@@ -109,21 +109,33 @@ ng serve
 
 <h2>👥 Roles y Accesos</h2>
 
+<p>La plataforma implementa un estricto control de acceso basado en roles para asegurar la integridad académica.</p>
+
 <ul>
     <li>
-        <strong>🎓 Alumno</strong>
+        <strong>👮 Administrador</strong>
         <ul>
-            <li>Inscripción a Materias y Exámenes.</li>
-            <li>Consulta de Estado Académico y Plan de Estudios.</li>
-            <li>Descarga de certificados.</li>
+            <li><strong>Gestión Global:</strong> ABM de Alumnos, Profesores y Materias.</li>
+            <li><strong>Calendario Académico:</strong> Configuración de turnos de examen y fechas de inscripción.</li>
+            <li><strong>Planes de Estudio:</strong> Definición de correlatividades y currículas.</li>
+            <li>Auditoría y reportes gerenciales.</li>
         </ul>
     </li>
     <li>
-        <strong>👨‍🏫 Administrativo/Profesor</strong>
+        <strong>👨‍🏫 Profesor</strong>
         <ul>
-            <li>Gestión de Actas de Examen.</li>
-            <li>Carga de notas.</li>
-            <li>Apertura y cierre de mesas.</li>
+            <li>Gestión de comisiones y visualización de inscriptos.</li>
+            <li><strong>Carga de Notas:</strong> Regularidades y cierre de Actas de Examen.</li>
+            <li>Toma de asistencia.</li>
+            <li>Comunicación directa con sus alumnos.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>🎓 Alumno</strong>
+        <ul>
+            <li><strong>Inscripciones:</strong> Alta y baja en Cursado y Mesas Finales.</li>
+            <li><strong>Autogestión:</strong> Consulta de Historia Académica (Analítico) y estado de situación.</li>
+            <li>Solicitud de constancias (Alumno Regular, Examen).</li>
         </ul>
     </li>
 </ul>
