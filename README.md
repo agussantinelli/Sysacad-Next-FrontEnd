@@ -1,7 +1,7 @@
 <h1 align="center">🎓 Sysacad Next - Frontend</h1>
 
 <div align="center">
-    <a href="https://github.com/tu-usuario/sysacad-next-web.git" target="_blank">
+    <a href="https://github.com/agussantinelli/Sysacad-Next-FrontEnd" target="_blank">
         <img src="https://img.shields.io/badge/🚀%20Repo%20Frontend%20(Estás%20Aquí)-Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Frontend Repo Badge"/>
     </a>
     <a href="https://github.com/tu-usuario/sysacad-next-api.git" target="_blank">
