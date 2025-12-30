@@ -1,1 +1,143 @@
-# SysacadV2.0-FrontEnd
+<h1 align="center">🎓 Sysacad Next - Frontend</h1>
+
+<div align="center">
+    <a href="https://github.com/tu-usuario/sysacad-next-web.git" target="_blank">
+        <img src="https://img.shields.io/badge/🚀%20Repo%20Frontend%20(Estás%20Aquí)-Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Frontend Repo Badge"/>
+    </a>
+    <a href="https://github.com/tu-usuario/sysacad-next-api.git" target="_blank">
+        <img src="https://img.shields.io/badge/⚙️%20Repo%20Backend-Java%20Spring-F80000?style=for-the-badge&logo=spring&logoColor=white" alt="Backend Repo Badge"/>
+    </a>
+    <a href="https://github.com/tu-usuario" target="_blank">
+        <img src="https://img.shields.io/badge/👤%20Contacto-Desarrollador-000000?style=for-the-badge&logo=github&logoColor=white" alt="Contact Badge"/>
+    </a>
+</div>
+
+<div align="center">
+    <img src="https://img.shields.io/badge/Angular-17+-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Badge"/>
+    <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"/>
+    <img src="https://img.shields.io/badge/Angular_Material-17-3F51B5?style=for-the-badge&logo=angular&logoColor=white" alt="Material Badge"/>
+    <img src="https://img.shields.io/badge/ESLint-8.0-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint Badge"/>
+</div>
+
+<div align="center">
+    <a href="#" target="_blank">
+        <img src="https://img.shields.io/badge/📂%20Documentación%20Funcional-4285F4?style=for-the-badge&logo=googledrive&logoColor=white" alt="Docs Badge"/>
+    </a>
+</div>
+
+<hr>
+
+<h2>🎯 Objetivo</h2>
+
+<p>Reemplazar el sistema de autogestión heredado ("Legacy") con una solución moderna, rápida y centrada en la experiencia del alumno, eliminando la fricción burocrática mediante una interfaz reactiva e intuitiva.</p>
+
+<h2>🧭 Visión General</h2>
+
+<p><strong>Sysacad Next</strong> es la evolución de la plataforma universitaria. Mientras la versión anterior se centraba en formularios estáticos, esta reingeniería propone:</p>
+<ul>
+    <li>Inscripciones en tiempo real con validación inmediata de correlatividades.</li>
+    <li>Visualización gráfica del avance de carrera (Plan de Estudios Interactivo).</li>
+    <li>Notificaciones instantáneas sobre estados de mesas de examen y trámites.</li>
+    <li>Arquitectura desacoplada (Angular + Java) para mayor escalabilidad.</li>
+</ul>
+
+<h2>💼 Problema (Legacy)</h2>
+
+<p>El sistema actual presenta:</p>
+<ul>
+    <li><strong>Lentitud crítica</strong> durante los periodos de inscripción masiva.</li>
+    <li><strong>UX obsoleta</strong> no adaptada a dispositivos móviles.</li>
+    <li>Dificultad para obtener un estado académico consolidado sin navegar múltiples menús.</li>
+</ul>
+
+<h2>🚀 Propuesta de Valor</h2>
+
+<ul>
+    <li><strong>📱 Mobile First:</strong> Diseño 100% responsivo para gestionar la vida académica desde el celular.</li>
+    <li><strong>⚡ Performance:</strong> Carga de datos optimizada y navegación SPA (Single Page Application) sin recargas.</li>
+    <li><strong>🔒 Seguridad Robusta:</strong> Integración con Backend Java mediante JWT y protección de rutas por roles (Alumno/Admin).</li>
+    <li><strong>🧠 Smart Validation:</strong> Reglas de negocio en el cliente para evitar errores de inscripción antes de enviar la solicitud.</li>
+</ul>
+
+<hr>
+
+<h2>🌐 Frontend (este repositorio)</h2>
+
+<p>Este repositorio aloja la <strong>Single Page Application (SPA)</strong> desarrollada en Angular, encargada de toda la interacción con el usuario final.</p>
+
+<h3>⚙️ Stack Tecnológico</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Componente</th>
+            <th>Tecnología</th>
+            <th>Notas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Framework</strong></td>
+            <td>Angular 17+</td>
+            <td>Uso de Standalone Components, Signals y Control Flow Syntax.</td>
+        </tr>
+        <tr>
+            <td><strong>Lenguaje</strong></td>
+            <td>TypeScript 5</td>
+            <td>Tipado estricto, Interfaces y DTOs alineados con Backend Java.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>💻 Setup Local</h3>
+
+<p>Requisitos: Node.js 18+ y Angular CLI.</p>
+
+<pre><code># 1. Instalar dependencias
+npm install
+
+# 2. Configurar entorno
+# Crear archivo src/environments/environment.ts apuntando a tu backend Java local
+# export const environment = { production: false, apiUrl: 'http://localhost:8080/api' };
+
+# 3. Iniciar servidor de desarrollo
+ng serve
+
+# 4. Acceder
+# Abre http://localhost:4200
+</code></pre>
+
+<hr>
+
+<h2>👥 Roles y Accesos</h2>
+
+<ul>
+    <li>
+        <strong>🎓 Alumno</strong>
+        <ul>
+            <li>Inscripción a Materias y Exámenes.</li>
+            <li>Consulta de Estado Académico y Plan de Estudios.</li>
+            <li>Descarga de certificados.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>👨‍🏫 Administrativo/Profesor</strong>
+        <ul>
+            <li>Gestión de Actas de Examen.</li>
+            <li>Carga de notas.</li>
+            <li>Apertura y cierre de mesas.</li>
+        </ul>
+    </li>
+</ul>
+
+<hr>
+
+<h2>🤝 Contribuciones</h2>
+
+<p>Este proyecto es parte de la iniciativa de modernización universitaria. Si encuentras un bug o tienes una idea:</p>
+<ol>
+    <li>Abre un <strong>Issue</strong> describiendo el caso.</li>
+    <li>Haz un Fork y envía tu <strong>Pull Request</strong> a la rama `develop`.</li>
+</ol>
+
+<p align="center">Desarrollado con ❤️ y mucho ☕ para la comunidad académica.</p>
