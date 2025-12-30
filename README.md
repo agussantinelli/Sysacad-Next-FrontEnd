@@ -15,13 +15,11 @@
 <div align="center">
     <img src="https://img.shields.io/badge/Angular-17+-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Badge"/>
     <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"/>
-    <img src="https://img.shields.io/badge/Angular_Material-17-3F51B5?style=for-the-badge&logo=angular&logoColor=white" alt="Material Badge"/>
-    <img src="https://img.shields.io/badge/ESLint-8.0-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint Badge"/>
 </div>
 
 <div align="center">
     <a href="#" target="_blank">
-        <img src="https://img.shields.io/badge/📂%20Documentación%20Funcional-4285F4?style=for-the-badge&logo=googledrive&logoColor=white" alt="Docs Badge"/>
+        <img src="https://img.shields.io/badge/📂%20Documentación%20del%20Proyecto-4285F4?style=for-the-badge&logo=googledrive&logoColor=white" alt="Docs Badge"/>
     </a>
 </div>
 
