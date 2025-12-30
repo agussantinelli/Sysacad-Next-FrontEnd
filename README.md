@@ -4,7 +4,7 @@
     <a href="https://github.com/agussantinelli/Sysacad-Next-FrontEnd" target="_blank">
         <img src="https://img.shields.io/badge/🚀%20Repo%20Frontend%20(Estás%20Aquí)-Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Frontend Repo Badge"/>
     </a>
-    <a href="https://github.com/agussantinelli/Sysacad-Next-FrontEnd" target="_blank">
+    <a href="https://github.com/agussantinelli/Sysacad-Next-BackEnd" target="_blank">
         <img src="https://img.shields.io/badge/⚙️%20Repo%20Backend-Java%20Spring-F80000?style=for-the-badge&logo=spring&logoColor=white" alt="Backend Repo Badge"/>
     </a>
     <a href="https://github.com/agussantinelli" target="_blank">
