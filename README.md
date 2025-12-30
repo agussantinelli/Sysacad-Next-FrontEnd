@@ -7,8 +7,8 @@
     <a href="https://github.com/tu-usuario/sysacad-next-api.git" target="_blank">
         <img src="https://img.shields.io/badge/⚙️%20Repo%20Backend-Java%20Spring-F80000?style=for-the-badge&logo=spring&logoColor=white" alt="Backend Repo Badge"/>
     </a>
-    <a href="https://github.com/tu-usuario" target="_blank">
-        <img src="https://img.shields.io/badge/👤%20Contacto-Desarrollador-000000?style=for-the-badge&logo=github&logoColor=white" alt="Contact Badge"/>
+    <a href="https://github.com/agussantinelli" target="_blank">
+        <img src="https://img.shields.io/badge/👤%20Contacto-agussantinelli-000000?style=for-the-badge&logo=github&logoColor=white" alt="Contact Badge"/>
     </a>
 </div>
 
