@@ -76,7 +76,7 @@
     <tbody>
         <tr>
             <td><strong>Framework</strong></td>
-            <td>Angular 17+</td>
+            <td>Angular 18+</td>
             <td>Uso de Standalone Components, Signals y Control Flow Syntax.</td>
         </tr>
         <tr>
@@ -84,8 +84,28 @@
             <td>TypeScript 5</td>
             <td>Tipado estricto, Interfaces y DTOs alineados con Backend Java.</td>
         </tr>
+        <tr>
+            <td><strong>UI Kit</strong></td>
+            <td>Angular Material</td>
+            <td>Librería oficial. Componentes accesibles (Tablas, Cards, Datepickers).</td>
+        </tr>
     </tbody>
 </table>
+
+<h3>🏗️ Arquitectura de Capas Propuesta</h3>
+
+<p>Organizamos el código verticalmente por <strong>Features</strong> (funcionalidad de negocio) en lugar de horizontalmente por tipo de archivo, favoreciendo la escalabilidad.</p>
+
+<pre><code>src/app/
+├── core/           # Singleton: AuthService, Guards, Interceptors, Modelos Globales
+├── features/       # Módulos de Negocio (Lazy Loaded)
+│   ├── auth/       # Login, Recuperar clave, Registro
+│   ├── dashboard/  # Resumen del alumno
+│   ├── academic/   # Notas, Inscripciones
+│   └── profile/    # Datos personales
+├── shared/         # Componentes UI reutilizables y Pipes comunes
+└── layout/         # Estructura base (Sidebar, Header, Footer)
+</code></pre>
 
 <h3>💻 Setup Local</h3>
 
