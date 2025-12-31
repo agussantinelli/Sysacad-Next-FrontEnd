@@ -121,9 +121,41 @@ npm install
 # 3. Iniciar servidor de desarrollo
 ng serve
 
+
 # 4. Acceder
 # Abre http://localhost:4200
 </code></pre>
+
+<h3>🛠️ Scripts y Comandos</h3>
+
+<p>Los siguientes scripts están disponibles en <code>package.json</code>:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Comando</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>npm start</code></td>
+            <td>Inicia el servidor de desarrollo (alias de <code>ng serve</code>).</td>
+        </tr>
+        <tr>
+            <td><code>npm run build</code></td>
+            <td>Compila la aplicación para producción en la carpeta <code>dist/</code>.</td>
+        </tr>
+        <tr>
+            <td><code>npm run watch</code></td>
+            <td>Modo de desarrollo con recarga en caliente y configuración de watch.</td>
+        </tr>
+        <tr>
+            <td><code>npm test</code></td>
+            <td>Ejecuta las pruebas unitarias con Karma/Jasmine.</td>
+        </tr>
+    </tbody>
+</table>
 
 <hr>
 
