@@ -139,6 +139,10 @@ ng serve
     </thead>
     <tbody>
         <tr>
+            <td><code>npm run dev</code></td>
+            <td>Inicia el servidor de desarrollo (alias de <code>ng serve</code>, igual que <code>start</code>).</td>
+        </tr>
+        <tr>
             <td><code>npm start</code></td>
             <td>Inicia el servidor de desarrollo (alias de <code>ng serve</code>).</td>
         </tr>
