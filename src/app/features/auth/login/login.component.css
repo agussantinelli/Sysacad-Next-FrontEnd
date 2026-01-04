@@ -103,13 +103,16 @@
 
 .input-field {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1rem;
+  /* Matched to button padding height */
   background: #f8fafc;
   /* Very light slate background */
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   color: #0f172a;
   font-size: 0.95rem;
+  line-height: 1.5;
+  /* Explicit line-height */
   transition: all 0.2s ease;
   outline: none;
 }
@@ -156,9 +159,12 @@
   background: var(--utn-blue);
   /* Solid vibrant blue */
   color: white;
-  border: none;
+  border: 1px solid transparent;
+  /* Match input border width */
   border-radius: 8px;
   font-size: 0.95rem;
+  line-height: 1.5;
+  /* Explicit line-height match */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
