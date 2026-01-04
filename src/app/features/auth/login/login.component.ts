@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
     selector: 'app-login',
@@ -13,12 +14,17 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     loginForm: FormGroup;
     isLoading = false;
+    private themeService = inject(ThemeService);
 
     constructor(private fb: FormBuilder, private router: Router) {
         this.loginForm = this.fb.group({
             email: ['', [Validators.required]],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
+    }
+
+    get logoPath(): string {
+        return this.themeService.isDarkMode() ? '/logo-utn-dark-mode.png' : '/logo-utn-light-mode.png';
     }
 
     onSubmit() {
