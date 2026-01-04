@@ -41,6 +41,12 @@
                 }
             </div>
 
+            @if (errorMessage) {
+            <div class="alert-error">
+                {{ errorMessage }}
+            </div>
+            }
+
             <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
                 @if (isLoading) {
                 <span class="spinner"></span>
