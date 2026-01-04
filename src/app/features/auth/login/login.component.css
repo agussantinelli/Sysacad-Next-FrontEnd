@@ -68,32 +68,32 @@
 }
 
 .title {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.025em;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.5rem;
   color: var(--text-primary);
 }
 
 .subtitle {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin: 0;
   font-weight: 400;
 }
 
 .input-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
 .input-label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #334155;
   /* Slate 700 */
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.5rem;
 }
 
 .input-wrapper {
@@ -102,14 +102,14 @@
 
 .input-field {
   width: 100%;
-  padding: 0.875rem 1rem;
-  /* Matched to button padding height */
+  padding: 1rem 1.25rem;
+  /* Increased padding */
   background: #f8fafc;
   /* Very light slate background */
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #0f172a;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   /* Explicit line-height */
   transition: all 0.2s ease;
@@ -154,20 +154,20 @@
 
 .submit-btn {
   width: 100%;
-  padding: 0.875rem;
+  padding: 1rem;
   background: var(--utn-blue);
   /* Solid vibrant blue */
   color: white;
   border: 1px solid transparent;
   /* Match input border width */
-  border-radius: 8px;
-  font-size: 0.95rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
   line-height: 1.5;
   /* Explicit line-height match */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,7 +207,7 @@
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
 }
 
 .link {
