@@ -44,7 +44,7 @@
     }
 
     .theme-toggle-switch.dark .moon-icon {
-        color: #fff;
+        color: #0099e6;
     }
 
     .toggle-circle {
@@ -63,7 +63,6 @@
         transform: translateX(34px);
     }
 
-    /* Hover effect */
     .theme-toggle-switch:hover {
         transform: scale(1.05);
     }
