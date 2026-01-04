@@ -61,12 +61,9 @@
 }
 
 .logo-image {
-  height: 80px;
+  height: 180px;
   /* Adjust size as needed */
-  width: auto;
-  object-fit: contain;
-  /* Slightly darker shadow for contrast on light bg */
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  width: 320px;
 }
 
 .title {
