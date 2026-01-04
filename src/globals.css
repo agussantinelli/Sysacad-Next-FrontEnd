@@ -1,0 +1,24 @@
+/* Global Color Palette - UTN Identity */
+:root {
+    /* Primary Colors */
+    --utn-blue: #0099e6;
+    /* Based on logo/wall image */
+    --utn-blue-dark: #0077c8;
+    /* For gradients/hover */
+    --utn-navy: #002060;
+    /* Darker academic navy */
+
+    /* Backgrounds */
+    --bg-dark: #050505;
+    --bg-card: rgba(18, 18, 18, 0.7);
+
+    /* Text */
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-input: #e2e8f0;
+
+    /* Accents */
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-focus: rgba(0, 153, 230, 0.5);
+    --error: #ef4444;
+}
