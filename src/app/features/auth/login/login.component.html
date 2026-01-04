@@ -10,9 +10,9 @@
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
             <div class="input-group">
-                <label for="email" class="input-label">Correo Electrónico</label>
+                <label for="email" class="input-label">Gmail o Legajo</label>
                 <div class="input-wrapper">
-                    <input type="email" id="email" formControlName="email" class="input-field"
+                    <input type="text" id="email" formControlName="email" class="input-field"
                         placeholder="legajo@frro.utn.edu.ar"
                         [class.error]="email?.invalid && (email?.dirty || email?.touched)">
                     <span class="focus-border"></span>
