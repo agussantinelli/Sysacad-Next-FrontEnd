@@ -10,7 +10,7 @@
 
 body {
     margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Questrial', sans-serif;
     color: var(--text-primary);
     background-color: var(--bg-dark);
 }

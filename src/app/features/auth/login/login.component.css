@@ -7,7 +7,6 @@
     radial-gradient(circle at 10% 20%, rgba(0, 153, 230, 0.08) 0%, transparent 40%),
     /* Subtle Blue Glow */
     radial-gradient(circle at 90% 80%, rgba(0, 32, 96, 0.05) 0%, transparent 40%);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
