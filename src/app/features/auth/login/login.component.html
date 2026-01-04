@@ -5,28 +5,28 @@
                 <img src="/logo-utn.png" alt="UTN Logo" class="logo-image">
             </div>
             <h1 class="title">Sysacad Next</h1>
-            <p class="subtitle">Academic Management System</p>
+            <p class="subtitle">Sistema de Gestión Académica</p>
         </header>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
             <div class="input-group">
-                <label for="email" class="input-label">Email</label>
+                <label for="email" class="input-label">Correo Electrónico</label>
                 <div class="input-wrapper">
                     <input type="email" id="email" formControlName="email" class="input-field"
-                        placeholder="student@example.com"
+                        placeholder="legajo@frro.utn.edu.ar"
                         [class.error]="email?.invalid && (email?.dirty || email?.touched)">
                     <span class="focus-border"></span>
                 </div>
                 @if (email?.invalid && (email?.dirty || email?.touched)) {
                 <div class="error-message">
-                    @if (email?.errors?.['required']) { Email is required }
-                    @if (email?.errors?.['email']) { Please enter a valid email }
+                    @if (email?.errors?.['required']) { El correo es obligatorio }
+                    @if (email?.errors?.['email']) { Ingrese un correo válido }
                 </div>
                 }
             </div>
 
             <div class="input-group">
-                <label for="password" class="input-label">Password</label>
+                <label for="password" class="input-label">Contraseña</label>
                 <div class="input-wrapper">
                     <input type="password" id="password" formControlName="password" class="input-field"
                         placeholder="••••••••"
@@ -35,8 +35,8 @@
                 </div>
                 @if (password?.invalid && (password?.dirty || password?.touched)) {
                 <div class="error-message">
-                    @if (password?.errors?.['required']) { Password is required }
-                    @if (password?.errors?.['minlength']) { At least 6 characters }
+                    @if (password?.errors?.['required']) { La contraseña es obligatoria }
+                    @if (password?.errors?.['minlength']) { Mínimo 6 caracteres }
                 </div>
                 }
             </div>
@@ -44,15 +44,15 @@
             <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
                 @if (isLoading) {
                 <span class="spinner"></span>
-                Signing in...
+                Ingresando...
                 } @else {
-                Sign In
+                Ingresar
                 }
             </button>
 
             <div class="links">
-                <a href="#" class="link">Forgot Password?</a>
-                <a href="#" class="link register">Create Account</a>
+                <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+                <a href="#" class="link register">Crear Cuenta</a>
             </div>
         </form>
     </div>

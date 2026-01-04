@@ -26,7 +26,7 @@ export class LoginComponent {
             this.isLoading = true;
             // Simulate API call
             setTimeout(() => {
-                console.log('Login successful', this.loginForm.value);
+                console.log('Ingreso exitoso', this.loginForm.value);
                 this.isLoading = false;
                 // Navigate to dashboard or home
                 // this.router.navigate(['/dashboard']);
