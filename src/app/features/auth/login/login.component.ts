@@ -13,22 +13,12 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     loginForm: FormGroup;
     isLoading = false;
-    isDarkMode = false;
 
     constructor(private fb: FormBuilder, private router: Router) {
         this.loginForm = this.fb.group({
             email: ['', [Validators.required]],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
-    }
-
-    toggleTheme() {
-        this.isDarkMode = !this.isDarkMode;
-        if (this.isDarkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
     }
 
     onSubmit() {
