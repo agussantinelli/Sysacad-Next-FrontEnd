@@ -1,11 +1,12 @@
 :host {
   display: block;
   min-height: 100vh;
-  /* Palette: Black background, Navy accents */
-  background-color: #000000;
+  /* Palette: Black background, Vibrant UTN Blue accents */
+  background-color: #050505;
   background-image:
-    radial-gradient(circle at 10% 20%, rgba(0, 32, 96, 0.4) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(0, 32, 96, 0.3) 0%, transparent 40%);
+    radial-gradient(circle at 10% 20%, rgba(0, 153, 230, 0.25) 0%, transparent 40%),
+    /* UTN Blue Glow */
+    radial-gradient(circle at 90% 80%, rgba(0, 153, 230, 0.15) 0%, transparent 40%);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: flex;
   align-items: center;
@@ -21,11 +22,13 @@
 
 /* Glassmorphism Card - Dark Theme */
 .glass-card {
-  background: rgba(18, 18, 18, 0.6);
+  background: rgba(18, 18, 18, 0.7);
   /* Semi-transparent dark gray */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid rgba(0, 153, 230, 0.3);
+  /* Subtle blue edge */
   border-radius: 24px;
   padding: 3rem 2.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -113,10 +116,10 @@
 }
 
 .input-field:focus {
-  border-color: #003366;
-  /* Navy Blue */
+  border-color: #0099e6;
+  /* Vivid UTN Blue */
   background: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.5);
+  box-shadow: 0 0 0 2px rgba(0, 153, 230, 0.3);
   /* Navy glow */
 }
 
@@ -146,10 +149,10 @@
 .submit-btn {
   width: 100%;
   padding: 0.875rem;
-  background: #002060;
-  /* Navy Blue */
+  background: linear-gradient(135deg, #0099e6 0%, #0077c8 100%);
+  /* Blue Gradient */
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: none;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
@@ -160,19 +163,21 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 153, 230, 0.3);
 }
 
 .submit-btn:hover {
-  background: #003366;
+  filter: brightness(1.1);
   /* Lighter Navy */
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 32, 96, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 153, 230, 0.5);
 }
 
 .submit-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 .spinner {
@@ -208,12 +213,12 @@
 }
 
 .link.register {
-  color: #60a5fa;
+  color: #0099e6;
   /* Light Blue for contrast */
   font-weight: 500;
 }
 
 .link.register:hover {
-  color: #93c5fd;
+  color: #33b5ff;
   text-decoration: underline;
 }
