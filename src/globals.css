@@ -1,24 +1,31 @@
-/* Global Color Palette - UTN Identity */
+/* Global Color Palette - UTN Identity (Light Mode) */
 :root {
     /* Primary Colors */
     --utn-blue: #0099e6;
-    /* Based on logo/wall image */
+    /* Vibrant Blue */
     --utn-blue-dark: #0077c8;
-    /* For gradients/hover */
+    /* Darker Blue for hover */
     --utn-navy: #002060;
-    /* Darker academic navy */
+    /* Academic Navy (Main Text) */
 
     /* Backgrounds */
-    --bg-dark: #050505;
-    --bg-card: rgba(18, 18, 18, 0.7);
+    --bg-dark: #f0f4f8;
+    /* Light Gray/Blueish tint for page bg */
+    --bg-card: rgba(255, 255, 255, 0.85);
+    /* White glass for card */
 
     /* Text */
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --text-input: #e2e8f0;
+    --text-primary: #002060;
+    /* Navy for headings */
+    --text-secondary: #475569;
+    /* Slate gray for secondary text */
+    --text-input: #1e293b;
+    /* Dark slate for inputs */
 
-    /* Accents */
-    --border-subtle: rgba(255, 255, 255, 0.1);
-    --border-focus: rgba(0, 153, 230, 0.5);
-    --error: #ef4444;
+    /* Accents & Borders */
+    --border-subtle: rgba(0, 32, 96, 0.1);
+    /* Subtle Navy border */
+    --border-focus: rgba(0, 153, 230, 0.4);
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --error: #dc2626;
 }
