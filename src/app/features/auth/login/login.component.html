@@ -1,4 +1,9 @@
 <div class="login-container">
+    <button class="theme-toggle-switch" (click)="toggleTheme()" [class.dark]="isDarkMode" aria-label="Toggle Dark Mode">
+        <span class="material-icons sun-icon">light_mode</span>
+        <span class="material-icons moon-icon">dark_mode</span>
+        <div class="toggle-circle"></div>
+    </button>
     <div class="glass-card">
         <header class="login-header">
             <div class="logo-container">

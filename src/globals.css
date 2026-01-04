@@ -1,31 +1,38 @@
-/* Global Color Palette - UTN Identity (Light Mode) */
+/* Global Color Palette - UTN Identity */
 :root {
-    /* Primary Colors */
+    /* Common Colors */
     --utn-blue: #0099e6;
     /* Vibrant Blue */
     --utn-blue-dark: #0077c8;
     /* Darker Blue for hover */
     --utn-navy: #002060;
-    /* Academic Navy (Main Text) */
+    /* Academic Navy */
+    --error: #dc2626;
 
-    /* Backgrounds */
-    --bg-dark: #f0f4f8;
-    /* Light Gray/Blueish tint for page bg */
-    --bg-card: rgba(255, 255, 255, 0.85);
-    /* White glass for card */
-
-    /* Text */
+    /* LIGHT MODE (Default) */
+    --bg-page: #f0f4f8;
+    --bg-card: rgba(255, 255, 255, 0.9);
     --text-primary: #002060;
     /* Navy for headings */
     --text-secondary: #475569;
-    /* Slate gray for secondary text */
+    /* Slate gray */
     --text-input: #1e293b;
-    /* Dark slate for inputs */
-
-    /* Accents & Borders */
+    /* Dark slate */
+    --input-bg: #f8fafc;
     --border-subtle: rgba(0, 32, 96, 0.1);
-    /* Subtle Navy border */
     --border-focus: rgba(0, 153, 230, 0.4);
-    --input-bg: rgba(255, 255, 255, 0.8);
-    --error: #dc2626;
+    --shadow-color: rgba(0, 32, 96, 0.08);
+}
+
+/* DARK MODE OVERRIDES */
+body.dark-mode {
+    --bg-page: #050505;
+    --bg-card: rgba(18, 18, 18, 0.8);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-input: #e2e8f0;
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-focus: rgba(0, 153, 230, 0.5);
+    --shadow-color: rgba(0, 0, 0, 0.5);
 }
