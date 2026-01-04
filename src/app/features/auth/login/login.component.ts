@@ -6,12 +6,17 @@ import { ThemeService } from '../../../core/services/theme.service';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
-    // ... (imports remain)
+    selector: 'app-login',
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css'
 })
 export class LoginComponent {
     loginForm: FormGroup;
     isLoading = false;
     errorMessage: string | null = null;
+
     private themeService = inject(ThemeService);
     private authService = inject(AuthService);
 
@@ -21,7 +26,10 @@ export class LoginComponent {
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
-    // ... (get logoPath remains)
+
+    get logoPath(): string {
+        return this.themeService.isDarkMode() ? '/logo-utn-dark-mode.png' : '/logo-utn-light-mode.png';
+    }
 
     onSubmit() {
         if (this.loginForm.valid) {
@@ -29,28 +37,28 @@ export class LoginComponent {
             this.errorMessage = null;
 
             const { email, password } = this.loginForm.value;
-            // Map email/legajo input to 'identificador'
+
             const loginRequest = {
                 identificador: email,
-                password: password,
-                // We might deduce tipoIdentificador based on regex (email vs number) if needed, 
-                // but for now backend might handle it or we just send it as is.
-                // The provided LoginRequest has 'identificador'.
+                password: password
             };
 
             this.authService.login(loginRequest).subscribe({
                 next: (response) => {
                     console.log('Login successful', response);
-                    // Store user data/token logic here
                     localStorage.setItem('user', JSON.stringify(response));
+                    localStorage.setItem('token', 'dummy-token'); // backend didn't return token in snippet, likely session or cookie, or just user data for now.
                     this.isLoading = false;
-                    // Navigate to home/dashboard
-                    // this.router.navigate(['/home']); 
+                    // this.router.navigate(['/dashboard']); 
                 },
                 error: (error) => {
                     console.error('Login failed', error);
                     this.isLoading = false;
-                    this.errorMessage = 'Credenciales inválidas o error en el servidor';
+                    if (error.status === 401) {
+                        this.errorMessage = 'Usuario o contraseña incorrectos';
+                    } else {
+                        this.errorMessage = 'Error de conexión con el servidor: ' + error.message;
+                    }
                 }
             });
         } else {
