@@ -46,3 +46,10 @@ Desktop.ini
 .env
 .env.local
 .env.*.local
+
+
+# Logs
+*.log
+
+# Angular
+/.angular
