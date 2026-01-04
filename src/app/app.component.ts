@@ -7,7 +7,6 @@ import { ThemeToggleComponent } from './shared/components/theme-toggle.component
   standalone: true,
   imports: [RouterOutlet, ThemeToggleComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'Sysacad-Next-FrontEnd';
