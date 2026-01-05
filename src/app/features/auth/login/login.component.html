@@ -43,9 +43,8 @@
             </div>
 
             @if (errorMessage) {
-            <div class="alert-error">
-                {{ errorMessage }}
-            </div>
+            <app-alert-message type="error" [message]="errorMessage" (close)="errorMessage = null">
+            </app-alert-message>
             }
 
             <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">

@@ -5,11 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { ThemeService } from '../../../core/services/theme.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { AlertMessageComponent } from '../../../shared/components/alert-message/alert-message.component';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, RouterLink, LoadingSpinnerComponent],
+    imports: [CommonModule, ReactiveFormsModule, RouterLink, LoadingSpinnerComponent, AlertMessageComponent],
     templateUrl: './login.component.html',
     styleUrl: './styles/login.component.css'
 })
@@ -17,6 +18,7 @@ export class LoginComponent {
     loginForm: FormGroup;
     isLoading = false;
     errorMessage: string | null = null;
+    successMessage: string | null = null;
 
     private themeService = inject(ThemeService);
     private authService = inject(AuthService);
@@ -36,6 +38,7 @@ export class LoginComponent {
         if (this.loginForm.valid) {
             this.isLoading = true;
             this.errorMessage = null;
+            this.successMessage = null;
 
             const { email, password } = this.loginForm.value;
 
@@ -47,14 +50,19 @@ export class LoginComponent {
             this.authService.login(loginRequest).subscribe({
                 next: (response) => {
                     console.log('Login successful', response);
-                    localStorage.setItem('user', JSON.stringify(response));
-                    localStorage.setItem('token', 'dummy-token'); // backend didn't return token in snippet, likely session or cookie, or just user data for now.
                     this.isLoading = false;
-                    this.router.navigate(['/dashboard']);
+                    this.successMessage = '¡Ingreso exitoso! Redirigiendo...';
+                    localStorage.setItem('user', JSON.stringify(response));
+                    localStorage.setItem('token', 'dummy-token');
+
+                    setTimeout(() => {
+                        this.router.navigate(['/dashboard']);
+                    }, 1500);
                 },
                 error: (error) => {
                     console.error('Login failed', error);
                     this.isLoading = false;
+                    this.successMessage = null;
                     if (error.status === 401) {
                         this.errorMessage = 'Usuario o contraseña incorrectos';
                     } else {
