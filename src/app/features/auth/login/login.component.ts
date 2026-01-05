@@ -49,7 +49,7 @@ export class LoginComponent {
                     localStorage.setItem('user', JSON.stringify(response));
                     localStorage.setItem('token', 'dummy-token'); // backend didn't return token in snippet, likely session or cookie, or just user data for now.
                     this.isLoading = false;
-                    // this.router.navigate(['/dashboard']); 
+                    this.router.navigate(['/dashboard']);
                 },
                 error: (error) => {
                     console.error('Login failed', error);
