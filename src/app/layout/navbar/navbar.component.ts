@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../core/services/theme.service';
 import { AuthService } from '../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
+import { UsuarioResponse } from '../../core/models/auth.models';
 
 interface NavbarOption {
     title: string;
@@ -23,12 +24,13 @@ interface NavbarSection {
     templateUrl: './navbar.component.html',
     styleUrl: './styles/navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
     private themeService = inject(ThemeService);
     private authService = inject(AuthService);
 
     isDropdownOpen = false;
     activeSection: string | null = null;
+    usuario: UsuarioResponse | null = null;
 
     menuSections: NavbarSection[] = [
         {
@@ -63,6 +65,13 @@ export class NavbarComponent {
             ]
         }
     ];
+
+    ngOnInit(): void {
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            this.usuario = JSON.parse(userStr);
+        }
+    }
 
     get logoPath(): string {
         return this.themeService.isDarkMode() ? '/logo-utn-dark-mode.png' : '/logo-utn-light-mode.png';

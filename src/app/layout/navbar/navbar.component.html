@@ -4,8 +4,9 @@
         <span class="brand-name">Sysacad Next</span>
     </div>
 
-    <!-- Main Navigation -->
+    <!-- Main Navigation (Only for Students) -->
     <nav class="nav-links">
+        @if (usuario?.rol === 'ESTUDIANTE') {
         @for (section of menuSections; track section.title) {
         <div class="nav-item-container">
             <button class="nav-link" [class.active]="activeSection === section.title"
@@ -23,6 +24,7 @@
                 }
             </div>
         </div>
+        }
         }
     </nav>
 
