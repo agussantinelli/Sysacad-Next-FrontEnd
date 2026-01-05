@@ -24,7 +24,6 @@
     left: 0;
     transform: translateY(-50%);
     height: 40px;
-    /* Reduced to default as per latest user preference or need to verify Step 838 edit */
     width: auto;
     object-fit: contain;
     z-index: 101;
@@ -34,17 +33,10 @@
     font-weight: 700;
     font-size: 1.2rem;
     color: var(--text-primary);
-    margin-left: 50px;
-    /* Adjusted for smaller logo spacer */
+    margin-left: 170px;
+    /* Adjusted for large logo spacer */
 }
 
-/* Override for larger logo if Step 830 request is priority over Step 838 manual edit?
-   User asked "hace que sea mas chiquito" then reverted?
-   Step 838 manual edit set height: 40px. 
-   I will respect the Step 838 manual edit first, but add the "hanging" style logic if size increases.
-   For 40px logo, it fits inside 60px header, so no need for large margins.
-   Adjusting margin-left to be reasonable for 40px logo (~50px).
-*/
 
 .user-menu {
     display: flex;
