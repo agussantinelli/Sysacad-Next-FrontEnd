@@ -97,14 +97,18 @@
 <p>Organizamos el código verticalmente por <strong>Features</strong> (funcionalidad de negocio) en lugar de horizontalmente por tipo de archivo, favoreciendo la escalabilidad.</p>
 
 <pre><code>src/app/
-├── core/           # Singleton: AuthService, Guards, Interceptors, Modelos Globales
-├── features/       # Módulos de Negocio (Lazy Loaded)
-│   ├── auth/       # Login, Recuperar clave, Registro
-│   ├── dashboard/  # Resumen del alumno
-│   ├── academic/   # Notas, Inscripciones
-│   └── profile/    # Datos personales
-├── shared/         # Componentes UI reutilizables y Pipes comunes
-└── layout/         # Estructura base (Sidebar, Header, Footer)
+├── core/
+│   ├── models/     # Modelos de datos (Auth, User)
+│   └── services/   # Servicios Globales (AuthService, ThemeService)
+├── features/
+│   ├── auth/
+│   │   └── login/  # Pantalla de Inicio de Sesión
+│   ├── dashboard/  # (En desarrollo) Resumen del alumno
+│   ├── academic/   # (En desarrollo) Notas, Inscripciones
+│   └── profile/    # (En desarrollo) Datos personales
+├── shared/
+│   └── components/ # UI Reutilizable (ThemeToggle)
+└── layout/         # (En desarrollo) Estructura base
 </code></pre>
 
 <h3>💻 Setup Local</h3>
