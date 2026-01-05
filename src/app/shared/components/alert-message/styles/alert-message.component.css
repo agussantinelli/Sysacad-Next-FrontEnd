@@ -1,0 +1,121 @@
+.alert-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.alert-icon {
+    font-size: 1.5rem;
+}
+
+.message {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    margin-left: 1rem;
+    opacity: 0.7;
+}
+
+.close-btn:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Success Type */
+.alert-container.success {
+    background-color: #ecfdf5;
+    /* emerald-50 */
+    border-color: #a7f3d0;
+    /* emerald-200 */
+    color: #065f46;
+    /* emerald-800 */
+}
+
+.alert-container.success .alert-icon {
+    color: #059669;
+    /* emerald-600 */
+}
+
+/* Error Type */
+.alert-container.error {
+    background-color: #fef2f2;
+    /* red-50 */
+    border-color: #fecaca;
+    /* red-200 */
+    color: #991b1b;
+    /* red-800 */
+}
+
+.alert-container.error .alert-icon {
+    color: #dc2626;
+    /* red-600 */
+}
+
+/* Info Type */
+.alert-container.info {
+    background-color: #eff6ff;
+    /* blue-50 */
+    border-color: #bfdbfe;
+    /* blue-200 */
+    color: #1e40af;
+    /* blue-800 */
+}
+
+.alert-container.info .alert-icon {
+    color: #2563eb;
+    /* blue-600 */
+}
+
+/* Dark Mode Adjustments via host-context if needed */
+:host-context(.dark-mode) .alert-container.success {
+    background-color: rgba(6, 95, 70, 0.2);
+    border-color: rgba(6, 95, 70, 0.5);
+    color: #d1fae5;
+}
+
+:host-context(.dark-mode) .alert-container.error {
+    background-color: rgba(153, 27, 27, 0.2);
+    border-color: rgba(153, 27, 27, 0.5);
+    color: #fecaca;
+}
+
+:host-context(.dark-mode) .alert-container.info {
+    background-color: rgba(30, 64, 175, 0.2);
+    border-color: rgba(30, 64, 175, 0.5);
+    color: #dbeafe;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
