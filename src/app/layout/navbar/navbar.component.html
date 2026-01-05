@@ -3,6 +3,29 @@
         <img [src]="logoPath" alt="UTN Logo" class="logo-img">
         <span class="brand-name">Sysacad Next</span>
     </div>
+
+    <!-- Main Navigation -->
+    <nav class="nav-links">
+        @for (section of menuSections; track section.title) {
+        <div class="nav-item-container">
+            <button class="nav-link" [class.active]="activeSection === section.title"
+                (click)="setActiveSection(section.title)">
+                {{ section.title }}
+                <span class="material-icons chevron">expand_more</span>
+            </button>
+
+            <div class="nav-dropdown" [class.show]="activeSection === section.title">
+                @for (option of section.options; track option.title) {
+                <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
+                    <span class="material-icons icon-sm">{{ option.icon }}</span>
+                    {{ option.title }}
+                </a>
+                }
+            </div>
+        </div>
+        }
+    </nav>
+
     <div class="user-menu">
         <button class="profile-btn" (click)="toggleDropdown()">
             <span class="material-icons">account_circle</span>

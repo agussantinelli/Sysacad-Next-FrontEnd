@@ -19,6 +19,7 @@
     position: relative;
     height: 100%;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .logo-img {
@@ -40,12 +41,104 @@
     /* Adjusted for large logo spacer */
 }
 
+/* Main Navigation */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 100%;
+    margin: 0 2rem;
+    flex: 1;
+}
+
+.nav-item-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--utn-blue);
+    background-color: var(--bg-hover);
+}
+
+.chevron {
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+.nav-link.active .chevron {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 10px 15px -3px var(--shadow-color);
+    width: 240px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.nav-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nav-dropdown-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--utn-blue);
+}
+
 
 .user-menu {
     position: relative;
     display: flex;
     align-items: center;
     margin-right: 2rem;
+    flex-shrink: 0;
 }
 
 .profile-btn {
