@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioResponse } from '../../core/models/auth.models';
-import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { NavbarComponent } from '../../layout/navbar/navbar.component';
 
 @Component({
     selector: 'app-dashboard',
