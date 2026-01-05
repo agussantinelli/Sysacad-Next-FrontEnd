@@ -118,13 +118,19 @@
 <pre><code># 1. Instalar dependencias
 npm install
 
-# 2. Configurar entorno
-# Crear archivo src/environments/environment.ts apuntando a tu backend Java local
-# export const environment = { production: false, apiUrl: 'http://localhost:8080/api' };
+# 2. Configurar Variables de Entorno
+# Copiar el archivo de ejemplo
+# cp .env.example .env
+
+# Configurar las URLs en .env (Referencia)
+# BACKEND_URL=http://localhost:8081
+# FRONTEND_URL=http://localhost:4200
+
+# IMPORTANTE: Asegurarse de que 'src/environments/environment.development.ts' coincida con el puerto del Backend:
+# export const environment = { apiUrl: 'http://localhost:8081/api' };
 
 # 3. Iniciar servidor de desarrollo
-ng serve
-
+npm run dev
 
 # 4. Acceder
 # Abre http://localhost:4200
