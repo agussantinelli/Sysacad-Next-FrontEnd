@@ -30,8 +30,8 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    height: 100px;
-    width: 160px;
+    height: 40px;
+    width: auto;
     object-fit: contain;
     z-index: 101;
 }
