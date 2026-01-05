@@ -53,12 +53,12 @@
 
 /* Success Type */
 .alert-container.success {
-    background-color: #ecfdf5;
-    /* emerald-50 */
-    border-color: #a7f3d0;
-    /* emerald-200 */
-    color: #065f46;
-    /* emerald-800 */
+    background-color: #022c22;
+    /* emerald-950 */
+    border-color: #064e3b;
+    /* emerald-900 */
+    color: #d1fae5;
+    /* emerald-100 */
 }
 
 .alert-container.success .alert-icon {
@@ -68,12 +68,12 @@
 
 /* Error Type */
 .alert-container.error {
-    background-color: #fef2f2;
-    /* red-50 */
-    border-color: #fecaca;
-    /* red-200 */
-    color: #991b1b;
-    /* red-800 */
+    background-color: #450a0a;
+    /* red-950 */
+    border-color: #7f1d1d;
+    /* red-900 */
+    color: #fecaca;
+    /* red-100 */
 }
 
 .alert-container.error .alert-icon {
@@ -83,39 +83,6 @@
 
 /* Info Type */
 .alert-container.info {
-    background-color: #eff6ff;
-    /* blue-50 */
-    border-color: #bfdbfe;
-    /* blue-200 */
-    color: #1e40af;
-    /* blue-800 */
-}
-
-.alert-container.info .alert-icon {
-    color: #2563eb;
-    /* blue-600 */
-}
-
-/* Dark Mode Adjustments via host-context */
-:host-context(.dark-mode) .alert-container.success {
-    background-color: #022c22;
-    /* emerald-950 */
-    border-color: #064e3b;
-    /* emerald-900 */
-    color: #d1fae5;
-    /* emerald-100 */
-}
-
-:host-context(.dark-mode) .alert-container.error {
-    background-color: #450a0a;
-    /* red-950 */
-    border-color: #7f1d1d;
-    /* red-900 */
-    color: #fecaca;
-    /* red-100 */
-}
-
-:host-context(.dark-mode) .alert-container.info {
     background-color: #172554;
     /* blue-950 */
     border-color: #1e3a8a;
@@ -124,10 +91,9 @@
     /* blue-100 */
 }
 
-:host-context(.dark-mode) .alert-container.info {
-    background-color: rgba(30, 64, 175, 0.2);
-    border-color: rgba(30, 64, 175, 0.5);
-    color: #dbeafe;
+.alert-container.info .alert-icon {
+    color: #2563eb;
+    /* blue-600 */
 }
 
 @keyframes slideIn {

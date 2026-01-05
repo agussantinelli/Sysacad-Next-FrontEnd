@@ -4,7 +4,6 @@ import { UsuarioResponse } from '../../core/models/auth.models';
 import { NavbarComponent } from '../../layout/navbar/navbar.component';
 import { AlertMessageComponent } from '../../shared/components/alert-message/alert-message.component';
 
-// Dashboard component handling user welcome and status
 @Component({
     selector: 'app-dashboard',
     standalone: true,
