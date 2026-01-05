@@ -91,6 +91,16 @@
             <td>Angular Material</td>
             <td>Librería oficial. Componentes accesibles (Tablas, Cards, Datepickers).</td>
         </tr>
+        <tr>
+            <td><strong>Tipografía</strong></td>
+            <td>Questrial</td>
+            <td>Google Fonts (vía <code>@fontsource/questrial</code>). Estética moderna y limpia.</td>
+        </tr>
+        <tr>
+            <td><strong>Iconos</strong></td>
+            <td>Material Icons</td>
+            <td>Paquete npm <code>material-icons</code>. Iconografía estándar de Google.</td>
+        </tr>
     </tbody>
 </table>
 
