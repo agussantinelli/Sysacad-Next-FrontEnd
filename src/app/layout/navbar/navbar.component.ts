@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../core/services/theme.service';
 import { AuthService } from '../../core/services/auth.service';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     templateUrl: './navbar.component.html',
     styleUrl: './styles/navbar.component.css'
 })
