@@ -104,6 +104,16 @@
             <td>Material Icons</td>
             <td>Paquete npm <code>material-icons</code>. Iconografía estándar de Google.</td>
         </tr>
+        <tr>
+            <td><strong>Gestión de Estado</strong></td>
+            <td>RxJS 7.8</td>
+            <td>Manejo de asincronía y flujos de datos (Observables).</td>
+        </tr>
+        <tr>
+            <td><strong>Runtime</strong></td>
+            <td>Node.js 18+</td>
+            <td>Entorno de ejecución para desarrollo y construcción del proyecto.</td>
+        </tr>
     </tbody>
 </table>
 
