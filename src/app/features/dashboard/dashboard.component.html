@@ -5,15 +5,36 @@
     </app-alert-message>
 
     <main class="dashboard-content">
-        <div class="welcome-card">
-            <h1>{{ greeting }}, <span class="highlight">{{ usuario?.nombre }}</span></h1>
-            <p class="subtitle">Bienvenido al nuevo Sistema de Gestión Académica.</p>
+        <div class="welcome-header">
+            <div class="header-text">
+                <h1>{{ greeting }}, <span class="highlight">{{ usuario?.nombre }}</span></h1>
+                <p class="subtitle">Ingeniería en Sistemas de Información (Plan 2023)</p>
+            </div>
 
             <div class="user-info-pill">
                 <span class="role-badge">{{ usuario?.rol }}</span>
                 <span class="divider">|</span>
                 <span>Legajo: {{ usuario?.legajo }}</span>
             </div>
+        </div>
+
+        <div class="sections-container">
+            @for (section of menuSections; track section.title) {
+            <section class="dashboard-section">
+                <h2 class="section-title">{{ section.title }}</h2>
+                <div class="options-grid">
+                    @for (option of section.options; track option.title) {
+                    <div class="option-card" tabindex="0">
+                        <div class="icon-wrapper">
+                            <span class="material-icons">{{ option.icon }}</span>
+                        </div>
+                        <span class="option-title">{{ option.title }}</span>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                    }
+                </div>
+            </section>
+            }
         </div>
     </main>
 </div>

@@ -1,70 +1,148 @@
 .dashboard-container {
+    background-color: var(--bg-primary);
     min-height: 100vh;
-    background-color: var(--bg-page);
-    color: var(--text-primary);
-    transition: background-color 0.3s ease;
+    padding-top: 80px;
+    /* Navbar height */
+    transition: background-color 0.3s;
 }
 
 .dashboard-content {
     max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: center;
-}
-
-.welcome-card {
-    background-color: var(--bg-card);
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 15px -3px var(--shadow-color);
-    text-align: center;
-    width: 100%;
-    max-width: 600px;
-    border: 1px solid var(--border-subtle);
+    margin: 0 auto;
+    padding: 2rem;
     animation: fadeIn 0.5s ease-out;
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+.welcome-header {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.header-text h1 {
+    font-size: 2rem;
     color: var(--text-primary);
+    margin-bottom: 0.5rem;
 }
 
 .highlight {
     color: var(--utn-blue);
+    font-weight: 700;
 }
 
 .subtitle {
     color: var(--text-secondary);
     font-size: 1.1rem;
-    margin-bottom: 2rem;
 }
 
 .user-info-pill {
     display: inline-flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--input-bg);
+    background-color: var(--bg-card);
+    padding: 0.5rem 1rem;
     border-radius: 50px;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
 }
 
 .role-badge {
-    color: var(--utn-navy);
+    color: var(--utn-blue);
     font-weight: 600;
-    background-color: #e2e8f0;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
-body.dark-mode .role-badge {
-    background-color: #334155;
-    color: #f1f5f9;
+.divider {
+    margin: 0 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+/* Sections */
+.sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 4rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    opacity: 0.9;
+    padding-left: 0.5rem;
+    border-left: 4px solid var(--utn-blue);
+}
+
+/* Grid */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Option Card */
+.option-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+.option-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--utn-blue);
+}
+
+.icon-wrapper {
+    background-color: var(--bg-hover);
+    padding: 0.75rem;
+    border-radius: 12px;
+    color: var(--utn-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.option-card:hover .icon-wrapper {
+    background-color: var(--utn-blue);
+    color: white;
+}
+
+.option-card .material-icons {
+    font-size: 1.75rem;
+}
+
+.option-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    z-index: 1;
+}
+
+/* Dark Mode Overrides for specific elements if needed */
+:host-context(.dark-mode) .icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+:host-context(.dark-mode) .option-card:hover .icon-wrapper {
+    background-color: var(--utn-blue);
 }
 
 @keyframes fadeIn {
@@ -76,5 +154,32 @@ body.dark-mode .role-badge {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-content {
+        padding: 1.5rem;
+    }
+
+    .welcome-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-text h1 {
+        font-size: 1.75rem;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .option-card {
+        flex-direction: row;
+        align-items: center;
+        padding: 1.25rem;
     }
 }
