@@ -111,65 +111,40 @@
 └── layout/         # (En desarrollo) Estructura base
 </code></pre>
 
-<h3>💻 Setup Local</h3>
+<h3>💻 Empezar (Setup Local)</h3>
 
-<p>Requisitos: Node.js 18+ y Angular CLI.</p>
+<p>Este es un proyecto <strong>Angular</strong> inicializado con <code>Angular CLI</code>.</p>
 
-<pre><code># 1. Instalar dependencias
-npm install
+<p>Instalá dependencias y levantá el servidor de desarrollo:</p>
 
-# 2. Configurar Variables de Entorno
-# Copiar el archivo de ejemplo
-# cp .env.example .env
-
-# Configurar las URLs en .env (Referencia)
-# BACKEND_URL=http://localhost:8081
-# FRONTEND_URL=http://localhost:4200
-
-# IMPORTANTE: Asegurarse de que 'src/environments/environment.development.ts' coincida con el puerto del Backend:
-# export const environment = { apiUrl: 'http://localhost:8081/api' };
-
-# 3. Iniciar servidor de desarrollo
+<pre><code>npm install
 npm run dev
 
-# 4. Acceder
-# Abre http://localhost:4200
+# Para verificar estilo de código
+npm run lint
 </code></pre>
 
-<h3>🛠️ Scripts y Comandos</h3>
+<p>Abrí <a href="http://localhost:4200">http://localhost:4200</a> en tu navegador para ver el resultado.</p>
 
-<p>Los siguientes scripts están disponibles en <code>package.json</code>:</p>
+<hr>
 
-<table>
-    <thead>
-        <tr>
-            <th>Comando</th>
-            <th>Descripción</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>npm run dev</code></td>
-            <td>Inicia el servidor de desarrollo (alias de <code>ng serve</code>, igual que <code>start</code>).</td>
-        </tr>
-        <tr>
-            <td><code>npm start</code></td>
-            <td>Inicia el servidor de desarrollo (alias de <code>ng serve</code>).</td>
-        </tr>
-        <tr>
-            <td><code>npm run build</code></td>
-            <td>Compila la aplicación para producción en la carpeta <code>dist/</code>.</td>
-        </tr>
-        <tr>
-            <td><code>npm run watch</code></td>
-            <td>Modo de desarrollo con recarga en caliente y configuración de watch.</td>
-        </tr>
-        <tr>
-            <td><code>npm test</code></td>
-            <td>Ejecuta las pruebas unitarias con Karma/Jasmine.</td>
-        </tr>
-    </tbody>
-</table>
+<h3>⚙️ Variables de Entorno</h3>
+
+<p>Crea un archivo <code>.env</code> en la raíz del proyecto (basado en <code>.env.example</code>) para tener referencia de la conexión al <a href="https://github.com/agussantinelli/Sysacad-Next-BackEnd">Backend</a>:</p>
+
+<pre><code># URL de la API (Backend Spring Boot)
+BACKEND_URL=http://localhost:8081
+
+# URL del Frontend (Angular)
+FRONTEND_URL=http://localhost:4200
+
+</code></pre>
+
+<p><strong>Nota:</strong> Angular utiliza <code>src/environments/environment.development.ts</code> para conectar con la API en desarrollo. Asegúrate de que coincida con el puerto del backend:</p>
+
+<pre><code>export const environment = {
+  apiUrl: 'http://localhost:8081/api'
+};</code></pre>
 
 <hr>
 
