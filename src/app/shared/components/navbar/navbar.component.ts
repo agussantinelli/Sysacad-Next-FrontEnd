@@ -7,7 +7,7 @@ import { ThemeService } from '../../../core/services/theme.service';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.css'
+    styleUrl: './styles/navbar.component.css'
 })
 export class NavbarComponent {
     private themeService = inject(ThemeService);
