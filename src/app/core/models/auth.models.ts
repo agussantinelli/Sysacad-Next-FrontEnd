@@ -30,6 +30,7 @@ export interface UsuarioResponse {
     tipoIdentificador?: string;
     anioIngreso?: number;
     carreras?: InfoCarrera[];
+    passwordChangeRequired?: boolean;
 }
 
 export interface LoginResponse {
