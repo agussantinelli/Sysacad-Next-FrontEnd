@@ -39,22 +39,98 @@
 
 
 .user-menu {
+    position: relative;
     display: flex;
-    gap: 1rem;
+    align-items: center;
 }
 
-.logout-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--error);
-    color: var(--error);
+.profile-btn {
     background: transparent;
-    border-radius: 8px;
+    border: none;
+    color: var(--text-primary);
     cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.logout-btn:hover {
-    background: var(--error);
-    color: white;
+.profile-btn:hover {
+    background-color: var(--bg-hover);
+}
+
+.profile-btn .material-icons {
+    font-size: 2rem;
+    color: var(--text-secondary);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 10px 15px -3px var(--shadow-color);
+    width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dropdown-item:hover:not(:disabled) {
+    background-color: var(--bg-hover);
+}
+
+.dropdown-item:disabled {
+    color: var(--text-secondary);
+    cursor: default;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--border-subtle);
+    margin: 4px 0;
+}
+
+.dropdown-item.logout {
+    color: var(--error);
+}
+
+.dropdown-item.logout:hover {
+    background-color: rgba(220, 38, 38, 0.05);
+}
+
+.icon-sm {
+    font-size: 1.2rem;
 }

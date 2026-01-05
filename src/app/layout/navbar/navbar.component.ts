@@ -14,8 +14,14 @@ export class NavbarComponent {
     private themeService = inject(ThemeService);
     private authService = inject(AuthService);
 
+    isDropdownOpen = false;
+
     get logoPath(): string {
         return this.themeService.isDarkMode() ? '/logo-utn-dark-mode.png' : '/logo-utn-light-mode.png';
+    }
+
+    toggleDropdown(): void {
+        this.isDropdownOpen = !this.isDropdownOpen;
     }
 
     logout(): void {

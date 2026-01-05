@@ -4,6 +4,16 @@
         <span class="brand-name">Sysacad Next</span>
     </div>
     <div class="user-menu">
-        <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+        <button class="profile-btn" (click)="toggleDropdown()">
+            <span class="material-icons">account_circle</span>
+        </button>
+
+        <div class="dropdown-menu" [class.show]="isDropdownOpen">
+            <button class="dropdown-item" disabled>Ver Perfil (Próximamente)</button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item logout" (click)="logout()">
+                <span class="material-icons icon-sm">logout</span> Cerrar Sesión
+            </button>
+        </div>
     </div>
 </header>
