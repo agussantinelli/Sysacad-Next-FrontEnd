@@ -117,9 +117,8 @@
     </tbody>
 </table>
 
-<h3>🏗️ Arquitectura de Capas Propuesta</h3>
-
-<p>Organizamos el código verticalmente por <strong>Features</strong> (funcionalidad de negocio) en lugar de horizontalmente por tipo de archivo, favoreciendo la escalabilidad.</p>
+<hr>
+<h3>📦 Estructura del Proyecto</h3>
 
 <pre><code>src/app/
 ├── core/
@@ -127,13 +126,18 @@
 │   └── services/   # Servicios Globales (AuthService, ThemeService)
 ├── features/
 │   ├── auth/
-│   │   └── login/  # Pantalla de Inicio de Sesión
-│   ├── dashboard/  # (En desarrollo) Resumen del alumno
+│   │   ├── login/           # Inicio de Sesión (Implementado)
+│   │   └── forgot-password/ # Recuperación de Contraseña (Implementado)
+│   ├── dashboard/  # Dashboard del Alumno (Implementado)
 │   ├── academic/   # (En desarrollo) Notas, Inscripciones
 │   └── profile/    # (En desarrollo) Datos personales
 ├── shared/
-│   └── components/ # UI Reutilizable (ThemeToggle)
-└── layout/         # (En desarrollo) Estructura base
+│   └── components/
+│       ├── alert-message/   # Alertas Flotantes (Success/Error/Info)
+│       ├── loading-spinner/ # Indicador de Carga
+│       └── theme-toggle/    # Switch Modo Claro/Oscuro
+└── layout/
+    └── navbar/     # Barra de Navegación Responsive
 </code></pre>
 
 <h3>💻 Empezar (Setup Local)</h3>
