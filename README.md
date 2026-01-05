@@ -13,8 +13,11 @@
 </div>
 
 <div align="center">
-    <img src="https://img.shields.io/badge/Angular-17+-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Badge"/>
+    <img src="https://img.shields.io/badge/Angular-18+-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Badge"/>
     <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"/>
+    <img src="https://img.shields.io/badge/Angular%20Material-19-3f51b5?style=for-the-badge&logo=angular&logoColor=white" alt="Material Badge"/>
+    <img src="https://img.shields.io/badge/RxJS-7.8-B7178C?style=for-the-badge&logo=rxjs&logoColor=white" alt="RxJS Badge"/>
+    <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
 </div>
 
 <div align="center">
