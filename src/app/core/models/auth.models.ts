@@ -19,8 +19,13 @@ export interface UsuarioResponse {
     ciudad: string;
     fotoPerfil: string;
     fechaIngreso: string;
-    tituloAcademico: string;
-    rol: string;
+    tituloAcademico?: string; // New field
+    rol: 'ADMIN' | 'ESTUDIANTE' | 'PROFESOR'; // Updated Strict Type
     estado: string;
     tipoIdentificador?: string;
+}
+
+export interface LoginResponse {
+    token: string;
+    usuario: UsuarioResponse;
 }
