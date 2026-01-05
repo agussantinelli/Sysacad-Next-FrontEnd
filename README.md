@@ -56,7 +56,7 @@
 <ul>
     <li><strong>📱 Mobile First:</strong> Diseño 100% responsivo para gestionar la vida académica desde el celular.</li>
     <li><strong>⚡ Performance:</strong> Carga de datos optimizada y navegación SPA (Single Page Application) sin recargas.</li>
-    <li><strong>🔒 Seguridad Robusta:</strong> Integración con Backend Java mediante JWT y protección de rutas por roles (Alumno/Admin).</li>
+    <li><strong>🔒 Seguridad Robusta:</strong> Backend Java con <strong>JWT</strong>. Cliente Frontend con <strong>Axios Interceptors</strong> para inyección automática de tokens y manejo de sesión seguro.</li>
     <li><strong>🧠 Smart Validation:</strong> Reglas de negocio en el cliente para evitar errores de inscripción antes de enviar la solicitud.</li>
 </ul>
 
@@ -97,7 +97,15 @@
         <tr>
             <td><strong>Gestión de Estado</strong></td>
             <td>RxJS 7.8</td>
+        <tr>
+            <td><strong>Gestión de Estado</strong></td>
+            <td>RxJS 7.8</td>
             <td>Manejo de asincronía y flujos de datos (Observables).</td>
+        </tr>
+        <tr>
+            <td><strong>Cliente HTTP</strong></td>
+            <td>Axios</td>
+            <td>Cliente ligero con <strong>Interceptores</strong> para inyección de JWT.</td>
         </tr>
         <tr>
             <td><strong>Runtime</strong></td>
@@ -122,6 +130,7 @@
 
 <pre><code>src/app/
 ├── core/
+│   ├── api/        # Cliente Axios Configurado (Interceptors)
 │   ├── models/     # Modelos de datos (Auth, User)
 │   └── services/   # Servicios Globales (AuthService, ThemeService)
 ├── features/
@@ -183,32 +192,29 @@ FRONTEND_URL=http://localhost:4200
 
 <ul>
     <li>
-        <strong>👮 Administrador</strong>
+        <strong>👮 Administrador (Rol: ADMIN)</strong>
         <ul>
             <li><strong>Gestión Global:</strong> ABM de Alumnos, Profesores y Materias.</li>
-            <li><strong>Calendario Académico:</strong> Configuración de turnos de examen y fechas de inscripción.</li>
-            <li><strong>Planes de Estudio:</strong> Definición de correlatividades y currículas.</li>
-            <li>Auditoría y reportes gerenciales.</li>
+            <li><strong>Panel Dedicado:</strong> (En construcción) Acceso a reportes y configuraciones.</li>
         </ul>
     </li>
     <li>
-        <strong>👨‍🏫 Profesor</strong>
+        <strong>👨‍🏫 Profesor (Rol: PROFESOR)</strong>
         <ul>
-            <li>Gestión de comisiones y visualización de inscriptos.</li>
-            <li><strong>Carga de Notas:</strong> Regularidades y cierre de Actas de Examen.</li>
-            <li>Toma de asistencia.</li>
-            <li>Comunicación directa con sus alumnos.</li>
+            <li><strong>Gestión de Cursadas:</strong> Carga de notas mediante Excel (Inteligente).</li>
+            <li><strong>Vista Adaptada:</strong> El Dashboard muestra opciones relevantes para la docencia (Título Académico, Cursos).</li>
         </ul>
     </li>
     <li>
-        <strong>🎓 Alumno</strong>
+        <strong>🎓 Estudiante (Rol: ESTUDIANTE)</strong>
         <ul>
-            <li><strong>Inscripciones:</strong> Alta y baja en Cursado y Mesas Finales.</li>
-            <li><strong>Autogestión:</strong> Consulta de Historia Académica (Analítico) y estado de situación.</li>
-            <li>Solicitud de constancias (Alumno Regular, Examen).</li>
+            <li><strong>Dashboard Completo:</strong> Acceso a Inscripciones, Estado Académico y Correlatividades.</li>
+            <li><strong>Personalización:</strong> Visualización de carrera y plan de estudios en tiempo real.</li>
         </ul>
     </li>
 </ul>
+
+<p><em>Nota: La interfaz (Navbar y Dashboard) renderiza componentes dinámicamente basándose en el rol del usuario logueado.</em></p>
 
 <hr>
 
