@@ -8,7 +8,7 @@ import { NavbarComponent } from '../../shared/components/navbar/navbar.component
     standalone: true,
     imports: [CommonModule, NavbarComponent],
     templateUrl: './dashboard.component.html',
-    styleUrl: './dashboard.component.css'
+    styleUrl: './styles/dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
     usuario: UsuarioResponse | null = null;
