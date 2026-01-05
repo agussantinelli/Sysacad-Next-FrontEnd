@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioResponse } from '../../core/models/auth.models';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -12,6 +13,11 @@ import { UsuarioResponse } from '../../core/models/auth.models';
 export class DashboardComponent implements OnInit {
     usuario: UsuarioResponse | null = null;
     greeting: string = '';
+    private themeService = inject(ThemeService);
+
+    get logoPath(): string {
+        return this.themeService.isDarkMode() ? '/logo-utn-dark-mode.png' : '/logo-utn-light-mode.png';
+    }
 
     ngOnInit(): void {
         const userStr = localStorage.getItem('user');
