@@ -1,0 +1,71 @@
+.spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    border-radius: 16px;
+    /* Default for inside cards */
+}
+
+/* Fullscreen override */
+.spinner-overlay.fullscreen {
+    position: fixed;
+    border-radius: 0;
+    z-index: 2000;
+}
+
+/* Dark mode adjustment if parent is dark, but here we use rgba white for light mode glass.
+   For dark mode support, we might need variables if the context changes.
+   For now, assuming it sits on top of our glass cards.
+*/
+:host-context(.dark-mode) .spinner-overlay {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.spinner-container {
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 153, 230, 0.3);
+    border-top-color: var(--utn-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+.spinner-message {
+    color: var(--utn-blue);
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
