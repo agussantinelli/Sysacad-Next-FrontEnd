@@ -19,6 +19,7 @@
         </div>
 
         <div class="sections-container">
+            @if (usuario?.rol === 'ESTUDIANTE') {
             @for (section of menuSections; track section.title) {
             <section class="dashboard-section">
                 <h2 class="section-title">{{ section.title }}</h2>
@@ -34,6 +35,12 @@
                     }
                 </div>
             </section>
+            }
+            } @else {
+            <div class="empty-state">
+                <h3>Panel de {{ usuario?.rol | titlecase }} en Construcción 🚧</h3>
+                <p>Próximamente verás aquí las opciones para tu rol.</p>
+            </div>
             }
         </div>
     </main>

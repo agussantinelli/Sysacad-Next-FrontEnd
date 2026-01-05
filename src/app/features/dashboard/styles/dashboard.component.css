@@ -145,6 +145,21 @@
     background-color: var(--utn-blue);
 }
 
+.empty-state {
+    text-align: center;
+    padding: 4rem;
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    border: 1px dashed var(--border-color);
+    color: var(--text-secondary);
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
