@@ -8,7 +8,13 @@
         <div class="welcome-header">
             <div class="header-text">
                 <h1>{{ greeting }}, <span class="highlight">{{ usuario?.nombre }}</span></h1>
-                <p class="subtitle">Ingeniería en Sistemas de Información (Plan 2023)</p>
+                @if (usuario?.rol === 'ESTUDIANTE' && usuario?.carreras?.length) {
+                <p class="subtitle">{{ usuario?.carreras?.[0]?.nombreCarrera }} (Plan {{ usuario?.anioIngreso }})</p>
+                } @else if (usuario?.rol === 'PROFESOR') {
+                <p class="subtitle">{{ usuario?.tituloAcademico || 'Docente' }}</p>
+                } @else {
+                <p class="subtitle">Panel de Administración</p>
+                }
             </div>
 
             <div class="user-info-pill">

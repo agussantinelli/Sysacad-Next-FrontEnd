@@ -4,6 +4,11 @@ export interface LoginRequest {
     tipoIdentificador?: string;
 }
 
+export interface InfoCarrera {
+    nombreCarrera: string;
+    facultad: string;
+}
+
 export interface UsuarioResponse {
     id: string;
     legajo: string;
@@ -19,10 +24,12 @@ export interface UsuarioResponse {
     ciudad: string;
     fotoPerfil: string;
     fechaIngreso: string;
-    tituloAcademico?: string; // New field
-    rol: 'ADMIN' | 'ESTUDIANTE' | 'PROFESOR'; // Updated Strict Type
+    tituloAcademico?: string;
+    rol: 'ADMIN' | 'ESTUDIANTE' | 'PROFESOR';
     estado: string;
     tipoIdentificador?: string;
+    anioIngreso?: number;
+    carreras?: InfoCarrera[];
 }
 
 export interface LoginResponse {
