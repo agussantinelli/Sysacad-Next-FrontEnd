@@ -57,6 +57,8 @@
     <li><strong>🧠 Smart Validation:</strong> Reglas de negocio en el cliente para evitar errores de inscripción antes de enviar la solicitud.</li>
 </ul>
 
+</ul>
+
 <hr>
 
 <h2>🌐 Frontend (este repositorio)</h2>
