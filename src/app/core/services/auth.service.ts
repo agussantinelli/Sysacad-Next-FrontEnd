@@ -1,23 +1,29 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { LoginRequest, UsuarioResponse } from '../models/auth.models';
-import { environment } from '../../../environments/environment';
+import { LoginRequest, LoginResponse, UsuarioResponse } from '../models/auth.models';
+import axiosClient from '../api/axios.client';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private http = inject(HttpClient);
-    private apiUrl = `${environment.apiUrl}/auth`;
 
     private router = inject(Router);
 
     constructor() { }
 
     login(credentials: LoginRequest): Observable<UsuarioResponse> {
-        return this.http.post<UsuarioResponse>(`${this.apiUrl}/login`, credentials);
+        return from(axiosClient.post<LoginResponse>('/auth/login', credentials)).pipe(
+            map(response => {
+                const { token, usuario } = response.data;
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(usuario));
+
+                return usuario;
+            })
+        );
     }
 
     logout(): void {
