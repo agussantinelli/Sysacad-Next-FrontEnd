@@ -51,13 +51,10 @@ export class LoginComponent {
                 next: (response) => {
                     console.log('Login successful', response);
                     this.isLoading = false;
-                    this.successMessage = '¡Ingreso exitoso! Redirigiendo...';
                     localStorage.setItem('user', JSON.stringify(response));
                     localStorage.setItem('token', 'dummy-token');
 
-                    setTimeout(() => {
-                        this.router.navigate(['/dashboard']);
-                    }, 1500);
+                    this.router.navigate(['/dashboard'], { state: { loginSuccess: true } });
                 },
                 error: (error) => {
                     console.error('Login failed', error);
