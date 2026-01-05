@@ -1,8 +1,22 @@
-    .theme-toggle-switch {
+    .theme-toggle-container {
         position: fixed;
-        /* Fixed so it floats on top of all pages */
-        top: 20px;
-        right: 20px;
+        top: 50%;
+        right: 0;
+        z-index: 1000;
+        /* Ensure it's above everything */
+        transform: translateY(-50%);
+        /* Drag handle cursor */
+        cursor: move;
+        padding: 10px;
+        /* Hit area */
+    }
+
+    /* Remove previous fixed positioning from the switch itself */
+    .theme-toggle-switch {
+        position: relative;
+        /* Reset from fixed */
+        top: auto;
+        right: auto;
         width: 70px;
         height: 36px;
         background: #e2e8f0;
@@ -13,11 +27,10 @@
         justify-content: space-between;
         padding: 0 8px;
         cursor: pointer;
+        /* Main cursor is pointer (click) */
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         overflow: hidden;
-        z-index: 1000;
-        /* Ensure it's above everything */
     }
 
     .theme-toggle-switch.dark {
