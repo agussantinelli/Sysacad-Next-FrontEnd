@@ -1,5 +1,6 @@
 <div class="login-container">
     <div class="glass-card">
+        <app-loading-spinner *ngIf="isLoading" message="Iniciando sesión..."></app-loading-spinner>
         <header class="login-header">
             <div class="logo-container">
                 <img [src]="logoPath" alt="UTN Logo" class="logo-image">
