@@ -1,0 +1,68 @@
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 60px;
+    background-color: var(--bg-card);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+}
+
+.logo-img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 40px;
+    /* Reduced to default as per latest user preference or need to verify Step 838 edit */
+    width: auto;
+    object-fit: contain;
+    z-index: 101;
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-left: 50px;
+    /* Adjusted for smaller logo spacer */
+}
+
+/* Override for larger logo if Step 830 request is priority over Step 838 manual edit?
+   User asked "hace que sea mas chiquito" then reverted?
+   Step 838 manual edit set height: 40px. 
+   I will respect the Step 838 manual edit first, but add the "hanging" style logic if size increases.
+   For 40px logo, it fits inside 60px header, so no need for large margins.
+   Adjusting margin-left to be reasonable for 40px logo (~50px).
+*/
+
+.user-menu {
+    display: flex;
+    gap: 1rem;
+}
+
+.logout-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--error);
+    color: var(--error);
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: var(--error);
+    color: white;
+}
