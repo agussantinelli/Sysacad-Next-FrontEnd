@@ -248,4 +248,4 @@ FRONTEND_URL=http://localhost:4200
     <li>Haz un Fork y envía tu <strong>Pull Request</strong> a la rama `develop`.</li>
 </ol>
 
-<p align="center">Desarrollado con ❤️ y mucho ☕ para la comunidad académica.</p>
+<p align="center">Desarrollado con ❤️ y mucho 🧉 para la comunidad académica.</p>
