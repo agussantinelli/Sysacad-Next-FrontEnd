@@ -7,7 +7,6 @@ export class ThemeService {
     isDarkMode = signal<boolean>(false);
 
     constructor() {
-        // Check system preference or localStorage
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             this.isDarkMode.set(true);

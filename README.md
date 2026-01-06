@@ -133,8 +133,8 @@
 <pre><code>src/app/
 ├── core/
 │   ├── api/        # Cliente Axios Configurado (Interceptors)
-│   ├── models/     # Modelos de datos (Auth, User)
-│   └── services/   # Servicios Globales (AuthService, ThemeService)
+│   ├── models/     # Modelos de Dominio (Usuario, Materia, Inscripcion...)
+│   └── services/   # Servicios HTTP por Entidad (Auth, Carrera, Alumno...)
 ├── features/
 │   ├── auth/
 │   │   ├── login/           # Inicio de Sesión (Implementado)
