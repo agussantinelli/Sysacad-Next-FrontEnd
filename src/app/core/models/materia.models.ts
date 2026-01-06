@@ -9,6 +9,12 @@ export enum DuracionMateria {
     CUATRIMESTRAL = 'CUATRIMESTRAL'
 }
 
+export enum ModalidadMateria {
+    PRESENCIAL = 'PRESENCIAL',
+    MIXTO = 'MIXTO',
+    VIRTUAL = 'VIRTUAL'
+}
+
 export enum CuatrimestreDictado {
     PRIMERO = 'PRIMERO',
     SEGUNDO = 'SEGUNDO',
@@ -26,6 +32,7 @@ export interface MateriaRequest {
     descripcion?: string;
     tipoMateria: TipoMateria;
     duracion: DuracionMateria;
+    modalidad?: ModalidadMateria;
     cuatrimestreDictado: CuatrimestreDictado;
     horasCursado: number; // Short
     rendirLibre: boolean;
@@ -39,6 +46,7 @@ export interface MateriaResponse {
     descripcion: string;
     tipoMateria: TipoMateria;
     duracion: DuracionMateria;
+    modalidad: ModalidadMateria;
     cuatrimestreDictado: CuatrimestreDictado;
     horasCursado: number;
     rendirLibre: boolean;
