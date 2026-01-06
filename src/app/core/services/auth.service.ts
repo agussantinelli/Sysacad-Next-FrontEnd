@@ -2,7 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { LoginRequest, LoginResponse, UsuarioResponse } from '../models/auth.models';
+import { LoginRequest, AuthResponse } from '../models/auth.models';
+import { UsuarioResponse } from '../models/usuario.models';
 import axiosClient from '../api/axios.client';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class AuthService {
     constructor() { }
 
     login(credentials: LoginRequest): Observable<UsuarioResponse> {
-        return from(axiosClient.post<LoginResponse>('/auth/login', credentials)).pipe(
+        return from(axiosClient.post<AuthResponse>('/auth/login', credentials)).pipe(
             map(response => {
                 const { token, usuario } = response.data;
                 localStorage.setItem('token', token);
