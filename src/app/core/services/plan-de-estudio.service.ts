@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 import axiosClient from '../api/axios.client';
 import { PlanDeEstudioRequest, PlanDeEstudioResponse } from '../models/plan-de-estudio.models';
 
-// Interface for PlanMateria if necessary, otherwise inline
 export interface PlanMateriaRequest {
     idFacultad: string;
     idCarrera: string;

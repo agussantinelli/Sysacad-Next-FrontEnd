@@ -3,8 +3,6 @@ import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '../api/axios.client';
 import { ComisionRequest, ComisionResponse } from '../models/comision.models';
-// Assuming Usuario definition is needed for assigning professor, but generic object might suffice if ID is what matters, 
-// but controller says `@RequestBody Usuario profesor`, so it likely expects the full object or a subset.
 import { UsuarioResponse } from '../models/usuario.models';
 
 @Injectable({
@@ -33,7 +31,6 @@ export class ComisionService {
     }
 
     asignarProfesor(idComision: string, profesor: Partial<UsuarioResponse>): Observable<ComisionResponse> {
-        // Sending Partial<UsuarioResponse> as the backend expects Usuario.
         return from(axiosClient.post<ComisionResponse>(`/comisiones/${idComision}/profesores`, profesor)).pipe(
             map(response => response.data)
         );

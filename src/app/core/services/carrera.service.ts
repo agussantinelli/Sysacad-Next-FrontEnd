@@ -24,7 +24,6 @@ export class CarreraService {
         );
     }
 
-    // Methods from CarreraController relating to Plans
     crearPlan(plan: PlanDeEstudioRequest): Observable<PlanDeEstudioResponse> {
         return from(axiosClient.post<PlanDeEstudioResponse>('/carreras/planes', plan)).pipe(
             map(response => response.data)
@@ -32,12 +31,6 @@ export class CarreraService {
     }
 
     agregarMateriaAPlan(planMateria: { idPlan: string; idMateria: string; cuatrimestre: number }): Observable<void> {
-        // Note: The backend expects PlanMateria object. Assuming structure based on usage. 
-        // If PlanMateria DTO is not defined in models, we might need a type for it.
-        // However, looking at the code `planService.agregarMateriaAPlan(planMateria)` it likely matches a DTO.
-        // I'll assume an interface or `any` for now if not strictly defined, or create one.
-        // Given usage in `PlanDeEstudioRequest`, checking if there is a helper type. Not seen.
-        // I will use `any` or a local interface for the payload.
         return from(axiosClient.post<void>('/carreras/planes/materias', planMateria)).pipe(
             map(response => response.data)
         );
