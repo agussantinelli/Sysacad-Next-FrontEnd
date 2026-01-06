@@ -132,23 +132,23 @@
 
 <pre><code>src/app/
 ├── core/
-│   ├── api/        # Cliente Axios Configurado (Interceptors)
-│   ├── models/     # Modelos de Dominio (Usuario, Materia, Inscripcion...)
-│   └── services/   # Servicios HTTP por Entidad (Auth, Carrera, Alumno...)
+│   ├── api/                 # Cliente Axios Configurado (Interceptors)
+│   ├── models/              # Modelos de Dominio (Usuario, Materia, Inscripcion...)
+│   └── services/            # Servicios Globales (Theme) y de Entidades (Auth, Carrera...)
 ├── features/
 │   ├── auth/
 │   │   ├── login/           # Inicio de Sesión (Implementado)
 │   │   └── forgot-password/ # Recuperación de Contraseña (Implementado)
-│   ├── dashboard/  # Dashboard del Alumno (Implementado)
-│   ├── academic/   # (En desarrollo) Notas, Inscripciones
-│   └── profile/    # (En desarrollo) Datos personales
+│   ├── dashboard/           # Dashboard del Alumno (Implementado)
+│   ├── academic/            # (En desarrollo) Notas, Inscripciones
+│   └── profile/             # (En desarrollo) Datos personales
 ├── shared/
 │   └── components/
 │       ├── alert-message/   # Alertas Flotantes (Success/Error/Info)
 │       ├── loading-spinner/ # Indicador de Carga
 │       └── theme-toggle/    # Switch Modo Claro/Oscuro
 └── layout/
-    └── navbar/     # Barra de Navegación Responsive
+    └── navbar/              # Barra de Navegación Responsive
 </code></pre>
 
 <h3>💻 Empezar (Setup Local)</h3>
