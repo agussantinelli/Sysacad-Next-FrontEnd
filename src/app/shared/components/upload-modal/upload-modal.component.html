@@ -17,8 +17,9 @@
         </div>
         } @else {
         <div class="crop-area">
-            @if (isUploading) {
-            <app-loading-spinner [message]="'Subiendo foto...'"></app-loading-spinner>
+            @if (isUploading || isProcessing) {
+            <app-loading-spinner
+                [message]="isUploading ? 'Subiendo foto...' : 'Procesando imagen...'"></app-loading-spinner>
             }
 
             <p class="drop-text" style="text-align: center; font-size: 0.9rem;">
@@ -38,9 +39,9 @@
             </div>
 
             <div class="modal-actions">
-                <button class="btn-cancel" (click)="reset()" [disabled]="isUploading">Volver</button>
+                <button class="btn-cancel" (click)="reset()" [disabled]="isUploading || isProcessing">Volver</button>
                 <button class="btn-confirm" (click)="cropAndSave()" [disabled]="isProcessing || isUploading">
-                    {{ isProcessing ? 'Procesando...' : 'Guardar Foto' }}
+                    Guardar Foto
                 </button>
             </div>
         </div>

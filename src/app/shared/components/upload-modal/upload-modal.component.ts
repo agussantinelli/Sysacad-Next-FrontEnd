@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, NgZone, inject, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 
@@ -10,6 +10,8 @@ import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/load
     styleUrl: './styles/upload-modal.component.css'
 })
 export class UploadModalComponent {
+    private ngZone = inject(NgZone);
+
     @Input() isUploading = false;
     @Output() closeParams = new EventEmitter<void>();
     @Output() imageCropped = new EventEmitter<File>();
@@ -172,9 +174,6 @@ export class UploadModalComponent {
 
         // Zoom centered logic (simplified: maintain center relative ratio roughly)
         const factor = this.currentZoom / oldZoom;
-        // For now simple re-center isn't perfect but sufficient for simple crop
-        // Better: adjusting pan so center point remains stable would be ideal but complex mathematics
-        // Let's just constrain and redraw
 
         this.constrainPan();
         this.texturaImage();
@@ -185,12 +184,6 @@ export class UploadModalComponent {
         const imgWidth = this.img.width * this.currentZoom;
         const imgHeight = this.img.height * this.currentZoom;
 
-        // Min X (image right edge touches canvas right edge) => canvasSize - imgWidth
-        // Max X (image left edge touches canvas left edge) => 0
-        // Actually:
-        // PanX shouldn't be > 0 (gap on left)
-        // PanX + imgWidth shouldn't be < canvasSize (gap on right)
-
         if (this.panX > 0) this.panX = 0;
         if (this.panX + imgWidth < this.canvasSize) this.panX = this.canvasSize - imgWidth;
 
@@ -199,26 +192,52 @@ export class UploadModalComponent {
     }
 
     cropAndSave() {
-        this.isProcessing = true;
+        try {
+            this.isProcessing = true; // Trigger UI update
 
-        // Create output canvas
-        const outputCanvas = document.createElement('canvas');
-        outputCanvas.width = 300; // Final upload size
-        outputCanvas.height = 300;
-        const ctx = outputCanvas.getContext('2d')!;
-
-        // Draw current view to output
-        // Since our main canvas is exactly what we see, we can just draw the main canvas contents
-        // Or redraw using same params for higher quality if main canvas was scaled
-        ctx.drawImage(this.canvasRef.nativeElement, 0, 0, 300, 300);
-
-        outputCanvas.toBlob((blob) => {
-            if (blob) {
-                // Convert blob to file
-                const file = new File([blob], "profile-pic.jpg", { type: "image/jpeg" });
-                this.imageCropped.emit(file);
+            if (!this.canvasRef || !this.canvasRef.nativeElement) {
+                console.error('Canvas not found');
+                this.isProcessing = false;
+                return;
             }
+
+            // Create output canvas
+            const outputCanvas = document.createElement('canvas');
+            outputCanvas.width = 300; // Final upload size
+            outputCanvas.height = 300;
+            const ctx = outputCanvas.getContext('2d');
+
+            if (!ctx) {
+                console.error('Could not get context for output canvas');
+                this.isProcessing = false;
+                return;
+            }
+
+            // Draw current view to output
+            ctx.drawImage(this.canvasRef.nativeElement, 0, 0, 300, 300);
+
+            outputCanvas.toBlob((blob) => {
+                this.ngZone.run(() => {
+                    try {
+                        if (blob) {
+                            // Convert blob to file
+                            const file = new File([blob], "profile-pic.jpg", { type: "image/jpeg" });
+                            // Emit event
+                            this.imageCropped.emit(file);
+                        } else {
+                            console.error('Blob generation failed');
+                        }
+                    } catch (e) {
+                        console.error('Error in emission', e);
+                    } finally {
+                        // Ensure this runs inside the zone so UI updates
+                        this.isProcessing = false;
+                    }
+                });
+            }, 'image/jpeg', 0.9);
+        } catch (e) {
+            console.error('Error in cropAndSave', e);
             this.isProcessing = false;
-        }, 'image/jpeg', 0.9);
+        }
     }
 }
