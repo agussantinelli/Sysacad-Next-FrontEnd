@@ -34,7 +34,9 @@
         </button>
 
         <div class="dropdown-menu" [class.show]="isDropdownOpen">
-            <button class="dropdown-item" disabled>Ver Perfil (Próximamente)</button>
+            <a class="dropdown-item" routerLink="/profile" (click)="toggleDropdown()">
+                <span class="material-icons icon-sm">person</span> Ver Perfil
+            </a>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item logout" (click)="logout()">
                 <span class="material-icons icon-sm">logout</span> Cerrar Sesión
