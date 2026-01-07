@@ -1,0 +1,72 @@
+<div class="profile-container">
+    @if (usuario) {
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                @if (usuario.fotoPerfil) {
+                <img [src]="usuario.fotoPerfil" [alt]="usuario.nombre" class="avatar-img">
+                } @else {
+                <span class="material-icons">person</span>
+                }
+            </div>
+            <h1 class="profile-name">{{ usuario.apellido }}, {{ usuario.nombre }}</h1>
+            <p class="profile-role">{{ usuario.rol }}</p>
+        </div>
+
+        <div class="profile-content">
+            <h3 class="section-title">Información Personal</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">DNI / Documento</span>
+                    <span class="info-value">{{ usuario.dni }} ({{ usuario.tipoDocumento }})</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">{{ usuario.mail }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Fecha de Nacimiento</span>
+                    <span class="info-value">{{ usuario.fechaNacimiento }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Género</span>
+                    <span class="info-value">{{ usuario.genero }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Teléfono</span>
+                    <span class="info-value">{{ usuario.telefono || '-' }}</span>
+                </div>
+            </div>
+
+            <h3 class="section-title">Información Académica</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Legajo</span>
+                    <span class="info-value">{{ usuario.legajo }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Fecha de Ingreso</span>
+                    <span class="info-value">{{ usuario.fechaIngreso }}</span>
+                </div>
+                <!-- TODO: Add careers list if available in future -->
+            </div>
+
+            <h3 class="section-title">Dirección</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Calle y Número</span>
+                    <span class="info-value">{{ usuario.direccion }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Ciudad</span>
+                    <span class="info-value">{{ usuario.ciudad }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    } @else {
+    <div class="loading-state">
+        <p>Cargando perfil...</p>
+    </div>
+    }
+</div>
