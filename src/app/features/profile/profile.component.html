@@ -2,6 +2,9 @@
     @if (usuario) {
     <div class="profile-card">
         <div class="profile-header">
+            <button class="back-btn" (click)="goBack()">
+                <span class="material-icons">arrow_back</span>
+            </button>
             <div class="profile-avatar">
                 @if (usuario.fotoPerfil) {
                 <img [src]="usuario.fotoPerfil" [alt]="usuario.nombre" class="avatar-img">

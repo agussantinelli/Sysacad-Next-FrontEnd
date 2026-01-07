@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
 import { UsuarioResponse } from '@core/models/usuario.models';
 
 @Component({
@@ -10,6 +10,7 @@ import { UsuarioResponse } from '@core/models/usuario.models';
     styleUrl: './styles/profile.component.css'
 })
 export class ProfileComponent implements OnInit {
+    private location = inject(Location);
     usuario: UsuarioResponse | null = null;
 
     ngOnInit(): void {
@@ -21,5 +22,9 @@ export class ProfileComponent implements OnInit {
                 console.error('Error parsing user data', e);
             }
         }
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }
