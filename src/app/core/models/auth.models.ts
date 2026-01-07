@@ -1,4 +1,4 @@
-import { UsuarioResponse } from './usuario.models';
+import { UsuarioResponse } from '@core/models/usuario.models';
 
 export interface LoginRequest {
     identificador: string;

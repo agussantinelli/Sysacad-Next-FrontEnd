@@ -1,4 +1,3 @@
-// Enum definitions for User domain
 export enum TipoDocumento {
     DNI = 'DNI',
     PASAPORTE = 'PASAPORTE',
@@ -26,7 +25,6 @@ export enum RolCargo {
 export enum EstadoUsuario {
     ACTIVO = 'ACTIVO',
     INACTIVO = 'INACTIVO'
-    // Add other states if known, defaulting to string from DTO description "estado (String)"
 }
 
 export interface InfoCarrera {
@@ -42,7 +40,7 @@ export interface UsuarioRequest {
     nombre: string;
     apellido: string;
     mail: string;
-    fechaNacimiento: string; // LocalDate as string due to JSON serialization
+    fechaNacimiento: string; // LocalDate 
     genero: Genero;
     telefono: string;
     direccion: string;

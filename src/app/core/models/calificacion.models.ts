@@ -1,4 +1,4 @@
-import { TipoInscripcion } from './inscripcion.models';
+import { TipoInscripcion } from '@core/models/inscripcion.models';
 
 export interface CalificacionRequest {
     idUsuario: string; // UUID

@@ -1,5 +1,3 @@
-
-
 export enum TipoInscripcion {
     CURSADO = 'CURSADO',
     EXAMEN = 'EXAMEN'
@@ -24,4 +22,3 @@ export interface InscripcionResponse {
     idMateria: string; // UUID
     idComision: string; // UUID
 }
-
