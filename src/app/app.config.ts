@@ -2,7 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 
-import { routes } from 'src/app/app.routes';
+import { routes } from '@/app/app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
