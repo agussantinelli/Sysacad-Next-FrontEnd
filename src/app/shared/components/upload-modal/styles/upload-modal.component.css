@@ -98,6 +98,13 @@
 }
 
 /* Crop Area */
+.crop-area {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .crop-container {
     position: relative;
     width: 300px;
@@ -107,10 +114,8 @@
     border-radius: 50%;
     /* Circle crop visualization */
     border: 4px solid var(--primary-color, #1a73e8);
-    box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.5);
-    /* Dimming outside crop area pseudo-effect, actually needs parent overflow hidden to work well, but here we just use border */
-    /* Alternative simple border */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+    /* Use large shadow to dim outside */
     cursor: grab;
     background: #000;
 }

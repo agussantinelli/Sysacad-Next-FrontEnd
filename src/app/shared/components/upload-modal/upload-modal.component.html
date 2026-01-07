@@ -18,10 +18,7 @@
         } @else {
         <div class="crop-area">
             @if (isUploading) {
-            <div class="uploading-overlay">
-                <app-loading-spinner></app-loading-spinner>
-                <p>Subiendo foto...</p>
-            </div>
+            <app-loading-spinner [message]="'Subiendo foto...'"></app-loading-spinner>
             }
 
             <p class="drop-text" style="text-align: center; font-size: 0.9rem;">
