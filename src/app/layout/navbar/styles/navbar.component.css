@@ -163,6 +163,13 @@
     color: var(--text-secondary);
 }
 
+.user-name {
+    margin-right: 0.8rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -191,6 +198,7 @@
     width: 100%;
     padding: 0.75rem 1rem;
     text-align: left;
+    text-decoration: none;
     background: none;
     border: none;
     color: var(--text-primary);

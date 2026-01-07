@@ -30,6 +30,7 @@
 
     <div class="user-menu">
         <button class="profile-btn" (click)="toggleDropdown()">
+            <span class="user-name" *ngIf="usuario">{{ usuario.nombre }} {{ usuario.apellido }}</span>
             <span class="material-icons">account_circle</span>
         </button>
 
