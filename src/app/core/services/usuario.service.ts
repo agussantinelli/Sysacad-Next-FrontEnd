@@ -17,6 +17,25 @@ export class UsuarioService {
         );
     }
 
+    actualizarUsuario(id: string, usuario: UsuarioRequest): Observable<UsuarioResponse> {
+        return from(axiosClient.put<UsuarioResponse>(`/usuarios/${id}`, usuario)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    subirFotoPerfil(id: string, file: File): Observable<string> {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return from(axiosClient.post<string>(`/usuarios/${id}/foto`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })).pipe(
+            map(response => response.data)
+        );
+    }
+
     obtenerTodos(rol?: RolUsuario): Observable<UsuarioResponse[]> {
         const params: any = {};
         if (rol) params.rol = rol;
