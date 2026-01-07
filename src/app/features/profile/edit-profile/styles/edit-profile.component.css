@@ -68,6 +68,13 @@
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
+.form-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
 .form-actions {
     display: flex;
     justify-content: flex-end;

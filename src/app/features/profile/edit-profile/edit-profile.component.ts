@@ -29,10 +29,10 @@ export class EditProfileComponent implements OnInit {
 
     initForm() {
         this.profileForm = this.fb.group({
-            nombre: ['', Validators.required],
-            apellido: ['', Validators.required],
+            nombre: [{ value: '', disabled: true }, Validators.required],
+            apellido: [{ value: '', disabled: true }, Validators.required],
             dni: ['', Validators.required],
-            mail: ['', [Validators.required, Validators.email]],
+            mail: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
             telefono: [''],
             direccion: [''],
             ciudad: [''],
@@ -80,7 +80,7 @@ export class EditProfileComponent implements OnInit {
         if (this.profileForm.invalid || !this.usuario) return;
 
         this.isSaving = true;
-        const formValues = this.profileForm.value;
+        const formValues = this.profileForm.getRawValue();
 
         const request: UsuarioRequest = {
             ...formValues,
