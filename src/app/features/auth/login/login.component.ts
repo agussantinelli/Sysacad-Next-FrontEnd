@@ -51,9 +51,6 @@ export class LoginComponent {
                 next: (response) => {
                     console.log('Login successful', response);
                     this.isLoading = false;
-                    localStorage.setItem('user', JSON.stringify(response));
-                    localStorage.setItem('token', 'dummy-token');
-
                     this.router.navigate(['/dashboard'], { state: { loginSuccess: true } });
                 },
                 error: (error) => {
