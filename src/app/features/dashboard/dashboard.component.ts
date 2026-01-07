@@ -70,8 +70,9 @@ export class DashboardComponent implements OnInit {
             this.setGreeting();
         }
 
-        if (history.state.loginSuccess) {
+        if (history.state.loginSuccess && !sessionStorage.getItem('welcomeShown')) {
             this.successMessage = '¡Bienvenido/a al Sistema de Gestión Académica!';
+            sessionStorage.setItem('welcomeShown', 'true');
             setTimeout(() => {
                 this.successMessage = null;
             }, 5000);
