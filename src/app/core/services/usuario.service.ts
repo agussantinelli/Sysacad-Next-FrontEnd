@@ -27,11 +27,7 @@ export class UsuarioService {
         const formData = new FormData();
         formData.append('file', file);
 
-        return from(axiosClient.post<string>(`/usuarios/${id}/foto`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })).pipe(
+        return from(axiosClient.post<string>(`/usuarios/${id}/foto`, formData)).pipe(
             map(response => response.data)
         );
     }
