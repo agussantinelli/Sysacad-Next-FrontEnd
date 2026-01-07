@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { ThemeService } from '../../../core/services/theme.service';
-import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
-import { AlertMessageComponent } from '../../../shared/components/alert-message/alert-message.component';
+import { ThemeService } from '@core/services/theme.service';
+import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
+import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 
 @Component({
     selector: 'app-forgot-password',

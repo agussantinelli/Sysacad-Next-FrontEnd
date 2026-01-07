@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThemeService } from '../../core/services/theme.service';
-import { AuthService } from '../../core/services/auth.service';
+import { ThemeService } from '@core/services/theme.service';
+import { AuthService } from '@core/services/auth.service';
 import { RouterLink } from '@angular/router';
-import { UsuarioResponse } from '../../core/models/auth.models';
+import { UsuarioResponse } from '@core/models/usuario.models';
 
 interface NavbarOption {
     title: string;

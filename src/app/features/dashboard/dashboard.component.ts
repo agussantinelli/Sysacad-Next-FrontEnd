@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuarioResponse } from '../../core/models/auth.models';
-import { NavbarComponent } from '../../layout/navbar/navbar.component';
-import { AlertMessageComponent } from '../../shared/components/alert-message/alert-message.component';
+import { UsuarioResponse } from '@core/models/usuario.models';
+import { NavbarComponent } from '@layout/navbar/navbar.component';
+import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 
 interface DashboardOption {
     title: string;

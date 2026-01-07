@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ThemeService } from '../../../core/services/theme.service';
-import { AuthService } from '../../../core/services/auth.service';
-import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
-import { AlertMessageComponent } from '../../../shared/components/alert-message/alert-message.component';
+import { ThemeService } from '@core/services/theme.service';
+import { AuthService } from '@core/services/auth.service';
+import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
+import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 
 @Component({
     selector: 'app-login',
