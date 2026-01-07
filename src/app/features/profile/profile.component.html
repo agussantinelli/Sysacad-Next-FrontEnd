@@ -15,8 +15,11 @@
                     <span class="material-icons">camera_alt</span>
                 </div>
             </div>
+
             <h1 class="profile-name">{{ usuario.apellido || '-' }}, {{ usuario.nombre || '-' }}</h1>
             <p class="profile-role">{{ usuario.rol || '-' }}</p>
+
+
         </div>
 
         <div class="profile-content">
@@ -66,6 +69,13 @@
                     <span class="info-label">Ciudad</span>
                     <span class="info-value">{{ usuario.ciudad || '-' }}</span>
                 </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn-edit" (click)="navigateToEdit()">
+                    <span class="material-icons">edit</span>
+                    Editar Perfil
+                </button>
             </div>
         </div>
     </div>

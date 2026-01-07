@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { UsuarioResponse } from '@core/models/usuario.models';
 import { UploadModalComponent } from '@shared/components/upload-modal/upload-modal.component';
 import { UsuarioService } from '@core/services/usuario.service';
@@ -14,6 +15,7 @@ import { UsuarioService } from '@core/services/usuario.service';
 export class ProfileComponent implements OnInit {
     private location = inject(Location);
     private usuarioService = inject(UsuarioService);
+    private router = inject(Router);
 
     usuario: UsuarioResponse | null = null;
     showUploadModal = false;
@@ -55,16 +57,6 @@ export class ProfileComponent implements OnInit {
 
         this.usuarioService.subirFotoPerfil(this.usuario.id, file).subscribe({
             next: () => {
-                // Success: Update local state to reflect change immediately? 
-                // Since backend returns string message, we might need to reload user or just assume success?
-                // Ideally backend returns the new URL. 
-                // For now, let's just close modal and maybe reload page or re-fetch user triggered by something else?
-                // actually better to just notify user.
-
-                // Let's try to update the photo URL if we can guess it or re-fetch user
-                // The backend endpoint `subirFoto` returns a string.
-                // We should re-fetch the user data to get the new photo URL string.
-
                 this.usuarioService.obtenerPorId(this.usuario!.id).subscribe(updatedUser => {
                     this.usuario = updatedUser;
                     localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -75,8 +67,11 @@ export class ProfileComponent implements OnInit {
             error: (err) => {
                 console.error('Upload failed', err);
                 this.isUploadingPhoto = false;
-                // Handle error (alert?)
             }
         });
+    }
+
+    navigateToEdit() {
+        this.router.navigate(['/profile/edit']);
     }
 }
