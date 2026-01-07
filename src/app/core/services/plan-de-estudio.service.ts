@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import axiosClient from '../api/axios.client';
-import { PlanDeEstudioRequest, PlanDeEstudioResponse } from '../models/plan-de-estudio.models';
+import axiosClient from '@core/api/axios.client';
+import { PlanDeEstudioRequest, PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
 
 export interface PlanMateriaRequest {
     idFacultad: string;

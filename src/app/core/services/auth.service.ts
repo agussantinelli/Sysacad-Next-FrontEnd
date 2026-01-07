@@ -2,9 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { LoginRequest, AuthResponse } from '../models/auth.models';
-import { UsuarioResponse } from '../models/usuario.models';
-import axiosClient from '../api/axios.client';
+import { LoginRequest, AuthResponse } from '@core/models/auth.models';
+import { UsuarioResponse } from '@core/models/usuario.models';
+import axiosClient from '@core/api/axios.client';
 
 @Injectable({
     providedIn: 'root'

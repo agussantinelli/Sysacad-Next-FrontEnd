@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import axiosClient from '../api/axios.client';
-import { CarreraRequest, CarreraResponse } from '../models/carrera.models';
-import { PlanDeEstudioRequest, PlanDeEstudioResponse } from '../models/plan-de-estudio.models';
+import axiosClient from '@core/api/axios.client';
+import { CarreraRequest, CarreraResponse } from '@core/models/carrera.models';
+import { PlanDeEstudioRequest, PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
 
 @Injectable({
     providedIn: 'root'

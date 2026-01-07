@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import axiosClient from '../api/axios.client';
-import { UsuarioRequest, UsuarioResponse, RolUsuario } from '../models/usuario.models';
+import axiosClient from '@core/api/axios.client';
+import { UsuarioRequest, UsuarioResponse, RolUsuario } from '@core/models/usuario.models';
 
 @Injectable({
     providedIn: 'root'
