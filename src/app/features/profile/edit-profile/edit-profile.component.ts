@@ -37,8 +37,7 @@ export class EditProfileComponent implements OnInit {
             direccion: [''],
             ciudad: [''],
             fechaNacimiento: [''],
-            genero: [''],
-            password: [''] // Optional
+            genero: ['']
         });
     }
 
@@ -67,8 +66,7 @@ export class EditProfileComponent implements OnInit {
             direccion: this.usuario.direccion,
             ciudad: this.usuario.ciudad,
             fechaNacimiento: this.usuario.fechaNacimiento,
-            genero: this.usuario.genero,
-            password: ''
+            genero: this.usuario.genero
         });
     }
 
@@ -83,8 +81,7 @@ export class EditProfileComponent implements OnInit {
         const formValues = this.profileForm.getRawValue();
 
         const request: UsuarioRequest = {
-            ...formValues,
-            password: formValues.password || undefined
+            ...formValues
         };
 
         this.usuarioService.actualizarUsuario(this.usuario.id, request).subscribe({
