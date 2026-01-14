@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
     }
 
     goBack(): void {
-        this.location.back();
+        this.router.navigate(['/dashboard']);
     }
 
     openUploadModal() {
