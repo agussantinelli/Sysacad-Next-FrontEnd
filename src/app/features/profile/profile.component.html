@@ -39,7 +39,11 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Género</span>
-                    <span class="info-value">{{ usuario.genero || '-' }}</span>
+                    <span class="info-value">
+                        @if (usuario.genero === 'M') { Masculino }
+                        @else if (usuario.genero === 'F') { Femenino }
+                        @else { {{ usuario.genero || '-' }} }
+                    </span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Teléfono</span>
