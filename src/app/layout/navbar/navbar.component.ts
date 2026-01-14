@@ -85,6 +85,23 @@ export class NavbarComponent implements OnInit {
         }
     ];
 
+    professorSections: NavbarSection[] = [
+        {
+            title: 'Gestión',
+            options: [
+                { title: 'Mis Materias', icon: 'class', route: '/professor/subjects' },
+                { title: 'Calificar', icon: 'assignment_turned_in', route: '/professor/grades' },
+            ]
+        },
+        {
+            title: 'Exámenes',
+            options: [
+                { title: 'Mesas', icon: 'assignment', route: '/professor/exams' },
+                { title: 'Actas', icon: 'description', route: '/professor/acts' }
+            ]
+        }
+    ];
+
     ngOnInit(): void {
         const userStr = localStorage.getItem('user');
         if (userStr) {

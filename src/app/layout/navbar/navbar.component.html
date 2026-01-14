@@ -25,6 +25,25 @@
             </div>
         </div>
         }
+        } @else if (usuario?.rol === 'PROFESOR') {
+        @for (section of professorSections; track section.title) {
+        <div class="nav-item-container">
+            <button class="nav-link" [class.active]="activeSection === section.title"
+                (click)="setActiveSection(section.title)">
+                {{ section.title }}
+                <span class="material-icons chevron">expand_more</span>
+            </button>
+
+            <div class="nav-dropdown" [class.show]="activeSection === section.title">
+                @for (option of section.options; track option.title) {
+                <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
+                    <span class="material-icons icon-sm">{{ option.icon }}</span>
+                    {{ option.title }}
+                </a>
+                }
+            </div>
+        </div>
+        }
         } @else if (usuario?.rol === 'ADMIN') {
         @for (section of adminSections; track section.title) {
         <div class="nav-item-container">
