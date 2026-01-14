@@ -82,6 +82,21 @@ export class NavbarComponent implements OnInit {
                 { title: 'Usuarios', icon: 'group', route: '/admin/usuarios' },
                 { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscripciones' }
             ]
+        },
+        {
+            title: 'Exámenes',
+            options: [
+                { title: 'Mesas', icon: 'assignment', route: '/admin/mesas' },
+                { title: 'Actas', icon: 'description', route: '/admin/actas' }
+            ]
+        },
+        {
+            title: 'Trámites',
+            options: [
+                { title: 'Certificados', icon: 'badge', route: '/admin/certificados' },
+                { title: 'Avisos', icon: 'notifications', route: '/admin/avisos' },
+                { title: 'Calendario', icon: 'calendar_month', route: '/admin/calendario' }
+            ]
         }
     ];
 
