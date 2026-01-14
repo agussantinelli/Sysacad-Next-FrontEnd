@@ -16,10 +16,12 @@ interface DashboardSection {
     options: DashboardOption[];
 }
 
+import { RouterLink } from '@angular/router';
+
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [CommonModule, NavbarComponent, AlertMessageComponent],
+    imports: [CommonModule, NavbarComponent, AlertMessageComponent, RouterLink],
     templateUrl: './dashboard.component.html',
     styleUrl: './styles/dashboard.component.css'
 })
@@ -42,7 +44,7 @@ export class DashboardComponent implements OnInit {
                 { title: 'Estado Académico', icon: 'school', route: '/academic/status' },
                 { title: 'Materias del Plan', icon: 'book', route: '/academic/plan' },
                 { title: 'Cursado y Notas', icon: 'grade', route: '/academic/grades' },
-                { title: 'Historia Académica', icon: 'history_edu', route: '/academic/history' } // "Exámenes" in legacy
+                { title: 'Historia Académica', icon: 'history_edu', route: '/academic/history' }
             ]
         },
         {
@@ -59,6 +61,25 @@ export class DashboardComponent implements OnInit {
                 { title: 'Calendario Académico', icon: 'calendar_month', route: '/academic/calendar' },
                 { title: 'Avisos', icon: 'notifications', route: '/notifications' },
                 { title: 'Cambio de Contraseña', icon: 'lock_reset', route: '/profile/change-password' }
+            ]
+        }
+    ];
+
+    adminSections: DashboardSection[] = [
+        {
+            title: 'Administración Académica',
+            options: [
+                { title: 'Carreras', icon: 'school', route: '/admin/carreras' },
+                { title: 'Facultades', icon: 'domain', route: '/admin/facultades' },
+                { title: 'Planes de Estudio', icon: 'map', route: '/admin/planes' },
+                { title: 'Materias', icon: 'book', route: '/admin/materias' }
+            ]
+        },
+        {
+            title: 'Gestión Institucional',
+            options: [
+                { title: 'Usuarios', icon: 'group', route: '/admin/usuarios' },
+                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscripciones' }
             ]
         }
     ];
