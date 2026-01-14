@@ -81,6 +81,21 @@ export class DashboardComponent implements OnInit {
                 { title: 'Usuarios', icon: 'group', route: '/admin/usuarios' },
                 { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscripciones' }
             ]
+        },
+        {
+            title: 'Gestión de Exámenes',
+            options: [
+                { title: 'Mesas de Examen', icon: 'assignment', route: '/admin/mesas' },
+                { title: 'Actas Volantes', icon: 'description', route: '/admin/actas' }
+            ]
+        },
+        {
+            title: 'Trámites y Comunicación',
+            options: [
+                { title: 'Solicitudes Certificados', icon: 'badge', route: '/admin/certificados' },
+                { title: 'Avisos', icon: 'notifications', route: '/admin/avisos' },
+                { title: 'Calendario Académico', icon: 'calendar_month', route: '/admin/calendario' }
+            ]
         }
     ];
 
