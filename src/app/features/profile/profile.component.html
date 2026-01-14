@@ -78,7 +78,7 @@
             <div class="profile-actions">
                 <button class="btn-edit" (click)="navigateToEdit()">
                     <span class="material-icons">edit</span>
-                    Editar Perfil
+                    {{ isProfileComplete ? 'Editar Perfil' : 'Completar Perfil' }}
                 </button>
             </div>
         </div>

@@ -84,6 +84,21 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    get isProfileComplete(): boolean {
+        if (!this.usuario) return false;
+        return !!(
+            this.usuario.dni &&
+            this.usuario.nombre &&
+            this.usuario.apellido &&
+            this.usuario.mail &&
+            this.usuario.fechaNacimiento &&
+            this.usuario.genero &&
+            this.usuario.telefono &&
+            this.usuario.direccion &&
+            this.usuario.ciudad
+        );
+    }
+
     navigateToEdit() {
         this.router.navigate(['/profile/edit']);
     }
