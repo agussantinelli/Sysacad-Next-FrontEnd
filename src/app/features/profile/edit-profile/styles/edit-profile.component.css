@@ -6,17 +6,17 @@
     animation: fadeIn 0.3s ease-out;
 }
 
+/* Light Mode Defaults */
 .edit-card {
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-card, #ffffff);
+    border: 1px solid var(--border-subtle, #e2e8f0);
     border-radius: 24px;
     padding: 2.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .edit-title {
-    color: var(--text-primary, #ffffff);
+    color: var(--text-primary, #1e293b);
     margin-bottom: 2rem;
     font-size: 1.8rem;
     font-weight: 700;
@@ -28,7 +28,7 @@
     font-size: 1.2rem;
     margin: 2rem 0 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-subtle, #e2e8f0);
 }
 
 .form-grid {
@@ -44,18 +44,18 @@
 }
 
 .form-group label {
-    color: var(--text-secondary, #94a3b8);
+    color: var(--text-secondary, #64748b);
     font-size: 0.9rem;
     font-weight: 500;
 }
 
 .form-input {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-hover, #f8fafc);
+    border: 1px solid var(--border-subtle, #e2e8f0);
     border-radius: 12px;
     padding: 0.75rem 1rem;
-    color: var(--text-primary, #fff);
+    color: var(--text-primary, #1e293b);
     font-size: 0.95rem;
     font-family: inherit;
     transition: all 0.2s;
@@ -64,31 +64,15 @@
 .form-input:focus {
     outline: none;
     border-color: var(--utn-blue, #3b82f6);
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-card, #ffffff);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 .form-input:disabled {
-    opacity: 0.6;
+    opacity: 0.7;
     cursor: not-allowed;
-    background: rgba(255, 255, 255, 0.02);
-    border-color: rgba(255, 255, 255, 0.05);
-}
-
-option {
-    background-color: #1e293b;
-    color: #ffffff;
-    padding: 10px;
-}
-
-select.form-input {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3F%3E%3C/svg%3E");
-    background-position: right 1rem center;
-    background-repeat: no-repeat;
-    background-size: 1.2em;
-    padding-right: 2.5rem;
-    cursor: pointer;
+    background: var(--bg-disabled, #f1f5f9);
+    color: var(--text-secondary, #94a3b8);
 }
 
 .form-actions {
@@ -97,13 +81,13 @@ select.form-input {
     gap: 1rem;
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-subtle, #e2e8f0);
 }
 
 .btn-cancel {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-secondary, #94a3b8);
+    border: 1px solid var(--border-subtle, #e2e8f0);
+    color: var(--text-secondary, #64748b);
     padding: 0.75rem 1.5rem;
     border-radius: 12px;
     cursor: pointer;
@@ -112,8 +96,9 @@ select.form-input {
 }
 
 .btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary, #fff);
+    background: var(--bg-hover, #f1f5f9);
+    color: var(--text-primary, #1e293b);
+    border-color: var(--text-secondary, #94a3b8);
 }
 
 .btn-save {
@@ -125,19 +110,38 @@ select.form-input {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
 }
 
 .btn-save:hover:not(:disabled) {
     background: var(--utn-hover, #2563eb);
     transform: translateY(-1px);
-    box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.4);
 }
 
 .btn-save:disabled {
     opacity: 0.7;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
+}
+
+/* Styling for Select Options - Light Mode */
+option {
+    background-color: var(--bg-card, #ffffff);
+    color: var(--text-primary, #1e293b);
+    padding: 10px;
+}
+
+/* Custom arrow for select - Light Mode */
+select.form-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3F%3E%3C/svg%3E");
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    background-size: 1.2em;
+    padding-right: 2.5rem;
+    cursor: pointer;
 }
 
 @keyframes fadeIn {
@@ -163,5 +167,67 @@ select.form-input {
 
     .form-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* === DARK MODE OVERRIDES === */
+@media (prefers-color-scheme: dark) {
+    .edit-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .edit-title {
+        color: #ffffff;
+    }
+
+    .section-title {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .form-group label {
+        color: #94a3b8;
+    }
+
+    .form-input {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    .form-input:focus {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .form-input:disabled {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .form-actions {
+        border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-cancel {
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #94a3b8;
+    }
+
+    .btn-cancel:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+    }
+
+    option {
+        background-color: #1e293b;
+        color: #ffffff;
+    }
+
+    select.form-input {
+        /* Arrow white for dark mode */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3F%3E%3C/svg%3E");
     }
 }
