@@ -29,7 +29,20 @@ export class ProfileComponent implements OnInit {
         const userStr = localStorage.getItem('user');
         if (userStr) {
             try {
-                this.usuario = JSON.parse(userStr);
+                const localUser = JSON.parse(userStr);
+                this.usuario = localUser;
+
+                // Debug: Fetch fresh data from backend to see "what arrives"
+                if (localUser && localUser.id) {
+                    this.usuarioService.obtenerPorId(localUser.id).subscribe({
+                        next: (data) => {
+                            console.log('🔍 RESPUESTA BACKEND (/profile):', data);
+                            this.usuario = data; // Update view with fresh data
+                            localStorage.setItem('user', JSON.stringify(data)); // Keep local storage in sync
+                        },
+                        error: (err) => console.error('Error obteniendo usuario del backend', err)
+                    });
+                }
             } catch (e) {
                 console.error('Error parsing user data', e);
             }
