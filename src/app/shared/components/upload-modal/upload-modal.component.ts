@@ -26,15 +26,10 @@ export class UploadModalComponent {
     private ctx!: CanvasRenderingContext2D;
     private canvasSize = 300; // Match CSS size
 
-    // Transform state
-    currentZoom = 1;
-    minZoom = 1;
-    maxZoom = 3;
+    // Transform state (calculated automatically)
+    zoom = 1;
     panX = 0;
     panY = 0;
-    isDraggingImage = false;
-    lastMouseX = 0;
-    lastMouseY = 0;
 
     close() {
         this.closeParams.emit();
@@ -42,7 +37,7 @@ export class UploadModalComponent {
 
     reset() {
         this.imageSource = null;
-        this.currentZoom = 1;
+        this.zoom = 1;
         this.panX = 0;
         this.panY = 0;
     }
@@ -80,16 +75,17 @@ export class UploadModalComponent {
             this.imageSource = e.target?.result as string;
             this.img.src = this.imageSource;
             this.img.onload = () => {
-                // Calculate initial zoom to fit cover
+                // Logic: "Cover" behavior (always fill 300x300)
+                // 1. Determine which dimension needs to be scaled more to fill the container
                 const scaleX = this.canvasSize / this.img.width;
                 const scaleY = this.canvasSize / this.img.height;
-                this.minZoom = Math.max(scaleX, scaleY);
-                this.currentZoom = this.minZoom;
-                this.maxZoom = this.minZoom * 4;
 
-                // Center image
-                this.panX = (this.canvasSize - this.img.width * this.currentZoom) / 2;
-                this.panY = (this.canvasSize - this.img.height * this.currentZoom) / 2;
+                // Use the larger scale factor to ensure the image covers the canvas
+                this.zoom = Math.max(scaleX, scaleY);
+
+                // 2. Center the image
+                this.panX = (this.canvasSize - this.img.width * this.zoom) / 2;
+                this.panY = (this.canvasSize - this.img.height * this.zoom) / 2;
 
                 // Initialize canvas after view update
                 setTimeout(() => this.initCanvas(), 0);
@@ -104,91 +100,23 @@ export class UploadModalComponent {
         canvas.width = this.canvasSize;
         canvas.height = this.canvasSize;
         this.ctx = canvas.getContext('2d')!;
-        this.texturaImage();
+        this.renderImage();
     }
 
-    texturaImage() {
+    renderImage() {
         if (!this.ctx) return;
 
         // Clear
         this.ctx.clearRect(0, 0, this.canvasSize, this.canvasSize);
 
-        // Draw image with transforms
+        // Draw image centered and covering
         this.ctx.drawImage(
             this.img,
             this.panX,
             this.panY,
-            this.img.width * this.currentZoom,
-            this.img.height * this.currentZoom
+            this.img.width * this.zoom,
+            this.img.height * this.zoom
         );
-    }
-
-    // Interaction Logic
-    startDrag(event: MouseEvent | TouchEvent) {
-        event.preventDefault();
-        this.isDraggingImage = true;
-        const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
-        const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
-        this.lastMouseX = clientX;
-        this.lastMouseY = clientY;
-
-        // Global listeners for drag outside container
-        window.addEventListener('mousemove', this.doDrag);
-        window.addEventListener('mouseup', this.stopDrag);
-        window.addEventListener('touchmove', this.doDrag, { passive: false });
-        window.addEventListener('touchend', this.stopDrag);
-    }
-
-    doDrag = (event: MouseEvent | TouchEvent) => {
-        if (!this.isDraggingImage) return;
-        event.preventDefault();
-
-        const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
-        const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
-
-        const deltaX = clientX - this.lastMouseX;
-        const deltaY = clientY - this.lastMouseY;
-
-        this.panX += deltaX;
-        this.panY += deltaY;
-
-        this.constrainPan();
-        this.texturaImage();
-
-        this.lastMouseX = clientX;
-        this.lastMouseY = clientY;
-    }
-
-    stopDrag = () => {
-        this.isDraggingImage = false;
-        window.removeEventListener('mousemove', this.doDrag);
-        window.removeEventListener('mouseup', this.stopDrag);
-        window.removeEventListener('touchmove', this.doDrag);
-        window.removeEventListener('touchend', this.stopDrag);
-    }
-
-    onZoomChange(event: Event) {
-        const slider = event.target as HTMLInputElement;
-        const oldZoom = this.currentZoom;
-        this.currentZoom = parseFloat(slider.value);
-
-        // Zoom centered logic (simplified: maintain center relative ratio roughly)
-        const factor = this.currentZoom / oldZoom;
-
-        this.constrainPan();
-        this.texturaImage();
-    }
-
-    constrainPan() {
-        // Ensure image always covers the canvas
-        const imgWidth = this.img.width * this.currentZoom;
-        const imgHeight = this.img.height * this.currentZoom;
-
-        if (this.panX > 0) this.panX = 0;
-        if (this.panX + imgWidth < this.canvasSize) this.panX = this.canvasSize - imgWidth;
-
-        if (this.panY > 0) this.panY = 0;
-        if (this.panY + imgHeight < this.canvasSize) this.panY = this.canvasSize - imgHeight;
     }
 
     cropAndSave() {

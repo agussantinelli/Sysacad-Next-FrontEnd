@@ -112,11 +112,8 @@
     margin: 1rem auto;
     overflow: hidden;
     border-radius: 50%;
-    /* Circle crop visualization */
+    /* Match profile circular style */
     border: 4px solid var(--primary-color, #1a73e8);
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
-    /* Use large shadow to dim outside */
-    cursor: grab;
     background: #000;
 }
 
@@ -132,17 +129,6 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
-    border-radius: 12px;
-}
-
-.uploading-overlay p {
-    margin-top: 1rem;
-    color: var(--text-secondary);
-    font-weight: 500;
-}
-
-.crop-container:active {
-    cursor: grabbing;
 }
 
 .crop-canvas {
