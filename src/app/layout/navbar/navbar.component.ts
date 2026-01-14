@@ -66,6 +66,25 @@ export class NavbarComponent implements OnInit {
         }
     ];
 
+    adminSections: NavbarSection[] = [
+        {
+            title: 'Académica',
+            options: [
+                { title: 'Carreras', icon: 'school', route: '/admin/carreras' },
+                { title: 'Facultades', icon: 'domain', route: '/admin/facultades' },
+                { title: 'Planes', icon: 'map', route: '/admin/planes' },
+                { title: 'Materias', icon: 'book', route: '/admin/materias' }
+            ]
+        },
+        {
+            title: 'Institución',
+            options: [
+                { title: 'Usuarios', icon: 'group', route: '/admin/usuarios' },
+                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscripciones' }
+            ]
+        }
+    ];
+
     ngOnInit(): void {
         const userStr = localStorage.getItem('user');
         if (userStr) {
