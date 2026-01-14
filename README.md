@@ -195,23 +195,30 @@ FRONTEND_URL=http://localhost:4200
 <ul>
     <li>
         <strong>👮 Administrador (Rol: ADMIN)</strong>
+        <p>Acceso total al sistema para la gestión académica e institucional.</p>
         <ul>
-            <li><strong>Gestión Global:</strong> ABM de Alumnos, Profesores y Materias.</li>
-            <li><strong>Panel Dedicado:</strong> (En construcción) Acceso a reportes y configuraciones.</li>
+            <li><strong>Administración Académica:</strong> Gestión ABM de Carreras, Facultades, Planes de Estudio y Materias.</li>
+            <li><strong>Gestión Institucional:</strong> Administración de Usuarios (Alumnos, Profesores) e Inscripciones.</li>
+            <li><strong>Gestión de Exámenes:</strong> Configuración de Mesas de Examen y generación de Actas Volantes.</li>
+            <li><strong>Trámites y Comunicación:</strong> Gestión de Solicitudes de Certificados, publicación de Avisos y Calendario Académico.</li>
         </ul>
     </li>
     <li>
         <strong>👨‍🏫 Profesor (Rol: PROFESOR)</strong>
+        <p>Herramientas optimizadas para la docencia y evaluación.</p>
         <ul>
-            <li><strong>Gestión de Cursadas:</strong> Carga de notas mediante Excel (Inteligente).</li>
-            <li><strong>Vista Adaptada:</strong> El Dashboard muestra opciones relevantes para la docencia (Título Académico, Cursos).</li>
+            <li><strong>Gestión Académica:</strong> Visualización de "Mis Materias", Carga de Notas (Calificar Alumnos) y Toma de Asistencia.</li>
+            <li><strong>Exámenes:</strong> Acceso a Mesas de Examen asignadas y gestión de Actas Volantes.</li>
         </ul>
     </li>
     <li>
         <strong>🎓 Estudiante (Rol: ESTUDIANTE)</strong>
+        <p>Portal de autogestión centralizado.</p>
         <ul>
-            <li><strong>Dashboard Completo:</strong> Acceso a Inscripciones, Estado Académico y Correlatividades.</li>
-            <li><strong>Personalización:</strong> Visualización de carrera y plan de estudios en tiempo real.</li>
+            <li><strong>Inscripciones:</strong> Inscripción a Cursado y Exámenes finales.</li>
+            <li><strong>Consultas Académicas:</strong> Estado Académico (Analítico provisorio), Plan de Estudios interactivo, Cursada/Notas e Historia Académica.</li>
+            <li><strong>Correlatividades:</strong> Verificación visual de materias habilitadas "Para Cursar" y "Para Rendir".</li>
+            <li><strong>Trámites:</strong> Solicitud de Certificados (Regularidad), visualización de Calendario y Avisos institucionales.</li>
         </ul>
     </li>
 </ul>
