@@ -60,6 +60,24 @@
                 </div>
             </section>
             }
+            } @else if (usuario?.rol === 'PROFESOR') {
+            @for (section of professorSections; track section.title) {
+            <section class="dashboard-section">
+                <h2 class="section-title">{{ section.title }}</h2>
+                <div class="options-grid">
+                    @for (option of section.options; track option.title) {
+                    <div class="option-card" tabindex="0" [class.disabled]="option.disabled"
+                        [routerLink]="option.disabled ? null : option.route">
+                        <div class="icon-wrapper">
+                            <span class="material-icons">{{ option.icon }}</span>
+                        </div>
+                        <span class="option-title">{{ option.title }}</span>
+                        <div class="card-hover-effect"></div>
+                    </div>
+                    }
+                </div>
+            </section>
+            }
             } @else {
             <div class="empty-state">
                 <h3>Panel de {{ usuario?.rol | titlecase }} en Construcción 🚧</h3>

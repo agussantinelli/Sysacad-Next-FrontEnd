@@ -84,6 +84,23 @@ export class DashboardComponent implements OnInit {
         }
     ];
 
+    professorSections: DashboardSection[] = [
+        {
+            title: 'Gestión Académica',
+            options: [
+                { title: 'Mis Materias', icon: 'class', route: '/professor/subjects' },
+                { title: 'Calificar Alumnos', icon: 'assignment_turned_in', route: '/professor/grades' },
+            ]
+        },
+        {
+            title: 'Exámenes',
+            options: [
+                { title: 'Mesas de Examen', icon: 'assignment', route: '/professor/exams' },
+                { title: 'Actas Volantes', icon: 'description', route: '/professor/acts' }
+            ]
+        }
+    ];
+
     ngOnInit(): void {
         const userStr = localStorage.getItem('user');
         if (userStr) {
