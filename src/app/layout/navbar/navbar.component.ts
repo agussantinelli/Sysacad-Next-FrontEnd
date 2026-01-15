@@ -118,10 +118,9 @@ export class NavbarComponent implements OnInit {
     ];
 
     ngOnInit(): void {
-        const userStr = localStorage.getItem('user');
-        if (userStr) {
-            this.usuario = JSON.parse(userStr);
-        }
+        this.authService.currentUser$.subscribe(user => {
+            this.usuario = user;
+        });
     }
 
     get logoPath(): string {

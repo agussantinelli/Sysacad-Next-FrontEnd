@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, from, BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoginRequest, AuthResponse } from '@core/models/auth.models';
 import { UsuarioResponse } from '@core/models/usuario.models';
@@ -12,18 +12,30 @@ import axiosClient from '@core/api/axios.client';
 export class AuthService {
 
     private router = inject(Router);
+    private currentUserSubject = new BehaviorSubject<UsuarioResponse | null>(null);
+    public currentUser$ = this.currentUserSubject.asObservable();
 
-    constructor() { }
+    constructor() {
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            try {
+                this.currentUserSubject.next(JSON.parse(userStr));
+            } catch (e) {
+                console.error('Error parsing user from local storage', e);
+                this.logout();
+            }
+        }
+    }
 
     login(credentials: LoginRequest): Observable<UsuarioResponse> {
         return from(axiosClient.post<AuthResponse>('/auth/login', credentials)).pipe(
-            map(response => {
-                const { token, usuario } = response.data;
+            map(response => response.data),
+            tap(({ token, usuario }) => {
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(usuario));
-
-                return usuario;
-            })
+                this.currentUserSubject.next(usuario);
+            }),
+            map(({ usuario }) => usuario)
         );
     }
 
@@ -31,6 +43,12 @@ export class AuthService {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         sessionStorage.removeItem('welcomeShown');
+        this.currentUserSubject.next(null);
         this.router.navigate(['/']);
+    }
+
+    updateUser(usuario: UsuarioResponse) {
+        localStorage.setItem('user', JSON.stringify(usuario));
+        this.currentUserSubject.next(usuario);
     }
 }
