@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
         {
             title: 'Inscripciones',
             options: [
-                { title: 'Cursado', icon: 'edit_calendar', route: '/academic/inscription-course' },
+                { title: 'Cursado', icon: 'edit_calendar', route: '/inscription' },
                 { title: 'Examen', icon: 'post_add', route: '/academic/inscription-exam' },
             ]
         },

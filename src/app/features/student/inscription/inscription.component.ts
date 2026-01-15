@@ -14,6 +14,7 @@ import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.
 })
 export class InscriptionComponent implements OnInit {
     private materiaService = inject(MateriaService);
+    private location = inject(Location);
 
     materias: MateriaResponse[] = [];
     columns: TableColumn[] = [
