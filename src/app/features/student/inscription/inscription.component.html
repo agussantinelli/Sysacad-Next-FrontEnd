@@ -1,6 +1,12 @@
 <div class="inscription-container">
     <div class="inscription-card">
-        <h2 class="inscription-title">Inscripción a Cursado</h2>
+        <div class="header-actions">
+            <button class="btn-back" (click)="goBack()">
+                <span class="material-icons">arrow_back</span>
+                Volver
+            </button>
+            <h2 class="inscription-title">Inscripción a Cursado</h2>
+        </div>
         <div class="table-wrapper">
             <app-table [data]="materias" [columns]="columns" [actions]="actions" [pageSize]="10"
                 (onAction)="handleAction($event)">

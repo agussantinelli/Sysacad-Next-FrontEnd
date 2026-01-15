@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { TableComponent } from '@shared/components/table/table.component';
 import { MateriaService } from '@core/services/materia.service';
 import { MateriaResponse } from '@core/models/materia.models';
@@ -46,5 +46,9 @@ export class InscriptionComponent implements OnInit {
             // TODO: Implement actual inscription logic
             alert(`Inscripción a ${event.row.nombre} simulada.`);
         }
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }
