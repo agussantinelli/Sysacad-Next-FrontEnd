@@ -136,7 +136,7 @@
 │   │   └── forgot-password/ # Recuperación de Contraseña (Implementado)
 │   ├── dashboard/           # Dashboard del Alumno (Implementado)
 │   ├── student/
-│   │   └── inscription/     # Inscripción a Cursado (Implementado)
+│   │   └── inscription-course/ # Inscripción a Cursado (Implementado)
 │   ├── academic/            # (En desarrollo) Notas
 │   └── profile/             # Datos personales y Edición (Implementado)
 ├── shared/
