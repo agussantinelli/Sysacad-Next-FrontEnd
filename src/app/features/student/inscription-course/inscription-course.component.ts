@@ -6,13 +6,13 @@ import { CarreraMateriasDTO } from '@core/models/matriculacion.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 
 @Component({
-    selector: 'app-inscription',
+    selector: 'app-inscription-course',
     standalone: true,
     imports: [CommonModule, TableComponent],
-    templateUrl: './inscription.component.html',
-    styleUrl: './styles/inscription.component.css'
+    templateUrl: './inscription-course.component.html',
+    styleUrl: './styles/inscription-course.component.css'
 })
-export class InscriptionComponent implements OnInit {
+export class InscriptionCourseComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
     private location = inject(Location);
 

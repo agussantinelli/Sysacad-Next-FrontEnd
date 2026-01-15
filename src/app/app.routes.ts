@@ -22,7 +22,7 @@ export const routes: Routes = [
         loadComponent: () => import('@features/profile/edit-profile/edit-profile.component').then(m => m.EditProfileComponent)
     },
     {
-        path: 'inscription',
-        loadComponent: () => import('@features/student/inscription/inscription.component').then(m => m.InscriptionComponent)
+        path: 'academic/inscription-course',
+        loadComponent: () => import('@features/student/inscription-course/inscription-course.component').then(m => m.InscriptionCourseComponent)
     }
 ];
