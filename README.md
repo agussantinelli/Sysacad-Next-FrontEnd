@@ -125,29 +125,43 @@
 <hr>
 <h3>📦 Estructura del Proyecto</h3>
 
-<pre><code>src/app/
-├── core/
-│   ├── api/                            # Cliente Axios Configurado (Interceptors)
-│   ├── models/                         # Modelos de Dominio (Usuario, Materia, Inscripcion, Matriculacion...)
-│   └── services/                       # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Matriculacion...)
-├── features/
-│   ├── auth/
-│   │   ├── login/                      # Inicio de Sesión (Implementado)
-│   │   └── forgot-password/            # Recuperación de Contraseña (Implementado)
-│   ├── dashboard/                      # Dashboard del Alumno (Implementado)
-│   ├── student/
-│   │   └── inscription-course/         # Inscripción a Cursado (Implementado)
-│   ├── academic/                       # (En desarrollo) Notas
-│   └── profile/                        # Datos personales y Edición (Implementado)
-├── shared/
-│   └── components/
-│       ├── alert-message/              # Alertas Flotantes (Success/Error/Info)
-│       ├── loading-spinner/            # Indicador de Carga
-│       ├── table/                      # Tabla Reutilizable (Paginación, Ordenamiento)
-│       ├── upload-modal/               # Modal de Carga de Imágenes
-│       └── theme-toggle/               # Switch Modo Claro/Oscuro
-└── layout/
-    └── navbar/                         # Barra de Navegación Responsive
+<pre><code>/
+├── public/                             # Assets estáticos servidos directamente (favicon, robots.txt)
+├── src/                                # Código fuente de la aplicación
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── api/                    # Cliente Axios Configurado (Interceptors)
+│   │   │   ├── models/                 # Modelos de Dominio (Usuario, Materia, Inscripcion, Matriculacion...)
+│   │   │   └── services/               # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Matriculacion...)
+│   │   ├── features/
+│   │   │   ├── auth/
+│   │   │   │   ├── login/              # Inicio de Sesión (Implementado)
+│   │   │   │   └── forgot-password/    # Recuperación de Contraseña (Implementado)
+│   │   │   ├── dashboard/              # Dashboard del Alumno (Implementado)
+│   │   │   ├── student/
+│   │   │   │   └── inscription-course/ # Inscripción a Cursado (Implementado)
+│   │   │   ├── academic/               # (En desarrollo) Notas
+│   │   │   └── profile/                # Datos personales y Edición (Implementado)
+│   │   ├── shared/
+│   │   │   └── components/
+│   │   │       ├── alert-message/      # Alertas Flotantes (Success/Error/Info)
+│   │   │       ├── loading-spinner/    # Indicador de Carga
+│   │   │       ├── table/              # Tabla Reutilizable (Paginación, Ordenamiento)
+│   │   │       ├── upload-modal/       # Modal de Carga de Imágenes
+│   │   │       └── theme-toggle/       # Switch Modo Claro/Oscuro
+│   │   └── layout/
+│   │       └── navbar/                 # Barra de Navegación Responsive
+│   ├── assets/                         # Recursos estáticos (imágenes, iconos)
+│   ├── environments/                   # Configuraciones de entorno (dev, prod)
+│   ├── index.html                      # Punto de entrada HTML
+│   ├── main.ts                         # Punto de entrada de la aplicación Angular
+│   └── styles.css                      # Estilos globales y variables CSS
+├── .env                                # Variables de entorno locales
+├── .gitignore                          # Archivos ignorados por Git
+├── angular.json                        # Configuración del workspace de Angular
+├── package.json                        # Dependencias y scripts del proyecto
+├── tsconfig.json                       # Configuración base de TypeScript
+└── README.md                           # Documentación del proyecto
 </code></pre>
 
 <h3>💻 Empezar (Setup Local)</h3>
