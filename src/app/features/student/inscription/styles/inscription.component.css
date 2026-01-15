@@ -91,3 +91,28 @@
         transform: translateY(0);
     }
 }
+
+.career-section {
+    margin-bottom: 2rem;
+}
+
+.career-title {
+    color: var(--utn-blue);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.career-plan {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-left: 0.5rem;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 2rem;
+}

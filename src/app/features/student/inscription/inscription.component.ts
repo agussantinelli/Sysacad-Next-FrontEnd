@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { TableComponent } from '@shared/components/table/table.component';
-import { MateriaService } from '@core/services/materia.service';
-import { MateriaResponse } from '@core/models/materia.models';
+import { MatriculacionService } from '@core/services/matriculacion.service';
+import { CarreraMateriasDTO } from '@core/models/matriculacion.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 
 @Component({
@@ -13,16 +13,28 @@ import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.
     styleUrl: './styles/inscription.component.css'
 })
 export class InscriptionComponent implements OnInit {
-    private materiaService = inject(MateriaService);
+    private matriculacionService = inject(MatriculacionService);
     private location = inject(Location);
 
-    materias: MateriaResponse[] = [];
+    carreras: CarreraMateriasDTO[] = [];
     columns: TableColumn[] = [
         { key: 'nombre', label: 'Materia', sortable: true },
-        { key: 'tipoMateria', label: 'Tipo', sortable: true },
-        { key: 'duracion', label: 'Duración', sortable: true },
-        { key: 'modalidad', label: 'Modalidad', sortable: true },
-        { key: 'cuatrimestreDictado', label: 'Cuatrimestre', sortable: true }
+        // These fields might not be in SimpleMateriaDTO (id, nombre). 
+        // Need to check if endpoint returns extended data or just SimpleMateriaDTO. 
+        // User prompt said "materias: [{id, nombre} ...]" (SimpleMateriaDTO).
+        // If so, columns like duration/modalidad won't be available unless the endpoint returns them.
+        // Assuming for now the user wants to see what's available. 
+        // If query only returns ID and Name, I can only show that.
+        // Waiting for verification or assuming I need to adjust columns.
+        // Given the prompt: "Devuelve una lista de objetos SimpleMateriaDTO" inside "materias".
+        // SimpleMateriaDTO typically only has ID and Name.
+        // I should probably simplify columns or ask backend to send more info.
+        // For now, I'll allow Name and ID (implicitly).
+    ];
+
+    // ADJUSTING COLUMNS FOR SimpleMateriaDTO
+    simpleColumns: TableColumn[] = [
+        { key: 'nombre', label: 'Materia', sortable: true }
     ];
 
     actions: TableAction[] = [
@@ -34,16 +46,15 @@ export class InscriptionComponent implements OnInit {
     }
 
     loadMaterias() {
-        this.materiaService.listarTodas().subscribe({
-            next: (data) => this.materias = data,
+        this.matriculacionService.getMisCarrerasMaterias().subscribe({
+            next: (data) => this.carreras = data,
             error: (err) => console.error('Error loading materias', err)
         });
     }
 
-    handleAction(event: ActionEvent<MateriaResponse>) {
+    handleAction(event: ActionEvent<any>) {
         if (event.action === 'inscribirse') {
             console.log('Inscribirse a:', event.row.nombre);
-            // TODO: Implement actual inscription logic
             alert(`Inscripción a ${event.row.nombre} simulada.`);
         }
     }
