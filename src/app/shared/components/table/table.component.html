@@ -1,0 +1,89 @@
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th *ngFor="let col of columns" scope="col"
+                    class="py-3 px-6 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" (click)="sort(col)">
+                    <div class="flex items-center">
+                        {{ col.label }}
+                        <span *ngIf="col.sortable" class="ml-1">
+                            <svg *ngIf="sortColumn !== col.key" class="w-3 h-3 text-gray-400" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path d="M12 2L12 22M12 2L6 8M12 2L18 8" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <svg *ngIf="sortColumn === col.key && sortDirection === 'asc'" class="w-3 h-3 text-blue-600"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7">
+                                </path>
+                            </svg>
+                            <svg *ngIf="sortColumn === col.key && sortDirection === 'desc'"
+                                class="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </th>
+                <th *ngIf="actions.length > 0" scope="col" class="py-3 px-6">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of displayData"
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td *ngFor="let col of columns" class="py-4 px-6">
+                    <ng-container [ngSwitch]="col.type">
+                        <span *ngSwitchCase="'date'">{{ getCellValue(row, col) | date:'short' }}</span>
+                        <span *ngSwitchCase="'currency'">{{ getCellValue(row, col) | currency }}</span>
+                        <span *ngSwitchDefault>{{ getCellValue(row, col) }}</span>
+                    </ng-container>
+                </td>
+                <td *ngIf="actions.length > 0" class="py-4 px-6 flex space-x-2">
+                    <button *ngFor="let action of actions" (click)="emitAction(action.name, row)"
+                        [class]="action.class ? action.class : 'font-medium text-blue-600 dark:text-blue-500 hover:underline'">
+                        {{ action.label }}
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="displayData.length === 0">
+                <td [attr.colspan]="columns.length + (actions.length > 0 ? 1 : 0)" class="py-4 px-6 text-center">
+                    No hay datos disponibles.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 border-t dark:border-gray-700"
+        aria-label="Table navigation">
+        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+            Mostrando <span class="font-semibold text-gray-900 dark:text-white">{{ (currentPage - 1) * pageSize + 1
+                }}</span>
+            - <span class="font-semibold text-gray-900 dark:text-white">{{ Math.min(currentPage * pageSize, data.length)
+                }}</span>
+            de <span class="font-semibold text-gray-900 dark:text-white">{{ data.length }}</span>
+        </span>
+        <ul class="inline-flex -space-x-px text-sm h-8">
+            <li>
+                <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"
+                    class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed">
+                    Anterior
+                </button>
+            </li>
+            <li>
+                <span
+                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
+                    {{ currentPage }} / {{ totalPages }}
+                </span>
+            </li>
+            <li>
+                <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages"
+                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed">
+                    Siguiente
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
