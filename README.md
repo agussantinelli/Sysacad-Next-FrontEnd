@@ -125,7 +125,7 @@
 <hr>
 <h3>📦 Estructura del Proyecto</h3>
 
-<pre><code>/
+<pre><code>Sysacad-Next-FrontEnd/
 ├── public/                             # Assets estáticos servidos directamente (favicon, robots.txt)
 ├── src/                                # Código fuente de la aplicación
 │   ├── app/
