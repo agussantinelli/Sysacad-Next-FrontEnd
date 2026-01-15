@@ -7,24 +7,12 @@
                     <div class="header-content">
                         {{ col.label }}
                         <span *ngIf="col.sortable" class="sort-icon">
-                            <svg *ngIf="sortColumn !== col.key" xmlns="http://www.w3.org/2000/svg" width="12"
-                                height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <polyline points="19 12 12 19 5 12"></polyline>
-                            </svg>
-                            <svg *ngIf="sortColumn === col.key && sortDirection === 'asc'"
-                                xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="18 15 12 9 6 15"></polyline>
-                            </svg>
-                            <svg *ngIf="sortColumn === col.key && sortDirection === 'desc'"
-                                xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
+                            <img *ngIf="sortColumn !== col.key" src="icons/sort-default.svg" alt="Sort" width="12"
+                                height="12">
+                            <img *ngIf="sortColumn === col.key && sortDirection === 'asc'" src="icons/sort-asc.svg"
+                                alt="Ascending" width="12" height="12">
+                            <img *ngIf="sortColumn === col.key && sortDirection === 'desc'" src="icons/sort-desc.svg"
+                                alt="Descending" width="12" height="12">
                         </span>
                     </div>
                 </th>
@@ -57,7 +45,6 @@
         </tbody>
     </table>
 
-    <!-- Pagination -->
     <nav class="pagination-container" aria-label="Table navigation">
         <span class="pagination-info">
             Mostrando <strong>{{ (currentPage - 1) * pageSize + 1 }}</strong>
