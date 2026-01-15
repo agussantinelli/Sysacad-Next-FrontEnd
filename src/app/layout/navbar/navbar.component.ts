@@ -127,6 +127,15 @@ export class NavbarComponent implements OnInit {
         return this.themeService.isDarkMode() ? '/logo-utn-dark-mode.png' : '/logo-utn-light-mode.png';
     }
 
+    getProfileImageUrl(relativePath: string): string {
+        if (!relativePath) return '';
+        if (relativePath.startsWith('http')) return relativePath;
+        // Assuming backend serves static files at root or /uploads
+        // If relativePath starts with /, remove it to avoid double slash
+        const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
+        return `http://localhost:8081/${cleanPath}`;
+    }
+
     toggleDropdown(): void {
         this.isDropdownOpen = !this.isDropdownOpen;
         this.activeSection = null; // Close other menus

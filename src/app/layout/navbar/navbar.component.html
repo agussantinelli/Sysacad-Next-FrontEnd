@@ -71,7 +71,7 @@
             <span class="user-name" *ngIf="usuario">{{ usuario.nombre }} {{ usuario.apellido }}</span>
             <ng-container *ngIf="usuario?.fotoPerfil as fotoUrl; else defaultIcon">
                 <div class="nav-avatar">
-                    <img [src]="fotoUrl" alt="Perfil" class="nav-avatar-img">
+                    <img [src]="getProfileImageUrl(fotoUrl)" alt="Perfil" class="nav-avatar-img">
                 </div>
             </ng-container>
             <ng-template #defaultIcon>
