@@ -127,27 +127,27 @@
 
 <pre><code>src/app/
 ├── core/
-│   ├── api/                 # Cliente Axios Configurado (Interceptors)
-│   ├── models/              # Modelos de Dominio (Usuario, Materia, Inscripcion, Matriculacion...)
-│   └── services/            # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Matriculacion...)
+│   ├── api/                            # Cliente Axios Configurado (Interceptors)
+│   ├── models/                         # Modelos de Dominio (Usuario, Materia, Inscripcion, Matriculacion...)
+│   └── services/                       # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Matriculacion...)
 ├── features/
 │   ├── auth/
-│   │   ├── login/           # Inicio de Sesión (Implementado)
-│   │   └── forgot-password/ # Recuperación de Contraseña (Implementado)
-│   ├── dashboard/           # Dashboard del Alumno (Implementado)
+│   │   ├── login/                      # Inicio de Sesión (Implementado)
+│   │   └── forgot-password/            # Recuperación de Contraseña (Implementado)
+│   ├── dashboard/                      # Dashboard del Alumno (Implementado)
 │   ├── student/
-│   │   └── inscription-course/ # Inscripción a Cursado (Implementado)
-│   ├── academic/            # (En desarrollo) Notas
-│   └── profile/             # Datos personales y Edición (Implementado)
+│   │   └── inscription-course/         # Inscripción a Cursado (Implementado)
+│   ├── academic/                       # (En desarrollo) Notas
+│   └── profile/                        # Datos personales y Edición (Implementado)
 ├── shared/
 │   └── components/
-│       ├── alert-message/   # Alertas Flotantes (Success/Error/Info)
-│       ├── loading-spinner/ # Indicador de Carga
-│       ├── table/           # Tabla Reutilizable (Paginación, Ordenamiento)
-│       ├── upload-modal/    # Modal de Carga de Imágenes
-│       └── theme-toggle/    # Switch Modo Claro/Oscuro
+│       ├── alert-message/              # Alertas Flotantes (Success/Error/Info)
+│       ├── loading-spinner/            # Indicador de Carga
+│       ├── table/                      # Tabla Reutilizable (Paginación, Ordenamiento)
+│       ├── upload-modal/               # Modal de Carga de Imágenes
+│       └── theme-toggle/               # Switch Modo Claro/Oscuro
 └── layout/
-    └── navbar/              # Barra de Navegación Responsive
+    └── navbar/                         # Barra de Navegación Responsive
 </code></pre>
 
 <h3>💻 Empezar (Setup Local)</h3>
