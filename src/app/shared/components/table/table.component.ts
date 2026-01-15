@@ -7,7 +7,7 @@ import { TableColumn, ActionEvent, TableAction } from '../../interfaces/table.in
     standalone: true,
     imports: [CommonModule],
     templateUrl: './table.component.html',
-    styleUrls: ['./table.component.css']
+    styleUrls: ['./styles/table.component.css']
 })
 export class TableComponent implements OnChanges {
     protected Math = Math;
