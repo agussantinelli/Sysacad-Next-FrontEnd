@@ -8,3 +8,17 @@ export interface CalificacionRequest {
     concepto: string;
     nota: number; // BigDecimal
 }
+
+export interface CalificacionResponse {
+    idUsuario: string; // UUID
+    nombreUsuario: string;
+    legajoUsuario: string;
+    idComision: string; // UUID
+    nombreComision: string;
+    materia: string;
+    tipoInscripcion: TipoInscripcion;
+    vecesTipoInscripcion: number;
+    concepto: string;
+    nota: number; // BigDecimal
+    fecha: string; // LocalDate
+}
