@@ -1,25 +1,32 @@
+/* Container */
 .table-container {
     width: 100%;
     overflow-x: auto;
     position: relative;
     border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    background-color: white;
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+    background-color: var(--bg-card);
 }
 
+/* Table */
 .data-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.875rem;
+    /* 14px */
     text-align: left;
-    color: #6b7280;
+    color: var(--text-secondary);
 }
 
+/* Header */
 .data-table thead {
     font-size: 0.75rem;
+    /* 12px */
     text-transform: uppercase;
-    color: #374151;
-    background-color: #f9fafb;
+    color: var(--text-primary);
+    background-color: var(--input-bg);
+    /* Use input-bg for slight contrast in header */
+    border-bottom: 2px solid var(--border-subtle);
 }
 
 .header-cell {
@@ -32,7 +39,8 @@
 }
 
 .header-cell.sortable:hover {
-    background-color: #f3f4f6;
+    background-color: var(--border-subtle);
+    /* Slight highlight */
 }
 
 .header-content {
@@ -41,13 +49,15 @@
     gap: 0.5rem;
 }
 
+/* Body */
 .table-row {
-    background-color: white;
-    border-bottom: 1px solid #e5e7eb;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-primary);
 }
 
 .table-row:hover {
-    background-color: #f9fafb;
+    background-color: var(--input-bg);
 }
 
 .table-cell {
@@ -58,8 +68,10 @@
 .empty-state {
     padding: 1rem 1.5rem;
     text-align: center;
+    color: var(--text-secondary);
 }
 
+/* Actions */
 .actions-cell {
     display: flex;
     gap: 0.5rem;
@@ -67,7 +79,7 @@
 
 .action-btn {
     font-weight: 500;
-    color: #2563eb;
+    color: var(--utn-blue);
     background: none;
     border: none;
     cursor: pointer;
@@ -76,25 +88,27 @@
 
 .action-btn:hover {
     text-decoration: underline;
+    color: var(--utn-blue-dark);
 }
 
+/* Pagination */
 .pagination-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    background-color: white;
-    border-top: 1px solid #e5e7eb;
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .pagination-info {
     font-size: 0.875rem;
-    color: #6b7280;
+    color: var(--text-secondary);
 }
 
 .pagination-info strong {
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
 }
 
 .pagination-controls {
@@ -103,6 +117,7 @@
     margin: 0;
     padding: 0;
     gap: -1px;
+    /* Overlap borders */
 }
 
 .page-btn {
@@ -112,9 +127,9 @@
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     line-height: 1.25;
-    color: #6b7280;
-    background-color: white;
-    border: 1px solid #d1d5db;
+    color: var(--text-secondary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     cursor: pointer;
 }
 
@@ -129,8 +144,8 @@
 }
 
 .page-btn:hover:not(:disabled) {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
 }
 
 .page-btn:disabled {
@@ -144,8 +159,9 @@
     justify-content: center;
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
-    border: 1px solid #d1d5db;
-    background-color: white;
+    border: 1px solid var(--border-subtle);
+    background-color: var(--bg-card);
     border-left: none;
     border-right: none;
+    color: var(--text-primary);
 }
