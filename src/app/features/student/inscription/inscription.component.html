@@ -1,0 +1,10 @@
+<div class="inscription-container">
+    <div class="inscription-card">
+        <h2 class="inscription-title">Inscripción a Cursado</h2>
+        <div class="table-wrapper">
+            <app-table [data]="materias" [columns]="columns" [actions]="actions" [pageSize]="10"
+                (onAction)="handleAction($event)">
+            </app-table>
+        </div>
+    </div>
+</div>
