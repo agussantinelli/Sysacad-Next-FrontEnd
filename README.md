@@ -62,8 +62,6 @@
     <li><strong>🧠 Smart Validation:</strong> Reglas de negocio en el cliente para evitar errores de inscripción antes de enviar la solicitud.</li>
 </ul>
 
-</ul>
-
 <hr>
 
 <h2>🌐 Frontend (este repositorio)</h2>
@@ -99,9 +97,6 @@
         <tr>
             <td><strong>Gestión de Estado</strong></td>
             <td>RxJS 7.8</td>
-        <tr>
-            <td><strong>Gestión de Estado</strong></td>
-            <td>RxJS 7.8</td>
             <td>Manejo de asincronía y flujos de datos (Observables).</td>
         </tr>
         <tr>
@@ -133,19 +128,23 @@
 <pre><code>src/app/
 ├── core/
 │   ├── api/                 # Cliente Axios Configurado (Interceptors)
-│   ├── models/              # Modelos de Dominio (Usuario, Materia, Inscripcion...)
-│   └── services/            # Servicios Globales (Theme) y de Entidades (Auth, Carrera...)
+│   ├── models/              # Modelos de Dominio (Usuario, Materia, Inscripcion, Matriculacion...)
+│   └── services/            # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Matriculacion...)
 ├── features/
 │   ├── auth/
 │   │   ├── login/           # Inicio de Sesión (Implementado)
 │   │   └── forgot-password/ # Recuperación de Contraseña (Implementado)
 │   ├── dashboard/           # Dashboard del Alumno (Implementado)
-│   ├── academic/            # (En desarrollo) Notas, Inscripciones
-│   └── profile/             # (En desarrollo) Datos personales
+│   ├── student/
+│   │   └── inscription/     # Inscripción a Cursado (Implementado)
+│   ├── academic/            # (En desarrollo) Notas
+│   └── profile/             # Datos personales y Edición (Implementado)
 ├── shared/
 │   └── components/
 │       ├── alert-message/   # Alertas Flotantes (Success/Error/Info)
 │       ├── loading-spinner/ # Indicador de Carga
+│       ├── table/           # Tabla Reutilizable (Paginación, Ordenamiento)
+│       ├── upload-modal/    # Modal de Carga de Imágenes
 │       └── theme-toggle/    # Switch Modo Claro/Oscuro
 └── layout/
     └── navbar/              # Barra de Navegación Responsive
@@ -177,7 +176,6 @@ BACKEND_URL=http://localhost:8081
 
 # URL del Frontend (Angular)
 FRONTEND_URL=http://localhost:4200
-
 </code></pre>
 
 <p><strong>Nota:</strong> Angular utiliza <code>src/environments/environment.development.ts</code> para conectar con la API en desarrollo. Asegúrate de que coincida con el puerto del backend:</p>
