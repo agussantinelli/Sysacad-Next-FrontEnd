@@ -131,8 +131,8 @@
 │   ├── app/
 │   │   ├── core/
 │   │   │   ├── api/                    # Cliente Axios Configurado (Interceptors)
-│   │   │   ├── models/                 # Modelos de Dominio (Usuario, Materia, Inscripcion, Matriculacion...)
-│   │   │   └── services/               # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Matriculacion...)
+│   │   │   ├── models/                 # Modelos de Dominio (Usuario, Materia, Inscripcion, Aviso, Horario, Salon, Sancion...)
+│   │   │   └── services/               # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Aviso, Sancion...)
 │   │   ├── features/
 │   │   │   ├── auth/
 │   │   │   │   ├── login/              # Inicio de Sesión (Implementado)
@@ -209,8 +209,8 @@ FRONTEND_URL=http://localhost:4200
         <strong>👮 Administrador (Rol: ADMIN)</strong>
         <p>Acceso total al sistema para la gestión académica e institucional.</p>
         <ul>
-            <li><strong>Administración Académica:</strong> Gestión ABM de Carreras, Facultades, Planes de Estudio y Materias.</li>
-            <li><strong>Gestión Institucional:</strong> Administración de Usuarios (Alumnos, Profesores) e Inscripciones.</li>
+            <li><strong>Administración Académica:</strong> Gestión ABM de Carreras, Facultades, Planes de Estudio, Materias, Horarios y Salones.</li>
+            <li><strong>Gestión Institucional:</strong> Administración de Usuarios (Alumnos, Profesores), Inscripciones y Sanciones.</li>
             <li><strong>Gestión de Exámenes:</strong> Configuración de Mesas de Examen y generación de Actas Volantes.</li>
             <li><strong>Trámites y Comunicación:</strong> Gestión de Solicitudes de Certificados, publicación de Avisos y Calendario Académico.</li>
         </ul>
@@ -230,7 +230,7 @@ FRONTEND_URL=http://localhost:4200
             <li><strong>Inscripciones:</strong> Inscripción a Cursado y Exámenes finales.</li>
             <li><strong>Consultas Académicas:</strong> Estado Académico (Analítico provisorio), Plan de Estudios interactivo, Cursada/Notas e Historia Académica.</li>
             <li><strong>Correlatividades:</strong> Verificación visual de materias habilitadas "Para Cursar" y "Para Rendir".</li>
-            <li><strong>Trámites:</strong> Solicitud de Certificados (Regularidad), visualización de Calendario y Avisos institucionales.</li>
+            <li><strong>Trámites:</strong> Solicitud de Certificados (Regularidad), visualización de Sanciones, Calendario y Avisos institucionales.</li>
         </ul>
     </li>
 </ul>
