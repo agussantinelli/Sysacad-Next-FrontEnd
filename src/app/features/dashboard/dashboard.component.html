@@ -31,7 +31,7 @@
                 <h2 class="section-title">{{ section.title }}</h2>
                 <div class="options-grid">
                     @for (option of section.options; track option.title) {
-                    <div class="option-card" tabindex="0">
+                    <div class="option-card" tabindex="0" [routerLink]="option.route">
                         <div class="icon-wrapper">
                             <span class="material-icons">{{ option.icon }}</span>
                         </div>
