@@ -21,6 +21,7 @@
     --border-subtle: rgba(0, 32, 96, 0.1);
     --border-focus: rgba(0, 153, 230, 0.4);
     --shadow-color: rgba(0, 32, 96, 0.08);
+    --select-arrow: url('/icons/chevron-down-dark.svg');
 }
 
 /* DARK MODE OVERRIDES */
@@ -34,4 +35,5 @@ body.dark-mode {
     --border-subtle: rgba(255, 255, 255, 0.1);
     --border-focus: rgba(0, 153, 230, 0.5);
     --shadow-color: rgba(0, 0, 0, 0.5);
+    --select-arrow: url('/icons/chevron-down-light.svg');
 }
