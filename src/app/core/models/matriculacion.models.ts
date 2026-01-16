@@ -1,12 +1,13 @@
 import { SimpleMateriaDTO } from './materia.models';
 
 export interface EstudianteMateriaDTO {
-    id: string; // UUID
+    idMateria: string; // UUID
     nombre: string;
     nivel: number;
-    estado: string; // "APROBADA", "REGULAR", "CURSANDO", "PENDIENTE", "LIBRE"
-    nota: string; // "8", "Promocionada", "-", etc.
+    estado: string; // "PENDIENTE", "CURSANDO", "REGULAR", "APROBADA"
+    nota: string; // "8", "9.50", "-"
     sePuedeInscribir: boolean;
+    esElectiva: boolean;
 }
 
 export interface CarreraMateriasDTO {
