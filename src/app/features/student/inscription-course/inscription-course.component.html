@@ -12,7 +12,7 @@
             <div class="career-section">
                 <h3 class="career-title">{{ carrera.nombreCarrera }} <span class="career-plan">({{ carrera.nombrePlan
                         }})</span></h3>
-                <app-table [data]="carrera.materias" [columns]="simpleColumns" [actions]="actions" [pageSize]="10"
+                <app-table [data]="carrera.materias" [columns]="simpleColumns" [actions]="actions" [pageSize]="50"
                     (onAction)="handleAction($event)">
                 </app-table>
             </div>
