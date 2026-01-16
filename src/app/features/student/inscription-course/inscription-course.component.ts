@@ -31,10 +31,10 @@ export class InscriptionCourseComponent implements OnInit {
         { key: 'nombre', label: 'Materia', sortable: true },
     ];
 
-    // ADJUSTING COLUMNS FOR SimpleMateriaDTO
     simpleColumns: TableColumn[] = [
         { key: 'nivel', label: 'Nivel', sortable: true },
         { key: 'nombre', label: 'Materia', sortable: true },
+        { key: 'tipo', label: 'Tipo', sortable: true },
         { key: 'estado', label: 'Estado', sortable: true },
         { key: 'nota', label: 'Nota', sortable: true }
     ];
@@ -56,6 +56,13 @@ export class InscriptionCourseComponent implements OnInit {
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 console.log('✅ [InscriptionCourse] Data received:', data);
+                // Map esElectiva to display string
+                data.forEach(carrera => {
+                    carrera.materias.forEach((materia: any) => {
+                        materia.tipo = materia.esElectiva ? 'Electiva' : 'Obligatoria';
+                    });
+                });
+
                 this.originalCarreras = JSON.parse(JSON.stringify(data)); // Deep copy to preserve original structure
                 this.carreras = data;
                 this.extractUniqueNombres();
