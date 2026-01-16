@@ -95,6 +95,23 @@ export class InscriptionCourseComponent implements OnInit {
         this.niveles = Array.from(nivelesSet).sort((a, b) => a - b);
     }
 
+    onMateriaChange() {
+        if (this.filterNombre) {
+            this.filterNivel = '';
+            this.filterTipo = '';
+            this.filterEstado = '';
+        }
+        this.applyFilters();
+    }
+
+    clearFilters() {
+        this.filterNombre = '';
+        this.filterNivel = '';
+        this.filterTipo = '';
+        this.filterEstado = '';
+        this.applyFilters();
+    }
+
     applyFilters() {
         // Start from original data
         const tempCarreras = JSON.parse(JSON.stringify(this.originalCarreras));
@@ -103,10 +120,16 @@ export class InscriptionCourseComponent implements OnInit {
             // Filter materias within each carrera
             carrera.materias = carrera.materias.filter((materia: any) => {
                 const matchesNombre = this.filterNombre ? materia.nombre === this.filterNombre : true;
+
+                // If filtering by name, ignore other filters (as they are disabled/cleared)
+                if (this.filterNombre) {
+                    return matchesNombre;
+                }
+
                 const matchesEstado = this.filterEstado ? materia.estado === this.filterEstado : true;
                 const matchesTipo = this.filterTipo ? materia.tipo === this.filterTipo : true;
                 const matchesNivel = this.filterNivel ? materia.nivel.toString() === this.filterNivel : true;
-                return matchesNombre && matchesEstado && matchesTipo && matchesNivel;
+                return matchesEstado && matchesTipo && matchesNivel;
             });
             return carrera;
         }).filter((carrera: CarreraMateriasDTO) => carrera.materias.length > 0); // Only show carreras with matching materias

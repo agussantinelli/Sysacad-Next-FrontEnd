@@ -158,3 +158,36 @@
     color: var(--text-secondary);
     padding: 2rem;
 }
+
+.filter-actions {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+}
+
+.btn-clear {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    height: 42px;
+    /* Match typical select height */
+}
+
+.btn-clear:hover {
+    background-color: var(--bg-hover, rgba(0, 0, 0, 0.05));
+    color: var(--utn-red, #dc3545);
+    border-color: var(--utn-red, #dc3545);
+}
+
+.btn-clear .material-icons {
+    font-size: 1.2rem;
+}
