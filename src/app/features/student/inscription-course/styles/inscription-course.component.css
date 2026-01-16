@@ -120,8 +120,8 @@
 }
 
 :host ::ng-deep .btn-inscription:hover {
-    background-color: var(--utn-blue-dark);
-    transform: translateY(-1px);
+    filter: brightness(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes fadeIn {
