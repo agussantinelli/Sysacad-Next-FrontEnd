@@ -52,7 +52,7 @@ export class InscriptionExamComponent implements OnInit {
     actions: TableAction[] = [
         {
             name: 'inscribirse',
-            label: 'Inscribirse a Examen',
+            label: 'Inscribirse',
             class: 'btn-inscription',
             isVisible: (row: any) => row.sePuedeInscribir === true
         }
