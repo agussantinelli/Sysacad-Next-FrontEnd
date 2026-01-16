@@ -186,7 +186,7 @@ npm run lint
 <p>Crea un archivo <code>.env</code> en la raíz del proyecto (basado en <code>.env.example</code>) para tener referencia de la conexión al <a href="https://github.com/agussantinelli/Sysacad-Next-BackEnd">Backend</a>:</p>
 
 <pre><code># URL de la API (Backend Spring Boot)
-BACKEND_URL=http://localhost:8081
+BACKEND_URL=http://localhost:8080
 
 # URL del Frontend (Angular)
 FRONTEND_URL=http://localhost:4200
@@ -195,7 +195,7 @@ FRONTEND_URL=http://localhost:4200
 <p><strong>Nota:</strong> Angular utiliza <code>src/environments/environment.development.ts</code> para conectar con la API en desarrollo. Asegúrate de que coincida con el puerto del backend:</p>
 
 <pre><code>export const environment = {
-  apiUrl: 'http://localhost:8081/api'
+  apiUrl: 'http://localhost:8080/api'
 };</code></pre>
 
 <hr>
