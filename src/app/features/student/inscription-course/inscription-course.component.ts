@@ -64,6 +64,19 @@ export class InscriptionCourseComponent implements OnInit {
                 data.forEach(carrera => {
                     carrera.materias.forEach((materia: any) => {
                         materia.tipo = materia.esElectiva ? 'Electiva' : 'Obligatoria';
+
+                        // Custom Frontend Validation for Electives
+                        if (materia.esElectiva && materia.nivel > 1) {
+                            const nivelAnterior = materia.nivel - 1;
+                            const tieneRegularAnterior = carrera.materias.some((m: any) =>
+                                m.nivel === nivelAnterior && (m.estado === 'REGULAR' || m.estado === 'APROBADA')
+                            );
+
+                            if (!tieneRegularAnterior) {
+                                materia.sePuedeInscribir = false;
+                                console.log(`🔒 Bloqueada electiva ${materia.nombre} (Nivel ${materia.nivel}) por falta de regular en Nivel ${nivelAnterior}`);
+                            }
+                        }
                     });
                 });
 
