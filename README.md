@@ -139,9 +139,12 @@
 │   │   │   │   └── forgot-password/    # Recuperación de Contraseña (Implementado)
 │   │   │   ├── dashboard/              # Dashboard del Alumno (Implementado)
 │   │   │   ├── student/
-│   │   │   │   └── inscription-course/ # Inscripción a Cursado (Implementado)
+│   │   │   │   ├── inscription-course/ # Inscripción a Cursado (Implementado)
+│   │   │   │   └── inscription-exam/   # Inscripción a Examen (Implementado)
 │   │   │   ├── academic/               # (En desarrollo) Notas
-│   │   │   └── profile/                # Datos personales y Edición (Implementado)
+│   │   │   └── profile/
+│   │   │       ├── edit-profile/       # Edición de Perfil (Implementado)
+│   │   │       └── profile.component   # Visualización de Perfil (Implementado)
 │   │   ├── shared/
 │   │   │   └── components/
 │   │   │       ├── alert-message/      # Alertas Flotantes (Success/Error/Info)
