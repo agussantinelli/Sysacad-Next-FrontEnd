@@ -9,6 +9,13 @@
         </div>
         <div class="filters-wrapper">
             <div class="filter-group">
+                <label for="filterNivel">Nivel</label>
+                <select id="filterNivel" [(ngModel)]="filterNivel" (change)="applyFilters()" class="form-control">
+                    <option value="">Todos los niveles</option>
+                    <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
                 <label for="filterNombre">Materia</label>
                 <select id="filterNombre" [(ngModel)]="filterNombre" (change)="applyFilters()" class="form-control">
                     <option value="">Todas las materias</option>

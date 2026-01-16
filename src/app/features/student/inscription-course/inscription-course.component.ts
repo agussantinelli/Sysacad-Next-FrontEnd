@@ -24,10 +24,12 @@ export class InscriptionCourseComponent implements OnInit {
     filterNombre: string = '';
     filterEstado: string = '';
     filterTipo: string = '';
+    filterNivel: string = '';
 
     uniqueNombres: string[] = [];
     estados: string[] = ['PENDIENTE', 'CURSANDO', 'REGULAR', 'APROBADA', 'LIBRE'];
     tipos: string[] = ['Obligatoria', 'Electiva'];
+    niveles: number[] = [];
 
     columns: TableColumn[] = [
         { key: 'nombre', label: 'Materia', sortable: true },
@@ -68,6 +70,7 @@ export class InscriptionCourseComponent implements OnInit {
                 this.originalCarreras = JSON.parse(JSON.stringify(data)); // Deep copy to preserve original structure
                 this.carreras = data;
                 this.extractUniqueNombres();
+                this.extractUniqueNiveles();
                 console.log('✅ [InscriptionCourse] this.carreras set to:', this.carreras);
             },
             error: (err) => {
@@ -84,6 +87,14 @@ export class InscriptionCourseComponent implements OnInit {
         this.uniqueNombres = Array.from(nombres).sort();
     }
 
+    extractUniqueNiveles() {
+        const nivelesSet = new Set<number>();
+        this.originalCarreras.forEach(carrera => {
+            carrera.materias.forEach(materia => nivelesSet.add(materia.nivel));
+        });
+        this.niveles = Array.from(nivelesSet).sort((a, b) => a - b);
+    }
+
     applyFilters() {
         // Start from original data
         const tempCarreras = JSON.parse(JSON.stringify(this.originalCarreras));
@@ -94,7 +105,8 @@ export class InscriptionCourseComponent implements OnInit {
                 const matchesNombre = this.filterNombre ? materia.nombre === this.filterNombre : true;
                 const matchesEstado = this.filterEstado ? materia.estado === this.filterEstado : true;
                 const matchesTipo = this.filterTipo ? materia.tipo === this.filterTipo : true;
-                return matchesNombre && matchesEstado && matchesTipo;
+                const matchesNivel = this.filterNivel ? materia.nivel.toString() === this.filterNivel : true;
+                return matchesNombre && matchesEstado && matchesTipo && matchesNivel;
             });
             return carrera;
         }).filter((carrera: CarreraMateriasDTO) => carrera.materias.length > 0); // Only show carreras with matching materias
