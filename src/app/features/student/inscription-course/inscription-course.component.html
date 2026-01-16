@@ -16,6 +16,13 @@
                 </select>
             </div>
             <div class="filter-group">
+                <label for="filterTipo">Tipo</label>
+                <select id="filterTipo" [(ngModel)]="filterTipo" (change)="applyFilters()" class="form-control">
+                    <option value="">Todas</option>
+                    <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
                 <label for="filterEstado">Estado</label>
                 <select id="filterEstado" [(ngModel)]="filterEstado" (change)="applyFilters()" class="form-control">
                     <option value="">Todos los estados</option>

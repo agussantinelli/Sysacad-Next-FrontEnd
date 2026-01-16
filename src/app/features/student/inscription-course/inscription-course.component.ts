@@ -23,9 +23,11 @@ export class InscriptionCourseComponent implements OnInit {
     // Filters
     filterNombre: string = '';
     filterEstado: string = '';
+    filterTipo: string = '';
 
     uniqueNombres: string[] = [];
     estados: string[] = ['PENDIENTE', 'CURSANDO', 'REGULAR', 'APROBADA', 'LIBRE'];
+    tipos: string[] = ['Obligatoria', 'Electiva'];
 
     columns: TableColumn[] = [
         { key: 'nombre', label: 'Materia', sortable: true },
@@ -88,10 +90,11 @@ export class InscriptionCourseComponent implements OnInit {
 
         this.carreras = tempCarreras.map((carrera: CarreraMateriasDTO) => {
             // Filter materias within each carrera
-            carrera.materias = carrera.materias.filter((materia: EstudianteMateriaDTO) => {
+            carrera.materias = carrera.materias.filter((materia: any) => {
                 const matchesNombre = this.filterNombre ? materia.nombre === this.filterNombre : true;
                 const matchesEstado = this.filterEstado ? materia.estado === this.filterEstado : true;
-                return matchesNombre && matchesEstado;
+                const matchesTipo = this.filterTipo ? materia.tipo === this.filterTipo : true;
+                return matchesNombre && matchesEstado && matchesTipo;
             });
             return carrera;
         }).filter((carrera: CarreraMateriasDTO) => carrera.materias.length > 0); // Only show carreras with matching materias
