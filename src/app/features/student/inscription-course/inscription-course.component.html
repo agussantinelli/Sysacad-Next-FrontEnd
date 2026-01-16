@@ -7,6 +7,22 @@
             </button>
             <h2 class="inscription-title">Inscripción a Cursado</h2>
         </div>
+        <div class="filters-wrapper">
+            <div class="filter-group">
+                <label for="filterNombre">Materia</label>
+                <select id="filterNombre" [(ngModel)]="filterNombre" (change)="applyFilters()" class="form-control">
+                    <option value="">Todas las materias</option>
+                    <option *ngFor="let nombre of uniqueNombres" [value]="nombre">{{ nombre }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filterEstado">Estado</label>
+                <select id="filterEstado" [(ngModel)]="filterEstado" (change)="applyFilters()" class="form-control">
+                    <option value="">Todos los estados</option>
+                    <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+                </select>
+            </div>
+        </div>
         <div class="table-wrapper">
             @for (carrera of carreras; track carrera.idCarrera) {
             <div class="career-section">

@@ -53,6 +53,48 @@
     font-size: 1.2rem;
 }
 
+.filters-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: var(--bg-hover, #f8f9fa);
+    padding: 1.5rem;
+    border-radius: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.form-control {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.form-control:focus {
+    border-color: var(--utn-blue);
+    box-shadow: 0 0 0 3px rgba(0, 89, 255, 0.1);
+}
+
 .table-wrapper {
     margin-top: 1rem;
 }

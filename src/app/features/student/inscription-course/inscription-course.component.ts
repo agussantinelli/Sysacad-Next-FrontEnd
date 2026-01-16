@@ -1,14 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TableComponent } from '@shared/components/table/table.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
-import { CarreraMateriasDTO } from '@core/models/matriculacion.models';
+import { CarreraMateriasDTO, EstudianteMateriaDTO } from '@core/models/matriculacion.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 
 @Component({
     selector: 'app-inscription-course',
     standalone: true,
-    imports: [CommonModule, TableComponent],
+    imports: [CommonModule, TableComponent, FormsModule],
     templateUrl: './inscription-course.component.html',
     styleUrl: './styles/inscription-course.component.css'
 })
@@ -16,20 +17,18 @@ export class InscriptionCourseComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
     private location = inject(Location);
 
+    originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
+
+    // Filters
+    filterNombre: string = '';
+    filterEstado: string = '';
+
+    uniqueNombres: string[] = [];
+    estados: string[] = ['PENDIENTE', 'CURSANDO', 'REGULAR', 'APROBADA', 'LIBRE'];
+
     columns: TableColumn[] = [
         { key: 'nombre', label: 'Materia', sortable: true },
-        // These fields might not be in SimpleMateriaDTO (id, nombre). 
-        // Need to check if endpoint returns extended data or just SimpleMateriaDTO. 
-        // User prompt said "materias: [{id, nombre} ...]" (SimpleMateriaDTO).
-        // If so, columns like duration/modalidad won't be available unless the endpoint returns them.
-        // Assuming for now the user wants to see what's available. 
-        // If query only returns ID and Name, I can only show that.
-        // Waiting for verification or assuming I need to adjust columns.
-        // Given the prompt: "Devuelve una lista de objetos SimpleMateriaDTO" inside "materias".
-        // SimpleMateriaDTO typically only has ID and Name.
-        // I should probably simplify columns or ask backend to send more info.
-        // For now, I'll allow Name and ID (implicitly).
     ];
 
     // ADJUSTING COLUMNS FOR SimpleMateriaDTO
@@ -57,13 +56,38 @@ export class InscriptionCourseComponent implements OnInit {
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 console.log('✅ [InscriptionCourse] Data received:', data);
+                this.originalCarreras = JSON.parse(JSON.stringify(data)); // Deep copy to preserve original structure
                 this.carreras = data;
+                this.extractUniqueNombres();
                 console.log('✅ [InscriptionCourse] this.carreras set to:', this.carreras);
             },
             error: (err) => {
                 console.error('❌ [InscriptionCourse] Error loading materias:', err);
             }
         });
+    }
+
+    extractUniqueNombres() {
+        const nombres = new Set<string>();
+        this.originalCarreras.forEach(carrera => {
+            carrera.materias.forEach(materia => nombres.add(materia.nombre));
+        });
+        this.uniqueNombres = Array.from(nombres).sort();
+    }
+
+    applyFilters() {
+        // Start from original data
+        const tempCarreras = JSON.parse(JSON.stringify(this.originalCarreras));
+
+        this.carreras = tempCarreras.map((carrera: CarreraMateriasDTO) => {
+            // Filter materias within each carrera
+            carrera.materias = carrera.materias.filter((materia: EstudianteMateriaDTO) => {
+                const matchesNombre = this.filterNombre ? materia.nombre === this.filterNombre : true;
+                const matchesEstado = this.filterEstado ? materia.estado === this.filterEstado : true;
+                return matchesNombre && matchesEstado;
+            });
+            return carrera;
+        }).filter((carrera: CarreraMateriasDTO) => carrera.materias.length > 0); // Only show carreras with matching materias
     }
 
     handleAction(event: ActionEvent<any>) {
