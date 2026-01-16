@@ -10,6 +10,7 @@ export interface TableAction {
     label: string;
     icon?: string;
     class?: string;
+    isVisible?: (row: any) => boolean;
 }
 
 export interface ActionEvent<T = any> {

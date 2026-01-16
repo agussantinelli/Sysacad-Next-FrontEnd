@@ -31,10 +31,12 @@
                     </ng-container>
                 </td>
                 <td *ngIf="actions.length > 0" class="table-cell actions-cell">
-                    <button *ngFor="let action of actions" (click)="emitAction(action.name, row)" class="action-btn"
-                        [ngClass]="action.class">
-                        {{ action.label }}
-                    </button>
+                    <ng-container *ngFor="let action of actions">
+                        <button *ngIf="!action.isVisible || action.isVisible(row)"
+                            (click)="emitAction(action.name, row)" class="action-btn" [ngClass]="action.class">
+                            {{ action.label }}
+                        </button>
+                    </ng-container>
                 </td>
             </tr>
             <tr *ngIf="displayData.length === 0">
