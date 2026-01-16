@@ -34,11 +34,19 @@ export class InscriptionCourseComponent implements OnInit {
 
     // ADJUSTING COLUMNS FOR SimpleMateriaDTO
     simpleColumns: TableColumn[] = [
-        { key: 'nombre', label: 'Materia', sortable: true }
+        { key: 'nivel', label: 'Nivel', sortable: true },
+        { key: 'nombre', label: 'Materia', sortable: true },
+        { key: 'estado', label: 'Estado', sortable: true },
+        { key: 'nota', label: 'Nota', sortable: true }
     ];
 
     actions: TableAction[] = [
-        { name: 'inscribirse', label: 'Inscribirse', class: 'btn-inscription' }
+        {
+            name: 'inscribirse',
+            label: 'Inscribirse',
+            class: 'btn-inscription',
+            isVisible: (row: any) => row.sePuedeInscribir === true
+        }
     ];
 
     ngOnInit(): void {
@@ -47,8 +55,14 @@ export class InscriptionCourseComponent implements OnInit {
 
     loadMaterias() {
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
-            next: (data) => this.carreras = data,
-            error: (err) => console.error('Error loading materias', err)
+            next: (data) => {
+                console.log('✅ [InscriptionCourse] Data received:', data);
+                this.carreras = data;
+                console.log('✅ [InscriptionCourse] this.carreras set to:', this.carreras);
+            },
+            error: (err) => {
+                console.error('❌ [InscriptionCourse] Error loading materias:', err);
+            }
         });
     }
 
