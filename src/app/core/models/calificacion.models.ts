@@ -1,24 +1,23 @@
-import { TipoInscripcion } from '@core/models/inscripcion.models';
-
-export interface CalificacionRequest {
-    idUsuario: string; // UUID
-    idComision: string; // UUID
-    tipoInscripcion: TipoInscripcion;
-    vecesTipoInscripcion: number;
-    concepto: string;
-    nota: number; // BigDecimal
+export enum EstadoExamen {
+    PENDIENTE = 'PENDIENTE',
+    APROBADO = 'APROBADO',
+    DESAPROBADO = 'DESAPROBADO',
+    AUSENTE = 'AUSENTE'
 }
 
-export interface CalificacionResponse {
-    idUsuario: string; // UUID
-    nombreUsuario: string;
-    legajoUsuario: string;
-    idComision: string; // UUID
-    nombreComision: string;
-    materia: string;
-    tipoInscripcion: TipoInscripcion;
-    vecesTipoInscripcion: number;
-    concepto: string;
+export interface CargaNotaExamenRequest {
+    nota: number; // BigDecimal
+    estado: EstadoExamen;
+}
+
+export interface CalificacionCursadaResponse {
+    id: string; // UUID
+    descripcion: string;
     nota: number; // BigDecimal
     fecha: string; // LocalDate
+}
+
+export interface CalificacionCursadaRequest {
+    descripcion: string;
+    nota: number; // BigDecimal
 }

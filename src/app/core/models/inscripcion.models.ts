@@ -1,24 +1,38 @@
-export enum TipoInscripcion {
-    CURSADO = 'CURSADO',
-    EXAMEN = 'EXAMEN'
+import { CalificacionCursadaResponse } from './calificacion.models';
+
+// InscripcionExamen
+export interface InscripcionExamenRequest {
+    idUsuario?: string; // UUID, Optional
+    idDetalleMesa: string; // UUID
 }
 
-export interface InscripcionRequest {
-    idUsuario: string; // UUID
-    idComision: string; // UUID
-    tipo: TipoInscripcion;
-    vecesTipo?: number;
-    condicion?: string;
-}
-
-export interface InscripcionResponse {
+export interface InscripcionExamenResponse {
+    id: string; // UUID
+    nombreAlumno: string;
+    legajoAlumno: string;
     nombreMateria: string;
-    comision: string;
-    anioCursado: number;
-    tipo: TipoInscripcion;
-    fechaInscripcion: string;
-    condicion: string;
-    notaFinal: number; // BigDecimal
+    fechaExamen: string; // LocalDate
+    horaExamen: string; // LocalTime
+    fechaInscripcion: string; // LocalDateTime
+    estado: string; // e.g., "PENDIENTE"
+    nota: number; // BigDecimal
+}
+
+// InscripcionCursado
+export interface InscripcionCursadoRequest {
+    idUsuario?: string; // UUID, Optional
     idMateria: string; // UUID
     idComision: string; // UUID
+}
+
+export interface InscripcionCursadoResponse {
+    id: string; // UUID
+    nombreMateria: string;
+    nombreComision: string;
+    anioCursado: number;
+    estado: string; // e.g., "CURSANDO"
+    notaFinal: number; // BigDecimal
+    fechaPromocion: string; // LocalDate
+    fechaInscripcion: string; // LocalDateTime
+    calificaciones: CalificacionCursadaResponse[];
 }

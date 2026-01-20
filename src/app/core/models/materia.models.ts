@@ -9,12 +9,6 @@ export enum DuracionMateria {
     CUATRIMESTRAL = 'CUATRIMESTRAL'
 }
 
-export enum ModalidadMateria {
-    PRESENCIAL = 'PRESENCIAL',
-    MIXTO = 'MIXTO',
-    VIRTUAL = 'VIRTUAL'
-}
-
 export enum CuatrimestreDictado {
     PRIMERO = 'PRIMERO',
     SEGUNDO = 'SEGUNDO',
@@ -29,15 +23,14 @@ export interface SimpleMateriaDTO {
 
 export interface MateriaRequest {
     nombre: string;
-    descripcion?: string;
+    descripcion: string;
     tipoMateria: TipoMateria;
     duracion: DuracionMateria;
-    modalidad?: ModalidadMateria;
     cuatrimestreDictado: CuatrimestreDictado;
     horasCursado: number; // Short
     rendirLibre: boolean;
     optativa: boolean;
-    idsCorrelativas?: string[]; // List of UUIDs
+    idsCorrelativas: string[]; // List of UUIDs
 }
 
 export interface MateriaResponse {
@@ -46,10 +39,9 @@ export interface MateriaResponse {
     descripcion: string;
     tipoMateria: TipoMateria;
     duracion: DuracionMateria;
-    modalidad: ModalidadMateria;
     cuatrimestreDictado: CuatrimestreDictado;
-    horasCursado: number;
+    horasCursado: number; // Short
     rendirLibre: boolean;
     optativa: boolean;
-    correlativas?: SimpleMateriaDTO[];
+    correlativas: SimpleMateriaDTO[];
 }
