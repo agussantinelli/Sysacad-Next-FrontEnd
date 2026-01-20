@@ -1,5 +1,13 @@
 import { CalificacionCursadaResponse } from './calificacion.models';
 
+export enum EstadoCursada {
+    CURSANDO = 'CURSANDO',
+    REGULAR = 'REGULAR',
+    PROMOCIONADO = 'PROMOCIONADO',
+    LIBRE = 'LIBRE',
+    APROBADO = 'APROBADO'
+}
+
 // InscripcionExamen
 export interface InscripcionExamenRequest {
     idUsuario?: string; // UUID, Optional

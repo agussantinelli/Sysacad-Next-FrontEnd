@@ -1,15 +1,11 @@
-export enum DiaSemana {
-    LUNES = 'LUNES',
-    MARTES = 'MARTES',
-    MIERCOLES = 'MIERCOLES',
-    JUEVES = 'JUEVES',
-    VIERNES = 'VIERNES',
-    SABADO = 'SABADO'
-}
-
 export interface ProfesorResumenDTO {
     legajo: string;
     nombreCompleto: string;
+}
+
+export enum RolCargo {
+    JEFE_CATEDRA = 'JEFE_CATEDRA',
+    DOCENTE = 'DOCENTE'
 }
 
 export interface ComisionRequest {

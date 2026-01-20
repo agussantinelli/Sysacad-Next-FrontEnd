@@ -17,11 +17,6 @@ export enum RolUsuario {
     PROFESOR = 'PROFESOR'
 }
 
-export enum RolCargo {
-    JEFE_CATEDRA = 'JEFE_CATEDRA',
-    DOCENTE = 'DOCENTE'
-}
-
 export enum EstadoUsuario {
     ACTIVO = 'ACTIVO',
     INACTIVO = 'INACTIVO'

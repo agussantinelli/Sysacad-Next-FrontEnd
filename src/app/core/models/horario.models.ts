@@ -4,8 +4,7 @@ export enum DiaSemana {
     MIERCOLES = 'MIERCOLES',
     JUEVES = 'JUEVES',
     VIERNES = 'VIERNES',
-    SABADO = 'SABADO',
-    DOMINGO = 'DOMINGO'
+    SABADO = 'SABADO'
 }
 
 export interface HorarioRequest {

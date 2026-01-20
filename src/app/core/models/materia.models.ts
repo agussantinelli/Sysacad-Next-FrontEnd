@@ -9,6 +9,12 @@ export enum DuracionMateria {
     CUATRIMESTRAL = 'CUATRIMESTRAL'
 }
 
+export enum ModalidadMateria {
+    PRESENCIAL = 'PRESENCIAL',
+    MIXTO = 'MIXTO',
+    VIRTUAL = 'VIRTUAL'
+}
+
 export enum CuatrimestreDictado {
     PRIMERO = 'PRIMERO',
     SEGUNDO = 'SEGUNDO',
