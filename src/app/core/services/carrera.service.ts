@@ -36,11 +36,11 @@ export class CarreraService {
         );
     }
 
-    listarPlanesVigentes(idCarrera: string, idFacultad?: string): Observable<PlanDeEstudioResponse[]> {
+    listarPlanesVigentes(nroCarrera: number, idFacultad?: string): Observable<PlanDeEstudioResponse[]> {
         const params: any = {};
         if (idFacultad) params.idFacultad = idFacultad;
 
-        return from(axiosClient.get<PlanDeEstudioResponse[]>(`/carreras/${idCarrera}/planes/vigentes`, { params })).pipe(
+        return from(axiosClient.get<PlanDeEstudioResponse[]>(`/carreras/${nroCarrera}/planes/vigentes`, { params })).pipe(
             map(response => response.data)
         );
     }

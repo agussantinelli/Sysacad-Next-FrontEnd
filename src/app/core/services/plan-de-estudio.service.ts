@@ -6,7 +6,7 @@ import { PlanDeEstudioRequest, PlanDeEstudioResponse } from '@core/models/plan-d
 
 export interface PlanMateriaRequest {
     idFacultad: string;
-    idCarrera: string;
+    nroCarrera: number;
     nombrePlan: string;
     idMateria: string;
     cuatrimestre: number;
@@ -32,14 +32,14 @@ export class PlanDeEstudioService {
         );
     }
 
-    listarPlanesVigentes(idCarrera: string): Observable<PlanDeEstudioResponse[]> {
-        return from(axiosClient.get<PlanDeEstudioResponse[]>(`/planes/vigentes/${idCarrera}`)).pipe(
+    listarPlanesVigentes(nroCarrera: number): Observable<PlanDeEstudioResponse[]> {
+        return from(axiosClient.get<PlanDeEstudioResponse[]>(`/planes/vigentes/${nroCarrera}`)).pipe(
             map(response => response.data)
         );
     }
 
-    listarTodosPorCarrera(idCarrera: string): Observable<PlanDeEstudioResponse[]> {
-        return from(axiosClient.get<PlanDeEstudioResponse[]>(`/planes/carrera/${idCarrera}`)).pipe(
+    listarTodosPorCarrera(nroCarrera: number): Observable<PlanDeEstudioResponse[]> {
+        return from(axiosClient.get<PlanDeEstudioResponse[]>(`/planes/carrera/${nroCarrera}`)).pipe(
             map(response => response.data)
         );
     }
