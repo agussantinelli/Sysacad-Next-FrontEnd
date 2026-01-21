@@ -3,10 +3,12 @@ import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from '@shared/components/table/table.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
-import { InscripcionService } from '@core/services/inscripcion.service';
+import { InscripcionExamenService } from '@core/services/inscripcion-examen.service';
+import { MesaExamenService } from '@core/services/mesa-examen.service';
 import { AuthService } from '@core/services/auth.service';
 import { CarreraMateriasDTO } from '@core/models/matriculacion.models';
-import { InscripcionRequest, TipoInscripcion } from '@core/models/inscripcion.models';
+import { InscripcionExamenRequest } from '@core/models/inscripcion.models';
+import { MesaExamenResponse, DetalleMesaExamenResponse } from '@core/models/mesa-examen.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { take } from 'rxjs/operators';
 
@@ -19,12 +21,14 @@ import { take } from 'rxjs/operators';
 })
 export class InscriptionExamComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
-    private inscripcionService = inject(InscripcionService);
+    private inscripcionService = inject(InscripcionExamenService);
+    private mesaExamenService = inject(MesaExamenService);
     private authService = inject(AuthService);
     private location = inject(Location);
 
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
+    mesas: MesaExamenResponse[] = [];
 
     // Filters
     filterNombre: string = '';
@@ -60,6 +64,7 @@ export class InscriptionExamComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadMaterias();
+        this.loadMesas();
     }
 
     loadMaterias() {
@@ -71,22 +76,19 @@ export class InscriptionExamComponent implements OnInit {
                     carrera.materias.forEach((materia: any) => {
                         materia.tipo = materia.esElectiva ? 'Electiva' : 'Obligatoria';
 
+                        // Default to false, enabled later if mesa exists
+                        materia.sePuedeInscribir = false;
+
                         // Exam Inscription Validation Logic
                         // Rule 1: Allow if status is REGULAR
                         // Rule 2: Allow if subject is English I or English II (even if not Regular, for Free Exam)
-                        // Rule 3: Do not allow if already APROBADA (assumed rule for common sense)
-
+                        // Rule 3: Do not allow if already APROBADA
                         const esIngles = ['Inglés I', 'Inglés II'].includes(materia.nombre);
                         const esRegular = materia.estado === 'REGULAR';
                         const estaAprobada = materia.estado === 'APROBADA';
+                        const condicionAcademica = !estaAprobada && (esRegular || esIngles);
 
-                        if (estaAprobada) {
-                            materia.sePuedeInscribir = false;
-                        } else if (esRegular || esIngles) {
-                            materia.sePuedeInscribir = true;
-                        } else {
-                            materia.sePuedeInscribir = false;
-                        }
+                        materia.condicionAcademica = condicionAcademica; // Save for logic in handleAction or mesa check
                     });
                 });
 
@@ -94,11 +96,59 @@ export class InscriptionExamComponent implements OnInit {
                 this.carreras = data;
                 this.extractUniqueNombres();
                 this.extractUniqueNiveles();
+
+                // Re-evaluate inscription capability if mesas are already loaded
+                if (this.mesas.length > 0) {
+                    this.updateInscriptionStatus();
+                }
             },
             error: (err) => {
                 console.error('❌ [InscriptionExam] Error loading materias:', err);
             }
         });
+    }
+
+    loadMesas() {
+        this.mesaExamenService.listarMesas().subscribe({
+            next: (mesas) => {
+                this.mesas = mesas;
+                console.log('✅ [InscriptionExam] Mesas loaded:', mesas);
+                if (this.carreras.length > 0) {
+                    this.updateInscriptionStatus();
+                }
+            },
+            error: (err) => {
+                console.error('❌ [InscriptionExam] Error loading mesas:', err);
+            }
+        });
+    }
+
+    updateInscriptionStatus() {
+        // Only allow inscription if acadamically allowed AND there is an open mesa for that subject
+        const now = new Date();
+
+        this.carreras.forEach(carrera => {
+            carrera.materias.forEach((materia: any) => {
+                if (materia.condicionAcademica) {
+                    // Find if there is any active mesa with this subject
+                    const mesaFound = this.findMesaForMateria(materia.idMateria);
+                    materia.sePuedeInscribir = !!mesaFound;
+                    materia.mesaDetalle = mesaFound; // Store for action
+                }
+            });
+        });
+    }
+
+    findMesaForMateria(idMateria: string): { mesa: MesaExamenResponse, detalle: DetalleMesaExamenResponse } | null {
+        for (const mesa of this.mesas) {
+            // Logic check for dates could go here (e.g. is inscription open?)
+            // For now assuming all listed mesas are valid candidates if they contain the subject
+            const detalle = mesa.detalles.find(d => d.idMateria === idMateria);
+            if (detalle) {
+                return { mesa, detalle };
+            }
+        }
+        return null;
     }
 
     extractUniqueNombres() {
@@ -157,26 +207,34 @@ export class InscriptionExamComponent implements OnInit {
     handleAction(event: ActionEvent<any>) {
         if (event.action === 'inscribirse') {
 
+            const materia = event.row;
+            if (!materia.mesaDetalle) {
+                alert('No se encontró una mesa de examen habilitada para esta materia.');
+                return;
+            }
+
             this.authService.currentUser$.pipe(take(1)).subscribe(user => {
                 if (!user) {
                     alert('Error: Usuario no identificado');
                     return;
                 }
 
-                const request: InscripcionRequest = {
+                const infoMesa = materia.mesaDetalle as { mesa: MesaExamenResponse, detalle: DetalleMesaExamenResponse };
+
+                const request: InscripcionExamenRequest = {
                     idUsuario: user.id,
-                    idComision: event.row.idMateria, // Mapping idMateria
-                    tipo: TipoInscripcion.EXAMEN
+                    idMesaExamen: infoMesa.mesa.id,
+                    nroDetalle: infoMesa.detalle.nroDetalle
                 };
 
                 // Confirm dialog
-                if (!confirm(`¿Desea inscribirse al examen de ${event.row.nombre}?`)) return;
+                if (!confirm(`¿Desea inscribirse al examen de ${materia.nombre} para la fecha ${infoMesa.detalle.diaExamen} ${infoMesa.detalle.horaExamen}?`)) return;
 
-                this.inscripcionService.inscribirAlumno(request).subscribe({
+                this.inscripcionService.inscribirExamen(request).subscribe({
                     next: (res) => {
                         console.log('Inscripción a examen exitosa:', res);
-                        alert(`Inscripción exitosa al examen de ${event.row.nombre}`);
-                        this.loadMaterias();
+                        alert(`Inscripción exitosa al examen de ${materia.nombre}`);
+                        this.loadMaterias(); // Re-load to update status if needed
                     },
                     error: (err) => {
                         console.error('Error al inscribirse al examen:', err);
