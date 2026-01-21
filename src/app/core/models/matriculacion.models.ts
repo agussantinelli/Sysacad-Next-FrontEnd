@@ -11,7 +11,7 @@ export interface EstudianteMateriaDTO {
 }
 
 export interface CarreraMateriasDTO {
-    idCarrera: string;
+    nroCarrera: number;
     nombreCarrera: string;
     nombrePlan: string;
     materias: EstudianteMateriaDTO[];

@@ -1,6 +1,7 @@
 export interface PlanDeEstudioRequest {
     idFacultad: string; // UUID
-    idCarrera: string;
+    nroCarrera: number;
+    nroPlan: number;
     nombrePlan: string;
     fechaInicio: string; // LocalDate
     fechaFin?: string; // LocalDate
@@ -8,6 +9,7 @@ export interface PlanDeEstudioRequest {
 }
 
 export interface PlanDeEstudioResponse {
+    nroPlan: number;
     nombrePlan: string;
     fechaInicio: string; // LocalDate
     fechaFin?: string; // LocalDate
