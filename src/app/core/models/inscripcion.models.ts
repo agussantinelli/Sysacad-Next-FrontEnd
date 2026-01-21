@@ -11,7 +11,8 @@ export enum EstadoCursada {
 // InscripcionExamen
 export interface InscripcionExamenRequest {
     idUsuario?: string; // UUID, Optional
-    idDetalleMesa: string; // UUID
+    idMesaExamen: string; // UUID
+    nroDetalle: number;
 }
 
 export interface InscripcionExamenResponse {
