@@ -1,9 +1,4 @@
-export enum EstadoExamen {
-    PENDIENTE = 'PENDIENTE',
-    APROBADO = 'APROBADO',
-    DESAPROBADO = 'DESAPROBADO',
-    AUSENTE = 'AUSENTE'
-}
+import { EstadoExamen } from '../enums/inscripcion.enums';
 
 export interface CargaNotaExamenRequest {
     nota: number; // BigDecimal
