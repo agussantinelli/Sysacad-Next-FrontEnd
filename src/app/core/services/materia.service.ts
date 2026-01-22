@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { MateriaRequest, MateriaResponse, TipoMateria } from '@core/models/materia.models';
+import { MateriaRequest, MateriaResponse } from '@core/models/materia.models';
+import { TipoMateria } from '@core/enums/materia.enums';
 
 @Injectable({
     providedIn: 'root'
