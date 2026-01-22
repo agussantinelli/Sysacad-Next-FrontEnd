@@ -1,11 +1,4 @@
-export enum DiaSemana {
-    LUNES = 'LUNES',
-    MARTES = 'MARTES',
-    MIERCOLES = 'MIERCOLES',
-    JUEVES = 'JUEVES',
-    VIERNES = 'VIERNES',
-    SABADO = 'SABADO'
-}
+import { DiaSemana } from '../enums/horario.enums';
 
 export interface HorarioRequest {
     idComision: string; // UUID

@@ -3,10 +3,7 @@ export interface ProfesorResumenDTO {
     nombreCompleto: string;
 }
 
-export enum RolCargo {
-    JEFE_CATEDRA = 'JEFE_CATEDRA',
-    DOCENTE = 'DOCENTE'
-}
+import { RolCargo } from '../enums/comision.enums';
 
 export interface ComisionRequest {
     nombre: string;
