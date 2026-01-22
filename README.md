@@ -131,6 +131,7 @@
 │   ├── app/
 │   │   ├── core/
 │   │   │   ├── api/                    # Cliente Axios Configurado (Interceptors)
+│   │   │   ├── enums/                  # Enumerados (Materia, Inscripcion, Usuario, Comision, Horario...)
 │   │   │   ├── models/                 # Modelos de Dominio (Usuario, Materia, Inscripcion, Aviso, Horario, Salon, Sancion...)
 │   │   │   └── services/               # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Aviso, Sancion...)
 │   │   ├── features/
