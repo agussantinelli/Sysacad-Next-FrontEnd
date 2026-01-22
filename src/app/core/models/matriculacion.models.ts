@@ -11,8 +11,10 @@ export interface EstudianteMateriaDTO {
 }
 
 export interface CarreraMateriasDTO {
-    nroCarrera: number;
+    idCarrera: string; // UUID
     nombreCarrera: string;
+    idFacultad: string; // UUID
+    nombreFacultad: string;
     nombrePlan: string;
     materias: EstudianteMateriaDTO[];
 }
