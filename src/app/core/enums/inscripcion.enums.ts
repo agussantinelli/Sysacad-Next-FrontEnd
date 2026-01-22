@@ -1,0 +1,15 @@
+export enum EstadoCursada {
+    CURSANDO = 'CURSANDO',
+    REGULAR = 'REGULAR',
+    PROMOCIONADO = 'PROMOCIONADO',
+    LIBRE = 'LIBRE',
+    APROBADO = 'APROBADO'
+}
+
+export enum EstadoExamen {
+    PENDIENTE = 'PENDIENTE',
+    APROBADO = 'APROBADO',
+    DESAPROBADO = 'DESAPROBADO',
+    AUSENTE = 'AUSENTE',
+    EQUIVALENCIA = 'EQUIVALENCIA'
+}
