@@ -8,6 +8,14 @@ export enum EstadoCursada {
     APROBADO = 'APROBADO'
 }
 
+export enum EstadoExamen {
+    PENDIENTE = 'PENDIENTE',
+    APROBADO = 'APROBADO',
+    DESAPROBADO = 'DESAPROBADO',
+    AUSENTE = 'AUSENTE',
+    EQUIVALENCIA = 'EQUIVALENCIA'
+}
+
 // InscripcionExamen
 export interface InscripcionExamenRequest {
     idUsuario?: string; // UUID, Optional
