@@ -15,3 +15,23 @@ body {
     color: var(--text-primary);
     background-color: var(--bg-page);
 }
+
+/* Snackbar Styles */
+.error-snackbar {
+    --mdc-snackbar-container-color: var(--error);
+    --mdc-snackbar-supporting-text-color: white;
+    --mat-mdc-snack-bar-button-color: white;
+}
+
+.success-snackbar {
+    --mdc-snackbar-container-color: #10b981;
+    /* Emerald 500 */
+    --mdc-snackbar-supporting-text-color: white;
+    --mat-mdc-snack-bar-button-color: white;
+}
+
+.info-snackbar {
+    --mdc-snackbar-container-color: var(--utn-blue);
+    --mdc-snackbar-supporting-text-color: white;
+    --mat-mdc-snack-bar-button-color: white;
+}
