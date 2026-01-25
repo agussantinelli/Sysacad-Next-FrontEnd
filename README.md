@@ -126,46 +126,42 @@
 <h3>📦 Estructura del Proyecto</h3>
 
 <pre><code>Sysacad-Next-FrontEnd/
-├── public/                             # Assets estáticos servidos directamente (favicon, robots.txt)
+├── public/                             # Assets estáticos servidos directamente
 ├── src/                                # Código fuente de la aplicación
 │   ├── app/
 │   │   ├── core/
-│   │   │   ├── api/                    # Cliente Axios Configurado (Interceptors)
-│   │   │   ├── enums/                  # Enumerados (Materia, Inscripcion, Usuario, Comision, Horario...)
-│   │   │   ├── models/                 # Modelos de Dominio (Usuario, Materia, Inscripcion, Aviso, Horario, Salon, Sancion...)
-│   │   │   └── services/               # Servicios Globales (Theme) y de Entidades (Auth, Carrera, Aviso, Sancion...)
+│   │   │   ├── api/                    # Cliente Axios Configurado
+│   │   │   ├── enums/                  # Enumerados (Materia, Inscripcion, Usuario...)
+│   │   │   ├── guards/                 # Guardias de Ruta (AuthGuard)
+│   │   │   ├── interceptors/           # Interceptores HTTP (JWT Injection)
+│   │   │   ├── models/                 # Modelos DTO (Granulares: Historial, InscripcionExamen...)
+│   │   │   └── services/               # Servicios de Entidades (Auth, Matriculacion...)
 │   │   ├── features/
 │   │   │   ├── auth/
-│   │   │   │   ├── login/              # Inicio de Sesión (Implementado)
-│   │   │   │   └── forgot-password/    # Recuperación de Contraseña (Implementado)
-│   │   │   ├── dashboard/              # Dashboard del Alumno (Implementado)
-│   │   │   ├── student/
-│   │   │   │   ├── inscription-course/ # Inscripción a Cursado (Implementado)
-│   │   │   │   └── inscription-exam/   # Inscripción a Examen (Implementado)
-│   │   │   ├── academic/               # (En desarrollo) Notas
-│   │   │   └── profile/
-│   │   │       ├── edit-profile/       # Edición de Perfil (Implementado)
-│   │   │       └── profile.component   # Visualización de Perfil (Implementado)
+│   │   │   │   ├── login/              # Inicio de Sesión
+│   │   │   │   └── forgot-password/    # Recuperación de Contraseña
+│   │   │   ├── dashboard/              # Dashboard del Alumno
+│   │   │   ├── profile/
+│   │   │   │   ├── edit-profile/       # Edición de Perfil
+│   │   │   │   └── profile.component   # Visualización de Perfil
+│   │   │   └── student/
+│   │   │       ├── academic-status/    # Estado Académico (Analítico + Historial)
+│   │   │       ├── inscription-course/ # Inscripción a Cursado
+│   │   │       └── inscription-exam/   # Inscripción a Examen
+│   │   ├── layout/
+│   │   │   └── navbar/                 # Barra de Navegación Responsive
 │   │   ├── shared/
-│   │   │   └── components/
-│   │   │       ├── alert-message/      # Alertas Flotantes (Success/Error/Info)
-│   │   │       ├── loading-spinner/    # Indicador de Carga
-│   │   │       ├── table/              # Tabla Reutilizable (Paginación, Ordenamiento)
-│   │   │       ├── upload-modal/       # Modal de Carga de Imágenes
-│   │   │       └── theme-toggle/       # Switch Modo Claro/Oscuro
-│   │   └── layout/
-│   │       └── navbar/                 # Barra de Navegación Responsive
-│   ├── assets/                         # Recursos estáticos (imágenes, iconos)
-│   ├── environments/                   # Configuraciones de entorno (dev, prod)
+│   │   │   ├── components/             # Reutilizables (Table, Spinner, Alert, Modal...)
+│   │   │   └── interfaces/             # Interfaces de UI (TableConfig)
+│   ├── assets/                         # Recursos estáticos
+│   ├── environments/                   # Configuraciones de entorno
 │   ├── index.html                      # Punto de entrada HTML
-│   ├── main.ts                         # Punto de entrada de la aplicación Angular
-│   └── styles.css                      # Estilos globales y variables CSS
-├── .env                                # Variables de entorno locales
-├── .gitignore                          # Archivos ignorados por Git
-├── angular.json                        # Configuración del workspace de Angular
-├── package.json                        # Dependencias y scripts del proyecto
-├── tsconfig.json                       # Configuración base de TypeScript
-└── README.md                           # Documentación del proyecto
+│   ├── main.ts                         # Punto de entrada Angular
+│   └── styles.css                      # Estilos globales
+├── .env                                # Variables de entorno
+├── angular.json                        # Configuración del workspace
+├── package.json                        # Dependencias
+└── README.md                           # Documentación
 </code></pre>
 
 <h3>💻 Empezar (Setup Local)</h3>
