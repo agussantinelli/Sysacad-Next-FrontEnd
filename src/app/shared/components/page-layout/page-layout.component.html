@@ -1,0 +1,14 @@
+<div class="inscription-container">
+    <div class="inscription-card">
+        <div class="header-actions">
+            <button class="btn-back" (click)="goBack()">
+                <div class="arrow-container">
+                    <span class="material-icons">arrow_back</span>
+                </div>
+                Volver
+            </button>
+            <h2 class="inscription-title">{{ title }}</h2>
+        </div>
+        <ng-content></ng-content>
+    </div>
+</div>

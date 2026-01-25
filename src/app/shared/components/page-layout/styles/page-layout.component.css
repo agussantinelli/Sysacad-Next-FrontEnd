@@ -1,0 +1,59 @@
+.inscription-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.inscription-card {
+    width: 100%;
+    max-width: 1400px;
+    background-color: #111111;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    border: 1px solid #222;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    color: #fff;
+    border-color: #666;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.material-icons {
+    font-size: 1.25rem;
+}
+
+.inscription-title {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
