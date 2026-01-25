@@ -7,9 +7,10 @@ import { MatriculacionService } from '@core/services/matriculacion.service';
 import { InscripcionExamenService } from '@core/services/inscripcion-examen.service';
 import { MesaExamenService } from '@core/services/mesa-examen.service';
 import { AuthService } from '@core/services/auth.service';
-import { CarreraMateriasDTO } from '@core/models/matriculacion.models';
-import { InscripcionExamenRequest } from '@core/models/inscripcion.models';
-import { MesaExamenResponse, DetalleMesaExamenResponse } from '@core/models/mesa-examen.models';
+import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
+import { InscripcionExamenRequest } from '@core/models/inscripcion-examen.models';
+import { MesaExamenResponse } from '@core/models/mesa-examen.models';
+import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { take } from 'rxjs/operators';
 

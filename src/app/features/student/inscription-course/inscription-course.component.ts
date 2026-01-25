@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { TableComponent } from '@shared/components/table/table.component';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
-import { CarreraMateriasDTO, EstudianteMateriaDTO } from '@core/models/matriculacion.models';
+import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
+import { EstudianteMateriaDTO } from '@core/models/estudiante-materia.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 
 @Component({
