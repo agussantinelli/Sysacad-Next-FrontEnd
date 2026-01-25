@@ -6,7 +6,8 @@ import { MatriculacionService } from '@core/services/matriculacion.service';
 import { InscripcionExamenService } from '@core/services/inscripcion-examen.service';
 import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { HistoryModalComponent } from './components/history-modal/history-modal.component';
 
 @Component({
@@ -55,17 +56,32 @@ export class AcademicStatusComponent implements OnInit {
 
     loadData() {
         forkJoin({
-            carreras: this.matriculacionService.getMisCarrerasMaterias(),
-            examenes: this.inscripcionExamenService.misInscripciones(),
-            cursadas: this.inscripcionCursadoService.misCursadas()
+            carreras: this.matriculacionService.getMisCarrerasMaterias().pipe(
+                catchError(err => {
+                    console.error('❌ [Academic Status] Error fetching carreras:', err);
+                    return of([]);
+                })
+            ),
+            examenes: this.inscripcionExamenService.misInscripciones().pipe(
+                catchError(err => {
+                    console.error('❌ [Academic Status] Error fetching examenes:', err);
+                    return of([]);
+                })
+            ),
+            cursadas: this.inscripcionCursadoService.misCursadas().pipe(
+                catchError(err => {
+                    console.error('❌ [Academic Status] Error fetching cursadas (Backend 500?):', err);
+                    return of([]);
+                })
+            )
         }).subscribe({
             next: (res) => {
-                this.matriculacionData = res.carreras;
-                this.examenesData = res.examenes;
-                this.cursadasData = res.cursadas;
+                console.log('✅ [Academic Status] Data loaded (partial or full):', res);
+                this.matriculacionData = res.carreras || [];
+                this.examenesData = res.examenes || [];
+                this.cursadasData = res.cursadas || [];
                 this.processData();
-            },
-            error: (err) => console.error('Error loading academic data', err)
+            }
         });
     }
 
