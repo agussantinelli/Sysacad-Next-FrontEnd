@@ -91,6 +91,11 @@ export class AcademicStatusComponent implements OnInit {
         // Flatten subjects from all careers
         this.matriculacionData.forEach(carrera => {
             carrera.materias.forEach((materia: any) => {
+                // Filter out 'PENDIENTE' subjects as requested
+                if (materia.estado === 'PENDIENTE') {
+                    return;
+                }
+
                 // Find associated history
                 const historyExams = this.examenesData.filter(e => e.nombreMateria === materia.nombre);
                 const historyCursadas = this.cursadasData.filter(c => c.nombreMateria === materia.nombre);
