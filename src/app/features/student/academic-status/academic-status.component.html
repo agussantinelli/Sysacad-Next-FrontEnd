@@ -2,6 +2,7 @@
     <app-table [data]="displayData" [columns]="columns" [actions]="actions" (onAction)="handleAction($event)">
     </app-table>
 
-    <app-history-modal *ngIf="isModalOpen" [materia]="selectedMateria" (close)="closeModal()">
+    <app-history-modal *ngIf="isModalOpen" [materia]="historyData" [isLoading]="isLoadingHistory"
+        (close)="closeModal()">
     </app-history-modal>
 </app-page-layout>
