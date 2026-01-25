@@ -59,6 +59,12 @@ export class InscriptionExamComponent implements OnInit {
             label: 'Inscribirse',
             class: 'btn-inscription',
             isVisible: (row: any) => row.sePuedeInscribir === true
+        },
+        {
+            name: 'sin-fechas',
+            label: 'Sin fechas',
+            class: 'btn-disabled-action',
+            isVisible: (row: any) => row.condicionAcademica === true && row.sePuedeInscribir === false
         }
     ];
 
