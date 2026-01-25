@@ -28,5 +28,9 @@ export const routes: Routes = [
     {
         path: 'academic/inscription-exam',
         loadComponent: () => import('@features/student/inscription-exam/inscription-exam.component').then(m => m.InscriptionExamComponent)
+    },
+    {
+        path: 'academic/status',
+        loadComponent: () => import('@features/student/academic-status/academic-status.component').then(m => m.AcademicStatusComponent)
     }
 ];
