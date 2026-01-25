@@ -33,13 +33,16 @@
                         <thead>
                             <tr>
                                 <th>Fecha</th>
+                                <th>Turno</th>
                                 <th>Estado</th>
                                 <th>Nota</th>
+                                <th>Tomo / Folio</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let exam of materia.historyExams">
                                 <td>{{ exam.fechaExamen | date:'dd/MM/yyyy' }}</td>
+                                <td>{{ exam.turno }}</td>
                                 <td>
                                     <span class="status-badge" [ngClass]="{
                                         'status-approved': exam.estado === 'APROBADO',
@@ -47,7 +50,12 @@
                                         'status-pending': exam.estado === 'PENDIENTE'
                                     }">{{ exam.estado }}</span>
                                 </td>
-                                <td class="font-bold">{{ exam.nota > 0 ? exam.nota : '-' }}</td>
+                                <td class="font-bold">{{ exam.nota }}</td>
+                                <td class="text-xs text-gray-400">
+                                    <span *ngIf="exam.tomo">T: {{ exam.tomo }}</span>
+                                    <span *ngIf="exam.folio" class="ml-2">F: {{ exam.folio }}</span>
+                                    <span *ngIf="!exam.tomo && !exam.folio">-</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,18 +73,24 @@
                     <table class="history-table">
                         <thead>
                             <tr>
-                                <th>Año</th>
+                                <th>Fecha Inscripción</th>
                                 <th>Comisión</th>
                                 <th>Estado</th>
-                                <th>Nota Final</th>
+                                <th>Nota</th>
+                                <th>Tomo / Folio</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let cursada of materia.historyCursadas">
-                                <td>{{ cursada.anioCursado }}</td>
-                                <td>{{ cursada.nombreComision }}</td>
+                                <td>{{ cursada.fechaInscripcion | date:'dd/MM/yyyy' }}</td>
+                                <td>{{ cursada.comision }}</td>
                                 <td class="font-bold">{{ cursada.estado }}</td>
-                                <td>{{ cursada.notaFinal > 0 ? cursada.notaFinal : '-' }}</td>
+                                <td>{{ cursada.nota }}</td>
+                                <td class="text-xs text-gray-400">
+                                    <span *ngIf="cursada.tomo">T: {{ cursada.tomo }}</span>
+                                    <span *ngIf="cursada.folio" class="ml-2">F: {{ cursada.folio }}</span>
+                                    <span *ngIf="!cursada.tomo && !cursada.folio">-</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
