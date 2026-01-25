@@ -1,63 +1,54 @@
-<div class="inscription-container">
-    <div class="inscription-card">
-        <div class="header-actions">
-            <button class="btn-back" (click)="goBack()">
-                <span class="material-icons">arrow_back</span>
-                Volver
+<app-page-layout title="Inscripción a Cursado">
+    <div class="filters-wrapper">
+        <div class="filter-group">
+            <label for="filterNivel">Nivel</label>
+            <select id="filterNivel" [(ngModel)]="filterNivel" (change)="applyFilters()" class="form-control"
+                [disabled]="!!filterNombre">
+                <option value="">Todos los niveles</option>
+                <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filterNombre">Materia</label>
+            <select id="filterNombre" [(ngModel)]="filterNombre" (change)="onMateriaChange()" class="form-control">
+                <option value="">Todas las materias</option>
+                <option *ngFor="let nombre of uniqueNombres" [value]="nombre">{{ nombre }}</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filterTipo">Tipo</label>
+            <select id="filterTipo" [(ngModel)]="filterTipo" (change)="applyFilters()" class="form-control"
+                [disabled]="!!filterNombre">
+                <option value="">Todas</option>
+                <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filterEstado">Estado</label>
+            <select id="filterEstado" [(ngModel)]="filterEstado" (change)="applyFilters()" class="form-control"
+                [disabled]="!!filterNombre">
+                <option value="">Todos los estados</option>
+                <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+            </select>
+        </div>
+        <div class="filter-actions">
+            <button class="btn-clear" (click)="clearFilters()">
+                <span class="material-icons">filter_alt_off</span>
+                Limpiar Filtros
             </button>
-            <h2 class="inscription-title">Inscripción a Cursado</h2>
-        </div>
-        <div class="filters-wrapper">
-            <div class="filter-group">
-                <label for="filterNivel">Nivel</label>
-                <select id="filterNivel" [(ngModel)]="filterNivel" (change)="applyFilters()" class="form-control"
-                    [disabled]="!!filterNombre">
-                    <option value="">Todos los niveles</option>
-                    <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="filterNombre">Materia</label>
-                <select id="filterNombre" [(ngModel)]="filterNombre" (change)="onMateriaChange()" class="form-control">
-                    <option value="">Todas las materias</option>
-                    <option *ngFor="let nombre of uniqueNombres" [value]="nombre">{{ nombre }}</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="filterTipo">Tipo</label>
-                <select id="filterTipo" [(ngModel)]="filterTipo" (change)="applyFilters()" class="form-control"
-                    [disabled]="!!filterNombre">
-                    <option value="">Todas</option>
-                    <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="filterEstado">Estado</label>
-                <select id="filterEstado" [(ngModel)]="filterEstado" (change)="applyFilters()" class="form-control"
-                    [disabled]="!!filterNombre">
-                    <option value="">Todos los estados</option>
-                    <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
-                </select>
-            </div>
-            <div class="filter-actions">
-                <button class="btn-clear" (click)="clearFilters()">
-                    <span class="material-icons">filter_alt_off</span>
-                    Limpiar Filtros
-                </button>
-            </div>
-        </div>
-        <div class="table-wrapper">
-            @for (carrera of carreras; track carrera.idCarrera) {
-            <div class="career-section">
-                <h3 class="career-title">{{ carrera.nombreCarrera }} <span class="career-plan">({{ carrera.nombrePlan
-                        }})</span></h3>
-                <app-table [data]="carrera.materias" [columns]="simpleColumns" [actions]="actions" [pageSize]="50"
-                    (onAction)="handleAction($event)">
-                </app-table>
-            </div>
-            } @empty {
-            <div class="no-data">No se encontraron carreras/materias para inscripción.</div>
-            }
         </div>
     </div>
-</div>
+    <div class="table-wrapper">
+        @for (carrera of carreras; track carrera.idCarrera) {
+        <div class="career-section">
+            <h3 class="career-title">{{ carrera.nombreCarrera }} <span class="career-plan">({{ carrera.nombrePlan
+                    }})</span></h3>
+            <app-table [data]="carrera.materias" [columns]="simpleColumns" [actions]="actions" [pageSize]="50"
+                (onAction)="handleAction($event)">
+            </app-table>
+        </div>
+        } @empty {
+        <div class="no-data">No se encontraron carreras/materias para inscripción.</div>
+        }
+    </div>
+</app-page-layout>

@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from '@shared/components/table/table.component';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
 import { CarreraMateriasDTO, EstudianteMateriaDTO } from '@core/models/matriculacion.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
@@ -9,7 +10,7 @@ import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.
 @Component({
     selector: 'app-inscription-course',
     standalone: true,
-    imports: [CommonModule, TableComponent, FormsModule],
+    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent],
     templateUrl: './inscription-course.component.html',
     styleUrl: './styles/inscription-course.component.css'
 })
