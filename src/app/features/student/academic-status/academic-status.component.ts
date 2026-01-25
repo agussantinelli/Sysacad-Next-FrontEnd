@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from '@shared/components/table/table.component';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
 import { InscripcionExamenService } from '@core/services/inscripcion-examen.service';
 import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
@@ -11,7 +12,7 @@ import { HistoryModalComponent } from './components/history-modal/history-modal.
 @Component({
     selector: 'app-academic-status',
     standalone: true,
-    imports: [CommonModule, TableComponent, HistoryModalComponent],
+    imports: [CommonModule, TableComponent, HistoryModalComponent, PageLayoutComponent],
     templateUrl: './academic-status.component.html',
     styleUrls: ['./styles/academic-status.component.css']
 })

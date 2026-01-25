@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from '@shared/components/table/table.component';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
 import { InscripcionExamenService } from '@core/services/inscripcion-examen.service';
 import { MesaExamenService } from '@core/services/mesa-examen.service';
@@ -15,7 +16,7 @@ import { take } from 'rxjs/operators';
 @Component({
     selector: 'app-inscription-exam',
     standalone: true,
-    imports: [CommonModule, TableComponent, FormsModule],
+    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent],
     templateUrl: './inscription-exam.component.html',
     styleUrl: './styles/inscription-exam.component.css'
 })

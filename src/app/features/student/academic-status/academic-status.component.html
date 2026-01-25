@@ -1,9 +1,7 @@
-<div class="p-6">
-    <h1 class="text-2xl font-bold mb-6 text-white">Estado Académico</h1>
-
+<app-page-layout title="Estado Académico">
     <app-table [data]="displayData" [columns]="columns" [actions]="actions" (onAction)="handleAction($event)">
     </app-table>
 
     <app-history-modal *ngIf="isModalOpen" [materia]="selectedMateria" (close)="closeModal()">
     </app-history-modal>
-</div>
+</app-page-layout>
