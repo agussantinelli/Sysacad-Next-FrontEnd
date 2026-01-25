@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HistoryModalComponent implements OnInit {
     @Input() materia: any;
+    @Input() isLoading: boolean = false;
     @Output() close = new EventEmitter<void>();
 
     ngOnInit(): void {
