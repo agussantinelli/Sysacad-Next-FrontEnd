@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { MesaExamenRequest, MesaExamenResponse, DetalleMesaExamenRequest } from '@core/models/mesa-examen.models';
+import { MesaExamenRequest, MesaExamenResponse } from '@core/models/mesa-examen.models';
+import { DetalleMesaExamenRequest } from '@core/models/detalle-mesa-examen.models';
 
 @Injectable({
     providedIn: 'root'

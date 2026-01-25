@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { InscripcionExamenRequest, InscripcionExamenResponse } from '@core/models/inscripcion.models';
-import { CargaNotaExamenRequest } from '@core/models/calificacion.models';
+import { InscripcionExamenRequest, InscripcionExamenResponse } from '@core/models/inscripcion-examen.models';
+import { CargaNotaExamenRequest } from '@core/models/calificacion-cursada.models';
 import { EstadoExamen } from '@core/enums/inscripcion.enums';
 
 @Injectable({

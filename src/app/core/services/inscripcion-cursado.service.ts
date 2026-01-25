@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { InscripcionCursadoRequest, InscripcionCursadoResponse } from '@core/models/inscripcion.models';
-import { CalificacionCursadaRequest } from '@core/models/calificacion.models';
+import { InscripcionCursadoRequest, InscripcionCursadoResponse } from '@core/models/inscripcion-cursado.models';
+import { CalificacionCursadaRequest } from '@core/models/calificacion-cursada.models';
 
 @Injectable({
     providedIn: 'root'
