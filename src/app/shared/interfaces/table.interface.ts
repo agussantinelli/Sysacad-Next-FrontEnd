@@ -4,6 +4,7 @@ export interface TableColumn {
     type?: 'text' | 'date' | 'currency' | 'action' | 'custom' | 'list';
     sortable?: boolean;
     cellClass?: (row: any) => string;
+    width?: string;
 }
 
 export interface TableAction {

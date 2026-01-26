@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th *ngFor="let col of columns" scope="col" class="header-cell" (click)="sort(col)"
-                    [class.sortable]="col.sortable">
+                    [class.sortable]="col.sortable" [style.width]="col.width">
                     <div class="header-content">
                         {{ col.label }}
                         <span *ngIf="col.sortable" class="sort-icon">
@@ -23,7 +23,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let row of displayData" class="table-row">
-                <td *ngFor="let col of columns" class="table-cell" [ngClass]="col.cellClass ? col.cellClass(row) : ''">
+                <td *ngFor="let col of columns" class="table-cell" [ngClass]="col.cellClass ? col.cellClass(row) : ''"
+                    [style.width]="col.width">
                     <ng-container [ngSwitch]="col.type">
                         <span *ngSwitchCase="'date'">{{ getCellValue(row, col) | date:'short' }}</span>
                         <span *ngSwitchCase="'currency'">{{ getCellValue(row, col) | currency }}</span>
@@ -42,19 +43,17 @@
                                 </button>
                                 <span *ngIf="items.length === 0" class="text-gray-500 font-medium">-</span>
 
-                                <!-- Expanded Content (Integrated Inline) -->
-                                <!-- white-space: normal prevents column width shift. block ensures vertical stacking. -->
-                                <ul *ngIf="row['isExpanded_' + col.key]" class="mt-2 pl-1 space-y-1 animate-fadeIn"
-                                    style="white-space: normal; min-width: 200px;">
-                                    <li *ngFor="let item of items"
-                                        class="text-xs text-gray-400 font-medium leading-relaxed flex items-start gap-1.5">
-                                        <span class="mt-1 w-1 h-1 rounded-full bg-gray-500 shrink-0"></span>
-                                        <span>{{ item }}</span>
+                                <!-- Expanded Content (Inline & Integrated) -->
+                                <!-- Inline flow pushes row height (Natural). Fixed column width prevents horizontal shift. -->
+                                <ul *ngIf="row['isExpanded_' + col.key]" class="mt-2 pl-2 space-y-1 animate-fadeIn"
+                                    style="white-space: normal; word-wrap: break-word;">
+                                    <li *ngFor="let item of items" class="flex items-start gap-2 text-xs text-gray-400">
+                                        <div class="mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0 opacity-80"></div>
+                                        <span class="font-medium tracking-wide leading-relaxed">{{ item }}</span>
                                     </li>
                                 </ul>
                             </ng-container>
                         </div>
-
                         <span *ngSwitchDefault>{{ getCellValue(row, col) }}</span>
                     </ng-container>
                 </td>

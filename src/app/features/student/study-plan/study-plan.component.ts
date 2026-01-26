@@ -43,7 +43,8 @@ export class StudyPlanComponent implements OnInit {
         {
             key: 'correlativasList',
             label: 'Correlativas',
-            type: 'list' // New type
+            type: 'list', // New type
+            width: '300px' // Fixed width to accommodate list without shifting
         },
         {
             key: 'estado',
