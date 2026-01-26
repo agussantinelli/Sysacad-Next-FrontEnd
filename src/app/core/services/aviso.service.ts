@@ -17,7 +17,7 @@ export class AvisoService {
         );
     }
 
-    obtenerAvisos(): Observable<AvisoResponse[]> {
+    listarAvisos(): Observable<AvisoResponse[]> {
         return from(axiosClient.get<AvisoResponse[]>('/avisos')).pipe(
             map(response => response.data)
         );
