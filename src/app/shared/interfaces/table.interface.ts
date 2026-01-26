@@ -1,7 +1,7 @@
 export interface TableColumn {
     key: string;
     label: string;
-    type?: 'text' | 'date' | 'currency' | 'action' | 'custom';
+    type?: 'text' | 'date' | 'currency' | 'action' | 'custom' | 'list';
     sortable?: boolean;
     cellClass?: (row: any) => string;
 }

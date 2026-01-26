@@ -32,11 +32,18 @@ export class StudyPlanComponent implements OnInit {
     displayData: any[] = [];
 
     columns: TableColumn[] = [
-        { key: 'cuatrimestre', label: 'Cuatrimestre', sortable: true },
+        { key: 'nivel', label: 'Nivel', sortable: true },
+        { key: 'cuatrimestre', label: 'Cuat.', sortable: true },
         { key: 'nombre', label: 'Materia', sortable: true },
         {
-            key: 'correlativasFormatted',
-            label: 'Correlativas'
+            key: 'esElectiva',
+            label: 'Electiva',
+            cellClass: (row) => row.esElectiva ? 'bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded' : ''
+        },
+        {
+            key: 'correlativasList',
+            label: 'Correlativas',
+            type: 'list' // New type
         },
         {
             key: 'estado',
@@ -80,8 +87,10 @@ export class StudyPlanComponent implements OnInit {
                     // Include ALL subjects (Pending, Approved, Regular...)
                     processed.push({
                         ...materia,
-                        // Format correlativas for display
-                        correlativasFormatted: materia.correlativas ? materia.correlativas.join(', ') : '-'
+                        // Clean electiva visual
+                        esElectiva: materia.esElectiva ? 'SÍ' : '',
+                        // Correlativas as array for list view
+                        correlativasList: materia.correlativas || []
                     });
                 });
             }
