@@ -40,14 +40,16 @@
                                         class="transform transition-transform duration-200"
                                         [class.rotate-180]="row['isExpanded_' + col.key]">
                                 </button>
-                                <span *ngIf="items.length === 0" class="text-gray-300 text-xl font-bold">-</span>
+                                <span *ngIf="items.length === 0" class="text-gray-500 font-medium">-</span>
 
-                                <!-- Expanded Content -->
-                                <ul *ngIf="row['isExpanded_' + col.key]"
-                                    class="mt-2 pl-2 space-y-1 rounded p-2 text-xs text-gray-600 animate-fadeIn">
-                                    <li *ngFor="let item of items" class="flex items-center gap-2">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-                                        {{ item }}
+                                <!-- Expanded Content (Integrated Inline) -->
+                                <!-- white-space: normal prevents column width shift. block ensures vertical stacking. -->
+                                <ul *ngIf="row['isExpanded_' + col.key]" class="mt-2 pl-1 space-y-1 animate-fadeIn"
+                                    style="white-space: normal; min-width: 200px;">
+                                    <li *ngFor="let item of items"
+                                        class="text-xs text-gray-400 font-medium leading-relaxed flex items-start gap-1.5">
+                                        <span class="mt-1 w-1 h-1 rounded-full bg-gray-500 shrink-0"></span>
+                                        <span>{{ item }}</span>
                                     </li>
                                 </ul>
                             </ng-container>

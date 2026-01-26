@@ -87,6 +87,8 @@ export class StudyPlanComponent implements OnInit {
                     // Include ALL subjects (Pending, Approved, Regular...)
                     processed.push({
                         ...materia,
+                        // Format cuatrimestre: If not ANUAL, show CUATRIMESTRAL
+                        cuatrimestre: materia.cuatrimestre === 'ANUAL' ? 'ANUAL' : 'CUATRIMESTRAL',
                         // Clean electiva visual
                         esElectiva: materia.esElectiva ? 'SÍ' : '',
                         // Correlativas as array for list view
