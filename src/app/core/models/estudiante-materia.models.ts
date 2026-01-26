@@ -6,4 +6,7 @@ export interface EstudianteMateriaDTO {
     nota: string; // "8", "9.50", "-"
     sePuedeInscribir: boolean;
     esElectiva: boolean;
+    horasCursado: number;
+    cuatrimestre: string;
+    correlativas: string[];
 }

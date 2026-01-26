@@ -15,3 +15,8 @@ export interface InscripcionExamenResponse {
     estado: string; // e.g., "PENDIENTE"
     nota: number; // BigDecimal
 }
+
+export interface CargaNotaExamenRequest {
+    nota: number;
+    estado: string; // Enum actually
+}
