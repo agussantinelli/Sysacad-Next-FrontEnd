@@ -3,6 +3,7 @@ export interface TableColumn {
     label: string;
     type?: 'text' | 'date' | 'currency' | 'action' | 'custom';
     sortable?: boolean;
+    cellClass?: (row: any) => string;
 }
 
 export interface TableAction {

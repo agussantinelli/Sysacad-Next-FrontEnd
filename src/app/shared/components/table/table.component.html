@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let row of displayData" class="table-row">
-                <td *ngFor="let col of columns" class="table-cell">
+                <td *ngFor="let col of columns" class="table-cell" [ngClass]="col.cellClass ? col.cellClass(row) : ''">
                     <ng-container [ngSwitch]="col.type">
                         <span *ngSwitchCase="'date'">{{ getCellValue(row, col) | date:'short' }}</span>
                         <span *ngSwitchCase="'currency'">{{ getCellValue(row, col) | currency }}</span>
