@@ -33,22 +33,20 @@
                             <ng-container *ngIf="getCellValue(row, col) as items">
                                 <button *ngIf="items.length > 0"
                                     (click)="row['isExpanded_' + col.key] = !row['isExpanded_' + col.key]"
-                                    class="flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium text-sm focus:outline-none">
-                                    <span>{{ items.length }} Correlativas</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="transform transition-transform duration-200"
+                                    class="flex items-center gap-2 font-medium text-inherit transition-colors cursor-pointer p-0 m-0"
+                                    style="background-color: transparent !important; border: none !important; box-shadow: none !important; color: inherit;">
+                                    <span>{{ items.length }}</span>
+                                    <img src="icons/chevron-down-light.svg" alt="Expand" width="12" height="12"
+                                        class="transform transition-transform duration-200"
                                         [class.rotate-180]="row['isExpanded_' + col.key]">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
                                 </button>
-                                <span *ngIf="items.length === 0" class="text-gray-400 text-sm">-</span>
+                                <span *ngIf="items.length === 0" class="text-gray-300 text-xl font-bold">-</span>
 
                                 <!-- Expanded Content -->
                                 <ul *ngIf="row['isExpanded_' + col.key]"
-                                    class="mt-2 pl-2 space-y-1 bg-gray-50 rounded p-2 text-xs text-gray-700 animate-fadeIn">
+                                    class="mt-2 pl-2 space-y-1 rounded p-2 text-xs text-gray-600 animate-fadeIn">
                                     <li *ngFor="let item of items" class="flex items-center gap-2">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
                                         {{ item }}
                                     </li>
                                 </ul>
