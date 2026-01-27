@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
             options: [
                 { title: 'Cursado', icon: 'edit_calendar', route: '/academic/inscription-course' },
                 { title: 'Examen', icon: 'post_add', route: '/academic/inscription-exam' },
+                { title: 'Cursadas Actuales', icon: 'list_alt', route: '/academic/current-enrollments' }
             ]
         },
         {
