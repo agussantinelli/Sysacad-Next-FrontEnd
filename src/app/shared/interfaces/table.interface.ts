@@ -5,6 +5,7 @@ export interface TableColumn {
     sortable?: boolean;
     cellClass?: (row: any) => string;
     width?: string;
+    align?: 'left' | 'center' | 'right';
 }
 
 export interface TableAction {
