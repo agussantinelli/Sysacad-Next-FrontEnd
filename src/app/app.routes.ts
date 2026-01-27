@@ -42,5 +42,9 @@ export const routes: Routes = [
     {
         path: 'academic/plan',
         loadComponent: () => import('@features/student/study-plan/study-plan.component').then(m => m.StudyPlanComponent)
+    },
+    {
+        path: 'academic/current-enrollments',
+        loadComponent: () => import('@features/student/current-enrollments/current-enrollments.component').then(m => m.CurrentEnrollmentsComponent)
     }
 ];
