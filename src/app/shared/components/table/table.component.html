@@ -4,7 +4,8 @@
             <tr>
                 <th *ngFor="let col of columns" scope="col" class="header-cell" (click)="sort(col)"
                     [class.sortable]="col.sortable" [style.width]="col.width">
-                    <div class="header-content" [class.justify-center]="col.align === 'center'">
+                    <div class="header-content w-full" [class.justify-center]="col.align === 'center'"
+                        [class.justify-end]="col.align === 'right'">
                         {{ col.label }}
                         <span *ngIf="col.sortable" class="sort-icon">
                             <img *ngIf="sortColumn !== col.key" src="icons/sort-default.svg" alt="Sort" width="12"
@@ -29,7 +30,6 @@
                         <span *ngSwitchCase="'date'">{{ getCellValue(row, col) | date:'short' }}</span>
                         <span *ngSwitchCase="'currency'">{{ getCellValue(row, col) | currency }}</span>
 
-                        <!-- List Type (Expandable) -->
                         <div *ngSwitchCase="'list'" class="w-full flex flex-col"
                             [class.items-center]="col.align === 'center'"
                             [class.items-start]="!col.align || col.align === 'left'"
@@ -37,14 +37,15 @@
                             <ng-container *ngIf="getCellValue(row, col) as items">
                                 <button *ngIf="items.length > 0"
                                     (click)="row['isExpanded_' + col.key] = !row['isExpanded_' + col.key]"
-                                    class="flex items-center gap-2 font-medium text-inherit transition-colors cursor-pointer p-1 rounded hover:bg-black/5"
-                                    style="background-color: transparent; border: none; box-shadow: none;">
+                                    class="flex items-center justify-center gap-2 font-medium text-white transition-colors cursor-pointer p-1 rounded hover:bg-black/5"
+                                    style="background-color: transparent; border: none; box-shadow: none; color: white !important;">
                                     <span>{{ items.length }}</span>
                                     <img src="icons/chevron-down-light.svg" alt="Expand" width="12" height="12"
                                         class="transform transition-transform duration-200"
                                         [class.rotate-180]="row['isExpanded_' + col.key]">
                                 </button>
-                                <span *ngIf="items.length === 0" class="text-gray-500 font-medium py-1">-</span>
+                                <span *ngIf="items.length === 0" class="text-white font-medium py-1"
+                                    style="color: white !important;">-</span>
 
                                 <!-- Expanded Content (Inline & Integrated) -->
                                 <ul *ngIf="row['isExpanded_' + col.key]"
