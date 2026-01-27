@@ -24,8 +24,9 @@ export class InscripcionCursadoService {
         );
     }
 
-    obtenerCursadasActuales(): Observable<InscripcionCursadoResponse[]> {
-        return from(axiosClient.get<InscripcionCursadoResponse[]>('/inscripciones-cursado/actuales')).pipe(
+    obtenerCursadasActuales(idUsuario?: string): Observable<InscripcionCursadoResponse[]> {
+        const params = idUsuario ? { idUsuario } : {};
+        return from(axiosClient.get<InscripcionCursadoResponse[]>('/inscripciones-cursado/actuales', { params })).pipe(
             map(response => response.data)
         );
     }
