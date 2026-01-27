@@ -29,6 +29,8 @@ export class CurrentEnrollmentsComponent implements OnInit {
         {
             key: 'calificacionesList',
             label: 'Calificaciones',
+            type: 'list',
+            collapsible: false, // Always visible
             sortable: false,
             width: '350px' // Wider for text
         }
@@ -62,10 +64,10 @@ export class CurrentEnrollmentsComponent implements OnInit {
     processData(data: InscripcionCursadoResponse[]) {
         this.displayData = data.map(item => ({
             ...item,
-            // Format grades as a single string for direct display
+            // Format grades as an ARRAY for the list view
             calificacionesList: item.calificaciones && item.calificaciones.length > 0
-                ? item.calificaciones.map(c => `${c.descripcion}: ${c.nota}`).join(' | ')
-                : 'Sin notas'
+                ? item.calificaciones.map(c => `${c.descripcion}: ${c.nota}`)
+                : []
         }));
     }
 }
