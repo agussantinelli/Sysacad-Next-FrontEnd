@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
             options: [
                 { title: 'Estado Académico', icon: 'school', route: '/academic/status' },
                 { title: 'Materias del Plan', icon: 'book', route: '/academic/plan' },
-                { title: 'Cursado y Notas', icon: 'grade', route: '/academic/grades' },
+                { title: 'Cursado y Notas', icon: 'grade', route: '/academic/current-enrollments' },
                 { title: 'Historia Académica', icon: 'history_edu', route: '/academic/history' }
             ]
         },
