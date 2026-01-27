@@ -35,30 +35,46 @@
                             [class.items-start]="!col.align || col.align === 'left'"
                             [class.items-end]="col.align === 'right'">
                             <ng-container *ngIf="getCellValue(row, col) as items">
-                                <button *ngIf="items.length > 0"
-                                    (click)="row['isExpanded_' + col.key] = !row['isExpanded_' + col.key]"
-                                    class="flex items-center justify-center gap-2 font-medium text-white transition-colors cursor-pointer p-1 rounded hover:bg-black/5"
-                                    style="background-color: transparent; border: none; box-shadow: none; color: white !important;">
-                                    <span>{{ items.length }}</span>
-                                    <img src="icons/chevron-down-light.svg" alt="Expand" width="12" height="12"
-                                        class="transform transition-transform duration-200"
-                                        [class.rotate-180]="row['isExpanded_' + col.key]">
-                                </button>
-                                <span *ngIf="items.length === 0" class="text-white font-medium py-1"
-                                    style="color: white !important;">-</span>
+                                <!-- COLLAPSIBLE LIST (Default) -->
+                                <ng-container *ngIf="col.collapsible !== false">
+                                    <button *ngIf="items.length > 0"
+                                        (click)="row['isExpanded_' + col.key] = !row['isExpanded_' + col.key]"
+                                        class="flex items-center justify-center gap-2 font-medium text-white transition-colors cursor-pointer p-1 rounded hover:bg-black/5"
+                                        style="background-color: transparent; border: none; box-shadow: none; color: white !important;">
+                                        <span>{{ items.length }}</span>
+                                        <img src="icons/chevron-down-light.svg" alt="Expand" width="12" height="12"
+                                            class="transform transition-transform duration-200"
+                                            [class.rotate-180]="row['isExpanded_' + col.key]">
+                                    </button>
+                                    <span *ngIf="items.length === 0" class="text-white font-medium py-1"
+                                        style="color: white !important;">-</span>
 
-                                <!-- Expanded Content (Inline & Integrated) -->
-                                <ul *ngIf="row['isExpanded_' + col.key]"
-                                    class="mt-2 w-full text-center space-y-1 animate-fadeIn"
-                                    style="white-space: normal; word-wrap: break-word;">
-                                    <li *ngFor="let item of items"
-                                        class="flex items-center justify-center gap-2 text-xs text-white uppercase tracking-wider font-semibold">
-                                        <div
-                                            class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 shadow-[0_0_4px_rgba(59,130,246,0.8)]">
-                                        </div>
-                                        <span class="leading-relaxed">{{ item }}</span>
-                                    </li>
-                                </ul>
+                                    <ul *ngIf="row['isExpanded_' + col.key]"
+                                        class="mt-2 w-full text-center space-y-1 animate-fadeIn"
+                                        style="white-space: normal; word-wrap: break-word;">
+                                        <li *ngFor="let item of items"
+                                            class="flex items-center justify-center gap-2 text-xs text-white uppercase tracking-wider font-semibold">
+                                            <div
+                                                class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 shadow-[0_0_4px_rgba(59,130,246,0.8)]">
+                                            </div>
+                                            <span class="leading-relaxed">{{ item }}</span>
+                                        </li>
+                                    </ul>
+                                </ng-container>
+
+                                <!-- NON-COLLAPSIBLE LIST (Always Visible) -->
+                                <ng-container *ngIf="col.collapsible === false">
+                                    <ul class="w-full space-y-1" style="white-space: normal; word-wrap: break-word;">
+                                        <li *ngFor="let item of items"
+                                            class="flex gap-2 text-xs text-secondary-200 font-medium"
+                                            [class.justify-center]="col.align === 'center'"
+                                            [class.justify-start]="!col.align || col.align === 'left'"
+                                            [class.justify-end]="col.align === 'right'">
+                                            <span class="leading-relaxed">{{ item }}</span>
+                                        </li>
+                                        <span *ngIf="items.length === 0">-</span>
+                                    </ul>
+                                </ng-container>
                             </ng-container>
                         </div>
                         <span *ngSwitchDefault>{{ getCellValue(row, col) }}</span>

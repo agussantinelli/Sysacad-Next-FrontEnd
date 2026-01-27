@@ -6,6 +6,7 @@ export interface TableColumn {
     cellClass?: (row: any) => string;
     width?: string;
     align?: 'left' | 'center' | 'right';
+    collapsible?: boolean; // Default true for list type
 }
 
 export interface TableAction {
