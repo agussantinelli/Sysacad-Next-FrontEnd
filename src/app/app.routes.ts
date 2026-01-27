@@ -27,6 +27,7 @@ export const routes: Routes = [
         path: 'profile/edit',
         loadComponent: () => import('@features/profile/edit-profile/edit-profile.component').then(m => m.EditProfileComponent)
     },
+    // Academic Modules
     {
         path: 'academic/inscription-course',
         loadComponent: () => import('@features/student/inscription-course/inscription-course.component').then(m => m.InscriptionCourseComponent)
@@ -46,5 +47,30 @@ export const routes: Routes = [
     {
         path: 'academic/current-enrollments',
         loadComponent: () => import('@features/student/current-enrollments/current-enrollments.component').then(m => m.CurrentEnrollmentsComponent)
+    },
+    // Placeholders temporales
+    {
+        path: 'academic/history',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'academic/correlatives-course',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'academic/correlatives-exam',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'academic/calendar',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'procedures/regular-cert',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'notifications',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
     }
 ];
