@@ -36,9 +36,8 @@ export class NavbarComponent implements OnInit {
         {
             title: 'Inscripciones',
             options: [
-                { title: 'Cursado', icon: 'edit_calendar', route: '/academic/inscription-course' },
-                { title: 'Examen', icon: 'post_add', route: '/academic/inscription-exam' },
-                { title: 'Cursadas Actuales', icon: 'list_alt', route: '/academic/current-enrollments' }
+                { title: 'Inscripción a Cursado', icon: 'edit_calendar', route: '/academic/inscription-course' },
+                { title: 'Inscripción a Examen', icon: 'post_add', route: '/academic/inscription-exam' },
             ]
         },
         {
@@ -46,7 +45,7 @@ export class NavbarComponent implements OnInit {
             options: [
                 { title: 'Estado Académico', icon: 'school', route: '/academic/status' },
                 { title: 'Materias Plan', icon: 'book', route: '/academic/plan' },
-                { title: 'Cursado/Notas', icon: 'grade', route: '/academic/grades' },
+                { title: 'Cursado y Notas', icon: 'grade', route: '/academic/current-enrollments' },
                 { title: 'Hist. Académica', icon: 'history_edu', route: '/academic/history' }
             ]
         },
