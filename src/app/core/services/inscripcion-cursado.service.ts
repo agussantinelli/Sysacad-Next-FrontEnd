@@ -24,6 +24,12 @@ export class InscripcionCursadoService {
         );
     }
 
+    obtenerCursadasActuales(): Observable<InscripcionCursadoResponse[]> {
+        return from(axiosClient.get<InscripcionCursadoResponse[]>('/inscripciones-cursado/actuales')).pipe(
+            map(response => response.data)
+        );
+    }
+
     cargarNotaParcial(idInscripcion: string, calificacion: CalificacionCursadaRequest): Observable<void> {
         return from(axiosClient.post<void>(`/inscripciones-cursado/${idInscripcion}/notas`, calificacion)).pipe(
             map(response => response.data)
