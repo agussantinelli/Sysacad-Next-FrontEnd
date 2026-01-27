@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th *ngFor="let col of columns" scope="col" class="header-cell" (click)="sort(col)"
-                    [class.sortable]="col.sortable" [style.width]="col.width">
+                    [class.sortable]="col.sortable" [style.width]="col.width" [style.text-align]="col.align || 'left'">
                     <div class="header-content w-full" [class.justify-center]="col.align === 'center'"
                         [class.justify-end]="col.align === 'right'">
                         {{ col.label }}
