@@ -8,10 +8,12 @@ import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
 import { EstudianteMateriaDTO } from '@core/models/estudiante-materia.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 
+import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
+
 @Component({
     selector: 'app-inscription-course',
     standalone: true,
-    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent],
+    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent, LoadingSpinnerComponent],
     templateUrl: './inscription-course.component.html',
     styleUrl: './styles/inscription-course.component.css'
 })
@@ -21,6 +23,7 @@ export class InscriptionCourseComponent implements OnInit {
 
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
+    isLoading: boolean = false;
 
     // Filters
     filterNombre: string = '';
@@ -59,6 +62,7 @@ export class InscriptionCourseComponent implements OnInit {
     }
 
     loadMaterias() {
+        this.isLoading = true;
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 console.log('✅ [InscriptionCourse] Data received:', data);
@@ -87,9 +91,11 @@ export class InscriptionCourseComponent implements OnInit {
                 this.extractUniqueNombres();
                 this.extractUniqueNiveles();
                 console.log('✅ [InscriptionCourse] this.carreras set to:', this.carreras);
+                this.isLoading = false;
             },
             error: (err) => {
                 console.error('❌ [InscriptionCourse] Error loading materias:', err);
+                this.isLoading = false;
             }
         });
     }

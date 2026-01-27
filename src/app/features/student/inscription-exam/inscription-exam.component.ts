@@ -14,10 +14,12 @@ import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.mode
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { take } from 'rxjs/operators';
 
+import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
+
 @Component({
     selector: 'app-inscription-exam',
     standalone: true,
-    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent],
+    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent, LoadingSpinnerComponent],
     templateUrl: './inscription-exam.component.html',
     styleUrl: './styles/inscription-exam.component.css'
 })
@@ -31,6 +33,7 @@ export class InscriptionExamComponent implements OnInit {
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
     mesas: MesaExamenResponse[] = [];
+    isLoading: boolean = false;
 
     // Filters
     filterNombre: string = '';
@@ -76,6 +79,7 @@ export class InscriptionExamComponent implements OnInit {
     }
 
     loadMaterias() {
+        this.isLoading = true;
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 console.log('✅ [InscriptionExam] Data received:', data);
@@ -105,13 +109,12 @@ export class InscriptionExamComponent implements OnInit {
                 this.extractUniqueNombres();
                 this.extractUniqueNiveles();
 
-                // Re-evaluate inscription capability if mesas are already loaded
-                if (this.mesas.length > 0) {
-                    this.updateInscriptionStatus();
-                }
+                // Load mesas after materias to ensure we can link them
+                this.loadMesas();
             },
             error: (err) => {
                 console.error('❌ [InscriptionExam] Error loading materias:', err);
+                this.isLoading = false;
             }
         });
     }
@@ -124,9 +127,11 @@ export class InscriptionExamComponent implements OnInit {
                 if (this.carreras.length > 0) {
                     this.updateInscriptionStatus();
                 }
+                this.isLoading = false;
             },
             error: (err) => {
                 console.error('❌ [InscriptionExam] Error loading mesas:', err);
+                this.isLoading = false;
             }
         });
     }

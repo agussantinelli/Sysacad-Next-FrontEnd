@@ -16,6 +16,7 @@ export class CurrentEnrollmentsComponent implements OnInit {
     private inscripcionService = inject(InscripcionCursadoService);
 
     displayData: any[] = [];
+    isLoading: boolean = false;
 
     columns: TableColumn[] = [
         { key: 'nombreMateria', label: 'Materia', sortable: true },
@@ -35,11 +36,16 @@ export class CurrentEnrollmentsComponent implements OnInit {
     }
 
     loadData() {
+        this.isLoading = true;
         this.inscripcionService.obtenerCursadasActuales().subscribe({
             next: (data) => {
                 this.processData(data);
+                this.isLoading = false;
             },
-            error: (err) => console.error('Error loading current enrollments:', err)
+            error: (err) => {
+                console.error('Error loading current enrollments:', err);
+                this.isLoading = false;
+            }
         });
     }
 

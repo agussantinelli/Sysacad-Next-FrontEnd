@@ -73,7 +73,12 @@
                     </ng-container>
                 </td>
             </tr>
-            <tr *ngIf="displayData.length === 0">
+            <tr *ngIf="isLoading">
+                <td [attr.colspan]="columns.length + (actions.length > 0 ? 1 : 0)" class="p-8 text-center">
+                    <app-loading-spinner message="Cargando datos..."></app-loading-spinner>
+                </td>
+            </tr>
+            <tr *ngIf="displayData.length === 0 && !isLoading">
                 <td [attr.colspan]="columns.length + (actions.length > 0 ? 1 : 0)" class="empty-state">
                     No hay datos disponibles.
                 </td>

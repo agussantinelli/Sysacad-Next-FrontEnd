@@ -19,14 +19,16 @@ export class AcademicStatusComponent implements OnInit {
     // Raw Data
     matriculacionData: any[] = [];
 
-    // Display Data
     displayData: any[] = [];
+    isLoading: boolean = false;
 
     // Modal State
     selectedMateria: any = null;
     isModalOpen = false;
     historyData: any = null;
     isLoadingHistory = false;
+
+    // Modal State
 
     columns: TableColumn[] = [
         { key: 'nivel', label: 'Nivel', sortable: true },
@@ -49,14 +51,19 @@ export class AcademicStatusComponent implements OnInit {
     }
 
     loadData() {
+        this.isLoading = true;
         // We only need basic subject info to list them. History is loaded on demand.
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 console.log('✅ [Academic Status] Carreras loaded:', data);
                 this.matriculacionData = data;
                 this.processData();
+                this.isLoading = false;
             },
-            error: (err) => console.error('❌ [Academic Status] Error loading carreras:', err)
+            error: (err) => {
+                console.error('❌ [Academic Status] Error loading carreras:', err);
+                this.isLoading = false;
+            }
         });
     }
 

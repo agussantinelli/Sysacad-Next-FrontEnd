@@ -1,5 +1,6 @@
 <app-page-layout title="Estado Académico">
-    <app-table [data]="displayData" [columns]="columns" [actions]="actions" (onAction)="handleAction($event)">
+    <app-table [data]="displayData" [columns]="columns" [actions]="actions" (onAction)="handleAction($event)"
+        [isLoading]="isLoading">
     </app-table>
 
     <app-history-modal *ngIf="isModalOpen" [materia]="historyData" [isLoading]="isLoadingHistory"

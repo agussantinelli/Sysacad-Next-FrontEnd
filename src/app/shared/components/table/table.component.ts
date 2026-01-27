@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableColumn, ActionEvent, TableAction } from '../../interfaces/table.interface';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
     selector: 'app-table',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, LoadingSpinnerComponent],
     templateUrl: './table.component.html',
     styleUrls: ['./styles/table.component.css']
 })
@@ -15,6 +16,7 @@ export class TableComponent implements OnChanges {
     @Input() columns: TableColumn[] = [];
     @Input() actions: TableAction[] = [];
     @Input() pageSize: number = 10;
+    @Input() isLoading: boolean = false;
     @Output() onAction = new EventEmitter<ActionEvent>();
 
     // Pagination state

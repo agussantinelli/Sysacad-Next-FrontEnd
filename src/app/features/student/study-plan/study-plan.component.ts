@@ -17,7 +17,8 @@ import { TableColumn } from '@shared/interfaces/table.interface';
             <app-table 
                 [data]="displayData" 
                 [columns]="columns" 
-                [pageSize]="20">
+                [pageSize]="20"
+                [isLoading]="isLoading">
             </app-table>
 
         </app-page-layout>
@@ -30,6 +31,7 @@ export class StudyPlanComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
 
     displayData: any[] = [];
+    isLoading: boolean = false;
 
     columns: TableColumn[] = [
         { key: 'nivel', label: 'Nivel', sortable: true },
@@ -72,11 +74,16 @@ export class StudyPlanComponent implements OnInit {
     }
 
     loadData() {
+        this.isLoading = true;
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 this.processData(data);
+                this.isLoading = false;
             },
-            error: (err) => console.error('Error loading study plan:', err)
+            error: (err) => {
+                console.error('Error loading study plan:', err);
+                this.isLoading = false;
+            }
         });
     }
 
