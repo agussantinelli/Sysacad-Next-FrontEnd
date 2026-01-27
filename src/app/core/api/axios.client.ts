@@ -21,4 +21,20 @@ axiosClient.interceptors.request.use(
     }
 );
 
+axiosClient.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        if (error.code === 'ERR_NETWORK') {
+            console.error('Network Error: Connection to backend lost.');
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('welcomeShown');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
+
 export default axiosClient;
