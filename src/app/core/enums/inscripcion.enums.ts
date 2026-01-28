@@ -3,7 +3,6 @@ export enum EstadoCursada {
     REGULAR = 'REGULAR',
     PROMOCIONADO = 'PROMOCIONADO',
     LIBRE = 'LIBRE',
-    APROBADO = 'APROBADO'
 }
 
 export enum EstadoExamen {

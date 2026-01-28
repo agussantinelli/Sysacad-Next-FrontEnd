@@ -35,7 +35,6 @@
                             [class.items-start]="!col.align || col.align === 'left'"
                             [class.items-end]="col.align === 'right'">
                             <ng-container *ngIf="getCellValue(row, col) as items">
-                                <!-- COLLAPSIBLE LIST (Default) -->
                                 <ng-container *ngIf="col.collapsible !== false">
                                     <button *ngIf="items.length > 0"
                                         (click)="row['isExpanded_' + col.key] = !row['isExpanded_' + col.key]"
