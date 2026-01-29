@@ -32,7 +32,7 @@ export interface MiembroGrupoResponse {
 
 export interface MensajeGrupoRequest {
     contenido: string;
-    idUsuarioRemitente?: string; // Optional (inferred from token)
+    idUsuarioRemitente?: string;
 }
 
 export interface MensajeGrupoResponse {

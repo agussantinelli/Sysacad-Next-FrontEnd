@@ -1,7 +1,7 @@
 import { DetalleMesaExamenResponse } from './detalle-mesa-examen.models';
 
 export interface MesaExamenRequest {
-    nombre: string; // e.g., "Turno Febrero 2026"
+    nombre: string;
     fechaInicio: string; // LocalDate
     fechaFin: string; // LocalDate
 }

@@ -11,15 +11,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             let errorMessage = 'Ocurrió un error inesperado.';
 
             if (error.error instanceof ErrorEvent) {
-                // Client-side error
+                // Error del cliente
                 errorMessage = `Error: ${error.error.message}`;
             } else {
-                // Server-side error
-                // The backend returns a JSON object with a 'message' field
+                // Error del servidor
+                // El backend retorna un JSON con un campo 'message'
                 if (error.error && error.error.message) {
                     errorMessage = error.error.message;
                 } else {
-                    // Fallback for status codes if no specific message is present
+                    // Fallback para códigos de estado si no hay un mensaje específico
                     if (error.status === 401) {
                         errorMessage = 'No autorizado. Por favor inicie sesión nuevamente.';
                     } else if (error.status === 403) {
