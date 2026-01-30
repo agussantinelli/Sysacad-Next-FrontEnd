@@ -237,6 +237,50 @@ FRONTEND_URL=http://localhost:4200
 
 <p><em>Nota: La interfaz (Navbar y Dashboard) renderiza componentes dinámicamente basándose en el rol del usuario logueado.</em></p>
 
+### 📊 Estado de Implementación por Rol
+
+**Referencias:**
+- ✅ **Implementado**: Funcionalidad activa y enrutada.
+- 🚧 **En Construcción**: Ruta existente pero apunta a página de "En Construcción".
+- ❌ **No Implementado**: Enlace visible en menú/dashboard pero sin ruta o lógica asociada.
+
+| Funcionalidad | Módulo | Estudiante | Profesor | Admin |
+| :--- | :--- | :---: | :---: | :---: |
+| **Autenticación** | Acceso | ✅ | ✅ | ✅ |
+| | Login / Logout | ✅ | ✅ | ✅ |
+| | Recuperar Contraseña | ✅ | ✅ | ✅ |
+| **Perfil** | Gestión de Usuario | ✅ | ✅ | ✅ |
+| | Ver Perfil | ✅ | ✅ | ✅ |
+| | Editar Perfil | ✅ | ✅ | ✅ |
+| **Dashboard** | Pantalla Principal | ✅ | ✅ (Visual) | ✅ (Visual) |
+| **Académico** | **Inscripciones** | | | |
+| | Inscripción a Cursado | ✅ | ❌ | ❌ |
+| | Inscripción a Examen | ✅ | ❌ | ❌ |
+| | **Consultas** | | | |
+| | Estado Académico | ✅ | ❌ | ❌ |
+| | Plan de Estudios | ✅ | ❌ | ❌ |
+| | Cursado y Notas | ✅ | ❌ | ❌ |
+| | Historia Académica | 🚧 | ❌ | ❌ |
+| | **Correlativas** | | | |
+| | Para Cursar | 🚧 | ❌ | ❌ |
+| | Para Rendir | 🚧 | ❌ | ❌ |
+| **Gestión Docente** | **Clases** | | | |
+| | Mis Materias | ❌ | ❌ | ❌ |
+| | Calificar Alumnos | ❌ | ❌ | ❌ |
+| | **Exámenes** | | | |
+| | Mesas de Examen | ❌ | ❌ | ❌ |
+| | Actas Volantes | ❌ | ❌ | ❌ |
+| **Administración** | **Académica** | | | |
+| | Carreras / Facultades | ❌ | ❌ | ❌ |
+| | Planes / Materias | ❌ | ❌ | ❌ |
+| | **Institucional** | | | |
+| | Usuarios / Inscripciones | ❌ | ❌ | ❌ |
+| | **Exámenes** | | | |
+| | Mesas / Actas | ❌ | ❌ | ❌ |
+| | **Trámites** | | | |
+| | Certificados / Avisos | ❌ | ❌ | ❌ |
+
+
 <hr>
 
 <h2>🚀 Roadmap & Futuras Implementaciones</h2>
