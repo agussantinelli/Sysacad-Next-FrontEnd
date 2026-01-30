@@ -22,7 +22,8 @@ import { AlertMessageComponent } from '@shared/components/alert-message/alert-me
         FormsModule,
         PageLayoutComponent,
         LoadingSpinnerComponent,
-        CommissionModalComponent
+        CommissionModalComponent,
+        AlertMessageComponent
     ],
     templateUrl: './inscription-course.component.html',
     styleUrl: './styles/inscription-course.component.css'
@@ -37,6 +38,10 @@ export class InscriptionCourseComponent implements OnInit {
     carreras: CarreraMateriasDTO[] = [];
     isLoading: boolean = false;
     isCommissionsLoading: boolean = false;
+
+    // Messages
+    errorMessage: string = '';
+    successMessage: string = '';
 
     // Modal State
     showCommissionModal: boolean = false;
@@ -198,14 +203,14 @@ export class InscriptionCourseComponent implements OnInit {
                 this.showCommissionModal = true;
 
                 if (this.availableCommissions.length === 0) {
-                    alert('No hay comisiones disponibles para esta materia en este año.');
+                    this.errorMessage = 'No hay comisiones disponibles para esta materia en este año.';
                     this.showCommissionModal = false;
                 }
             },
             error: (err) => {
                 console.error('Error loading commissions', err);
                 this.isCommissionsLoading = false;
-                alert('No se pudieron cargar las comisiones. Intente nuevamente.');
+                this.errorMessage = 'No se pudieron cargar las comisiones. Intente nuevamente.';
             }
         });
     }
@@ -215,22 +220,28 @@ export class InscriptionCourseComponent implements OnInit {
 
         this.isLoading = true;
         this.showCommissionModal = false;
+        this.clearMessages();
 
         this.inscripcionCursadoService.inscribirCursado({
             idMateria: this.selectedMateriaForEnrollment.idMateria,
             idComision: commission.id
         }).subscribe({
             next: () => {
-                alert('✅ Inscripción realizada con éxito!');
+                this.successMessage = 'Inscripción realizada con éxito!';
                 this.isLoading = false;
                 this.loadMaterias(); // Reload to update status
             },
             error: (err) => {
                 console.error('Error enrolling', err);
-                alert('Hubo un error al realizar la inscripción.');
+                this.errorMessage = 'Hubo un error al realizar la inscripción.';
                 this.isLoading = false;
             }
         });
+    }
+
+    clearMessages() {
+        this.errorMessage = '';
+        this.successMessage = '';
     }
 
     closeModal() {
