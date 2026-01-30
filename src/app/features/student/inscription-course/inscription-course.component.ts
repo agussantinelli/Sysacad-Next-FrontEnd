@@ -4,26 +4,44 @@ import { FormsModule } from '@angular/forms';
 import { TableComponent } from '@shared/components/table/table.component';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
+import { ComisionService } from '@core/services/comision.service';
+import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
 import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
-import { EstudianteMateriaDTO } from '@core/models/estudiante-materia.models';
+import { ComisionResponse } from '@core/models/comision.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
-
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
+import { CommissionModalComponent } from './components/commission-modal/commission-modal.component';
+import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component'; // Optional for alerts
 
 @Component({
     selector: 'app-inscription-course',
     standalone: true,
-    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent, LoadingSpinnerComponent],
+    imports: [
+        CommonModule,
+        TableComponent,
+        FormsModule,
+        PageLayoutComponent,
+        LoadingSpinnerComponent,
+        CommissionModalComponent
+    ],
     templateUrl: './inscription-course.component.html',
     styleUrl: './styles/inscription-course.component.css'
 })
 export class InscriptionCourseComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
+    private comisionService = inject(ComisionService);
+    private inscripcionCursadoService = inject(InscripcionCursadoService);
     private location = inject(Location);
 
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
     isLoading: boolean = false;
+    isCommissionsLoading: boolean = false;
+
+    // Modal State
+    showCommissionModal: boolean = false;
+    availableCommissions: ComisionResponse[] = [];
+    selectedMateriaForEnrollment: any = null;
 
     // Filters
     filterNombre: string = '';
@@ -158,9 +176,66 @@ export class InscriptionCourseComponent implements OnInit {
 
     handleAction(event: ActionEvent<any>) {
         if (event.action === 'inscribirse') {
-            console.log('Inscribirse a:', event.row.nombre);
-            alert(`Inscripción a ${event.row.nombre} simulada.`);
+            this.openCommissionModal(event.row);
         }
+    }
+
+    openCommissionModal(materia: any) {
+        this.selectedMateriaForEnrollment = materia;
+        this.isCommissionsLoading = true;
+
+        // Use current year
+        const currentYear = new Date().getFullYear();
+
+        this.comisionService.listarPorAnio(currentYear).subscribe({
+            next: (commissions) => {
+                // Client-side filtering by name
+                // Note: This relies on exact name match. May need normalization.
+                this.availableCommissions = commissions.filter(c =>
+                    c.materiasNombres.some(nombre => nombre.trim().toLowerCase() === materia.nombre.trim().toLowerCase())
+                );
+                this.isCommissionsLoading = false;
+                this.showCommissionModal = true;
+
+                if (this.availableCommissions.length === 0) {
+                    alert('No hay comisiones disponibles para esta materia en este año.');
+                    this.showCommissionModal = false;
+                }
+            },
+            error: (err) => {
+                console.error('Error loading commissions', err);
+                this.isCommissionsLoading = false;
+                alert('No se pudieron cargar las comisiones. Intente nuevamente.');
+            }
+        });
+    }
+
+    onEnroll(commission: ComisionResponse) {
+        if (!this.selectedMateriaForEnrollment) return;
+
+        this.isLoading = true;
+        this.showCommissionModal = false;
+
+        this.inscripcionCursadoService.inscribirCursado({
+            idMateria: this.selectedMateriaForEnrollment.idMateria,
+            idComision: commission.id
+        }).subscribe({
+            next: () => {
+                alert('✅ Inscripción realizada con éxito!');
+                this.isLoading = false;
+                this.loadMaterias(); // Reload to update status
+            },
+            error: (err) => {
+                console.error('Error enrolling', err);
+                alert('Hubo un error al realizar la inscripción.');
+                this.isLoading = false;
+            }
+        });
+    }
+
+    closeModal() {
+        this.showCommissionModal = false;
+        this.selectedMateriaForEnrollment = null;
     }
 
     goBack(): void {
