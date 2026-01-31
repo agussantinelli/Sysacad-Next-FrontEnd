@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
 import { InscripcionCursadoRequest, InscripcionCursadoResponse } from '@core/models/inscripcion-cursado.models';
 import { CalificacionCursadaRequest } from '@core/models/calificacion-cursada.models';
+import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 
 @Injectable({
     providedIn: 'root'
@@ -31,12 +32,12 @@ export class InscripcionCursadoService {
         );
     }
 
-    getComisionesDisponibles(materiaId: string, usuarioId?: string): Observable<any[]> {
-        const params: any = { materiaId };
+    getComisionesDisponibles(materiaId: string, usuarioId?: string): Observable<ComisionDisponibleDTO[]> {
+        const params: any = {};
         if (usuarioId) {
             params.usuarioId = usuarioId;
         }
-        return from(axiosClient.get<any[]>('/inscripciones-cursado/disponibles', { params })).pipe(
+        return from(axiosClient.get<ComisionDisponibleDTO[]>(`/inscripciones-cursado/materias/${materiaId}/disponibles`, { params })).pipe(
             map(response => response.data)
         );
     }
