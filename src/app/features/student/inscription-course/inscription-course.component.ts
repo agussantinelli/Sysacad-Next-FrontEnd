@@ -89,12 +89,10 @@ export class InscriptionCourseComponent implements OnInit {
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 console.log('✅ [InscriptionCourse] Data received:', data);
-                // Map esElectiva to display string
                 data.forEach(carrera => {
                     carrera.materias.forEach((materia: any) => {
                         materia.tipo = materia.esElectiva ? 'Electiva' : 'Obligatoria';
 
-                        // Custom Frontend Validation for Electives
                         if (materia.esElectiva && materia.nivel > 1) {
                             const nivelAnterior = materia.nivel - 1;
                             const tieneRegularAnterior = carrera.materias.some((m: any) =>
@@ -157,15 +155,12 @@ export class InscriptionCourseComponent implements OnInit {
     }
 
     applyFilters() {
-        // Start from original data
         const tempCarreras = JSON.parse(JSON.stringify(this.originalCarreras));
 
         this.carreras = tempCarreras.map((carrera: CarreraMateriasDTO) => {
-            // Filter materias within each carrera
             carrera.materias = carrera.materias.filter((materia: any) => {
                 const matchesNombre = this.filterNombre ? materia.nombre === this.filterNombre : true;
 
-                // If filtering by name, ignore other filters (as they are disabled/cleared)
                 if (this.filterNombre) {
                     return matchesNombre;
                 }
@@ -189,13 +184,10 @@ export class InscriptionCourseComponent implements OnInit {
         this.selectedMateriaForEnrollment = materia;
         this.isCommissionsLoading = true;
 
-        // Use current year
         const currentYear = new Date().getFullYear();
 
         this.comisionService.listarPorAnio(currentYear).subscribe({
             next: (commissions) => {
-                // Client-side filtering by name
-                // Note: This relies on exact name match. May need normalization.
                 this.availableCommissions = commissions.filter(c =>
                     c.materiasNombres.some(nombre => nombre.trim().toLowerCase() === materia.nombre.trim().toLowerCase())
                 );
@@ -226,7 +218,8 @@ export class InscriptionCourseComponent implements OnInit {
             idMateria: this.selectedMateriaForEnrollment.idMateria,
             idComision: commission.id
         }).subscribe({
-            next: () => {
+            next: (response) => {
+                console.log('✅ Inscripción exitosa:', response);
                 this.successMessage = 'Inscripción realizada con éxito!';
                 this.isLoading = false;
                 this.loadMaterias(); // Reload to update status

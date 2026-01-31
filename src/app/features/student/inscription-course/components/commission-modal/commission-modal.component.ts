@@ -7,7 +7,7 @@ import { ComisionResponse } from '@core/models/comision.models';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './commission-modal.component.html',
-    styleUrls: ['./commission-modal.component.css']
+    styleUrls: ['./styles/commission-modal.component.css']
 })
 export class CommissionModalComponent {
     @Input() commissions: ComisionResponse[] = [];
