@@ -1,14 +1,10 @@
 <div class="modal-overlay" (click)="onClose()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
 
         <div class="modal-header">
-            <h2 class="modal-title">Inscribirse a: <span>{{ title }}</span></h2>
+            <h2 class="modal-title">Inscribirse a: <span class="highlight-text">{{ title }}</span></h2>
             <button (click)="onClose()" class="btn-close-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+                <span class="material-icons">close</span>
             </button>
         </div>
 
@@ -16,21 +12,18 @@
             <!-- Mode 1: Exam Inscription (Detail View) -->
             @if (examDetail) {
             <div class="exam-detail-card">
-                <p class="mb-4 text-gray-400 text-sm">Detalles de la mesa de examen:</p>
+                <p class="section-subtitle">Detalles de la mesa de examen:</p>
 
                 <div class="detail-row">
-                    <span class="label flex items-center gap-2"><span class="material-icons text-sm">event</span>
-                        Fecha:</span>
+                    <span class="label"><span class="material-icons icon-sm">event</span> Fecha:</span>
                     <span class="value">{{ examDetail.diaExamen }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="label flex items-center gap-2"><span class="material-icons text-sm">schedule</span>
-                        Hora:</span>
+                    <span class="label"><span class="material-icons icon-sm">schedule</span> Hora:</span>
                     <span class="value">{{ examDetail.horaExamen }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="label flex items-center gap-2"><span class="material-icons text-sm">person</span>
-                        Presidente:</span>
+                    <span class="label"><span class="material-icons icon-sm">person</span> Presidente:</span>
                     <span class="value">{{ examDetail.nombrePresidente }}</span>
                 </div>
 
@@ -42,48 +35,51 @@
             }
             <!-- Mode 2: Commission Selection (List View) -->
             @else {
-            <p class="mb-3 text-gray-400 text-sm">Selecciona una comisión:</p>
+            <p class="section-subtitle">Selecciona una comisión:</p>
 
-            <div class="space-y-2 commission-list">
+            <div class="commission-list">
                 @for (comision of commissions; track comision.id) {
                 <div class="commission-card" [class.selected]="selectedCommission?.id === comision.id"
                     (click)="onSelectCommission(comision)">
 
-                    <div class="flex justify-between items-center w-full">
-                        <div class="flex flex-col flex-1 min-w-0 mr-3">
-                            <h4 class="commission-name text-sm font-semibold text-gray-200">{{ comision.nombre }}</h4>
+                    <div class="commission-content">
+                        <div class="commission-info">
+                            <h4 class="commission-name">{{ comision.nombre }}</h4>
 
                             <!-- Professors Line -->
-                            <div class="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                                <span class="material-icons text-[12px] text-gray-500">person</span>
-                                <span class="truncate block w-full" title="{{ getProfesoresForSubject(comision) }}">
+                            <div class="commission-detail-row">
+                                <span class="material-icons icon-sm">person</span>
+                                <span class="detail-text" title="{{ getProfesoresForSubject(comision) }}">
                                     {{ getProfesoresForSubject(comision) }}
                                 </span>
                             </div>
 
                             <!-- Schedule and location line -->
-                            <div class="text-xs text-gray-500 flex items-center gap-3 mt-1">
-                                <span class="flex items-center gap-1"><span
-                                        class="material-icons text-[12px]">schedule</span> {{ comision.turno }}</span>
-                                <span class="flex items-center gap-1"><span
-                                        class="material-icons text-[12px]">place</span> {{ comision.nombreSalon || '---'
-                                    }}</span>
+                            <div class="commission-detail-row">
+                                <span class="detail-group">
+                                    <span class="material-icons icon-sm">schedule</span>
+                                    {{ comision.turno }}
+                                </span>
+                                <span class="detail-group">
+                                    <span class="material-icons icon-sm">place</span>
+                                    {{ comision.nombreSalon || '---' }}
+                                </span>
                             </div>
                         </div>
 
                         <div class="selection-indicator">
                             @if (selectedCommission?.id === comision.id) {
-                            <div class="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                                <span class="material-icons text-white text-[10px] font-bold">check</span>
+                            <div class="radio-checked">
+                                <span class="material-icons check-icon">check</span>
                             </div>
                             } @else {
-                            <div class="w-4 h-4 border border-gray-600 rounded-full"></div>
+                            <div class="radio-unchecked"></div>
                             }
                         </div>
                     </div>
                 </div>
                 } @empty {
-                <div class="p-4 text-center text-sm text-gray-500 bg-gray-800 rounded-lg border border-gray-700">
+                <div class="empty-state">
                     No hay comisiones disponibles.
                 </div>
                 }

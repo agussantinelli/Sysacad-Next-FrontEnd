@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComisionResponse } from '@core/models/comision.models';
 import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
@@ -35,32 +35,16 @@ export class InscriptionModalComponent {
     }
 
     getProfesoresForSubject(comision: ComisionResponse): string {
-        console.log('🔍 Checking Professors for Commission:', comision.nombre);
-        console.log('   - Current Subject ID:', this.subjectId);
-        console.log('   - Commission Details:', comision.materiasDetalle);
-
-        if (!this.subjectId) {
-            console.warn('   ⚠️ No Subject ID provided to modal.');
-            return '--- (No Subject)';
-        }
-
-        if (!comision.materiasDetalle || comision.materiasDetalle.length === 0) {
-            console.warn('   ⚠️ No detalles found for commission.');
-            return '--- (No Details)';
+        if (!this.subjectId || !comision.materiasDetalle) {
+            return 'Sin asignar';
         }
 
         const detalle = comision.materiasDetalle.find(d => d.idMateria === this.subjectId);
 
-        if (detalle) {
-            console.log('   ✅ Match found:', detalle);
-            if (detalle.profesores && detalle.profesores.length > 0) {
-                return detalle.profesores.map(p => p.nombreCompleto).join(', ');
-            } else {
-                return 'Sin profesor asignado';
-            }
+        if (detalle && detalle.profesores && detalle.profesores.length > 0) {
+            return detalle.profesores.map(p => p.nombreCompleto).join(', ');
         }
 
-        console.warn('   ❌ No match found for subject ID:', this.subjectId);
         return 'Sin asignar';
     }
 
