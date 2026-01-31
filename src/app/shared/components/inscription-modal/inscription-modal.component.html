@@ -46,7 +46,7 @@
                         <div class="commission-info">
                             <h4 class="commission-name">{{ comision.nombreComision }}</h4>
 
-                            <!-- Professors Line -->
+                            <!-- Line 1: Professors -->
                             <div class="commission-detail-row">
                                 <span class="material-icons icon-sm">person</span>
                                 <span class="detail-text" title="{{ comision.profesores.join(', ') }}">
@@ -55,20 +55,25 @@
                                 </span>
                             </div>
 
-                            <!-- Schedule and location line -->
+                            <!-- Line 2: Turno -->
+                            <div class="commission-detail-row">
+                                <span class="material-icons icon-sm">brightness_6</span>
+                                <span class="detail-text">{{ comision.turno }}</span>
+                            </div>
+
+                            <!-- Line 3: Schedule and Location -->
                             <div class="commission-detail-row">
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">schedule</span>
-                                    <div class="flex flex-col">
-                                        <span>{{ comision.turno }}</span>
+                                    <div class="schedule-column">
                                         @for (horario of comision.horarios; track horario) {
-                                        <span class="text-xs text-secondary">{{ horario }}</span>
+                                        <span class="schedule-text">{{ horario }}</span>
                                         }
                                     </div>
                                 </span>
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">place</span>
-                                    {{ comision.ubicacion || '---' }}
+                                    <span class="detail-text">{{ comision.ubicacion || '---' }}</span>
                                 </span>
                             </div>
                         </div>
