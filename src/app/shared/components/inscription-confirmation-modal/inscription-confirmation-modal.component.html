@@ -1,0 +1,64 @@
+<div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h2 class="modal-title">Confirmar Inscripción</h2>
+            <button class="btn-cancel" style="border:none; padding:4px;" (click)="onClose()">
+                <span class="material-icons" style="font-size:20px;">close</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            @if (commission) {
+            <div class="confirmation-card">
+                <h3 class="subject-title">{{ subjectName }}</h3>
+
+                <div class="detail-row">
+                    <span class="label">Comisión:</span>
+                    <span class="value">{{ commission.nombreComision }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Turno:</span>
+                    <span class="value">{{ commission.turno }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Ubicación:</span>
+                    <span class="value">{{ commission.ubicacion || '---' }}</span>
+                </div>
+
+                <div class="detail-row" style="align-items: flex-start;">
+                    <span class="label">Horarios:</span>
+                    <div class="value schedule-list">
+                        @for (horario of commission.horarios; track horario) {
+                        <span class="schedule-item">• {{ horario }}</span>
+                        } @empty {
+                        <span class="schedule-item">---</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="detail-row" style="align-items: flex-start; margin-top: 12px;">
+                    <span class="label">Profesores:</span>
+                    <div class="value">
+                        {{ commission.profesores && commission.profesores.length > 0 ? commission.profesores.join(', ')
+                        : 'Sin asignar' }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert-info">
+                <span class="material-icons">info</span>
+                <span>Verifica los datos antes de confirmar.</span>
+            </div>
+            }
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel" (click)="onClose()">Cancelar</button>
+            <button class="btn-confirm" (click)="onConfirm()">Confirmar Definitivamente</button>
+        </div>
+
+    </div>
+</div>
