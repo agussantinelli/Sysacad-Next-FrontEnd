@@ -9,17 +9,25 @@ import { MesaExamenService } from '@core/services/mesa-examen.service';
 import { AuthService } from '@core/services/auth.service';
 import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
 import { InscripcionExamenRequest } from '@core/models/inscripcion-examen.models';
-import { MesaExamenResponse } from '@core/models/mesa-examen.models';
 import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { take } from 'rxjs/operators';
-
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
+import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
+import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
 
 @Component({
     selector: 'app-inscription-exam',
     standalone: true,
-    imports: [CommonModule, TableComponent, FormsModule, PageLayoutComponent, LoadingSpinnerComponent],
+    imports: [
+        CommonModule,
+        TableComponent,
+        FormsModule,
+        PageLayoutComponent,
+        LoadingSpinnerComponent,
+        AlertMessageComponent,
+        InscriptionModalComponent
+    ],
     templateUrl: './inscription-exam.component.html',
     styleUrl: './styles/inscription-exam.component.css'
 })
@@ -32,8 +40,20 @@ export class InscriptionExamComponent implements OnInit {
 
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
-    mesas: MesaExamenResponse[] = [];
+
+    // Changed to flat list of available exam details
+    mesasDisponibles: DetalleMesaExamenResponse[] = [];
+
     isLoading: boolean = false;
+
+    // Messages
+    errorMessage: string = '';
+    successMessage: string = '';
+
+    // State for Modal
+    selectedExamDetail: DetalleMesaExamenResponse | null = null;
+    selectedMateriaForEnrollment: any = null;
+    showModal: boolean = false;
 
     // Filters
     filterNombre: string = '';
@@ -75,7 +95,6 @@ export class InscriptionExamComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadMaterias();
-        this.loadMesas();
     }
 
     loadMaterias() {
@@ -87,20 +106,15 @@ export class InscriptionExamComponent implements OnInit {
                 data.forEach(carrera => {
                     carrera.materias.forEach((materia: any) => {
                         materia.tipo = materia.esElectiva ? 'Electiva' : 'Obligatoria';
-
-                        // Default to false, enabled later if mesa exists
                         materia.sePuedeInscribir = false;
 
                         // Exam Inscription Validation Logic
-                        // Rule 1: Allow if status is REGULAR
-                        // Rule 2: Allow if subject is English I or English II (even if not Regular, for Free Exam)
-                        // Rule 3: Do not allow if already APROBADA
                         const esIngles = ['Inglés I', 'Inglés II'].includes(materia.nombre);
                         const esRegular = materia.estado === 'REGULAR';
                         const estaAprobada = materia.estado === 'APROBADA';
                         const condicionAcademica = !estaAprobada && (esRegular || esIngles);
 
-                        materia.condicionAcademica = condicionAcademica; // Save for logic in handleAction or mesa check
+                        materia.condicionAcademica = condicionAcademica;
                     });
                 });
 
@@ -109,59 +123,53 @@ export class InscriptionExamComponent implements OnInit {
                 this.extractUniqueNombres();
                 this.extractUniqueNiveles();
 
-                // Load mesas after materias to ensure we can link them
+                // Load available exam tables
                 this.loadMesas();
             },
             error: (err) => {
                 console.error('❌ [InscriptionExam] Error loading materias:', err);
+                this.errorMessage = 'Error al cargar las materias.';
                 this.isLoading = false;
             }
         });
     }
 
     loadMesas() {
-        this.mesaExamenService.listarMesas().subscribe({
-            next: (mesas) => {
-                this.mesas = mesas;
-                console.log('✅ [InscriptionExam] Mesas loaded:', mesas);
+        // Use the STUDENT endpoint: /mesas/disponibles
+        this.mesaExamenService.listarMesasDisponibles().subscribe({
+            next: (detalles) => {
+                this.mesasDisponibles = detalles;
+                console.log('✅ [InscriptionExam] Mesas Disponibles loaded:', detalles);
+
                 if (this.carreras.length > 0) {
                     this.updateInscriptionStatus();
                 }
                 this.isLoading = false;
             },
             error: (err) => {
-                console.error('❌ [InscriptionExam] Error loading mesas:', err);
+                console.error('❌ [InscriptionExam] Error loading mesas disponibles:', err);
+                this.errorMessage = 'Error al cargar mesas de examen disponibles.';
                 this.isLoading = false;
             }
         });
     }
 
     updateInscriptionStatus() {
-        // Only allow inscription if acadamically allowed AND there is an open mesa for that subject
-        const now = new Date();
-
         this.carreras.forEach(carrera => {
             carrera.materias.forEach((materia: any) => {
                 if (materia.condicionAcademica) {
-                    // Find if there is any active mesa with this subject
-                    const mesaFound = this.findMesaForMateria(materia.idMateria);
-                    materia.sePuedeInscribir = !!mesaFound;
-                    materia.mesaDetalle = mesaFound; // Store for action
+                    // Match by ID. Since DetalleMesaExamenResponse has idMateria, we can match directly.
+                    const detalleFound = this.mesasDisponibles.find(d => d.idMateria === materia.idMateria);
+
+                    if (detalleFound) {
+                        materia.sePuedeInscribir = true;
+                        materia.mesaDetalle = detalleFound; // Store the simplified detail
+                    } else {
+                        materia.sePuedeInscribir = false;
+                    }
                 }
             });
         });
-    }
-
-    findMesaForMateria(idMateria: string): { mesa: MesaExamenResponse, detalle: DetalleMesaExamenResponse } | null {
-        for (const mesa of this.mesas) {
-            // Logic check for dates could go here (e.g. is inscription open?)
-            // For now assuming all listed mesas are valid candidates if they contain the subject
-            const detalle = mesa.detalles.find(d => d.idMateria === idMateria);
-            if (detalle) {
-                return { mesa, detalle };
-            }
-        }
-        return null;
     }
 
     extractUniqueNombres() {
@@ -219,43 +227,80 @@ export class InscriptionExamComponent implements OnInit {
 
     handleAction(event: ActionEvent<any>) {
         if (event.action === 'inscribirse') {
-
             const materia = event.row;
             if (!materia.mesaDetalle) {
-                alert('No se encontró una mesa de examen habilitada para esta materia.');
+                this.errorMessage = 'No se encontró mesa para esta materia.';
                 return;
             }
 
-            this.authService.currentUser$.pipe(take(1)).subscribe(user => {
-                if (!user) {
-                    alert('Error: Usuario no identificado');
-                    return;
+            const initialDetalle = materia.mesaDetalle as DetalleMesaExamenResponse;
+            this.isLoading = true;
+
+            // Call endpoint: /mesas/detalles/{id}/{nroDetalle}
+            this.mesaExamenService.obtenerDetalleMesa(initialDetalle.idMesaExamen, initialDetalle.nroDetalle).subscribe({
+                next: (fullDetalle) => {
+                    this.isLoading = false;
+                    this.openConfirmationModal(materia, fullDetalle);
+                },
+                error: (err) => {
+                    console.error('Error verifying mesa detail', err);
+                    this.isLoading = false;
+                    this.errorMessage = 'No se pudo verificar el detalle de la mesa. Intente nuevamente.';
                 }
-
-                const infoMesa = materia.mesaDetalle as { mesa: MesaExamenResponse, detalle: DetalleMesaExamenResponse };
-
-                const request: InscripcionExamenRequest = {
-                    idUsuario: user.id,
-                    idMesaExamen: infoMesa.mesa.id,
-                    nroDetalle: infoMesa.detalle.nroDetalle
-                };
-
-                // Confirm dialog
-                if (!confirm(`¿Desea inscribirse al examen de ${materia.nombre} para la fecha ${infoMesa.detalle.diaExamen} ${infoMesa.detalle.horaExamen}?`)) return;
-
-                this.inscripcionService.inscribirExamen(request).subscribe({
-                    next: (res) => {
-                        console.log('Inscripción a examen exitosa:', res);
-                        alert(`Inscripción exitosa al examen de ${materia.nombre}`);
-                        this.loadMaterias(); // Re-load to update status if needed
-                    },
-                    error: (err) => {
-                        console.error('Error al inscribirse al examen:', err);
-                        alert('Error al procesar la inscripción al examen');
-                    }
-                });
             });
         }
+    }
+
+    openConfirmationModal(materia: any, detalle: DetalleMesaExamenResponse) {
+        this.selectedMateriaForEnrollment = materia;
+        this.selectedExamDetail = detalle;
+        this.showModal = true;
+    }
+
+    onConfirmEnrollment() {
+        if (!this.selectedMateriaForEnrollment || !this.selectedExamDetail) return;
+
+        this.showModal = false;
+        this.authService.currentUser$.pipe(take(1)).subscribe(user => {
+            if (!user) {
+                this.errorMessage = 'Error: Usuario no identificado';
+                return;
+            }
+
+            const request: InscripcionExamenRequest = {
+                idUsuario: user.id,
+                idMesaExamen: this.selectedExamDetail!.idMesaExamen,
+                nroDetalle: this.selectedExamDetail!.nroDetalle
+            };
+
+            this.isLoading = true;
+            this.clearMessages();
+
+            this.inscripcionService.inscribirExamen(request).subscribe({
+                next: (res) => {
+                    console.log('Inscripción a examen exitosa:', res);
+                    this.successMessage = `Inscripción exitosa al examen de ${this.selectedMateriaForEnrollment.nombre}`;
+                    this.isLoading = false;
+                    this.loadMaterias();
+                },
+                error: (err) => {
+                    console.error('Error al inscribirse al examen:', err);
+                    this.errorMessage = 'Error al procesar la inscripción al examen';
+                    this.isLoading = false;
+                }
+            });
+        });
+    }
+
+    closeModal() {
+        this.showModal = false;
+        this.selectedExamDetail = null;
+        this.selectedMateriaForEnrollment = null;
+    }
+
+    clearMessages() {
+        this.errorMessage = '';
+        this.successMessage = '';
     }
 
     goBack(): void {

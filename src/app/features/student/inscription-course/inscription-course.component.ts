@@ -10,7 +10,7 @@ import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
 import { ComisionResponse } from '@core/models/comision.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
-import { CommissionModalComponent } from './components/commission-modal/commission-modal.component';
+import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component'; // Optional for alerts
 
 @Component({
@@ -22,7 +22,7 @@ import { AlertMessageComponent } from '@shared/components/alert-message/alert-me
         FormsModule,
         PageLayoutComponent,
         LoadingSpinnerComponent,
-        CommissionModalComponent,
+        InscriptionModalComponent,
         AlertMessageComponent
     ],
     templateUrl: './inscription-course.component.html',
@@ -188,6 +188,7 @@ export class InscriptionCourseComponent implements OnInit {
 
         this.comisionService.listarPorAnio(currentYear).subscribe({
             next: (commissions) => {
+                console.log('📚 Comisiones disponibles para cursado:', commissions);
                 this.availableCommissions = commissions.filter(c =>
                     c.materiasNombres.some(nombre => nombre.trim().toLowerCase() === materia.nombre.trim().toLowerCase())
                 );

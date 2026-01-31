@@ -1,4 +1,11 @@
 <app-page-layout title="Inscripción a Examenes Finales">
+    @if (errorMessage) {
+    <app-alert-message [message]="errorMessage" type="error" (close)="clearMessages()"></app-alert-message>
+    }
+
+    @if (successMessage) {
+    <app-alert-message [message]="successMessage" type="success" (close)="clearMessages()"></app-alert-message>
+    }
     <div class="filters-wrapper">
         <div class="filter-group">
             <label for="filterNivel">Nivel</label>
@@ -53,6 +60,11 @@
         } @empty {
         <div class="no-data">No se encontraron materias para inscripción.</div>
         }
+        }
+        @if (showModal) {
+        <app-inscription-modal [title]="selectedMateriaForEnrollment?.nombre" [examDetail]="selectedExamDetail"
+            (close)="closeModal()" (confirmExam)="onConfirmEnrollment()">
+        </app-inscription-modal>
         }
     </div>
 </app-page-layout>
