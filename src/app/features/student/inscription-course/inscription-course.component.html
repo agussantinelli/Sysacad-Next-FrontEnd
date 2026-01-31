@@ -72,7 +72,8 @@
 
     @if (showCommissionModal) {
     <app-inscription-modal [commissions]="availableCommissions" [title]="selectedMateriaForEnrollment?.nombre"
-        (close)="closeModal()" (selectCommission)="onEnroll($event)">
+        [subjectId]="selectedMateriaForEnrollment?.idMateria" (close)="closeModal()"
+        (selectCommission)="onEnroll($event)">
     </app-inscription-modal>
     }
 </app-page-layout>

@@ -16,61 +16,75 @@
             <!-- Mode 1: Exam Inscription (Detail View) -->
             @if (examDetail) {
             <div class="exam-detail-card">
-                <p class="mb-4 text-gray-400">Detalles de la mesa de examen:</p>
+                <p class="mb-4 text-gray-400 text-sm">Detalles de la mesa de examen:</p>
 
                 <div class="detail-row">
-                    <span class="label">📅 Fecha:</span>
+                    <span class="label flex items-center gap-2"><span class="material-icons text-sm">event</span>
+                        Fecha:</span>
                     <span class="value">{{ examDetail.diaExamen }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="label">⏰ Hora:</span>
+                    <span class="label flex items-center gap-2"><span class="material-icons text-sm">schedule</span>
+                        Hora:</span>
                     <span class="value">{{ examDetail.horaExamen }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="label">👨‍🏫 Presidente:</span>
+                    <span class="label flex items-center gap-2"><span class="material-icons text-sm">person</span>
+                        Presidente:</span>
                     <span class="value">{{ examDetail.nombrePresidente }}</span>
                 </div>
 
                 <div class="alert-info mt-4">
                     <span class="material-icons info-icon">info</span>
-                    <span>Se validaron tus condiciones académicas para este examen.</span>
+                    <span>Se validaron tus condiciones académicas.</span>
                 </div>
             </div>
             }
             <!-- Mode 2: Commission Selection (List View) -->
             @else {
-            <p class="mb-4 text-gray-400">Selecciona una comisión disponible:</p>
+            <p class="mb-3 text-gray-400 text-sm">Selecciona una comisión:</p>
 
-            <div class="space-y-3">
+            <div class="space-y-2 commission-list">
                 @for (comision of commissions; track comision.id) {
                 <div class="commission-card" [class.selected]="selectedCommission?.id === comision.id"
                     (click)="onSelectCommission(comision)">
 
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="commission-name mb-1">{{ comision.nombre }}</h4>
-                            <div class="text-sm text-gray-400">
-                                <span class="mr-3">📅 {{ comision.turno }}</span>
-                                <span>📍 {{ comision.nombreSalon || 'Sin salón' }}</span>
+                    <div class="flex justify-between items-center w-full">
+                        <div class="flex flex-col flex-1 min-w-0 mr-3">
+                            <h4 class="commission-name text-sm font-semibold text-gray-200">{{ comision.nombre }}</h4>
+
+                            <!-- Professors Line -->
+                            <div class="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                                <span class="material-icons text-[12px] text-gray-500">person</span>
+                                <span class="truncate block w-full" title="{{ getProfesoresForSubject(comision) }}">
+                                    {{ getProfesoresForSubject(comision) }}
+                                </span>
+                            </div>
+
+                            <!-- Schedule and location line -->
+                            <div class="text-xs text-gray-500 flex items-center gap-3 mt-1">
+                                <span class="flex items-center gap-1"><span
+                                        class="material-icons text-[12px]">schedule</span> {{ comision.turno }}</span>
+                                <span class="flex items-center gap-1"><span
+                                        class="material-icons text-[12px]">place</span> {{ comision.nombreSalon || '---'
+                                    }}</span>
                             </div>
                         </div>
+
                         <div class="selection-indicator">
                             @if (selectedCommission?.id === comision.id) {
-                            <div class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
+                            <div class="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span class="material-icons text-white text-[10px] font-bold">check</span>
                             </div>
                             } @else {
-                            <div class="w-5 h-5 border-2 border-gray-600 rounded-full"></div>
+                            <div class="w-4 h-4 border border-gray-600 rounded-full"></div>
                             }
                         </div>
                     </div>
                 </div>
                 } @empty {
-                <div class="p-4 text-center text-gray-500 bg-gray-800 rounded-lg">
-                    No se encontraron comisiones para esta materia.
+                <div class="p-4 text-center text-sm text-gray-500 bg-gray-800 rounded-lg border border-gray-700">
+                    No hay comisiones disponibles.
                 </div>
                 }
             </div>
