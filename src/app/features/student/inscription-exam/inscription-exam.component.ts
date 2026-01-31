@@ -13,8 +13,8 @@ import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.mode
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { take } from 'rxjs/operators';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
-import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
+import { AlertService } from '@core/services/alert.service';
 
 @Component({
     selector: 'app-inscription-exam',
@@ -25,7 +25,6 @@ import { InscriptionModalComponent } from '@shared/components/inscription-modal/
         FormsModule,
         PageLayoutComponent,
         LoadingSpinnerComponent,
-        AlertMessageComponent,
         InscriptionModalComponent
     ],
     templateUrl: './inscription-exam.component.html',
@@ -37,18 +36,14 @@ export class InscriptionExamComponent implements OnInit {
     private mesaExamenService = inject(MesaExamenService);
     private authService = inject(AuthService);
     private location = inject(Location);
+    private alertService = inject(AlertService);
 
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
 
-    // Changed to flat list of available exam details
     mesasDisponibles: DetalleMesaExamenResponse[] = [];
 
     isLoading: boolean = false;
-
-    // Messages
-    errorMessage: string = '';
-    successMessage: string = '';
 
     // State for Modal
     selectedExamDetail: DetalleMesaExamenResponse | null = null;
@@ -128,7 +123,7 @@ export class InscriptionExamComponent implements OnInit {
             },
             error: (err) => {
                 console.error('❌ [InscriptionExam] Error loading materias:', err);
-                this.errorMessage = 'Error al cargar las materias.';
+                this.alertService.error('Error al cargar las materias.');
                 this.isLoading = false;
             }
         });
@@ -148,7 +143,7 @@ export class InscriptionExamComponent implements OnInit {
             },
             error: (err) => {
                 console.error('❌ [InscriptionExam] Error loading mesas disponibles:', err);
-                this.errorMessage = 'Error al cargar mesas de examen disponibles.';
+                this.alertService.error('Error al cargar mesas de examen disponibles.');
                 this.isLoading = false;
             }
         });
@@ -229,7 +224,7 @@ export class InscriptionExamComponent implements OnInit {
         if (event.action === 'inscribirse') {
             const materia = event.row;
             if (!materia.mesaDetalle) {
-                this.errorMessage = 'No se encontró mesa para esta materia.';
+                this.alertService.error('No se encontró mesa para esta materia.');
                 return;
             }
 
@@ -245,7 +240,7 @@ export class InscriptionExamComponent implements OnInit {
                 error: (err) => {
                     console.error('Error verifying mesa detail', err);
                     this.isLoading = false;
-                    this.errorMessage = 'No se pudo verificar el detalle de la mesa. Intente nuevamente.';
+                    this.alertService.error('No se pudo verificar el detalle de la mesa. Intente nuevamente.');
                 }
             });
         }
@@ -263,7 +258,7 @@ export class InscriptionExamComponent implements OnInit {
         this.showModal = false;
         this.authService.currentUser$.pipe(take(1)).subscribe(user => {
             if (!user) {
-                this.errorMessage = 'Error: Usuario no identificado';
+                this.alertService.error('Error: Usuario no identificado');
                 return;
             }
 
@@ -274,18 +269,18 @@ export class InscriptionExamComponent implements OnInit {
             };
 
             this.isLoading = true;
-            this.clearMessages();
+            this.alertService.clear();
 
             this.inscripcionService.inscribirExamen(request).subscribe({
                 next: (res) => {
                     console.log('Inscripción a examen exitosa:', res);
-                    this.successMessage = `Inscripción exitosa al examen de ${this.selectedMateriaForEnrollment.nombre}`;
+                    this.alertService.success(`Inscripción exitosa al examen de ${this.selectedMateriaForEnrollment.nombre}`);
                     this.isLoading = false;
                     this.loadMaterias();
                 },
                 error: (err) => {
                     console.error('Error al inscribirse al examen:', err);
-                    this.errorMessage = 'Error al procesar la inscripción al examen';
+                    this.alertService.error('Error al procesar la inscripción al examen');
                     this.isLoading = false;
                 }
             });
@@ -296,11 +291,6 @@ export class InscriptionExamComponent implements OnInit {
         this.showModal = false;
         this.selectedExamDetail = null;
         this.selectedMateriaForEnrollment = null;
-    }
-
-    clearMessages() {
-        this.errorMessage = '';
-        this.successMessage = '';
     }
 
     goBack(): void {
