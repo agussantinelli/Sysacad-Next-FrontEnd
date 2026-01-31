@@ -32,7 +32,7 @@
                     <span class="label">Horarios:</span>
                     <div class="value schedule-list">
                         @for (horario of commission.horarios; track horario) {
-                        <span class="schedule-item">• {{ horario }}</span>
+                        <span class="schedule-item">{{ horario }}</span>
                         } @empty {
                         <span class="schedule-item">---</span>
                         }
