@@ -14,6 +14,12 @@ export interface ComisionRequest {
     idsProfesores: string[]; // List of UUIDs
 }
 
+export interface MateriaDetalleDTO {
+    nombreMateria: string;
+    idMateria: string;
+    profesores: ProfesorResumenDTO[];
+}
+
 export interface ComisionResponse {
     id: string; // UUID
     nombre: string;
@@ -23,4 +29,5 @@ export interface ComisionResponse {
     ubicacionSalon: string;
     materiasNombres: string[];
     profesores: ProfesorResumenDTO[];
+    materiasDetalle: MateriaDetalleDTO[];
 }
