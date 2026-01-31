@@ -31,6 +31,16 @@ export class InscripcionCursadoService {
         );
     }
 
+    getComisionesDisponibles(materiaId: string, usuarioId?: string): Observable<any[]> {
+        const params: any = { materiaId };
+        if (usuarioId) {
+            params.usuarioId = usuarioId;
+        }
+        return from(axiosClient.get<any[]>('/inscripciones-cursado/disponibles', { params })).pipe(
+            map(response => response.data)
+        );
+    }
+
     cargarNotaParcial(idInscripcion: string, calificacion: CalificacionCursadaRequest): Observable<void> {
         return from(axiosClient.post<void>(`/inscripciones-cursado/${idInscripcion}/notas`, calificacion)).pipe(
             map(response => response.data)

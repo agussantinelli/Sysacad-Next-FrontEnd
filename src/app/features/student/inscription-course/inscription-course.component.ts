@@ -11,7 +11,9 @@ import { ComisionResponse } from '@core/models/comision.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
-import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component'; // Optional for alerts
+import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
+import { AuthService } from '@core/services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'app-inscription-course',
@@ -32,6 +34,7 @@ export class InscriptionCourseComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
     private comisionService = inject(ComisionService);
     private inscripcionCursadoService = inject(InscripcionCursadoService);
+    private authService = inject(AuthService);
     private location = inject(Location);
 
     originalCarreras: CarreraMateriasDTO[] = [];
@@ -107,7 +110,7 @@ export class InscriptionCourseComponent implements OnInit {
                     });
                 });
 
-                this.originalCarreras = JSON.parse(JSON.stringify(data)); // Deep copy to preserve original structure
+                this.originalCarreras = JSON.parse(JSON.stringify(data));
                 this.carreras = data;
                 this.extractUniqueNombres();
                 this.extractUniqueNiveles();
@@ -171,7 +174,7 @@ export class InscriptionCourseComponent implements OnInit {
                 return matchesEstado && matchesTipo && matchesNivel;
             });
             return carrera;
-        }).filter((carrera: CarreraMateriasDTO) => carrera.materias.length > 0); // Only show carreras with matching materias
+        }).filter((carrera: CarreraMateriasDTO) => carrera.materias.length > 0);
     }
 
     handleAction(event: ActionEvent<any>) {
@@ -184,27 +187,32 @@ export class InscriptionCourseComponent implements OnInit {
         this.selectedMateriaForEnrollment = materia;
         this.isCommissionsLoading = true;
 
-        const currentYear = new Date().getFullYear();
-
-        this.comisionService.listarPorAnio(currentYear).subscribe({
-            next: (commissions) => {
-                console.log('📚 Comisiones disponibles para cursado:', commissions);
-                this.availableCommissions = commissions.filter(c =>
-                    c.materiasNombres.some(nombre => nombre.trim().toLowerCase() === materia.nombre.trim().toLowerCase())
-                );
+        this.authService.currentUser$.pipe(take(1)).subscribe(user => {
+            if (!user) {
+                this.errorMessage = 'Usuario no identificado.';
                 this.isCommissionsLoading = false;
-                this.showCommissionModal = true;
-
-                if (this.availableCommissions.length === 0) {
-                    this.errorMessage = 'No hay comisiones disponibles para esta materia en este año.';
-                    this.showCommissionModal = false;
-                }
-            },
-            error: (err) => {
-                console.error('Error loading commissions', err);
-                this.isCommissionsLoading = false;
-                this.errorMessage = 'No se pudieron cargar las comisiones. Intente nuevamente.';
+                return;
             }
+
+            this.inscripcionCursadoService.getComisionesDisponibles(materia.idMateria, user.id).subscribe({
+                next: (commissions) => {
+                    console.log('📚 Comisiones disponibles para cursado:', commissions);
+                    this.availableCommissions = commissions;
+
+                    this.isCommissionsLoading = false;
+                    this.showCommissionModal = true;
+
+                    if (this.availableCommissions.length === 0) {
+                        this.errorMessage = 'No hay comisiones disponibles para esta materia.';
+                        this.showCommissionModal = false;
+                    }
+                },
+                error: (err) => {
+                    console.error('Error loading commissions', err);
+                    this.isCommissionsLoading = false;
+                    this.errorMessage = 'No se pudieron cargar las comisiones. Intente nuevamente.';
+                }
+            });
         });
     }
 
@@ -223,7 +231,7 @@ export class InscriptionCourseComponent implements OnInit {
                 console.log('✅ Inscripción exitosa:', response);
                 this.successMessage = 'Inscripción realizada con éxito!';
                 this.isLoading = false;
-                this.loadMaterias(); // Reload to update status
+                this.loadMaterias();
             },
             error: (err) => {
                 console.error('Error enrolling', err);
