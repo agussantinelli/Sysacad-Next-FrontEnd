@@ -13,8 +13,8 @@ import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
 import { InscriptionConfirmationModalComponent } from '@shared/components/inscription-confirmation-modal/inscription-confirmation-modal.component';
-import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 import { AuthService } from '@core/services/auth.service';
+import { AlertService } from '@core/services/alert.service'; // Import service
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -27,8 +27,7 @@ import { take } from 'rxjs/operators';
         PageLayoutComponent,
         LoadingSpinnerComponent,
         InscriptionModalComponent,
-        InscriptionConfirmationModalComponent,
-        AlertMessageComponent
+        InscriptionConfirmationModalComponent
     ],
     templateUrl: './inscription-course.component.html',
     styleUrl: './styles/inscription-course.component.css'
@@ -39,6 +38,7 @@ export class InscriptionCourseComponent implements OnInit {
     private inscripcionCursadoService = inject(InscripcionCursadoService);
     private authService = inject(AuthService);
     private location = inject(Location);
+    private alertService = inject(AlertService); // Inject service
 
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
@@ -46,8 +46,8 @@ export class InscriptionCourseComponent implements OnInit {
     isCommissionsLoading: boolean = false;
 
     // Messages
-    errorMessage: string = '';
-    successMessage: string = '';
+    // Messages removed, using AlertService
+
 
     // Modal State
     showCommissionModal: boolean = false;
@@ -182,6 +182,8 @@ export class InscriptionCourseComponent implements OnInit {
         }).filter((carrera: CarreraMateriasDTO) => carrera.materias.length > 0);
     }
 
+
+
     handleAction(event: ActionEvent<any>) {
         if (event.action === 'inscribirse') {
             this.openCommissionModal(event.row);
@@ -191,10 +193,11 @@ export class InscriptionCourseComponent implements OnInit {
     openCommissionModal(materia: any) {
         this.selectedMateriaForEnrollment = materia;
         this.isCommissionsLoading = true;
+        this.alertService.clear();
 
         this.authService.currentUser$.pipe(take(1)).subscribe(user => {
             if (!user) {
-                this.errorMessage = 'Usuario no identificado.';
+                this.alertService.error('Usuario no identificado.');
                 this.isCommissionsLoading = false;
                 return;
             }
@@ -208,14 +211,14 @@ export class InscriptionCourseComponent implements OnInit {
                     this.showCommissionModal = true;
 
                     if (this.availableCommissions.length === 0) {
-                        this.errorMessage = 'No hay comisiones disponibles para esta materia.';
+                        this.alertService.error('No hay comisiones disponibles para esta materia.');
                         this.showCommissionModal = false;
                     }
                 },
                 error: (err) => {
                     console.error('Error loading commissions', err);
                     this.isCommissionsLoading = false;
-                    this.errorMessage = 'No se pudieron cargar las comisiones. Intente nuevamente.';
+                    this.alertService.error('No se pudieron cargar las comisiones. Intente nuevamente.');
                 }
             });
         });
@@ -231,13 +234,13 @@ export class InscriptionCourseComponent implements OnInit {
         this.showConfirmationModal = true; // Open confirmation
     }
 
-    // Step 2: User clicks "Confirmar Definitivamente" in the confirmation modal
+    // Confirm enrollment calls backend
     confirmEnrollment() {
         if (!this.selectedMateriaForEnrollment || !this.selectedCommissionForConfirmation) return;
 
         this.isLoading = true;
         this.showConfirmationModal = false; // Close confirm modal
-        this.clearMessages();
+        this.alertService.clear();
 
         this.inscripcionCursadoService.inscribirCursado({
             idMateria: this.selectedMateriaForEnrollment.idMateria,
@@ -245,15 +248,14 @@ export class InscriptionCourseComponent implements OnInit {
         }).subscribe({
             next: (response) => {
                 console.log('✅ Inscripción exitosa:', response);
-                this.successMessage = 'Inscripción realizada con éxito!';
+                this.alertService.success('Inscripción realizada con éxito!');
                 this.isLoading = false;
                 this.loadMaterias();
-                // Reset state
                 this.selectedCommissionForConfirmation = null;
             },
             error: (err) => {
                 console.error('Error enrolling', err);
-                this.errorMessage = 'Hubo un error al realizar la inscripción.';
+                this.alertService.error('Hubo un error al realizar la inscripción.');
                 this.isLoading = false;
             }
         });
@@ -269,10 +271,7 @@ export class InscriptionCourseComponent implements OnInit {
         this.selectedCommissionForConfirmation = null;
     }
 
-    clearMessages() {
-        this.errorMessage = '';
-        this.successMessage = '';
-    }
+
 
     goBack(): void {
         this.location.back();

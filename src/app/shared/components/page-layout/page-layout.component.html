@@ -9,6 +9,12 @@
             </button>
             <h2 class="inscription-title">{{ title }}</h2>
         </div>
+
+        @if (alertService.alert$ | async; as alert) {
+        <app-alert-message [message]="alert.message" [type]="alert.type" (close)="alertService.clear()">
+        </app-alert-message>
+        }
+
         <ng-content></ng-content>
     </div>
 </div>

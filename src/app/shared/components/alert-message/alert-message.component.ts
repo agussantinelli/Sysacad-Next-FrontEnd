@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type AlertType = 'success' | 'error' | 'info';
+export type AlertType = 'success' | 'error' | 'info' | 'warning';
 
 @Component({
     selector: 'app-alert-message',
@@ -20,6 +20,7 @@ export class AlertMessageComponent {
             case 'success': return 'check_circle';
             case 'error': return 'error';
             case 'info': return 'info';
+            case 'warning': return 'warning';
             default: return 'info';
         }
     }
