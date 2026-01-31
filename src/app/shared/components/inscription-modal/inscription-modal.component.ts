@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComisionResponse } from '@core/models/comision.models';
+import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
 
 @Component({
@@ -10,42 +10,35 @@ import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.mode
     templateUrl: './inscription-modal.component.html',
     styleUrls: ['./styles/inscription-modal.component.css']
 })
-export class InscriptionModalComponent {
+export class InscriptionModalComponent implements OnInit, OnDestroy {
     // Mode 1: Commission Selection (Course Inscription)
-    @Input() commissions: ComisionResponse[] = [];
+    @Input() commissions: ComisionDisponibleDTO[] = [];
 
     // Mode 2: Exam Confirmation (Exam Inscription)
     @Input() examDetail: DetalleMesaExamenResponse | null = null;
 
     // Common
     @Input() title: string = '';
-    @Input() subjectId: string | null = null; // To filter professors by subject
     @Output() close = new EventEmitter<void>();
 
     // Output for Course
-    @Output() selectCommission = new EventEmitter<ComisionResponse>();
+    @Output() selectCommission = new EventEmitter<ComisionDisponibleDTO>();
 
     // Output for Exam
     @Output() confirmExam = new EventEmitter<void>();
 
-    selectedCommission: ComisionResponse | null = null;
+    selectedCommission: ComisionDisponibleDTO | null = null;
 
-    onSelectCommission(commission: ComisionResponse) {
-        this.selectedCommission = commission;
+    ngOnInit(): void {
+        document.body.style.overflow = 'hidden';
     }
 
-    getProfesoresForSubject(comision: ComisionResponse): string {
-        if (!this.subjectId || !comision.materiasDetalle) {
-            return 'Sin asignar';
-        }
+    ngOnDestroy(): void {
+        document.body.style.overflow = 'auto';
+    }
 
-        const detalle = comision.materiasDetalle.find(d => d.idMateria === this.subjectId);
-
-        if (detalle && detalle.profesores && detalle.profesores.length > 0) {
-            return detalle.profesores.map(p => p.nombreCompleto).join(', ');
-        }
-
-        return 'Sin asignar';
+    onSelectCommission(commission: ComisionDisponibleDTO) {
+        this.selectedCommission = commission;
     }
 
     confirm() {

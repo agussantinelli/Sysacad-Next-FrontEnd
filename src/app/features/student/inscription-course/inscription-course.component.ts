@@ -8,6 +8,7 @@ import { ComisionService } from '@core/services/comision.service';
 import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
 import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
 import { ComisionResponse } from '@core/models/comision.models';
+import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
@@ -48,7 +49,7 @@ export class InscriptionCourseComponent implements OnInit {
 
     // Modal State
     showCommissionModal: boolean = false;
-    availableCommissions: ComisionResponse[] = [];
+    availableCommissions: ComisionDisponibleDTO[] = [];
     selectedMateriaForEnrollment: any = null;
 
     // Filters
@@ -216,7 +217,7 @@ export class InscriptionCourseComponent implements OnInit {
         });
     }
 
-    onEnroll(commission: ComisionResponse) {
+    onEnroll(commission: ComisionDisponibleDTO) {
         if (!this.selectedMateriaForEnrollment) return;
 
         this.isLoading = true;
@@ -225,7 +226,7 @@ export class InscriptionCourseComponent implements OnInit {
 
         this.inscripcionCursadoService.inscribirCursado({
             idMateria: this.selectedMateriaForEnrollment.idMateria,
-            idComision: commission.id
+            idComision: commission.idComision
         }).subscribe({
             next: (response) => {
                 console.log('✅ Inscripción exitosa:', response);

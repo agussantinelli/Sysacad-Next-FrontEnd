@@ -38,19 +38,20 @@
             <p class="section-subtitle">Selecciona una comisión:</p>
 
             <div class="commission-list">
-                @for (comision of commissions; track comision.id) {
-                <div class="commission-card" [class.selected]="selectedCommission?.id === comision.id"
+                @for (comision of commissions; track comision.idComision) {
+                <div class="commission-card" [class.selected]="selectedCommission?.idComision === comision.idComision"
                     (click)="onSelectCommission(comision)">
 
                     <div class="commission-content">
                         <div class="commission-info">
-                            <h4 class="commission-name">{{ comision.nombre }}</h4>
+                            <h4 class="commission-name">{{ comision.nombreComision }}</h4>
 
                             <!-- Professors Line -->
                             <div class="commission-detail-row">
                                 <span class="material-icons icon-sm">person</span>
-                                <span class="detail-text" title="{{ getProfesoresForSubject(comision) }}">
-                                    {{ getProfesoresForSubject(comision) }}
+                                <span class="detail-text" title="{{ comision.profesores.join(', ') }}">
+                                    {{ comision.profesores.length > 0 ? comision.profesores.join(', ') : 'Sin profesor
+                                    asignado' }}
                                 </span>
                             </div>
 
@@ -58,17 +59,22 @@
                             <div class="commission-detail-row">
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">schedule</span>
-                                    {{ comision.turno }}
+                                    <div class="flex flex-col">
+                                        <span>{{ comision.turno }}</span>
+                                        @for (horario of comision.horarios; track horario) {
+                                        <span class="text-xs text-secondary">{{ horario }}</span>
+                                        }
+                                    </div>
                                 </span>
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">place</span>
-                                    {{ comision.nombreSalon || '---' }}
+                                    {{ comision.ubicacion || '---' }}
                                 </span>
                             </div>
                         </div>
 
                         <div class="selection-indicator">
-                            @if (selectedCommission?.id === comision.id) {
+                            @if (selectedCommission?.idComision === comision.idComision) {
                             <div class="radio-checked">
                                 <span class="material-icons check-icon">check</span>
                             </div>
