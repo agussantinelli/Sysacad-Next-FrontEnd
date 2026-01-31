@@ -75,4 +75,11 @@
         (close)="closeModal()" (selectCommission)="onEnroll($event)">
     </app-inscription-modal>
     }
+
+    @if (showConfirmationModal) {
+    <app-inscription-confirmation-modal [commission]="selectedCommissionForConfirmation"
+        [subjectName]="selectedMateriaForEnrollment?.nombre" (close)="closeConfirmationModal()"
+        (confirm)="confirmEnrollment()">
+    </app-inscription-confirmation-modal>
+    }
 </app-page-layout>

@@ -45,6 +45,7 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
         if (this.examDetail) {
             this.confirmExam.emit();
         } else if (this.selectedCommission) {
+            // Emit directly so the parent can handle the next step (Confirmation Modal)
             this.selectCommission.emit(this.selectedCommission);
         }
     }

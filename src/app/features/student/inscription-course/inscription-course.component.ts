@@ -12,6 +12,7 @@ import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
+import { InscriptionConfirmationModalComponent } from '@shared/components/inscription-confirmation-modal/inscription-confirmation-modal.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 import { AuthService } from '@core/services/auth.service';
 import { take } from 'rxjs/operators';
@@ -26,6 +27,7 @@ import { take } from 'rxjs/operators';
         PageLayoutComponent,
         LoadingSpinnerComponent,
         InscriptionModalComponent,
+        InscriptionConfirmationModalComponent,
         AlertMessageComponent
     ],
     templateUrl: './inscription-course.component.html',
@@ -49,8 +51,10 @@ export class InscriptionCourseComponent implements OnInit {
 
     // Modal State
     showCommissionModal: boolean = false;
+    showConfirmationModal: boolean = false;
     availableCommissions: ComisionDisponibleDTO[] = [];
     selectedMateriaForEnrollment: any = null;
+    selectedCommissionForConfirmation: ComisionDisponibleDTO | null = null;
 
     // Filters
     filterNombre: string = '';
@@ -217,22 +221,35 @@ export class InscriptionCourseComponent implements OnInit {
         });
     }
 
+    // Step 1: User clicks "Confirmar" in the list modal (Inscribirse)
     onEnroll(commission: ComisionDisponibleDTO) {
         if (!this.selectedMateriaForEnrollment) return;
 
+        // Save selection and switch modals
+        this.selectedCommissionForConfirmation = commission;
+        this.showCommissionModal = false; // Close list
+        this.showConfirmationModal = true; // Open confirmation
+    }
+
+    // Step 2: User clicks "Confirmar Definitivamente" in the confirmation modal
+    confirmEnrollment() {
+        if (!this.selectedMateriaForEnrollment || !this.selectedCommissionForConfirmation) return;
+
         this.isLoading = true;
-        this.showCommissionModal = false;
+        this.showConfirmationModal = false; // Close confirm modal
         this.clearMessages();
 
         this.inscripcionCursadoService.inscribirCursado({
             idMateria: this.selectedMateriaForEnrollment.idMateria,
-            idComision: commission.idComision
+            idComision: this.selectedCommissionForConfirmation.idComision
         }).subscribe({
             next: (response) => {
                 console.log('✅ Inscripción exitosa:', response);
                 this.successMessage = 'Inscripción realizada con éxito!';
                 this.isLoading = false;
                 this.loadMaterias();
+                // Reset state
+                this.selectedCommissionForConfirmation = null;
             },
             error: (err) => {
                 console.error('Error enrolling', err);
@@ -242,14 +259,19 @@ export class InscriptionCourseComponent implements OnInit {
         });
     }
 
-    clearMessages() {
-        this.errorMessage = '';
-        this.successMessage = '';
-    }
-
     closeModal() {
         this.showCommissionModal = false;
         this.selectedMateriaForEnrollment = null;
+    }
+
+    closeConfirmationModal() {
+        this.showConfirmationModal = false;
+        this.selectedCommissionForConfirmation = null;
+    }
+
+    clearMessages() {
+        this.errorMessage = '';
+        this.successMessage = '';
     }
 
     goBack(): void {
