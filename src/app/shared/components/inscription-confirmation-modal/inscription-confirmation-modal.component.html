@@ -52,6 +52,35 @@
                 <span class="material-icons">info</span>
                 <span>Verifica los datos antes de confirmar.</span>
             </div>
+            } @else if (examTable) {
+            <div class="confirmation-card">
+                <h3 class="subject-title">{{ subjectName }}</h3>
+
+                <div class="detail-row">
+                    <span class="label">Mesa:</span>
+                    <span class="value">{{ examTable.nombreMesa }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Fecha:</span>
+                    <span class="value">{{ examTable.fecha }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Hora:</span>
+                    <span class="value">{{ examTable.hora }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Presidente:</span>
+                    <span class="value">{{ examTable.presidente || 'A designar' }}</span>
+                </div>
+            </div>
+
+            <div class="alert-info">
+                <span class="material-icons">info</span>
+                <span>Verifica los datos de la mesa antes de confirmar.</span>
+            </div>
             }
         </div>
 

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angu
 import { CommonModule } from '@angular/common';
 import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
+import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
 
 @Component({
     selector: 'app-inscription-modal',
@@ -24,10 +25,16 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
     // Output for Course
     @Output() selectCommission = new EventEmitter<ComisionDisponibleDTO>();
 
-    // Output for Exam
+    // Output for Exam List
+    @Output() selectExamTable = new EventEmitter<MesaExamenDisponibleDTO>();
+
+    // Output for Exam Confirmation
     @Output() confirmExam = new EventEmitter<void>();
 
     selectedCommission: ComisionDisponibleDTO | null = null;
+    selectedExamTable: MesaExamenDisponibleDTO | null = null;
+
+    @Input() examTables: MesaExamenDisponibleDTO[] = [];
 
     ngOnInit(): void {
         document.body.style.overflow = 'hidden';
@@ -39,14 +46,21 @@ export class InscriptionModalComponent implements OnInit, OnDestroy {
 
     onSelectCommission(commission: ComisionDisponibleDTO) {
         this.selectedCommission = commission;
+        this.selectedExamTable = null;
+    }
+
+    onSelectExamTable(table: MesaExamenDisponibleDTO) {
+        this.selectedExamTable = table;
+        this.selectedCommission = null;
     }
 
     confirm() {
         if (this.examDetail) {
             this.confirmExam.emit();
         } else if (this.selectedCommission) {
-            // Emit directly so the parent can handle the next step (Confirmation Modal)
             this.selectCommission.emit(this.selectedCommission);
+        } else if (this.selectedExamTable) {
+            this.selectExamTable.emit(this.selectedExamTable);
         }
     }
 

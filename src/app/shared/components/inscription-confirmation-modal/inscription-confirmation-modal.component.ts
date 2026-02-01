@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
+import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
 
 @Component({
     selector: 'app-inscription-confirmation-modal',
@@ -11,6 +12,7 @@ import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 })
 export class InscriptionConfirmationModalComponent implements OnInit, OnDestroy {
     @Input() commission: ComisionDisponibleDTO | null = null;
+    @Input() examTable: MesaExamenDisponibleDTO | null = null;
     @Input() subjectName: string = '';
     @Output() confirm = new EventEmitter<void>();
     @Output() close = new EventEmitter<void>();

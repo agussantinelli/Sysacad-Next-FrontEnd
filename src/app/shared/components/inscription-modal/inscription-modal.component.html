@@ -33,6 +33,69 @@
                 </div>
             </div>
             }
+            @else if (examTables.length > 0) {
+            <p class="section-subtitle">Selecciona una mesa de examen:</p>
+
+            <div class="commission-list">
+                @for (table of examTables; track table.idDetalleMesa) {
+                <div class="commission-card" [class.selected]="selectedExamTable?.idDetalleMesa === table.idDetalleMesa"
+                    [class.disabled-card]="!table.habilitada"
+                    (click)="table.habilitada ? onSelectExamTable(table) : null">
+
+                    <div class="commission-content">
+                        <div class="commission-info">
+                            <h4 class="commission-name">
+                                {{ table.nombreMesa }}
+                                @if (!table.habilitada) {
+                                <span class="badge-error">No disponible</span>
+                                }
+                            </h4>
+
+                            <!-- Error Message -->
+                            @if (!table.habilitada) {
+                            <div class="overlap-warning">
+                                <span class="material-icons warning-icon">warning_amber</span>
+                                <span>{{ table.mensaje }}</span>
+                            </div>
+                            }
+
+                            <!-- Line 1: Date & Time -->
+                            <div class="commission-detail-row">
+                                <span class="detail-group">
+                                    <span class="material-icons icon-sm">event</span>
+                                    <span class="detail-text">{{ table.fecha }}</span>
+                                </span>
+                                <span class="detail-group">
+                                    <span class="material-icons icon-sm">schedule</span>
+                                    <span class="detail-text">{{ table.hora }}</span>
+                                </span>
+                            </div>
+
+                            <!-- Line 2: President -->
+                            <div class="commission-detail-row">
+                                <span class="material-icons icon-sm">person</span>
+                                <span class="detail-text" title="{{ table.presidente }}">
+                                    {{ table.presidente || 'A designar' }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="selection-indicator">
+                            @if (selectedExamTable?.idDetalleMesa === table.idDetalleMesa) {
+                            <div class="radio-checked">
+                                <span class="material-icons check-icon">check</span>
+                            </div>
+                            } @else if (table.habilitada) {
+                            <div class="radio-unchecked"></div>
+                            } @else {
+                            <div class="radio-disabled"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            }
             <!-- Mode 2: Commission Selection (List View) -->
             @else {
             <p class="section-subtitle">Selecciona una comisión:</p>
@@ -113,7 +176,8 @@
 
         <div class="modal-footer">
             <button class="btn-cancel" (click)="onClose()">Cancelar</button>
-            <button class="btn-confirm" [disabled]="!examDetail && !selectedCommission" (click)="confirm()">
+            <button class="btn-confirm" [disabled]="!examDetail && !selectedCommission && !selectedExamTable"
+                (click)="confirm()">
                 Confirmar Inscripción
             </button>
         </div>
