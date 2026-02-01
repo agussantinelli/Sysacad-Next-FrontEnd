@@ -29,8 +29,6 @@
                     <ng-container [ngSwitch]="col.type">
                         <span *ngSwitchCase="'date'">{{ getCellValue(row, col) | date:'short' }}</span>
                         <span *ngSwitchCase="'currency'">{{ getCellValue(row, col) | currency }}</span>
-
-                        <!-- Custom: Correlativas Button -->
                         <div *ngSwitchCase="'custom'" class="flex justify-center">
                             <ng-container *ngIf="col.key === 'correlativasDisplay'">
                                 <button *ngIf="getCellValue(row, col)?.hasCorrelatives"
@@ -70,10 +68,8 @@
                                         style="white-space: normal; word-wrap: break-word;">
                                         <li *ngFor="let item of items"
                                             class="flex items-center justify-center gap-2 text-xs text-white font-semibold">
-                                            <!-- Correlative Name -->
                                             <span class="leading-relaxed uppercase tracking-wider">{{ item.nombre ||
                                                 item }}</span>
-                                            <!-- Condition Badge (if object with badge property) -->
                                             <span *ngIf="item.badge"
                                                 class="inline-block px-1.5 py-0.5 rounded text-[10px] font-bold"
                                                 [class.bg-green-500]="item.badge === 'P'"

@@ -43,7 +43,7 @@ export class MesaExamenService {
         );
     }
 
-    listarMesasPorMateria(idMateria: number): Observable<MesaExamenDisponibleDTO[]> {
+    listarMesasPorMateria(idMateria: string): Observable<MesaExamenDisponibleDTO[]> {
         return from(axiosClient.get<MesaExamenDisponibleDTO[]>(`/materias/${idMateria}/mesas`)).pipe(
             map(response => response.data)
         );
