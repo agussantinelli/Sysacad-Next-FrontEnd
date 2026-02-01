@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
 import { MesaExamenRequest, MesaExamenResponse } from '@core/models/mesa-examen.models';
 import { DetalleMesaExamenRequest, DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
+import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
 
 @Injectable({
     providedIn: 'root'
@@ -38,6 +39,12 @@ export class MesaExamenService {
 
     obtenerDetalleMesa(idMesa: string, nroDetalle: number): Observable<DetalleMesaExamenResponse> {
         return from(axiosClient.get<DetalleMesaExamenResponse>(`/mesas/detalles/${idMesa}/${nroDetalle}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    listarMesasPorMateria(idMateria: number): Observable<MesaExamenDisponibleDTO[]> {
+        return from(axiosClient.get<MesaExamenDisponibleDTO[]>(`/materias/${idMateria}/mesas`)).pipe(
             map(response => response.data)
         );
     }
