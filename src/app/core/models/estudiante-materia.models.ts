@@ -9,4 +9,5 @@ export interface EstudianteMateriaDTO {
     horasCursado: number;
     cuatrimestre: string;
     correlativas: string[];
+    tieneInscripcionExamenPendiente: boolean;
 }

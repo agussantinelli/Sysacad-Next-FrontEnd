@@ -91,7 +91,13 @@ export class InscriptionExamComponent implements OnInit {
             name: 'sin-fechas',
             label: 'Sin fechas',
             class: 'btn-disabled-action',
-            isVisible: (row: any) => row.condicionAcademica === true && row.sePuedeInscribir === false
+            isVisible: (row: any) => row.condicionAcademica === true && row.sePuedeInscribir === false && !row.tieneInscripcionExamenPendiente
+        },
+        {
+            name: 'pendiente',
+            label: 'Inscripción Pendiente',
+            class: 'btn-pending-action', // Need to define this style or reuse disabled
+            isVisible: (row: any) => row.tieneInscripcionExamenPendiente === true
         }
     ];
 
@@ -112,10 +118,14 @@ export class InscriptionExamComponent implements OnInit {
                         const esIngles = ['Inglés I', 'Inglés II'].includes(materia.nombre);
                         const esRegular = materia.estado === 'REGULAR';
                         const estaAprobada = materia.estado === 'APROBADA';
+                        // Add check for pending inscription
+                        const tieneInscripcionPendiente = materia.tieneInscripcionExamenPendiente;
+
+                        // Condition: Not Approved AND (Regular OR Ingles) AND NOT Pending Inscription
                         const condicionAcademica = !estaAprobada && (esRegular || esIngles);
 
                         materia.condicionAcademica = condicionAcademica;
-                        materia.sePuedeInscribir = condicionAcademica;
+                        materia.sePuedeInscribir = condicionAcademica && !tieneInscripcionPendiente;
                     });
                 });
 
