@@ -40,13 +40,25 @@
             <div class="commission-list">
                 @for (comision of commissions; track comision.idComision) {
                 <div class="commission-card" [class.selected]="selectedCommission?.idComision === comision.idComision"
-                    (click)="onSelectCommission(comision)">
+                    [class.disabled-card]="!comision.habilitada"
+                    (click)="comision.habilitada ? onSelectCommission(comision) : null">
 
                     <div class="commission-content">
                         <div class="commission-info">
-                            <h4 class="commission-name">{{ comision.nombreComision }}</h4>
+                            <h4 class="commission-name">
+                                {{ comision.nombreComision }}
+                                @if (!comision.habilitada) {
+                                <span class="badge-error">No disponible</span>
+                                }
+                            </h4>
 
-                            <!-- Line 1: Professors -->
+                            @if (!comision.habilitada) {
+                            <div class="overlap-warning">
+                                <span class="material-icons warning-icon">warning_amber</span>
+                                <span>{{ comision.mensaje }}</span>
+                            </div>
+                            }
+
                             <div class="commission-detail-row">
                                 <span class="material-icons icon-sm">person</span>
                                 <span class="detail-text" title="{{ comision.profesores.join(', ') }}">
@@ -55,7 +67,6 @@
                                 </span>
                             </div>
 
-                            <!-- Line 2: Turno -->
                             <div class="commission-detail-row">
                                 <span class="material-icons icon-sm">brightness_6</span>
                                 <span class="detail-text">{{ comision.turno }}</span>
@@ -83,8 +94,10 @@
                             <div class="radio-checked">
                                 <span class="material-icons check-icon">check</span>
                             </div>
-                            } @else {
+                            } @else if (comision.habilitada) {
                             <div class="radio-unchecked"></div>
+                            } @else {
+                            <div class="radio-disabled"></div>
                             }
                         </div>
                     </div>

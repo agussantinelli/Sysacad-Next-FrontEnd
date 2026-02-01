@@ -206,6 +206,69 @@
     font-weight: bold;
 }
 
+/* Disabled State */
+.commission-card.disabled-card {
+    opacity: 0.7;
+    background: #252526;
+    border-color: #333;
+    cursor: not-allowed;
+}
+
+.commission-card.disabled-card:hover {
+    background: #252526;
+    border-color: #333;
+}
+
+.commission-card.disabled-card .commission-name,
+.commission-card.disabled-card .detail-text {
+    color: #666;
+}
+
+/* Error Badge */
+.badge-error {
+    font-size: 0.75rem;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Overlap Warning */
+.overlap-warning {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    background: rgba(234, 179, 8, 0.1);
+    /* Amber 500/10 */
+    border: 1px solid rgba(234, 179, 8, 0.2);
+    border-radius: 4px;
+    color: #fca5a5;
+    /* Red-ish text for high contrast on dark bg */
+    font-size: 0.9rem;
+}
+
+.warning-icon {
+    font-size: 18px;
+    color: #f87171;
+}
+
+/* Radio Disabled */
+.radio-disabled {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    background: #333;
+    cursor: not-allowed;
+}
+
 /* Empty State */
 .empty-state {
     text-align: center;
