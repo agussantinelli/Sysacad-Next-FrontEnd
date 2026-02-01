@@ -1,0 +1,23 @@
+<div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h3 class="modal-title">{{ title }}</h3>
+            <button class="btn-close-icon" (click)="onClose()">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <p>{{ message }}</p>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel" (click)="onClose()">{{ cancelText }}</button>
+            <button class="btn-confirm" [class]="type" (click)="onConfirm()">
+                {{ confirmText }}
+            </button>
+        </div>
+
+    </div>
+</div>
