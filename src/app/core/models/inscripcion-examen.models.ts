@@ -1,7 +1,8 @@
 export interface InscripcionExamenRequest {
     idUsuario?: string; // UUID, Optional
-    idMesaExamen: string; // UUID
-    nroDetalle: number;
+    idMesaExamen?: string; // UUID
+    nroDetalle?: number;
+    idDetalleMesa?: string; // UUID (Alternative for single ID)
 }
 
 export interface InscripcionExamenResponse {
