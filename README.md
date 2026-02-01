@@ -58,10 +58,11 @@
 <ul>
     <li><strong>📱 Mobile First:</strong> Diseño 100% responsivo para gestionar la vida académica desde el celular.</li>
     <li><strong>⚡ Performance:</strong> Carga de datos optimizada y navegación SPA (Single Page Application) sin recargas.</li>
-    <li><strong>🔒 Seguridad Robusta:</strong> Backend Java con <strong>JWT</strong>. Cliente Frontend con <strong>Axios Interceptors</strong> para inyección automática de tokens y manejo de sesión seguro.</li>
+    <li><strong>🔒 Seguridad Robusta:</strong> Backend Java con <strong>JWT</strong>. Cliente Frontend con <strong>Axios Interceptors</strong> para inyección automática de tokens y validar la integridad de la sesión del servidor (BootId).</li>
     <li><strong>🧠 Smart Validation:</strong> Reglas de negocio en el cliente para evitar errores de inscripción antes de enviar la solicitud.</li>
     <li><strong>🔔 Sistema de Alertas Global:</strong> Feedback unificado (Éxito, Error, Info) gestionado por un servicio centralizado, asegurando consistencia en toda la aplicación.</li>
-    <li><strong>✅ Flujo de Inscripción Dual:</strong> Sistema de modal doble (Selección -> Confirmación) que previene inscripciones accidentales y muestra detalles críticos (Profesor, Horario) antes de confirmar.</li>
+    <li><strong>✅ Flujo de Inscripción Confimada:</strong> Sistema de modal doble (Selección -> Confirmación) que previene inscripciones accidentales.</li>
+    <li><strong>📋 Gestión Activa:</strong> Nueva sección "Mis Inscripciones" para visualizar y dar de baja exámenes activos en tiempo real.</li>
 </ul>
 
 <hr>
@@ -155,9 +156,13 @@
 │   │   ├── shared/
 │   │   │   ├── components/             # Reutilizables (Table, Spinner, Alert, Modal...)
 │   │   │   │   ├── alert-message/      # Componente visual de alertas
+│   │   │   │   ├── loading-spinner/    # Spinner de carga
+│   │   │   │   ├── page-layout/        # Layout estándar de páginas
 │   │   │   │   ├── inscription-modal/  # Modal de selección de comisión/mesa
-│   │   │   │   └── inscription-confirmation-modal/ # Modal de confirmación final
-│   │   │   └── interfaces/             # Interfaces de UI (TableConfig)
+│   │   │   │   ├── inscription-confirmation-modal/ # Modal de confirmación de inscripción
+│   │   │   │   └── confirmation-modal/ # Modal genérico de confirmación
+│   │   │   ├── interfaces/             # Interfaces de UI (TableConfig)
+│   │   │   └── pipes/                  # Pipes (DateFormat...)
 │   ├── assets/                         # Recursos estáticos
 │   ├── environments/                   # Configuraciones de entorno
 │   ├── index.html                      # Punto de entrada HTML
@@ -261,6 +266,7 @@ FRONTEND_URL=http://localhost:4200
 | **Académico** | **Inscripciones** | | | |
 | | Inscripción a Cursado | ✅ | ❌ | ❌ |
 | | Inscripción a Examen | ✅ | ❌ | ❌ |
+| | Mis Inscripciones | ✅ | ❌ | ❌ |
 | | **Consultas** | | | |
 | | Estado Académico | ✅ | ❌ | ❌ |
 | | Plan de Estudios | ✅ | ❌ | ❌ |
