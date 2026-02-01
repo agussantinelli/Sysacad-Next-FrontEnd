@@ -9,4 +9,5 @@ export interface LoginRequest {
 export interface AuthResponse {
     token: string;
     usuario: UsuarioResponse;
+    bootId: string;
 }

@@ -30,9 +30,12 @@ export class AuthService {
     login(credentials: LoginRequest): Observable<UsuarioResponse> {
         return from(axiosClient.post<AuthResponse>('/auth/login', credentials)).pipe(
             map(response => response.data),
-            tap(({ token, usuario }) => {
+            tap(({ token, usuario, bootId }) => {
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(usuario));
+                if (bootId) {
+                    localStorage.setItem('bootId', bootId);
+                }
                 this.currentUserSubject.next(usuario);
             }),
             map(({ usuario }) => usuario)
@@ -42,6 +45,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('bootId');
         sessionStorage.removeItem('welcomeShown');
         this.currentUserSubject.next(null);
         this.router.navigate(['/']);
