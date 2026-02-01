@@ -5,4 +5,6 @@ export interface ComisionDisponibleDTO {
     ubicacion: string;       // "Aula 305 (Rosario)"
     horarios: string[];      // ["LUNES 18:00 - 22:00"]
     profesores: string[];    // ["Juan Perez", "Maria Garcia"]
+    habilitada: boolean;     // true si se puede inscribir
+    mensaje: string;         // "Disponible", "Superposición con Análisis II", "Cupo lleno"
 }
