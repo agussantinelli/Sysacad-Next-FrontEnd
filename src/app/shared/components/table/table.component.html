@@ -30,6 +30,21 @@
                         <span *ngSwitchCase="'date'">{{ getCellValue(row, col) | date:'short' }}</span>
                         <span *ngSwitchCase="'currency'">{{ getCellValue(row, col) | currency }}</span>
 
+                        <!-- Custom: Correlativas Button -->
+                        <div *ngSwitchCase="'custom'" class="flex justify-center">
+                            <ng-container *ngIf="col.key === 'correlativasDisplay'">
+                                <button *ngIf="getCellValue(row, col)?.hasCorrelatives"
+                                    (click)="emitAction('viewCorrelatives', row)"
+                                    style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;"
+                                    class="inline-flex items-center gap-1.5 text-white hover:opacity-70 transition-opacity">
+                                    <span class="material-icons" style="font-size: 16px;">visibility</span>
+                                    <span class="text-sm font-medium">{{ getCellValue(row, col)?.count }}</span>
+                                </button>
+                                <span *ngIf="!getCellValue(row, col)?.hasCorrelatives"
+                                    class="text-gray-400 font-medium text-sm">NO</span>
+                            </ng-container>
+                        </div>
+
                         <div *ngSwitchCase="'list'" class="w-full flex flex-col"
                             [class.items-center]="col.align === 'center'"
                             [class.items-start]="!col.align || col.align === 'left'"
@@ -52,11 +67,17 @@
                                         class="mt-2 w-full text-center space-y-1 animate-fadeIn"
                                         style="white-space: normal; word-wrap: break-word;">
                                         <li *ngFor="let item of items"
-                                            class="flex items-center justify-center gap-2 text-xs text-white uppercase tracking-wider font-semibold">
-                                            <div
-                                                class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 shadow-[0_0_4px_rgba(59,130,246,0.8)]">
-                                            </div>
-                                            <span class="leading-relaxed">{{ item }}</span>
+                                            class="flex items-center justify-center gap-2 text-xs text-white font-semibold">
+                                            <!-- Correlative Name -->
+                                            <span class="leading-relaxed uppercase tracking-wider">{{ item.nombre ||
+                                                item }}</span>
+                                            <!-- Condition Badge (if object with badge property) -->
+                                            <span *ngIf="item.badge"
+                                                class="inline-block px-1.5 py-0.5 rounded text-[10px] font-bold"
+                                                [class.bg-green-500]="item.badge === 'P'"
+                                                [class.bg-yellow-500]="item.badge === 'R'" [title]="item.condicion">
+                                                {{ item.badge }}
+                                            </span>
                                         </li>
                                     </ul>
                                 </ng-container>
@@ -67,7 +88,13 @@
                                             [class.justify-center]="col.align === 'center'"
                                             [class.justify-start]="!col.align || col.align === 'left'"
                                             [class.justify-end]="col.align === 'right'">
-                                            <span class="leading-relaxed">{{ item }}</span>
+                                            <span class="leading-relaxed">{{ item.nombre || item }}</span>
+                                            <span *ngIf="item.badge"
+                                                class="inline-block px-1.5 py-0.5 rounded text-[10px] font-bold"
+                                                [class.bg-green-500]="item.badge === 'P'"
+                                                [class.bg-yellow-500]="item.badge === 'R'" [title]="item.condicion">
+                                                {{ item.badge }}
+                                            </span>
                                         </li>
                                         <span *ngIf="items.length === 0">-</span>
                                     </ul>
