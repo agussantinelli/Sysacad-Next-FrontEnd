@@ -37,6 +37,10 @@ export const routes: Routes = [
         loadComponent: () => import('@features/student/inscription-exam/inscription-exam.component').then(m => m.InscriptionExamComponent)
     },
     {
+        path: 'academic/my-inscriptions',
+        loadComponent: () => import('@features/student/my-inscriptions/my-inscriptions.component').then(m => m.MyInscriptionsComponent)
+    },
+    {
         path: 'academic/status',
         loadComponent: () => import('@features/student/academic-status/academic-status.component').then(m => m.AcademicStatusComponent)
     },
