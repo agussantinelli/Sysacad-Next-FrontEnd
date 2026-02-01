@@ -60,6 +60,8 @@
     <li><strong>⚡ Performance:</strong> Carga de datos optimizada y navegación SPA (Single Page Application) sin recargas.</li>
     <li><strong>🔒 Seguridad Robusta:</strong> Backend Java con <strong>JWT</strong>. Cliente Frontend con <strong>Axios Interceptors</strong> para inyección automática de tokens y manejo de sesión seguro.</li>
     <li><strong>🧠 Smart Validation:</strong> Reglas de negocio en el cliente para evitar errores de inscripción antes de enviar la solicitud.</li>
+    <li><strong>🔔 Sistema de Alertas Global:</strong> Feedback unificado (Éxito, Error, Info) gestionado por un servicio centralizado, asegurando consistencia en toda la aplicación.</li>
+    <li><strong>✅ Flujo de Inscripción Dual:</strong> Sistema de modal doble (Selección -> Confirmación) que previene inscripciones accidentales y muestra detalles críticos (Profesor, Horario) antes de confirmar.</li>
 </ul>
 
 <hr>
@@ -152,6 +154,9 @@
 │   │   │   └── navbar/                 # Barra de Navegación Responsive
 │   │   ├── shared/
 │   │   │   ├── components/             # Reutilizables (Table, Spinner, Alert, Modal...)
+│   │   │   │   ├── alert-message/      # Componente visual de alertas
+│   │   │   │   ├── inscription-modal/  # Modal de selección de comisión/mesa
+│   │   │   │   └── inscription-confirmation-modal/ # Modal de confirmación final
 │   │   │   └── interfaces/             # Interfaces de UI (TableConfig)
 │   ├── assets/                         # Recursos estáticos
 │   ├── environments/                   # Configuraciones de entorno
