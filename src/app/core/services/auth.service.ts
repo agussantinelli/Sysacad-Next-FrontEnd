@@ -57,6 +57,6 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return !!this.currentUserSubject.value || !!localStorage.getItem('token');
+        return (!!this.currentUserSubject.value || !!localStorage.getItem('token')) && !!localStorage.getItem('bootId');
     }
 }
