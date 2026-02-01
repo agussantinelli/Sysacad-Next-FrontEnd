@@ -31,7 +31,7 @@
             <div class="card-body">
                 <div class="detail-row">
                     <span class="material-icons icon-sm">event</span>
-                    <span>{{ inscripcion.fechaExamen }}</span>
+                    <span>{{ inscripcion.fechaExamen | dateFormat }}</span>
                 </div>
                 <div class="detail-row">
                     <span class="material-icons icon-sm">schedule</span>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="card-actions">
-                <button class="btn-cancel" (click)="onUnenroll(inscripcion.id)"
+                <button class="btn-cancel" (click)="onUnenrollClick(inscripcion.id)"
                     [disabled]="inscripcion.estado !== 'PENDIENTE'">
                     Dar de baja
                 </button>
@@ -63,3 +63,11 @@
     }
     }
 </ng-template>
+
+@if (showConfirmModal) {
+<app-confirmation-modal title="Dar de Baja Inscripción"
+    message="¿Estás seguro que deseas darte de baja de este examen? Si la fecha límite ha pasado, no podrás volver a inscribirte."
+    confirmText="Sí, dar de baja" cancelText="Cancelar" type="danger" (confirm)="onConfirmUnenroll()"
+    (close)="onCancelUnenroll()">
+</app-confirmation-modal>
+}
