@@ -16,7 +16,7 @@
 
                 <div class="detail-row">
                     <span class="label"><span class="material-icons icon-sm">event</span> Fecha:</span>
-                    <span class="value">{{ examDetail.diaExamen }}</span>
+                    <span class="value">{{ examDetail.diaExamen | dateFormat }}</span>
                 </div>
                 <div class="detail-row">
                     <span class="label"><span class="material-icons icon-sm">schedule</span> Hora:</span>
@@ -51,7 +51,7 @@
                             <div class="commission-detail-row">
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">event</span>
-                                    <span class="detail-text">{{ table.fecha }}</span>
+                                    <span class="detail-text">{{ table.fecha | dateFormat }}</span>
                                 </span>
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">schedule</span>

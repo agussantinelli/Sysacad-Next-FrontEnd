@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
 
+import { DateFormatPipe } from '@shared/pipes/date-format.pipe';
+
 @Component({
     selector: 'app-inscription-confirmation-modal',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, DateFormatPipe],
     templateUrl: './inscription-confirmation-modal.component.html',
     styleUrls: ['./styles/inscription-confirmation-modal.component.css']
 })
