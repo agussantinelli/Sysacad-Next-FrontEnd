@@ -10,7 +10,6 @@ import { AuthService } from '@core/services/auth.service';
 import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
 import { InscripcionExamenRequest } from '@core/models/inscripcion-examen.models';
 import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
-// import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models'; // Keep if reused for mapping or remove if replaced totally. Keeping for now as types might be used in modal input.
 import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { take } from 'rxjs/operators';
@@ -54,11 +53,9 @@ export class InscriptionExamComponent implements OnInit {
     availableExamTables: MesaExamenDisponibleDTO[] = [];
     selectedExamTable: MesaExamenDisponibleDTO | null = null;
 
-    // We map to this for the confirmation view in the modal
-    // mappedExamDetail: DetalleMesaExamenResponse | null = null; // Removed as per instruction
-
     selectedMateriaForEnrollment: any = null;
-    // showModal: boolean = false; // Removed as per instruction
+
+    // Filters
 
     // Filters
     filterNombre: string = '';

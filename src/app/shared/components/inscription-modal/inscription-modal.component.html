@@ -39,25 +39,13 @@
             <div class="commission-list">
                 @for (table of examTables; track table.idDetalleMesa) {
                 <div class="commission-card" [class.selected]="selectedExamTable?.idDetalleMesa === table.idDetalleMesa"
-                    [class.disabled-card]="!table.habilitada"
-                    (click)="table.habilitada ? onSelectExamTable(table) : null">
+                    (click)="onSelectExamTable(table)">
 
                     <div class="commission-content">
                         <div class="commission-info">
                             <h4 class="commission-name">
                                 {{ table.nombreMesa }}
-                                @if (!table.habilitada) {
-                                <span class="badge-error">No disponible</span>
-                                }
                             </h4>
-
-                            <!-- Error Message -->
-                            @if (!table.habilitada) {
-                            <div class="overlap-warning">
-                                <span class="material-icons warning-icon">warning_amber</span>
-                                <span>{{ table.mensaje }}</span>
-                            </div>
-                            }
 
                             <!-- Line 1: Date & Time -->
                             <div class="commission-detail-row">
@@ -85,10 +73,8 @@
                             <div class="radio-checked">
                                 <span class="material-icons check-icon">check</span>
                             </div>
-                            } @else if (table.habilitada) {
-                            <div class="radio-unchecked"></div>
                             } @else {
-                            <div class="radio-disabled"></div>
+                            <div class="radio-unchecked"></div>
                             }
                         </div>
                     </div>
