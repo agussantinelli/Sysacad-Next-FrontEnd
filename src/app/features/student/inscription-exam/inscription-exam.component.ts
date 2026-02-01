@@ -95,7 +95,7 @@ export class InscriptionExamComponent implements OnInit {
         },
         {
             name: 'pendiente',
-            label: 'Inscripción Pendiente',
+            label: 'Inscripto',
             class: 'btn-pending-action', // Need to define this style or reuse disabled
             isVisible: (row: any) => row.tieneInscripcionExamenPendiente === true
         }
