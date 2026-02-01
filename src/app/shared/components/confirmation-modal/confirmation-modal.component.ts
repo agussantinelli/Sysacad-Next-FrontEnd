@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './confirmation-modal.component.html',
-    styleUrls: ['./confirmation-modal.component.css']
+    styleUrls: ['./styles/confirmation-modal.component.css']
 })
 export class ConfirmationModalComponent implements OnInit, OnDestroy {
     @Input() title: string = 'Confirmar Operación';
