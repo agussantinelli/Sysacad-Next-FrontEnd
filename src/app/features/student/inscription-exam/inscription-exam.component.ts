@@ -243,7 +243,8 @@ export class InscriptionExamComponent implements OnInit {
 
             const request: InscripcionExamenRequest = {
                 idUsuario: user.id,
-                idDetalleMesa: this.selectedExamTable!.idDetalleMesa
+                idDetalleMesa: this.selectedExamTable!.idDetalleMesa,
+                nroDetalle: this.selectedExamTable!.nroDetalle
             };
 
             this.isLoading = true;
