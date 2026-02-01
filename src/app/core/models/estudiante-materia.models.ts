@@ -1,3 +1,8 @@
+export interface CorrelativaDTO {
+    nombre: string;
+    condicion: string; // "REGULAR" | "PROMOCIONADA"
+}
+
 export interface EstudianteMateriaDTO {
     idMateria: string; // UUID
     nombre: string;
@@ -8,6 +13,6 @@ export interface EstudianteMateriaDTO {
     esElectiva: boolean;
     horasCursado: number;
     cuatrimestre: string;
-    correlativas: string[];
+    correlativas: CorrelativaDTO[];
     tieneInscripcionExamenPendiente: boolean;
 }
