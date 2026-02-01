@@ -11,7 +11,7 @@ import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.
     standalone: true,
     imports: [CommonModule, LoadingSpinnerComponent, PageLayoutComponent],
     templateUrl: './my-inscriptions.component.html',
-    styleUrls: ['./my-inscriptions.component.css']
+    styleUrls: ['./styles/my-inscriptions.component.css']
 })
 export class MyInscriptionsComponent implements OnInit {
     private inscripcionService = inject(InscripcionExamenService);
