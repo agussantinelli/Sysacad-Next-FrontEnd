@@ -1,0 +1,171 @@
+.my-inscriptions-container {
+    width: 100%;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.my-inscriptions-container:not(.widget-mode) {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.widget-mode {
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.widget-title {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Grid Layout */
+.inscriptions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.inscriptions-grid.widget-grid {
+    /* Widget mode specific grid adjustments if needed */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Card Styling */
+.inscription-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.inscription-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--utn-blue);
+    line-height: 1.4;
+}
+
+.status-badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: var(--bg-hover);
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.status-badge.pending {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #b58900;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.detail-row .material-icons {
+    color: var(--text-tertiary);
+    font-size: 1.2rem;
+}
+
+.card-actions {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.btn-cancel {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--utn-red);
+    background: transparent;
+    color: var(--utn-red);
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-cancel:hover:not(:disabled) {
+    background: var(--utn-red);
+    color: white;
+}
+
+.btn-cancel:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: var(--text-tertiary);
+    color: var(--text-tertiary);
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 16px;
+    color: var(--text-secondary);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

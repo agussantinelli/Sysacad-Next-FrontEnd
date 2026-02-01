@@ -1,0 +1,65 @@
+@if (isWidget) {
+<!-- Widget Mode -->
+<div class="my-inscriptions-container widget-mode">
+    <h3 class="widget-title">Inscripciones Activas</h3>
+    <ng-container *ngTemplateOutlet="inscriptionsList"></ng-container>
+</div>
+} @else {
+<!-- Full Page Mode -->
+<app-page-layout title="Mis Inscripciones a Exámenes">
+    <div class="my-inscriptions-container">
+        <ng-container *ngTemplateOutlet="inscriptionsList"></ng-container>
+    </div>
+</app-page-layout>
+}
+
+<ng-template #inscriptionsList>
+    @if (isLoading) {
+    <app-loading-spinner message="Cargando inscripciones..."></app-loading-spinner>
+    } @else {
+    @if (myInscriptions.length > 0) {
+    <div class="inscriptions-grid" [class.widget-grid]="isWidget">
+        @for (inscripcion of myInscriptions; track inscripcion.id) {
+        <div class="inscription-card">
+            <div class="card-header">
+                <h4>{{ inscripcion.nombreMateria }}</h4>
+                <span class="status-badge" [class.pending]="inscripcion.estado === 'PENDIENTE'">
+                    {{ inscripcion.estado }}
+                </span>
+            </div>
+
+            <div class="card-body">
+                <div class="detail-row">
+                    <span class="material-icons icon-sm">event</span>
+                    <span>{{ inscripcion.fechaExamen }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="material-icons icon-sm">schedule</span>
+                    <span>{{ inscripcion.horaExamen }}</span>
+                </div>
+
+                @if (inscripcion.nota) {
+                <div class="detail-row">
+                    <span class="material-icons icon-sm">grade</span>
+                    <span>Nota: {{ inscripcion.nota }}</span>
+                </div>
+                }
+            </div>
+
+            <div class="card-actions">
+                <button class="btn-cancel" (click)="onUnenroll(inscripcion.id)"
+                    [disabled]="inscripcion.estado !== 'PENDIENTE'">
+                    Dar de baja
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+    } @else {
+    <div class="empty-state">
+        <span class="material-icons empty-icon">assignment_turned_in</span>
+        <p>No tienes inscripciones a exámenes activas.</p>
+    </div>
+    }
+    }
+</ng-template>
