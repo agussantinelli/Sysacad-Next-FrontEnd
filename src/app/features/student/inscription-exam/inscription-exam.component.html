@@ -55,10 +55,16 @@
         <div class="no-data">No se encontraron materias para inscripción.</div>
         }
         }
-        @if (showModal) {
-        <app-inscription-modal [title]="selectedMateriaForEnrollment?.nombre" [examDetail]="selectedExamDetail"
-            (close)="closeModal()" (confirmExam)="onConfirmEnrollment()">
+        @if (showTableSelectionModal) {
+        <app-inscription-modal [title]="selectedMateriaForEnrollment?.nombre" [examTables]="availableExamTables"
+            (close)="closeTableSelectionModal()" (selectExamTable)="onSelectTable($event)">
         </app-inscription-modal>
+        }
+
+        @if (showConfirmationModal) {
+        <app-inscription-confirmation-modal [subjectName]="selectedMateriaForEnrollment?.nombre"
+            [examTable]="selectedExamTable" (close)="closeConfirmationModal()" (confirm)="onConfirmEnrollment()">
+        </app-inscription-confirmation-modal>
         }
     </div>
 </app-page-layout>

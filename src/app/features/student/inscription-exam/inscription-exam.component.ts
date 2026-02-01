@@ -9,11 +9,14 @@ import { MesaExamenService } from '@core/services/mesa-examen.service';
 import { AuthService } from '@core/services/auth.service';
 import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
 import { InscripcionExamenRequest } from '@core/models/inscripcion-examen.models';
+import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
+// import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models'; // Keep if reused for mapping or remove if replaced totally. Keeping for now as types might be used in modal input.
 import { DetalleMesaExamenResponse } from '@core/models/detalle-mesa-examen.models';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { take } from 'rxjs/operators';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
+import { InscriptionConfirmationModalComponent } from '@shared/components/inscription-confirmation-modal/inscription-confirmation-modal.component';
 import { AlertService } from '@core/services/alert.service';
 
 @Component({
@@ -25,7 +28,8 @@ import { AlertService } from '@core/services/alert.service';
         FormsModule,
         PageLayoutComponent,
         LoadingSpinnerComponent,
-        InscriptionModalComponent
+        InscriptionModalComponent,
+        InscriptionConfirmationModalComponent
     ],
     templateUrl: './inscription-exam.component.html',
     styleUrl: './styles/inscription-exam.component.css'
@@ -41,14 +45,20 @@ export class InscriptionExamComponent implements OnInit {
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
 
-    mesasDisponibles: DetalleMesaExamenResponse[] = [];
+    // Remove mesasDisponibles (bulk list)
+    // mesasDisponibles: DetalleMesaExamenResponse[] = [];
 
     isLoading: boolean = false;
 
     // State for Modal
-    selectedExamDetail: DetalleMesaExamenResponse | null = null;
+    availableExamTables: MesaExamenDisponibleDTO[] = [];
+    selectedExamTable: MesaExamenDisponibleDTO | null = null;
+
+    // We map to this for the confirmation view in the modal
+    // mappedExamDetail: DetalleMesaExamenResponse | null = null; // Removed as per instruction
+
     selectedMateriaForEnrollment: any = null;
-    showModal: boolean = false;
+    // showModal: boolean = false; // Removed as per instruction
 
     // Filters
     filterNombre: string = '';
@@ -101,15 +111,14 @@ export class InscriptionExamComponent implements OnInit {
                 data.forEach(carrera => {
                     carrera.materias.forEach((materia: any) => {
                         materia.tipo = materia.esElectiva ? 'Electiva' : 'Obligatoria';
-                        materia.sePuedeInscribir = false;
 
-                        // Exam Inscription Validation Logic
                         const esIngles = ['Inglés I', 'Inglés II'].includes(materia.nombre);
                         const esRegular = materia.estado === 'REGULAR';
                         const estaAprobada = materia.estado === 'APROBADA';
                         const condicionAcademica = !estaAprobada && (esRegular || esIngles);
 
                         materia.condicionAcademica = condicionAcademica;
+                        materia.sePuedeInscribir = condicionAcademica;
                     });
                 });
 
@@ -118,8 +127,7 @@ export class InscriptionExamComponent implements OnInit {
                 this.extractUniqueNombres();
                 this.extractUniqueNiveles();
 
-                // Load available exam tables
-                this.loadMesas();
+                this.isLoading = false;
             },
             error: (err) => {
                 console.error('❌ [InscriptionExam] Error loading materias:', err);
@@ -129,43 +137,7 @@ export class InscriptionExamComponent implements OnInit {
         });
     }
 
-    loadMesas() {
-        // Use the STUDENT endpoint: /mesas/disponibles
-        this.mesaExamenService.listarMesasDisponibles().subscribe({
-            next: (detalles) => {
-                this.mesasDisponibles = detalles;
-                console.log('✅ [InscriptionExam] Mesas Disponibles loaded:', detalles);
-
-                if (this.carreras.length > 0) {
-                    this.updateInscriptionStatus();
-                }
-                this.isLoading = false;
-            },
-            error: (err) => {
-                console.error('❌ [InscriptionExam] Error loading mesas disponibles:', err);
-                this.alertService.error('Error al cargar mesas de examen disponibles.');
-                this.isLoading = false;
-            }
-        });
-    }
-
-    updateInscriptionStatus() {
-        this.carreras.forEach(carrera => {
-            carrera.materias.forEach((materia: any) => {
-                if (materia.condicionAcademica) {
-                    // Match by ID. Since DetalleMesaExamenResponse has idMateria, we can match directly.
-                    const detalleFound = this.mesasDisponibles.find(d => d.idMateria === materia.idMateria);
-
-                    if (detalleFound) {
-                        materia.sePuedeInscribir = true;
-                        materia.mesaDetalle = detalleFound; // Store the simplified detail
-                    } else {
-                        materia.sePuedeInscribir = false;
-                    }
-                }
-            });
-        });
-    }
+    // Removed loadMesas() and updateInscriptionStatus() as we fetch on demand now.
 
     extractUniqueNombres() {
         const nombres = new Set<string>();
@@ -223,39 +195,49 @@ export class InscriptionExamComponent implements OnInit {
     handleAction(event: ActionEvent<any>) {
         if (event.action === 'inscribirse') {
             const materia = event.row;
-            if (!materia.mesaDetalle) {
-                this.alertService.error('No se encontró mesa para esta materia.');
-                return;
-            }
-
-            const initialDetalle = materia.mesaDetalle as DetalleMesaExamenResponse;
+            this.selectedMateriaForEnrollment = materia;
             this.isLoading = true;
+            this.alertService.clear();
 
-            // Call endpoint: /mesas/detalles/{id}/{nroDetalle}
-            this.mesaExamenService.obtenerDetalleMesa(initialDetalle.idMesaExamen, initialDetalle.nroDetalle).subscribe({
-                next: (fullDetalle) => {
+            this.mesaExamenService.listarMesasPorMateria(materia.idMateria).subscribe({
+                next: (mesas) => {
+                    console.log('📚 Mesas disponibles:', mesas);
                     this.isLoading = false;
-                    this.openConfirmationModal(materia, fullDetalle);
+
+                    if (mesas.length === 0) {
+                        this.alertService.error('No hay mesas de examen disponibles para esta materia.');
+                        return;
+                    }
+
+                    this.availableExamTables = mesas;
+                    this.showTableSelectionModal = true;
                 },
                 error: (err) => {
-                    console.error('Error verifying mesa detail', err);
+                    console.error('Error fetching exam tables', err);
                     this.isLoading = false;
-                    this.alertService.error('No se pudo verificar el detalle de la mesa. Intente nuevamente.');
+                    this.alertService.error('No se pudieron cargar las mesas de examen.');
                 }
             });
         }
     }
 
-    openConfirmationModal(materia: any, detalle: DetalleMesaExamenResponse) {
-        this.selectedMateriaForEnrollment = materia;
-        this.selectedExamDetail = detalle;
-        this.showModal = true;
+    // State for Modals
+    showTableSelectionModal: boolean = false;
+    showConfirmationModal: boolean = false;
+
+    // Step 1: Selection
+    onSelectTable(table: MesaExamenDisponibleDTO) {
+        // User clicked "Inscribirse" on a table in the list
+        this.selectedExamTable = table;
+        this.showTableSelectionModal = false;
+        this.showConfirmationModal = true;
     }
 
+    // Step 2: Confirmation
     onConfirmEnrollment() {
-        if (!this.selectedMateriaForEnrollment || !this.selectedExamDetail) return;
+        if (!this.selectedMateriaForEnrollment || !this.selectedExamTable) return;
 
-        this.showModal = false;
+        this.showConfirmationModal = false;
         this.authService.currentUser$.pipe(take(1)).subscribe(user => {
             if (!user) {
                 this.alertService.error('Error: Usuario no identificado');
@@ -264,8 +246,7 @@ export class InscriptionExamComponent implements OnInit {
 
             const request: InscripcionExamenRequest = {
                 idUsuario: user.id,
-                idMesaExamen: this.selectedExamDetail!.idMesaExamen,
-                nroDetalle: this.selectedExamDetail!.nroDetalle
+                idDetalleMesa: this.selectedExamTable!.idDetalleMesa
             };
 
             this.isLoading = true;
@@ -276,6 +257,7 @@ export class InscriptionExamComponent implements OnInit {
                     console.log('Inscripción a examen exitosa:', res);
                     this.alertService.success(`Inscripción exitosa al examen de ${this.selectedMateriaForEnrollment.nombre}`);
                     this.isLoading = false;
+                    this.selectedExamTable = null;
                     this.loadMaterias();
                 },
                 error: (err) => {
@@ -288,10 +270,17 @@ export class InscriptionExamComponent implements OnInit {
         });
     }
 
-    closeModal() {
-        this.showModal = false;
-        this.selectedExamDetail = null;
+    closeTableSelectionModal() {
+        this.showTableSelectionModal = false;
         this.selectedMateriaForEnrollment = null;
+        this.selectedExamTable = null;
+    }
+
+    closeConfirmationModal() {
+        this.showConfirmationModal = false;
+        // Don't clear selectedMateria here if we want to go back?
+        // Usually cancel means cancel everything.
+        this.selectedExamTable = null;
     }
 
     goBack(): void {
