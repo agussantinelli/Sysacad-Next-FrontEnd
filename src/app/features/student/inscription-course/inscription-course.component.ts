@@ -255,7 +255,8 @@ export class InscriptionCourseComponent implements OnInit {
             },
             error: (err) => {
                 console.error('Error enrolling', err);
-                this.alertService.error('Hubo un error al realizar la inscripción.');
+                const errorMessage = err.error?.message || 'Hubo un error al realizar la inscripción.';
+                this.alertService.error(errorMessage);
                 this.isLoading = false;
             }
         });

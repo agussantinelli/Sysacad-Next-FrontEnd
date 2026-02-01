@@ -280,7 +280,8 @@ export class InscriptionExamComponent implements OnInit {
                 },
                 error: (err) => {
                     console.error('Error al inscribirse al examen:', err);
-                    this.alertService.error('Error al procesar la inscripción al examen');
+                    const errorMessage = err.error?.message || 'Error al procesar la inscripción al examen';
+                    this.alertService.error(errorMessage);
                     this.isLoading = false;
                 }
             });
