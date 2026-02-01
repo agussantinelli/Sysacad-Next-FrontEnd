@@ -1,0 +1,45 @@
+<div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title">Correlativas de <span class="subject-highlight">{{ subjectName }}</span></h2>
+            <button (click)="onClose()" class="btn-close">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            @if (correlatives.length > 0) {
+            <table class="correlatives-table">
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Condición Requerida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (corr of correlatives; track corr.nombre) {
+                    <tr>
+                        <td class="subject-name">{{ corr.nombre }}</td>
+                        <td class="condition">
+                            <span class="badge" [class.badge-promocionada]="corr.condicion === 'PROMOCIONADA'"
+                                [class.badge-regular]="corr.condicion === 'REGULAR'">
+                                {{ corr.condicion }}
+                            </span>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            } @else {
+            <div class="empty-state">
+                <span class="material-icons">info</span>
+                <p>Esta materia no tiene correlativas.</p>
+            </div>
+            }
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-close-footer" (click)="onClose()">Cerrar</button>
+        </div>
+    </div>
+</div>
