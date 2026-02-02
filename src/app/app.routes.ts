@@ -27,6 +27,10 @@ export const routes: Routes = [
         path: 'profile/edit',
         loadComponent: () => import('@features/profile/edit-profile/edit-profile.component').then(m => m.EditProfileComponent)
     },
+    {
+        path: 'profile/change-password',
+        loadComponent: () => import('@features/profile/change-password/change-password.component').then(m => m.ChangePasswordComponent)
+    },
     // Academic Modules
     {
         path: 'academic/inscription-course',
