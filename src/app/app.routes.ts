@@ -102,5 +102,11 @@ export const routes: Routes = [
         path: 'messages',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/messages/messages.component').then(m => m.MessagesComponent)
+    },
+    // Professor Modules
+    {
+        path: 'professor/subjects',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/professor/subjects/professor-subjects.component').then(m => m.ProfessorSubjectsComponent)
     }
 ];
