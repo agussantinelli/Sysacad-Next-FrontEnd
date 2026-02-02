@@ -10,4 +10,5 @@ export interface AvisoResponse {
     descripcion: string;
     fechaEmision: string; // LocalDateTime
     estado: string;
+    visto: boolean;
 }
