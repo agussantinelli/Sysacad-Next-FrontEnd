@@ -257,3 +257,10 @@
         align-items: stretch;
     }
 }
+
+/* Fix for dark mode dropdown options */
+.filter-select option {
+    background-color: var(--bg-page);
+    /* Use solid page background */
+    color: var(--text-primary);
+}
