@@ -7,3 +7,12 @@ export interface MateriaProfesorDTO {
     plan: string;
     cargo: RolCargo;
 }
+
+export interface ComisionHorarioDTO {
+    idComision: string; // UUID
+    nombre: string;
+    anio: number;
+    turno: string;
+    salon: string;
+    horarios: string[]; // Formatted schedules (e.g., "LUNES 08:00 - 12:00")
+}
