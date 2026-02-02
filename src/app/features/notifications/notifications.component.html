@@ -12,16 +12,23 @@
         } @else {
         <div class="notifications-grid">
             @for (aviso of avisos; track aviso.id) {
-            <div class="notification-card">
+            <div class="notification-card" [class.unread]="!aviso.visto">
                 <div class="card-header">
                     <div class="header-content">
                         <span class="material-icons notification-icon">campaign</span>
                         <h3>{{ aviso.titulo }}</h3>
                     </div>
-                    <span class="date-badge">
-                        <span class="material-icons date-icon">event</span>
-                        {{ aviso.fechaEmision | date:'dd/MM/yyyy' }}
-                    </span>
+                    <div class="header-actions">
+                        <span class="date-badge">
+                            <span class="material-icons date-icon">event</span>
+                            {{ aviso.fechaEmision | date:'dd/MM/yyyy' }}
+                        </span>
+                        @if (!aviso.visto) {
+                        <button class="btn-mark-read" (click)="markAsRead(aviso)" title="Marcar como leído">
+                            <span class="material-icons">check_circle_outline</span>
+                        </button>
+                        }
+                    </div>
                 </div>
 
                 <div class="card-content">

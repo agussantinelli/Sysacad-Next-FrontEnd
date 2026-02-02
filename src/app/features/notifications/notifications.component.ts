@@ -41,4 +41,18 @@ export class NotificationsComponent implements OnInit {
             }
         });
     }
+
+    markAsRead(aviso: AvisoResponse) {
+        if (aviso.visto) return; // Already read
+
+        this.avisoService.marcarLeido(aviso.id).subscribe({
+            next: () => {
+                aviso.visto = true; // Update local state
+                // Optional: Update global unread count if we have one
+            },
+            error: (err) => {
+                console.error('Error marking as read:', err);
+            }
+        });
+    }
 }
