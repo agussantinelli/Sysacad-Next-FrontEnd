@@ -6,6 +6,7 @@ export interface MateriaProfesorDTO {
     nivel: number;
     plan: string;
     cargo: RolCargo;
+    jefeCatedra: string | null; // Name of head professor, null if user IS the head
 }
 
 export interface ComisionHorarioDTO {
@@ -15,4 +16,5 @@ export interface ComisionHorarioDTO {
     turno: string;
     salon: string;
     horarios: string[]; // Formatted schedules (e.g., "LUNES 08:00 - 12:00")
+    profesores: string[]; // All professors if requester is head, empty otherwise
 }
