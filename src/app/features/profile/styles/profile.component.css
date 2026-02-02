@@ -178,6 +178,7 @@
     padding-top: 1.5rem;
     border-top: 1px solid var(--border-subtle);
     width: 100%;
+    gap: 1rem;
 }
 
 .btn-edit {
@@ -207,4 +208,29 @@
 
 .btn-edit .material-icons {
     font-size: 1.25rem;
+}
+
+.btn-security {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: transparent;
+    border: 2px solid var(--border-subtle);
+    color: var(--text-primary);
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    min-width: 200px;
+    text-decoration: none;
+}
+
+.btn-security:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
 }
