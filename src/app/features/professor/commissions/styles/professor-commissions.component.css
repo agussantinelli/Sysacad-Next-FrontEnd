@@ -1,0 +1,211 @@
+.commissions-container {
+    padding: 1rem 0;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--surface-card);
+    border-radius: 16px;
+    text-align: center;
+    color: var(--text-secondary);
+    border: 2px dashed var(--utn-blue);
+    opacity: 0.7;
+}
+
+.empty-state .material-icons {
+    font-size: 64px;
+    margin-bottom: 1rem;
+    color: var(--utn-blue);
+    opacity: 0.4;
+}
+
+.commissions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.75rem;
+}
+
+.commission-card {
+    background: var(--surface-card);
+    border-radius: 16px;
+    padding: 1.75rem;
+    border: 2px solid var(--utn-blue);
+    box-shadow: 0 2px 8px rgba(0, 117, 190, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.commission-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 117, 190, 0.15);
+    border-color: #4A90E2;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(0, 117, 190, 0.1);
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.year-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+    width: fit-content;
+}
+
+.shift-badge {
+    padding: 0.35rem 0.85rem;
+    border-radius: 24px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--utn-blue), #4A90E2);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 117, 190, 0.2);
+    white-space: nowrap;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    background: var(--surface-hover);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.info-row .material-icons {
+    font-size: 20px;
+    color: var(--utn-blue);
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.schedules-section,
+.professors-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--utn-blue);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-title .material-icons {
+    font-size: 18px;
+}
+
+.schedules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.schedule-item {
+    padding: 0.6rem 0.9rem;
+    background: rgba(0, 117, 190, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--utn-blue);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.professors-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.professor-chip {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 193, 7, 0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.professor-chip::before {
+    content: '👤';
+    font-size: 0.9rem;
+}
+
+/* Dark Mode Adjustments */
+:host-context(body.dark-mode) .commission-card {
+    background: rgba(30, 30, 35, 0.9);
+    border-color: #4A90E2;
+}
+
+:host-context(body.dark-mode) .info-row {
+    background: rgba(74, 144, 226, 0.08);
+    border-color: rgba(74, 144, 226, 0.2);
+}
+
+:host-context(body.dark-mode) .schedule-item {
+    background: rgba(74, 144, 226, 0.1);
+    border-left-color: #66B2FF;
+}
+
+:host-context(body.dark-mode) .shift-badge {
+    background: linear-gradient(135deg, #4A90E2, #66B2FF);
+}
