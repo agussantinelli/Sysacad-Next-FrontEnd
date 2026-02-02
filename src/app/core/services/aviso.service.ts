@@ -22,4 +22,10 @@ export class AvisoService {
             map(response => response.data)
         );
     }
+
+    marcarLeido(id: string): Observable<void> {
+        return from(axiosClient.post<void>(`/avisos/${id}/leido`)).pipe(
+            map(response => response.data)
+        );
+    }
 }
