@@ -82,8 +82,8 @@
 }
 
 .btn-close-icon:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: var(--border-subtle);
+    color: var(--text-primary);
 }
 
 .modal-body {
@@ -337,9 +337,9 @@
 }
 
 .btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--border-subtle);
     color: var(--text-primary);
-    border-color: #777;
+    border-color: var(--text-secondary);
 }
 
 .btn-confirm {
