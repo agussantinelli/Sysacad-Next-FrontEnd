@@ -1,4 +1,9 @@
 <app-theme-toggle></app-theme-toggle>
+
+@if (showNavbar) {
+<app-navbar></app-navbar>
+}
+
 <router-outlet />
 
 @if (authService.currentUser$ | async) {

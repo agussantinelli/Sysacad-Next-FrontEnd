@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioResponse } from '@core/models/usuario.models';
-import { NavbarComponent } from '@layout/navbar/navbar.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 
 interface DashboardOption {
@@ -21,7 +20,7 @@ import { RouterLink } from '@angular/router';
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [CommonModule, NavbarComponent, AlertMessageComponent, RouterLink],
+    imports: [CommonModule, AlertMessageComponent, RouterLink],
     templateUrl: './dashboard.component.html',
     styleUrl: './styles/dashboard.component.css'
 })

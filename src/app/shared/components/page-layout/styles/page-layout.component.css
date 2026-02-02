@@ -2,6 +2,7 @@
     width: 100%;
     min-height: 100vh;
     padding: 2rem;
+    padding-top: 6rem;
     background-color: var(--bg-page);
     font-family: 'Montserrat', sans-serif;
     display: flex;
