@@ -67,6 +67,119 @@
 
 <hr>
 
+<h2>🏗️ Arquitectura de Alto Nivel</h2>
+
+<p>La aplicación sigue una arquitectura en capas separando presentación, lógica de negocio y acceso a datos:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Capa</th>
+            <th>Propósito</th>
+            <th>Componentes Clave</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Application Shell</strong></td>
+            <td>Bootstrapping y configuración raíz</td>
+            <td><code>index.html</code>, <code>main.ts</code>, <code>app.routes.ts</code></td>
+        </tr>
+        <tr>
+            <td><strong>Feature Modules</strong></td>
+            <td>Funcionalidad de usuario por dominio</td>
+            <td><code>auth/</code>, <code>dashboard/</code>, <code>profile/</code>, <code>student/</code></td>
+        </tr>
+        <tr>
+            <td><strong>Layout</strong></td>
+            <td>Estructura y navegación persistente</td>
+            <td><code>navbar.component.ts</code></td>
+        </tr>
+        <tr>
+            <td><strong>Core Layer</strong></td>
+            <td>Lógica de negocio, API y Modelos</td>
+            <td><code>axiosClient.ts</code>, servicios, DTOs</td>
+        </tr>
+        <tr>
+            <td><strong>Shared Components</strong></td>
+            <td>UI Reutilizable</td>
+            <td>Tablas, Alertas, Modales, Spinner</td>
+        </tr>
+        <tr>
+            <td><strong>Theming System</strong></td>
+            <td>Consistencia visual y Dark Mode</td>
+            <td><code>theme.service.ts</code>, <code>globals.css</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>🧩 Patrones de Arquitectura Core</h2>
+
+<h3>1. Arquitectura de Componentes Standalone</h3>
+<p>La aplicación utiliza el patrón de componentes standalone de Angular, eliminando la necesidad de NgModules. Cada componente declara sus propias dependencias directamente.</p>
+<ul>
+    <li><strong>Beneficios:</strong> Menor tamaño de bundle (tree-shaking), gestión de dependencias simple y mejor organización.</li>
+</ul>
+
+<h3>2. Role-Based Access Control (RBAC)</h3>
+<p>El sistema implementa tres roles de usuario distintos con capacidades diferenciadas:</p>
+<ul>
+    <li><strong>ESTUDIANTE:</strong> Inscripciones, consultas académicas, correlativas.</li>
+    <li><strong>PROFESOR:</strong> Gestión de materias, carga de notas, mesas de examen.</li>
+    <li><strong>ADMIN:</strong> Administración total del sistema y usuarios.</li>
+</ul>
+
+<h3>3. Flujo de Autenticación JWT</h3>
+<p>La autenticación se maneja mediante tokens JWT con inyección automática vía <strong>Axios Interceptors</strong> (`axiosClient.ts`). El estado de autenticación se gestiona reactivamente con `BehaviorSubject` en `auth.service.ts`.</p>
+
+<h3>4. Estrategia de Lazy Loading</h3>
+<p>Todas las rutas de características (features) utilizan `loadComponent` para optimizar la carga inicial, descargando el código solo cuando el usuario navega a la ruta concerniente.</p>
+
+<hr>
+
+<h2>🎨 Sistema de Temas (Theming)</h2>
+<p>La aplicación implementa un sistema de temas global que soporta modos Claro y Oscuro.</p>
+<ul>
+    <li>Utiliza <strong>Angular Signals</strong> en `ThemeService` para gestionar el estado.</li>
+    <li>La preferencia se persiste en <code>localStorage</code>.</li>
+    <li>Uso de <strong>Variables CSS</strong> en `globals.css` para tokens de color tipados.</li>
+</ul>
+
+<hr>
+
+<h2>🔌 Integración Backend</h2>
+<p>El frontend se comunica con el backend Java Spring Boot a través de una API RESTful.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Componente</th>
+            <th>Tecnología</th>
+            <th>Puerto Dev</th>
+            <th>Propósito</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Frontend</strong></td>
+            <td>Angular 18+ SPA</td>
+            <td>4200</td>
+            <td>Interfaz de usuario y lógica cliente</td>
+        </tr>
+        <tr>
+            <td><strong>Backend</strong></td>
+            <td>Java Spring Boot</td>
+            <td>8080</td>
+            <td>Lógica de negocio, persistencia, JWT</td>
+        </tr>
+    </tbody>
+</table>
+<p>Repositorio Backend: <a href="https://github.com/agussantinelli/Sysacad-Next-BackEnd">Sysacad-Next-BackEnd</a></p>
+
+<hr>
+
 <h2>🌐 Frontend (este repositorio)</h2>
 
 <p>Este repositorio aloja la <strong>Single Page Application (SPA)</strong> desarrollada en Angular, encargada de toda la interacción con el usuario final.</p>
@@ -84,27 +197,27 @@
     <tbody>
         <tr>
             <td><strong>Framework</strong></td>
-            <td>Angular 18+</td>
+            <td>Angular 19.2.18</td>
             <td>Uso de Standalone Components, Signals y Control Flow Syntax.</td>
         </tr>
         <tr>
             <td><strong>Lenguaje</strong></td>
-            <td>TypeScript 5</td>
+            <td>TypeScript 5.5.2</td>
             <td>Tipado estricto, Interfaces y DTOs alineados con Backend Java.</td>
         </tr>
         <tr>
             <td><strong>UI Kit</strong></td>
-            <td>Angular Material</td>
+            <td>Angular Material 19.0.0</td>
             <td>Librería oficial. Componentes accesibles (Tablas, Cards, Datepickers).</td>
         </tr>
         <tr>
             <td><strong>Gestión de Estado</strong></td>
-            <td>RxJS 7.8</td>
+            <td>RxJS 7.8.0</td>
             <td>Manejo de asincronía y flujos de datos (Observables).</td>
         </tr>
         <tr>
             <td><strong>Cliente HTTP</strong></td>
-            <td>Axios</td>
+            <td>Axios 1.13.2</td>
             <td>Cliente ligero con <strong>Interceptores</strong> para inyección de JWT.</td>
         </tr>
         <tr>
@@ -114,12 +227,12 @@
         </tr>     
         <tr>
             <td><strong>Iconos</strong></td>
-            <td>Material Icons</td>
+            <td>Material Icons 1.13.14</td>
             <td>Paquete npm <code>material-icons</code>. Iconografía estándar de Google.</td>
         </tr>
         <tr>
             <td><strong>Tipografía</strong></td>
-            <td>Questrial</td>
+            <td>Questrial 5.2.8</td>
             <td>Google Fonts (vía <code>@fontsource/questrial</code>). Estética moderna y limpia.</td>
         </tr>
     </tbody>
