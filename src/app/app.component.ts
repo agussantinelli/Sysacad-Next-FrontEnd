@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { ThemeToggleComponent } from '@shared/components/theme-toggle.component';
 import { HealthService } from '@core/services/health.service';
 import { AuthService } from '@core/services/auth.service';
@@ -7,13 +8,13 @@ import { AuthService } from '@core/services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ThemeToggleComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, ThemeToggleComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   title = 'Sysacad-Next-FrontEnd';
   private healthService = inject(HealthService);
-  private authService = inject(AuthService);
+  public authService = inject(AuthService);
 
   ngOnInit() {
     this.authService.currentUser$.subscribe(user => {

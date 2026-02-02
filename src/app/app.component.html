@@ -1,2 +1,8 @@
 <app-theme-toggle></app-theme-toggle>
 <router-outlet />
+
+@if (authService.currentUser$ | async) {
+<a routerLink="/messages" class="floating-chat-btn" title="Mensajes">
+    <span class="material-icons">chat</span>
+</a>
+}
