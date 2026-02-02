@@ -3,15 +3,39 @@
 
         @if (isLoading) {
         <app-loading-spinner></app-loading-spinner>
-        } @else if (avisos.length === 0) {
+        } @else {
+
+        <!-- Filters -->
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="statusFilter">Estado</label>
+                <select id="statusFilter" [(ngModel)]="statusFilter" class="filter-select">
+                    <option value="all">Todos</option>
+                    <option value="unread">No leídos</option>
+                    <option value="read">Leídos</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="timeFilter">Fecha</label>
+                <select id="timeFilter" [(ngModel)]="timeFilter" class="filter-select">
+                    <option value="all">Todos</option>
+                    <option value="today">Hoy</option>
+                    <option value="week">Última semana</option>
+                    <option value="month">Último mes</option>
+                    <option value="year">Último año</option>
+                </select>
+            </div>
+        </div>
+
+        @if (filteredAvisos.length === 0) {
         <div class="empty-state">
             <span class="material-icons">notifications_off</span>
-            <h3>No hay avisos recientes</h3>
-            <p>Te notificaremos cuando haya novedades importantes.</p>
+            <h3>No se encontraron avisos</h3>
+            <p>Intenta cambiar los filtros seleccionados.</p>
         </div>
         } @else {
         <div class="notifications-grid">
-            @for (aviso of avisos; track aviso.id) {
+            @for (aviso of filteredAvisos; track aviso.id) {
             <div class="notification-card" [class.unread]="!aviso.visto">
                 <div class="card-header">
                     <div class="header-content">
@@ -37,6 +61,7 @@
             </div>
             }
         </div>
+        }
         }
     </div>
 </app-page-layout>

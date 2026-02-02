@@ -179,8 +179,8 @@
 
 .btn-mark-read {
     background: transparent;
-    border: 1px solid var(--utn-blue);
-    color: var(--utn-blue);
+    border: 1px solid var(--success);
+    color: var(--success);
     border-radius: 8px;
     /* Square-ish matches date-badge */
     width: 32px;
@@ -194,11 +194,66 @@
 }
 
 .btn-mark-read:hover {
-    background: var(--utn-blue);
+    background: var(--success);
     color: white;
-    box-shadow: 0 2px 4px rgba(0, 153, 230, 0.2);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .btn-mark-read .material-icons {
     font-size: 1.25rem;
+}
+
+/* Filters */
+.filters-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.filter-select {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s;
+    appearance: none;
+    background-image: var(--select-arrow);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    border-color: var(--utn-blue);
+    box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.1);
+}
+
+@media (max-width: 600px) {
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
