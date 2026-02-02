@@ -48,12 +48,18 @@ export class DashboardComponent implements OnInit {
             ]
         },
         {
-            title: 'Trámites y Otros',
+            title: 'Comunicación y Cuenta',
+            options: [
+                { title: 'Avisos', icon: 'notifications', route: '/notifications' },
+                { title: 'Mensajes', icon: 'chat', route: '/messages' },
+                { title: 'Cambio de Contraseña', icon: 'lock_reset', route: '/profile/change-password' }
+            ]
+        },
+        {
+            title: 'Trámites',
             options: [
                 { title: 'Certificado Regularidad', icon: 'badge', route: '/procedures/regular-cert' },
-                { title: 'Calendario Académico', icon: 'calendar_month', route: '/academic/calendar' },
-                { title: 'Avisos', icon: 'notifications', route: '/notifications' },
-                { title: 'Cambio de Contraseña', icon: 'lock_reset', route: '/profile/change-password' }
+                { title: 'Calendario Académico', icon: 'calendar_month', route: '/academic/calendar' }
             ]
         }
     ];
