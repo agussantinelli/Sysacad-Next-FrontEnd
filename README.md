@@ -244,59 +244,59 @@
 <h3>📦 Estructura del Proyecto</h3>
 
 <pre><code>Sysacad-Next-FrontEnd/
-├── public/                             # Assets estáticos servidos directamente
-├── src/                                # Código fuente de la aplicación
+├── public/                                           # Assets estáticos servidos directamente
+├── src/                                              # Código fuente de la aplicación
 │   ├── app/
 │   │   ├── core/
-│   │   │   ├── api/                    # Cliente Axios Configurado
-│   │   │   ├── enums/                  # Enumerados (Materia, Inscripcion, Usuario...)
-│   │   │   ├── guards/                 # Guardias de Ruta (AuthGuard)
-│   │   │   ├── interceptors/           # Interceptores HTTP (JWT Injection)
-│   │   │   ├── models/                 # Modelos DTO (Granulares: Historial, InscripcionExamen...)
-│   │   │   └── services/               # Servicios de Entidades (Auth, Matriculacion...)
+│   │   │   ├── api/                                  # Cliente Axios Configurado
+│   │   │   ├── enums/                                # Enumerados (Materia, Inscripcion, Usuario...)
+│   │   │   ├── guards/                               # Guardias de Ruta (AuthGuard)
+│   │   │   ├── interceptors/                         # Interceptores HTTP (JWT Injection)
+│   │   │   ├── models/                               # Modelos DTO (Granulares: Historial, InscripcionExamen...)
+│   │   │   └── services/                             # Servicios de Entidades (Auth, Matriculacion...)
 │   │   ├── features/
-│   │   │   ├── announcements/      # Avisos y Anuncios
+│   │   │   ├── announcements/                        # Avisos y Anuncios
 │   │   │   │   └── announcements.component
 │   │   │   ├── auth/
-│   │   │   │   ├── login/              # Inicio de Sesión
-│   │   │   │   └── forgot-password/    # Recuperación de Contraseña
-│   │   │   ├── dashboard/              # Dashboard del Alumno
-│   │   │   ├── messages/               # Sistema de Mensajería
+│   │   │   │   ├── login/                            # Inicio de Sesión
+│   │   │   │   └── forgot-password/                  # Recuperación de Contraseña
+│   │   │   ├── dashboard/                            # Dashboard del Alumno
+│   │   │   ├── messages/                             # Sistema de Mensajería
 │   │   │   │   └── messages.component
-│   │   │   ├── notifications/          # (Legacy/Refactor)
+│   │   │   ├── notifications/                        # (Legacy/Refactor)
 │   │   │   ├── profile/
-│   │   │   │   ├── edit-profile/       # Edición de Perfil
-│   │   │   │   └── profile.component   # Visualización de Perfil
+│   │   │   │   ├── edit-profile/                     # Edición de Perfil
+│   │   │   │   └── profile.component                 # Visualización de Perfil
 │   │   │   └── student/
-│   │   │       ├── academic-status/    # Estado Académico (Analítico + Historial)
-│   │   │       ├── calendar/           # Calendario Académico
-│   │   │       ├── current-enrollments/# Cursado y Notas (Matriculaciones activas)
-│   │   │       ├── inscription-course/ # Inscripción a Cursado
-│   │   │       ├── inscription-exam/   # Inscripción a Examen
-│   │   │       ├── my-inscriptions/    # Mis Inscripciones (Baja)
-│   │   │       ├── regular-cert/       # Certificado de Alumno Regular
-│   │   │       └── study-plan/         # Plan de Estudios Interactivo
+│   │   │       ├── academic-status/                  # Estado Académico (Analítico + Historial)
+│   │   │       ├── calendar/                         # Calendario Académico
+│   │   │       ├── current-enrollments/              # Cursado y Notas (Matriculaciones activas)
+│   │   │       ├── inscription-course/               # Inscripción a Cursado
+│   │   │       ├── inscription-exam/                 # Inscripción a Examen
+│   │   │       ├── my-inscriptions/                  # Mis Inscripciones (Baja)
+│   │   │       ├── regular-cert/                     # Certificado de Alumno Regular
+│   │   │       └── study-plan/                       # Plan de Estudios Interactivo
 │   │   ├── layout/
-│   │   │   └── navbar/                 # Barra de Navegación Responsive
+│   │   │   └── navbar/                               # Barra de Navegación Responsive
 │   │   ├── shared/
-│   │   │   ├── components/             # Reutilizables (Table, Spinner, Alert, Modal...)
-│   │   │   │   ├── alert-message/      # Componente visual de alertas
-│   │   │   │   ├── loading-spinner/    # Spinner de carga
-│   │   │   │   ├── page-layout/        # Layout estándar de páginas
-│   │   │   │   ├── inscription-modal/  # Modal de selección de comisión/mesa
-│   │   │   │   ├── inscription-confirmation-modal/ # Modal de confirmación de inscripción
-│   │   │   │   └── confirmation-modal/ # Modal genérico de confirmación
-│   │   │   ├── interfaces/             # Interfaces de UI (TableConfig)
-│   │   │   └── pipes/                  # Pipes (DateFormat...)
-│   ├── assets/                         # Recursos estáticos
-│   ├── environments/                   # Configuraciones de entorno
-│   ├── index.html                      # Punto de entrada HTML
-│   ├── main.ts                         # Punto de entrada Angular
-│   └── styles.css                      # Estilos globales
-├── .env                                # Variables de entorno
-├── angular.json                        # Configuración del workspace
-├── package.json                        # Dependencias
-└── README.md                           # Documentación
+│   │   │   ├── components/                           # Reutilizables (Table, Spinner, Alert, Modal...)
+│   │   │   │   ├── alert-message/                    # Componente visual de alertas
+│   │   │   │   ├── loading-spinner/                  # Spinner de carga
+│   │   │   │   ├── page-layout/                      # Layout estándar de páginas
+│   │   │   │   ├── inscription-modal/                # Modal de selección de comisión/mesa
+│   │   │   │   ├── inscription-confirmation-modal/   # Modal de confirmación de inscripción
+│   │   │   │   └── confirmation-modal/               # Modal genérico de confirmación
+│   │   │   ├── interfaces/                           # Interfaces de UI (TableConfig)
+│   │   │   └── pipes/                                # Pipes (DateFormat...)
+│   ├── assets/                                       # Recursos estáticos
+│   ├── environments/                                 # Configuraciones de entorno
+│   ├── index.html                                    # Punto de entrada HTML
+│   ├── main.ts                                       # Punto de entrada Angular
+│   └── styles.css                                    # Estilos globales
+├── .env                                              # Variables de entorno
+├── angular.json                                      # Configuración del workspace
+├── package.json                                      # Dependencias
+└── README.md                                         # Documentación
 </code></pre>
 
 <h3>💻 Empezar (Setup Local)</h3>
