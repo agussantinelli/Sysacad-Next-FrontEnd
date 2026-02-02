@@ -71,7 +71,7 @@ export const routes: Routes = [
     },
     {
         path: 'academic/calendar',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/student/calendar/calendar.component').then(m => m.CalendarComponent)
     },
     {
         path: 'procedures/regular-cert',
