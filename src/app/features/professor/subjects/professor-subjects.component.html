@@ -25,6 +25,12 @@
                         <span class="material-icons">person_outline</span>
                         <span>{{ getCargoLabel(materia.cargo) }}</span>
                     </div>
+                    @if (materia.jefeCatedra) {
+                    <div class="head-info">
+                        <span class="material-icons">school</span>
+                        <span>Jefe: {{ materia.jefeCatedra }}</span>
+                    </div>
+                    }
                 </div>
                 <div class="card-footer">
                     @if (materia.cargo === 'JEFE_CATEDRA') {
