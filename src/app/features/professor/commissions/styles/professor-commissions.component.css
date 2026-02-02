@@ -190,6 +190,41 @@
     font-size: 0.9rem;
 }
 
+.card-actions {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(0, 117, 190, 0.1);
+}
+
+.btn-grade {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.5rem;
+    background: linear-gradient(135deg, var(--utn-blue), #4A90E2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 117, 190, 0.2);
+}
+
+.btn-grade:hover {
+    background: linear-gradient(135deg, #004a7c, var(--utn-blue));
+    box-shadow: 0 4px 12px rgba(0, 117, 190, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-grade .material-icons {
+    font-size: 20px;
+}
+
 /* Dark Mode Adjustments */
 :host-context(body.dark-mode) .commission-card {
     background: rgba(30, 30, 35, 0.9);

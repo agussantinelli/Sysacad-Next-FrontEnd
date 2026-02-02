@@ -210,3 +210,7 @@
 :host-context(body.dark-mode) .level-badge {
     background: linear-gradient(135deg, #4A90E2, #66B2FF);
 }
+
+:host-context(body.dark-mode) .action-btn.primary {
+    color: white !important;
+}
