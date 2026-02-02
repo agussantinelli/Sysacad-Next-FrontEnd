@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { UsuarioRequest, UsuarioResponse } from '@core/models/usuario.models';
+import { UsuarioRequest, UsuarioResponse, CambioPasswordRequest } from '@core/models/usuario.models';
 import { RolUsuario } from '@core/enums/usuario.enums';
 
 @Injectable({
@@ -72,6 +72,12 @@ export class UsuarioService {
 
     eliminarUsuario(id: string): Observable<void> {
         return from(axiosClient.delete<void>(`/usuarios/${id}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    cambiarPassword(id: string, request: CambioPasswordRequest): Observable<void> {
+        return from(axiosClient.post<void>(`/usuarios/${id}/cambiar-password`, request)).pipe(
             map(response => response.data)
         );
     }
