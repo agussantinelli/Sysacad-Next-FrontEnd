@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { UsuarioService } from '@core/services/usuario.service';
 import { AuthService } from '@core/services/auth.service';
@@ -21,6 +22,7 @@ export class ChangePasswordComponent implements OnInit {
     private authService = inject(AuthService);
     private alertService = inject(AlertService);
     private location = inject(Location);
+    private router = inject(Router);
 
     passwordForm: FormGroup;
     isLoading = false;
@@ -85,6 +87,9 @@ export class ChangePasswordComponent implements OnInit {
                     this.alertService.success('Contraseña actualizada correctamente.');
                     this.passwordForm.reset();
                     this.isLoading = false;
+                    setTimeout(() => {
+                        this.router.navigate(['/dashboard']);
+                    }, 1500);
                 },
                 error: (err) => {
                     console.error('Error changing password:', err);
