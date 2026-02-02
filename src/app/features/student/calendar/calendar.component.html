@@ -1,9 +1,7 @@
-<div class="calendar-container fade-in">
-    <div class="calendar-card">
-        <h1 class="page-title">Calendario Académico</h1>
-
+<app-page-layout title="Calendario Académico">
+    <div class="calendar-content fade-in">
         <div class="description-section">
-            <p>
+            <p class="description-text">
                 El Calendario Académico es un documento oficial que establece las fechas importantes
                 del ciclo lectivo, incluyendo periodos de inscripción, fechas de exámenes,
                 recesos y feriados administrativos. Es fundamental para la planificación de tu año académico.
@@ -12,9 +10,14 @@
 
         <div class="action-section">
             <button class="btn btn-primary download-btn" (click)="downloadCalendar()" [disabled]="isLoading">
+                @if (isLoading) {
+                <span class="material-icons spin">refresh</span>
+                <span>Descargando...</span>
+                } @else {
                 <span class="material-icons">file_download</span>
-                {{ isLoading ? 'Descargando...' : 'Descargar PDF' }}
+                <span>Descargar PDF</span>
+                }
             </button>
         </div>
     </div>
-</div>
+</app-page-layout>

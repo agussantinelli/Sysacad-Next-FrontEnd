@@ -1,57 +1,84 @@
-.calendar-container {
-    padding: 2rem;
+.calendar-content {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 80vh;
-}
-
-.calendar-card {
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    padding: 3rem;
-    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem;
     max-width: 800px;
-    width: 100%;
-    text-align: center;
-    border: 1px solid var(--border-color);
-}
-
-.page-title {
-    color: var(--text-primary);
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    font-weight: 600;
+    margin: 0 auto;
 }
 
 .description-section {
-    margin-bottom: 3rem;
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.description-text {
     color: var(--text-secondary);
     font-size: 1.1rem;
-    line-height: 1.6;
+    line-height: 1.8;
+    margin: 0;
 }
 
 .action-section {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .download-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
     font-size: 1.1rem;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    border-radius: 99px;
+    /* Pill shape */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--utn-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
 }
 
-.download-btn .material-icons {
-    font-size: 1.3rem;
+.download-btn:hover:not(:disabled) {
+    background-color: var(--utn-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+}
+
+.download-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.download-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: var(--text-secondary);
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Animations */
 .fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.4s ease-out forwards;
 }
 
 @keyframes fadeIn {

@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { CalendarioService } from '@core/services/calendario.service';
 
 
 @Component({
     selector: 'app-calendar',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, PageLayoutComponent],
     templateUrl: './calendar.component.html',
     styleUrl: './styles/calendar.component.css'
 })
