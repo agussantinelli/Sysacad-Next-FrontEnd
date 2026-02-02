@@ -44,4 +44,12 @@ export class ProfessorSubjectsComponent implements OnInit {
     getLevelLabel(level: number): string {
         return `${level}° Año`;
     }
+
+    getCargoLabel(cargo: string): string {
+        const cargoLabels: { [key: string]: string } = {
+            'JEFE_CATEDRA': 'Jefe de Cátedra',
+            'DOCENTE': 'Docente'
+        };
+        return cargoLabels[cargo] || cargo;
+    }
 }

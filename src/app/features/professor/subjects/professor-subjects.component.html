@@ -23,7 +23,7 @@
                     <h3>{{ materia.nombre }}</h3>
                     <div class="role-info">
                         <span class="material-icons">person_outline</span>
-                        <span>{{ materia.cargo | titlecase }}</span>
+                        <span>{{ getCargoLabel(materia.cargo) }}</span>
                     </div>
                 </div>
                 <div class="card-footer">
