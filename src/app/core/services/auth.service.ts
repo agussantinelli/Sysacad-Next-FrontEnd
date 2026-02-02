@@ -48,7 +48,7 @@ export class AuthService {
         localStorage.removeItem('bootId');
         sessionStorage.removeItem('welcomeShown');
         this.currentUserSubject.next(null);
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
     }
 
     updateUser(usuario: UsuarioResponse) {
