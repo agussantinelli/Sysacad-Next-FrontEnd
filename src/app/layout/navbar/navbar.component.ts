@@ -46,15 +46,7 @@ export class NavbarComponent implements OnInit {
             options: [
                 { title: 'Estado Académico', icon: 'school', route: '/academic/status' },
                 { title: 'Materias Plan', icon: 'book', route: '/academic/plan' },
-                { title: 'Cursado y Notas', icon: 'grade', route: '/academic/current-enrollments' },
-                { title: 'Hist. Académica', icon: 'history_edu', route: '/academic/history' }
-            ]
-        },
-        {
-            title: 'Correlativas',
-            options: [
-                { title: 'Para Cursar', icon: 'schema', route: '/academic/correlatives-course' },
-                { title: 'Para Rendir', icon: 'account_tree', route: '/academic/correlatives-exam' }
+                { title: 'Cursado y Notas', icon: 'grade', route: '/academic/current-enrollments' }
             ]
         },
         {
