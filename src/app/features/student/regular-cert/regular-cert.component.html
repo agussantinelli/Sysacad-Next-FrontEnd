@@ -1,0 +1,25 @@
+<app-page-layout title="Certificado de Alumno Regular">
+    <div class="cert-content fade-in">
+        <div class="description-section">
+            <p class="description-text">
+                El Certificado de Alumno Regular es un documento legal y académico emitido por la Universidad.
+                Acredita tu condición de alumno activo y regular en tu carrera frente a terceros
+                (obras sociales, pasantías, beneficios estatales).
+                <br><br>
+                Este documento certifica tu condición al momento de la fecha de emisión.
+            </p>
+        </div>
+
+        <div class="action-section">
+            <button class="btn btn-primary download-btn" (click)="downloadCertificate()" [disabled]="isLoading">
+                @if (isLoading) {
+                <span class="material-icons spin">refresh</span>
+                <span>Generando...</span>
+                } @else {
+                <span class="material-icons">file_download</span>
+                <span>Descargar PDF</span>
+                }
+            </button>
+        </div>
+    </div>
+</app-page-layout>
