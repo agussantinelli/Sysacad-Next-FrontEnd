@@ -8,13 +8,13 @@ import { AvisoResponse } from '@core/models/aviso.models';
 import { AlertService } from '@core/services/alert.service';
 
 @Component({
-    selector: 'app-notifications',
+    selector: 'app-announcements',
     standalone: true,
     imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, FormsModule],
-    templateUrl: './notifications.component.html',
-    styleUrls: ['./styles/notifications.component.css']
+    templateUrl: './announcements.component.html',
+    styleUrls: ['./styles/announcements.component.css']
 })
-export class NotificationsComponent implements OnInit {
+export class AnnouncementsComponent implements OnInit {
     private avisoService = inject(AvisoService);
     private alertService = inject(AlertService);
 

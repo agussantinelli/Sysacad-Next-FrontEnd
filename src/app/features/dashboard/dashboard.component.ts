@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
         {
             title: 'Comunicación y Cuenta',
             options: [
-                { title: 'Avisos', icon: 'notifications', route: '/notifications' },
+                { title: 'Avisos', icon: 'notifications', route: '/announcements' },
                 { title: 'Mensajes', icon: 'chat', route: '/messages' },
                 { title: 'Cambio de Contraseña', icon: 'lock_reset', route: '/profile/change-password' }
             ]

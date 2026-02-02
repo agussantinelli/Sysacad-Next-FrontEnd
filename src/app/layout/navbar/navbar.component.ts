@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
         {
             title: 'Comunicación',
             options: [
-                { title: 'Avisos', icon: 'notifications', route: '/notifications' },
+                { title: 'Avisos', icon: 'notifications', route: '/announcements' },
                 { title: 'Mensajes', icon: 'chat', route: '/messages' }
             ]
         }

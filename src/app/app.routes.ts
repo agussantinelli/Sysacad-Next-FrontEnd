@@ -78,8 +78,8 @@ export const routes: Routes = [
         loadComponent: () => import('@features/student/regular-cert/regular-cert.component').then(m => m.RegularCertComponent)
     },
     {
-        path: 'notifications',
-        loadComponent: () => import('@features/notifications/notifications.component').then(m => m.NotificationsComponent)
+        path: 'announcements',
+        loadComponent: () => import('@features/announcements/announcements.component').then(m => m.AnnouncementsComponent)
     },
     {
         path: 'messages',
