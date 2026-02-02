@@ -1,0 +1,45 @@
+<app-page-layout title="Mis Materias Asignadas" icon="class">
+    <div class="subjects-container">
+        @if (isLoading) {
+        <app-loading-spinner message="Cargando materias..."></app-loading-spinner>
+        } @else if (error) {
+        <app-alert-message type="error" [message]="error" (close)="error = null"></app-alert-message>
+        } @else {
+        @if (materias.length === 0) {
+        <div class="empty-state">
+            <span class="material-icons">class_off</span>
+            <h3>No tienes materias asignadas</h3>
+            <p>Si consideras que es un error, contacta a bedelía.</p>
+        </div>
+        } @else {
+        <div class="subjects-grid">
+            @for (materia of materias; track materia.id) {
+            <div class="subject-card">
+                <div class="card-header">
+                    <span class="level-badge">{{ getLevelLabel(materia.nivel) }}</span>
+                    <span class="plan-badge">{{ materia.plan }}</span>
+                </div>
+                <div class="card-body">
+                    <h3>{{ materia.nombre }}</h3>
+                    <div class="role-info">
+                        <span class="material-icons">person_outline</span>
+                        <span>{{ materia.cargo | titlecase }}</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="action-btn">
+                        <span class="material-icons">groups</span>
+                        Ver Alumnos
+                    </button>
+                    <button class="action-btn primary">
+                        <span class="material-icons">assignment_turned_in</span>
+                        Calificar
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+        }
+        }
+    </div>
+</app-page-layout>
