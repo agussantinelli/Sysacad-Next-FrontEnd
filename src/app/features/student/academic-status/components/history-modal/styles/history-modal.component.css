@@ -14,14 +14,12 @@
 
 /* Modal Content Card */
 .modal-content {
-    background-color: #111;
-    /* Dark background */
-    border: 1px solid #333;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px -5px var(--shadow-color), 0 8px 10px -6px var(--shadow-color);
     width: 100%;
     max-width: 42rem;
-    /* max-w-2xl */
     overflow: hidden;
     animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -32,14 +30,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #222;
-    background-color: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border-subtle);
+    background-color: var(--bg-card);
 }
 
 .modal-title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -51,7 +49,7 @@
 .btn-close-icon {
     background: transparent;
     border: none;
-    color: #9ca3af;
+    color: var(--text-secondary);
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 0.375rem;
@@ -62,8 +60,8 @@
 }
 
 .btn-close-icon:hover {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    background-color: var(--border-subtle);
 }
 
 /* Body */
@@ -80,7 +78,7 @@
 .section-title {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #e5e7eb;
+    color: var(--text-primary);
     margin-bottom: 1rem;
     padding-left: 0.75rem;
     border-left-width: 4px;
@@ -101,22 +99,23 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.875rem;
-    color: #d1d5db;
+    color: var(--text-secondary);
 }
 
 .history-table th {
     text-transform: uppercase;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #9ca3af;
-    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    background-color: var(--input-bg);
     padding: 0.75rem 1rem;
     text-align: left;
 }
 
 .history-table td {
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-primary);
 }
 
 .history-table tr:last-child td {
@@ -124,7 +123,7 @@
 }
 
 .history-table tr:hover {
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: var(--input-bg);
 }
 
 /* Badges */
@@ -157,26 +156,26 @@
 /* Footer */
 .modal-footer {
     padding: 1rem 1.5rem;
-    border-top: 1px solid #222;
-    background-color: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid var(--border-subtle);
+    background-color: var(--bg-card);
     display: flex;
     justify-content: flex-end;
 }
 
 .btn-close {
-    background-color: #374151;
-    color: #fff;
-    border: none;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
     padding: 0.5rem 1.25rem;
     font-size: 0.9rem;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
     font-weight: 500;
 }
 
 .btn-close:hover {
-    background-color: #4b5563;
+    background-color: var(--border-subtle);
 }
 
 /* Utilities */
