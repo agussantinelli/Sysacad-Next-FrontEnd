@@ -48,3 +48,8 @@ export interface UsuarioResponse {
     passwordChangeRequired?: boolean;
     carreras?: InfoCarrera[];
 }
+
+export interface CambioPasswordRequest {
+    passwordActual: string;
+    passwordNueva: string;
+}
