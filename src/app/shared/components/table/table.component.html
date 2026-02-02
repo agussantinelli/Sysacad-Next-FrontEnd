@@ -33,11 +33,9 @@
                             <ng-container *ngIf="col.key === 'correlativasDisplay'">
                                 <button *ngIf="getCellValue(row, col)?.hasCorrelatives"
                                     (click)="emitAction('viewCorrelatives', row)"
-                                    style="background: none; border: none; padding: 0; margin: 0; cursor: pointer; color: white;"
-                                    class="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity">
-                                    <span class="material-icons"
-                                        style="font-size: 16px; color: white;">visibility</span>
-                                    <span class="text-sm font-medium" style="color: white;">{{ getCellValue(row,
+                                    class="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity visibility-btn">
+                                    <span class="material-icons text-sm">visibility</span>
+                                    <span class="text-sm font-medium">{{ getCellValue(row,
                                         col)?.count }}</span>
                                 </button>
                                 <span *ngIf="!getCellValue(row, col)?.hasCorrelatives"
@@ -53,15 +51,13 @@
                                 <ng-container *ngIf="col.collapsible !== false">
                                     <button *ngIf="items.length > 0"
                                         (click)="row['isExpanded_' + col.key] = !row['isExpanded_' + col.key]"
-                                        class="flex items-center justify-center gap-2 font-medium text-white transition-colors cursor-pointer p-1 rounded hover:bg-black/5"
-                                        style="background-color: transparent; border: none; box-shadow: none; color: white !important;">
+                                        class="flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer p-1 rounded hover:bg-black/5 expand-btn">
                                         <span>{{ items.length }}</span>
                                         <img src="icons/chevron-down-light.svg" alt="Expand" width="12" height="12"
                                             class="transform transition-transform duration-200"
                                             [class.rotate-180]="row['isExpanded_' + col.key]">
                                     </button>
-                                    <span *ngIf="items.length === 0" class="text-white font-medium py-1"
-                                        style="color: white !important;">-</span>
+                                    <span *ngIf="items.length === 0" class="font-medium py-1 empty-dash">-</span>
 
                                     <ul *ngIf="row['isExpanded_' + col.key]"
                                         class="mt-2 w-full text-center space-y-1 animate-fadeIn"

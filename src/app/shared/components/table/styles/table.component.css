@@ -91,6 +91,30 @@
     color: var(--utn-blue-dark);
 }
 
+.visibility-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.text-sm {
+    font-size: 16px;
+}
+
+.expand-btn {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--text-primary) !important;
+}
+
+.empty-dash {
+    color: var(--text-primary) !important;
+}
+
 /* Pagination */
 .pagination-container {
     display: flex;
