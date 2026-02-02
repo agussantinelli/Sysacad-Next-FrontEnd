@@ -14,20 +14,18 @@
             @for (aviso of avisos; track aviso.id) {
             <div class="notification-card">
                 <div class="card-header">
-                    <h3>{{ aviso.titulo }}</h3>
+                    <div class="header-content">
+                        <span class="material-icons notification-icon">campaign</span>
+                        <h3>{{ aviso.titulo }}</h3>
+                    </div>
                     <span class="date-badge">
+                        <span class="material-icons date-icon">event</span>
                         {{ aviso.fechaEmision | date:'dd/MM/yyyy' }}
                     </span>
                 </div>
 
                 <div class="card-content">
                     <p>{{ aviso.descripcion }}</p>
-                </div>
-
-                <div class="card-footer">
-                    <span class="status-badge" [class]="aviso.estado.toLowerCase()">
-                        {{ aviso.estado }}
-                    </span>
                 </div>
             </div>
             }
