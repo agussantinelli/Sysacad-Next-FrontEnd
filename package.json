@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^19.2.18",
     "@angular/platform-browser-dynamic": "^19.2.18",
     "@angular/router": "^19.2.18",
+    "@fontsource/montserrat": "^5.2.8",
     "@fontsource/questrial": "^5.2.8",
     "axios": "^1.13.2",
     "material-icons": "^1.13.14",
