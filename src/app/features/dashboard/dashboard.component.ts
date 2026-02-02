@@ -103,6 +103,7 @@ export class DashboardComponent implements OnInit {
             title: 'Gestión Académica',
             options: [
                 { title: 'Mis Materias', icon: 'class', route: '/professor/subjects' },
+                { title: 'Mis Comisiones', icon: 'groups', route: '/professor/commissions' },
                 { title: 'Calificar Alumnos', icon: 'assignment_turned_in', route: '/professor/grades' },
             ]
         },
@@ -111,6 +112,20 @@ export class DashboardComponent implements OnInit {
             options: [
                 { title: 'Mesas de Examen', icon: 'assignment', route: '/professor/exams' },
                 { title: 'Actas Volantes', icon: 'description', route: '/professor/acts' }
+            ]
+        },
+        {
+            title: 'Comunicación y Cuenta',
+            options: [
+                { title: 'Avisos', icon: 'notifications', route: '/announcements' },
+                { title: 'Mensajes', icon: 'chat', route: '/messages' },
+                { title: 'Cambio de Contraseña', icon: 'lock_reset', route: '/profile/change-password' }
+            ]
+        },
+        {
+            title: 'Trámites',
+            options: [
+                { title: 'Calendario Académico', icon: 'calendar_month', route: '/academic/calendar' }
             ]
         }
     ];

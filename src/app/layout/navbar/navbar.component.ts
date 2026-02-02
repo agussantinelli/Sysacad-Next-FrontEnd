@@ -104,6 +104,7 @@ export class NavbarComponent implements OnInit {
             title: 'Gestión',
             options: [
                 { title: 'Mis Materias', icon: 'class', route: '/professor/subjects' },
+                { title: 'Mis Comisiones', icon: 'groups', route: '/professor/commissions' },
                 { title: 'Calificar', icon: 'assignment_turned_in', route: '/professor/grades' },
             ]
         },
@@ -112,6 +113,19 @@ export class NavbarComponent implements OnInit {
             options: [
                 { title: 'Mesas', icon: 'assignment', route: '/professor/exams' },
                 { title: 'Actas', icon: 'description', route: '/professor/acts' }
+            ]
+        },
+        {
+            title: 'Comunicación',
+            options: [
+                { title: 'Avisos', icon: 'notifications', route: '/announcements' },
+                { title: 'Mensajes', icon: 'chat', route: '/messages' }
+            ]
+        },
+        {
+            title: 'Trámites',
+            options: [
+                { title: 'Calendario', icon: 'calendar_month', route: '/academic/calendar' }
             ]
         }
     ];
@@ -132,7 +146,7 @@ export class NavbarComponent implements OnInit {
         // Assuming backend serves static files at root or /uploads
         // If relativePath starts with /, remove it to avoid double slash
         const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
-        return `http://localhost:8081/${cleanPath}`;
+        return `http://localhost:8080/${cleanPath}`;
     }
 
     toggleDropdown(): void {
