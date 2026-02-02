@@ -36,3 +36,33 @@ body {
     --mdc-snackbar-supporting-text-color: white;
     --mat-mdc-snack-bar-button-color: white;
 }
+
+/* Global Floating Action Button */
+.floating-chat-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background-color: var(--utn-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 153, 230, 0.4);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    text-decoration: none;
+}
+
+.floating-chat-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--utn-blue-dark);
+    box-shadow: 0 8px 15px rgba(0, 153, 230, 0.5);
+}
+
+.floating-chat-btn .material-icons {
+    font-size: 28px;
+}
