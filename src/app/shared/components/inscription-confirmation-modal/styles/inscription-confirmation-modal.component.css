@@ -1,13 +1,13 @@
 /* Reusing variables and base styles for consistency */
 :host {
-    --modal-bg: #1e1e1e;
-    --modal-border: #333;
-    --text-primary: #e0e0e0;
-    --text-secondary: #a0a0a0;
-    --accent-color: #3b82f6;
-    --accent-hover: #2563eb;
-    --card-bg: #2d2d2d;
-    --card-border: #404040;
+    --modal-bg: var(--bg-card);
+    --modal-border: var(--border-subtle);
+    --text-primary: var(--text-primary);
+    --text-secondary: var(--text-secondary);
+    --accent-color: var(--utn-blue);
+    --accent-hover: var(--utn-blue-dark);
+    --card-bg: var(--input-bg);
+    --card-border: var(--border-subtle);
 }
 
 .modal-overlay {
@@ -45,7 +45,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #252526;
+    background: var(--bg-card);
 }
 
 .modal-title {
@@ -69,10 +69,10 @@
 .subject-title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     margin-bottom: 16px;
     padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .detail-row {
@@ -100,7 +100,8 @@
 
 .schedule-item {
     font-size: 0.9rem;
-    color: #cbd5e1;
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 .alert-info {
@@ -119,7 +120,7 @@
 .modal-footer {
     padding: 16px 24px;
     border-top: 1px solid var(--modal-border);
-    background: #252526;
+    background: var(--bg-card);
     display: flex;
     justify-content: flex-end;
     gap: 12px;
