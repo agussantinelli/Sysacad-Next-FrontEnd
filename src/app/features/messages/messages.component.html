@@ -1,0 +1,94 @@
+<app-page-layout title="Mensajes">
+    <div class="messages-container">
+
+        <!-- Sidebar: List of Conversations -->
+        <div class="conversations-sidebar" [class.mobile-hidden]="selectedConversation">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Buscar mensajes...">
+            </div>
+
+            <div class="conversations-list">
+                @for (conv of conversations; track conv.id) {
+                <div class="conversation-item" [class.active]="selectedConversation?.id === conv.id"
+                    [class.unread]="conv.unreadCount > 0" (click)="selectConversation(conv)">
+
+                    <div class="avatar-container">
+                        <div class="avatar-placeholder">
+                            {{ conv.name.charAt(0) }}
+                        </div>
+                        @if (conv.online) {
+                        <span class="status-indicator online"></span>
+                        }
+                    </div>
+
+                    <div class="conv-info">
+                        <div class="conv-header">
+                            <span class="conv-name">{{ conv.name }}</span>
+                            <span class="conv-time">{{ conv.lastMessageTime | date:'shortTime' }}</span>
+                        </div>
+                        <div class="conv-preview">
+                            <span class="last-message">{{ conv.lastMessage }}</span>
+                            @if (conv.unreadCount > 0) {
+                            <span class="badge">{{ conv.unreadCount }}</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Main: Chat Window -->
+        <div class="chat-window" [class.mobile-visible]="selectedConversation">
+            @if (selectedConversation) {
+            <div class="chat-header">
+                <button class="btn-back mobile-only" (click)="selectedConversation = null">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+
+                <div class="chat-header-info">
+                    <div class="avatar-placeholder sm">
+                        {{ selectedConversation.name.charAt(0) }}
+                    </div>
+                    <div class="header-text">
+                        <h3>{{ selectedConversation.name }}</h3>
+                        <span class="status-text">{{ selectedConversation.online ? 'En línea' : 'Desconectado' }}</span>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <button class="icon-btn"><span class="material-icons">more_vert</span></button>
+                </div>
+            </div>
+
+            <div class="messages-list">
+                @for (msg of messages; track msg.id) {
+                <div class="message-group" [class.mine]="msg.isMine">
+                    <div class="message-bubble">
+                        <p>{{ msg.content }}</p>
+                        <span class="msg-time">{{ msg.timestamp | date:'shortTime' }}</span>
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="chat-input-area">
+                <button class="icon-btn"><span class="material-icons">attach_file</span></button>
+                <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="newMessage"
+                    (keyup.enter)="sendMessage()">
+                <button class="btn-send" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+                    <span class="material-icons">send</span>
+                </button>
+            </div>
+
+            } @else {
+            <div class="empty-chat-state">
+                <span class="material-icons">chat_bubble_outline</span>
+                <h3>Selecciona una conversación</h3>
+                <p>Elige un contacto para comenzar a chatear.</p>
+            </div>
+            }
+        </div>
+    </div>
+</app-page-layout>
