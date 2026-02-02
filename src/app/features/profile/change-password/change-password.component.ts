@@ -30,20 +30,33 @@ export class ChangePasswordComponent implements OnInit {
             currentPassword: ['', Validators.required],
             newPassword: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', Validators.required]
-        }, { validators: this.passwordMatchValidator });
+        }, { validators: this.passwordValidators });
     }
 
     ngOnInit(): void {
     }
 
-    passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-        const newPassword = control.get('newPassword');
-        const confirmPassword = control.get('confirmPassword');
+    passwordValidators(control: AbstractControl): ValidationErrors | null {
+        const currentPassword = control.get('currentPassword')?.value;
+        const newPassword = control.get('newPassword')?.value;
+        const confirmPassword = control.get('confirmPassword')?.value;
 
-        if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
-            return { mismatch: true };
+        const errors: ValidationErrors = {};
+        let hasError = false;
+
+        // Check if new password is same as current
+        if (currentPassword && newPassword && currentPassword === newPassword) {
+            errors['sameAsCurrent'] = true;
+            hasError = true;
         }
-        return null;
+
+        // Check if confirm matches new
+        if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+            errors['mismatch'] = true;
+            hasError = true;
+        }
+
+        return hasError ? errors : null;
     }
 
     onSubmit() {
@@ -57,7 +70,7 @@ export class ChangePasswordComponent implements OnInit {
 
         this.authService.currentUser$.pipe(take(1)).subscribe(user => {
             if (!user) {
-                this.alertService.error('⚠️ No se ha podido identificar al usuario.');
+                this.alertService.error('No se ha podido identificar al usuario.');
                 this.isLoading = false;
                 return;
             }
@@ -69,14 +82,14 @@ export class ChangePasswordComponent implements OnInit {
 
             this.usuarioService.cambiarPassword(user.id, request).subscribe({
                 next: () => {
-                    this.alertService.success('✅ Contraseña actualizada correctamente.');
+                    this.alertService.success('Contraseña actualizada correctamente.');
                     this.passwordForm.reset();
                     this.isLoading = false;
                 },
                 error: (err) => {
                     console.error('Error changing password:', err);
                     const msg = err.error?.message || 'Error al actualizar la contraseña. Verifica que la contraseña actual sea correcta.';
-                    this.alertService.error(`❌ ${msg}`);
+                    this.alertService.error(msg);
                     this.isLoading = false;
                 }
             });
