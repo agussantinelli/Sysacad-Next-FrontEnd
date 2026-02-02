@@ -2,7 +2,7 @@
     width: 100%;
     min-height: 100vh;
     padding: 2rem;
-    background-color: #000000;
+    background-color: var(--bg-page);
     font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: center;
@@ -11,11 +11,11 @@
 .inscription-card {
     width: 100%;
     max-width: 1400px;
-    background-color: #111111;
+    background-color: var(--bg-card);
     border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-    border: 1px solid #222;
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+    border: 1px solid var(--border-subtle);
 }
 
 .header-actions {
@@ -30,9 +30,9 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #a0a0a0;
+    background: var(--input-bg);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
@@ -43,11 +43,11 @@
 }
 
 .btn-back:hover {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.3);
-    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-color: var(--border-focus);
+    background-color: var(--bg-card);
     transform: translateX(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .btn-back:active {
@@ -59,7 +59,7 @@
 }
 
 .inscription-title {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
