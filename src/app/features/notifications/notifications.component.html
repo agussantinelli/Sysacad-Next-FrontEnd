@@ -1,0 +1,37 @@
+<app-page-layout title="Avisos Institucionales">
+    <div class="notifications-container">
+
+        @if (isLoading) {
+        <app-loading-spinner></app-loading-spinner>
+        } @else if (avisos.length === 0) {
+        <div class="empty-state">
+            <span class="material-icons">notifications_off</span>
+            <h3>No hay avisos recientes</h3>
+            <p>Te notificaremos cuando haya novedades importantes.</p>
+        </div>
+        } @else {
+        <div class="notifications-grid">
+            @for (aviso of avisos; track aviso.id) {
+            <div class="notification-card">
+                <div class="card-header">
+                    <h3>{{ aviso.titulo }}</h3>
+                    <span class="date-badge">
+                        {{ aviso.fechaEmision | date:'dd/MM/yyyy' }}
+                    </span>
+                </div>
+
+                <div class="card-content">
+                    <p>{{ aviso.descripcion }}</p>
+                </div>
+
+                <div class="card-footer">
+                    <span class="status-badge" [class]="aviso.estado.toLowerCase()">
+                        {{ aviso.estado }}
+                    </span>
+                </div>
+            </div>
+            }
+        </div>
+        }
+    </div>
+</app-page-layout>

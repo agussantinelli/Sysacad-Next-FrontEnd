@@ -79,6 +79,6 @@ export const routes: Routes = [
     },
     {
         path: 'notifications',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/notifications/notifications.component').then(m => m.NotificationsComponent)
     }
 ];
