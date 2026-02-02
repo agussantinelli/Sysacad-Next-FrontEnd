@@ -15,7 +15,7 @@ export class TableComponent implements OnChanges {
     @Input() data: any[] = [];
     @Input() columns: TableColumn[] = [];
     @Input() actions: TableAction[] = [];
-    @Input() pageSize: number = 10;
+    @Input() pageSize: number = 50;
     @Input() isLoading: boolean = false;
     @Output() onAction = new EventEmitter<ActionEvent>();
 

@@ -19,7 +19,7 @@ import { CorrelativesModalComponent } from '@shared/components/correlatives-moda
             <app-table 
                 [data]="displayData" 
                 [columns]="columns" 
-                [pageSize]="20"
+                [pageSize]="50"
                 [isLoading]="isLoading"
                 (onAction)="handleAction($event)">
             </app-table>
