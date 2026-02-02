@@ -27,13 +27,15 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    @if (materia.cargo === 'JEFE_CATEDRA') {
                     <button class="action-btn">
-                        <span class="material-icons">groups</span>
-                        Ver Alumnos
+                        <span class="material-icons">settings</span>
+                        Ajustes
                     </button>
+                    }
                     <button class="action-btn primary">
-                        <span class="material-icons">assignment_turned_in</span>
-                        Calificar
+                        <span class="material-icons">groups</span>
+                        Comisiones
                     </button>
                 </div>
             </div>
