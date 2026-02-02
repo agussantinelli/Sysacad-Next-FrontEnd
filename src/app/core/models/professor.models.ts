@@ -17,4 +17,5 @@ export interface ComisionHorarioDTO {
     salon: string;
     horarios: string[]; // Formatted schedules (e.g., "LUNES 08:00 - 12:00")
     profesores: string[]; // All professors if requester is head, empty otherwise
+    cantidadAlumnos: number; // Number of students in this commission
 }

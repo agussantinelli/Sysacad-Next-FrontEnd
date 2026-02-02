@@ -30,6 +30,12 @@
                         <span class="info-value">{{ comision.salon }}</span>
                     </div>
 
+                    <div class="info-row">
+                        <span class="material-icons">group</span>
+                        <span class="info-label">Alumnos:</span>
+                        <span class="info-value">{{ comision.cantidadAlumnos }}</span>
+                    </div>
+
                     <div class="schedules-section">
                         <div class="section-title">
                             <span class="material-icons">schedule</span>
@@ -53,6 +59,15 @@
                             <div class="professor-chip">{{ profesor }}</div>
                             }
                         </div>
+                    </div>
+                    }
+
+                    @if (comision.cantidadAlumnos > 0) {
+                    <div class="card-actions">
+                        <button class="btn-grade">
+                            <span class="material-icons">assignment_turned_in</span>
+                            Calificar Alumnos
+                        </button>
                     </div>
                     }
                 </div>
