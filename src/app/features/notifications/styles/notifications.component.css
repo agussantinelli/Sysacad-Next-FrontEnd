@@ -9,7 +9,7 @@
 .empty-state {
     text-align: center;
     padding: 3rem;
-    background-color: white;
+    background-color: var(--bg-card);
     border-radius: 12px;
     color: var(--text-secondary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -28,7 +28,7 @@
 }
 
 .notification-card {
-    background-color: white;
+    background-color: var(--bg-card);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
