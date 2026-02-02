@@ -75,7 +75,7 @@ export const routes: Routes = [
     },
     {
         path: 'procedures/regular-cert',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/student/regular-cert/regular-cert.component').then(m => m.RegularCertComponent)
     },
     {
         path: 'notifications',
