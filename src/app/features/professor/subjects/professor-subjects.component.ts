@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
@@ -9,7 +10,7 @@ import { MateriaProfesorDTO } from '@core/models/professor.models';
 @Component({
     selector: 'app-professor-subjects',
     standalone: true,
-    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent],
+    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent, RouterLink],
     templateUrl: './professor-subjects.component.html',
     styleUrl: './styles/professor-subjects.component.css'
 })
