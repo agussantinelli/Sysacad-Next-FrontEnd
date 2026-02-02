@@ -63,6 +63,8 @@
     <li><strong>🔔 Sistema de Alertas Global:</strong> Feedback unificado (Éxito, Error, Info) gestionado por un servicio centralizado, asegurando consistencia en toda la aplicación.</li>
     <li><strong>✅ Flujo de Inscripción Confimada:</strong> Sistema de modal doble (Selección -> Confirmación) que previene inscripciones accidentales.</li>
     <li><strong>📋 Gestión Activa:</strong> Nueva sección "Mis Inscripciones" para visualizar y dar de baja exámenes activos en tiempo real.</li>
+    <li><strong>💬 Comunicación Integrada:</strong> Sistema de Mensajería interna y Avisos (Notificaciones) clasificados por estado y fecha.</li>
+    <li><strong>📄 Trámites Digitales:</strong> Emisión de Certificado de Alumno Regular en PDF directamente desde la plataforma.</li>
 </ul>
 
 <hr>
@@ -253,17 +255,27 @@
 │   │   │   ├── models/                 # Modelos DTO (Granulares: Historial, InscripcionExamen...)
 │   │   │   └── services/               # Servicios de Entidades (Auth, Matriculacion...)
 │   │   ├── features/
+│   │   │   ├── announcements/      # Avisos y Anuncios
+│   │   │   │   └── announcements.component
 │   │   │   ├── auth/
 │   │   │   │   ├── login/              # Inicio de Sesión
 │   │   │   │   └── forgot-password/    # Recuperación de Contraseña
 │   │   │   ├── dashboard/              # Dashboard del Alumno
+│   │   │   ├── messages/               # Sistema de Mensajería
+│   │   │   │   └── messages.component
+│   │   │   ├── notifications/          # (Legacy/Refactor)
 │   │   │   ├── profile/
 │   │   │   │   ├── edit-profile/       # Edición de Perfil
 │   │   │   │   └── profile.component   # Visualización de Perfil
 │   │   │   └── student/
 │   │   │       ├── academic-status/    # Estado Académico (Analítico + Historial)
+│   │   │       ├── calendar/           # Calendario Académico
+│   │   │       ├── current-enrollments/# Cursado y Notas (Matriculaciones activas)
 │   │   │       ├── inscription-course/ # Inscripción a Cursado
-│   │   │       └── inscription-exam/   # Inscripción a Examen
+│   │   │       ├── inscription-exam/   # Inscripción a Examen
+│   │   │       ├── my-inscriptions/    # Mis Inscripciones (Baja)
+│   │   │       ├── regular-cert/       # Certificado de Alumno Regular
+│   │   │       └── study-plan/         # Plan de Estudios Interactivo
 │   │   ├── layout/
 │   │   │   └── navbar/                 # Barra de Navegación Responsive
 │   │   ├── shared/
@@ -388,6 +400,12 @@ FRONTEND_URL=http://localhost:4200
 | | **Correlativas** | | | |
 | | Para Cursar | 🚧 | ❌ | ❌ |
 | | Para Rendir | 🚧 | ❌ | ❌ |
+| | **Trámites** | | | |
+| | Certificado Regular | ✅ | ❌ | ❌ |
+| | Calendario Académico | ✅ | ❌ | ❌ |
+| | **Comunicación** | | | |
+| | Avisos | ✅ | ❌ | ❌ |
+| | Mensajería | ✅ | ❌ | ❌ |
 | **Gestión Docente** | **Clases** | | | |
 | | Mis Materias | ❌ | ❌ | ❌ |
 | | Calificar Alumnos | ❌ | ❌ | ❌ |
