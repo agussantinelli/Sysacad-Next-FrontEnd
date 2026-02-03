@@ -178,3 +178,49 @@
     font-size: 0.75rem;
     color: var(--text-secondary);
 }
+
+.grading-actions {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-grade {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--utn-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-grade:hover {
+    background-color: var(--utn-blue-dim);
+}
+
+.grading-status-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.grading-status-message.warning {
+    color: #eab308;
+    background-color: rgba(234, 179, 8, 0.1);
+}
+
+.grading-status-message .material-icons {
+    font-size: 20px;
+}

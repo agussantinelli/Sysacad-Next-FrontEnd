@@ -80,6 +80,25 @@ export class ProfessorExamDetailsComponent implements OnInit {
         this.router.navigate(['/professor/exams']);
     }
 
+    isExamPast(dateStr: string, timeStr: string): boolean {
+        const examDate = new Date(`${dateStr}T${timeStr}`);
+        const now = new Date();
+        return now > examDate;
+    }
+
+    hasEnrolledStudents(count: number): boolean {
+        return count > 0;
+    }
+
+    canGrade(detalle: ProfesorDetalleExamenDTO): boolean {
+        return this.isExamPast(detalle.fecha, detalle.hora) && this.hasEnrolledStudents(detalle.cantidadInscriptos);
+    }
+
+    gradeExam(detalle: ProfesorDetalleExamenDTO): void {
+        console.log('Navegar a corrección para:', detalle.nombreMateria);
+        // Implement navigation to grading component later
+    }
+
     getRoleLabel(rol: string): string {
         return rol === 'PRESIDENTE' ? 'Presidente' : 'Vocal';
     }

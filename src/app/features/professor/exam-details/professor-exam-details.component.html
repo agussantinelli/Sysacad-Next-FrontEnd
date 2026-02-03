@@ -52,6 +52,25 @@
                             }
                         </div>
                     </div>
+
+                    <div class="grading-actions">
+                        @if (canGrade(detalle)) {
+                        <button class="btn-grade" (click)="gradeExam(detalle)">
+                            <span class="material-icons">rate_review</span> Corregir Examen
+                        </button>
+                        } @else {
+                        <div class="grading-status-message warning">
+                            <span class="material-icons">info</span>
+                            <span>
+                                @if (!hasEnrolledStudents(detalle.cantidadInscriptos)) {
+                                Sin alumnos inscriptos.
+                                } @else if (!isExamPast(detalle.fecha, detalle.hora)) {
+                                El examen aún no ha finalizado.
+                                }
+                            </span>
+                        </div>
+                        }
+                    </div>
                 </div>
             </div>
             }
