@@ -354,7 +354,6 @@ FRONTEND_URL=http://localhost:4200
         </ul>
     </li>
     <li>
-
         <strong>👨‍🏫 Profesor (Rol: PROFESOR)</strong>
         <p>Herramientas optimizadas para la docencia y evaluación.</p>
         <ul>
