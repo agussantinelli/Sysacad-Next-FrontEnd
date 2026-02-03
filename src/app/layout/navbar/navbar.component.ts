@@ -112,6 +112,7 @@ export class NavbarComponent implements OnInit {
             title: 'Exámenes',
             options: [
                 { title: 'Mesas', icon: 'assignment', route: '/professor/exams' },
+                { title: 'Estadísticas', icon: 'bar_chart', route: '/professor/exam-statistics' }
             ]
         },
         {

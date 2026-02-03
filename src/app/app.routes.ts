@@ -134,5 +134,9 @@ export const routes: Routes = [
         path: 'professor/exams/:idMesa/grading/:nroDetalle',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/professor/grade-exam/professor-grade-exam.component').then(m => m.ProfessorGradeExamComponent)
+    },
+    {
+        path: 'professor/exam-statistics',
+        loadComponent: () => import('@features/professor/exam-statistics/professor-exam-statistics.component').then(m => m.ProfessorExamStatisticsComponent)
     }
 ];
