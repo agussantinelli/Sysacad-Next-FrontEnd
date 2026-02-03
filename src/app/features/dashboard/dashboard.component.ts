@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioResponse } from '@core/models/usuario.models';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
+import { RouterLink } from '@angular/router';
+import { AvisoService } from '@core/services/aviso.service';
 
 interface DashboardOption {
     title: string;
     icon: string;
     route: string;
     disabled?: boolean;
+    badgeCount?: number;
 }
 
 interface DashboardSection {
     title: string;
     options: DashboardOption[];
 }
-
-import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -25,6 +26,8 @@ import { RouterLink } from '@angular/router';
     styleUrl: './styles/dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+    private avisoService = inject(AvisoService);
+
     usuario: UsuarioResponse | null = null;
     greeting: string = '';
     successMessage: string | null = null;
@@ -134,6 +137,7 @@ export class DashboardComponent implements OnInit {
         if (userStr) {
             this.usuario = JSON.parse(userStr);
             this.setGreeting();
+            this.loadUnreadNotices();
         }
 
         if (history.state.loginSuccess && !sessionStorage.getItem('welcomeShown')) {
@@ -154,5 +158,30 @@ export class DashboardComponent implements OnInit {
         } else {
             this.greeting = 'Buenas noches';
         }
+    }
+
+    loadUnreadNotices(): void {
+        this.avisoService.obtenerCantidadSinLeer().subscribe({
+            next: (count) => {
+                this.updateBadgeCount('Avisos', count);
+            },
+            error: (err) => console.error('Error loading unread notices', err)
+        });
+    }
+
+    updateBadgeCount(optionTitle: string, count: number): void {
+        // Helper to update count in all sections
+        const updateInSections = (sections: DashboardSection[]) => {
+            for (const section of sections) {
+                const option = section.options.find(o => o.title === optionTitle);
+                if (option) {
+                    option.badgeCount = count;
+                }
+            }
+        };
+
+        if (this.usuario?.rol === 'ESTUDIANTE') updateInSections(this.menuSections);
+        else if (this.usuario?.rol === 'PROFESOR') updateInSections(this.professorSections);
+        else if (this.usuario?.rol === 'ADMIN') updateInSections(this.adminSections);
     }
 }

@@ -118,6 +118,28 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    position: relative;
+    /* Added for badge positioning */
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--error);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--bg-card);
+    z-index: 10;
 }
 
 .option-card:hover .icon-wrapper {
