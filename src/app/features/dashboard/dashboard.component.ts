@@ -124,6 +124,7 @@ export class DashboardComponent implements OnInit {
         {
             title: 'Trámites',
             options: [
+                { title: 'Certificado Docencia', icon: 'badge', route: '/professor/professor-cert' },
                 { title: 'Calendario Académico', icon: 'calendar_month', route: '/academic/calendar' }
             ]
         }

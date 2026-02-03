@@ -125,6 +125,7 @@ export class NavbarComponent implements OnInit {
         {
             title: 'Trámites',
             options: [
+                { title: 'Certificados', icon: 'badge', route: '/professor/professor-cert' },
                 { title: 'Calendario', icon: 'calendar_month', route: '/academic/calendar' }
             ]
         }

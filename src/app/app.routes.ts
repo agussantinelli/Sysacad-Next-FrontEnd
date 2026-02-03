@@ -138,5 +138,9 @@ export const routes: Routes = [
     {
         path: 'professor/exam-statistics',
         loadComponent: () => import('@features/professor/exam-statistics/professor-exam-statistics.component').then(m => m.ProfessorExamStatisticsComponent)
+    },
+    {
+        path: 'professor/professor-cert',
+        loadComponent: () => import('@features/professor/professor-cert/professor-cert.component').then(m => m.ProfessorCertComponent)
     }
 ];
