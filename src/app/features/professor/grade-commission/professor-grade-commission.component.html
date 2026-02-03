@@ -10,7 +10,7 @@
             <div class="info-item full-width">
                 <label for="concepto" class="label">Concepto de la Nota:</label>
                 <input type="text" id="concepto" [(ngModel)]="concepto" class="form-input"
-                    placeholder="Ej: 1er Parcial, TP Final" [disabled]="isSaving">
+                    placeholder="Ej: 1er Parcial, TP Final" [disabled]="isSaving || esNotaFinal">
 
                 <label class="checkbox-container">
                     <input type="checkbox" [(ngModel)]="esNotaFinal" [disabled]="isSaving">
@@ -78,7 +78,8 @@
 
         <div class="actions-bar">
             <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
-            <button class="btn btn-primary" (click)="saveGrades()" [disabled]="isSaving || !hasChanges() || !concepto">
+            <button class="btn btn-primary" (click)="saveGrades()"
+                [disabled]="isSaving || !hasChanges() || (!esNotaFinal && !concepto)">
                 @if (isSaving) {
                 <span class="material-icons spin">refresh</span>
                 <span>Guardando...</span>

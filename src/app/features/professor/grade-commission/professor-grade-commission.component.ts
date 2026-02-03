@@ -124,13 +124,17 @@ export class ProfessorGradeCommissionComponent implements OnInit {
             return;
         }
 
-        if (!this.concepto.trim()) {
+        // Validate Concept if NOT final grade
+        if (!this.esNotaFinal && !this.concepto.trim()) {
             this.alertService.error('Debe ingresar un concepto para la nota (ej: 1er Parcial)');
             return;
         }
 
+        // If it's a final grade, concept can be empty (defaults to 'Nota Final' or similar backend side if needed, or just sent as empty string)
+        const conceptoToSend = this.esNotaFinal ? (this.concepto.trim() || 'Nota Final') : this.concepto;
+
         const updates: CargaNotasCursadaDTO = {
-            concepto: this.concepto,
+            concepto: conceptoToSend,
             esNotaFinal: this.esNotaFinal,
             notas: this.students
                 .filter(s => {
@@ -143,8 +147,8 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                     return gradeChanged || stateChanged;
                 })
                 .map(s => {
-                    // Force null grade if state is CURSANDO and it's a final grade note
-                    if (this.esNotaFinal && s.newState === EstadoCursada.CURSANDO) {
+                    // Force null grade if state is CURSANDO or LIBRE and it's a final grade note
+                    if (this.esNotaFinal && (s.newState === EstadoCursada.CURSANDO || s.newState === EstadoCursada.LIBRE)) {
                         s.newGrade = null;
                     }
 
