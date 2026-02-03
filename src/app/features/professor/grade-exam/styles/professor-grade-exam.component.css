@@ -122,3 +122,41 @@ tr.desaprobado {
     color: var(--text-secondary);
     border: 2px dashed var(--border-color);
 }
+
+.utn-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.utn-table th,
+.utn-table td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.utn-table th:nth-child(1) {
+    width: 10%;
+}
+
+/* Legajo */
+.utn-table th:nth-child(2) {
+    width: 40%;
+}
+
+/* Alumno */
+.utn-table th:nth-child(3) {
+    width: 20%;
+}
+
+/* Estado */
+.utn-table th:nth-child(4) {
+    width: 13%;
+}
+
+/* Nota */
+.utn-table th:nth-child(5) {
+    width: 17%;
+}
