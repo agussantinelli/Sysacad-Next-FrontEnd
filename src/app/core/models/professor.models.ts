@@ -82,6 +82,7 @@ export interface AlumnoCursadaDTO {
     apellido: string;
     legajo: number;
     estado: string; // EstadoCursada
+    notaFinal?: number; // Optional since not all responses might have it, but consistent with user feedback
     calificaciones: CalificacionDTO[];
 }
 
