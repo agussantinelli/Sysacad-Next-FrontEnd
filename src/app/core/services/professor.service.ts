@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, ProfesorMesaExamenDTO, ProfesorDetalleExamenDTO, AlumnoExamenDTO, CargaNotaItemDTO, AlumnoCursadaDTO, CargaNotasCursadaDTO } from '@core/models/professor.models';
+import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, ProfesorMesaExamenDTO, ProfesorDetalleExamenDTO, AlumnoExamenDTO, CargaNotaItemDTO, AlumnoCursadaDTO, CargaNotasCursadaDTO, ProfesorEstadisticasDTO } from '@core/models/professor.models';
 
 @Injectable({
     providedIn: 'root'
@@ -69,6 +69,28 @@ export class ProfessorService {
 
     cargarNotasComision(idComision: string, idMateria: string, notasDTO: CargaNotasCursadaDTO): Observable<void> {
         return from(axiosClient.post<void>(`/profesores/comisiones/${idComision}/materias/${idMateria}/calificar`, notasDTO)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getEstadisticasGeneral(anio?: number): Observable<ProfesorEstadisticasDTO> {
+        return from(axiosClient.get<ProfesorEstadisticasDTO>('/profesores/estadisticas/general', {
+            params: { anio }
+        })).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getEstadisticasMateria(idMateria: string, anio?: number): Observable<ProfesorEstadisticasDTO> {
+        return from(axiosClient.get<ProfesorEstadisticasDTO>(`/profesores/estadisticas/materias/${idMateria}`, {
+            params: { anio }
+        })).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getAniosEstadisticas(): Observable<number[]> {
+        return from(axiosClient.get<number[]>('/profesores/estadisticas/anios')).pipe(
             map(response => response.data)
         );
     }
