@@ -17,6 +17,7 @@ import { ComisionHorarioDTO } from '@core/models/professor.models';
 export class SubjectCommissionsComponent implements OnInit {
     private professorService = inject(ProfessorService);
     private route = inject(ActivatedRoute);
+    private router = inject(Router);
 
     comisiones: ComisionHorarioDTO[] = [];
     isLoading = false;
@@ -52,5 +53,9 @@ export class SubjectCommissionsComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+    }
+
+    goToGrading(idComision: string): void {
+        this.router.navigate(['/professor/commissions', idComision, 'subjects', this.idMateria, 'grading']);
     }
 }

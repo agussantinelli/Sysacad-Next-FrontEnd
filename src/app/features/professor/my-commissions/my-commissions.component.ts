@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
@@ -15,6 +16,7 @@ import { ComisionDetalladaDTO } from '@core/models/professor.models';
 })
 export class MyCommissionsComponent implements OnInit {
     private professorService = inject(ProfessorService);
+    private router = inject(Router);
 
     comisiones: ComisionDetalladaDTO[] = [];
     isLoading = false;
@@ -39,5 +41,9 @@ export class MyCommissionsComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+    }
+
+    goToGrading(comision: ComisionDetalladaDTO): void {
+        this.router.navigate(['/professor/commissions', comision.idComision, 'subjects', comision.idMateria, 'grading']);
     }
 }

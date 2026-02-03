@@ -65,7 +65,7 @@
 
                     @if (comision.cantidadAlumnos > 0) {
                     <div class="card-actions">
-                        <button class="btn-grade">
+                        <button class="btn-grade" (click)="goToGrading(comision)">
                             <span class="material-icons">assignment_turned_in</span>
                             Calificar Alumnos
                         </button>
