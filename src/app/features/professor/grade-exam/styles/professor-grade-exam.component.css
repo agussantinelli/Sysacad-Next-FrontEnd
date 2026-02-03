@@ -30,6 +30,7 @@
     border: 1px solid var(--border-color);
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
 }
 
 .form-select {
@@ -70,7 +71,7 @@
 
 .form-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);

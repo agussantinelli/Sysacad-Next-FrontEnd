@@ -1,10 +1,5 @@
 <app-page-layout [title]="'Calificar: ' + materiaNombre">
 
-    <div class="actions-header">
-        <button class="btn-back" (click)="goBack()">
-            <span class="material-icons">arrow_back</span> Volver al Detalle
-        </button>
-    </div>
 
     <app-loading-spinner *ngIf="isLoading" message="Cargando alumnos..."></app-loading-spinner>
 
