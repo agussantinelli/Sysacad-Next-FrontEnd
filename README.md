@@ -264,6 +264,10 @@
 │   │   │   ├── messages/                             # Sistema de Mensajería
 │   │   │   │   └── messages.component
 │   │   │   ├── professor/                            # Módulo de Profesores
+│   │   │   │   ├── exam-details/                     # Detalle de Mesa de Examen
+│   │   │   │   ├── exam-statistics/                  # Estadísticas de Rendimiento
+│   │   │   │   ├── exams/                            # Listado de Mesas de Examen
+│   │   │   │   ├── grade-exam/                       # Interfaz de Carga de Notas
 │   │   │   │   ├── my-commissions/                   # Mis Comisiones (Global)
 │   │   │   │   ├── subject-commissions/              # Comisiones por Materia
 │   │   │   │   └── subjects/                         # Mis Materias
