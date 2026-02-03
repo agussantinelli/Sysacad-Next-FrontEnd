@@ -5,7 +5,7 @@ import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 import { ProfessorService } from '@core/services/professor.service';
-import { ProfesorDetalleExamenDTO } from '@core/models/professor.models';
+import { ProfesorDetalleExamenDTO, ProfesorMesaExamenDTO } from '@core/models/professor.models';
 
 @Component({
     selector: 'app-professor-exam-details',
@@ -49,6 +49,20 @@ export class ProfessorExamDetailsComponent implements OnInit {
 
     loadDetalles(): void {
         this.isLoading = true;
+
+        // If title is missing (e.g. refresh), try to fetch it from the list of mesas
+        if (this.mesaNombre === 'Detalle de Mesa de Examen') {
+            this.professorService.getMesasExamen().subscribe({
+                next: (mesas) => {
+                    const mesa = mesas.find(m => m.id === this.idMesa);
+                    if (mesa) {
+                        this.mesaNombre = mesa.nombre;
+                    }
+                },
+                error: (err) => console.error('Error fetching mesa info', err)
+            });
+        }
+
         this.professorService.getDetallesMesaExamen(this.idMesa).subscribe({
             next: (data: ProfesorDetalleExamenDTO[]) => {
                 this.detalles = data;
