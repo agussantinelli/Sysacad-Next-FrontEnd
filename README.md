@@ -260,10 +260,13 @@
 │   │   │   ├── auth/
 │   │   │   │   ├── login/                            # Inicio de Sesión
 │   │   │   │   └── forgot-password/                  # Recuperación de Contraseña
-│   │   │   ├── dashboard/                            # Dashboard del Alumno
+│   │   │   ├── dashboard/                            # Dashboard (Role-Based)
 │   │   │   ├── messages/                             # Sistema de Mensajería
 │   │   │   │   └── messages.component
-│   │   │   ├── notifications/                        # (Legacy/Refactor)
+│   │   │   ├── professor/                            # Módulo de Profesores
+│   │   │   │   ├── my-commissions/                   # Mis Comisiones (Global)
+│   │   │   │   ├── subject-commissions/              # Comisiones por Materia
+│   │   │   │   └── subjects/                         # Mis Materias
 │   │   │   ├── profile/
 │   │   │   │   ├── edit-profile/                     # Edición de Perfil
 │   │   │   │   └── profile.component                 # Visualización de Perfil
