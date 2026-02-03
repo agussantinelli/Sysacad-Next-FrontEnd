@@ -237,6 +237,11 @@
             <td>Questrial 5.2.8</td>
             <td>Google Fonts (vía <code>@fontsource/questrial</code>). Estética moderna y limpia.</td>
         </tr>
+        <tr>
+            <td><strong>Gráficos</strong></td>
+            <td>Ngx-Charts 20.5.0</td>
+            <td>Visualización de datos (SVGs). Gráficos de torta y barras.</td>
+        </tr>
     </tbody>
 </table>
 
@@ -420,7 +425,8 @@ FRONTEND_URL=http://localhost:4200
 | **Gestión Docente** | **Clases** | | | |
 | | Mis Materias | ❌ | ✅ | ❌ |
 | | Mis Comisiones (Global) | ❌ | ✅ | ❌ |
-| | Calificar Alumnos | ❌ | 🚧 | ❌ |
+| | Calificar Alumnos | ❌ | ✅ | ❌ |
+| | Estadísticas | ❌ | ✅ | ❌ |
 | | **Exámenes** | | | |
 | | Mesas de Examen | ❌ | ❌ | ❌ |
 | | Actas Volantes | ❌ | ❌ | ❌ |
