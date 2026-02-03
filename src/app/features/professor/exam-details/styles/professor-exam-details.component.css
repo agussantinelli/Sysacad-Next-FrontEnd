@@ -1,0 +1,180 @@
+.actions-header {
+    margin-bottom: 1.5rem;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.btn-back:hover {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--surface-card);
+    border-radius: 16px;
+    text-align: center;
+    color: var(--text-secondary);
+    border: 2px dashed var(--border-color);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1.5rem;
+}
+
+.detail-card {
+    background: var(--surface-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.subject-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.year-badge {
+    padding: 0.25rem 0.75rem;
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.date-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--surface-hover);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+}
+
+.date-badge .material-icons {
+    color: var(--utn-blue);
+}
+
+.date-badge div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.date-badge .date {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.date-badge .time {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.info-row .material-icons {
+    color: var(--text-tertiary);
+}
+
+.info-row .value {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.tribunal-section h4 {
+    margin: 1rem 0 0.75rem 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    letter-spacing: 0.5px;
+}
+
+.tribunal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tribunal-member {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+    background: var(--surface-hover);
+    border-left: 3px solid transparent;
+}
+
+.tribunal-member.president {
+    background: rgba(var(--primary-rgb), 0.05);
+    border-left-color: var(--utn-blue);
+}
+
+.person-icon {
+    color: var(--text-tertiary);
+    font-size: 20px;
+}
+
+.tribunal-member.president .person-icon {
+    color: var(--utn-blue);
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.member-role {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}

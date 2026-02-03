@@ -1,0 +1,63 @@
+<app-page-layout [title]="mesaNombre">
+
+    <app-loading-spinner *ngIf="isLoading" message="Cargando detalles de la mesa..."></app-loading-spinner>
+
+    <app-alert-message *ngIf="error" type="error" [message]="error" (close)="error = null"></app-alert-message>
+
+    <div class="details-container" *ngIf="!isLoading && !error">
+
+        @if (detalles.length === 0) {
+        <div class="empty-state">
+            <span class="material-icons">info</span>
+            <h3>No hay detalles disponibles para esta mesa.</h3>
+        </div>
+        } @else {
+        <div class="details-grid">
+            @for (detalle of detalles; track detalle.nroDetalle) {
+            <div class="detail-card">
+                <div class="card-header">
+                    <div class="subject-info">
+                        <h3>{{ detalle.nombreMateria }}</h3>
+                        <span class="year-badge">{{ detalle.anioMateria }} Año</span>
+                    </div>
+                    <div class="date-badge">
+                        <span class="material-icons">event</span>
+                        <div>
+                            <span class="date">{{ detalle.fecha | date:'dd/MM/yyyy' }}</span>
+                            <span class="time">{{ detalle.hora }} hs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="info-row">
+                        <span class="material-icons">groups</span>
+                        <span class="label">Inscriptos:</span>
+                        <span class="value">{{ detalle.cantidadInscriptos }}</span>
+                    </div>
+
+                    <div class="tribunal-section">
+                        <h4>Tribunal Examinador</h4>
+                        <div class="tribunal-list">
+                            @for (miembro of detalle.tribunal; track miembro.nombreCompleto) {
+                            <div class="tribunal-member" [class.president]="miembro.rol === 'PRESIDENTE'">
+                                <span class="material-icons person-icon">
+                                    {{ miembro.rol === 'PRESIDENTE' ? 'school' : 'person' }}
+                                </span>
+                                <div class="member-info">
+                                    <span class="member-name">{{ miembro.nombreCompleto }}</span>
+                                    <span class="member-role">{{ getRoleLabel(miembro.rol) }}</span>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+
+    </div>
+
+</app-page-layout>
