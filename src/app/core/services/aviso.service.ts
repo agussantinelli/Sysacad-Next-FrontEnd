@@ -28,4 +28,10 @@ export class AvisoService {
             map(response => response.data)
         );
     }
+
+    obtenerCantidadSinLeer(): Observable<number> {
+        return from(axiosClient.get<number>('/avisos/sin-leer/cantidad')).pipe( // Assuming /avisos prefix based on controller pattern
+            map(response => response.data)
+        );
+    }
 }
