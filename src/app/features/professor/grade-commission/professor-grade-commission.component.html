@@ -1,0 +1,81 @@
+<app-page-layout title="Cargar Notas de Cursada" icon="assignment_turned_in">
+    <div class="grading-container">
+        @if (isLoading) {
+        <app-loading-spinner message="Cargando alumnos..."></app-loading-spinner>
+        } @else if (error) {
+        <app-alert-message type="error" [message]="error" (close)="error = null"></app-alert-message>
+        } @else {
+
+        <div class="header-info card">
+            <div class="info-item full-width">
+                <label for="concepto" class="label">Concepto de la Nota:</label>
+                <input type="text" id="concepto" [(ngModel)]="concepto" class="form-input"
+                    placeholder="Ej: 1er Parcial, TP Final" [disabled]="isSaving">
+
+                <label class="checkbox-container">
+                    <input type="checkbox" [(ngModel)]="esNotaFinal" [disabled]="isSaving">
+                    <span class="checkbox-label">Es nota final de la cursada</span>
+                </label>
+            </div>
+        </div>
+
+        @if (students.length === 0) {
+        <div class="empty-state">
+            <span class="material-icons">people_outline</span>
+            <h3>No hay alumnos inscriptos</h3>
+        </div>
+        } @else {
+        <div class="table-container card">
+            <table class="grades-table">
+                <thead>
+                    <tr>
+                        <th>Legajo</th>
+                        <th>Alumno</th>
+                        <!-- Dynamic Grade Headers -->
+                        @for (col of concepts; track col) {
+                        <th class="grade-col">{{ col }}</th>
+                        }
+                        <th class="grade-col highlight">Nueva Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (student of students; track student.studentId) {
+                    <tr>
+                        <td>{{ student.legajo }}</td>
+                        <td>{{ student.studentName }}</td>
+
+                        <!-- Dynamic Grade Cells -->
+                        @for (col of concepts; track col) {
+                        <td class="grade-col">
+                            <span [className]="getGradeClass(student.grades[col])">
+                                {{ student.grades[col] || '-' }}
+                            </span>
+                        </td>
+                        }
+
+                        <td class="grade-col">
+                            <input type="number" [(ngModel)]="student.newGrade" min="1" max="10" class="grade-input"
+                                [class.modified]="student.newGrade !== student.prevNewGrade">
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions-bar">
+            <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+            <button class="btn btn-primary" (click)="saveGrades()" [disabled]="isSaving || !hasChanges() || !concepto">
+                @if (isSaving) {
+                <span class="material-icons spin">refresh</span>
+                <span>Guardando...</span>
+                } @else {
+                <span class="material-icons">save</span>
+                <span>Descargar y Recargar</span>
+                }
+            </button>
+        </div>
+        }
+        }
+    </div>
+</app-page-layout>

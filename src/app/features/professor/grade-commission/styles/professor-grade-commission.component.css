@@ -1,0 +1,226 @@
+.grading-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.header-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--utn-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.1);
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.value {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.table-container {
+    overflow-x: auto;
+    padding: 0;
+}
+
+.grades-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grades-table th,
+.grades-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.grades-table th {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.grades-table .grade-col {
+    width: 150px;
+    text-align: center;
+}
+
+.grade-input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.375rem;
+    text-align: center;
+    font-size: 1rem;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.grade-input:focus {
+    border-color: var(--utn-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.1);
+}
+
+.grade-input.modified {
+    border-color: var(--success);
+    background-color: rgba(28, 255, 179, 0.05);
+}
+
+.actions-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.btn-primary {
+    background-color: var(--utn-blue);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--utn-blue-dark);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.grade-passing {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.grade-failing {
+    color: var(--error);
+    font-weight: 700;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary);
+    text-align: center;
+    background-color: var(--bg-card);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.empty-state .material-icons {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    accent-color: var(--utn-blue);
+}
+
+.checkbox-label {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    user-select: none;
+}
