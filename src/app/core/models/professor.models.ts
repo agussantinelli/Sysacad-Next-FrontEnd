@@ -49,3 +49,20 @@ export interface ProfesorDetalleExamenDTO {
     cantidadInscriptos: number;
     tribunal: MiembroTribunalDTO[];
 }
+
+export interface AlumnoExamenDTO {
+    idInscripcion: string; // UUID
+    nombre: string;
+    apellido: string;
+    legajo: number;
+    estado: 'PENDIENTE' | 'APROBADO' | 'DESAPROBADO' | 'AUSENTE';
+    nota: number | null; // BigDecimal in backend, number in TS
+}
+
+export interface CargaNotaItemDTO {
+    idInscripcion: string;
+    nota: number | null;
+    estado: 'APROBADO' | 'DESAPROBADO' | 'AUSENTE';
+    tomo?: string;
+    folio?: string;
+}
