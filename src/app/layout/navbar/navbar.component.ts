@@ -105,7 +105,6 @@ export class NavbarComponent implements OnInit {
             options: [
                 { title: 'Mis Materias', icon: 'class', route: '/professor/subjects' },
                 { title: 'Mis Comisiones', icon: 'groups', route: '/professor/my-commissions' },
-                { title: 'Calificar', icon: 'assignment_turned_in', route: '/professor/grades' },
             ]
         },
         {
