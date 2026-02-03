@@ -57,6 +57,8 @@ export interface AlumnoExamenDTO {
     legajo: number;
     estado: 'PENDIENTE' | 'APROBADO' | 'DESAPROBADO' | 'AUSENTE';
     nota: number | null; // BigDecimal in backend, number in TS
+    tomo?: string;
+    folio?: string;
 }
 
 export interface CargaNotaItemDTO {

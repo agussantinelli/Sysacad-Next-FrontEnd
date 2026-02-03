@@ -42,9 +42,9 @@
                             <!-- Tomo/Folio fields could go here, currently generic placeholder or disabled if not approved -->
                             <div class="folio-inputs">
                                 <input type="text" class="form-input folio-input" placeholder="T"
-                                    [disabled]="alumno.estado !== 'APROBADO'">
+                                    [(ngModel)]="alumno['tomo']" [disabled]="alumno.estado !== 'APROBADO'">
                                 <input type="text" class="form-input folio-input" placeholder="F"
-                                    [disabled]="alumno.estado !== 'APROBADO'">
+                                    [(ngModel)]="alumno['folio']" [disabled]="alumno.estado !== 'APROBADO'">
                             </div>
                         </td>
                     </tr>
