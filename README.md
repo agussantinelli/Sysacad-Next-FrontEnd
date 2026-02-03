@@ -407,10 +407,6 @@ FRONTEND_URL=http://localhost:4200
 | | Estado Académico | ✅ | ❌ | ❌ |
 | | Plan de Estudios | ✅ | ❌ | ❌ |
 | | Cursado y Notas | ✅ | ❌ | ❌ |
-| | Historia Académica | 🚧 | ❌ | ❌ |
-| | **Correlativas** | | | |
-| | Para Cursar | 🚧 | ❌ | ❌ |
-| | Para Rendir | 🚧 | ❌ | ❌ |
 | | **Trámites** | | | |
 | | Certificado Regular | ✅ | ❌ | ❌ |
 | | Calendario Académico | ✅ | ✅ | ✅ |
