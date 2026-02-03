@@ -15,8 +15,11 @@ interface StudentRow {
     legajo: number;
     grades: { [concepto: string]: number }; // Map concept -> grade
     newGrade: number | null;
+    newState: string | null;
     prevNewGrade: number | null; // Track changes
 }
+
+export const ESTADOS_CURSADA = ['REGULAR', 'APROBADO', 'LIBRE', 'PROMOCIONADO'];
 
 @Component({
     selector: 'app-professor-grade-commission',
@@ -36,6 +39,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
 
     students: StudentRow[] = [];
     concepts: string[] = []; // Dynamic columns
+    availableStates = ESTADOS_CURSADA;
 
     // Form controls
     concepto = '';
@@ -84,6 +88,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                         legajo: a.legajo,
                         grades: gradeMap,
                         newGrade: null,
+                        newState: a.estado || 'REGULAR', // Default to current state
                         prevNewGrade: null
                     };
                 });
@@ -99,6 +104,8 @@ export class ProfessorGradeCommissionComponent implements OnInit {
     }
 
     hasChanges(): boolean {
+        // If final grade is selected, we always consider it a "change" context if grades are entered
+        // But strictly, we check if grade was modified OR if it's final grade and state might need adjustment
         return this.students.some(s => s.newGrade !== s.prevNewGrade);
     }
 
@@ -118,10 +125,16 @@ export class ProfessorGradeCommissionComponent implements OnInit {
             esNotaFinal: this.esNotaFinal,
             notas: this.students
                 .filter(s => s.newGrade !== s.prevNewGrade && s.newGrade !== null)
-                .map(s => ({
-                    idInscripcion: s.studentId,
-                    nota: s.newGrade!
-                }))
+                .map(s => {
+                    const item: any = {
+                        idInscripcion: s.studentId,
+                        nota: s.newGrade!
+                    };
+                    if (this.esNotaFinal) {
+                        item.estado = s.newState;
+                    }
+                    return item;
+                })
         };
 
         if (updates.notas.length === 0) {
