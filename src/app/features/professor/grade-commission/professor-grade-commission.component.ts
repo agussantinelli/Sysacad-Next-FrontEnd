@@ -7,7 +7,7 @@ import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/load
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 import { ProfessorService } from '@core/services/professor.service';
 import { AlertService } from '@core/services/alert.service';
-import { AlumnoCursadaDTO, CargaNotasCursadaDTO, CalificacionDTO } from '@core/models/professor.models';
+import { AlumnoCursadaDTO, CargaNotasCursadaDTO, CalificacionDTO, NotaCursadaItemDTO } from '@core/models/professor.models';
 import { EstadoCursada } from '@core/enums/inscripcion.enums';
 
 interface StudentRow {
@@ -18,6 +18,7 @@ interface StudentRow {
     newGrade: number | null;
     newState: string | null;
     prevNewGrade: number | null; // Track changes
+    prevNewState: string | null;
 }
 
 @Component({
@@ -38,7 +39,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
 
     students: StudentRow[] = [];
     concepts: string[] = []; // Dynamic columns
-    availableStates = Object.values(EstadoCursada).filter(e => e !== EstadoCursada.CURSANDO);
+    availableStates = Object.values(EstadoCursada);
 
     // Form controls
     concepto = '';
@@ -81,10 +82,10 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                         gradeMap[c.concepto] = c.nota;
                     });
 
-                    // If current state is CURSANDO (or null), default 'New State' selector to REGULAR
+                    // If current state is CURSANDO (or null), default 'New State' selector to CURSANDO
                     // Otherwise keep their existing finalized state
                     const defaultState = (a.estado === EstadoCursada.CURSANDO || !a.estado)
-                        ? EstadoCursada.REGULAR
+                        ? EstadoCursada.CURSANDO
                         : a.estado;
 
                     return {
@@ -94,7 +95,8 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                         grades: gradeMap,
                         newGrade: null,
                         newState: defaultState,
-                        prevNewGrade: null
+                        prevNewGrade: null,
+                        prevNewState: defaultState
                     };
                 });
 
@@ -109,9 +111,11 @@ export class ProfessorGradeCommissionComponent implements OnInit {
     }
 
     hasChanges(): boolean {
-        // If final grade is selected, we always consider it a "change" context if grades are entered
-        // But strictly, we check if grade was modified OR if it's final grade and state might need adjustment
-        return this.students.some(s => s.newGrade !== s.prevNewGrade);
+        // Change if grade changed OR (final grade active AND state changed)
+        return this.students.some(s =>
+            (s.newGrade !== s.prevNewGrade) ||
+            (this.esNotaFinal && s.newState !== s.prevNewState)
+        );
     }
 
     saveGrades(): void {
@@ -129,14 +133,27 @@ export class ProfessorGradeCommissionComponent implements OnInit {
             concepto: this.concepto,
             esNotaFinal: this.esNotaFinal,
             notas: this.students
-                .filter(s => s.newGrade !== s.prevNewGrade && s.newGrade !== null)
+                .filter(s => {
+                    // Logic: 
+                    // 1. Grade changed AND is not null (regular grading)
+                    // 2. State changed AND is Final Grade active (state update, maybe grade is null)
+                    const gradeChanged = s.newGrade !== s.prevNewGrade && s.newGrade !== null;
+                    const stateChanged = this.esNotaFinal && s.newState !== s.prevNewState;
+                    // Note: If state changed to CURSANDO, newGrade might be null, which is now allowed by DTO.
+                    return gradeChanged || stateChanged;
+                })
                 .map(s => {
-                    const item: any = {
+                    // Force null grade if state is CURSANDO and it's a final grade note
+                    if (this.esNotaFinal && s.newState === EstadoCursada.CURSANDO) {
+                        s.newGrade = null;
+                    }
+
+                    const item: NotaCursadaItemDTO = {
                         idInscripcion: s.studentId,
-                        nota: s.newGrade!
+                        nota: s.newGrade // Can be null
                     };
                     if (this.esNotaFinal) {
-                        item.estado = s.newState;
+                        item.estado = s.newState || undefined;
                     }
                     return item;
                 })
