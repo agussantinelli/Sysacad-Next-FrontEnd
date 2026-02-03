@@ -29,11 +29,11 @@ export class MyCommissionsComponent implements OnInit {
         this.error = null;
 
         this.professorService.getMisComisiones().subscribe({
-            next: (data) => {
+            next: (data: ComisionDetalladaDTO[]) => {
                 this.comisiones = data;
                 this.isLoading = false;
             },
-            error: (err) => {
+            error: (err: any) => {
                 console.error('Error loading commissions', err);
                 this.error = 'No se pudieron cargar las comisiones. Intente nuevamente.';
                 this.isLoading = false;

@@ -30,11 +30,11 @@ export class ProfessorSubjectsComponent implements OnInit {
         this.error = null;
 
         this.professorService.getMisMaterias().subscribe({
-            next: (data) => {
+            next: (data: MateriaProfesorDTO[]) => {
                 this.materias = data;
                 this.isLoading = false;
             },
-            error: (err) => {
+            error: (err: any) => {
                 console.error('Error loading subjects', err);
                 this.error = 'No se pudieron cargar las materias asignadas. Intente nuevamente.';
                 this.isLoading = false;

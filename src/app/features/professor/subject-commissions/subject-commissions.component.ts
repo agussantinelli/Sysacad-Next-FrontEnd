@@ -42,11 +42,11 @@ export class SubjectCommissionsComponent implements OnInit {
         this.error = null;
 
         this.professorService.getComisionesByMateria(this.idMateria).subscribe({
-            next: (data) => {
+            next: (data: ComisionHorarioDTO[]) => {
                 this.comisiones = data;
                 this.isLoading = false;
             },
-            error: (err) => {
+            error: (err: any) => {
                 console.error('Error loading commissions', err);
                 this.error = 'No se pudieron cargar las comisiones. Intente nuevamente.';
                 this.isLoading = false;
