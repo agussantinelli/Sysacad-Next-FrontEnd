@@ -31,7 +31,19 @@
         <app-alert-message type="error" [message]="error"></app-alert-message>
         } @else if (stats) {
 
-        <!-- Overview Cards -->
+        <!-- Charts Section (First) -->
+        <h3 class="section-title">Distribución de Condición de Cursada</h3>
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <ngx-charts-pie-chart [scheme]="colorScheme" [results]="courseStatusData" [gradient]="true"
+                    [legend]="true" [legendTitle]="'Condición'" [labels]="true" [doughnut]="true" [arcWidth]="0.25"
+                    [maxLabelLength]="30">
+                </ngx-charts-pie-chart>
+            </div>
+        </div>
+
+        <!-- Overview Cards (Cursada Data) -->
+        <h3 class="section-title">Indicadores de Cursada</h3>
         <div class="kpi-grid">
             <div class="kpi-card total">
                 <div class="icon-wrapper">
@@ -81,17 +93,6 @@
                     <span class="kpi-value">{{ stats.notaPromedio | number:'1.1-2' }}</span>
                     <span class="kpi-label">Promedio General</span>
                 </div>
-            </div>
-        </div>
-
-        <!-- Charts Section -->
-        <h3 class="section-title">Distribución de Condición de Alumnos</h3>
-        <div class="charts-container">
-            <div class="chart-wrapper">
-                <ngx-charts-pie-chart [scheme]="colorScheme" [results]="courseStatusData" [gradient]="true"
-                    [legend]="true" [legendTitle]="'Condición'" [labels]="true" [doughnut]="true" [arcWidth]="0.25"
-                    [maxLabelLength]="30">
-                </ngx-charts-pie-chart>
             </div>
         </div>
 
