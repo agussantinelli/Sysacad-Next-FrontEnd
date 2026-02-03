@@ -17,7 +17,8 @@
                         <th>Alumno</th>
                         <th>Estado</th>
                         <th>Nota</th>
-                        <th>Tomo / Folio</th>
+                        <th>Tomo</th>
+                        <th>Folio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,13 +40,12 @@
                                 max="10" [disabled]="alumno.estado === 'AUSENTE'" placeholder="-">
                         </td>
                         <td>
-                            <!-- Tomo/Folio fields could go here, currently generic placeholder or disabled if not approved -->
-                            <div class="folio-inputs">
-                                <input type="text" class="form-input folio-input" placeholder="T"
-                                    [(ngModel)]="alumno['tomo']" [disabled]="alumno.estado !== 'APROBADO'">
-                                <input type="text" class="form-input folio-input" placeholder="F"
-                                    [(ngModel)]="alumno['folio']" [disabled]="alumno.estado !== 'APROBADO'">
-                            </div>
+                            <input type="text" class="form-input folio-input" placeholder="T" [(ngModel)]="alumno.tomo"
+                                [disabled]="alumno.estado !== 'APROBADO'">
+                        </td>
+                        <td>
+                            <input type="text" class="form-input folio-input" placeholder="F" [(ngModel)]="alumno.folio"
+                                [disabled]="alumno.estado !== 'APROBADO'">
                         </td>
                     </tr>
                     }
