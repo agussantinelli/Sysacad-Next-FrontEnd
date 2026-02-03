@@ -18,9 +18,22 @@
                 <thead>
                     <tr>
                         <th>Nombre / Turno</th>
-                        <th>Fecha Inicio</th>
+                        <th (click)="sortData('fechaInicio')" class="sortable">
+                            Fecha Inicio
+                            <span class="material-icons sort-icon" [class.active]="sortColumn === 'fechaInicio'">
+                                {{ sortColumn === 'fechaInicio' && sortDirection === 'desc' ? 'arrow_drop_down' :
+                                'arrow_drop_up' }}
+                            </span>
+                        </th>
                         <th>Fecha Fin</th>
-                        <th>Materias Involucradas</th>
+                        <th (click)="sortData('cantidadMateriasInvolucradas')" class="sortable">
+                            Materias Involucradas
+                            <span class="material-icons sort-icon"
+                                [class.active]="sortColumn === 'cantidadMateriasInvolucradas'">
+                                {{ sortColumn === 'cantidadMateriasInvolucradas' && sortDirection === 'desc' ?
+                                'arrow_drop_down' : 'arrow_drop_up' }}
+                            </span>
+                        </th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
