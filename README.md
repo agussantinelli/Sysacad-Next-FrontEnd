@@ -351,10 +351,11 @@ FRONTEND_URL=http://localhost:4200
         </ul>
     </li>
     <li>
+
         <strong>👨‍🏫 Profesor (Rol: PROFESOR)</strong>
         <p>Herramientas optimizadas para la docencia y evaluación.</p>
         <ul>
-            <li><strong>Gestión Académica:</strong> Visualización de "Mis Materias", Carga de Notas (Calificar Alumnos) y Toma de Asistencia.</li>
+            <li><strong>Gestión Académica:</strong> Visualización de "Mis Materias" y "Mis Comisiones" (Globales y por Materia).</li>
             <li><strong>Exámenes:</strong> Acceso a Mesas de Examen asignadas y gestión de Actas Volantes.</li>
         </ul>
     </li>
@@ -368,6 +369,14 @@ FRONTEND_URL=http://localhost:4200
             <li><strong>Trámites:</strong> Solicitud de Certificados (Regularidad), visualización de Sanciones, Calendario y Avisos institucionales.</li>
         </ul>
     </li>
+</ul>
+
+<h3>👑 Poderes del Jefe de Cátedra</h3>
+<p>El sistema distingue automáticamente si un profesor es <strong>Titular / Jefe de Cátedra</strong>, otorgándole visibilidad extendida:</p>
+<ul>
+    <li><strong>Visualización Global:</strong> Puede ver la totalidad de las comisiones de su materia, independiente de si dicta clases en ellas o no.</li>
+    <li><strong>Gestión de Equipo:</strong> Visualización de todos los profesores (JTP, Ayudantes) asignados a cada comisión.</li>
+    <li><strong>Etiquetado Visual:</strong> Identificación clara en el dashboard de las materias donde ejerce como autoridad máxima.</li>
 </ul>
 
 <p><em>Nota: La interfaz (Navbar y Dashboard) renderiza componentes dinámicamente basándose en el rol del usuario logueado.</em></p>
@@ -387,7 +396,7 @@ FRONTEND_URL=http://localhost:4200
 | **Perfil** | Gestión de Usuario | ✅ | ✅ | ✅ |
 | | Ver Perfil | ✅ | ✅ | ✅ |
 | | Editar Perfil | ✅ | ✅ | ✅ |
-| **Dashboard** | Pantalla Principal | ✅ | ✅ (Visual) | ✅ (Visual) |
+| **Dashboard** | Pantalla Principal | ✅ | ✅ | ✅ |
 | **Académico** | **Inscripciones** | | | |
 | | Inscripción a Cursado | ✅ | ❌ | ❌ |
 | | Inscripción a Examen | ✅ | ❌ | ❌ |
@@ -402,13 +411,14 @@ FRONTEND_URL=http://localhost:4200
 | | Para Rendir | 🚧 | ❌ | ❌ |
 | | **Trámites** | | | |
 | | Certificado Regular | ✅ | ❌ | ❌ |
-| | Calendario Académico | ✅ | ❌ | ❌ |
+| | Calendario Académico | ✅ | ✅ | ✅ |
 | | **Comunicación** | | | |
-| | Avisos | ✅ | ❌ | ❌ |
-| | Mensajería | ✅ | ❌ | ❌ |
+| | Avisos | ✅ | ✅ | ✅ |
+| | Mensajería | ✅ | ✅ | ✅ |
 | **Gestión Docente** | **Clases** | | | |
-| | Mis Materias | ❌ | ❌ | ❌ |
-| | Calificar Alumnos | ❌ | ❌ | ❌ |
+| | Mis Materias | ❌ | ✅ | ❌ |
+| | Mis Comisiones (Global) | ❌ | ✅ | ❌ |
+| | Calificar Alumnos | ❌ | 🚧 | ❌ |
 | | **Exámenes** | | | |
 | | Mesas de Examen | ❌ | ❌ | ❌ |
 | | Actas Volantes | ❌ | ❌ | ❌ |
