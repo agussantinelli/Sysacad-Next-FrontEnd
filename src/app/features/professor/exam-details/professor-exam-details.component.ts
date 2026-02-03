@@ -96,7 +96,10 @@ export class ProfessorExamDetailsComponent implements OnInit {
 
     gradeExam(detalle: ProfesorDetalleExamenDTO): void {
         this.router.navigate(['/professor/exams', this.idMesa, 'grading', detalle.nroDetalle], {
-            state: { materiaNombre: detalle.nombreMateria }
+            state: {
+                materiaNombre: detalle.nombreMateria,
+                readOnly: detalle.todosCorregidos
+            }
         });
     }
 

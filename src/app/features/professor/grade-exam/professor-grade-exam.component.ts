@@ -30,6 +30,8 @@ export class ProfessorGradeExamComponent implements OnInit {
     nroDetalle: number = 0;
     materiaNombre: string = 'Carga de Notas';
 
+    isReadOnly: boolean = false;
+
     ngOnInit(): void {
         this.idMesa = this.route.snapshot.paramMap.get('idMesa') || '';
         const nroDetalleStr = this.route.snapshot.paramMap.get('nroDetalle');
@@ -39,10 +41,12 @@ export class ProfessorGradeExamComponent implements OnInit {
         const navigation = this.router.getCurrentNavigation();
         if (navigation?.extras.state) {
             this.materiaNombre = navigation.extras.state['materiaNombre'] || this.materiaNombre;
+            this.isReadOnly = !!navigation.extras.state['readOnly'];
         } else {
             const state = history.state;
             if (state && state.materiaNombre) {
                 this.materiaNombre = state.materiaNombre;
+                this.isReadOnly = !!state.readOnly;
             }
         }
 

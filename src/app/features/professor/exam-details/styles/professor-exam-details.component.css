@@ -212,6 +212,14 @@
     background-color: var(--utn-blue-dim);
 }
 
+.btn-grade.btn-view {
+    background-color: var(--text-secondary);
+}
+
+.btn-grade.btn-view:hover {
+    background-color: var(--text-primary);
+}
+
 .grading-status-message {
     display: flex;
     align-items: center;

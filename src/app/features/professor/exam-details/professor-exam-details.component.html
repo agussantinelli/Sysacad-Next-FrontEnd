@@ -55,8 +55,13 @@
 
                     <div class="grading-actions">
                         @if (canGrade(detalle)) {
-                        <button class="btn-grade" (click)="gradeExam(detalle)">
+                        <button class="btn-grade" (click)="gradeExam(detalle)"
+                            [class.btn-view]="detalle.todosCorregidos">
+                            @if (detalle.todosCorregidos) {
+                            <span class="material-icons">visibility</span> Ver Calificaciones
+                            } @else {
                             <span class="material-icons">rate_review</span> Corregir Examen
+                            }
                         </button>
                         } @else {
                         <div class="grading-status-message warning">
