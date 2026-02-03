@@ -52,4 +52,12 @@ export class ProfessorService {
             map(response => response.data)
         );
     }
+
+    getServicesCertificate(): Observable<Blob> {
+        return from(axiosClient.get('/profesores/certificado-regular', {
+            responseType: 'blob'
+        })).pipe(
+            map(response => response.data)
+        );
+    }
 }
