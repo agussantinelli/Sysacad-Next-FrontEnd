@@ -1,0 +1,76 @@
+<app-page-layout [title]="'Calificar: ' + materiaNombre">
+
+    <div class="actions-header">
+        <button class="btn-back" (click)="goBack()">
+            <span class="material-icons">arrow_back</span> Volver al Detalle
+        </button>
+    </div>
+
+    <app-loading-spinner *ngIf="isLoading" message="Cargando alumnos..."></app-loading-spinner>
+
+    <app-alert-message *ngIf="error" type="error" [message]="error" (close)="error = null"></app-alert-message>
+    <app-alert-message *ngIf="successMessage" type="success" [message]="successMessage"
+        (close)="successMessage = null"></app-alert-message>
+
+    <div class="grading-container" *ngIf="!isLoading && inscriptos.length > 0">
+
+        <div class="table-responsive">
+            <table class="utn-table">
+                <thead>
+                    <tr>
+                        <th>Legajo</th>
+                        <th>Alumno</th>
+                        <th>Estado</th>
+                        <th>Nota</th>
+                        <th>Tomo / Folio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (alumno of inscriptos; track alumno.idInscripcion) {
+                    <tr [class.aprobado]="alumno.estado === 'APROBADO'"
+                        [class.desaprobado]="alumno.estado === 'DESAPROBADO'">
+                        <td class="font-medium">{{ alumno.legajo }}</td>
+                        <td>{{ alumno.apellido }}, {{ alumno.nombre }}</td>
+                        <td>
+                            <select class="form-select status-select" [(ngModel)]="alumno.estado">
+                                <option value="PENDIENTE" disabled>Pendiente</option>
+                                <option value="APROBADO">Aprobado</option>
+                                <option value="DESAPROBADO">Desaprobado</option>
+                                <option value="AUSENTE">Ausente</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" class="form-input grade-input" [(ngModel)]="alumno.nota" min="1"
+                                max="10" [disabled]="alumno.estado === 'AUSENTE'" placeholder="-">
+                        </td>
+                        <td>
+                            <!-- Tomo/Folio fields could go here, currently generic placeholder or disabled if not approved -->
+                            <div class="folio-inputs">
+                                <input type="text" class="form-input folio-input" placeholder="T"
+                                    [disabled]="alumno.estado !== 'APROBADO'">
+                                <input type="text" class="form-input folio-input" placeholder="F"
+                                    [disabled]="alumno.estado !== 'APROBADO'">
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-save" (click)="saveGrades()" [disabled]="isSaving">
+                <span class="material-icons" *ngIf="!isSaving">save</span>
+                <span *ngIf="isSaving">Guardando...</span>
+                <span *ngIf="!isSaving">Guardar Notas</span>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && inscriptos.length === 0 && !error">
+        <span class="material-icons">people_outline</span>
+        <h3>No hay alumnos inscriptos en esta mesa.</h3>
+    </div>
+
+</app-page-layout>
