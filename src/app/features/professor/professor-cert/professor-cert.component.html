@@ -1,0 +1,25 @@
+<app-page-layout title="Certificado de Servicios">
+    <div class="cert-content fade-in">
+        <div class="description-section">
+            <p class="description-text">
+                El Certificado de Servicios es un documento legal y académico emitido por la Universidad.
+                Acredita tu condición de docente activo y tus antecedentes académicos frente a terceros
+                (obras sociales, antigüedad, beneficios estatales).
+                <br><br>
+                Este documento certifica tu condición al momento de la fecha de emisión y tiene una validez de 3 meses.
+            </p>
+        </div>
+
+        <div class="action-section">
+            <button class="btn btn-primary download-btn" (click)="downloadCertificate()" [disabled]="isLoading">
+                @if (isLoading) {
+                <span class="material-icons spin">refresh</span>
+                <span>Generando...</span>
+                } @else {
+                <span class="material-icons">file_download</span>
+                <span>Descargar PDF</span>
+                }
+            </button>
+        </div>
+    </div>
+</app-page-layout>
