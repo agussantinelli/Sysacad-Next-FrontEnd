@@ -37,7 +37,7 @@ export class ProfessorExamStatisticsComponent implements OnInit {
         name: 'academicStatus',
         selectable: true,
         group: ScaleType.Ordinal,
-        domain: ['#10b981', '#f59e0b', '#ef4444']
+        domain: ['#00E676', '#FFC400', '#FF1744'] // Brighter: Green A400, Amber A400, Red A400
     };
 
     ngOnInit(): void {
