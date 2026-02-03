@@ -20,6 +20,9 @@
                 <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
                     <span class="material-icons icon-sm">{{ option.icon }}</span>
                     {{ option.title }}
+                    @if (option.badgeCount && option.badgeCount > 0) {
+                    <span class="nav-badge">{{ option.badgeCount }}</span>
+                    }
                 </a>
                 }
             </div>
@@ -39,6 +42,9 @@
                 <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
                     <span class="material-icons icon-sm">{{ option.icon }}</span>
                     {{ option.title }}
+                    @if (option.badgeCount && option.badgeCount > 0) {
+                    <span class="nav-badge">{{ option.badgeCount }}</span>
+                    }
                 </a>
                 }
             </div>
@@ -58,6 +64,9 @@
                 <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
                     <span class="material-icons icon-sm">{{ option.icon }}</span>
                     {{ option.title }}
+                    @if (option.badgeCount && option.badgeCount > 0) {
+                    <span class="nav-badge">{{ option.badgeCount }}</span>
+                    }
                 </a>
                 }
             </div>

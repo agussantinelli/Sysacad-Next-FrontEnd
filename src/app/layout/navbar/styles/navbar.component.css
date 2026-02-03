@@ -126,6 +126,23 @@
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.2s;
+    position: relative;
+}
+
+.nav-badge {
+    background-color: var(--error);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    margin-left: auto;
+    /* Push to right */
 }
 
 .nav-dropdown-item:hover {

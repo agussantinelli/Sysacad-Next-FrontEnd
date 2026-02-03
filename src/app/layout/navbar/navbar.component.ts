@@ -4,12 +4,14 @@ import { ThemeService } from '@core/services/theme.service';
 import { AuthService } from '@core/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { UsuarioResponse } from '@core/models/usuario.models';
+import { AvisoService } from '@core/services/aviso.service';
 
 interface NavbarOption {
     title: string;
     icon: string;
     route: string;
     disabled?: boolean;
+    badgeCount?: number;
 }
 
 interface NavbarSection {
@@ -27,6 +29,7 @@ interface NavbarSection {
 export class NavbarComponent implements OnInit {
     private themeService = inject(ThemeService);
     private authService = inject(AuthService);
+    private avisoService = inject(AvisoService);
 
     isDropdownOpen = false;
     activeSection: string | null = null;
@@ -133,7 +136,30 @@ export class NavbarComponent implements OnInit {
     ngOnInit(): void {
         this.authService.currentUser$.subscribe(user => {
             this.usuario = user;
+            if (user) {
+                this.loadUnreadNotices();
+            }
         });
+    }
+
+    loadUnreadNotices(): void {
+        this.avisoService.obtenerCantidadSinLeer().subscribe({
+            next: (count) => this.updateBadgeCount('Avisos', count),
+            error: (err) => console.error(err)
+        });
+    }
+
+    updateBadgeCount(optionTitle: string, count: number): void {
+        const update = (sections: NavbarSection[]) => {
+            sections.forEach(s => {
+                const opt = s.options.find(o => o.title === optionTitle);
+                if (opt) opt.badgeCount = count;
+            });
+        };
+
+        if (this.usuario?.rol === 'ESTUDIANTE') update(this.menuSections);
+        else if (this.usuario?.rol === 'PROFESOR') update(this.professorSections);
+        else if (this.usuario?.rol === 'ADMIN') update(this.adminSections);
     }
 
     get logoPath(): string {
