@@ -36,6 +36,9 @@
                         <th class="grade-col">{{ col }}</th>
                         }
                         <th class="grade-col highlight">Nueva Nota</th>
+                        @if (showFinalGradeColumn) {
+                        <th class="grade-col">Nota Final</th>
+                        }
                         @if (esNotaFinal) {
                         <th class="grade-col state-col">Estado</th>
                         }
@@ -57,13 +60,25 @@
                         }
 
                         <td class="grade-col">
+                            @if (!student.finalGrade && student.originalState === EstadoCursada.CURSANDO) {
                             <input type="number" [(ngModel)]="student.newGrade" min="1" max="10" class="grade-input"
                                 [class.modified]="student.newGrade !== student.prevNewGrade">
+                            }
                         </td>
+
+                        @if (showFinalGradeColumn) {
+                        <td class="grade-col">
+                            <span [class.grade-passing]="(student.finalGrade ?? 0) >= 6 && student.finalGrade"
+                                [class.grade-failing]="(student.finalGrade ?? 0) < 6 && student.finalGrade">
+                                {{ student.finalGrade || '-' }}
+                            </span>
+                        </td>
+                        }
 
                         @if (esNotaFinal) {
                         <td class="grade-col state-col">
-                            <select [(ngModel)]="student.newState" class="state-select">
+                            <select [(ngModel)]="student.newState" class="state-select"
+                                [disabled]="student.originalState !== EstadoCursada.CURSANDO">
                                 @for (state of availableStates; track state) {
                                 <option [value]="state">{{ state }}</option>
                                 }

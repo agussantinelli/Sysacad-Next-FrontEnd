@@ -15,6 +15,8 @@ interface StudentRow {
     studentName: string;
     legajo: number;
     grades: { [concepto: string]: number }; // Map concept -> grade
+    finalGrade: number | null; // Display read-only final grade
+    originalState: string | null; // Track backend state for read-only check
     newGrade: number | null;
     newState: string | null;
     prevNewGrade: number | null; // Track changes
@@ -40,6 +42,8 @@ export class ProfessorGradeCommissionComponent implements OnInit {
     students: StudentRow[] = [];
     concepts: string[] = []; // Dynamic columns
     availableStates = Object.values(EstadoCursada);
+    public readonly EstadoCursada = EstadoCursada;
+    showFinalGradeColumn = false;
 
     // Form controls
     concepto = '';
@@ -93,12 +97,17 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                         studentName: `${a.nombre} ${a.apellido}`,
                         legajo: a.legajo,
                         grades: gradeMap,
+                        finalGrade: a.notaFinal || null,
+                        originalState: a.estado || null,
                         newGrade: null,
                         newState: defaultState,
                         prevNewGrade: null,
                         prevNewState: defaultState
                     };
                 });
+
+                // Check if any student has a final grade to show the column
+                this.showFinalGradeColumn = this.students.some(s => s.finalGrade !== null && s.finalGrade !== undefined);
 
                 this.isLoading = false;
             },
