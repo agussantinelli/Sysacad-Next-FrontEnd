@@ -425,12 +425,13 @@ FRONTEND_URL=http://localhost:4200
 | | Mensajería | 🚧 | 🚧 | 🚧 |
 | **Gestión Docente** | **Clases** | | | |
 | | Mis Materias | ❌ | ✅ | ❌ |
-| | Mis Comisiones (Global) | ❌ | ✅ | ❌ |
+| | Mis Comisiones | ❌ | ✅ | ❌ |
 | | Calificar Alumnos | ❌ | ✅ | ❌ |
-| | Estadísticas | ❌ | ✅ | ❌ |
+| | **Trámites** | | | |
+| | Certificado de Servicios | ❌ | ✅ | ❌ |
 | | **Exámenes** | | | |
 | | Mesas de Examen | ❌ | ❌ | ❌ |
-| | Actas Volantes | ❌ | ❌ | ❌ |
+| | Estadísticas | ❌ | ✅ | ❌ |
 | **Administración** | **Académica** | | | |
 | | Carreras / Facultades | ❌ | ❌ | ❌ |
 | | Planes / Materias | ❌ | ❌ | ❌ |
