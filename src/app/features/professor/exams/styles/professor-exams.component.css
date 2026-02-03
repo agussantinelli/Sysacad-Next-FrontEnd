@@ -46,6 +46,30 @@
     border-bottom: 2px solid var(--border-color);
 }
 
+.utn-table th.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.utn-table th.sortable:hover {
+    background-color: rgba(var(--primary-rgb), 0.05);
+    color: var(--utn-blue);
+}
+
+.sort-icon {
+    font-size: 16px;
+    vertical-align: middle;
+    opacity: 0.3;
+    transition: all 0.2s;
+    margin-left: 4px;
+}
+
+.sort-icon.active {
+    opacity: 1;
+    color: var(--utn-blue);
+}
+
 .utn-table td {
     padding: 1rem 1.5rem;
     color: var(--text-primary);

@@ -27,11 +27,15 @@ export class ProfessorExamsComponent implements OnInit {
         this.loadMesas();
     }
 
+    sortColumn: keyof ProfesorMesaExamenDTO = 'fechaInicio';
+    sortDirection: 'asc' | 'desc' = 'asc';
+
     loadMesas(): void {
         this.isLoading = true;
         this.professorService.getMesasExamen().subscribe({
             next: (data: ProfesorMesaExamenDTO[]) => {
                 this.mesas = data;
+                this.sortMesas();
                 this.isLoading = false;
             },
             error: (err: any) => {
@@ -39,6 +43,31 @@ export class ProfessorExamsComponent implements OnInit {
                 this.error = 'No se pudieron cargar las mesas de examen. Intente nuevamente más tarde.';
                 this.isLoading = false;
             }
+        });
+    }
+
+    sortData(column: keyof ProfesorMesaExamenDTO): void {
+        if (this.sortColumn === column) {
+            this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            this.sortColumn = column;
+            this.sortDirection = 'asc';
+        }
+        this.sortMesas();
+    }
+
+    sortMesas(): void {
+        this.mesas.sort((a, b) => {
+            const valueA = a[this.sortColumn];
+            const valueB = b[this.sortColumn];
+
+            if (valueA < valueB) {
+                return this.sortDirection === 'asc' ? -1 : 1;
+            }
+            if (valueA > valueB) {
+                return this.sortDirection === 'asc' ? 1 : -1;
+            }
+            return 0;
         });
     }
 
