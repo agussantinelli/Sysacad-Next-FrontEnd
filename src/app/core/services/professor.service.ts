@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, ProfesorMesaExamenDTO, ProfesorDetalleExamenDTO } from '@core/models/professor.models';
+import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, ProfesorMesaExamenDTO, ProfesorDetalleExamenDTO, AlumnoExamenDTO, CargaNotaItemDTO } from '@core/models/professor.models';
 
 @Injectable({
     providedIn: 'root'
@@ -37,6 +37,18 @@ export class ProfessorService {
 
     getDetallesMesaExamen(idMesa: string): Observable<ProfesorDetalleExamenDTO[]> {
         return from(axiosClient.get<ProfesorDetalleExamenDTO[]>(`/profesores/mesas-examen/${idMesa}/materias`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getInscriptosExamen(idMesa: string, nroDetalle: number): Observable<AlumnoExamenDTO[]> {
+        return from(axiosClient.get<AlumnoExamenDTO[]>(`/profesores/mesas-examen/${idMesa}/materias/${nroDetalle}/inscriptos`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    cargarNotasExamen(notas: CargaNotaItemDTO[]): Observable<void> {
+        return from(axiosClient.post<void>('/profesores/mesas-examen/calificar-lote', notas)).pipe(
             map(response => response.data)
         );
     }
