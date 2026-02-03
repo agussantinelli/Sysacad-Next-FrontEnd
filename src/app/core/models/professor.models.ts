@@ -47,6 +47,7 @@ export interface ProfesorDetalleExamenDTO {
     fecha: string; // LocalDate
     hora: string; // LocalTime
     cantidadInscriptos: number;
+    todosCorregidos: boolean;
     tribunal: MiembroTribunalDTO[];
 }
 
