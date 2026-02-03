@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
             title: 'Gestión Académica',
             options: [
                 { title: 'Mis Materias', icon: 'class', route: '/professor/subjects' },
-                { title: 'Mis Comisiones', icon: 'groups', route: '/professor/commissions' },
+                { title: 'Mis Comisiones', icon: 'groups', route: '/professor/my-commissions' },
                 { title: 'Calificar Alumnos', icon: 'assignment_turned_in', route: '/professor/grades' },
             ]
         },
