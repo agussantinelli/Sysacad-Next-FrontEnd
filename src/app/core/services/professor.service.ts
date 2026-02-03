@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, ProfesorMesaExamenDTO, ProfesorDetalleExamenDTO, AlumnoExamenDTO, CargaNotaItemDTO } from '@core/models/professor.models';
+import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, ProfesorMesaExamenDTO, ProfesorDetalleExamenDTO, AlumnoExamenDTO, CargaNotaItemDTO, AlumnoCursadaDTO, CargaNotasCursadaDTO } from '@core/models/professor.models';
 
 @Injectable({
     providedIn: 'root'
@@ -57,6 +57,18 @@ export class ProfessorService {
         return from(axiosClient.get('/profesores/certificado-regular', {
             responseType: 'blob'
         })).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getInscriptosComision(idComision: string, idMateria: string): Observable<AlumnoCursadaDTO[]> {
+        return from(axiosClient.get<AlumnoCursadaDTO[]>(`/profesores/comisiones/${idComision}/materias/${idMateria}/inscriptos`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    cargarNotasComision(idComision: string, idMateria: string, notasDTO: CargaNotasCursadaDTO): Observable<void> {
+        return from(axiosClient.post<void>(`/profesores/comisiones/${idComision}/materias/${idMateria}/calificar`, notasDTO)).pipe(
             map(response => response.data)
         );
     }
