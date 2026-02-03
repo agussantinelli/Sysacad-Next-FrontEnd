@@ -57,7 +57,37 @@
                 </ng-template>
             </div>
             <div class="section-container">
-                <h3 class="section-title coursework">Cursadas</h3>
+                <h3 class="section-title coursework">Notas de Cursado</h3>
+                <div *ngIf="materia?.historyNotas?.length > 0; else noNotas" class="table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Instancia Evaluativa</th>
+                                <th>Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let nota of materia.historyNotas">
+                                <td>{{ nota.fecha | date:'dd/MM/yyyy' }}</td>
+                                <td class="font-medium">{{ nota.descripcion }}</td>
+                                <td class="font-bold">
+                                    <span class="status-badge" [ngClass]="{
+                                        'status-approved': nota.nota >= 6,
+                                        'status-failed': nota.nota < 6
+                                    }">{{ nota.nota }}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ng-template #noNotas>
+                    <p class="text-empty">No hay registros de notas parciales.</p>
+                </ng-template>
+            </div>
+
+            <div class="section-container">
+                <h3 class="section-title coursework">Cursadas (Histórico)</h3>
 
                 <div *ngIf="materia?.historyCursadas?.length > 0; else noCursadas" class="table-container">
                     <table class="history-table">

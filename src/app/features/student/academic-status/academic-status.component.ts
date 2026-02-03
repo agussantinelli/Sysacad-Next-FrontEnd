@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from '@shared/components/table/table.component';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
+import { AuthService } from '@core/services/auth.service';
 import { TableColumn, TableAction, ActionEvent } from '@shared/interfaces/table.interface';
 import { HistoryModalComponent } from './components/history-modal/history-modal.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-academic-status',
@@ -15,10 +17,10 @@ import { HistoryModalComponent } from './components/history-modal/history-modal.
 })
 export class AcademicStatusComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
+    private authService = inject(AuthService);
 
     // Raw Data
     matriculacionData: any[] = [];
-
     displayData: any[] = [];
     isLoading: boolean = false;
 
@@ -27,8 +29,6 @@ export class AcademicStatusComponent implements OnInit {
     isModalOpen = false;
     historyData: any = null;
     isLoadingHistory = false;
-
-    // Modal State
 
     columns: TableColumn[] = [
         { key: 'nivel', label: 'Nivel', sortable: true },
@@ -52,7 +52,6 @@ export class AcademicStatusComponent implements OnInit {
 
     loadData() {
         this.isLoading = true;
-        // We only need basic subject info to list them. History is loaded on demand.
         this.matriculacionService.getMisCarrerasMaterias().subscribe({
             next: (data) => {
                 console.log('✅ [Academic Status] Carreras loaded:', data);
@@ -69,17 +68,14 @@ export class AcademicStatusComponent implements OnInit {
 
     processData() {
         const processed: any[] = [];
-
         this.matriculacionData.forEach(carrera => {
             carrera.materias.forEach((materia: any) => {
                 if (materia.estado === 'PENDIENTE') {
                     return;
                 }
-                // No history pre-calculation
                 processed.push(materia);
             });
         });
-
         this.displayData = processed;
     }
 
@@ -93,15 +89,33 @@ export class AcademicStatusComponent implements OnInit {
         this.selectedMateria = materia;
         this.isModalOpen = true;
         this.isLoadingHistory = true;
-        this.historyData = null; // Reset previous data
+        this.historyData = null;
 
-        this.matriculacionService.getHistorialMateria(materia.idMateria).subscribe({
+        let currentUser: any = null;
+        this.authService.currentUser$.subscribe(u => currentUser = u).unsubscribe();
+
+        const userId = currentUser ? currentUser.id : null;
+
+        if (!userId) {
+            console.error('❌ [Academic Status] User ID not found');
+            this.isLoadingHistory = false;
+            return;
+        }
+
+        const history$ = this.matriculacionService.getHistorialMateria(materia.idMateria);
+        const grades$ = this.matriculacionService.getNotasCursada(userId, materia.idMateria);
+
+        forkJoin({
+            history: history$,
+            grades: grades$
+        }).subscribe({
             next: (data) => {
-                console.log('📊 [Academic Status] History loaded:', data);
+                console.log('📊 [Academic Status] History & Grades loaded:', data);
                 this.historyData = {
-                    nombre: materia.nombre, // Ensure name is passed
-                    historyExams: data.finales || [], // Map fields to match modal expectation
-                    historyCursadas: data.cursadas || []
+                    nombre: materia.nombre,
+                    historyExams: data.history.finales || [],
+                    historyCursadas: data.history.cursadas || [],
+                    historyNotas: data.grades || []
                 };
                 this.isLoadingHistory = false;
             },
