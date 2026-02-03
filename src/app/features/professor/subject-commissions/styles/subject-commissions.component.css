@@ -174,10 +174,10 @@
 
 .professor-chip {
     padding: 0.5rem 1rem;
-    background: rgba(255, 193, 7, 0.08);
+    background: rgb(0, 247, 255);
     border-radius: 20px;
-    border: 1px solid rgba(255, 193, 7, 0.2);
-    color: var(--text-primary);
+    border: 1px solid rgb(0, 247, 255);
+    color: #002060;
     font-size: 0.85rem;
     font-weight: 600;
     display: flex;
