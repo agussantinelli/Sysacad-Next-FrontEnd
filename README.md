@@ -18,6 +18,7 @@
     <img src="https://img.shields.io/badge/Angular%20Material-19-3f51b5?style=for-the-badge&logo=angular&logoColor=white" alt="Material Badge"/>
     <img src="https://img.shields.io/badge/RxJS-7.8-B7178C?style=for-the-badge&logo=rxjs&logoColor=white" alt="RxJS Badge"/>
     <img src="https://img.shields.io/badge/Axios-HttpClient-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt="Axios Badge"/>
+    <img src="https://img.shields.io/badge/Ngx%20Charts-Visualization-AA2B68?style=for-the-badge&logo=googleanalytics&logoColor=white" alt="NgxCharts Badge"/>
     <img src="https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT Badge"/>
     <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
 </div>
