@@ -97,3 +97,15 @@ export interface CargaNotasCursadaDTO {
     esNotaFinal: boolean;
     notas: NotaCursadaItemDTO[];
 }
+
+export interface ProfesorEstadisticasDTO {
+    cantidadTotalAlumnos: number;
+    cantidadPromocionados: number;
+    cantidadRegulares: number;
+    cantidadLibres: number;
+    notaPromedio: number;
+    cantidadTotalInscriptosExamen: number;
+    cantidadAprobadosExamen: number;
+    cantidadDesaprobadosExamen: number;
+    cantidadAusentesExamen: number;
+}
