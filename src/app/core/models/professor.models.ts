@@ -88,6 +88,7 @@ export interface AlumnoCursadaDTO {
 export interface NotaCursadaItemDTO {
     idInscripcion: string;
     nota: number;
+    estado?: string;
 }
 
 export interface CargaNotasCursadaDTO {
