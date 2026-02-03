@@ -112,6 +112,16 @@ export const routes: Routes = [
     {
         path: 'professor/commissions/:idMateria',
         canActivate: [requireAuthGuard],
-        loadComponent: () => import('@features/professor/commissions/professor-commissions.component').then(m => m.ProfessorCommissionsComponent)
+        loadComponent: () => import('@features/professor/subject-commissions/subject-commissions.component').then(m => m.SubjectCommissionsComponent)
+    },
+    {
+        path: 'professor/mis-materias',
+        redirectTo: 'professor/subjects',
+        pathMatch: 'full'
+    },
+    {
+        path: 'professor/comisiones',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/professor/my-commissions/my-commissions.component').then(m => m.MyCommissionsComponent)
     }
 ];

@@ -1,0 +1,80 @@
+<app-page-layout title="Mis Comisiones" icon="groups">
+    <div class="commissions-container">
+        @if (isLoading) {
+        <app-loading-spinner message="Cargando comisiones..."></app-loading-spinner>
+        } @else if (error) {
+        <app-alert-message type="error" [message]="error" (close)="error = null"></app-alert-message>
+        } @else {
+        @if (comisiones.length === 0) {
+        <div class="empty-state">
+            <span class="material-icons">groups_off</span>
+            <h3>No tienes comisiones asignadas</h3>
+            <p>Si consideras que es un error, contacta a bedelía.</p>
+        </div>
+        } @else {
+        <div class="commissions-grid">
+            @for (comision of comisiones; track comision.idComision) {
+            <div class="commission-card">
+                <div class="card-header">
+                    <div class="header-left">
+                        <h3>{{ comision.nombre }}</h3>
+                        <span class="year-badge">{{ comision.anio }}</span>
+                    </div>
+                    <span class="shift-badge">{{ comision.turno }}</span>
+                </div>
+
+                <div class="card-body">
+                    <div class="info-row">
+                        <span class="material-icons">meeting_room</span>
+                        <span class="info-label">Salón:</span>
+                        <span class="info-value">{{ comision.salon }}</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="material-icons">group</span>
+                        <span class="info-label">Alumnos:</span>
+                        <span class="info-value">{{ comision.cantidadAlumnos }}</span>
+                    </div>
+
+                    <div class="schedules-section">
+                        <div class="section-title">
+                            <span class="material-icons">schedule</span>
+                            <span>Horarios</span>
+                        </div>
+                        <div class="schedules-list">
+                            @for (horario of comision.horarios; track $index) {
+                            <div class="schedule-item">{{ horario }}</div>
+                            }
+                        </div>
+                    </div>
+
+                    @if (comision.profesores && comision.profesores.length > 0) {
+                    <div class="professors-section">
+                        <div class="section-title">
+                            <span class="material-icons">school</span>
+                            <span>Profesores</span>
+                        </div>
+                        <div class="professors-list">
+                            @for (profesor of comision.profesores; track $index) {
+                            <div class="professor-chip">{{ profesor }}</div>
+                            }
+                        </div>
+                    </div>
+                    }
+
+                    @if (comision.cantidadAlumnos > 0) {
+                    <div class="card-actions">
+                        <button class="btn-grade">
+                            <span class="material-icons">assignment_turned_in</span>
+                            Calificar Alumnos
+                        </button>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        }
+        }
+    </div>
+</app-page-layout>
