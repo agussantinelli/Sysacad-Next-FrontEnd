@@ -63,6 +63,15 @@
     flex: 1;
 }
 
+.subject-tag {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--utn-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+}
+
 .card-header h3 {
     margin: 0;
     font-size: 1.3rem;
@@ -176,7 +185,7 @@
     padding: 0.5rem 1rem;
     background: rgba(255, 193, 7, 0.08);
     border-radius: 20px;
-    border: 1px solid rgba(255, 193, 7, 0.2);
+    border: 1px solid rgb(0, 247, 255);
     color: var(--text-primary);
     font-size: 0.85rem;
     font-weight: 600;

@@ -4,7 +4,7 @@ import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 import { ProfessorService } from '@core/services/professor.service';
-import { ComisionHorarioDTO } from '@core/models/professor.models';
+import { ComisionDetalladaDTO } from '@core/models/professor.models';
 
 @Component({
     selector: 'app-my-commissions',
@@ -16,7 +16,7 @@ import { ComisionHorarioDTO } from '@core/models/professor.models';
 export class MyCommissionsComponent implements OnInit {
     private professorService = inject(ProfessorService);
 
-    comisiones: ComisionHorarioDTO[] = [];
+    comisiones: ComisionDetalladaDTO[] = [];
     isLoading = false;
     error: string | null = null;
 
