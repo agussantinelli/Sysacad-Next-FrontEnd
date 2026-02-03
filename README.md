@@ -412,7 +412,7 @@ FRONTEND_URL=http://localhost:4200
 | | Calendario Académico | ✅ | ✅ | ✅ |
 | | **Comunicación** | | | |
 | | Avisos | ✅ | ✅ | ✅ |
-| | Mensajería | ✅ | ✅ | ✅ |
+| | Mensajería | 🚧 | 🚧 | 🚧 |
 | **Gestión Docente** | **Clases** | | | |
 | | Mis Materias | ❌ | ✅ | ❌ |
 | | Mis Comisiones (Global) | ❌ | ✅ | ❌ |
