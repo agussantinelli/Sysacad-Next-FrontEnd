@@ -8,16 +8,15 @@ import { ProfessorService } from '@core/services/professor.service';
 import { ComisionHorarioDTO } from '@core/models/professor.models';
 
 @Component({
-    selector: 'app-professor-commissions',
+    selector: 'app-subject-commissions',
     standalone: true,
     imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent],
-    templateUrl: './professor-commissions.component.html',
-    styleUrl: './styles/professor-commissions.component.css'
+    templateUrl: './subject-commissions.component.html',
+    styleUrl: './styles/subject-commissions.component.css'
 })
-export class ProfessorCommissionsComponent implements OnInit {
+export class SubjectCommissionsComponent implements OnInit {
     private professorService = inject(ProfessorService);
     private route = inject(ActivatedRoute);
-    private router = inject(Router);
 
     comisiones: ComisionHorarioDTO[] = [];
     isLoading = false;
@@ -26,14 +25,16 @@ export class ProfessorCommissionsComponent implements OnInit {
     idMateria = '';
 
     ngOnInit(): void {
-        this.idMateria = this.route.snapshot.paramMap.get('idMateria') || '';
-        this.subjectName = this.route.snapshot.queryParamMap.get('name') || 'Materia';
+        this.route.paramMap.subscribe(params => {
+            this.idMateria = params.get('idMateria') || '';
 
-        if (this.idMateria) {
-            this.loadComisiones();
-        } else {
-            this.error = 'ID de materia no válido';
-        }
+            if (this.idMateria) {
+                this.subjectName = this.route.snapshot.queryParamMap.get('name') || 'Materia';
+                this.loadComisiones();
+            } else {
+                this.error = 'ID de materia no válido';
+            }
+        });
     }
 
     loadComisiones(): void {
