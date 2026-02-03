@@ -38,7 +38,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
 
     students: StudentRow[] = [];
     concepts: string[] = []; // Dynamic columns
-    availableStates = Object.values(EstadoCursada);
+    availableStates = Object.values(EstadoCursada).filter(e => e !== EstadoCursada.CURSANDO);
 
     // Form controls
     concepto = '';
@@ -81,13 +81,19 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                         gradeMap[c.concepto] = c.nota;
                     });
 
+                    // If current state is CURSANDO (or null), default 'New State' selector to REGULAR
+                    // Otherwise keep their existing finalized state
+                    const defaultState = (a.estado === EstadoCursada.CURSANDO || !a.estado)
+                        ? EstadoCursada.REGULAR
+                        : a.estado;
+
                     return {
                         studentId: a.idInscripcion,
                         studentName: `${a.nombre} ${a.apellido}`,
                         legajo: a.legajo,
                         grades: gradeMap,
                         newGrade: null,
-                        newState: a.estado || EstadoCursada.REGULAR, // Default to current state
+                        newState: defaultState,
                         prevNewGrade: null
                     };
                 });

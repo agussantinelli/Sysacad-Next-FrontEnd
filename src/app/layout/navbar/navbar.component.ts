@@ -169,8 +169,6 @@ export class NavbarComponent implements OnInit {
     getProfileImageUrl(relativePath: string): string {
         if (!relativePath) return '';
         if (relativePath.startsWith('http')) return relativePath;
-        // Assuming backend serves static files at root or /uploads
-        // If relativePath starts with /, remove it to avoid double slash
         const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
         return `http://localhost:8080/${cleanPath}`;
     }
