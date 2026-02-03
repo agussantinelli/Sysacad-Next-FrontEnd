@@ -1,8 +1,8 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { AlertService } from '@core/services/alert.service';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-page-layout',
@@ -13,11 +13,19 @@ import { AsyncPipe } from '@angular/common';
 })
 export class PageLayoutComponent {
     @Input() title: string = '';
+    @Input() backRoute: string | any[] | null = null;
+
     private location = inject(Location);
+    private router = inject(Router);
     public alertService = inject(AlertService);
 
     goBack(): void {
         this.alertService.clear(); // Clear alerts on navigation
-        this.location.back();
+        if (this.backRoute) {
+            const commands = Array.isArray(this.backRoute) ? this.backRoute : [this.backRoute];
+            this.router.navigate(commands);
+        } else {
+            this.location.back();
+        }
     }
 }

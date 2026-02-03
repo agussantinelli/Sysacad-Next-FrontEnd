@@ -1,4 +1,4 @@
-<app-page-layout title="Mis Mesas de Examen">
+<app-page-layout title="Mis Mesas de Examen" [backRoute]="['/dashboard']">
 
     <app-loading-spinner *ngIf="isLoading" message="Cargando mesas de examen..."></app-loading-spinner>
 

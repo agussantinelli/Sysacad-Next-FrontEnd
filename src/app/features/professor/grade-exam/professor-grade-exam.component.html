@@ -1,4 +1,4 @@
-<app-page-layout [title]="'Calificar: ' + materiaNombre">
+<app-page-layout [title]="'Calificar: ' + materiaNombre" [backRoute]="['/professor/exams', idMesa]">
 
 
     <app-loading-spinner *ngIf="isLoading" message="Cargando alumnos..."></app-loading-spinner>
@@ -53,8 +53,8 @@
             </table>
         </div>
 
-        <div class="form-actions">
-            <button class="btn-save" (click)="saveGrades()" [disabled]="isSaving">
+        <div class="form-actions" *ngIf="!isReadOnly">
+            <button class="btn-save" (click)="saveGrades()" [disabled]="isSaving || isReadOnly">
                 <span class="material-icons" *ngIf="!isSaving">save</span>
                 <span *ngIf="isSaving">Guardando...</span>
                 <span *ngIf="!isSaving">Guardar Notas</span>
