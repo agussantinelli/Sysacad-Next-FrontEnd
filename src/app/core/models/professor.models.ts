@@ -69,3 +69,28 @@ export interface CargaNotaItemDTO {
     tomo?: string;
     folio?: string;
 }
+
+export interface CalificacionDTO {
+    concepto: string;
+    nota: number;
+    fecha: string; // LocalDate
+}
+
+export interface AlumnoCursadaDTO {
+    idInscripcion: string; // UUID
+    nombre: string;
+    apellido: string;
+    legajo: number;
+    estado: string; // EstadoCursada
+    calificaciones: CalificacionDTO[];
+}
+
+export interface NotaCursadaItemDTO {
+    idInscripcion: string;
+    nota: number;
+}
+
+export interface CargaNotasCursadaDTO {
+    concepto: string;
+    notas: NotaCursadaItemDTO[];
+}
