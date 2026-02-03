@@ -179,8 +179,15 @@
     color: var(--text-secondary);
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+
 .grading-actions {
-    margin-top: 1.5rem;
+    margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
 }
