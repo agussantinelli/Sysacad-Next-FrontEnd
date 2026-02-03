@@ -1,0 +1,50 @@
+<app-page-layout title="Mis Mesas de Examen">
+
+    <app-loading-spinner *ngIf="isLoading" message="Cargando mesas de examen..."></app-loading-spinner>
+
+    <app-alert-message *ngIf="error" type="error" [message]="error" (close)="error = null"></app-alert-message>
+
+    <div class="exams-container" *ngIf="!isLoading && !error">
+
+        @if (mesas.length === 0) {
+        <div class="empty-state">
+            <span class="material-icons">event_busy</span>
+            <h3>No tienes mesas de examen asignadas actualmente.</h3>
+            <p>Las mesas aparecerán aquí cuando seas designado como autoridad.</p>
+        </div>
+        } @else {
+        <div class="table-responsive">
+            <table class="utn-table">
+                <thead>
+                    <tr>
+                        <th>Nombre / Turno</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Materias Involucradas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (mesa of mesas; track mesa.id) {
+                    <tr>
+                        <td class="font-medium">{{ mesa.nombre }}</td>
+                        <td>{{ mesa.fechaInicio | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ mesa.fechaFin | date:'dd/MM/yyyy' }}</td>
+                        <td>
+                            <span class="badge-count">{{ mesa.cantidadMateriasInvolucradas }}</span>
+                        </td>
+                        <td>
+                            <button class="btn-action primary" (click)="viewDetails(mesa.id)" title="Ver Detalle">
+                                <span class="material-icons">visibility</span> Ver Materias
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+    </div>
+
+</app-page-layout>
