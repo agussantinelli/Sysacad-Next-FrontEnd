@@ -95,8 +95,9 @@ export class ProfessorExamDetailsComponent implements OnInit {
     }
 
     gradeExam(detalle: ProfesorDetalleExamenDTO): void {
-        console.log('Navegar a corrección para:', detalle.nombreMateria);
-        // Implement navigation to grading component later
+        this.router.navigate(['/professor/exams', this.idMesa, 'grading', detalle.nroDetalle], {
+            state: { materiaNombre: detalle.nombreMateria }
+        });
     }
 
     getRoleLabel(rol: string): string {
