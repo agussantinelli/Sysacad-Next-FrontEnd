@@ -110,7 +110,6 @@ export class DashboardComponent implements OnInit {
             title: 'Exámenes',
             options: [
                 { title: 'Mesas de Examen', icon: 'assignment', route: '/professor/exams' },
-                { title: 'Actas Volantes', icon: 'description', route: '/professor/acts' }
             ]
         },
         {
