@@ -24,3 +24,28 @@ export interface ComisionDetalladaDTO extends ComisionHorarioDTO {
     nombreMateria: string;
     idMateria: string; // UUID
 }
+
+export interface MiembroTribunalDTO {
+    nombreCompleto: string;
+    rol: 'PRESIDENTE' | 'AUXILIAR';
+}
+
+export interface ProfesorMesaExamenDTO {
+    id: string; // UUID (idMesaExamen)
+    nombre: string; // Nombre de la mesa/turno (e.g. "Febrero 2026")
+    fechaInicio: string; // LocalDate
+    fechaFin: string; // LocalDate
+    cantidadMateriasInvolucradas: number;
+}
+
+export interface ProfesorDetalleExamenDTO {
+    idMesaExamen: string; // UUID
+    nroDetalle: number;
+    idMateria: string; // UUID
+    nombreMateria: string;
+    anioMateria: string;
+    fecha: string; // LocalDate
+    hora: string; // LocalTime
+    cantidadInscriptos: number;
+    tribunal: MiembroTribunalDTO[];
+}
