@@ -19,3 +19,8 @@ export interface ComisionHorarioDTO {
     profesores: string[]; // All professors if requester is head, empty otherwise
     cantidadAlumnos: number; // Number of students in this commission
 }
+
+export interface ComisionDetalladaDTO extends ComisionHorarioDTO {
+    nombreMateria: string;
+    idMateria: string; // UUID
+}

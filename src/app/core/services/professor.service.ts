@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { MateriaProfesorDTO, ComisionHorarioDTO } from '@core/models/professor.models';
+import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO } from '@core/models/professor.models';
 
 @Injectable({
     providedIn: 'root'
@@ -23,8 +23,8 @@ export class ProfessorService {
         );
     }
 
-    getMisComisiones(): Observable<ComisionHorarioDTO[]> {
-        return from(axiosClient.get<ComisionHorarioDTO[]>('/profesores/mis-comisiones')).pipe(
+    getMisComisiones(): Observable<ComisionDetalladaDTO[]> {
+        return from(axiosClient.get<ComisionDetalladaDTO[]>('/profesores/mis-comisiones')).pipe(
             map(response => response.data)
         );
     }
