@@ -22,4 +22,10 @@ export class ProfessorService {
             map(response => response.data)
         );
     }
+
+    getMisComisiones(): Observable<ComisionHorarioDTO[]> {
+        return from(axiosClient.get<ComisionHorarioDTO[]>('/profesores/mis-comisiones')).pipe(
+            map(response => response.data)
+        );
+    }
 }
