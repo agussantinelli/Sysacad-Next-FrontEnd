@@ -46,7 +46,7 @@
 .detail-card {
     background: var(--surface-card);
     border-radius: 16px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--text-secondary);
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     display: flex;
