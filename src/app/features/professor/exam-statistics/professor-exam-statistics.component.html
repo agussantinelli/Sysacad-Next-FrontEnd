@@ -1,8 +1,128 @@
-<app-page-layout title="Estadísticas de Rendimiento">
-    <div class="empty-state">
-        <span class="material-icons">bar_chart</span>
-        <h3>Estadísticas de Exámenes</h3>
-        <p>Visualiza el rendimiento de tus alumnos, tasas de aprobación y promedios por turno.</p>
-        <p class="text-secondary">(Módulo en desarrollo)</p>
+<app-page-layout title="Estadísticas Académicas" icon="analytics">
+    <div class="stats-container">
+
+        <!-- Filters Bar -->
+        <div class="filters-bar card">
+            <div class="filter-group">
+                <label for="yearSelect">Año:</label>
+                <select id="yearSelect" [(ngModel)]="selectedYear" (change)="onFilterChange()" class="form-select">
+                    <option [ngValue]="null">Histórico Completo</option>
+                    @for (year of years; track year) {
+                    <option [value]="year">{{ year }}</option>
+                    }
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="subjectSelect">Materia:</label>
+                <select id="subjectSelect" [(ngModel)]="selectedSubject" (change)="onFilterChange()"
+                    class="form-select">
+                    <option value="">Todas las Materias</option>
+                    @for (subject of subjects; track subject.id) {
+                    <option [value]="subject.id">{{ subject.nombre }} ({{ subject.plan }})</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        @if (isLoading) {
+        <app-loading-spinner message="Calculando indicadores..."></app-loading-spinner>
+        } @else if (error) {
+        <app-alert-message type="error" [message]="error"></app-alert-message>
+        } @else if (stats) {
+
+        <!-- Overview Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card total">
+                <div class="icon-wrapper">
+                    <span class="material-icons">groups</span>
+                </div>
+                <div class="kpi-content">
+                    <span class="kpi-value">{{ stats.cantidadTotalAlumnos }}</span>
+                    <span class="kpi-label">Total Alumnos</span>
+                </div>
+            </div>
+
+            <div class="kpi-card promoted">
+                <div class="icon-wrapper">
+                    <span class="material-icons">stars</span>
+                </div>
+                <div class="kpi-content">
+                    <span class="kpi-value">{{ stats.cantidadPromocionados }}</span>
+                    <span class="kpi-label">Promocionados</span>
+                </div>
+            </div>
+
+            <div class="kpi-card regular">
+                <div class="icon-wrapper">
+                    <span class="material-icons">check_circle</span>
+                </div>
+                <div class="kpi-content">
+                    <span class="kpi-value">{{ stats.cantidadRegulares }}</span>
+                    <span class="kpi-label">Regulares</span>
+                </div>
+            </div>
+
+            <div class="kpi-card free">
+                <div class="icon-wrapper">
+                    <span class="material-icons">cancel</span>
+                </div>
+                <div class="kpi-content">
+                    <span class="kpi-value">{{ stats.cantidadLibres }}</span>
+                    <span class="kpi-label">Libres</span>
+                </div>
+            </div>
+
+            <div class="kpi-card average">
+                <div class="icon-wrapper">
+                    <span class="material-icons">auto_graph</span>
+                </div>
+                <div class="kpi-content">
+                    <span class="kpi-value">{{ stats.notaPromedio | number:'1.1-2' }}</span>
+                    <span class="kpi-label">Promedio General</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Stats Section -->
+        <h3 class="section-title">Rendimiento en Exámenes Finales</h3>
+        <div class="exams-grid">
+            <div class="exam-stat-card">
+                <h4>Inscriptos Totales</h4>
+                <div class="big-number">{{ stats.cantidadTotalInscriptosExamen }}</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <div class="exam-stat-card success">
+                <h4>Aprobados</h4>
+                <div class="big-number">{{ stats.cantidadAprobadosExamen }}</div>
+                <div class="stat-detail">
+                    {{ (stats.cantidadTotalInscriptosExamen ? (stats.cantidadAprobadosExamen /
+                    stats.cantidadTotalInscriptosExamen * 100) : 0) | number:'1.0-1' }}%
+                </div>
+            </div>
+
+            <div class="exam-stat-card danger">
+                <h4>Desaprobados</h4>
+                <div class="big-number">{{ stats.cantidadDesaprobadosExamen }}</div>
+                <div class="stat-detail">
+                    {{ (stats.cantidadTotalInscriptosExamen ? (stats.cantidadDesaprobadosExamen /
+                    stats.cantidadTotalInscriptosExamen * 100) : 0) | number:'1.0-1' }}%
+                </div>
+            </div>
+
+            <div class="exam-stat-card neutral">
+                <h4>Ausentes</h4>
+                <div class="big-number">{{ stats.cantidadAusentesExamen }}</div>
+                <div class="stat-detail">
+                    {{ (stats.cantidadTotalInscriptosExamen ? (stats.cantidadAusentesExamen /
+                    stats.cantidadTotalInscriptosExamen * 100) : 0) | number:'1.0-1' }}%
+                </div>
+            </div>
+        </div>
+
+        }
     </div>
 </app-page-layout>
