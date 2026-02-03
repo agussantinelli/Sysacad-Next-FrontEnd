@@ -216,3 +216,16 @@
     background-color: var(--utn-blue);
     border-radius: 3px;
 }
+
+/* Charts */
+.charts-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.chart-wrapper {
+    width: 100%;
+    height: 350px;
+}

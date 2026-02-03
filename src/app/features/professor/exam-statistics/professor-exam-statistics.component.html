@@ -84,6 +84,16 @@
             </div>
         </div>
 
+        <!-- Charts Section -->
+        <h3 class="section-title">Distribución de Condición de Alumnos</h3>
+        <div class="charts-container card">
+            <div class="chart-wrapper">
+                <ngx-charts-pie-chart [scheme]="colorScheme" [results]="courseStatusData" [gradient]="true"
+                    [legend]="true" [legendTitle]="'Condición'" [labels]="true" [doughnut]="true" [arcWidth]="0.25">
+                </ngx-charts-pie-chart>
+            </div>
+        </div>
+
         <!-- Exam Stats Section -->
         <h3 class="section-title">Rendimiento en Exámenes Finales</h3>
         <div class="exams-grid">
