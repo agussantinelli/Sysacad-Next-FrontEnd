@@ -71,7 +71,9 @@ export class ProfessorExamsComponent implements OnInit {
         });
     }
 
-    viewDetails(idMesa: string): void {
-        this.router.navigate(['/professor/exams', idMesa]);
+    viewDetails(mesa: ProfesorMesaExamenDTO): void {
+        this.router.navigate(['/professor/exams', mesa.id], {
+            state: { mesaNombre: mesa.nombre }
+        });
     }
 }

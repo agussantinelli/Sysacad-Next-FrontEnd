@@ -124,5 +124,10 @@ export const routes: Routes = [
         path: 'professor/exams',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/professor/exams/professor-exams.component').then(m => m.ProfessorExamsComponent)
+    },
+    {
+        path: 'professor/exams/:idMesa',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/professor/exam-details/professor-exam-details.component').then(m => m.ProfessorExamDetailsComponent)
     }
 ];
