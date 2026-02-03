@@ -232,7 +232,13 @@
     font-size: 0.9rem;
     background-color: var(--input-bg);
     color: var(--text-primary);
-    width: 120px;
+    width: 100%;
+    min-width: 120px;
+}
+
+.state-select option {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .state-select:focus {

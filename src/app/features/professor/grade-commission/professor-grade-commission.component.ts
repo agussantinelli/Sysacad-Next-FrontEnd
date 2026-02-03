@@ -8,6 +8,7 @@ import { AlertMessageComponent } from '@shared/components/alert-message/alert-me
 import { ProfessorService } from '@core/services/professor.service';
 import { AlertService } from '@core/services/alert.service';
 import { AlumnoCursadaDTO, CargaNotasCursadaDTO, CalificacionDTO } from '@core/models/professor.models';
+import { EstadoCursada } from '@core/enums/inscripcion.enums';
 
 interface StudentRow {
     studentId: string;
@@ -18,8 +19,6 @@ interface StudentRow {
     newState: string | null;
     prevNewGrade: number | null; // Track changes
 }
-
-export const ESTADOS_CURSADA = ['REGULAR', 'APROBADO', 'LIBRE', 'PROMOCIONADO'];
 
 @Component({
     selector: 'app-professor-grade-commission',
@@ -39,7 +38,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
 
     students: StudentRow[] = [];
     concepts: string[] = []; // Dynamic columns
-    availableStates = ESTADOS_CURSADA;
+    availableStates = Object.values(EstadoCursada);
 
     // Form controls
     concepto = '';
@@ -88,7 +87,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                         legajo: a.legajo,
                         grades: gradeMap,
                         newGrade: null,
-                        newState: a.estado || 'REGULAR', // Default to current state
+                        newState: a.estado || EstadoCursada.REGULAR, // Default to current state
                         prevNewGrade: null
                     };
                 });
