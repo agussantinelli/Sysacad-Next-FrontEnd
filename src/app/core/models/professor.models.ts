@@ -92,5 +92,6 @@ export interface NotaCursadaItemDTO {
 
 export interface CargaNotasCursadaDTO {
     concepto: string;
+    esNotaFinal: boolean;
     notas: NotaCursadaItemDTO[];
 }
