@@ -37,7 +37,7 @@
                         }
                         <th class="grade-col highlight">Nueva Nota</th>
                         @if (esNotaFinal) {
-                        <th class="grade-col">Estado</th>
+                        <th class="grade-col state-col">Estado</th>
                         }
                     </tr>
                 </thead>
@@ -62,7 +62,7 @@
                         </td>
 
                         @if (esNotaFinal) {
-                        <td class="grade-col">
+                        <td class="grade-col state-col">
                             <select [(ngModel)]="student.newState" class="state-select">
                                 @for (state of availableStates; track state) {
                                 <option [value]="state">{{ state }}</option>
