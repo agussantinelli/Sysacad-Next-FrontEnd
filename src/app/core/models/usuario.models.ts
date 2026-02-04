@@ -1,4 +1,9 @@
-import { TipoDocumento, Genero, RolUsuario, EstadoUsuario } from '../enums/usuario.enums';
+import { TipoDocumento, Genero, RolUsuario } from '../enums/usuario.enums';
+
+export enum EstadoUsuario {
+    ACTIVO = 'ACTIVO',
+    INACTIVO = 'INACTIVO'
+}
 
 export interface InfoCarrera {
     nombreCarrera: string;
@@ -22,7 +27,7 @@ export interface UsuarioRequest {
     fechaIngreso: string; // LocalDate
     tituloAcademico?: string;
     rol: RolUsuario;
-    estado?: string;
+    estado?: EstadoUsuario;
 }
 
 export interface UsuarioResponse {
@@ -42,7 +47,7 @@ export interface UsuarioResponse {
     fechaIngreso: string; // LocalDate
     tituloAcademico?: string;
     rol: RolUsuario;
-    estado: string;
+    estado: EstadoUsuario;
     tipoIdentificador?: string;
     anioIngreso?: number;
     passwordChangeRequired?: boolean;
