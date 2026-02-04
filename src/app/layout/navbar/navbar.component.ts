@@ -88,8 +88,7 @@ export class NavbarComponent implements OnInit {
         {
             title: 'Exámenes',
             options: [
-                { title: 'Mesas', icon: 'assignment', route: '/admin/mesas' },
-                { title: 'Actas', icon: 'description', route: '/admin/actas' }
+                { title: 'Mesas', icon: 'assignment', route: '/admin/mesas' }
             ]
         },
         {
