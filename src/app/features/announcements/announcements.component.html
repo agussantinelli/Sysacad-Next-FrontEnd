@@ -68,7 +68,7 @@
                         <button class="btn-toggle-visibility" [class.is-active]="aviso.estado === 'ACTIVO'"
                             (click)="toggleState(aviso)"
                             [title]="aviso.estado === 'ACTIVO' ? 'Ocultar aviso' : 'Mostrar aviso'">
-                            <span class="material-icons">{{ aviso.estado === 'ACTIVO' ? 'visibility_off' : 'visibility'
+                            <span class="material-icons">{{ aviso.estado === 'ACTIVO' ? 'visibility' : 'visibility_off'
                                 }}</span>
                         </button>
                         } @else if (!aviso.visto) {
