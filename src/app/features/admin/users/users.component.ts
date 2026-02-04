@@ -57,9 +57,10 @@ export class UsersComponent implements OnInit {
                 user.estado = updatedUser.estado;
                 this.alertService.success(`Usuario ${nuevoEstado === EstadoUsuario.ACTIVO ? 'habilitado' : 'deshabilitado'} correctamente.`);
             },
-            error: (err) => {
+            error: (err: any) => {
                 console.error('Error changing user status:', err);
-                this.alertService.error('Error al cambiar el estado del usuario.');
+                const errorMessage = err.response?.data?.message || err.message || 'Error al cambiar el estado del usuario.';
+                this.alertService.error(errorMessage);
             }
         });
     }
