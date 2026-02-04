@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
+import axiosClient from '@core/api/axios.client';
 import { ReporteCertificadoDTO } from '../models/reporte.models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ReporteService {
-    private apiUrl = `${environment.apiUrl}/reportes`;
 
-    constructor(private http: HttpClient) { }
+    constructor() { }
 
     getCertificadosHistory(): Observable<ReporteCertificadoDTO[]> {
-        return this.http.get<ReporteCertificadoDTO[]>(`${this.apiUrl}/certificados`);
+        return from(axiosClient.get<ReporteCertificadoDTO[]>('/reportes/certificados')).pipe(
+            map(response => response.data)
+        );
     }
 }
