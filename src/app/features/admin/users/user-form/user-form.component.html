@@ -68,21 +68,22 @@
                     </div>
                 </div>
 
-                <!-- Password Section (Create Only) -->
-                @if (!isEditMode) {
+                <!-- Password Section -->
                 <div class="form-grid" style="margin-top: 1.5rem;">
                     <div class="form-group full-width">
-                        <label>Contraseña</label>
+                        <label>{{ isEditMode ? 'Nueva Contraseña' : 'Contraseña' }}</label>
                         <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password"
-                            placeholder="Dejar en blanco para usar legajo como contraseña">
+                            [placeholder]="isEditMode ? 'Dejar en blanco para mantener la actual' : 'Dejar en blanco para usar legajo como contraseña'">
+
+                        @if (!isEditMode) {
                         <div class="info-note">
                             <span class="material-icons">info</span>
                             <span>Si no se especifica una contraseña, se utilizará el <strong>legajo</strong> por
                                 defecto.</span>
                         </div>
+                        }
                     </div>
                 </div>
-                }
 
                 <div class="button-group">
                     <button type="button" class="btn-cancel" (click)="cancel()">Cancelar</button>
