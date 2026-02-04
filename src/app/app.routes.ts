@@ -153,5 +153,10 @@ export const routes: Routes = [
         path: 'admin/certificados',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/admin/reports/reports.component').then(m => m.ReportsComponent)
-    }
+    },
+    {
+        path: 'admin/avisos',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/announcements/announcements.component').then(m => m.AnnouncementsComponent)
+    },
 ];
