@@ -58,6 +58,17 @@
     box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.1);
 }
 
+.form-control:disabled,
+.form-select:disabled {
+    background-color: var(--bg-secondary, #22303f);
+    /* Fallback to light grey if var doesn't exist */
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    opacity: 1;
+    /* Standardize opacity for some browsers */
+    border-color: var(--border-subtle);
+}
+
 .button-group {
     display: flex;
     justify-content: flex-end;
@@ -111,4 +122,22 @@
     color: #ef4444;
     font-size: 0.8rem;
     margin-top: 0.2rem;
+}
+
+.info-note {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    background-color: var(--bg-page);
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--utn-blue);
+}
+
+.info-note .material-icons {
+    font-size: 1.2rem;
+    color: var(--utn-blue);
 }
