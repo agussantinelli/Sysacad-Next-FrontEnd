@@ -30,7 +30,15 @@ export class AvisoService {
     }
 
     obtenerCantidadSinLeer(): Observable<number> {
-        return from(axiosClient.get<number>('/avisos/sin-leer/cantidad')).pipe( // Assuming /avisos prefix based on controller pattern
+        return from(axiosClient.get<number>('/avisos/sin-leer/cantidad')).pipe(
+            map(response => response.data)
+        );
+    }
+
+    cambiarEstado(id: string, nuevoEstado: string): Observable<AvisoResponse> {
+        return from(axiosClient.put<AvisoResponse>(`/avisos/${id}/estado`, {}, {
+            params: { nuevoEstado }
+        })).pipe(
             map(response => response.data)
         );
     }
