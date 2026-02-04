@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { UsuarioRequest, UsuarioResponse, CambioPasswordRequest } from '@core/models/usuario.models';
+import { UsuarioRequest, UsuarioResponse, CambioPasswordRequest, EstadoUsuario } from '@core/models/usuario.models';
 import { RolUsuario } from '@core/enums/usuario.enums';
 
 @Injectable({
@@ -20,6 +20,14 @@ export class UsuarioService {
 
     actualizarUsuario(id: string, usuario: UsuarioRequest): Observable<UsuarioResponse> {
         return from(axiosClient.put<UsuarioResponse>(`/usuarios/${id}`, usuario)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    cambiarEstado(id: string, nuevoEstado: EstadoUsuario): Observable<UsuarioResponse> {
+        return from(axiosClient.put<UsuarioResponse>(`/usuarios/${id}/estado`, null, {
+            params: { nuevoEstado }
+        })).pipe(
             map(response => response.data)
         );
     }
