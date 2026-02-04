@@ -1,0 +1,38 @@
+<app-page-layout title="Nuevo Aviso Institucional">
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" [(ngModel)]="aviso.titulo" name="titulo"
+                    placeholder="Ej: Suspensión de actividades" class="form-input" [disabled]="isLoading">
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" [(ngModel)]="aviso.descripcion" name="descripcion" rows="6"
+                    placeholder="Escribe el contenido del aviso..." class="form-textarea"
+                    [disabled]="isLoading"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado Inicial</label>
+                <select id="estado" [(ngModel)]="aviso.estado" name="estado" class="form-select" [disabled]="isLoading">
+                    <option value="ACTIVO">Activo (Visible)</option>
+                    <option value="OCULTO">Oculto (Borrador)</option>
+                </select>
+                <p class="help-text">Los avisos ocultos no serán visibles para los alumnos.</p>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" (click)="cancel()" [disabled]="isLoading">Cancelar</button>
+                <button type="button" class="btn-submit" (click)="onSubmit()" [disabled]="isLoading">
+                    @if (isLoading) {
+                    <span class="spinner-sm"></span> Publicando...
+                    } @else {
+                    Publicar Aviso
+                    }
+                </button>
+            </div>
+        </div>
+    </div>
+</app-page-layout>
