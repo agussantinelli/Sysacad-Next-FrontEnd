@@ -1,6 +1,37 @@
 <app-page-layout title="Avisos Institucionales">
     <div class="notifications-container">
 
+        @if (canCreate) {
+        <div class="actions-header">
+            <button class="btn-create" (click)="toggleCreateMode()">
+                <span class="material-icons">{{ isCreating ? 'close' : 'add' }}</span>
+                {{ isCreating ? 'Cancelar' : 'Nuevo Aviso' }}
+            </button>
+        </div>
+
+        @if (isCreating) {
+        <div class="create-form-card">
+            <h3>Crear Nuevo Aviso</h3>
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" [(ngModel)]="newAviso.titulo" placeholder="Ej: Suspensión de actividades"
+                    class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" [(ngModel)]="newAviso.descripcion" rows="3"
+                    placeholder="Escribe el contenido del aviso..." class="form-textarea"></textarea>
+            </div>
+            <div class="form-actions-right">
+                <button class="btn-submit" (click)="createAnnouncement()">
+                    <span class="material-icons">send</span>
+                    Publicar Aviso
+                </button>
+            </div>
+        </div>
+        }
+        }
+
         @if (isLoading) {
         <app-loading-spinner></app-loading-spinner>
         } @else {

@@ -6,6 +6,9 @@ import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/load
 import { AvisoService } from '@core/services/aviso.service';
 import { AvisoResponse } from '@core/models/aviso.models';
 import { AlertService } from '@core/services/alert.service';
+import { AuthService } from '@core/services/auth.service';
+import { UsuarioResponse } from '@core/models/usuario.models';
+import { AvisoRequest } from '@core/models/aviso.models';
 
 @Component({
     selector: 'app-announcements',
@@ -17,15 +20,29 @@ import { AlertService } from '@core/services/alert.service';
 export class AnnouncementsComponent implements OnInit {
     private avisoService = inject(AvisoService);
     private alertService = inject(AlertService);
+    private authService = inject(AuthService);
 
     avisos: AvisoResponse[] = [];
     isLoading: boolean = false;
+    usuario: UsuarioResponse | null = null;
+
+    // Creation State
+    isCreating = false;
+    newAviso: AvisoRequest = {
+        titulo: '',
+        descripcion: '',
+        estado: 'NORMAL' // Default state
+    };
 
     // Filters
     statusFilter: 'all' | 'read' | 'unread' = 'all';
     timeFilter: 'all' | 'today' | 'week' | 'month' | 'year' = 'all';
 
+
     ngOnInit(): void {
+        this.authService.currentUser$.subscribe(user => {
+            this.usuario = user;
+        });
         this.loadAvisos();
     }
 
@@ -86,5 +103,46 @@ export class AnnouncementsComponent implements OnInit {
                 console.error('Error marking as read:', err);
             }
         });
+    }
+
+    get canCreate(): boolean {
+        return this.usuario?.rol === 'ADMIN';
+    }
+
+    toggleCreateMode() {
+        this.isCreating = !this.isCreating;
+        if (!this.isCreating) {
+            this.resetForm();
+        }
+    }
+
+    createAnnouncement() {
+        if (!this.newAviso.titulo || !this.newAviso.descripcion) {
+            this.alertService.error('Debes completar todos los campos');
+            return;
+        }
+
+        this.isLoading = true;
+        this.avisoService.crearAviso(this.newAviso).subscribe({
+            next: (avisoCreado) => {
+                this.avisos.unshift(avisoCreado); // Add to top
+                this.alertService.success('Aviso creado correctamente');
+                this.toggleCreateMode();
+                this.isLoading = false;
+            },
+            error: (err) => {
+                console.error('Error creating announcement', err);
+                this.alertService.error('Error al crear el aviso');
+                this.isLoading = false;
+            }
+        });
+    }
+
+    resetForm() {
+        this.newAviso = {
+            titulo: '',
+            descripcion: '',
+            estado: 'NORMAL'
+        };
     }
 }

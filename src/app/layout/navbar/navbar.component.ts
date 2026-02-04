@@ -96,7 +96,6 @@ export class NavbarComponent implements OnInit {
             options: [
                 { title: 'Certificados', icon: 'badge', route: '/admin/certificados' },
                 { title: 'Avisos', icon: 'notifications', route: '/admin/avisos' },
-                { title: 'Calendario', icon: 'calendar_month', route: '/admin/calendario' }
             ]
         }
     ];
