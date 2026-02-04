@@ -147,5 +147,11 @@ export const routes: Routes = [
     {
         path: 'professor/professor-cert',
         loadComponent: () => import('@features/professor/professor-cert/professor-cert.component').then(m => m.ProfessorCertComponent)
+    },
+    // Admin Modules
+    {
+        path: 'admin/certificados',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/reports/reports.component').then(m => m.ReportsComponent)
     }
 ];
