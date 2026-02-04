@@ -3,33 +3,11 @@
 
         @if (canCreate) {
         <div class="actions-header">
-            <button class="btn-create" (click)="toggleCreateMode()">
-                <span class="material-icons">{{ isCreating ? 'close' : 'add' }}</span>
-                {{ isCreating ? 'Cancelar' : 'Nuevo Aviso' }}
+            <button class="btn-create" (click)="goToCreate()">
+                <span class="material-icons">add</span>
+                Nuevo Aviso
             </button>
         </div>
-
-        @if (isCreating) {
-        <div class="create-form-card">
-            <h3>Crear Nuevo Aviso</h3>
-            <div class="form-group">
-                <label for="titulo">Título</label>
-                <input type="text" id="titulo" [(ngModel)]="newAviso.titulo" placeholder="Ej: Suspensión de actividades"
-                    class="form-input">
-            </div>
-            <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" [(ngModel)]="newAviso.descripcion" rows="3"
-                    placeholder="Escribe el contenido del aviso..." class="form-textarea"></textarea>
-            </div>
-            <div class="form-actions-right">
-                <button class="btn-submit" (click)="createAnnouncement()">
-                    <span class="material-icons">send</span>
-                    Publicar Aviso
-                </button>
-            </div>
-        </div>
-        }
         }
 
         @if (isLoading) {
@@ -71,14 +49,28 @@
                 <div class="card-header">
                     <div class="header-content">
                         <span class="material-icons notification-icon">campaign</span>
-                        <h3>{{ aviso.titulo }}</h3>
+                        <div class="title-section">
+                            <h3>{{ aviso.titulo }}</h3>
+                            @if (canCreate) {
+                            <span class="status-badge" [class.active]="aviso.estado === 'ACTIVO'">
+                                {{ aviso.estado === 'ACTIVO' ? 'Visible' : 'Oculto' }}
+                            </span>
+                            }
+                        </div>
                     </div>
                     <div class="header-actions">
                         <span class="date-badge">
                             <span class="material-icons date-icon">event</span>
                             {{ aviso.fechaEmision | date:'dd/MM/yyyy' }}
                         </span>
-                        @if (!aviso.visto) {
+
+                        @if (canCreate) {
+                        <button class="btn-icon" (click)="toggleState(aviso)"
+                            [title]="aviso.estado === 'ACTIVO' ? 'Ocultar aviso' : 'Mostrar aviso'">
+                            <span class="material-icons">{{ aviso.estado === 'ACTIVO' ? 'visibility_off' : 'visibility'
+                                }}</span>
+                        </button>
+                        } @else if (!aviso.visto) {
                         <button class="btn-mark-read" (click)="markAsRead(aviso)" title="Marcar como leído">
                             <span class="material-icons">check_circle_outline</span>
                         </button>

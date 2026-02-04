@@ -159,4 +159,9 @@ export const routes: Routes = [
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/announcements/announcements.component').then(m => m.AnnouncementsComponent)
     },
+    {
+        path: 'admin/avisos/crear',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/announcements/create-announcement/create-announcement.component').then(m => m.CreateAnnouncementComponent)
+    },
 ];

@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AvisoService } from '@core/services/aviso.service';
@@ -8,7 +9,6 @@ import { AvisoResponse } from '@core/models/aviso.models';
 import { AlertService } from '@core/services/alert.service';
 import { AuthService } from '@core/services/auth.service';
 import { UsuarioResponse } from '@core/models/usuario.models';
-import { AvisoRequest } from '@core/models/aviso.models';
 
 @Component({
     selector: 'app-announcements',
@@ -21,18 +21,11 @@ export class AnnouncementsComponent implements OnInit {
     private avisoService = inject(AvisoService);
     private alertService = inject(AlertService);
     private authService = inject(AuthService);
+    private router = inject(Router);
 
     avisos: AvisoResponse[] = [];
     isLoading: boolean = false;
     usuario: UsuarioResponse | null = null;
-
-    // Creation State
-    isCreating = false;
-    newAviso: AvisoRequest = {
-        titulo: '',
-        descripcion: '',
-        estado: 'NORMAL' // Default state
-    };
 
     // Filters
     statusFilter: 'all' | 'read' | 'unread' = 'all';
@@ -109,40 +102,22 @@ export class AnnouncementsComponent implements OnInit {
         return this.usuario?.rol === 'ADMIN';
     }
 
-    toggleCreateMode() {
-        this.isCreating = !this.isCreating;
-        if (!this.isCreating) {
-            this.resetForm();
-        }
+    goToCreate() {
+        this.router.navigate(['/admin/avisos/crear']);
     }
 
-    createAnnouncement() {
-        if (!this.newAviso.titulo || !this.newAviso.descripcion) {
-            this.alertService.error('Debes completar todos los campos');
-            return;
-        }
+    toggleState(aviso: AvisoResponse) {
+        const nuevoEstado = aviso.estado === 'ACTIVO' ? 'OCULTO' : 'ACTIVO';
 
-        this.isLoading = true;
-        this.avisoService.crearAviso(this.newAviso).subscribe({
-            next: (avisoCreado) => {
-                this.avisos.unshift(avisoCreado); // Add to top
-                this.alertService.success('Aviso creado correctamente');
-                this.toggleCreateMode();
-                this.isLoading = false;
+        this.avisoService.cambiarEstado(aviso.id, nuevoEstado).subscribe({
+            next: (avisoActualizado) => {
+                aviso.estado = avisoActualizado.estado;
+                this.alertService.success(`Aviso ${nuevoEstado === 'ACTIVO' ? 'visible' : 'oculto'} correctamente.`);
             },
             error: (err) => {
-                console.error('Error creating announcement', err);
-                this.alertService.error('Error al crear el aviso');
-                this.isLoading = false;
+                console.error('Error changing state:', err);
+                this.alertService.error('Error al cambiar el estado del aviso.');
             }
         });
-    }
-
-    resetForm() {
-        this.newAviso = {
-            titulo: '',
-            descripcion: '',
-            estado: 'NORMAL'
-        };
     }
 }
