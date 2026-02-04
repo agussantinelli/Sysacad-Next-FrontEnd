@@ -338,6 +338,7 @@
 .form-actions-right {
     display: flex;
     justify-content: flex-end;
+    gap: 1rem;
 }
 
 .btn-submit {
@@ -357,4 +358,66 @@
 .btn-submit:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 117, 190, 0.2);
+}
+
+/* Title Section */
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.status-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: var(--warning-bg, #f59e0b20);
+    color: var(--warning, #d97706);
+    border: 1px solid var(--warning-border, #fcd34d);
+}
+
+.status-badge.active {
+    background-color: var(--success-bg, #10b98120);
+    color: var(--success, #059669);
+    border-color: var(--success-border, #6ee7b7);
+}
+
+/* Improved Toggle Button */
+.btn-toggle-visibility {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--bg-page);
+    /* Slight contrast from card */
+}
+
+.btn-toggle-visibility:hover {
+    background-color: var(--utn-blue);
+    color: white;
+    border-color: var(--utn-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+/* Specific state for active (visible) vs hidden action */
+.btn-toggle-visibility.is-active:hover {
+    background-color: var(--error, #ef4444);
+    /* Red to indicate hiding */
+    border-color: var(--error, #ef4444);
+}
+
+.btn-toggle-visibility .material-icons {
+    font-size: 1.2rem;
 }
