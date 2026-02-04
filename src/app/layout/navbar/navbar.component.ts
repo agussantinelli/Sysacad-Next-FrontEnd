@@ -72,30 +72,30 @@ export class NavbarComponent implements OnInit {
         {
             title: 'Académica',
             options: [
-                { title: 'Carreras', icon: 'school', route: '/admin/carreras' },
-                { title: 'Facultades', icon: 'domain', route: '/admin/facultades' },
-                { title: 'Planes', icon: 'map', route: '/admin/planes' },
-                { title: 'Materias', icon: 'book', route: '/admin/materias' }
+                { title: 'Carreras', icon: 'school', route: '/admin/careers' },
+                { title: 'Facultades', icon: 'domain', route: '/admin/faculties' },
+                { title: 'Planes', icon: 'map', route: '/admin/study-plans' },
+                { title: 'Materias', icon: 'book', route: '/admin/subjects' }
             ]
         },
         {
             title: 'Institución',
             options: [
-                { title: 'Usuarios', icon: 'group', route: '/admin/usuarios' },
-                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscripciones' }
+                { title: 'Usuarios', icon: 'group', route: '/admin/users' },
+                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscriptions' }
             ]
         },
         {
             title: 'Exámenes',
             options: [
-                { title: 'Mesas', icon: 'assignment', route: '/admin/mesas' }
+                { title: 'Mesas', icon: 'assignment', route: '/admin/exam-tables' }
             ]
         },
         {
             title: 'Trámites',
             options: [
-                { title: 'Certificados', icon: 'badge', route: '/admin/certificados' },
-                { title: 'Avisos', icon: 'notifications', route: '/admin/avisos' },
+                { title: 'Certificados', icon: 'badge', route: '/admin/certificate-requests' },
+                { title: 'Avisos', icon: 'notifications', route: '/admin/announcements' },
             ]
         }
     ];

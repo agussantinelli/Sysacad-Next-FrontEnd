@@ -37,7 +37,7 @@ export class CreateAnnouncementComponent {
         this.avisoService.crearAviso(this.aviso).subscribe({
             next: () => {
                 this.alertService.success('Aviso creado exitosamente.');
-                this.router.navigate(['/admin/avisos']);
+                this.router.navigate(['/admin/announcements']);
             },
             error: (err) => {
                 console.error('Error al crear aviso:', err);
@@ -48,6 +48,6 @@ export class CreateAnnouncementComponent {
     }
 
     cancel() {
-        this.router.navigate(['/admin/avisos']);
+        this.router.navigate(['/admin/announcements']);
     }
 }

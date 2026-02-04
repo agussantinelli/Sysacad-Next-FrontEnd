@@ -70,31 +70,33 @@ export class DashboardComponent implements OnInit {
         {
             title: 'Administración Académica',
             options: [
-                { title: 'Carreras', icon: 'school', route: '/admin/carreras' },
-                { title: 'Facultades', icon: 'domain', route: '/admin/facultades' },
-                { title: 'Planes de Estudio', icon: 'map', route: '/admin/planes' },
-                { title: 'Materias', icon: 'book', route: '/admin/materias' }
+                { title: 'Carreras', icon: 'school', route: '/admin/careers' },
+                { title: 'Facultades', icon: 'domain', route: '/admin/faculties' },
+                { title: 'Planes de Estudio', icon: 'map', route: '/admin/study-plans' },
+                { title: 'Materias', icon: 'book', route: '/admin/subjects' }
             ]
         },
         {
             title: 'Gestión Institucional',
             options: [
-                { title: 'Usuarios', icon: 'group', route: '/admin/usuarios' },
-                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscripciones' }
+                { title: 'Usuarios', icon: 'group', route: '/admin/users' },
+                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscriptions' },
+                { title: 'Matricular Alumno', icon: 'person_add', route: '/admin/enroll-student' }
             ]
         },
         {
             title: 'Gestión de Exámenes',
             options: [
-                { title: 'Mesas de Examen', icon: 'assignment', route: '/admin/mesas' }
+                { title: 'Mesas de Examen', icon: 'assignment', route: '/admin/exam-tables' },
+                { title: 'Estadísticas', icon: 'bar_chart', route: '/admin/exam-statistics' }
             ]
         },
         {
             title: 'Trámites y Comunicación',
             options: [
-                { title: 'Solicitudes Certificados', icon: 'badge', route: '/admin/certificados' },
-                { title: 'Avisos', icon: 'notifications', route: '/admin/avisos' },
-                { title: 'Calendario Académico', icon: 'calendar_month', route: '/admin/calendario' }
+                { title: 'Solicitudes Certificados', icon: 'badge', route: '/admin/certificate-requests' },
+                { title: 'Avisos', icon: 'notifications', route: '/admin/announcements' },
+                { title: 'Calendario Académico', icon: 'calendar_month', route: '/admin/calendar' }
             ]
         }
     ];

@@ -150,18 +150,60 @@ export const routes: Routes = [
     },
     // Admin Modules
     {
-        path: 'admin/certificados',
+        path: 'admin/certificate-requests',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/admin/reports/reports.component').then(m => m.ReportsComponent)
     },
     {
-        path: 'admin/avisos',
+        path: 'admin/announcements',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/announcements/announcements.component').then(m => m.AnnouncementsComponent)
     },
     {
-        path: 'admin/avisos/crear',
+        path: 'admin/announcements/create',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/announcements/create-announcement/create-announcement.component').then(m => m.CreateAnnouncementComponent)
+    },
+    {
+        path: 'admin/enroll-student',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/exam-statistics',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/professor/exam-statistics/professor-exam-statistics.component').then(m => m.ProfessorExamStatisticsComponent)
+    },
+    {
+        path: 'admin/careers',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/faculties',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/study-plans',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/subjects',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/users',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/inscriptions',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/exam-tables',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/calendar',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
     },
 ];

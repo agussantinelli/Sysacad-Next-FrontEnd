@@ -103,7 +103,7 @@ export class AnnouncementsComponent implements OnInit {
     }
 
     goToCreate() {
-        this.router.navigate(['/admin/avisos/crear']);
+        this.router.navigate(['/admin/announcements/create']);
     }
 
     toggleState(aviso: AvisoResponse) {
