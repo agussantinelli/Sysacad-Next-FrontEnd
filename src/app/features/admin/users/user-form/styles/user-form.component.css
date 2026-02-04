@@ -106,3 +106,9 @@
 .required {
     color: #ef4444;
 }
+
+.error-msg {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
