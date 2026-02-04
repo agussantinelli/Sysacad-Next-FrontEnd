@@ -1,0 +1,111 @@
+<app-page-layout title="Gestión de Usuarios">
+    <div class="users-container">
+
+        <!-- Header Actions -->
+        <div class="users-header">
+            <div class="filters">
+                <!-- Placeholder for future search/filter -->
+            </div>
+            <button class="btn-create" (click)="goToCreate()">
+                <span class="material-icons">person_add</span>
+                Crear Usuario
+            </button>
+        </div>
+
+        @if (isLoading) {
+        <app-loading-spinner></app-loading-spinner>
+        } @else {
+        <div class="table-card">
+            <div class="table-responsive">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>DNI / Legajo</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (usuarios.length === 0) {
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                No hay usuarios registrados.
+                            </td>
+                        </tr>
+                        } @else {
+                        @for (user of usuarios; track user.id) {
+                        <tr>
+                            <!-- Profile Column -->
+                            <td>
+                                <div class="profile-cell">
+                                    @if (user.fotoPerfil) {
+                                    <img [src]="getProfileImageUrl(user.fotoPerfil)" alt="Avatar" class="table-avatar">
+                                    } @else {
+                                    <div class="avatar-placeholder">
+                                        {{ user.nombre.charAt(0).toUpperCase() }}
+                                    </div>
+                                    }
+                                    <div class="user-info">
+                                        <span class="user-name">{{ user.nombre }} {{ user.apellido }}</span>
+                                        <span class="user-email">{{ user.mail }}</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <!-- ID Column -->
+                            <td>
+                                <div class="user-info">
+                                    <span class="user-name">{{ user.dni }}</span>
+                                    @if(user.legajo) {
+                                    <span class="user-email">{{ user.legajo }}</span>
+                                    }
+                                </div>
+                            </td>
+
+                            <!-- Role Column -->
+                            <td>
+                                {{ user.rol }}
+                            </td>
+
+                            <!-- Status Column -->
+                            <td>
+                                <span class="status-badge" [class.activo]="user.estado === 'ACTIVO'"
+                                    [class.inactivo]="user.estado === 'INACTIVO'">
+                                    <span class="material-icons" style="font-size: 14px;">
+                                        {{ user.estado === 'ACTIVO' ? 'check_circle' : 'cancel' }}
+                                    </span>
+                                    {{ user.estado }}
+                                </span>
+                            </td>
+
+                            <!-- Actions Column -->
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-icon-action" title="Editar" (click)="editUser(user)">
+                                        <span class="material-icons">edit</span>
+                                    </button>
+
+                                    @if (user.estado === 'ACTIVO') {
+                                    <button class="btn-icon-action delete" title="Deshabilitar"
+                                        (click)="toggleState(user)">
+                                        <span class="material-icons">block</span>
+                                    </button>
+                                    } @else {
+                                    <button class="btn-icon-action" title="Habilitar" (click)="toggleState(user)">
+                                        <span class="material-icons">check_circle</span>
+                                    </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+    </div>
+</app-page-layout>
