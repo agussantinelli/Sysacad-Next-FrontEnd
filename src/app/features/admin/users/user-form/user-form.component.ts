@@ -87,9 +87,10 @@ export class UserFormComponent implements OnInit {
                     this.alertService.success('Usuario actualizado correctamente.');
                     this.router.navigate(['/admin/users']);
                 },
-                error: (err) => {
+                error: (err: any) => {
                     console.error('Error updating user:', err);
-                    this.alertService.error('Error al actualizar usuario.');
+                    const errorMessage = err.response?.data?.message || err.message || 'Error al actualizar usuario.';
+                    this.alertService.error(errorMessage);
                     this.isLoading = false;
                 }
             });
@@ -100,9 +101,10 @@ export class UserFormComponent implements OnInit {
                     this.alertService.success('Usuario creado correctamente.');
                     this.router.navigate(['/admin/users']);
                 },
-                error: (err) => {
+                error: (err: any) => {
                     console.error('Error creating user:', err);
-                    this.alertService.error('Error al crear usuario.');
+                    const errorMessage = err.response?.data?.message || err.message || 'Error al crear usuario.';
+                    this.alertService.error(errorMessage);
                     this.isLoading = false;
                 }
             });
