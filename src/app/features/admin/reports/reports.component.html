@@ -1,0 +1,49 @@
+<app-page-layout title="Historial de Certificados" icon="history_edu">
+    <div class="reports-container">
+        @if (isLoading) {
+        <app-loading-spinner message="Cargando historial..."></app-loading-spinner>
+        } @else if (error) {
+        <app-alert-message type="error" [message]="error" (close)="error = null"></app-alert-message>
+        } @else {
+
+        @if (reports.length === 0) {
+        <div class="empty-state">
+            <span class="material-icons">history_off</span>
+            <h3>No hay historial de descargas</h3>
+            <p>Todavía no se han generado certificados en el sistema.</p>
+        </div>
+        } @else {
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Legajo</th>
+                        <th>Alumno</th>
+                        <th>Email</th>
+                        <th>Tipo Certificado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (report of reports; track $index) {
+                    <tr>
+                        <td>{{ report.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+                        <td>
+                            <span class="font-medium font-mono">{{ report.legajo }}</span>
+                        </td>
+                        <td class="font-semibold">{{ report.apellido }}, {{ report.nombre }}</td>
+                        <td class="text-sm text-gray-500">{{ report.mail }}</td>
+                        <td>
+                            <span class="badge badge-cert">
+                                {{ report.tipoCertificado }}
+                            </span>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+        }
+    </div>
+</app-page-layout>
