@@ -82,13 +82,15 @@ export class NavbarComponent implements OnInit {
             title: 'Institución',
             options: [
                 { title: 'Usuarios', icon: 'group', route: '/admin/users' },
-                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscriptions' }
+                { title: 'Inscripciones', icon: 'app_registration', route: '/admin/inscriptions' },
+                { title: 'Matricular Alumno', icon: 'person_add', route: '/admin/enroll-student' }
             ]
         },
         {
             title: 'Exámenes',
             options: [
-                { title: 'Mesas', icon: 'assignment', route: '/admin/exam-tables' }
+                { title: 'Mesas', icon: 'assignment', route: '/admin/exam-tables' },
+                { title: 'Estadísticas', icon: 'bar_chart', route: '/admin/exam-statistics' }
             ]
         },
         {

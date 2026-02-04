@@ -192,7 +192,18 @@ export const routes: Routes = [
     },
     {
         path: 'admin/users',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/users/users.component').then(m => m.UsersComponent)
+    },
+    {
+        path: 'admin/users/create',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/users/user-form/user-form.component').then(m => m.UserFormComponent)
+    },
+    {
+        path: 'admin/users/edit/:id',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/users/user-form/user-form.component').then(m => m.UserFormComponent)
     },
     {
         path: 'admin/inscriptions',
@@ -204,6 +215,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin/calendar',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/student/calendar/calendar.component').then(m => m.CalendarComponent)
     },
 ];

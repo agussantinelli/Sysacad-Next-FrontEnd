@@ -40,7 +40,7 @@ export class UserFormComponent implements OnInit {
         // Default values for required fields not in form minimally
         fechaNacimiento: new Date().toISOString().split('T')[0], // Default today
         fechaIngreso: new Date().toISOString().split('T')[0],
-        genero: Genero.OTRO,
+        genero: Genero.M,
         telefono: '',
         direccion: '',
         ciudad: '',
