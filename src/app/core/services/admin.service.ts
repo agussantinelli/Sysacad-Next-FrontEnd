@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest, AdminInscripcionRequest } from '@core/models/admin.models';
+import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest, AdminInscripcionRequest, FacultadAdminDTO, FacultadRequest, CarreraAdminDTO, PlanDetalleDTO, MesaAdminDTO, MesaExamenRequest, DetalleMesaRequest } from '@core/models/admin.models';
 import { FacultadResponse } from '@core/models/facultad.models';
 import { CarreraResponse } from '@core/models/carrera.models';
 import { PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
@@ -121,6 +121,62 @@ export class AdminService {
         return from(axiosClient.get<MesaExamenDisponibleDTO[]>('/admin/inscripcion/examen/mesas', {
             params: { idAlumno, idMateria }
         })).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getAllFacultades(): Observable<FacultadAdminDTO[]> {
+        return from(axiosClient.get<FacultadAdminDTO[]>('/admin/facultades')).pipe(
+            map(response => response.data)
+        );
+    }
+
+    createFacultad(request: FacultadRequest): Observable<void> {
+        return from(axiosClient.post<void>('/admin/facultades', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    deleteFacultad(id: string): Observable<void> {
+        return from(axiosClient.delete<void>(`/admin/facultades/${id}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    // --- Module: Careers ---
+    getAllCarreras(): Observable<CarreraAdminDTO[]> {
+        return from(axiosClient.get<CarreraAdminDTO[]>('/admin/carreras')).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getPlanDetalle(carreraId: string, anio: number): Observable<PlanDetalleDTO> {
+        return from(axiosClient.get<PlanDetalleDTO>(`/admin/carreras/${carreraId}/plan/${anio}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    // --- Module: Exam Tables ---
+    getAllMesasAdmin(): Observable<MesaAdminDTO[]> {
+        return from(axiosClient.get<MesaAdminDTO[]>('/admin/mesas')).pipe(
+            map(response => response.data)
+        );
+    }
+
+    crearTurno(request: MesaExamenRequest): Observable<void> {
+        return from(axiosClient.post<void>('/admin/mesas/turnos', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    agregarDetalleMesa(request: DetalleMesaRequest): Observable<void> {
+        return from(axiosClient.post<void>('/admin/mesas/detalles', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    eliminarDetalleMesa(idMesa: string, nroDetalle: number): Observable<void> {
+        return from(axiosClient.delete<void>(`/admin/mesas/${idMesa}/detalle/${nroDetalle}`)).pipe(
             map(response => response.data)
         );
     }
