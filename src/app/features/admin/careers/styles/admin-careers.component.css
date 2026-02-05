@@ -151,7 +151,6 @@
     border-radius: 4px;
 }
 
-/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -167,7 +166,6 @@
 }
 
 
-/* Plans Modal specific styles */
 .large-modal {
     max-width: 600px;
     width: 90%;
@@ -202,7 +200,6 @@
     align-items: center;
     padding: 1rem;
     background-color: var(--card-bg);
-    /* Fallback or specific variable */
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
@@ -248,20 +245,15 @@
 }
 
 .modal-content {
-    background: #0f0f0f;
-    /* Use a solid dark color to reduce transparency issues */
+    background: var(--bg-card);
     padding: 1.5rem;
     border-radius: 12px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    /* Stronger shadow */
-    border: 1px solid #333;
-    /* More visible border */
+    box-shadow: 0 4px 20px var(--shadow-color);
+    border: 1px solid var(--border-subtle);
     position: relative;
-    /* Ensure z-index works if needed */
     z-index: 1001;
-    /* Above overlay */
 }
 
 .modal-content h4 {
@@ -320,11 +312,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #1a1a1a;
-    /* Distinct background */
+    background-color: var(--bg-hover);
+    /* Use variable that adapts */
     border-radius: 8px;
-    border: 1px solid #444;
-    /* Visible border */
+    border: 1px solid var(--border-color);
+    /* Use variable */
     transition: border-color 0.2s;
 }
 
