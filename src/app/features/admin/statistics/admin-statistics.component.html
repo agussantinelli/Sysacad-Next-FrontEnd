@@ -1,0 +1,82 @@
+<app-page-layout title="Estadísticas Generales" icon="bar_chart">
+    <div class="stats-container">
+
+        <!-- Optional Filters Placeholder -->
+        <!-- <div class="filters-bar">...</div> -->
+
+        @if (isLoading) {
+        <app-loading-spinner message="Calculando estadísticas..."></app-loading-spinner>
+        } @else if (stats) {
+
+        <h3 class="section-header">Población Estudiantil</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">groups</span>
+                    <span>Total Alumnos</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadTotalAlumnos }}</div>
+                <div class="stat-label">Alumnos registrados en el sistema</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">school</span>
+                    <span>Regulares</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadRegulares }}</div>
+                <div class="stat-label">Alumnos cursando regularmente</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">emoji_events</span>
+                    <span>Promocionados</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadPromocionados }}</div>
+                <div class="stat-label">Materias promocionadas</div>
+            </div>
+        </div>
+
+        <h3 class="section-header">Rendimiento en Exámenes</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">assignment_turned_in</span>
+                    <span>Inscriptos a Examen</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadTotalInscriptosExamen }}</div>
+                <div class="stat-label">Total inscripciones a mesas</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">check_circle</span>
+                    <span>Aprobados</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadAprobadosExamen }}</div>
+                <div class="stat-label">Exámenes aprobados</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">cancel</span>
+                    <span>Desaprobados</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadDesaprobadosExamen }}</div>
+                <div class="stat-label">Exámenes desaprobados</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">trending_up</span>
+                    <span>Promedio General</span>
+                </div>
+                <div class="stat-value">{{ stats.notaPromedio | number:'1.2-2' }}</div>
+                <div class="stat-label">Promedio de notas de exámenes</div>
+            </div>
+        </div>
+
+        }
+    </div>
+</app-page-layout>
