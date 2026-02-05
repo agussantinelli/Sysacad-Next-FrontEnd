@@ -12,10 +12,28 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Fecha</th>
+                        <th (click)="onSort('fecha')" class="sortable-header">
+                            Fecha
+                            @if (sortColumn === 'fecha') {
+                            <span class="material-icons sort-icon">{{ sortDirection === 'asc' ? 'arrow_upward' :
+                                'arrow_downward' }}</span>
+                            }
+                        </th>
                         <th>Tipo</th>
-                        <th>Alumno</th>
-                        <th>Materia</th>
+                        <th (click)="onSort('alumno')" class="sortable-header">
+                            Alumno
+                            @if (sortColumn === 'alumno') {
+                            <span class="material-icons sort-icon">{{ sortDirection === 'asc' ? 'arrow_upward' :
+                                'arrow_downward' }}</span>
+                            }
+                        </th>
+                        <th (click)="onSort('materia')" class="sortable-header">
+                            Materia
+                            @if (sortColumn === 'materia') {
+                            <span class="material-icons sort-icon">{{ sortDirection === 'asc' ? 'arrow_upward' :
+                                'arrow_downward' }}</span>
+                            }
+                        </th>
                         <th>Comisión</th>
                         <th>Estado</th>
                         <th>Acciones</th>

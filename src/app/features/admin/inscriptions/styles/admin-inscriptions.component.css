@@ -30,6 +30,23 @@ th {
     border-bottom: 2px solid var(--border-color);
 }
 
+.sortable-header {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.sortable-header:hover {
+    background-color: var(--bg-page);
+    color: var(--utn-blue);
+}
+
+.sort-icon {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
 td {
     padding: 1rem;
     color: var(--text-primary);

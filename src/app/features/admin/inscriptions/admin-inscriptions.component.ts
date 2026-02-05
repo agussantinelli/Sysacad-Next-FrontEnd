@@ -32,12 +32,60 @@ export class AdminInscriptionsComponent implements OnInit {
             next: (data) => {
                 this.inscripciones = data;
                 this.isLoading = false;
+                // Apply initial sort if set, or default
+                if (this.sortColumn) {
+                    this.sortData();
+                }
             },
             error: (err) => {
                 console.error('Error loading inscriptions', err);
                 this.alertService.error('Error al cargar el listado de inscripciones.');
                 this.isLoading = false;
             }
+        });
+    }
+
+    // Sorting
+    sortColumn: string = '';
+    sortDirection: 'asc' | 'desc' = 'asc';
+
+    onSort(column: string) {
+        if (this.sortColumn === column) {
+            this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            this.sortColumn = column;
+            this.sortDirection = 'asc';
+        }
+        this.sortData();
+    }
+
+    sortData() {
+        if (!this.sortColumn) return;
+
+        this.inscripciones.sort((a, b) => {
+            let valA: any = '';
+            let valB: any = '';
+
+            switch (this.sortColumn) {
+                case 'fecha':
+                    valA = new Date(a.fechaInscripcion).getTime();
+                    valB = new Date(b.fechaInscripcion).getTime();
+                    break;
+                case 'alumno':
+                    valA = (a.apellido + ' ' + a.nombre).toLowerCase();
+                    valB = (b.apellido + ' ' + b.nombre).toLowerCase();
+                    break;
+                case 'materia':
+                    valA = a.nombreMateria.toLowerCase();
+                    valB = b.nombreMateria.toLowerCase();
+                    break;
+                default:
+                    return 0;
+            }
+
+            if (valA < valB) return this.sortDirection === 'asc' ? -1 : 1;
+            if (valA > valB) return this.sortDirection === 'asc' ? 1 : -1;
+            return 0;
         });
     }
 
