@@ -47,6 +47,7 @@
                     <label for="tipo">Tipo de Inscripción</label>
                     <select id="tipo" name="tipo" [(ngModel)]="tipo" (change)="onTipoChange()" required
                         class="form-control" [disabled]="!selectedStudent">
+                        <option [ngValue]="null" disabled selected>Seleccione una opción</option>
                         <option value="CURSADA">Cursada</option>
                         <option value="EXAMEN">Examen Final</option>
                     </select>

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
-import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
 import { UsuarioService } from '@core/services/usuario.service';
@@ -16,7 +15,7 @@ import { AdminInscripcionRequest } from '@core/models/admin.models';
 @Component({
     selector: 'app-inscription-form',
     standalone: true,
-    imports: [CommonModule, FormsModule, PageLayoutComponent, LoadingSpinnerComponent],
+    imports: [CommonModule, FormsModule, PageLayoutComponent],
     templateUrl: './inscription-form.component.html',
     styleUrl: './styles/inscription-form.component.css'
 })
@@ -39,7 +38,7 @@ export class InscriptionFormComponent implements OnInit {
     mesas: MesaExamenDisponibleDTO[] = [];
 
     // Form Selection
-    tipo: 'CURSADA' | 'EXAMEN' = 'CURSADA';
+    tipo: 'CURSADA' | 'EXAMEN' | null = null;
     selectedMateriaId = '';
     selectedComisionId = '';
     selectedMesaDetalleId = '';
@@ -89,7 +88,7 @@ export class InscriptionFormComponent implements OnInit {
         this.materias = [];
         this.comisiones = [];
         this.mesas = [];
-        if (this.selectedStudent) {
+        if (this.selectedStudent && this.tipo) {
             this.loadMaterias();
         }
     }
@@ -99,7 +98,7 @@ export class InscriptionFormComponent implements OnInit {
     }
 
     loadMaterias() {
-        if (!this.selectedStudent) return;
+        if (!this.selectedStudent || !this.tipo) return;
         this.isLoading = true;
 
         const request = this.tipo === 'CURSADA'
@@ -161,7 +160,7 @@ export class InscriptionFormComponent implements OnInit {
     }
 
     onSubmit() {
-        if (!this.selectedStudent) return;
+        if (!this.selectedStudent || !this.tipo) return;
 
         const request: AdminInscripcionRequest = {
             idAlumno: this.selectedStudent.id,

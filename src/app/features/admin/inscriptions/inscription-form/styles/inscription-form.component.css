@@ -65,25 +65,57 @@ label {
     border-style: dashed;
 }
 
-/* Search Box specific */
+select.form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    select.form-control {
+        color-scheme: dark;
+    }
+}
+
+select.form-control option {
+    background-color: #1e1e1e;
+    background-color: var(--surface-card);
+    color: var(--text-primary);
+    padding: 12px;
+}
+
 .search-box {
     display: flex;
-    gap: 0.75rem;
+    gap: 0;
     align-items: stretch;
-    /* Ensure button same height as input */
     margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .search-box .form-control {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    z-index: 1;
+    border-color: rgb(255, 255, 255);
+}
+
+.search-box .form-control:focus {
+    z-index: 2;
 }
 
 .btn-search {
     background: var(--utn-blue);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
+    /* Rounded only on right */
     padding: 0 1.5rem;
     display: inline-flex;
     align-items: center;
@@ -91,7 +123,6 @@ label {
     cursor: pointer;
     transition: background-color 0.2s;
     flex-shrink: 0;
-    /* Prevent shrinking */
 }
 
 .btn-search:hover:not(:disabled) {
@@ -101,6 +132,7 @@ label {
 .btn-search:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    background-color: var(--border-input);
 }
 
 /* Results List */
@@ -227,164 +259,4 @@ label {
     color: var(--text-secondary);
     margin-bottom: 1rem;
     font-style: italic;
-}
-
-.form-card {
-    background: var(--surface-card);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--border-color);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-input);
-    border-radius: 8px;
-    background: var(--bg-input);
-    color: var(--text-primary);
-    font-size: 0.95rem;
-    transition: all 0.2s;
-}
-
-.form-control:focus {
-    border-color: var(--utn-blue);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.1);
-}
-
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.btn-primary,
-.btn-secondary {
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-}
-
-.btn-primary {
-    background-color: var(--utn-blue);
-    color: white;
-}
-
-.btn-primary:hover:not(:disabled) {
-    background-color: #004a7c;
-}
-
-.btn-primary:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-    background-color: var(--bg-page);
-    color: var(--text-primary);
-}
-
-.hint-text {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-
-    /* Reuse common form styles but ensure specific search styles are present if not global */
-    h3 {
-        margin-bottom: 1rem;
-        font-size: 1.1rem;
-        color: var(--utn-blue);
-        border-bottom: 1px solid var(--border-subtle);
-        padding-bottom: 0.5rem;
-    }
-
-    /* Search Box */
-    .search-box {
-        display: flex;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .btn-search {
-        background: var(--utn-blue);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        width: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    .results-list {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1rem;
-        border: 1px solid var(--border-subtle);
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .results-list li {
-        padding: 0.75rem;
-        border-bottom: 1px solid var(--border-subtle);
-        cursor: pointer;
-        background: var(--bg-page);
-        color: var(--text-primary);
-    }
-
-    .results-list li:hover {
-        background: var(--hover-bg);
-    }
-
-    /* Selected Student */
-    .selected-student {
-        margin-bottom: 1.5rem;
-        background: rgba(16, 185, 129, 0.1);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        border-radius: 8px;
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .check-icon {
-        color: #10b981;
-    }
-
-    .student-name {
-        font-weight: 600;
-        color: var(--text-primary);
-    }
-
-    .student-detail {
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-    }
 }
