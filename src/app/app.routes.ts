@@ -192,7 +192,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin/commissions',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/admin/commissions/admin-commissions.component').then(m => m.AdminCommissionsComponent)
     },
     {
         path: 'admin/subjects',
