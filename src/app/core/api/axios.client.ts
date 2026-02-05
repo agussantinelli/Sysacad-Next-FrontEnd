@@ -57,7 +57,13 @@ axiosClient.interceptors.response.use(
                 localStorage.removeItem('user');
                 localStorage.removeItem('bootId');
                 window.location.href = '/login';
+                window.location.href = '/login';
             }
+        }
+
+        if (error.response && error.response.status === 500) {
+            const message = error.response.data?.message || 'Error interno del servidor';
+            window.dispatchEvent(new CustomEvent('sysacad-error', { detail: message }));
         }
 
         return Promise.reject(error);

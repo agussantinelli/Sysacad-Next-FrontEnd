@@ -13,6 +13,14 @@ export class AlertService {
     private alertSubject = new BehaviorSubject<Alert | null>(null);
     alert$ = this.alertSubject.asObservable();
 
+    constructor() {
+        window.addEventListener('sysacad-error', (event: any) => {
+            if (event.detail) {
+                this.error(event.detail);
+            }
+        });
+    }
+
     success(message: string) {
         this.alertSubject.next({ type: 'success', message });
     }
