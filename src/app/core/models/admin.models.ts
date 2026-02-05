@@ -65,6 +65,7 @@ export interface MateriaDetalleDTO {
     nivel: number;
     horasCursado: number; // Short
     tipoMateria: string;
+    esElectiva: boolean;
     correlativas: string[];
 }
 

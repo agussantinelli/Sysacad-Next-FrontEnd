@@ -44,7 +44,7 @@
                                     <td>{{ materia.horasCursado }} hs</td>
                                     <td>{{ materia.tipoMateria }}</td>
                                     <td>
-                                        @if (materia.tipoMateria === 'Electiva') {
+                                        @if (materia.esElectiva) {
                                         <span class="badge-elective">Sí</span>
                                         } @else {
                                         <span class="text-muted">No</span>
