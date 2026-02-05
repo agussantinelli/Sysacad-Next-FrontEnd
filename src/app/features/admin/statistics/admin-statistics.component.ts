@@ -1,16 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
-import { AdminEstadisticasDTO } from '@core/models/admin.models';
+import { AdminEstadisticasDTO, FacultadAdminDTO, CarreraAdminDTO } from '@core/models/admin.models';
 import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
     selector: 'app-admin-statistics',
     standalone: true,
-    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, NgxChartsModule],
+    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, NgxChartsModule, FormsModule],
     templateUrl: './admin-statistics.component.html',
     styleUrl: './styles/admin-statistics.component.css'
 })
@@ -20,6 +21,14 @@ export class AdminStatisticsComponent implements OnInit {
 
     stats: AdminEstadisticasDTO | null = null;
     isLoading = false;
+
+    // Filters
+    selectedAnio: number | null = new Date().getFullYear();
+    selectedFacultad: string = '';
+    selectedCarrera: string = '';
+
+    facultades: FacultadAdminDTO[] = [];
+    carreras: CarreraAdminDTO[] = [];
 
     // Charts Data
     examChartData: any[] = [];
@@ -41,13 +50,23 @@ export class AdminStatisticsComponent implements OnInit {
     };
 
     ngOnInit() {
+        this.loadFiltersData();
         this.loadStatistics();
+    }
+
+    loadFiltersData() {
+        // Load Faculties and Careers for filters
+        this.adminService.getAllFacultades().subscribe(data => this.facultades = data);
+        this.adminService.getAllCarreras().subscribe(data => this.carreras = data);
     }
 
     loadStatistics() {
         this.isLoading = true;
-        // Default call without filters for now
-        this.adminService.obtenerEstadisticas().subscribe({
+        this.adminService.obtenerEstadisticas(
+            this.selectedAnio || undefined,
+            this.selectedFacultad || undefined,
+            this.selectedCarrera || undefined
+        ).subscribe({
             next: (data) => {
                 this.stats = data;
                 this.processChartData(data);
@@ -59,6 +78,10 @@ export class AdminStatisticsComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+    }
+
+    applyFilters() {
+        this.loadStatistics();
     }
 
     processChartData(data: AdminEstadisticasDTO) {
