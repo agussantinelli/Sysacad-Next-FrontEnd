@@ -162,3 +162,9 @@ export interface ComisionRequest {
     salon: string; // inferred from "nombreSalon" or similar
     idCarrera: string; // Usually required to link commission to a structure
 }
+
+export interface SimpleMateriaDTO {
+    id: string; // UUID
+    nombre: string;
+    anio: number; // or nivel?
+}
