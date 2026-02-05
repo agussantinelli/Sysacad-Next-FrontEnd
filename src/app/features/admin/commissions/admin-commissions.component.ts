@@ -27,7 +27,7 @@ export class AdminCommissionsComponent implements OnInit {
     selectedComision: AdminComisionDTO | null = null;
 
     // Modal State
-    showCreateModal = false;
+    showModal = false;
     newComision: ComisionRequest = {
         nombre: '',
         turno: 'Noche',
@@ -62,7 +62,7 @@ export class AdminCommissionsComponent implements OnInit {
 
     // Modal Actions
     openCreateModal() {
-        this.showCreateModal = true;
+        this.showModal = true;
         this.newComision = {
             nombre: '',
             turno: 'Noche',
@@ -73,7 +73,7 @@ export class AdminCommissionsComponent implements OnInit {
     }
 
     closeCreateModal() {
-        this.showCreateModal = false;
+        this.showModal = false;
     }
 
     createComision() {
