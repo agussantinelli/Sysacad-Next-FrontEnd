@@ -16,7 +16,7 @@ import { RolUsuario } from '@core/enums/usuario.enums';
 @Component({
     selector: 'app-enroll-student',
     standalone: true,
-    imports: [CommonModule, FormsModule, PageLayoutComponent, LoadingSpinnerComponent],
+    imports: [CommonModule, FormsModule, PageLayoutComponent],
     templateUrl: './enroll-student.component.html',
     styleUrl: './styles/enroll-student.component.css'
 })

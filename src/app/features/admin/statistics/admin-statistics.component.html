@@ -1,9 +1,5 @@
 <app-page-layout title="Estadísticas Generales" icon="bar_chart">
     <div class="stats-container">
-
-        <!-- Optional Filters Placeholder -->
-        <!-- <div class="filters-bar">...</div> -->
-
         @if (isLoading) {
         <app-loading-spinner message="Calculando estadísticas..."></app-loading-spinner>
         } @else if (stats) {
@@ -26,6 +22,15 @@
                 </div>
                 <div class="stat-value">{{ stats.cantidadRegulares }}</div>
                 <div class="stat-label">Alumnos cursando regularmente</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">sentiment_very_dissatisfied</span>
+                    <span>Libres</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadLibres }}</div>
+                <div class="stat-label">Alumnos en condición de libre</div>
             </div>
 
             <div class="stat-card">
@@ -65,6 +70,15 @@
                 </div>
                 <div class="stat-value">{{ stats.cantidadDesaprobadosExamen }}</div>
                 <div class="stat-label">Exámenes desaprobados</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-header">
+                    <span class="material-icons">event_busy</span>
+                    <span>Ausentes</span>
+                </div>
+                <div class="stat-value">{{ stats.cantidadAusentesExamen }}</div>
+                <div class="stat-label">Ausentes en exámenes</div>
             </div>
 
             <div class="stat-card">
