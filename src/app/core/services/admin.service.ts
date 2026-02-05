@@ -35,4 +35,10 @@ export class AdminService {
             map(response => response.data)
         );
     }
+
+    crearInscripcion(data: any): Observable<any> {
+        return from(axiosClient.post<any>('/admin/inscripciones', data)).pipe(
+            map(response => response.data)
+        );
+    }
 }
