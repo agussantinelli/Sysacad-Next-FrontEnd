@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
             title: 'Gestión de Exámenes',
             options: [
                 { title: 'Mesas de Examen', icon: 'assignment', route: '/admin/exam-tables' },
-                { title: 'Estadísticas', icon: 'bar_chart', route: '/admin/exam-statistics' }
+                { title: 'Estadísticas', icon: 'bar_chart', route: '/admin/statistics' }
             ]
         },
         {

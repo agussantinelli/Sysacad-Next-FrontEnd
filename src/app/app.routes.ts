@@ -207,7 +207,13 @@ export const routes: Routes = [
     },
     {
         path: 'admin/inscriptions',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/inscriptions/admin-inscriptions.component').then(m => m.AdminInscriptionsComponent)
+    },
+    {
+        path: 'admin/statistics',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/statistics/admin-statistics.component').then(m => m.AdminStatisticsComponent)
     },
     {
         path: 'admin/exam-tables',

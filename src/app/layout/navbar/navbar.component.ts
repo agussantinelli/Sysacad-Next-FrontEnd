@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
             title: 'Exámenes',
             options: [
                 { title: 'Mesas', icon: 'assignment', route: '/admin/exam-tables' },
-                { title: 'Estadísticas', icon: 'bar_chart', route: '/admin/exam-statistics' }
+                { title: 'Estadísticas', icon: 'bar_chart', route: '/admin/statistics' }
             ]
         },
         {
