@@ -91,6 +91,42 @@
             </div>
         </div>
 
+        <!-- Charts Section -->
+        <h3 class="section-header">Gráficos</h3>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h4>Resultados de Exámenes</h4>
+                <div class="chart-wrapper">
+                    <ngx-charts-pie-chart [scheme]="examColorScheme" [results]="examChartData" [gradient]="true"
+                        [legend]="false" [doughnut]="true" [labels]="false">
+                    </ngx-charts-pie-chart>
+                </div>
+                <div class="custom-legend">
+                    <div class="legend-item">
+                        <span class="color-dot" style="background-color: #10b981;"></span>
+                        <span>Aprobados</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="color-dot" style="background-color: #ef4444;"></span>
+                        <span>Desaprobados</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="color-dot" style="background-color: #f59e0b;"></span>
+                        <span>Ausentes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h4>Condición de Alumnos</h4>
+                <div class="chart-wrapper">
+                    <ngx-charts-bar-vertical [scheme]="studentColorScheme" [results]="studentChartData"
+                        [gradient]="true" [xAxis]="true" [yAxis]="true" [showXAxisLabel]="false" [showYAxisLabel]="true"
+                        yAxisLabel="Cantidad">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+        </div>
         }
     </div>
 </app-page-layout>
