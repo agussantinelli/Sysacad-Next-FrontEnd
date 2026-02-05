@@ -60,6 +60,9 @@
                     <span class="material-icons">arrow_back</span> Volver a Turnos
                 </button>
                 <h3>Mesas: {{ selectedTurno }}</h3>
+                <button class="btn-primary" (click)="openAddModal()">
+                    <span class="material-icons">add_circle</span> Agregar Mesa
+                </button>
             </div>
 
             <div class="table-responsive">
@@ -99,4 +102,103 @@
         }
 
     </div>
+
+    <!-- Add Exam Modal -->
+    @if (showAddModal) {
+    <div class="modal-overlay" (click)="closeAddModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h4>Agregar Mesa de Examen</h4>
+
+            <!-- Step 1: Subject Search -->
+            @if (addStep === 'SUBJECT') {
+            <div class="form-group">
+                <label>Carrera</label>
+                <select [(ngModel)]="selectedCarreraId" class="form-control" (change)="foundSubjects = []">
+                    <option value="" disabled>Seleccione Carrera...</option>
+                    @for (carrera of carreras; track carrera.id) {
+                    <option [value]="carrera.id">{{ carrera.nombre }}</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Buscar Materia</label>
+                <div class="search-box">
+                    <input type="text" [(ngModel)]="subjectQuery" class="form-control"
+                        placeholder="Nombre de materia...">
+                    <button class="btn-primary" (click)="searchSubjects()"
+                        [disabled]="!selectedCarreraId || !subjectQuery">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+
+            <div class="results-list">
+                @for (subj of foundSubjects; track subj.id) {
+                <div class="result-item" (click)="selectSubject(subj)">
+                    <span>{{ subj.nombre }} (Año {{ subj.anio }})</span>
+                    <span class="material-icons">chevron_right</span>
+                </div>
+                } @empty {
+                @if (subjectQuery && !isLoading) { <p class="text-secondary">No se encontraron materias.</p> }
+                }
+            </div>
+            }
+
+            <!-- Step 2: Date & Time -->
+            @if (addStep === 'DATETIME') {
+            <div class="selected-info mb-2">
+                <strong>Materia:</strong> {{ selectedSubject?.nombre }}
+            </div>
+
+            <div class="form-group">
+                <label>Fecha del Examen</label>
+                <input type="date" [(ngModel)]="examDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Hora</label>
+                <input type="time" [(ngModel)]="examTime" class="form-control">
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="addStep = 'SUBJECT'">Atrás</button>
+                <button class="btn-primary" (click)="findPresidents()" [disabled]="!examDate || !examTime || isLoading">
+                    Siguiente (Buscar Presidente)
+                </button>
+            </div>
+            }
+
+            <!-- Step 3: Professor -->
+            @if (addStep === 'PROFESSOR') {
+            <div class="selected-info mb-2">
+                <strong>Fecha:</strong> {{ examDate | date:'dd/MM/yyyy' }} {{ examTime }}
+            </div>
+
+            <h5>Seleccionar Presidente</h5>
+            <div class="professors-list">
+                @for (prof of availablePresidents; track prof.id) {
+                <div class="professor-item" [class.selected]="selectedPresidentId === prof.id"
+                    (click)="selectPresident(prof.id)">
+                    <div>
+                        <span class="prof-name">{{ prof.apellido }}, {{ prof.nombre }}</span>
+                        <span class="prof-legajo">Legajo: {{ prof.legajo }}</span>
+                    </div>
+                    <span class="material-icons checkbox">
+                        {{ selectedPresidentId === prof.id ? 'radio_button_checked' : 'radio_button_unchecked' }}
+                    </span>
+                </div>
+                } @empty {
+                <p>No hay profesores disponibles en este horario.</p>
+                }
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="addStep = 'DATETIME'">Atrás</button>
+                <button class="btn-primary" (click)="saveExam()" [disabled]="!selectedPresidentId || isLoading">
+                    Confirmar y Guardar
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+    }
 </app-page-layout>

@@ -305,8 +305,82 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     transition: all 0.2s;
 }
 
-.btn-outline:hover {
-    background: var(--bg-hover);
+
+
+/* Modal specific styles */
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.results-list,
+.professors-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.result-item,
+.professor-item {
+    background: var(--bg-input);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.result-item:hover,
+.professor-item:hover {
+    background: var(--surface-card);
     border-color: var(--utn-blue);
+}
+
+.professor-item.selected {
+    border-color: var(--utn-blue);
+    background: rgba(0, 153, 230, 0.05);
+}
+
+.prof-name {
+    display: block;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.prof-legajo {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.checkbox {
     color: var(--utn-blue);
+}
+
+.selected-info {
+    background: var(--bg-hover);
+    padding: 0.75rem;
+    border-radius: 6px;
+    color: var(--text-primary);
+    border-left: 3px solid var(--utn-blue);
+}
+
+.modal-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
 }
