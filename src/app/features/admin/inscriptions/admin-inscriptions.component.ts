@@ -40,7 +40,7 @@ export class AdminInscriptionsComponent implements OnInit {
     }
 
     deleteInscription(item: AdminInscripcionDTO) {
-        if (!confirm(`¿Está seguro de eliminar la inscripción de ${item.nombreAlumno} en ${item.nombreMateria}? Esta acción no se puede deshacer.`)) {
+        if (!confirm(`¿Está seguro de eliminar la inscripción de ${item.nombre} ${item.apellido} en ${item.nombreMateria}? Esta acción no se puede deshacer.`)) {
             return;
         }
 

@@ -69,3 +69,28 @@ tr:hover td {
     padding: 3rem;
     color: var(--text-secondary);
 }
+
+/* Actions */
+.btn-icon-action {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-icon-action:hover {
+    background-color: var(--bg-page);
+    color: var(--utn-blue);
+    border-color: var(--border-subtle);
+}
+
+.btn-icon-action.delete:hover {
+    color: #ef4444;
+}
