@@ -1,0 +1,71 @@
+<app-page-layout title="Gestión de Universidades" icon="school">
+    <div class="content-container">
+
+        <!-- Create Form -->
+        <div class="card create-form">
+            <h3>Nueva Facultad/Universidad</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Ciudad</label>
+                    <input type="text" [(ngModel)]="newFacultad.ciudad" class="form-control" placeholder="Ej: Rosario">
+                </div>
+                <div class="form-group">
+                    <label>Provincia</label>
+                    <input type="text" [(ngModel)]="newFacultad.provincia" class="form-control"
+                        placeholder="Ej: Santa Fe">
+                </div>
+                <button class="btn-primary" (click)="create()"
+                    [disabled]="!newFacultad.ciudad || !newFacultad.provincia || isLoading">
+                    <span class="material-icons">add</span> Agregar
+                </button>
+            </div>
+        </div>
+
+        <!-- List -->
+        <div class="card list-card">
+            @if (isLoading) {
+            <app-loading-spinner></app-loading-spinner>
+            } @else {
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre Completo</th>
+                            <th>Ubicación</th>
+                            <th>Matriculados</th>
+                            <th>Carreras</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (facultad of facultades; track facultad.id) {
+                        <tr>
+                            <td>{{ facultad.nombreCompleto }}</td>
+                            <td>{{ facultad.ciudad }}, {{ facultad.provincia }}</td>
+                            <td>{{ facultad.cantidadMatriculados }}</td>
+                            <td>
+                                <div class="tags">
+                                    @for (carrera of facultad.carreras; track carrera) {
+                                    <span class="tag">{{ carrera }}</span>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <button class="icon-btn delete" (click)="delete(facultad)" title="Eliminar">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                            </td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="5" class="empty-cell">No hay universidades registradas.</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            }
+        </div>
+
+    </div>
+</app-page-layout>
