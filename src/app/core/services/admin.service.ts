@@ -156,6 +156,18 @@ export class AdminService {
         );
     }
 
+    getCarrerasSimples(): Observable<CarreraResponse[]> {
+        return from(axiosClient.get<CarreraResponse[]>('/admin/carreras/simples')).pipe(
+            map(response => response.data)
+        );
+    }
+
+    asociarCarreraFacultad(carreraId: string, facultadId: string): Observable<void> {
+        return from(axiosClient.post<void>(`/admin/carreras/${carreraId}/facultades/${facultadId}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
     // --- Module: Exam Tables ---
     getAllMesasAdmin(): Observable<MesaAdminDTO[]> {
         return from(axiosClient.get<MesaAdminDTO[]>('/admin/mesas')).pipe(
