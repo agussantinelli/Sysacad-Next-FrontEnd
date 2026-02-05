@@ -410,12 +410,12 @@ FRONTEND_URL=http://localhost:4200
 | | Editar Perfil | ✅ | ✅ | ✅ |
 | **Dashboard** | Pantalla Principal | ✅ | ✅ | ✅ |
 | **Académico** | **Inscripciones** | | | |
-| | Inscripción a Cursado | ✅ | ❌ | ❌ |
-| | Inscripción a Examen | ✅ | ❌ | ❌ |
+| | Inscripción a Cursado | ✅ | ❌ | ✅ |
+| | Inscripción a Examen | ✅ | ❌ | ✅ |
 | | Mis Inscripciones | ✅ | ❌ | ❌ |
 | | **Consultas** | | | |
 | | Estado Académico | ✅ | ❌ | ❌ |
-| | Plan de Estudios | ✅ | ❌ | ❌ |
+| | Plan de Estudios | ✅ | ❌ | 🚧 |
 | | Cursado y Notas | ✅ | ❌ | ❌ |
 | | **Trámites** | | | |
 | | Certificado Regular | ✅ | ❌ | ❌ |
@@ -430,17 +430,17 @@ FRONTEND_URL=http://localhost:4200
 | | **Trámites** | | | |
 | | Certificado de Servicios | ❌ | ✅ | ❌ |
 | | **Exámenes** | | | |
-| | Mesas de Examen | ❌ | ❌ | ❌ |
-| | Estadísticas | ❌ | ✅ | ❌ |
+| | Mesas de Examen | ❌ | ✅ | ✅ |
+| | Estadísticas | ❌ | ✅ | ✅ |
 | **Administración** | **Académica** | | | |
-| | Carreras / Facultades | ❌ | ❌ | ❌ |
-| | Planes / Materias | ❌ | ❌ | ❌ |
+| | Carreras / Facultades | ❌ | ❌ | ✅ |
+| | Planes / Materias | ❌ | ❌ | 🚧 |
 | | **Institucional** | | | |
-| | Usuarios / Inscripciones | ❌ | ❌ | ❌ |
+| | Usuarios / Inscripciones | ❌ | ❌ | ✅ |
 | | **Exámenes** | | | |
-| | Mesas / Actas | ❌ | ❌ | ❌ |
+| | Mesas / Actas | ❌ | ❌ | ✅ |
 | | **Trámites** | | | |
-| | Certificados / Avisos | ❌ | ❌ | ❌ |
+| | Certificados / Avisos | ❌ | ❌ | 🚧 |
 
 
 <hr>
