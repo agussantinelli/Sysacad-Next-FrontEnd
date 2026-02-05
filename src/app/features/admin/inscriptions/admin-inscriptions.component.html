@@ -52,6 +52,9 @@
                         <td>{{ item.comision }}</td>
                         <td>{{ item.estado }}</td>
                         <td>
+                            <button class="btn-icon-action" title="Ver Perfil" (click)="goToProfile(item.idAlumno)">
+                                <span class="material-icons">visibility</span>
+                            </button>
                             <button class="btn-icon-action delete" title="Eliminar Inscripción"
                                 (click)="deleteInscription(item)">
                                 <span class="material-icons">delete</span>

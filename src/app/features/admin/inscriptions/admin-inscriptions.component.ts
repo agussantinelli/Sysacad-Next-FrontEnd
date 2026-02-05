@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AdminService } from '@core/services/admin.service';
@@ -16,6 +17,7 @@ import { AdminInscripcionDTO } from '@core/models/admin.models';
 export class AdminInscriptionsComponent implements OnInit {
     private adminService = inject(AdminService);
     private alertService = inject(AlertService);
+    private router = inject(Router);
 
     inscripciones: AdminInscripcionDTO[] = [];
     isLoading = false;
@@ -39,6 +41,10 @@ export class AdminInscriptionsComponent implements OnInit {
         });
     }
 
+    goToProfile(userId: string) {
+        this.router.navigate(['/admin/profile', userId]);
+    }
+
     deleteInscription(item: AdminInscripcionDTO) {
         if (!confirm(`¿Está seguro de eliminar la inscripción de ${item.nombre} ${item.apellido} en ${item.nombreMateria}? Esta acción no se puede deshacer.`)) {
             return;
@@ -55,6 +61,7 @@ export class AdminInscriptionsComponent implements OnInit {
             }
         });
     }
+
     getProfileImageUrl(relativePath: string): string {
         if (!relativePath) return '';
         if (relativePath.startsWith('http')) return relativePath;

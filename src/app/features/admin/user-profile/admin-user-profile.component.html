@@ -90,4 +90,9 @@
         <app-loading-spinner message="Cargando perfil..."></app-loading-spinner>
     </div>
     }
+
+    @if (showModal) {
+    <app-confirmation-modal [title]="modalTitle" [message]="modalMessage" (confirm)="onModalConfirm()"
+        (cancel)="onModalCancel()"></app-confirmation-modal>
+    }
 </div>

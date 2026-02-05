@@ -6,11 +6,12 @@ import { UsuarioService } from '@core/services/usuario.service';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertService } from '@core/services/alert.service';
+import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 
 @Component({
     selector: 'app-admin-user-profile',
     standalone: true,
-    imports: [CommonModule, LoadingSpinnerComponent],
+    imports: [CommonModule, LoadingSpinnerComponent, ConfirmationModalComponent],
     templateUrl: './admin-user-profile.component.html',
     styleUrl: './styles/admin-user-profile.component.css'
 })
@@ -23,6 +24,12 @@ export class AdminUserProfileComponent implements OnInit {
 
     usuario: UsuarioResponse | null = null;
     isLoading = false;
+
+    // Modal State
+    showModal = false;
+    modalTitle = '';
+    modalMessage = '';
+    pendingNewState: EstadoUsuario | null = null;
 
     ngOnInit(): void {
         const userId = this.route.snapshot.paramMap.get('id');
@@ -62,18 +69,44 @@ export class AdminUserProfileComponent implements OnInit {
         const nuevoEstado = this.usuario.estado === EstadoUsuario.ACTIVO ? EstadoUsuario.INACTIVO : EstadoUsuario.ACTIVO;
         const actionVerb = nuevoEstado === EstadoUsuario.ACTIVO ? 'habilitar' : 'deshabilitar';
 
-        if (confirm(`¿Está seguro de ${actionVerb} al usuario ${this.usuario.nombre} ${this.usuario.apellido}?`)) {
-            this.usuarioService.cambiarEstado(this.usuario.id, nuevoEstado).subscribe({
-                next: (updatedUser) => {
-                    if (this.usuario) this.usuario.estado = updatedUser.estado;
-                    this.alertService.success(`Usuario ${nuevoEstado === EstadoUsuario.ACTIVO ? 'habilitado' : 'deshabilitado'} correctamente.`);
-                },
-                error: (err) => {
-                    console.error('Error changing user status:', err);
-                    this.alertService.error('Error al cambiar el estado del usuario.');
-                }
-            });
-        }
+        this.openConfirmModal(
+            `Confirmar ${actionVerb}`,
+            `¿Está seguro de que desea ${actionVerb} al usuario ${this.usuario.nombre} ${this.usuario.apellido}?`,
+            nuevoEstado
+        );
+    }
+
+    openConfirmModal(title: string, message: string, newState: EstadoUsuario) {
+        this.modalTitle = title;
+        this.modalMessage = message;
+        this.pendingNewState = newState;
+        this.showModal = true;
+    }
+
+    onModalConfirm() {
+        if (!this.usuario || !this.pendingNewState) return;
+
+        this.usuarioService.cambiarEstado(this.usuario.id, this.pendingNewState).subscribe({
+            next: (updatedUser) => {
+                if (this.usuario) this.usuario.estado = updatedUser.estado;
+                this.alertService.success(`Usuario ${updatedUser.estado === EstadoUsuario.ACTIVO ? 'habilitado' : 'deshabilitado'} correctamente.`);
+                this.closeModal();
+            },
+            error: (err) => {
+                console.error('Error changing user status:', err);
+                this.alertService.error('Error al cambiar el estado del usuario.');
+                this.closeModal();
+            }
+        });
+    }
+
+    onModalCancel() {
+        this.closeModal();
+    }
+
+    closeModal() {
+        this.showModal = false;
+        this.pendingNewState = null;
     }
 
     getProfileImageUrl(relativePath: string): string {
