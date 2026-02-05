@@ -35,7 +35,7 @@
                             <div class="student-profile">
                                 <div class="avatar-container">
                                     @if (item.fotoPerfil) {
-                                    <img [src]="item.fotoPerfil" alt="Perfil" class="avatar-img">
+                                    <img [src]="getProfileImageUrl(item.fotoPerfil)" alt="Perfil" class="avatar-img">
                                     } @else {
                                     <div class="avatar-placeholder">
                                         {{ item.nombre.charAt(0) }}{{ item.apellido.charAt(0) }}
