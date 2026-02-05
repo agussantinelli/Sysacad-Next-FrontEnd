@@ -25,3 +25,11 @@ export interface MatriculacionRequest {
     idCarrera: string;
     nroPlan: number;
 }
+
+export interface AdminInscripcionRequest {
+    idAlumno: string;
+    tipo: 'CURSADA' | 'EXAMEN';
+    idReferencia: string; // ID Comision or ID MesaExamen
+    idMateria?: string; // Required for CURSADA
+    nroDetalle?: number; // Required for EXAMEN (Usually extracted from available exams)
+}
