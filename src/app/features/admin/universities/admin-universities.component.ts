@@ -100,7 +100,8 @@ export class AdminUniversitiesComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
-        this.alertService.error('Error al crear universidad');
+        const backendMessage = err.response?.data?.message || 'Error al crear universidad';
+        this.alertService.error(backendMessage);
         this.isLoading = false;
       }
     });

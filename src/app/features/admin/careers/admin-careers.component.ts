@@ -69,7 +69,8 @@ export class AdminCareersComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
-        this.alertService.error('Error al crear carrera');
+        const backendMessage = err.response?.data?.message || 'Error al crear carrera';
+        this.alertService.error(backendMessage);
         this.isLoading = false;
       }
     });
