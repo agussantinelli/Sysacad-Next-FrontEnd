@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest, AdminInscripcionRequest, FacultadAdminDTO, FacultadRequest, CarreraAdminDTO, PlanDetalleDTO, MesaAdminDTO, MesaExamenRequest, DetalleMesaRequest } from '@core/models/admin.models';
+import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest, AdminInscripcionRequest, FacultadAdminDTO, FacultadRequest, CarreraAdminDTO, PlanDetalleDTO, MesaAdminDTO, MesaExamenRequest, DetalleMesaRequest, AdminComisionDTO, ComisionRequest, AsignarMateriaComisionRequest, ProfesorDisponibleDTO } from '@core/models/admin.models';
 import { FacultadResponse } from '@core/models/facultad.models';
 import { CarreraResponse } from '@core/models/carrera.models';
 import { PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
@@ -201,6 +201,31 @@ export class AdminService {
 
     eliminarDetalleMesa(idMesa: string, nroDetalle: number): Observable<void> {
         return from(axiosClient.delete<void>(`/admin/mesas/${idMesa}/detalle/${nroDetalle}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    // --- Module: Commissions ---
+    getAllComisiones(): Observable<AdminComisionDTO[]> {
+        return from(axiosClient.get<AdminComisionDTO[]>('/admin/comisiones')).pipe(
+            map(response => response.data)
+        );
+    }
+
+    crearComision(request: ComisionRequest): Observable<void> {
+        return from(axiosClient.post<void>('/admin/comisiones', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    asignarMateriaComision(idComision: string, request: AsignarMateriaComisionRequest): Observable<void> {
+        return from(axiosClient.post<void>(`/admin/comisiones/${idComision}/materias`, request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getProfesoresDisponibles(request: AsignarMateriaComisionRequest): Observable<ProfesorDisponibleDTO[]> {
+        return from(axiosClient.post<ProfesorDisponibleDTO[]>('/admin/comisiones/profesores-disponibles', request)).pipe(
             map(response => response.data)
         );
     }
