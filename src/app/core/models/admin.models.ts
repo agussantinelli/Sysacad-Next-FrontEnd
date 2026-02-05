@@ -33,3 +33,70 @@ export interface AdminInscripcionRequest {
     idMateria?: string; // Required for CURSADA
     nroDetalle?: number; // Required for EXAMEN (Usually extracted from available exams)
 }
+
+// Faculties
+export interface FacultadRequest {
+    ciudad: string;
+    provincia: string;
+}
+
+export interface FacultadAdminDTO {
+    id: string;
+    ciudad: string;
+    provincia: string;
+    nombreCompleto: string;
+    cantidadMatriculados: number;
+    carreras: string[];
+}
+
+// Careers
+export interface CarreraAdminDTO {
+    id: string;
+    nombre: string;
+    alias: string;
+    cantidadMatriculados: number;
+    planes: any[]; // Simulating PlanDeEstudioResponse for now to avoid circular deps if needed, otherwise import
+}
+
+export interface MateriaDetalleDTO {
+    id: string;
+    nombre: string;
+    codigo: string;
+    nivel: number;
+    horasCursado: number; // Short
+    tipoMateria: string;
+    correlativas: string[];
+}
+
+export interface PlanDetalleDTO {
+    carreraId: string;
+    anio: number;
+    nombre: string;
+    esVigente: boolean;
+    materias: MateriaDetalleDTO[];
+}
+
+// Exam Tables
+export interface MesaExamenRequest {
+    nombre: string;
+    fechaInicio: string; // LocalDate
+    fechaFin: string; // LocalDate
+}
+
+export interface DetalleMesaRequest {
+    idMesaExamen: string;
+    idMateria: string;
+    idPresidente: string;
+    diaExamen: string; // LocalDate
+    horaExamen: string; // LocalTime
+}
+
+export interface MesaAdminDTO {
+    idMesaExamen: string;
+    nroDetalle: number;
+    materia: string;
+    turno: string;
+    fecha: string; // LocalDateTime
+    cantidadInscriptos: number;
+    abierta: boolean;
+}
