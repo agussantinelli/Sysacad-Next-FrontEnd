@@ -275,3 +275,16 @@ select.form-control option {
     margin-bottom: 1rem;
     font-style: italic;
 }
+
+.text-warning {
+    color: #f59e0b;
+    /* Amber/Orange */
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}

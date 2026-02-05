@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <label for="comision">Comisión</label>
                     <select id="comision" name="comision" [(ngModel)]="selectedComisionId" required class="form-control"
-                        [disabled]="!selectedMateriaId">
+                        [disabled]="!selectedMateriaId || comisiones.length === 0">
                         <option value="" disabled selected>Seleccione una comisión</option>
                         @for (comision of comisiones; track comision.idComision) {
                         <option [value]="comision.idComision" [disabled]="!comision.habilitada">
@@ -79,6 +79,13 @@
                         </option>
                         }
                     </select>
+                    @if (selectedMateriaId && comisiones.length === 0 && !isLoading) {
+                    <div class="hint-text text-warning mt-2">
+                        <span class="material-icons"
+                            style="font-size: 1rem; vertical-align: text-bottom;">warning</span>
+                        No hay comisiones disponibles para esta materia.
+                    </div>
+                    }
                 </div>
                 }
 

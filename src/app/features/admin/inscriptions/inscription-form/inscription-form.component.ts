@@ -136,6 +136,7 @@ export class InscriptionFormComponent implements OnInit {
             if (this.tipo === 'CURSADA') {
                 this.adminService.getComisiones(this.selectedStudent.id, this.selectedMateriaId).subscribe({
                     next: (data) => {
+                        console.log('Comisiones loaded:', data);
                         this.comisiones = data;
                         this.isLoading = false;
                     },
