@@ -167,7 +167,7 @@ export const routes: Routes = [
     {
         path: 'admin/enroll-student',
         canActivate: [requireAuthGuard],
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/admin/enroll-student/enroll-student.component').then(m => m.EnrollStudentComponent)
     },
     {
         path: 'admin/exam-statistics',

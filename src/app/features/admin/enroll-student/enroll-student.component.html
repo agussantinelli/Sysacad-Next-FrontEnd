@@ -1,0 +1,88 @@
+<app-page-layout title="Matricular Alumno">
+    <div class="enroll-container">
+        <!-- Search Section -->
+        <div class="card search-card">
+            <h3>1. Buscar Alumno</h3>
+            <div class="search-box">
+                <input type="text" [(ngModel)]="legajoQuery" placeholder="Ingresar Legajo"
+                    (keyup.enter)="searchStudent()" class="form-control">
+                <button class="btn-search" (click)="searchStudent()" [disabled]="isSearching">
+                    <span class="material-icons">search</span>
+                </button>
+            </div>
+
+            @if (isSearching) {
+            <div class="mini-loader">Buscando...</div>
+            }
+
+            @if (foundStudents.length > 0) {
+            <ul class="results-list">
+                @for (student of foundStudents; track student.id) {
+                <li (click)="selectStudent(student)">
+                    <strong>{{ student.apellido }}, {{ student.nombre }}</strong> - Legajo: {{ student.legajo }} - DNI:
+                    {{ student.dni }}
+                </li>
+                }
+            </ul>
+            }
+
+            @if (selectedStudent) {
+            <div class="selected-student">
+                <div class="check-icon"><span class="material-icons">check_circle</span></div>
+                <div>
+                    <p class="student-name">{{ selectedStudent.apellido }}, {{ selectedStudent.nombre }}</p>
+                    <p class="student-detail">Legajo: {{ selectedStudent.legajo }} | DNI: {{ selectedStudent.dni }}</p>
+                </div>
+                <button class="btn-clear" (click)="selectedStudent = null">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            }
+        </div>
+
+        <!-- Academic Selection -->
+        <div class="card form-card">
+            <h3>2. Datos Académicos</h3>
+
+            <div class="form-group">
+                <label>Facultad</label>
+                <select [(ngModel)]="selectedFacultadId" (change)="onFacultadChange()" class="form-control"
+                    [disabled]="!selectedStudent">
+                    <option value="" disabled selected>Seleccione Facultad</option>
+                    @for (fac of facultades; track fac.id) {
+                    <option [value]="fac.id">{{ fac.nombreCompleto }}</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Carrera</label>
+                <select [(ngModel)]="selectedCarreraId" (change)="onCarreraChange()" class="form-control"
+                    [disabled]="!selectedFacultadId">
+                    <option value="" disabled selected>Seleccione Carrera</option>
+                    @for (car of carreras; track car.id) {
+                    <option [value]="car.id">{{ car.nombre }}</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Plan de Estudio</label>
+                <select [(ngModel)]="selectedPlanNro" class="form-control" [disabled]="!selectedCarreraId">
+                    <option [ngValue]="null" disabled selected>Seleccione Plan</option>
+                    @for (plan of planes; track plan.nroPlan) {
+                    <option [value]="plan.nroPlan">{{ plan.nombrePlan }} ({{ plan.nroPlan }})</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-primary" (click)="onSubmit()"
+                    [disabled]="isLoading || !selectedStudent || !selectedPlanNro">
+                    @if (isLoading) { <span class="loader"></span> }
+                    Matricular Alumno
+                </button>
+            </div>
+        </div>
+    </div>
+</app-page-layout>
