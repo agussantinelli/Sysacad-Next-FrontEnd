@@ -11,6 +11,7 @@ import { CarreraResponse } from '@core/models/carrera.models';
 import { PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
 import { UsuarioResponse } from '@core/models/usuario.models';
 import { MatriculacionRequest } from '@core/models/admin.models';
+import { RolUsuario } from '@core/enums/usuario.enums';
 
 @Component({
     selector: 'app-enroll-student',
@@ -71,9 +72,10 @@ export class EnrollStudentComponent implements OnInit {
         this.selectedStudent = null; // Reset selection on new search
         this.adminService.buscarUsuarios(this.legajoQuery).subscribe({
             next: (data) => {
-                this.foundStudents = data;
+                // Filter only students
+                this.foundStudents = data.filter(user => user.rol === RolUsuario.ESTUDIANTE);
                 this.isSearching = false;
-                if (data.length === 0) {
+                if (this.foundStudents.length === 0) {
                     this.alertService.info('No se encontraron alumnos con ese legajo.');
                 }
             },
