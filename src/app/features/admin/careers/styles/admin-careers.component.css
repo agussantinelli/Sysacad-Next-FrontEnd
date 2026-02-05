@@ -248,13 +248,20 @@
 }
 
 .modal-content {
-    background: var(--surface-card);
+    background: #0f0f0f;
+    /* Use a solid dark color to reduce transparency issues */
     padding: 1.5rem;
     border-radius: 12px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    /* Stronger shadow */
+    border: 1px solid #333;
+    /* More visible border */
+    position: relative;
+    /* Ensure z-index works if needed */
+    z-index: 1001;
+    /* Above overlay */
 }
 
 .modal-content h4 {
@@ -313,9 +320,16 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: var(--surface-card);
+    background-color: #1a1a1a;
+    /* Distinct background */
     border-radius: 8px;
-    border: 1px solid var(--border-color);
+    border: 1px solid #444;
+    /* Visible border */
+    transition: border-color 0.2s;
+}
+
+.plan-item:hover {
+    border-color: var(--utn-blue);
 }
 
 .plan-info {
