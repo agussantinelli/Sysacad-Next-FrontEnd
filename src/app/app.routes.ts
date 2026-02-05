@@ -176,11 +176,11 @@ export const routes: Routes = [
     },
     {
         path: 'admin/careers',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/admin/careers/admin-careers.component').then(m => m.AdminCareersComponent)
     },
     {
         path: 'admin/universities',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/admin/universities/admin-universities.component').then(m => m.AdminUniversitiesComponent)
     },
     {
         path: 'admin/study-plans',
@@ -231,7 +231,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin/exam-tables',
-        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+        loadComponent: () => import('@features/admin/exam-tables/admin-exam-tables.component').then(m => m.AdminExamTablesComponent)
     },
     {
         path: 'admin/calendar',
