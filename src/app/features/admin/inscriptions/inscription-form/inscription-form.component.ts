@@ -98,7 +98,11 @@ export class InscriptionFormComponent implements OnInit {
     }
 
     loadMaterias() {
-        if (!this.selectedStudent || !this.tipo) return;
+        console.log('loadMaterias triggered', { student: this.selectedStudent, tipo: this.tipo });
+        if (!this.selectedStudent || !this.tipo) {
+            console.log('Missing student or tipo, aborting load');
+            return;
+        }
         this.isLoading = true;
 
         const request = this.tipo === 'CURSADA'
@@ -107,6 +111,7 @@ export class InscriptionFormComponent implements OnInit {
 
         request.subscribe({
             next: (data) => {
+                console.log('Materias loaded:', data);
                 this.materias = data;
                 this.isLoading = false;
             },

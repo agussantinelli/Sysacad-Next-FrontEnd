@@ -57,7 +57,7 @@
                 <div class="form-group">
                     <label for="materia">Materia</label>
                     <select id="materia" name="materia" [(ngModel)]="selectedMateriaId" (change)="onMateriaChange()"
-                        required class="form-control" [disabled]="!selectedStudent">
+                        required class="form-control" [disabled]="!selectedStudent || isLoading">
                         <option value="" disabled selected>Seleccione una materia</option>
                         @for (materia of materias; track materia.id) {
                         <option [value]="materia.id">{{ materia.nombre }} ({{ materia.cuatrimestreDictado }})</option>

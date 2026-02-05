@@ -65,6 +65,7 @@ label {
     border-style: dashed;
 }
 
+/* Select specific styles */
 select.form-control {
     appearance: none;
     -webkit-appearance: none;
@@ -75,19 +76,33 @@ select.form-control {
     background-size: 1.2rem;
     padding-right: 2.5rem;
     cursor: pointer;
+    background-color: var(--bg-input);
+    /* Explicit background for the select itself */
+    color: var(--text-primary);
 }
 
+/* Force dark options explicitly */
+select.form-control option {
+    background-color: #121212;
+    /* Hardcoded dark background fallback */
+    background-color: var(--bg-page);
+    /* Use theme variable if available */
+    color: white;
+    /* Force white text */
+    padding: 12px;
+}
+
+/* Specific fix for Windows High Contrast / Forced Colors if needed, but primary fix is above */
 @media (prefers-color-scheme: dark) {
     select.form-control {
-        color-scheme: dark;
+        background-color: var(--bg-input);
+        color: white;
     }
-}
 
-select.form-control option {
-    background-color: #1e1e1e;
-    background-color: var(--surface-card);
-    color: var(--text-primary);
-    padding: 12px;
+    select.form-control option {
+        background-color: #121212;
+        color: white;
+    }
 }
 
 .search-box {
@@ -103,7 +118,7 @@ select.form-control option {
     border-bottom-right-radius: 0;
     border-right: none;
     z-index: 1;
-    border-color: rgb(255, 255, 255);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .search-box .form-control:focus {
