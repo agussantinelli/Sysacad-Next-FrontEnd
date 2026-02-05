@@ -258,56 +258,47 @@
 │   │   │   ├── enums/                                # Enumerados (Materia, Inscripcion, Usuario...)
 │   │   │   ├── guards/                               # Guardias de Ruta (AuthGuard)
 │   │   │   ├── interceptors/                         # Interceptores HTTP (JWT Injection)
-│   │   │   ├── models/                               # Modelos DTO (Granulares: Historial, InscripcionExamen...)
-│   │   │   └── services/                             # Servicios de Entidades (Auth, Matriculacion...)
+│   │   │   ├── models/                               # Modelos DTO
+│   │   │   └── services/                             # Servicios de Entidades
 │   │   ├── features/
+│   │   │   ├── admin/                                # Módulo de Administración
+│   │   │   │   ├── careers/                          # Gestión de Carreras
+│   │   │   │   ├── exam-tables/                      # Gestión de Mesas de Examen
+│   │   │   │   ├── inscriptions/                     # Inscripciones y Matrículas
+│   │   │   │   ├── statistics/                       # Estadísticas Globales
+│   │   │   │   ├── universities/                     # Gestión de Universidades
+│   │   │   │   └── users/                            # Gestión de Usuarios
 │   │   │   ├── announcements/                        # Avisos y Anuncios
-│   │   │   │   └── announcements.component
-│   │   │   ├── auth/
-│   │   │   │   ├── login/                            # Inicio de Sesión
-│   │   │   │   └── forgot-password/                  # Recuperación de Contraseña
+│   │   │   ├── auth/                                 # Autenticación (Login)
 │   │   │   ├── dashboard/                            # Dashboard (Role-Based)
 │   │   │   ├── messages/                             # Sistema de Mensajería
-│   │   │   │   └── messages.component
 │   │   │   ├── professor/                            # Módulo de Profesores
-│   │   │   │   ├── exam-details/                     # Detalle de Mesa de Examen
-│   │   │   │   ├── exam-statistics/                  # Estadísticas de Rendimiento
-│   │   │   │   ├── exams/                            # Listado de Mesas de Examen
-│   │   │   │   ├── grade-exam/                       # Interfaz de Carga de Notas
-│   │   │   │   ├── my-commissions/                   # Mis Comisiones (Global)
-│   │   │   │   ├── subject-commissions/              # Comisiones por Materia
+│   │   │   │   ├── exam-details/                     # Detalle de Mesa
+│   │   │   │   ├── exam-statistics/                  # Estadísticas de Examen
+│   │   │   │   ├── exams/                            # Listado de Mesas
+│   │   │   │   ├── grade-exam/                       # Carga de Notas
 │   │   │   │   └── subjects/                         # Mis Materias
-│   │   │   ├── profile/
-│   │   │   │   ├── edit-profile/                     # Edición de Perfil
-│   │   │   │   └── profile.component                 # Visualización de Perfil
-│   │   │   └── student/
-│   │   │       ├── academic-status/                  # Estado Académico (Analítico + Historial)
-│   │   │       ├── calendar/                         # Calendario Académico
-│   │   │       ├── current-enrollments/              # Cursado y Notas (Matriculaciones activas)
-│   │   │       ├── inscription-course/               # Inscripción a Cursado
-│   │   │       ├── inscription-exam/                 # Inscripción a Examen
-│   │   │       ├── my-inscriptions/                  # Mis Inscripciones (Baja)
-│   │   │       ├── regular-cert/                     # Certificado de Alumno Regular
-│   │   │       └── study-plan/                       # Plan de Estudios Interactivo
+│   │   │   ├── profile/                              # Perfil de Usuario
+│   │   │   └── student/                              # Módulo de Estudiantes
+│   │   │       ├── academic-status/                  # Estado Académico
+│   │   │       ├── calendar/                         # Calendario
+│   │   │       ├── current-enrollments/              # Cursado Actual
+│   │   │       ├── inscription-course/               # Inscripción Cursado
+│   │   │       ├── inscription-exam/                 # Inscripción Examen
+│   │   │       └── regular-cert/                     # Certificado Regular
 │   │   ├── layout/
-│   │   │   └── navbar/                               # Barra de Navegación Responsive
+│   │   │   └── navbar/                               # Barra de Navegación
 │   │   ├── shared/
-│   │   │   ├── components/                           # Reutilizables (Table, Spinner, Alert, Modal...)
-│   │   │   │   ├── alert-message/                    # Componente visual de alertas
-│   │   │   │   ├── loading-spinner/                  # Spinner de carga
-│   │   │   │   ├── page-layout/                      # Layout estándar de páginas
-│   │   │   │   ├── inscription-modal/                # Modal de selección de comisión/mesa
-│   │   │   │   ├── inscription-confirmation-modal/   # Modal de confirmación de inscripción
-│   │   │   │   └── confirmation-modal/               # Modal genérico de confirmación
-│   │   │   ├── interfaces/                           # Interfaces de UI (TableConfig)
-│   │   │   └── pipes/                                # Pipes (DateFormat...)
+│   │   │   ├── components/                           # Reutilizables (Table, Spinner, Alert...)
+│   │   │   ├── interfaces/                           # Interfaces UI
+│   │   │   └── pipes/                                # Pipes Custom
 │   ├── assets/                                       # Recursos estáticos
-│   ├── environments/                                 # Configuraciones de entorno
-│   ├── index.html                                    # Punto de entrada HTML
-│   ├── main.ts                                       # Punto de entrada Angular
+│   ├── environments/                                 # Configuración de entorno
+│   ├── index.html                                    # Entry Point HTML
+│   ├── main.ts                                       # Entry Point TS
 │   └── styles.css                                    # Estilos globales
-├── .env                                              # Variables de entorno
-├── angular.json                                      # Configuración del workspace
+├── .env                                              # Variables local
+├── angular.json                                      # Config Angular
 ├── package.json                                      # Dependencias
 └── README.md                                         # Documentación
 </code></pre>
