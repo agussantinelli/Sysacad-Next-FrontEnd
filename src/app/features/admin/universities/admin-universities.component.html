@@ -51,9 +51,15 @@
                                 </div>
                             </td>
                             <td>
-                                <button class="icon-btn delete" (click)="delete(facultad)" title="Eliminar">
-                                    <span class="material-icons">delete</span>
-                                </button>
+                                <div class="action-buttons">
+                                    <button class="icon-btn add-link" (click)="openAssociationModal(facultad)"
+                                        title="Asociar Carrera">
+                                        <span class="material-icons">link</span>
+                                    </button>
+                                    <button class="icon-btn delete" (click)="delete(facultad)" title="Eliminar">
+                                        <span class="material-icons">delete</span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         } @empty {
@@ -68,4 +74,29 @@
         </div>
 
     </div>
+
+    <!-- Simple Modal for Association -->
+    @if (showModal) {
+    <div class="modal-overlay" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h4>Asociar Carrera</h4>
+            <div class="form-group">
+                <label>Seleccionar Carrera</label>
+                <select [(ngModel)]="selectedCarreraId" class="form-control">
+                    <option value="" disabled>Seleccione una carrera...</option>
+                    @for (carrera of carrerasSimples; track carrera.id) {
+                    <option [value]="carrera.id">{{ carrera.nombre }} ({{ carrera.alias }})</option>
+                    }
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+                <button class="btn-primary" (click)="asociarCarrera()" [disabled]="!selectedCarreraId || isLoading">
+                    Asociar
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
 </app-page-layout>

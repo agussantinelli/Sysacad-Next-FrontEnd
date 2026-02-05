@@ -6,6 +6,7 @@ import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/load
 import { AlertService } from '@core/services/alert.service';
 import { AdminService } from '@core/services/admin.service';
 import { FacultadAdminDTO, FacultadRequest } from '@core/models/admin.models';
+import { CarreraResponse } from '@core/models/carrera.models';
 
 @Component({
   selector: 'app-admin-universities',
@@ -19,6 +20,11 @@ export class AdminUniversitiesComponent implements OnInit {
   private alertService = inject(AlertService);
 
   facultades: FacultadAdminDTO[] = [];
+  carrerasSimples: CarreraResponse[] = [];
+  selectedFacultadId: string | null = null;
+  selectedCarreraId: string = '';
+  showModal: boolean = false;
+
   isLoading = false;
 
   newFacultad: FacultadRequest = {
@@ -28,6 +34,45 @@ export class AdminUniversitiesComponent implements OnInit {
 
   ngOnInit() {
     this.loadFacultades();
+    this.loadCarrerasSimples();
+  }
+
+  loadCarrerasSimples() {
+    this.adminService.getCarrerasSimples().subscribe({
+      next: (data) => this.carrerasSimples = data,
+      error: (err) => console.error('Error loading careers', err)
+    });
+  }
+
+  openAssociationModal(facultad: FacultadAdminDTO) {
+    this.selectedFacultadId = facultad.id;
+    this.selectedCarreraId = '';
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedFacultadId = null;
+    this.selectedCarreraId = '';
+  }
+
+  asociarCarrera() {
+    if (!this.selectedFacultadId || !this.selectedCarreraId) return;
+
+    this.isLoading = true;
+    this.adminService.asociarCarreraFacultad(this.selectedCarreraId, this.selectedFacultadId).subscribe({
+      next: () => {
+        this.alertService.success('Carrera asociada exitosamente');
+        this.loadFacultades(); // Reload to see the new career in the list
+        this.closeModal();
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.alertService.error('Error al asociar carrera');
+        this.isLoading = false;
+      }
+    });
   }
 
   loadFacultades() {
