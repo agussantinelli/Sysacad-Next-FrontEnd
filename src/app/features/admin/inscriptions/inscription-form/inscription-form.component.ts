@@ -7,6 +7,7 @@ import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
 import { UsuarioService } from '@core/services/usuario.service';
 import { UsuarioResponse } from '@core/models/usuario.models';
+import { RolUsuario } from '@core/enums/usuario.enums';
 import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
 import { MateriaResponse } from '@core/models/materia.models';
@@ -21,7 +22,7 @@ import { AdminInscripcionRequest } from '@core/models/admin.models';
 })
 export class InscriptionFormComponent implements OnInit {
     private adminService = inject(AdminService);
-    private alertService = inject(AlertService); // Removed usage of UsuarioService for search, using AdminService instead
+    private alertService = inject(AlertService);
     private router = inject(Router);
 
     isLoading = false;
@@ -59,9 +60,11 @@ export class InscriptionFormComponent implements OnInit {
         this.selectedStudent = null;
         this.adminService.buscarUsuarios(this.legajoQuery).subscribe({
             next: (data) => {
-                this.foundStudents = data;
+                // Filter only students
+                this.foundStudents = data.filter(user => user.rol === RolUsuario.ESTUDIANTE);
+
                 this.isSearching = false;
-                if (data.length === 0) {
+                if (this.foundStudents.length === 0) {
                     this.alertService.info('No se encontraron alumnos con ese legajo.');
                 }
             },
