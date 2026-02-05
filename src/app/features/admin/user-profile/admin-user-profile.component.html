@@ -1,79 +1,93 @@
-<app-page-layout title="Perfil de Usuario">
-    <div class="profile-container">
-        @if (usuario) {
-        <div class="profile-card">
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    @if (usuario.fotoPerfil) {
-                    <img [src]="getProfileImageUrl(usuario.fotoPerfil)" [alt]="usuario.nombre" class="avatar-img">
-                    } @else {
-                    <span class="material-icons">person</span>
-                    }
-                </div>
-
-                <h1 class="profile-name">{{ usuario.apellido || '-' }}, {{ usuario.nombre || '-' }}</h1>
-                <p class="profile-role">{{ usuario.rol || '-' }}</p>
-                <p class="profile-role" style="font-size: 0.8rem; margin-top: 5px;">{{ usuario.estado }}</p>
+<div class="profile-container">
+    @if (usuario) {
+    <div class="profile-card">
+        <div class="profile-header">
+            <button class="back-btn" (click)="goBack()">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <div class="profile-avatar">
+                @if (usuario.fotoPerfil) {
+                <img [src]="getProfileImageUrl(usuario.fotoPerfil)" [alt]="usuario.nombre" class="avatar-img">
+                } @else {
+                <span class="material-icons">person</span>
+                }
             </div>
 
-            <div class="profile-content">
-                <h3 class="section-title">Información Personal</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">DNI / Documento</span>
-                        <span class="info-value">{{ usuario.dni || '-' }} ({{ usuario.tipoDocumento || '-' }})</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Email</span>
-                        <span class="info-value">{{ usuario.mail || '-' }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Fecha de Nacimiento</span>
-                        <span class="info-value">{{ usuario.fechaNacimiento || '-' }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Género</span>
-                        <span class="info-value">
-                            @if (usuario.genero === 'M') { Masculino }
-                            @else if (usuario.genero === 'F') { Femenino }
-                            @else { {{ usuario.genero || '-' }} }
-                        </span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Teléfono</span>
-                        <span class="info-value">{{ usuario.telefono || '-' }}</span>
-                    </div>
-                </div>
+            <h1 class="profile-name">{{ usuario.apellido || '-' }}, {{ usuario.nombre || '-' }}</h1>
+            <p class="profile-role">{{ usuario.rol || '-' }}</p>
+            <p class="profile-role" style="font-size: 0.8rem; margin-top: 5px;">{{ usuario.estado }}</p>
+        </div>
 
-                <h3 class="section-title">Información Académica</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Legajo</span>
-                        <span class="info-value">{{ usuario.legajo || '-' }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Fecha de Ingreso</span>
-                        <span class="info-value">{{ usuario.fechaIngreso || '-' }}</span>
-                    </div>
+        <div class="profile-content">
+            <h3 class="section-title">Información Personal</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">DNI / Documento</span>
+                    <span class="info-value">{{ usuario.dni || '-' }} ({{ usuario.tipoDocumento || '-' }})</span>
                 </div>
-
-                <h3 class="section-title">Dirección</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Calle y Número</span>
-                        <span class="info-value">{{ usuario.direccion || '-' }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Ciudad</span>
-                        <span class="info-value">{{ usuario.ciudad || '-' }}</span>
-                    </div>
+                <div class="info-item">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">{{ usuario.mail || '-' }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Fecha de Nacimiento</span>
+                    <span class="info-value">{{ usuario.fechaNacimiento || '-' }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Género</span>
+                    <span class="info-value">
+                        @if (usuario.genero === 'M') { Masculino }
+                        @else if (usuario.genero === 'F') { Femenino }
+                        @else { {{ usuario.genero || '-' }} }
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Teléfono</span>
+                    <span class="info-value">{{ usuario.telefono || '-' }}</span>
                 </div>
             </div>
+
+            <h3 class="section-title">Información Académica</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Legajo</span>
+                    <span class="info-value">{{ usuario.legajo || '-' }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Fecha de Ingreso</span>
+                    <span class="info-value">{{ usuario.fechaIngreso || '-' }}</span>
+                </div>
+            </div>
+
+            <h3 class="section-title">Dirección</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Calle y Número</span>
+                    <span class="info-value">{{ usuario.direccion || '-' }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Ciudad</span>
+                    <span class="info-value">{{ usuario.ciudad || '-' }}</span>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn-edit" (click)="editUser()">
+                    <span class="material-icons">edit</span>
+                    Editar Usuario
+                </button>
+                <button class="btn-delete" (click)="toggleState()"
+                    [style.background-color]="usuario.estado === 'ACTIVO' ? '#ef4444' : '#10b981'"
+                    [style.box-shadow]="'none'">
+                    <span class="material-icons">{{ usuario.estado === 'ACTIVO' ? 'block' : 'check_circle' }}</span>
+                    {{ usuario.estado === 'ACTIVO' ? 'Deshabilitar Usuario' : 'Habilitar Usuario' }}
+                </button>
+            </div>
         </div>
-        } @else if (isLoading) {
-        <div class="loading-state">
-            <app-loading-spinner message="Cargando perfil..."></app-loading-spinner>
-        </div>
-        }
     </div>
-</app-page-layout>
+    } @else if (isLoading) {
+    <div class="loading-state">
+        <app-loading-spinner message="Cargando perfil..."></app-loading-spinner>
+    </div>
+    }
+</div>

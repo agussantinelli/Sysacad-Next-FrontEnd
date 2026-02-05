@@ -1,7 +1,7 @@
 .profile-container {
     max-width: 800px;
     margin: 2rem auto;
-    /* margin-top: 6rem; Remove this if page-layout handles padding, but keeping consistent with original for now */
+    margin-top: 6rem;
     padding: 0 1rem;
     animation: fadeIn 0.4s ease-out;
 }
@@ -20,6 +20,27 @@
     padding: 3rem 2rem;
     text-align: center;
     position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: white;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 /* Header Avatar */
@@ -123,4 +144,53 @@
     text-align: center;
     padding: 3rem;
     color: var(--text-secondary);
+}
+
+/* Profile Actions */
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+    width: 100%;
+    gap: 1rem;
+}
+
+.btn-edit,
+.btn-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    font-size: 1rem;
+    min-width: 180px;
+}
+
+.btn-edit {
+    background: var(--utn-blue);
+}
+
+.btn-edit:hover {
+    background: var(--utn-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
+}
+
+.btn-delete {
+    background: #ef4444;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
 }
