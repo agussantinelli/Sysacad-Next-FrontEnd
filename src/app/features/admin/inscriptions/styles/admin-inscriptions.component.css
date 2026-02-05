@@ -70,6 +70,62 @@ tr:hover td {
     color: var(--text-secondary);
 }
 
+/* Page Layout Override to widen the table */
+:host ::ng-deep .inscription-card {
+    max-width: 95% !important;
+}
+
+/* Student Profile Cell */
+.student-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar-container {
+    flex-shrink: 0;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-subtle);
+}
+
+.avatar-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--utn-blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 2px solid var(--border-subtle);
+    text-transform: uppercase;
+}
+
+.student-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.student-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.student-legajo {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
 /* Actions */
 .btn-icon-action {
     width: 32px;

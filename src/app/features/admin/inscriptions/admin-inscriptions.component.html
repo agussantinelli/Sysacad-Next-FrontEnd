@@ -32,9 +32,20 @@
                             </span>
                         </td>
                         <td>
-                            <div class="flex flex-col">
-                                <span class="font-medium">{{ item.apellido }}, {{ item.nombre }}</span>
-                                <span class="text-xs text-secondary">{{ item.legajoAlumno }}</span>
+                            <div class="student-profile">
+                                <div class="avatar-container">
+                                    @if (item.fotoPerfil) {
+                                    <img [src]="item.fotoPerfil" alt="Perfil" class="avatar-img">
+                                    } @else {
+                                    <div class="avatar-placeholder">
+                                        {{ item.nombre.charAt(0) }}{{ item.apellido.charAt(0) }}
+                                    </div>
+                                    }
+                                </div>
+                                <div class="student-info">
+                                    <span class="student-name">{{ item.apellido }}, {{ item.nombre }}</span>
+                                    <span class="student-legajo">Legajo: {{ item.legajoAlumno }}</span>
+                                </div>
                             </div>
                         </td>
                         <td>{{ item.nombreMateria }}</td>
