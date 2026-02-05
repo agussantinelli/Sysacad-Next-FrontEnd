@@ -4,7 +4,8 @@ import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
-import { CarreraAdminDTO } from '@core/models/admin.models';
+import { CarreraAdminDTO, PlanDetalleDTO } from '@core/models/admin.models';
+import { Router } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 
@@ -18,10 +19,16 @@ import { FormsModule } from '@angular/forms';
 export class AdminCareersComponent implements OnInit {
   private adminService = inject(AdminService);
   private alertService = inject(AlertService);
+  private router = inject(Router);
 
   carreras: CarreraAdminDTO[] = [];
   isLoading = false;
   showModal = false;
+
+  // Plans Modal
+  showPlansModal = false;
+  selectedCarreraPlans: PlanDetalleDTO[] = [];
+  selectedCarreraName: string = '';
 
   newCarrera = {
     nombre: '',
@@ -77,8 +84,31 @@ export class AdminCareersComponent implements OnInit {
   }
 
   viewPlans(carrera: CarreraAdminDTO) {
-    // Logic to navigate to plans or show plans
-    // For now just logging, as the requirement was mainly about the button state
-    console.log('View plans for', carrera.alias);
+    this.isLoading = true;
+    this.selectedCarreraName = carrera.nombre;
+    this.adminService.getPlanesDetallados(carrera.id).subscribe({
+      next: (data) => {
+        this.selectedCarreraPlans = data;
+        this.showPlansModal = true;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.alertService.error('Error al cargar planes');
+        this.isLoading = false;
+      }
+    });
+  }
+
+  closePlansModal() {
+    this.showPlansModal = false;
+    this.selectedCarreraPlans = [];
+  }
+
+  goToPlanDetail(plan: PlanDetalleDTO) {
+    // We can pass the plan via state or reload it via ID in the detail page
+    // Assuming route: /admin/carreras/:carreraId/plan/:anio
+    // But wait, plan ID? PlanDetalleDTO uses composite key (carreraId, anio).
+    this.router.navigate(['/admin/carreras', plan.carreraId, 'plan', plan.anio]);
   }
 }

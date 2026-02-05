@@ -86,4 +86,41 @@
     </div>
     }
 
+    <!-- View Plans Modal -->
+    @if (showPlansModal) {
+    <div class="modal-overlay" (click)="closePlansModal()">
+        <div class="modal-content large-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h4>Planes de Estudio - {{ selectedCarreraName }}</h4>
+                <button class="close-btn" (click)="closePlansModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+
+            <div class="plans-list">
+                @if (selectedCarreraPlans.length === 0) {
+                <p class="empty-state">No hay planes registrados para esta carrera.</p>
+                } @else {
+                <div class="plan-item" *ngFor="let plan of selectedCarreraPlans">
+                    <div class="plan-info">
+                        <span class="plan-year">Plan {{ plan.anio }}</span>
+                        <span class="plan-status" [class.vigente]="plan.esVigente" [class.no-vigente]="!plan.esVigente">
+                            {{ plan.esVigente ? 'Vigente' : 'No Vigente' }}
+                        </span>
+                        <span class="plan-name">{{ plan.nombre }}</span>
+                    </div>
+                    <button class="btn-outline btn-sm" (click)="goToPlanDetail(plan)">
+                        Ver Detalle
+                    </button>
+                </div>
+                }
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="closePlansModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    }
+
 </app-page-layout>
