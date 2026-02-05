@@ -27,4 +27,12 @@ export class AdminService {
             map(response => response.data)
         );
     }
+
+    eliminarInscripcion(id: string, tipo: 'CURSADA' | 'EXAMEN'): Observable<void> {
+        return from(axiosClient.delete<void>(`/admin/inscripciones/${id}`, {
+            params: { tipo }
+        })).pipe(
+            map(response => response.data)
+        );
+    }
 }
