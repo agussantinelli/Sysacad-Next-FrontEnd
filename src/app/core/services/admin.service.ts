@@ -168,6 +168,18 @@ export class AdminService {
         );
     }
 
+    crearCarrera(request: { nombre: string; alias: string; horasElectivasRequeridas: number }): Observable<CarreraResponse> {
+        return from(axiosClient.post<CarreraResponse>('/admin/carreras', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getPlanesDetallados(carreraId: string): Observable<PlanDetalleDTO[]> {
+        return from(axiosClient.get<PlanDetalleDTO[]>(`/admin/carreras/${carreraId}/planes/detallados`)).pipe(
+            map(response => response.data)
+        );
+    }
+
     // --- Module: Exam Tables ---
     getAllMesasAdmin(): Observable<MesaAdminDTO[]> {
         return from(axiosClient.get<MesaAdminDTO[]>('/admin/mesas')).pipe(

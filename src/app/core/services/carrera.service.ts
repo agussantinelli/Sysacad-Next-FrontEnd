@@ -12,11 +12,7 @@ export class CarreraService {
 
     constructor() { }
 
-    registrarCarrera(carrera: CarreraRequest): Observable<CarreraResponse> {
-        return from(axiosClient.post<CarreraResponse>('/carreras', carrera)).pipe(
-            map(response => response.data)
-        );
-    }
+
 
     listarPorFacultad(idFacultad: string): Observable<CarreraResponse[]> {
         return from(axiosClient.get<CarreraResponse[]>(`/carreras/facultad/${idFacultad}`)).pipe(
