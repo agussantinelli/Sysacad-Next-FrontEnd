@@ -137,7 +137,12 @@
 .actions-cell {
     display: flex;
     gap: 0.5rem;
-    justify-content: flex-end;
+    justify-content: center;
+}
+
+.users-table th:last-child,
+.users-table td:last-child {
+    text-align: center;
 }
 
 .btn-icon-action {
