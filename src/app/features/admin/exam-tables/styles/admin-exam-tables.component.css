@@ -39,11 +39,84 @@
 
 .form-control {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     border-radius: 8px;
     background: var(--bg-input);
     border: 1px solid var(--border-input);
     color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-control:hover {
+    border-color: var(--utn-blue-light, #60a5fa);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--utn-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: var(--surface-card);
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Date Picker Specific Styles */
+input[type="date"] {
+    position: relative;
+    padding-right: 1rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    z-index: 1;
+    /* Pone el calendario clickeable sobre todo el input */
+}
+
+/* Custom Icon for Date - Using a pseudo element trick or background image is common, 
+   but for simplicity and reliability with dynamic themes, we'll try to style the native indicator if possible 
+   or add a wrapper. Since we can't easily add a wrapper without HTML changes, 
+   we'll style the input to look good and ensure the icon is visible/customized. 
+*/
+
+/* Better approach for modern browsers to color the icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+    /* Neutral gray */
+    cursor: pointer;
+    z-index: 1;
+    /* Reset z-index to default behavior but ensure clickable */
+    position: static;
+    /* Reset position */
+    margin-left: 0.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    transition: filter 0.2s;
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator {
+    filter: invert(0.4) sepia(1) saturate(20) hue-rotate(190deg);
+    /* Attempt to tint towards blue */
+}
+
+/* Dark mode adjustment for the icon filter */
+@media (prefers-color-scheme: dark) {
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(0.8);
+    }
 }
 
 .btn-primary {

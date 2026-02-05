@@ -37,11 +37,30 @@
 
 .form-control {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     border-radius: 8px;
     background: var(--bg-input);
     border: 1px solid var(--border-input);
     color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-control:hover {
+    border-color: var(--utn-blue-light, #60a5fa);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--utn-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: var(--surface-card);
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
 }
 
 .btn-primary {
