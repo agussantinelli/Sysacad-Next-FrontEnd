@@ -5,7 +5,7 @@ import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
-import { PlanDetalleDTO } from '@core/models/admin.models';
+import { MateriaDetalleDTO, PlanDetalleDTO } from '@core/models/admin.models';
 
 @Component({
     selector: 'app-admin-plan-detail',
@@ -25,6 +25,14 @@ export class AdminPlanDetailComponent implements OnInit {
     plan: PlanDetalleDTO | null = null;
     isLoading = true;
 
+    // UI Properties
+    pageTitle: string = 'Cargando...';
+
+    // New properties
+    careerName: string = '';
+    groupedMaterias: { [key: number]: MateriaDetalleDTO[] } = {};
+    years: number[] = [];
+
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             this.carreraId = params.get('carreraId') || '';
@@ -32,7 +40,7 @@ export class AdminPlanDetailComponent implements OnInit {
             this.anio = anioStr ? parseInt(anioStr, 10) : 0;
 
             if (this.carreraId && this.anio) {
-                this.loadPlan();
+                this.loadData();
             } else {
                 this.alertService.error('Información del plan inválida');
                 this.router.navigate(['/admin/careers']);
@@ -40,11 +48,34 @@ export class AdminPlanDetailComponent implements OnInit {
         });
     }
 
-    loadPlan() {
+    loadData() {
         this.isLoading = true;
+        // Parallel requests could be better, but sequential is safer for now
+        this.loadCareerInfo();
+        this.loadPlan();
+    }
+
+    loadCareerInfo() {
+        // Fetch all careers to find the name. 
+        // Optimization: In a real app, we should have a getById endpoint.
+        this.adminService.getAllCarreras().subscribe({
+            next: (carreras) => {
+                const carrera = carreras.find(c => c.id === this.carreraId);
+                if (carrera) {
+                    this.careerName = carrera.nombre;
+                    this.updateTitle();
+                }
+            },
+            error: (err) => console.error('Error loading career info', err)
+        });
+    }
+
+    loadPlan() {
         this.adminService.getPlanDetalle(this.carreraId, this.anio).subscribe({
             next: (data) => {
                 this.plan = data;
+                this.processMaterias();
+                this.updateTitle();
                 this.isLoading = false;
             },
             error: (err) => {
@@ -53,6 +84,30 @@ export class AdminPlanDetailComponent implements OnInit {
                 this.isLoading = false;
             }
         });
+    }
+
+    updateTitle() {
+        if (this.plan && this.careerName) {
+            this.pageTitle = `${this.careerName} - ${this.plan.nombre}`;
+        } else if (this.plan) {
+            this.pageTitle = this.plan.nombre;
+        }
+    }
+
+    processMaterias() {
+        if (!this.plan) return;
+
+        this.groupedMaterias = {};
+        this.plan.materias.forEach(materia => {
+            if (!this.groupedMaterias[materia.nivel]) {
+                this.groupedMaterias[materia.nivel] = [];
+            }
+            this.groupedMaterias[materia.nivel].push(materia);
+        });
+
+        this.years = Object.keys(this.groupedMaterias)
+            .map(Number)
+            .sort((a, b) => a - b);
     }
 
     goBack() {

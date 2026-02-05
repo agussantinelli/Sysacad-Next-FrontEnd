@@ -1,58 +1,73 @@
-<app-page-layout title="Detalle de Plan de Estudio" icon="description">
+<app-page-layout [title]="pageTitle" icon="description">
     <div class="content-container">
-
-        <div class="actions-bar">
-            <button class="btn-outline" (click)="goBack()">
-                <span class="material-icons">arrow_back</span> Volver
-            </button>
-        </div>
 
         @if (isLoading) {
         <app-loading-spinner></app-loading-spinner>
         } @else if (plan) {
         <div class="card plan-card">
-            <div class="plan-header">
-                <h2>{{ plan.nombre }} - {{ plan.anio }}</h2>
+            <div class="plan-header-info">
                 <span class="status-badge" [class.vigente]="plan.esVigente" [class.no-vigente]="!plan.esVigente">
                     {{ plan.esVigente ? 'Vigente' : 'No Vigente' }}
                 </span>
+                <span class="plan-year-label">Plan {{ plan.anio }}</span>
             </div>
 
-            <div class="subjects-section">
-                <h3>Materias</h3>
-
-                <div class="subjects-grid">
-                    @for (materia of plan.materias; track materia.id) {
-                    <div class="subject-card">
-                        <div class="subject-header">
-                            <span class="subject-code">{{ materia.codigo }}</span>
-                            <span class="subject-level">Año {{ materia.nivel }}</span>
-                        </div>
-                        <h4>{{ materia.nombre }}</h4>
-                        <div class="subject-details">
-                            <div class="detail-item">
-                                <span class="material-icons">schedule</span>
-                                <span>{{ materia.horasCursado }} horas</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="material-icons">class</span>
-                                <span>{{ materia.tipoMateria }}</span>
-                            </div>
-                        </div>
-
-                        @if (materia.correlativas && materia.correlativas.length > 0) {
-                        <div class="correlatives">
-                            <strong>Correlativas:</strong>
-                            <ul>
-                                @for (corr of materia.correlativas; track corr) {
-                                <li>{{ corr }}</li>
+            <div class="years-container">
+                @for (year of years; track year) {
+                <div class="year-section">
+                    <h3>{{ year }}° Año</h3>
+                    <div class="table-responsive">
+                        <table class="data-table fixed-header">
+                            <colgroup>
+                                <col style="width: 100px;"> <!-- Código -->
+                                <col style="width: 35%;"> <!-- Materia -->
+                                <col style="width: 100px;"> <!-- Horas -->
+                                <col style="width: 15%;"> <!-- Tipo -->
+                                <col style="width: 15%;"> <!-- Es Electiva? -->
+                                <col style="width: 25%;"> <!-- Correlativas -->
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Materia</th>
+                                    <th>Horas</th>
+                                    <th>Tipo</th>
+                                    <th>Electiva</th>
+                                    <th>Correlativas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (materia of groupedMaterias[year]; track materia.id) {
+                                <tr>
+                                    <td><span class="code-badge">{{ materia.codigo }}</span></td>
+                                    <td class="fw-bold">{{ materia.nombre }}</td>
+                                    <td>{{ materia.horasCursado }} hs</td>
+                                    <td>{{ materia.tipoMateria }}</td>
+                                    <td>
+                                        @if (materia.tipoMateria === 'Electiva') {
+                                        <span class="badge-elective">Sí</span>
+                                        } @else {
+                                        <span class="text-muted">No</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (materia.correlativas && materia.correlativas.length > 0) {
+                                        <div class="correlatives-list">
+                                            @for (corr of materia.correlativas; track corr) {
+                                            <span class="correlative-tag">{{ corr }}</span>
+                                            }
+                                        </div>
+                                        } @else {
+                                        <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                </tr>
                                 }
-                            </ul>
-                        </div>
-                        }
+                            </tbody>
+                        </table>
                     </div>
-                    }
                 </div>
+                }
             </div>
         </div>
         }
