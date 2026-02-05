@@ -1,7 +1,8 @@
+/* General Layout */
 .enroll-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -9,92 +10,209 @@
 
 .card {
     background: var(--surface-card);
-    padding: 1.5rem;
-    border-radius: 12px;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 h3 {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
     color: var(--utn-blue);
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 0.5rem;
+    font-weight: 600;
 }
 
-/* Search Box */
-.search-box {
-    display: flex;
-    gap: 0.5rem;
+/* Form Controls */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.9rem;
 }
 
 .form-control {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.875rem 1rem;
     border: 1px solid var(--border-input);
-    border-radius: 8px;
+    border-radius: 10px;
     background: var(--bg-input);
     color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    border-color: var(--utn-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.15);
+}
+
+.form-control:disabled {
+    background-color: var(--bg-page);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    border-style: dashed;
+}
+
+/* Select specific styles */
+select.form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+    padding-right: 2.5rem;
+    cursor: pointer;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+/* Force dark options explicitly */
+select.form-control option {
+    background-color: #121212;
+    background-color: var(--bg-page);
+    color: white;
+    padding: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    select.form-control {
+        background-color: var(--bg-input);
+        color: white;
+    }
+
+    select.form-control option {
+        background-color: #121212;
+        color: white;
+    }
+}
+
+/* Search Box specific */
+.search-box {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.search-box input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    z-index: 1;
+    border-color: rgba(255, 255, 255, 0.5);
+    /* Matching the requested style */
+}
+
+.search-box input:focus {
+    z-index: 2;
 }
 
 .btn-search {
     background: var(--utn-blue);
     color: white;
     border: none;
-    border-radius: 8px;
-    width: 48px;
-    display: flex;
+    border-radius: 0 10px 10px 0;
+    padding: 0 1.5rem;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+    width: auto;
+    /* Override previous fixed width */
 }
 
+.btn-search:hover:not(:disabled) {
+    background-color: #004a7c;
+}
+
+.btn-search:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--border-input);
+}
+
+/* Results List */
 .results-list {
     list-style: none;
     padding: 0;
-    margin-top: 1rem;
+    margin: 0 0 1.5rem 0;
     border: 1px solid var(--border-subtle);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--surface-card);
 }
 
 .results-list li {
-    padding: 0.75rem;
+    padding: 1rem;
     border-bottom: 1px solid var(--border-subtle);
     cursor: pointer;
-    background: var(--bg-page);
     color: var(--text-primary);
+    transition: background 0.15s;
+    font-size: 0.95rem;
+}
+
+.results-list li:last-child {
+    border-bottom: none;
 }
 
 .results-list li:hover {
-    background: var(--hover-bg);
+    background-color: var(--surface-hover);
+    color: var(--utn-blue);
 }
 
-/* Selected Student */
+/* Selected Student Card */
 .selected-student {
-    margin-top: 1rem;
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    border-radius: 8px;
-    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 1.25rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
 .check-icon {
-    color: #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #10b981;
+    color: white;
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .student-name {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+    font-size: 1.05rem;
 }
 
 .student-detail {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
+    margin: 0;
 }
 
 .btn-clear {
@@ -103,25 +221,78 @@ h3 {
     border: none;
     color: var(--text-secondary);
     cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.2s;
 }
 
-/* Form Styles */
-.form-group {
-    margin-bottom: 1.5rem;
+.btn-clear:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+}
+
+/* Buttons actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
 }
 
 .btn-primary {
-    background: var(--utn-blue);
+    background-color: var(--utn-blue);
     color: white;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
-    width: 100%;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    width: auto;
+    /* Auto width instead of 100% */
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #004a7c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 74, 124, 0.3);
 }
 
 .btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    box-shadow: none;
+}
+
+.mini-loader {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.loader {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
