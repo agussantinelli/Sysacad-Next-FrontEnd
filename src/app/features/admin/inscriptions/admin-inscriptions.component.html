@@ -1,0 +1,57 @@
+<app-page-layout title="Inscripciones" icon="app_registration">
+    <div class="inscriptions-container">
+        @if (isLoading) {
+        <app-loading-spinner message="Cargando inscripciones..."></app-loading-spinner>
+        } @else {
+        <div class="table-card">
+            @if (inscripciones.length === 0) {
+            <div class="empty-state">
+                <p>No se encontraron inscripciones registradas.</p>
+            </div>
+            } @else {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Alumno</th>
+                        <th>Materia</th>
+                        <th>Comisión</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of inscripciones; track item.id) {
+                    <tr>
+                        <td>{{ item.fechaInscripcion | date:'dd/MM/yyyy HH:mm' }}</td>
+                        <td>
+                            <span class="badge" [class.badge-cursada]="item.tipo === 'CURSADA'"
+                                [class.badge-examen]="item.tipo === 'EXAMEN'">
+                                {{ item.tipo }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="flex flex-col">
+                                <span class="font-medium">{{ item.nombreAlumno }}</span>
+                                <span class="text-xs text-secondary">{{ item.legajoAlumno }}</span>
+                            </div>
+                        </td>
+                        <td>{{ item.nombreMateria }}</td>
+                        <td>{{ item.comision }}</td>
+                        <td>{{ item.estado }}</td>
+                        <td>
+                            <button class="btn-icon-action delete" title="Eliminar Inscripción"
+                                (click)="deleteInscription(item)">
+                                <span class="material-icons">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            }
+        </div>
+        }
+    </div>
+</app-page-layout>
