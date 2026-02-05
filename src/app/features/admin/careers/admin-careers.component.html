@@ -13,6 +13,13 @@
             @if (isLoading) {
             <app-loading-spinner></app-loading-spinner>
             } @else {
+
+            <div class="table-actions">
+                <button class="btn-primary" (click)="openCreateModal()">
+                    <span class="material-icons">add</span> Nueva Carrera
+                </button>
+            </div>
+
             <div class="table-responsive">
                 <table class="data-table">
                     <thead>
@@ -30,8 +37,11 @@
                             <td>{{ carrera.alias }}</td>
                             <td>{{ carrera.cantidadMatriculados }}</td>
                             <td>
-                                <!-- Placeholder for plan details interaction -->
-                                <button class="btn-outline">Ver Planes</button>
+                                @if (carrera.planes && carrera.planes.length > 0) {
+                                <button class="btn-outline" (click)="viewPlans(carrera)">Ver Planes</button>
+                                } @else {
+                                <span class="no-plan-label">Sin Plan</span>
+                                }
                             </td>
                         </tr>
                         } @empty {
@@ -45,4 +55,35 @@
             }
         </div>
     </div>
+
+    <!-- Create Carrera Modal -->
+    @if (showModal) {
+    <div class="modal-overlay" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h4>Nueva Carrera</h4>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" [(ngModel)]="newCarrera.nombre" class="form-control"
+                    placeholder="Ej: Ingeniería en Sistemas de Información">
+            </div>
+            <div class="form-group">
+                <label>Alias</label>
+                <input type="text" [(ngModel)]="newCarrera.alias" class="form-control" placeholder="Ej: ISI">
+            </div>
+            <div class="form-group">
+                <label>Horas Electivas Requeridas</label>
+                <input type="number" [(ngModel)]="newCarrera.horasElectivasRequeridas" class="form-control"
+                    placeholder="Ej: 120" min="0">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+                <button class="btn-primary" (click)="createCarrera()"
+                    [disabled]="!newCarrera.nombre || !newCarrera.alias || isLoading">
+                    Crear
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
 </app-page-layout>
