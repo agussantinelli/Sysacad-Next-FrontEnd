@@ -8,6 +8,10 @@ import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
 import { UsuarioService } from '@core/services/usuario.service';
 import { UsuarioResponse } from '@core/models/usuario.models';
+import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
+import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
+import { MateriaResponse } from '@core/models/materia.models';
+import { AdminInscripcionRequest } from '@core/models/admin.models';
 
 @Component({
     selector: 'app-inscription-form',
@@ -18,70 +22,175 @@ import { UsuarioResponse } from '@core/models/usuario.models';
 })
 export class InscriptionFormComponent implements OnInit {
     private adminService = inject(AdminService);
-    private usuarioService = inject(UsuarioService);
-    private alertService = inject(AlertService);
+    private alertService = inject(AlertService); // Removed usage of UsuarioService for search, using AdminService instead
     private router = inject(Router);
 
     isLoading = false;
-    students: UsuarioResponse[] = [];
 
-    // Form Model
-    inscriptionData = {
-        idAlumno: '',
-        tipo: 'CURSADA', // 'CURSADA' | 'EXAMEN'
-        idMateria: '', // We need subjects list
-        idComision: '', // If cursada
-        idMesa: '' // If examen
-    };
+    // Search
+    legajoQuery = '';
+    foundStudents: UsuarioResponse[] = [];
+    selectedStudent: UsuarioResponse | null = null;
+    isSearching = false;
+
+    // Selection Data
+    materias: MateriaResponse[] = [];
+    comisiones: ComisionDisponibleDTO[] = [];
+    mesas: MesaExamenDisponibleDTO[] = [];
+
+    // Form Selection
+    tipo: 'CURSADA' | 'EXAMEN' = 'CURSADA';
+    selectedMateriaId = '';
+    selectedComisionId = '';
+    selectedMesaDetalleId = '';
+    selectedMesaNroDetalle: number | null = null;
 
     ngOnInit() {
-        this.loadStudents();
-        // We also need to load subjects, commissions, exams. 
-        // For now, let's just get the component rendering.
+        // No initial load needed, starts with search
     }
 
-    loadStudents() {
-        // Ideally we should have a 'getStudents' endpoint or search. 
-        // Reusing obtenerTodos for now, though it might be heavy.
-        this.isLoading = true;
-        this.usuarioService.obtenerTodos().subscribe({
+    // Reuse search logic (could be shared service/component)
+    searchStudent() {
+        if (!this.legajoQuery || this.legajoQuery.length < 3) {
+            this.alertService.warning('Ingrese al menos 3 caracteres del legajo.');
+            return;
+        }
+
+        this.isSearching = true;
+        this.selectedStudent = null;
+        this.adminService.buscarUsuarios(this.legajoQuery).subscribe({
             next: (data) => {
-                this.students = data.filter(u => u.rol === 'ESTUDIANTE');
+                this.foundStudents = data;
+                this.isSearching = false;
+                if (data.length === 0) {
+                    this.alertService.info('No se encontraron alumnos con ese legajo.');
+                }
+            },
+            error: (err) => {
+                console.error('Error searching students', err);
+                this.alertService.error('Error al buscar alumnos.');
+                this.isSearching = false;
+            }
+        });
+    }
+
+    selectStudent(student: UsuarioResponse) {
+        this.selectedStudent = student;
+        this.foundStudents = [];
+        this.legajoQuery = '';
+        this.resetSelections();
+    }
+
+    resetSelections() {
+        this.selectedMateriaId = '';
+        this.selectedComisionId = '';
+        this.selectedMesaDetalleId = '';
+        this.selectedMesaNroDetalle = null;
+        this.materias = [];
+        this.comisiones = [];
+        this.mesas = [];
+        if (this.selectedStudent) {
+            this.loadMaterias();
+        }
+    }
+
+    onTipoChange() {
+        this.resetSelections();
+    }
+
+    loadMaterias() {
+        if (!this.selectedStudent) return;
+        this.isLoading = true;
+
+        const request = this.tipo === 'CURSADA'
+            ? this.adminService.getMateriasCursada(this.selectedStudent.id)
+            : this.adminService.getMateriasExamen(this.selectedStudent.id);
+
+        request.subscribe({
+            next: (data) => {
+                this.materias = data;
                 this.isLoading = false;
             },
             error: (err) => {
-                console.error('Error loading students', err);
+                this.alertService.error('Error al cargar materias.');
                 this.isLoading = false;
             }
         });
     }
 
-    onSubmit() {
-        console.log('Submit', this.inscriptionData);
-        // Helper to validate and call service
-        this.createInscription();
+    onMateriaChange() {
+        this.selectedComisionId = '';
+        this.selectedMesaDetalleId = '';
+        this.comisiones = [];
+        this.mesas = [];
+
+        if (this.selectedMateriaId && this.selectedStudent) {
+            this.isLoading = true;
+            if (this.tipo === 'CURSADA') {
+                this.adminService.getComisiones(this.selectedStudent.id, this.selectedMateriaId).subscribe({
+                    next: (data) => {
+                        this.comisiones = data;
+                        this.isLoading = false;
+                    },
+                    error: (err) => {
+                        this.alertService.error('Error al cargar comisiones.');
+                        this.isLoading = false;
+                    }
+                });
+            } else {
+                this.adminService.getMesas(this.selectedStudent.id, this.selectedMateriaId).subscribe({
+                    next: (data) => {
+                        this.mesas = data;
+                        this.isLoading = false;
+                    },
+                    error: (err) => {
+                        this.alertService.error('Error al cargar mesas.');
+                        this.isLoading = false;
+                    }
+                });
+            }
+        }
     }
 
-    createInscription() {
+    // For exams, when selecting a mesa, we need to capture nroDetalle too
+    onMesaChange() {
+        const selectedMesa = this.mesas.find(m => m.idDetalleMesa === this.selectedMesaDetalleId);
+        if (selectedMesa) {
+            this.selectedMesaNroDetalle = selectedMesa.nroDetalle;
+        }
+    }
+
+    onSubmit() {
+        if (!this.selectedStudent) return;
+
+        const request: AdminInscripcionRequest = {
+            idAlumno: this.selectedStudent.id,
+            tipo: this.tipo,
+            idMateria: this.selectedMateriaId,
+            idReferencia: this.tipo === 'CURSADA' ? this.selectedComisionId : this.selectedMesaDetalleId
+        };
+
+        if (this.tipo === 'EXAMEN') {
+            if (this.selectedMesaNroDetalle !== null) {
+                request.nroDetalle = this.selectedMesaNroDetalle;
+            } else {
+                this.alertService.error('Error al seleccionar la mesa.');
+                return;
+            }
+        }
+
         this.isLoading = true;
-        // Mock call for now until service is updated
-        /*
-        this.adminService.crearInscripcion(this.inscriptionData).subscribe({
+        this.adminService.inscribir(request).subscribe({
             next: () => {
                 this.alertService.success('Inscripción creada exitosamente.');
                 this.router.navigate(['/admin/inscriptions']);
             },
             error: (err) => {
-                this.alertService.error('Error al crear inscripción.');
+                console.error('Error creating inscription', err);
+                this.alertService.error(err.response?.data?.message || 'Error al crear inscripción.');
                 this.isLoading = false;
             }
         });
-        */
-        setTimeout(() => {
-            this.alertService.success('Funcionalidad en construcción. Datos: ' + JSON.stringify(this.inscriptionData));
-            this.isLoading = false;
-            this.router.navigate(['/admin/inscriptions']);
-        }, 1000);
     }
 
     cancel() {

@@ -1,42 +1,110 @@
 <app-page-layout title="Nueva Inscripción">
     <div class="form-container">
-        <div class="form-card">
-            <form (ngSubmit)="onSubmit()" #form="ngForm">
 
-                <!-- Alumno Selection -->
-                <div class="form-group">
-                    <label for="alumno">Alumno</label>
-                    <select id="alumno" name="alumno" [(ngModel)]="inscriptionData.idAlumno" required
-                        class="form-control">
-                        <option value="" disabled selected>Seleccione un alumno</option>
-                        @for (student of students; track student.id) {
-                        <option [value]="student.id">{{ student.apellido }}, {{ student.nombre }} ({{ student.legajo }})
-                        </option>
-                        }
-                    </select>
+        <!-- Search Section -->
+        <div class="form-card search-card">
+            <h3>1. Buscar Alumno</h3>
+            <div class="search-box">
+                <input type="text" [(ngModel)]="legajoQuery" placeholder="Ingresar Legajo"
+                    (keyup.enter)="searchStudent()" class="form-control">
+                <button class="btn-search" (click)="searchStudent()" [disabled]="isSearching">
+                    <span class="material-icons">search</span>
+                </button>
+            </div>
+
+            @if (isSearching) {
+            <div class="mini-loader">Buscando...</div>
+            }
+
+            @if (foundStudents.length > 0) {
+            <ul class="results-list">
+                @for (student of foundStudents; track student.id) {
+                <li (click)="selectStudent(student)">
+                    <strong>{{ student.apellido }}, {{ student.nombre }}</strong> - Legajo: {{ student.legajo }}
+                </li>
+                }
+            </ul>
+            }
+
+            @if (selectedStudent) {
+            <div class="selected-student">
+                <div class="check-icon"><span class="material-icons">check_circle</span></div>
+                <div>
+                    <p class="student-name">{{ selectedStudent.apellido }}, {{ selectedStudent.nombre }}</p>
+                    <p class="student-detail">Legajo: {{ selectedStudent.legajo }} | DNI: {{ selectedStudent.dni }}</p>
                 </div>
+            </div>
+            }
+        </div>
+
+        <!-- Inscription Details -->
+        <div class="form-card">
+            <h3>2. Datos de Inscripción</h3>
+            <form (ngSubmit)="onSubmit()" #form="ngForm">
 
                 <!-- Tipo Selection -->
                 <div class="form-group">
                     <label for="tipo">Tipo de Inscripción</label>
-                    <select id="tipo" name="tipo" [(ngModel)]="inscriptionData.tipo" required class="form-control">
+                    <select id="tipo" name="tipo" [(ngModel)]="tipo" (change)="onTipoChange()" required
+                        class="form-control" [disabled]="!selectedStudent">
                         <option value="CURSADA">Cursada</option>
                         <option value="EXAMEN">Examen Final</option>
                     </select>
                 </div>
 
-                <!-- Placeholder for Subject/Commission/Exam selection -->
+                <!-- Materia Selection -->
                 <div class="form-group">
-                    <p class="hint-text">Seleccione materia y detalles (En desarrollo)</p>
+                    <label for="materia">Materia</label>
+                    <select id="materia" name="materia" [(ngModel)]="selectedMateriaId" (change)="onMateriaChange()"
+                        required class="form-control" [disabled]="!selectedStudent">
+                        <option value="" disabled selected>Seleccione una materia</option>
+                        @for (materia of materias; track materia.id) {
+                        <option [value]="materia.id">{{ materia.nombre }} ({{ materia.cuatrimestreDictado }})</option>
+                        }
+                    </select>
                 </div>
+
+                <!-- Cursada: Comision Selection -->
+                @if (tipo === 'CURSADA') {
+                <div class="form-group">
+                    <label for="comision">Comisión</label>
+                    <select id="comision" name="comision" [(ngModel)]="selectedComisionId" required class="form-control"
+                        [disabled]="!selectedMateriaId">
+                        <option value="" disabled selected>Seleccione una comisión</option>
+                        @for (comision of comisiones; track comision.idComision) {
+                        <option [value]="comision.idComision" [disabled]="!comision.habilitada">
+                            {{ comision.nombreComision }} - {{ comision.turno }}
+                            @if (!comision.habilitada) { ({{ comision.mensaje }}) }
+                        </option>
+                        }
+                    </select>
+                </div>
+                }
+
+                <!-- Examen: Mesa Selection -->
+                @if (tipo === 'EXAMEN') {
+                <div class="form-group">
+                    <label for="mesa">Mesa de Examen</label>
+                    <select id="mesa" name="mesa" [(ngModel)]="selectedMesaDetalleId" (change)="onMesaChange()" required
+                        class="form-control" [disabled]="!selectedMateriaId">
+                        <option value="" disabled selected>Seleccione una fecha</option>
+                        @for (mesa of mesas; track mesa.idDetalleMesa) {
+                        <option [value]="mesa.idDetalleMesa" [disabled]="!mesa.habilitada">
+                            {{ mesa.fecha | date:'dd/MM/yyyy' }} {{ mesa.hora }} - {{ mesa.nombreMesa }}
+                            @if (!mesa.habilitada) { ({{ mesa.mensaje }}) }
+                        </option>
+                        }
+                    </select>
+                </div>
+                }
 
                 <div class="form-actions">
                     <button type="button" class="btn-secondary" (click)="cancel()">Cancelar</button>
-                    <button type="submit" class="btn-primary" [disabled]="!form.valid || isLoading">
+                    <button type="submit" class="btn-primary" [disabled]="!form.valid || isLoading || !selectedStudent">
                         @if (isLoading) {
                         <span class="loader"></span>
                         }
-                        Guardar
+                        Confirmar Inscripción
                     </button>
                 </div>
             </form>
