@@ -1,0 +1,48 @@
+<app-page-layout title="Gestión de Carreras" icon="school">
+    <div class="content-container">
+
+        <div class="stats-overview">
+            <div class="stat-box" *ngFor="let carrera of carreras">
+                <h4>{{ carrera.alias }}</h4>
+                <p class="count">{{ carrera.cantidadMatriculados }}</p>
+                <span class="label">Matriculados</span>
+            </div>
+        </div>
+
+        <div class="card list-card">
+            @if (isLoading) {
+            <app-loading-spinner></app-loading-spinner>
+            } @else {
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Alias</th>
+                            <th>Matriculados</th>
+                            <th>Planes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (carrera of carreras; track carrera.id) {
+                        <tr>
+                            <td>{{ carrera.nombre }}</td>
+                            <td>{{ carrera.alias }}</td>
+                            <td>{{ carrera.cantidadMatriculados }}</td>
+                            <td>
+                                <!-- Placeholder for plan details interaction -->
+                                <button class="btn-outline">Ver Planes</button>
+                            </td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="4" class="empty-cell">No hay carreras registradas.</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            }
+        </div>
+    </div>
+</app-page-layout>
