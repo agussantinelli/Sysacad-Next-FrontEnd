@@ -206,6 +206,11 @@ export const routes: Routes = [
         loadComponent: () => import('@features/admin/users/user-form/user-form.component').then(m => m.UserFormComponent)
     },
     {
+        path: 'admin/profile/:id',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/user-profile/admin-user-profile.component').then(m => m.AdminUserProfileComponent)
+    },
+    {
         path: 'admin/inscriptions',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/admin/inscriptions/admin-inscriptions.component').then(m => m.AdminInscriptionsComponent)

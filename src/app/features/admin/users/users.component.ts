@@ -49,6 +49,10 @@ export class UsersComponent implements OnInit {
         this.router.navigate(['/admin/users/edit', user.id]);
     }
 
+    goToProfile(user: UsuarioResponse) {
+        this.router.navigate(['/admin/profile', user.id]);
+    }
+
     toggleState(user: UsuarioResponse) {
         const nuevoEstado = user.estado === EstadoUsuario.ACTIVO ? EstadoUsuario.INACTIVO : EstadoUsuario.ACTIVO;
 
