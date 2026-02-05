@@ -72,10 +72,9 @@ export class NavbarComponent implements OnInit {
         {
             title: 'Académica',
             options: [
+                { title: 'Facultades', icon: 'domain', route: '/admin/universities' },
                 { title: 'Carreras', icon: 'school', route: '/admin/careers' },
-                { title: 'Facultades', icon: 'domain', route: '/admin/faculties' },
-                { title: 'Planes', icon: 'map', route: '/admin/study-plans' },
-                { title: 'Materias', icon: 'book', route: '/admin/subjects' }
+                { title: 'Comisiones', icon: 'groups', route: '/admin/commissions' }
             ]
         },
         {

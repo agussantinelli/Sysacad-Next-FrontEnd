@@ -179,11 +179,15 @@ export const routes: Routes = [
         loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
     },
     {
-        path: 'admin/faculties',
+        path: 'admin/universities',
         loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
     },
     {
         path: 'admin/study-plans',
+        loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
+    },
+    {
+        path: 'admin/commissions',
         loadComponent: () => import('@shared/components/construction/construction.component').then(m => m.ConstructionComponent)
     },
     {
