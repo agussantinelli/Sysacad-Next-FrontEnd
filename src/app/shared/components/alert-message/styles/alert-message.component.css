@@ -1,6 +1,6 @@
 .alert-container {
     position: fixed;
-    top: 1rem;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
