@@ -2,33 +2,48 @@
     <div class="stats-container">
 
         <!-- Filter Bar -->
+        <!-- Filter Bar -->
         <div class="card filter-card">
+            <h4><span class="material-icons">filter_alt</span> Filtros de Búsqueda</h4>
             <div class="filter-row">
                 <div class="form-group">
-                    <label>Año</label>
-                    <input type="number" [(ngModel)]="selectedAnio" class="form-control" placeholder="Todos">
+                    <label>Año Académico</label>
+                    <div class="input-wrapper">
+                        <span class="material-icons input-icon">calendar_today</span>
+                        <select [(ngModel)]="selectedAnio" class="form-control">
+                            <option [ngValue]="null">Todos</option>
+                            <option [ngValue]="2025">2025</option>
+                            <option [ngValue]="2026">2026</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Facultad</label>
-                    <select [(ngModel)]="selectedFacultad" class="form-control">
-                        <option value="">Todas</option>
-                        @for (fac of facultades; track fac.id) {
-                        <option [value]="fac.id">{{ fac.nombreCompleto }}</option>
-                        }
-                    </select>
+                    <div class="input-wrapper">
+                        <span class="material-icons input-icon">apartment</span>
+                        <select [(ngModel)]="selectedFacultad" class="form-control">
+                            <option value="">Todas</option>
+                            @for (fac of facultades; track fac.id) {
+                            <option [value]="fac.id">{{ fac.nombreCompleto }}</option>
+                            }
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Carrera</label>
-                    <select [(ngModel)]="selectedCarrera" class="form-control">
-                        <option value="">Todas</option>
-                        @for (car of carreras; track car.id) {
-                        <option [value]="car.id">{{ car.nombre }}</option>
-                        }
-                    </select>
+                    <div class="input-wrapper">
+                        <span class="material-icons input-icon">school</span>
+                        <select [(ngModel)]="selectedCarrera" class="form-control">
+                            <option value="">Todas</option>
+                            @for (car of carreras; track car.id) {
+                            <option [value]="car.id">{{ car.nombre }}</option>
+                            }
+                        </select>
+                    </div>
                 </div>
                 <div class="filter-actions">
                     <button class="btn-primary" (click)="applyFilters()" [disabled]="isLoading">
-                        <span class="material-icons">filter_list</span> Aplicar
+                        <span class="material-icons">refresh</span> Actualizar
                     </button>
                 </div>
             </div>
