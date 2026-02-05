@@ -179,6 +179,10 @@ export const routes: Routes = [
         loadComponent: () => import('@features/admin/careers/admin-careers.component').then(m => m.AdminCareersComponent)
     },
     {
+        path: 'admin/carreras/:carreraId/plan/:anio',
+        loadComponent: () => import('@features/admin/plan-detail/plan-detail.component').then(m => m.AdminPlanDetailComponent)
+    },
+    {
         path: 'admin/universities',
         loadComponent: () => import('@features/admin/universities/admin-universities.component').then(m => m.AdminUniversitiesComponent)
     },
