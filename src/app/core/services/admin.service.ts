@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest } from '@core/models/admin.models';
+import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest, AdminInscripcionRequest } from '@core/models/admin.models';
 import { FacultadResponse } from '@core/models/facultad.models';
 import { CarreraResponse } from '@core/models/carrera.models';
 import { PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
 import { UsuarioResponse } from '@core/models/usuario.models';
+import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
+import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
+import { MateriaResponse } from '@core/models/materia.models';
 
 @Injectable({
     providedIn: 'root'
@@ -79,6 +82,45 @@ export class AdminService {
 
     matricular(request: MatriculacionRequest): Observable<void> {
         return from(axiosClient.post<void>('/admin/matriculacion', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    // Inscripciones (Cursada/Examen)
+    inscribir(request: AdminInscripcionRequest): Observable<void> {
+        return from(axiosClient.post<void>('/admin/inscripcion', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getMateriasCursada(idAlumno: string): Observable<MateriaResponse[]> {
+        return from(axiosClient.get<MateriaResponse[]>('/admin/inscripcion/cursado/materias', {
+            params: { idAlumno }
+        })).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getComisiones(idAlumno: string, idMateria: string): Observable<ComisionDisponibleDTO[]> {
+        return from(axiosClient.get<ComisionDisponibleDTO[]>('/admin/inscripcion/cursado/comisiones', {
+            params: { idAlumno, idMateria }
+        })).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getMateriasExamen(idAlumno: string): Observable<MateriaResponse[]> {
+        return from(axiosClient.get<MateriaResponse[]>('/admin/inscripcion/examen/materias', {
+            params: { idAlumno }
+        })).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getMesas(idAlumno: string, idMateria: string): Observable<MesaExamenDisponibleDTO[]> {
+        return from(axiosClient.get<MesaExamenDisponibleDTO[]>('/admin/inscripcion/examen/mesas', {
+            params: { idAlumno, idMateria }
+        })).pipe(
             map(response => response.data)
         );
     }
