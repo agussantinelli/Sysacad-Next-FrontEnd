@@ -101,3 +101,64 @@ export interface MesaAdminDTO {
     cantidadInscriptos: number;
     abierta: boolean;
 }
+
+// Commissions
+export interface AdminComisionDTO {
+    id: string;
+    nombre: string;
+    turno: string;
+    anio: number;
+    nombreSalon: string;
+    idCarrera: string; // Needed for fetching subjects
+    materias: AdminMateriaComisionDTO[];
+}
+
+export interface AdminMateriaComisionDTO {
+    idMateria: string;
+    nombreMateria: string;
+    nivel: number; // Short in backend -> number
+    cantidadInscriptos: number; // long -> number
+    alumnos: AlumnoResumenDTO[];
+    profesores: ProfesorResumenDTO[];
+}
+
+export interface AlumnoResumenDTO {
+    idUsuario: string;
+    nombre: string;
+    apellido: string;
+    legajo: string;
+}
+
+export interface ProfesorResumenDTO {
+    idUsuario: string;
+    nombre: string;
+    apellido: string;
+    legajo: string;
+}
+
+export interface AsignarMateriaComisionRequest {
+    idMateria: string;
+    idsProfesores: string[]; // List<UUID>
+    horarios: HorarioRequestDTO[];
+}
+
+export interface HorarioRequestDTO {
+    dia: string; // DiaSemana enum as string
+    horaDesde: string; // LocalTime -> string "HH:mm"
+    horaHasta: string; // LocalTime -> string "HH:mm"
+}
+
+export interface ProfesorDisponibleDTO {
+    id: string;
+    nombre: string;
+    apellido: string;
+    legajo: string;
+}
+
+export interface ComisionRequest {
+    nombre: string;
+    turno: string;
+    anio: number;
+    salon: string; // inferred from "nombreSalon" or similar
+    idCarrera: string; // Usually required to link commission to a structure
+}
