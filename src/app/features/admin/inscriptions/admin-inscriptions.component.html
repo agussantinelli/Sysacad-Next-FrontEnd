@@ -32,7 +32,7 @@
                             </span>
                         </td>
                         <td>
-                            <div class="student-profile">
+                            <div class="student-profile" style="cursor: pointer;" (click)="goToProfile(item.idAlumno)">
                                 <div class="avatar-container">
                                     @if (item.fotoPerfil) {
                                     <img [src]="getProfileImageUrl(item.fotoPerfil)" alt="Perfil" class="avatar-img">
@@ -52,9 +52,7 @@
                         <td>{{ item.comision }}</td>
                         <td>{{ item.estado }}</td>
                         <td>
-                            <button class="btn-icon-action" title="Ver Perfil" (click)="goToProfile(item.idAlumno)">
-                                <span class="material-icons">visibility</span>
-                            </button>
+
                             <button class="btn-icon-action delete" title="Eliminar Inscripción"
                                 (click)="deleteInscription(item)">
                                 <span class="material-icons">delete</span>
