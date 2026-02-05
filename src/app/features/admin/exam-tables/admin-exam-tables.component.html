@@ -25,16 +25,47 @@
             </div>
         </div>
 
-        <!-- List -->
+        <!-- Views -->
+        @if (isLoading) {
+        <app-loading-spinner></app-loading-spinner>
+        } @else {
+        @if (!selectedTurno) {
+        <!-- Turns Grid View -->
+        <div class="turns-grid">
+            @for (turno of uniqueTurnos; track turno) {
+            <div class="card turn-card" (click)="selectTurno(turno)">
+                <div class="turn-header">
+                    <span class="material-icons turn-icon">event_note</span>
+                    <h4>{{ turno }}</h4>
+                </div>
+                <div class="turn-stats">
+                    <span class="stat-count">{{ getMesasCount(turno) }}</span>
+                    <span class="stat-label">Mesas de Examen</span>
+                </div>
+                <button class="btn-outline w-100">
+                    Ver Mesas
+                </button>
+            </div>
+            } @empty {
+            <div class="empty-state-card">
+                <p>No hay turnos de examen registrados.</p>
+            </div>
+            }
+        </div>
+        } @else {
+        <!-- Selected Turn Detail View -->
         <div class="card list-card">
-            @if (isLoading) {
-            <app-loading-spinner></app-loading-spinner>
-            } @else {
+            <div class="card-header-actions">
+                <button class="btn-outline" (click)="clearSelection()">
+                    <span class="material-icons">arrow_back</span> Volver a Turnos
+                </button>
+                <h3>Mesas: {{ selectedTurno }}</h3>
+            </div>
+
             <div class="table-responsive">
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Turno</th>
                             <th>Materia</th>
                             <th>Fecha Examen</th>
                             <th>Inscriptos</th>
@@ -43,10 +74,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (mesa of mesas; track mesa.idMesaExamen + '-' + mesa.nroDetalle) {
+                        @for (mesa of filteredMesas; track mesa.idMesaExamen + '-' + mesa.nroDetalle) {
                         <tr>
-                            <td>{{ mesa.turno }}</td>
-                            <td>{{ mesa.materia }}</td>
+                            <td class="fw-bold">{{ mesa.materia }}</td>
                             <td>{{ mesa.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
                             <td>{{ mesa.cantidadInscriptos }}</td>
                             <td>
@@ -60,16 +90,13 @@
                                 </button>
                             </td>
                         </tr>
-                        } @empty {
-                        <tr>
-                            <td colspan="6" class="empty-cell">No hay mesas de examen configuradas.</td>
-                        </tr>
                         }
                     </tbody>
                 </table>
             </div>
-            }
         </div>
+        }
+        }
 
     </div>
 </app-page-layout>

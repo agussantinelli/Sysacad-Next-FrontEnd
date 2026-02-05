@@ -19,6 +19,8 @@ export class AdminExamTablesComponent implements OnInit {
   private alertService = inject(AlertService);
 
   mesas: MesaAdminDTO[] = [];
+  uniqueTurnos: string[] = [];
+  selectedTurno: string | null = null;
   isLoading = false;
 
   newTurno: MesaExamenRequest = {
@@ -36,6 +38,7 @@ export class AdminExamTablesComponent implements OnInit {
     this.adminService.getAllMesasAdmin().subscribe({
       next: (data) => {
         this.mesas = data;
+        this.processTurnos();
         this.isLoading = false;
       },
       error: (err) => {
@@ -44,6 +47,28 @@ export class AdminExamTablesComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  processTurnos() {
+    // Extract unique turn names
+    this.uniqueTurnos = [...new Set(this.mesas.map(m => m.turno))].sort();
+  }
+
+  selectTurno(turno: string) {
+    this.selectedTurno = turno;
+  }
+
+  clearSelection() {
+    this.selectedTurno = null;
+  }
+
+  get filteredMesas() {
+    if (!this.selectedTurno) return [];
+    return this.mesas.filter(m => m.turno === this.selectedTurno);
+  }
+
+  getMesasCount(turno: string): number {
+    return this.mesas.filter(m => m.turno === turno).length;
   }
 
   createTurno() {
