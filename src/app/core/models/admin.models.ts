@@ -18,3 +18,10 @@ export interface AdminEstadisticasDTO extends ProfesorEstadisticasDTO {
     // Additional aggregated fields can be added here if defined in backend
     // For now, it inherits from ProfesorEstadisticasDTO as specified
 }
+
+export interface MatriculacionRequest {
+    idUsuario: string;
+    idFacultad: string;
+    idCarrera: string;
+    nroPlan: number;
+}
