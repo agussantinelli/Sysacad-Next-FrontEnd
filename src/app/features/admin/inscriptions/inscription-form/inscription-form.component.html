@@ -1,0 +1,45 @@
+<app-page-layout title="Nueva Inscripción">
+    <div class="form-container">
+        <div class="form-card">
+            <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+                <!-- Alumno Selection -->
+                <div class="form-group">
+                    <label for="alumno">Alumno</label>
+                    <select id="alumno" name="alumno" [(ngModel)]="inscriptionData.idAlumno" required
+                        class="form-control">
+                        <option value="" disabled selected>Seleccione un alumno</option>
+                        @for (student of students; track student.id) {
+                        <option [value]="student.id">{{ student.apellido }}, {{ student.nombre }} ({{ student.legajo }})
+                        </option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Tipo Selection -->
+                <div class="form-group">
+                    <label for="tipo">Tipo de Inscripción</label>
+                    <select id="tipo" name="tipo" [(ngModel)]="inscriptionData.tipo" required class="form-control">
+                        <option value="CURSADA">Cursada</option>
+                        <option value="EXAMEN">Examen Final</option>
+                    </select>
+                </div>
+
+                <!-- Placeholder for Subject/Commission/Exam selection -->
+                <div class="form-group">
+                    <p class="hint-text">Seleccione materia y detalles (En desarrollo)</p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" (click)="cancel()">Cancelar</button>
+                    <button type="submit" class="btn-primary" [disabled]="!form.valid || isLoading">
+                        @if (isLoading) {
+                        <span class="loader"></span>
+                        }
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</app-page-layout>
