@@ -89,6 +89,10 @@ export class AdminInscriptionsComponent implements OnInit {
         });
     }
 
+    goToCreate() {
+        this.router.navigate(['/admin/inscriptions/create']);
+    }
+
     goToProfile(userId: string) {
         this.router.navigate(['/admin/profile', userId]);
     }

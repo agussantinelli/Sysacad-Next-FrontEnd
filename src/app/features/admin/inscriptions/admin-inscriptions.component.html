@@ -1,5 +1,11 @@
 <app-page-layout title="Inscripciones" icon="app_registration">
     <div class="inscriptions-container">
+        <div class="header-actions">
+            <button class="btn-create" (click)="goToCreate()">
+                <span class="material-icons">add_circle</span>
+                Nueva Inscripción
+            </button>
+        </div>
         @if (isLoading) {
         <app-loading-spinner message="Cargando inscripciones..."></app-loading-spinner>
         } @else {

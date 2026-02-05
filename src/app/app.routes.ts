@@ -216,6 +216,11 @@ export const routes: Routes = [
         loadComponent: () => import('@features/admin/inscriptions/admin-inscriptions.component').then(m => m.AdminInscriptionsComponent)
     },
     {
+        path: 'admin/inscriptions/create',
+        canActivate: [requireAuthGuard],
+        loadComponent: () => import('@features/admin/inscriptions/inscription-form/inscription-form.component').then(m => m.InscriptionFormComponent)
+    },
+    {
         path: 'admin/statistics',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/admin/statistics/admin-statistics.component').then(m => m.AdminStatisticsComponent)
