@@ -3,7 +3,9 @@ import { ProfesorEstadisticasDTO } from './professor.models';
 export interface AdminInscripcionDTO {
     id: string; // UUID
     tipo: 'CURSADA' | 'EXAMEN';
-    nombreAlumno: string;
+    nombre: string;
+    apellido: string;
+    fotoPerfil?: string;
     legajoAlumno: string;
     nombreMateria: string;
     comision: string; // "N/A" for EXAMEN
