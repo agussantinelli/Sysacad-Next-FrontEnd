@@ -11,4 +11,5 @@ import { CommonModule } from '@angular/common';
 export class LoadingSpinnerComponent {
     @Input() message: string = 'Cargando...';
     @Input() fullScreen: boolean = false;
+    @Input() inline: boolean = false;
 }

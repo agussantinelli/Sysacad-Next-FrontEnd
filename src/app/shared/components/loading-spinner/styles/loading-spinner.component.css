@@ -21,6 +21,28 @@
     z-index: 2000;
 }
 
+.spinner-overlay.inline {
+    position: relative;
+    background: transparent;
+    backdrop-filter: none;
+    z-index: 1;
+    padding: 0;
+    height: auto;
+    width: auto;
+    display: inline-flex;
+}
+
+.spinner-overlay.inline .spinner {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    border-width: 2px;
+}
+
+.spinner-overlay.inline .spinner-message {
+    display: none;
+}
+
 /* Dark mode adjustment if parent is dark, but here we use rgba white for light mode glass.
    For dark mode support, we might need variables if the context changes.
    For now, assuming it sits on top of our glass cards.
