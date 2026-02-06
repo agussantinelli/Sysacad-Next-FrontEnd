@@ -18,7 +18,8 @@
         <!-- Turns Grid View -->
         <div class="turns-grid">
             @for (turno of turns; track turno.id) {
-            <div class="card turn-card" (click)="selectTurno(turno)">
+            <div class="card turn-card" [class.active]="isTurnActive(turno)" [class.past]="isTurnPast(turno)"
+                (click)="selectTurno(turno)">
                 <div class="turn-header">
                     <span class="material-icons turn-icon">event_note</span>
                     <h4>{{ turno.nombre }}</h4>
@@ -35,6 +36,7 @@
                     <strong>Inscriptos:</strong> {{ turno.cantidadInscriptos }}
                 </div>
                 <!-- Action Buttons -->
+                @if (!isTurnPast(turno)) {
                 <div class="turn-actions mt-3 d-flex justify-content-center gap-3">
                     <button class="icon-btn" (click)="editTurno(turno, $event)" title="Editar Turno">
                         <span class="material-icons">edit</span>
@@ -45,6 +47,7 @@
                     </button>
                     }
                 </div>
+                }
                 <button class="btn-outline w-100 mt-2">
                     Ver Mesas
                 </button>
@@ -225,7 +228,8 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Inicio</label>
-                    <input type="date" [(ngModel)]="newTurno.fechaInicio" class="form-control">
+                    <input type="date" [(ngModel)]="newTurno.fechaInicio" class="form-control"
+                        [disabled]="isEditingTurn && isEditingActiveTurn">
                 </div>
                 <div class="form-group">
                     <label>Fin</label>

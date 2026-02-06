@@ -228,6 +228,31 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
 }
 
+.turn-card.active {
+    border-color: #10b981;
+    /* Green */
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+}
+
+.turn-card.active .turn-icon {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.turn-card.past {
+    opacity: 0.7;
+    border-color: var(--border-color);
+}
+
+.turn-card.past:hover {
+    opacity: 1;
+}
+
+.turn-card.past .turn-icon {
+    color: var(--text-secondary);
+    background: var(--bg-hover);
+}
+
 .turn-header {
     display: flex;
     flex-direction: column;

@@ -56,6 +56,7 @@ export class AdminExamTablesComponent implements OnInit {
   // Turn Form State
   isEditingTurn = false;
   editingTurnId: string | null = null;
+  isEditingActiveTurn = false;
   newTurno: MesaExamenRequest = {
     nombre: '',
     fechaInicio: '',
@@ -70,7 +71,9 @@ export class AdminExamTablesComponent implements OnInit {
     this.isLoading = true;
     this.adminService.getAllTurnos().subscribe({
       next: (data) => {
-        this.turns = data;
+        // Sort by start date ascending (oldest first)
+        this.turns = data.sort((a, b) => new Date(a.fechaInicio).getTime() - new Date(b.fechaInicio).getTime());
+
         // If a turn was selected, refresh it
         if (this.selectedTurno) {
           this.selectedTurno = this.turns.find(t => t.id === this.selectedTurno!.id) || null;
@@ -101,6 +104,22 @@ export class AdminExamTablesComponent implements OnInit {
     return turno.detalles ? turno.detalles.length : 0;
   }
 
+  isTurnActive(turno: MesaExamenResponse): boolean {
+    const now = new Date();
+    const start = new Date(turno.fechaInicio);
+    const end = new Date(turno.fechaFin);
+    // Include end date by setting it to end of day? Or simple comparison
+    end.setHours(23, 59, 59);
+    return now >= start && now <= end;
+  }
+
+  isTurnPast(turno: MesaExamenResponse): boolean {
+    const now = new Date();
+    const end = new Date(turno.fechaFin);
+    end.setHours(23, 59, 59);
+    return now > end;
+  }
+
   // --- Turn Management ---
 
   showCreateTurnModal = false;
@@ -108,6 +127,7 @@ export class AdminExamTablesComponent implements OnInit {
   openCreateTurnModal() {
     this.isEditingTurn = false;
     this.editingTurnId = null;
+    this.isEditingActiveTurn = false;
     this.newTurno = { nombre: '', fechaInicio: '', fechaFin: '' };
     this.showCreateTurnModal = true;
   }
@@ -120,6 +140,7 @@ export class AdminExamTablesComponent implements OnInit {
     event.stopPropagation(); // Prevent card selection
     this.isEditingTurn = true;
     this.editingTurnId = turno.id;
+    this.isEditingActiveTurn = this.isTurnActive(turno);
 
     // Ensure dates are YYYY-MM-DD for input[type="date"]
     // Assuming backend returns "YYYY-MM-DD" or ISO. Slice just in case.
