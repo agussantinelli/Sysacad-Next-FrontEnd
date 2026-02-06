@@ -46,9 +46,11 @@ export class AdminExamTablesComponent implements OnInit {
   }
 
   loadTurnos() {
+    console.log('[AdminMain] loadTurnos called');
     this.isLoading = true;
     this.adminService.getAllTurnos().subscribe({
       next: (data) => {
+        console.log('[AdminMain] Turns loaded:', data);
         // Sort by start date ascending (oldest first)
         this.turns = data.map(t => ({
           ...t,
@@ -57,7 +59,7 @@ export class AdminExamTablesComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.error(err);
+        console.error('[AdminMain] Error loading turns:', err);
         this.alertService.error('Error al cargar turnos');
         this.isLoading = false;
       }
@@ -152,7 +154,11 @@ export class AdminExamTablesComponent implements OnInit {
 
   deleteTurno(turno: MesaExamenResponse, event: Event) {
     event.stopPropagation();
-    if (turno.cantidadInscriptos > 0 || (turno.detalles && turno.detalles.some(d => d.cantidadInscriptos > 0))) {
+    // Safety check for optional properties
+    const hasActiveInscriptions = (turno.cantidadInscriptos || 0) > 0 ||
+      (turno.detalles && turno.detalles.some(d => (d.cantidadInscriptos || 0) > 0));
+
+    if (hasActiveInscriptions) {
       this.alertService.error('No se puede eliminar un turno con inscripciones activas.');
       return;
     }

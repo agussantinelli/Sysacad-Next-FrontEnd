@@ -70,12 +70,17 @@ export class AdminDetailExamTablesComponent implements OnInit {
 
     loadTurnDetails(id: string) {
         this.isLoading = true;
-        this.adminService.getTurno(id).subscribe({
+        this.adminService.getAllTurnos().subscribe({
             next: (data) => {
-                this.turn = data;
-                // Ensure detalles is never null
-                if (!this.turn.detalles) {
-                    this.turn.detalles = [];
+                const foundTurn = data.find(t => t.id === id);
+                if (foundTurn) {
+                    this.turn = foundTurn;
+                    if (!this.turn.detalles) {
+                        this.turn.detalles = [];
+                    }
+                } else {
+                    this.alertService.error('Turno no encontrado');
+                    this.goBack();
                 }
                 this.isLoading = false;
             },
@@ -95,12 +100,12 @@ export class AdminDetailExamTablesComponent implements OnInit {
     // --- Deletion Logic ---
 
     deleteDetalle(mesa: DetalleMesaExamenResponse) {
-        if (mesa.cantidadInscriptos > 0) {
+        if ((mesa.cantidadInscriptos || 0) > 0) {
             this.alertService.error('No se puede eliminar una mesa con alumnos inscriptos.');
             return;
         }
 
-        if (this.isDatePassed(mesa.fecha)) {
+        if (this.isDatePassed(mesa.diaExamen)) {
             this.alertService.error('No se puede eliminar una mesa cuya fecha ya ha pasado.');
             return;
         }
@@ -136,9 +141,24 @@ export class AdminDetailExamTablesComponent implements OnInit {
     }
 
     isDatePassed(dateString: string): boolean {
+        // diaExamen is 'yyyy-MM-dd'
         const examDate = new Date(dateString);
+        // Normalize to midnight just in case, though comparison with now is usually enough
+        // But if now is today 10am and exam is today, strictly "passed" might need nuance.
+        // Usually passed means < today.
         const now = new Date();
-        return examDate < now;
+        now.setHours(0, 0, 0, 0);
+
+        // Fix timezone offset issue if parsed as UTC
+        // '2026-02-10' parsed as Date might look like Feb 09 21:00 in -0300
+        // Better to treat as string comparison or append time
+        const dateParts = dateString.split('-');
+        const year = +dateParts[0];
+        const month = +dateParts[1] - 1;
+        const day = +dateParts[2];
+        const localExamDate = new Date(year, month, day);
+
+        return localExamDate < now;
     }
 
     // --- Add Exam Logic (Wizard) ---

@@ -93,12 +93,16 @@ export interface DetalleMesaRequest {
 }
 
 export interface DetalleMesaExamenResponse {
-    idMesaExamen: string; // The parent ID (Turn ID)
-    nroDetalle: number; // The ID of this specific exam
-    materia: string; // Name of the subject
-    fecha: string; // LocalDateTime
-    cantidadInscriptos: number;
-    abierta: boolean;
+    idMesaExamen: string;
+    nroDetalle: number;
+    nombreMateria: string;
+    idMateria: string;
+    nombrePresidente?: string;
+    idPresidente?: string;
+    diaExamen: string; // LocalDate yyyy-MM-dd
+    horaExamen: string; // LocalTime HH:mm:ss
+    cantidadInscriptos?: number; // Optional as it might be missing
+    abierta?: boolean; // Optional
 }
 
 export interface MesaExamenResponse {

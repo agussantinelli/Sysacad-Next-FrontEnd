@@ -29,18 +29,21 @@
                         @for (mesa of turn.detalles; track mesa.idMesaExamen + '-' + mesa.nroDetalle) {
                         <tr>
                             <td class="fw-bold">{{ mesa.nombreMateria }}</td>
-                            <td>{{ mesa.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
-                            <td>{{ mesa.cantidadInscriptos }}</td>
+                            <td>
+                                {{ mesa.diaExamen | date:'dd/MM/yyyy' }} {{ mesa.horaExamen ? (mesa.horaExamen |
+                                slice:0:5) : '' }}
+                            </td>
+                            <td>{{ mesa.cantidadInscriptos || 0 }}</td>
                             <td>
                                 <span class="badge" [class.open]="mesa.abierta" [class.closed]="!mesa.abierta">
                                     {{ mesa.abierta ? 'Abierta' : 'Cerrada' }}
                                 </span>
                             </td>
                             <td>
-                                @if (mesa.cantidadInscriptos === 0) {
+                                @if ((mesa.cantidadInscriptos || 0) === 0) {
                                 <button class="icon-btn delete" (click)="deleteDetalle(mesa)"
-                                    [disabled]="isDatePassed(mesa.fecha)"
-                                    [title]="isDatePassed(mesa.fecha) ? 'No se puede eliminar una mesa pasada' : 'Eliminar Mesa'">
+                                    [disabled]="isDatePassed(mesa.diaExamen)"
+                                    [title]="isDatePassed(mesa.diaExamen) ? 'No se puede eliminar una mesa pasada' : 'Eliminar Mesa'">
                                     <span class="material-icons">delete</span>
                                 </button>
                                 }

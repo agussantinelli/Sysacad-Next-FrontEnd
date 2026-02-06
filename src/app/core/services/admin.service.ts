@@ -182,44 +182,72 @@ export class AdminService {
 
     // --- Module: Exam Tables ---
     getAllTurnos(): Observable<MesaExamenResponse[]> {
+        console.log('[AdminService] Calling getAllTurnos (/admin/mesas/turnos)');
         return from(axiosClient.get<MesaExamenResponse[]>('/admin/mesas/turnos')).pipe(
-            map(response => response.data)
+            map(response => {
+                console.log('[AdminService] getAllTurnos Response:', response.data);
+                return response.data;
+            })
         );
     }
 
     crearTurno(request: MesaExamenRequest): Observable<void> {
+        console.log('[AdminService] Calling crearTurno (/admin/mesas/turnos)', request);
         return from(axiosClient.post<void>('/admin/mesas/turnos', request)).pipe(
-            map(response => response.data)
+            map(response => {
+                console.log('[AdminService] crearTurno Response:', response.data);
+                return response.data;
+            })
         );
     }
 
     agregarDetalleMesa(request: DetalleMesaRequest): Observable<void> {
+        console.log('[AdminService] Calling agregarDetalleMesa (/admin/mesas/detalles)', request);
         return from(axiosClient.post<void>('/admin/mesas/detalles', request)).pipe(
-            map(response => response.data)
+            map(response => {
+                console.log('[AdminService] agregarDetalleMesa Response:', response.data);
+                return response.data;
+            })
         );
     }
 
     eliminarDetalleMesa(idMesa: string, nroDetalle: number): Observable<void> {
+        console.log(`[AdminService] Calling eliminarDetalleMesa (/admin/mesas/${idMesa}/detalle/${nroDetalle})`);
         return from(axiosClient.delete<void>(`/admin/mesas/${idMesa}/detalle/${nroDetalle}`)).pipe(
-            map(response => response.data)
+            map(response => {
+                console.log('[AdminService] eliminarDetalleMesa Response:', response.data);
+                return response.data;
+            })
         );
     }
 
     eliminarTurno(id: string): Observable<void> {
+        console.log(`[AdminService] Calling eliminarTurno (/admin/mesas/turnos/${id})`);
         return from(axiosClient.delete<void>(`/admin/mesas/turnos/${id}`)).pipe(
-            map(response => response.data)
+            map(response => {
+                console.log('[AdminService] eliminarTurno Response:', response.data);
+                return response.data;
+            })
         );
     }
 
     editarTurno(id: string, request: MesaExamenRequest): Observable<void> {
+        console.log(`[AdminService] Calling editarTurno (/admin/mesas/turnos/${id})`, request);
         return from(axiosClient.put<void>(`/admin/mesas/turnos/${id}`, request)).pipe(
-            map(response => response.data)
+            map(response => {
+                console.log('[AdminService] editarTurno Response:', response.data);
+                return response.data;
+            })
         );
     }
 
     getTurno(id: string): Observable<MesaExamenResponse> {
+        console.log(`[AdminService] Calling getTurno (/admin/mesas/turnos/${id})`);
         return from(axiosClient.get<MesaExamenResponse>(`/admin/mesas/turnos/${id}`)).pipe(
-            map(response => response.data)
+            map(response => {
+                console.log('[AdminService] getTurno Response:', response.data);
+                return response.data;
+            })
         );
     }
 
