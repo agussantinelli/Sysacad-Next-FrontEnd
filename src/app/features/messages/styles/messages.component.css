@@ -50,6 +50,24 @@
     overflow-y: auto;
 }
 
+.category-subtitle {
+    padding: 0.75rem 1rem 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+}
+
+.grayscale {
+    filter: grayscale(1);
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
 .conversation-item {
     display: flex;
     padding: 1rem;

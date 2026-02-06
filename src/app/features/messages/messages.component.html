@@ -9,16 +9,15 @@
             </div>
 
             <div class="conversations-list">
-                @for (conv of conversations; track conv.id) {
+                @if (currentUserRol === 'PROFESOR') {
+                @if (activeConversations.length > 0) {
+                <div class="category-subtitle">Grupos Activos</div>
+                @for (conv of activeConversations; track conv.id) {
                 <div class="conversation-item" [class.active]="selectedConversation?.id === conv.id"
                     (click)="selectConversation(conv)">
-
                     <div class="avatar-container">
-                        <div class="avatar-placeholder">
-                            {{ conv.nombre.charAt(0) }}
-                        </div>
+                        <div class="avatar-placeholder">{{ conv.nombre.charAt(0) }}</div>
                     </div>
-
                     <div class="conv-info">
                         <div class="conv-header">
                             <span class="conv-name text-truncate">{{ conv.nombre }}</span>
@@ -29,7 +28,51 @@
                         </div>
                     </div>
                 </div>
-                } @empty {
+                }
+                }
+
+                @if (inactiveConversations.length > 0) {
+                <div class="category-subtitle mt-4">Grupos Inactivos aún</div>
+                @for (conv of inactiveConversations; track conv.id) {
+                <div class="conversation-item" [class.active]="selectedConversation?.id === conv.id"
+                    (click)="selectConversation(conv)">
+                    <div class="avatar-container">
+                        <div class="avatar-placeholder grayscale opacity-50">{{ conv.nombre.charAt(0) }}</div>
+                    </div>
+                    <div class="conv-info">
+                        <div class="conv-header">
+                            <span class="conv-name text-truncate opacity-50">{{ conv.nombre }}</span>
+                            <span class="conv-time">{{ conv.fechaCreacion | date:'shortDate' }}</span>
+                        </div>
+                        <div class="conv-preview">
+                            <span class="last-message italic opacity-50">{{ conv.descripcion }}</span>
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+                } @else {
+                <!-- Lista plana para Estudiantes (u otros roles) -->
+                @for (conv of conversations; track conv.id) {
+                <div class="conversation-item" [class.active]="selectedConversation?.id === conv.id"
+                    (click)="selectConversation(conv)">
+                    <div class="avatar-container">
+                        <div class="avatar-placeholder">{{ conv.nombre.charAt(0) }}</div>
+                    </div>
+                    <div class="conv-info">
+                        <div class="conv-header">
+                            <span class="conv-name text-truncate">{{ conv.nombre }}</span>
+                            <span class="conv-time">{{ conv.fechaCreacion | date:'shortDate' }}</span>
+                        </div>
+                        <div class="conv-preview">
+                            <span class="last-message">{{ conv.descripcion }}</span>
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+
+                @if (conversations.length === 0) {
                 <div class="p-4 text-center text-secondary italic">
                     No perteneces a ningún grupo aún.
                 </div>

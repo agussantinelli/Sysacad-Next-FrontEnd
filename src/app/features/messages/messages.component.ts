@@ -56,7 +56,7 @@ export class MessagesComponent implements OnInit {
             })
         ).subscribe({
             next: (grupos) => {
-                this.conversations = grupos;
+                this.conversations = grupos || [];
 
                 // Handle deep linking
                 const idComision = this.route.snapshot.queryParamMap.get('idComision');
@@ -81,7 +81,8 @@ export class MessagesComponent implements OnInit {
     checkPermissions(groupId: string) {
         this.chatService.getMiembros(groupId).subscribe({
             next: (miembros) => {
-                const me = miembros.find(m => m.idUsuario === this.currentUserId);
+                const safeMiembros = miembros || [];
+                const me = safeMiembros.find(m => m.idUsuario === this.currentUserId);
                 this.canSend = me?.rol === RolGrupo.ADMIN;
             },
             error: (err) => console.error('Error checking permissions', err)
@@ -92,7 +93,7 @@ export class MessagesComponent implements OnInit {
         this.isLoading = true;
         this.chatService.getMensajes(groupId).subscribe({
             next: (mensajes) => {
-                this.messages = mensajes;
+                this.messages = mensajes || [];
                 this.isLoading = false;
             },
             error: (err) => {
@@ -130,5 +131,13 @@ export class MessagesComponent implements OnInit {
 
     isMine(msg: MensajeGrupoResponse): boolean {
         return msg.idUsuarioRemitente === this.currentUserId;
+    }
+
+    get activeConversations(): GrupoResponse[] {
+        return (this.conversations || []).filter(c => c && c.esVisible);
+    }
+
+    get inactiveConversations(): GrupoResponse[] {
+        return (this.conversations || []).filter(c => c && !c.esVisible);
     }
 }
