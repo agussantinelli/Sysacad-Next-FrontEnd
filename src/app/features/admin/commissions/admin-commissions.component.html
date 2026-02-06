@@ -40,10 +40,14 @@
         <div class="card details-card">
             <div class="details-header">
                 <h3>{{ selectedComision.nombre }} ({{ selectedComision.anio }})</h3>
-                <button class="btn-outline" (click)="backToList()">Volver</button>
+                <div class="header-actions">
+                    <button class="btn-primary" (click)="openAssignModal()">
+                        <span class="material-icons">add_circle</span> Agregar Materia
+                    </button>
+                    <button class="btn-outline" (click)="backToList()">Volver</button>
+                </div>
             </div>
 
-            <h4>Materias Asignadas</h4>
             <div class="table-responsive">
                 <table class="data-table">
                     <thead>
@@ -52,27 +56,49 @@
                             <th>Nivel</th>
                             <th>Inscriptos</th>
                             <th>Profesores</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @for (materia of selectedComision.materias; track materia.idMateria) {
                         <tr>
-                            <td>{{ materia.nombreMateria }}</td>
-                            <td>{{ materia.nivel }}</td>
-                            <td>{{ materia.cantidadInscriptos }}</td>
                             <td>
-                                @for (prof of materia.profesores; track prof.idUsuario) {
-                                <span class="tag">{{ prof.apellido }}</span>
-                                }
+                                <div class="cell-content">
+                                    <span class="material-icons text-muted">menu_book</span>
+                                    <span>{{ materia.nombreMateria }}</span>
+                                </div>
+                            </td>
+                            <td>{{ materia.nivel }}</td>
+                            <td>
+                                <span class="badge">{{ materia.cantidadInscriptos }}</span>
+                            </td>
+                            <td>
+                                <div class="prof-list">
+                                    @for (prof of materia.profesores; track prof.idUsuario) {
+                                    <span class="tag">{{ prof.apellido }}</span>
+                                    } @empty {
+                                    <span class="text-secondary italic">Sin asignar</span>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <button class="icon-btn danger" title="Desasignar">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                            </td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="5" class="text-center py-4">
+                                <div class="empty-state-small">
+                                    <span class="material-icons">playlist_remove</span>
+                                    <p>No hay materias asignadas a esta comisión.</p>
+                                </div>
                             </td>
                         </tr>
                         }
                     </tbody>
                 </table>
-            </div>
-
-            <div class="actions mt-3">
-                <p class="text-secondary">Funcionalidad de asignación de materias en desarrollo.</p>
             </div>
         </div>
         }
