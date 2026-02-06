@@ -21,7 +21,13 @@
                     <div class="conv-info">
                         <div class="conv-header">
                             <span class="conv-name text-truncate">{{ conv.nombre }}</span>
-                            <span class="conv-time">{{ conv.fechaCreacion | date:'shortDate' }}</span>
+                            <span class="conv-time">
+                                @if (isToday(conv.fechaCreacion)) {
+                                {{ conv.fechaCreacion | date:'HH:mm' }}
+                                } @else {
+                                {{ conv.fechaCreacion | date:'dd/MM/yy' }}
+                                }
+                            </span>
                         </div>
                         <div class="conv-preview">
                             <span class="last-message">{{ conv.descripcion }}</span>
@@ -42,7 +48,7 @@
                     <div class="conv-info">
                         <div class="conv-header">
                             <span class="conv-name text-truncate opacity-50">{{ conv.nombre }}</span>
-                            <span class="conv-time">{{ conv.fechaCreacion | date:'shortDate' }}</span>
+                            <!-- Ocultamos la fecha para grupos inactivos -->
                         </div>
                         <div class="conv-preview">
                             <span class="last-message italic opacity-50">{{ conv.descripcion }}</span>
@@ -62,7 +68,13 @@
                     <div class="conv-info">
                         <div class="conv-header">
                             <span class="conv-name text-truncate">{{ conv.nombre }}</span>
-                            <span class="conv-time">{{ conv.fechaCreacion | date:'shortDate' }}</span>
+                            <span class="conv-time">
+                                @if (isToday(conv.fechaCreacion)) {
+                                {{ conv.fechaCreacion | date:'HH:mm' }}
+                                } @else {
+                                {{ conv.fechaCreacion | date:'dd/MM/yy' }}
+                                }
+                            </span>
                         </div>
                         <div class="conv-preview">
                             <span class="last-message">{{ conv.descripcion }}</span>
@@ -131,7 +143,7 @@
 
             @if (canSend) {
             <div class="chat-input-area">
-                <button class="icon-btn"><span class="material-icons">attach_file</span></button>
+                <!-- Se quitó el botón de adjuntos -->
                 <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="newMessage"
                     (keyup.enter)="sendMessage()">
                 <button class="btn-send" (click)="sendMessage()" [disabled]="!newMessage.trim()">

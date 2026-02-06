@@ -138,6 +138,17 @@ export class MessagesComponent implements OnInit {
     }
 
     get inactiveConversations(): GrupoResponse[] {
-        return (this.conversations || []).filter(c => c && !c.esVisible);
+        return (this.conversations || [])
+            .filter(c => c && !c.esVisible)
+            .sort((a, b) => a.nombre.localeCompare(b.nombre));
     }
+
+    isToday = (date: any): boolean => {
+        if (!date) return false;
+        const d = new Date(date);
+        const today = new Date();
+        return d.getDate() === today.getDate() &&
+            d.getMonth() === today.getMonth() &&
+            d.getFullYear() === today.getFullYear();
+    };
 }
