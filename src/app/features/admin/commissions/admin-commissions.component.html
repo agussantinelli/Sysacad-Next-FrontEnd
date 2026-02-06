@@ -123,7 +123,7 @@
                     [disabled]="!newComision.turno || !newComision.anio">
                     <option value="" disabled selected>Seleccione una opción</option>
                     @for (salon of salones; track salon.id) {
-                    <option [value]="salon.nombre">{{ salon.nombre }} (Cap: {{ salon.capacidad }})</option>
+                    <option [value]="salon.nombre">{{ salon.nombre }}</option>
                     }
                 </select>
             </div>
