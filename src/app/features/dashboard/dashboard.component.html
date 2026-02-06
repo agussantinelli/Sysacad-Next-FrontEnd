@@ -7,7 +7,8 @@
             <div class="header-text">
                 <h1>{{ greeting }}, <span class="highlight">{{ usuario?.nombre }}</span></h1>
                 @if (usuario?.rol === 'ESTUDIANTE' && usuario?.carreras?.length) {
-                <p class="subtitle">{{ usuario?.carreras?.[0]?.nombreCarrera }} (Plan {{ usuario?.anioIngreso }})</p>
+                <p class="subtitle">{{ usuario?.carreras?.[0]?.nombreCarrera }} (Plan {{
+                    usuario?.carreras?.[0]?.anioPlan }})</p>
                 } @else if (usuario?.rol === 'PROFESOR') {
                 <p class="subtitle">{{ usuario?.tituloAcademico || 'Docente' }}</p>
                 } @else {

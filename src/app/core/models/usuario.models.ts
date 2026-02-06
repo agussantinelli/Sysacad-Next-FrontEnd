@@ -8,6 +8,7 @@ export enum EstadoUsuario {
 export interface InfoCarrera {
     nombreCarrera: string;
     facultad: string;
+    anioPlan: number;
 }
 
 export interface UsuarioRequest {
