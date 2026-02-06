@@ -81,9 +81,11 @@
                                 </div>
                             </td>
                             <td>
+                                @if (materia.cantidadInscriptos === 0) {
                                 <button class="icon-btn danger" title="Desasignar">
                                     <span class="material-icons">delete</span>
                                 </button>
+                                }
                             </td>
                         </tr>
                         } @empty {
