@@ -6,8 +6,10 @@
 
 <router-outlet />
 
-@if (authService.currentUser$ | async) {
+@if (authService.currentUser$ | async; as user) {
+@if (user.rol !== 'ADMIN') {
 <a routerLink="/messages" class="floating-chat-btn" title="Mensajes">
     <span class="material-icons">chat</span>
 </a>
+}
 }
