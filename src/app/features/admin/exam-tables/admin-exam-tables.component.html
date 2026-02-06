@@ -17,17 +17,32 @@
         @if (!selectedTurno) {
         <!-- Turns Grid View -->
         <div class="turns-grid">
-            @for (turno of uniqueTurnos; track turno) {
+            @for (turno of turns; track turno.id) {
             <div class="card turn-card" (click)="selectTurno(turno)">
                 <div class="turn-header">
                     <span class="material-icons turn-icon">event_note</span>
-                    <h4>{{ turno }}</h4>
+                    <h4>{{ turno.nombre }}</h4>
                 </div>
                 <div class="turn-stats">
                     <span class="stat-count">{{ getMesasCount(turno) }}</span>
                     <span class="stat-label">Mesas de Examen</span>
                 </div>
-                <button class="btn-outline w-100">
+                <div class="turn-dates text-muted small mt-2">
+                    {{ turno.fechaInicio | date:'dd/MM' }} - {{ turno.fechaFin | date:'dd/MM/yyyy' }}
+                </div>
+                <div class="turn-dates text-muted small mt-1">
+                    <strong>Inscriptos:</strong> {{ turno.cantidadInscriptos }}
+                </div>
+                <!-- Action Buttons -->
+                <div class="turn-actions mt-3 d-flex justify-content-center gap-3">
+                    <button class="icon-btn" (click)="editTurno(turno, $event)" title="Editar Turno">
+                        <span class="material-icons">edit</span>
+                    </button>
+                    <button class="icon-btn delete" (click)="deleteTurno(turno, $event)" title="Eliminar Turno">
+                        <span class="material-icons">delete</span>
+                    </button>
+                </div>
+                <button class="btn-outline w-100 mt-2">
                     Ver Mesas
                 </button>
             </div>
@@ -44,7 +59,7 @@
                 <button class="btn-outline" (click)="clearSelection()">
                     <span class="material-icons">arrow_back</span> Volver a Turnos
                 </button>
-                <h3>Mesas: {{ selectedTurno }}</h3>
+                <h3>{{ selectedTurno.nombre }}</h3>
                 <button class="btn-primary" (click)="openAddModal()">
                     <span class="material-icons">add_circle</span> Agregar Mesa
                 </button>
@@ -62,7 +77,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (mesa of filteredMesas; track mesa.idMesaExamen + '-' + mesa.nroDetalle) {
+                        @for (mesa of selectedTurno.detalles; track mesa.idMesaExamen + '-' + mesa.nroDetalle) {
                         <tr>
                             <td class="fw-bold">{{ mesa.materia }}</td>
                             <td>{{ mesa.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
@@ -80,6 +95,11 @@
                                     <span class="material-icons">delete</span>
                                 </button>
                                 }
+                            </td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">No hay mesas cargadas en este turno.
                             </td>
                         </tr>
                         }
@@ -190,11 +210,11 @@
         </div>
     </div>
     }
-    <!-- Create Turn Modal -->
+    <!-- Create/Edit Turn Modal -->
     @if (showCreateTurnModal) {
     <div class="modal-overlay" (click)="closeCreateTurnModal()">
         <div class="modal-content" (click)="$event.stopPropagation()">
-            <h4>Nuevo Turno de Examen</h4>
+            <h4>{{ isEditingTurn ? 'Editar Turno' : 'Nuevo Turno de Examen' }}</h4>
             <div class="form-group">
                 <label>Nombre</label>
                 <input type="text" [(ngModel)]="newTurno.nombre" class="form-control" placeholder="Ej: Febrero 2026">
@@ -211,9 +231,9 @@
             </div>
             <div class="modal-actions">
                 <button class="btn-secondary" (click)="closeCreateTurnModal()">Cancelar</button>
-                <button class="btn-primary" (click)="createTurno()"
+                <button class="btn-primary" (click)="saveTurno()"
                     [disabled]="!newTurno.nombre || !newTurno.fechaInicio || !newTurno.fechaFin || isLoading">
-                    Crear Turno
+                    {{ isEditingTurn ? 'Guardar Cambios' : 'Crear Turno' }}
                 </button>
             </div>
         </div>

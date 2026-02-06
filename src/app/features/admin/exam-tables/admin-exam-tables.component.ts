@@ -5,7 +5,7 @@ import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
-import { MesaAdminDTO, MesaExamenRequest, CarreraAdminDTO, SimpleMateriaDTO, ProfesorDisponibleDTO, DetalleMesaRequest } from '@core/models/admin.models';
+import { MesaExamenRequest, CarreraAdminDTO, SimpleMateriaDTO, ProfesorDisponibleDTO, DetalleMesaRequest, MesaExamenResponse, DetalleMesaExamenResponse } from '@core/models/admin.models';
 
 import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 
@@ -20,9 +20,10 @@ export class AdminExamTablesComponent implements OnInit {
   private adminService = inject(AdminService);
   private alertService = inject(AlertService);
 
-  mesas: MesaAdminDTO[] = [];
-  uniqueTurnos: string[] = [];
-  selectedTurno: string | null = null;
+  // Data Source: List of Turns (Hierarchical)
+  turns: MesaExamenResponse[] = [];
+  selectedTurno: MesaExamenResponse | null = null;
+  // uniqueTurnos: string[] = []; // No longer needed
 
   isLoading = false;
 
@@ -32,7 +33,9 @@ export class AdminExamTablesComponent implements OnInit {
 
   // Delete Confirmation State
   showDeleteConfirmation = false;
-  itemToDelete: MesaAdminDTO | null = null;
+  deleteType: 'TURN' | 'DETAIL' = 'DETAIL';
+  itemToDelete: DetalleMesaExamenResponse | null = null; // For Table Details
+  turnToDelete: MesaExamenResponse | null = null; // For Turns
 
   // Add Exam Wizard State
   addStep: 'SUBJECT' | 'DATETIME' | 'PROFESSOR' = 'SUBJECT';
@@ -50,6 +53,9 @@ export class AdminExamTablesComponent implements OnInit {
   availablePresidents: ProfesorDisponibleDTO[] = [];
   selectedPresidentId: string = '';
 
+  // Turn Form State
+  isEditingTurn = false;
+  editingTurnId: string | null = null;
   newTurno: MesaExamenRequest = {
     nombre: '',
     fechaInicio: '',
@@ -57,31 +63,31 @@ export class AdminExamTablesComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.loadMesas();
+    this.loadTurnos();
   }
 
-  loadMesas() {
+  loadTurnos() {
     this.isLoading = true;
-    this.adminService.getAllMesasAdmin().subscribe({
+    this.adminService.getAllTurnos().subscribe({
       next: (data) => {
-        this.mesas = data;
-        this.processTurnos();
+        this.turns = data;
+        // If a turn was selected, refresh it
+        if (this.selectedTurno) {
+          this.selectedTurno = this.turns.find(t => t.id === this.selectedTurno!.id) || null;
+        }
         this.isLoading = false;
       },
       error: (err) => {
         console.error(err);
-        this.alertService.error('Error al cargar mesas');
+        this.alertService.error('Error al cargar turnos');
         this.isLoading = false;
       }
     });
   }
 
-  processTurnos() {
-    // Extract unique turn names
-    this.uniqueTurnos = [...new Set(this.mesas.map(m => m.turno))].sort();
-  }
+  // processTurnos() removed
 
-  selectTurno(turno: string) {
+  selectTurno(turno: MesaExamenResponse) {
     this.selectedTurno = turno;
   }
 
@@ -89,32 +95,88 @@ export class AdminExamTablesComponent implements OnInit {
     this.selectedTurno = null;
   }
 
-  get filteredMesas() {
-    if (!this.selectedTurno) return [];
-    return this.mesas.filter(m => m.turno === this.selectedTurno);
+  // get filteredMesas removed - simply use selectedTurno.detalles
+
+  getMesasCount(turno: MesaExamenResponse): number {
+    return turno.detalles ? turno.detalles.length : 0;
   }
 
-  getMesasCount(turno: string): number {
-    return this.mesas.filter(m => m.turno === turno).length;
+  // --- Turn Management ---
+
+  showCreateTurnModal = false;
+
+  openCreateTurnModal() {
+    this.isEditingTurn = false;
+    this.editingTurnId = null;
+    this.newTurno = { nombre: '', fechaInicio: '', fechaFin: '' };
+    this.showCreateTurnModal = true;
   }
 
-  createTurno() {
+  closeCreateTurnModal() {
+    this.showCreateTurnModal = false;
+  }
+
+  editTurno(turno: MesaExamenResponse, event: Event) {
+    event.stopPropagation(); // Prevent card selection
+    this.isEditingTurn = true;
+    this.editingTurnId = turno.id;
+    this.newTurno = {
+      nombre: turno.nombre,
+      fechaInicio: turno.fechaInicio,
+      fechaFin: turno.fechaFin
+    };
+    this.showCreateTurnModal = true;
+  }
+
+  saveTurno() {
     this.isLoading = true;
-    this.adminService.crearTurno(this.newTurno).subscribe({
-      next: () => {
-        this.alertService.success('Turno creado correctamente');
-        this.closeCreateTurnModal();
-        this.loadMesas();
-      },
-      error: (err) => {
-        console.error(err);
-        this.alertService.error('Error al crear turno');
-        this.isLoading = false;
-      }
-    });
+
+    if (this.isEditingTurn && this.editingTurnId) {
+      this.adminService.editarTurno(this.editingTurnId, this.newTurno).subscribe({
+        next: () => {
+          this.alertService.success('Turno actualizado correctamente');
+          this.closeCreateTurnModal();
+          this.loadTurnos();
+        },
+        error: (err) => {
+          console.error(err);
+          this.alertService.error('Error al actualizar turno');
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.adminService.crearTurno(this.newTurno).subscribe({
+        next: () => {
+          this.alertService.success('Turno creado correctamente');
+          this.closeCreateTurnModal();
+          this.loadTurnos();
+        },
+        error: (err) => {
+          console.error(err);
+          this.alertService.error('Error al crear turno');
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
-  deleteDetalle(mesa: MesaAdminDTO) {
+  deleteTurno(turno: MesaExamenResponse, event: Event) {
+    event.stopPropagation();
+    if (turno.cantidadInscriptos > 0 || (turno.detalles && turno.detalles.some(d => d.cantidadInscriptos > 0))) {
+      this.alertService.error('No se puede eliminar un turno con inscripciones activas inside.');
+      // Note: Backend handles deep validation, but frontend check is good UX.
+      // Assuming 'cantidadInscriptos' on turn aggregates everything? 
+      // User request says: "Valida que no tenga alumnos inscriptos."
+      // We'll trust backend mostly, but if we have the data, block it.
+      if (turno.cantidadInscriptos > 0) return;
+    }
+
+    this.deleteType = 'TURN';
+    this.turnToDelete = turno;
+    this.showDeleteConfirmation = true;
+  }
+
+  deleteDetalle(mesa: DetalleMesaExamenResponse) {
     if (mesa.cantidadInscriptos > 0) {
       this.alertService.error('No se puede eliminar una mesa con alumnos inscriptos.');
       return;
@@ -125,37 +187,54 @@ export class AdminExamTablesComponent implements OnInit {
       return;
     }
 
-    // Open confirmation modal instead of window.confirm
+    this.deleteType = 'DETAIL';
     this.itemToDelete = mesa;
     this.showDeleteConfirmation = true;
   }
 
   confirmDelete() {
-    if (!this.itemToDelete) return;
+    if (this.deleteType === 'DETAIL' && this.itemToDelete) {
+      const idMesaStr = this.itemToDelete.idMesaExamen;
+      const nroDetalle = this.itemToDelete.nroDetalle;
 
-    const idMesa = this.itemToDelete.idMesaExamen;
-    const nroDetalle = this.itemToDelete.nroDetalle;
+      this.cancelDelete();
+      this.isLoading = true;
 
-    // Close modal and show loading spinner immediately
-    this.cancelDelete();
-    this.isLoading = true;
+      this.adminService.eliminarDetalleMesa(idMesaStr, nroDetalle).subscribe({
+        next: () => {
+          this.alertService.success('Mesa eliminada');
+          this.loadTurnos();
+        },
+        error: (err) => {
+          console.error(err);
+          this.alertService.error('Error al eliminar mesa');
+          this.isLoading = false;
+        }
+      });
+    } else if (this.deleteType === 'TURN' && this.turnToDelete) {
+      const idTurno = this.turnToDelete.id;
 
-    this.adminService.eliminarDetalleMesa(idMesa, nroDetalle).subscribe({
-      next: () => {
-        this.alertService.success('Mesa eliminada');
-        this.loadMesas();
-      },
-      error: (err) => {
-        console.error(err);
-        this.alertService.error('Error al eliminar mesa');
-        this.isLoading = false;
-      }
-    });
+      this.cancelDelete();
+      this.isLoading = true;
+
+      this.adminService.eliminarTurno(idTurno).subscribe({
+        next: () => {
+          this.alertService.success('Turno eliminado');
+          this.loadTurnos();
+        },
+        error: (err) => {
+          console.error(err);
+          this.alertService.error('Error al eliminar turno'); // Check if 400 bad request for inscriptions
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
   cancelDelete() {
     this.showDeleteConfirmation = false;
     this.itemToDelete = null;
+    this.turnToDelete = null;
   }
 
   isDatePassed(dateString: string): boolean {
@@ -167,17 +246,7 @@ export class AdminExamTablesComponent implements OnInit {
 
   // --- Add Exam Feature ---
 
-  // Create Turn Modal State
-  showCreateTurnModal = false;
 
-  openCreateTurnModal() {
-    this.showCreateTurnModal = true;
-    this.newTurno = { nombre: '', fechaInicio: '', fechaFin: '' };
-  }
-
-  closeCreateTurnModal() {
-    this.showCreateTurnModal = false;
-  }
 
   // --- Add Exam Feature ---
 
@@ -256,16 +325,16 @@ export class AdminExamTablesComponent implements OnInit {
   }
 
   saveExam() {
-    // Find the ID of the current Turn (MesaExamen ID)
-    // Assuming all rows in this view share the same ID. 
-    // Need to handle the edge case where no rows exist yet for this turn locally? 
-    // But we are in "Details" view which implies we clicked a card.
-    // If the card exists, it came from uniqueTurnos.
-    // We need to find the ID associated with this turno string.
-    const turnId = this.mesas.find(m => m.turno === this.selectedTurno)?.idMesaExamen;
+    // New Logic: Use selectedTurno.id directly
+    if (!this.selectedTurno) {
+      this.alertService.error('No se pudo identificar el turno.');
+      return;
+    }
+
+    const turnId = this.selectedTurno.id;
 
     if (!turnId) {
-      this.alertService.error('No se pudo identificar el turno.');
+      this.alertService.error('ID del Turno inválido.');
       return;
     }
 
@@ -284,7 +353,7 @@ export class AdminExamTablesComponent implements OnInit {
       next: () => {
         this.alertService.success('Mesa agregada correctamente');
         this.closeAddModal();
-        this.loadMesas();
+        this.loadTurnos(); // Reload all turns to refresh data
       },
       error: (err) => {
         console.error(err);
