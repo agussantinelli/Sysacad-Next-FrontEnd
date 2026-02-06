@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
+import { ActivatedRoute } from '@angular/router';
 
 import { ChatService } from '@core/services/chat.service';
 import { AuthService } from '@core/services/auth.service';
@@ -27,7 +28,8 @@ export class MessagesComponent implements OnInit {
 
     constructor(
         private chatService: ChatService,
-        private authService: AuthService
+        private authService: AuthService,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit(): void {
@@ -52,6 +54,15 @@ export class MessagesComponent implements OnInit {
             groupsObservable.subscribe({
                 next: (grupos) => {
                     this.conversations = grupos;
+
+                    // Handle deep linking
+                    const idComision = this.route.snapshot.queryParamMap.get('idComision');
+                    if (idComision) {
+                        const targetGroup = this.conversations.find(g => g.idComision === idComision);
+                        if (targetGroup) {
+                            this.selectConversation(targetGroup);
+                        }
+                    }
                 },
                 error: (err) => console.error('Error loading groups', err)
             });

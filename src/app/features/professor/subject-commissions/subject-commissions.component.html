@@ -66,8 +66,13 @@
                     <div class="card-actions">
                         <button class="btn-grade" (click)="goToGrading(comision.idComision)">
                             <span class="material-icons">assignment_turned_in</span>
-                            Calificar Alumnos
+                            Calificar
                         </button>
+                        <a [routerLink]="['/messages']" [queryParams]="{idComision: comision.idComision}"
+                            class="btn-message">
+                            <span class="material-icons">chat</span>
+                            Mensaje
+                        </a>
                     </div>
                     }
                 </div>

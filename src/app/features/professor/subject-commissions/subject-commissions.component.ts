@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
@@ -10,7 +10,7 @@ import { ComisionHorarioDTO } from '@core/models/professor.models';
 @Component({
     selector: 'app-subject-commissions',
     standalone: true,
-    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent],
+    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent, RouterLink],
     templateUrl: './subject-commissions.component.html',
     styleUrl: './styles/subject-commissions.component.css'
 })
