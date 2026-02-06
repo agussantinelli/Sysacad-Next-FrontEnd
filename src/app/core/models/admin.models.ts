@@ -127,8 +127,10 @@ export interface AdminComisionDTO {
     nombre: string;
     turno: string;
     anio: number;
-    nombreSalon: string;
+    nivel: number;
     idCarrera: string;
+    nombreCarrera: string;
+    nombreSalon: string;
     materias: AdminMateriaComisionDTO[];
 }
 

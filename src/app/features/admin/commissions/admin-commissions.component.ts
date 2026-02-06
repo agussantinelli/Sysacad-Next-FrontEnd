@@ -171,10 +171,16 @@ export class AdminCommissionsComponent implements OnInit {
     }
 
     loadAvailableSubjects() {
-        if (!this.selectedComision || !this.selectedComision.idCarrera) {
-            // Fallback if idCarrera is missing: try to find it from careers list? 
-            // Ideally backend sends it. If not, we can't filter easily.
-            this.alertService.error('Error: Faltan datos de la carrera en la comisión.');
+        console.log('[loadAvailableSubjects] selectedComision:', this.selectedComision);
+
+        if (!this.selectedComision) {
+            this.alertService.error('Error: No hay comisión seleccionada.');
+            return;
+        }
+
+        if (!this.selectedComision.idCarrera) {
+            console.error('[loadAvailableSubjects] Missing idCarrera in commission:', this.selectedComision);
+            this.alertService.error('Error: La comisión no tiene carrera asignada. Por favor, contacte al administrador.');
             return;
         }
 
