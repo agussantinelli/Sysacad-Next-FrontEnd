@@ -217,6 +217,12 @@ export class AdminService {
         );
     }
 
+    getTurno(id: string): Observable<MesaExamenResponse> {
+        return from(axiosClient.get<MesaExamenResponse>(`/admin/mesas/turnos/${id}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
     // --- Module: Commissions ---
     getAllComisiones(): Observable<AdminComisionDTO[]> {
         return from(axiosClient.get<AdminComisionDTO[]>('/admin/comisiones')).pipe(
