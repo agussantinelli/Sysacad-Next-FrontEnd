@@ -4,6 +4,7 @@ import { UsuarioResponse } from '@core/models/usuario.models';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
 import { RouterLink } from '@angular/router';
 import { AvisoService } from '@core/services/aviso.service';
+import { ChatService } from '@core/services/chat.service';
 
 interface DashboardOption {
     title: string;
@@ -27,6 +28,7 @@ interface DashboardSection {
 })
 export class DashboardComponent implements OnInit {
     private avisoService = inject(AvisoService);
+    private chatService = inject(ChatService);
 
     usuario: UsuarioResponse | null = null;
     greeting: string = '';
@@ -138,6 +140,7 @@ export class DashboardComponent implements OnInit {
             this.usuario = JSON.parse(userStr);
             this.setGreeting();
             this.loadUnreadNotices();
+            this.loadUnreadMessages();
         }
 
         if (history.state.loginSuccess && !sessionStorage.getItem('welcomeShown')) {
@@ -166,6 +169,26 @@ export class DashboardComponent implements OnInit {
                 this.updateBadgeCount('Avisos', count);
             },
             error: (err) => console.error('Error loading unread notices', err)
+        });
+    }
+
+    loadUnreadMessages(): void {
+        if (!this.usuario) return;
+
+        let groupsObservable;
+        if (this.usuario.rol === 'ESTUDIANTE') {
+            groupsObservable = this.chatService.getGruposAlumno();
+        } else if (this.usuario.rol === 'PROFESOR') {
+            groupsObservable = this.chatService.getGruposProfesor();
+        } else {
+            groupsObservable = this.chatService.getMisGrupos();
+        }
+
+        groupsObservable.subscribe({
+            next: (grupos) => {
+                // Placeholder for counting unread messages if supported in the future
+            },
+            error: (err) => console.error('Error loading groups for dashboard', err)
         });
     }
 

@@ -5,6 +5,7 @@ import { AuthService } from '@core/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { UsuarioResponse } from '@core/models/usuario.models';
 import { AvisoService } from '@core/services/aviso.service';
+import { ChatService } from '@core/services/chat.service';
 
 interface NavbarOption {
     title: string;
@@ -30,6 +31,7 @@ export class NavbarComponent implements OnInit {
     private themeService = inject(ThemeService);
     private authService = inject(AuthService);
     private avisoService = inject(AvisoService);
+    private chatService = inject(ChatService);
 
     isDropdownOpen = false;
     activeSection: string | null = null;
@@ -137,6 +139,7 @@ export class NavbarComponent implements OnInit {
             this.usuario = user;
             if (user) {
                 this.loadUnreadNotices();
+                this.loadUnreadMessages();
             }
         });
     }
@@ -144,6 +147,28 @@ export class NavbarComponent implements OnInit {
     loadUnreadNotices(): void {
         this.avisoService.obtenerCantidadSinLeer().subscribe({
             next: (count) => this.updateBadgeCount('Avisos', count),
+            error: (err) => console.error(err)
+        });
+    }
+
+    loadUnreadMessages(): void {
+        if (!this.usuario) return;
+
+        let groupsObservable;
+        if (this.usuario.rol === 'ESTUDIANTE') {
+            groupsObservable = this.chatService.getGruposAlumno();
+        } else if (this.usuario.rol === 'PROFESOR') {
+            groupsObservable = this.chatService.getGruposProfesor();
+        } else {
+            groupsObservable = this.chatService.getMisGrupos();
+        }
+
+        groupsObservable.subscribe({
+            next: (grupos) => {
+                // For now, we don't have a direct 'unread' count in GrupoResponse, 
+                // but we call the correct endpoint as requested.
+                // this.updateBadgeCount('Mensajes', count);
+            },
             error: (err) => console.error(err)
         });
     }

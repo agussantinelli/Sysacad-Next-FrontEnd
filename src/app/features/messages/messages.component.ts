@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { filter, switchMap } from 'rxjs/operators';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,6 +9,7 @@ import { ChatService } from '@core/services/chat.service';
 import { AuthService } from '@core/services/auth.service';
 import { GrupoResponse, MensajeGrupoResponse, MiembroGrupoResponse } from '@core/models/messaging.models';
 import { RolGrupo } from '@core/enums/grupo.enums';
+import { RolUsuario } from '@core/enums/usuario.enums';
 
 @Component({
     selector: 'app-messages',
@@ -38,36 +40,34 @@ export class MessagesComponent implements OnInit {
     }
 
     loadGroups() {
-        this.authService.currentUser$.subscribe(user => {
-            if (!user) return;
+        this.authService.currentUser$.pipe(
+            filter(user => !!user),
+            switchMap(user => {
+                this.currentUserId = user!.id;
+                this.currentUserRol = user!.rol;
 
-            this.currentUserId = user.id;
-            this.currentUserRol = user.rol;
-            let groupsObservable;
+                if (user!.rol === RolUsuario.ESTUDIANTE) {
+                    return this.chatService.getGruposAlumno();
+                } else if (user!.rol === RolUsuario.PROFESOR) {
+                    return this.chatService.getGruposProfesor();
+                } else {
+                    return this.chatService.getMisGrupos();
+                }
+            })
+        ).subscribe({
+            next: (grupos) => {
+                this.conversations = grupos;
 
-            if (user.rol === 'ESTUDIANTE') {
-                groupsObservable = this.chatService.getGruposAlumno();
-            } else if (user.rol === 'PROFESOR') {
-                groupsObservable = this.chatService.getGruposProfesor();
-            } else {
-                groupsObservable = this.chatService.getMisGrupos();
-            }
-
-            groupsObservable.subscribe({
-                next: (grupos) => {
-                    this.conversations = grupos;
-
-                    // Handle deep linking
-                    const idComision = this.route.snapshot.queryParamMap.get('idComision');
-                    if (idComision) {
-                        const targetGroup = this.conversations.find(g => g.idComision === idComision);
-                        if (targetGroup) {
-                            this.selectConversation(targetGroup);
-                        }
+                // Handle deep linking
+                const idComision = this.route.snapshot.queryParamMap.get('idComision');
+                if (idComision) {
+                    const targetGroup = this.conversations.find(g => g.idComision === idComision);
+                    if (targetGroup) {
+                        this.selectConversation(targetGroup);
                     }
-                },
-                error: (err) => console.error('Error loading groups', err)
-            });
+                }
+            },
+            error: (err) => console.error('Error loading groups', err)
         });
     }
 
@@ -105,7 +105,7 @@ export class MessagesComponent implements OnInit {
     sendMessage() {
         if (!this.newMessage.trim() || !this.selectedConversation || !this.canSend) return;
 
-        if (this.currentUserRol === 'PROFESOR' && this.selectedConversation.idComision && this.selectedConversation.idMateria) {
+        if (this.currentUserRol === RolUsuario.PROFESOR && this.selectedConversation.idComision && this.selectedConversation.idMateria) {
             this.chatService.enviarMensajeComisionMateria({
                 idComision: this.selectedConversation.idComision,
                 idMateria: this.selectedConversation.idMateria,
