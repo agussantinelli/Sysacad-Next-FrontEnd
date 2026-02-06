@@ -1,10 +1,10 @@
-import { RolGrupo, EstadoGrupo } from '../enums/grupo.enums';
+import { EstadoGrupo, RolGrupo } from "../enums/grupo.enums";
 
 export interface GrupoRequest {
     nombre: string;
     descripcion: string;
     tipo: string;
-    idsIntegrantes: string[]; // UUIDs
+    idsIntegrantes: string[]; // List of UUIDs
 }
 
 export interface GrupoResponse {
@@ -13,7 +13,9 @@ export interface GrupoResponse {
     descripcion: string;
     tipo: string;
     estado: EstadoGrupo;
-    fechaCreacion: string; // LocalDateTime
+    fechaCreacion: string; // LocalDateTime as ISO string
+    idComision: string; // UUID
+    idMateria: string; // UUID
 }
 
 export interface MiembroGrupoRequest {
@@ -32,7 +34,9 @@ export interface MiembroGrupoResponse {
 
 export interface MensajeGrupoRequest {
     contenido: string;
-    idUsuarioRemitente?: string;
+    idUsuarioRemitente?: string; // UUID: Optional/Ignored (inferred from token).
+    idComision: string; // UUID: Used for automatic group creation.
+    idMateria: string; // UUID: Used for automatic group creation.
 }
 
 export interface MensajeGrupoResponse {
