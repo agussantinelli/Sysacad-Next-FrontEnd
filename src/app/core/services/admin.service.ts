@@ -10,6 +10,7 @@ import { UsuarioResponse } from '@core/models/usuario.models';
 import { ComisionDisponibleDTO } from '@core/models/comision-disponible.models';
 import { MesaExamenDisponibleDTO } from '@core/models/mesa-examen-disponible.models';
 import { MateriaResponse } from '@core/models/materia.models';
+import { SalonResponse } from '@core/models/salon.models';
 
 @Injectable({
     providedIn: 'root'
@@ -272,6 +273,14 @@ export class AdminService {
 
     getProfesoresDisponibles(request: AsignarMateriaComisionRequest): Observable<ProfesorDisponibleDTO[]> {
         return from(axiosClient.post<ProfesorDisponibleDTO[]>('/admin/comisiones/profesores-disponibles', request)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getSalonesDisponibles(turno: string, anio: number): Observable<SalonResponse[]> {
+        return from(axiosClient.get<SalonResponse[]>('/admin/comisiones/salones-disponibles', {
+            params: { turno, anio }
+        })).pipe(
             map(response => response.data)
         );
     }
