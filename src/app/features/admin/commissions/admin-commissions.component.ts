@@ -32,7 +32,7 @@ export class AdminCommissionsComponent implements OnInit {
     showModal = false;
     newComision: ComisionRequest = {
         nombre: '',
-        turno: 'Noche',
+        turno: '',
         anio: new Date().getFullYear(),
         salon: '',
         idCarrera: ''
@@ -66,8 +66,11 @@ export class AdminCommissionsComponent implements OnInit {
         // Only load if we have year and shift
         if (!this.newComision.anio || !this.newComision.turno) return;
 
+        console.log('[AdminCommissions] Buscando salones disponibles para:', { turno: this.newComision.turno, anio: this.newComision.anio });
+
         this.adminService.getSalonesDisponibles(this.newComision.turno, this.newComision.anio).subscribe({
             next: (data) => {
+                console.log('[AdminCommissions] Salones encontrados:', data);
                 this.salones = data;
             },
             error: (err) => {
@@ -87,12 +90,12 @@ export class AdminCommissionsComponent implements OnInit {
         this.showModal = true;
         this.newComision = {
             nombre: '',
-            turno: 'Noche',
+            turno: '',
             anio: new Date().getFullYear(),
             salon: '',
             idCarrera: this.carreras.length > 0 ? this.carreras[0].id : ''
         };
-        this.loadSalones(); // Load initial availability
+        this.salones = []; // Reset salones list
     }
 
     closeCreateModal() {

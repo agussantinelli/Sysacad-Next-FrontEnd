@@ -87,38 +87,41 @@
         <div class="modal-content" (click)="$event.stopPropagation()">
             <h4>Nueva Comisión</h4>
             <div class="form-group">
-                <label>Nombre</label>
+                <label>Nombre de Comisión</label>
                 <input type="text" [(ngModel)]="newComision.nombre" class="form-control" placeholder="Ej: 1K1">
             </div>
+
             <div class="form-group">
                 <label>Carrera</label>
                 <select [(ngModel)]="newComision.idCarrera" class="form-control">
-                    <option value="" disabled>Seleccione Carrera</option>
+                    <option value="" disabled selected>Seleccione una opción</option>
                     @for (carrera of carreras; track carrera.id) {
                     <option [value]="carrera.id">{{ carrera.nombre }}</option>
                     }
                 </select>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Año</label>
-                    <input type="number" [(ngModel)]="newComision.anio" (change)="onTurnoOrAnioChange()"
-                        class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Turno</label>
-                    <select [(ngModel)]="newComision.turno" (change)="onTurnoOrAnioChange()" class="form-control">
-                        <option value="Mañana">Mañana</option>
-                        <option value="Tarde">Tarde</option>
-                        <option value="Noche">Noche</option>
-                    </select>
-                </div>
-            </div>
+
             <div class="form-group">
-                <label>Salón</label>
+                <label>Año Académico</label>
+                <input type="number" [(ngModel)]="newComision.anio" (change)="onTurnoOrAnioChange()"
+                    class="form-control" placeholder="Ej: 2025">
+            </div>
+
+            <div class="form-group">
+                <label>Turno</label>
+                <select [(ngModel)]="newComision.turno" (change)="onTurnoOrAnioChange()" class="form-control">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="Mañana">Mañana</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noche">Noche</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Salón Asignado</label>
                 <select [(ngModel)]="newComision.salon" class="form-control"
                     [disabled]="!newComision.turno || !newComision.anio">
-                    <option value="" disabled>Seleccione Salón</option>
+                    <option value="" disabled selected>Seleccione una opción</option>
                     @for (salon of salones; track salon.id) {
                     <option [value]="salon.nombre">{{ salon.nombre }} (Cap: {{ salon.capacidad }})</option>
                     }
