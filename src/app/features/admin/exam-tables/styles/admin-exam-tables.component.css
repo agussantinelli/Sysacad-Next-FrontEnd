@@ -220,7 +220,6 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     position: relative;
     overflow: hidden;
     align-items: center;
-    /* Center Content Horizontal */
 }
 
 .turn-card:hover {
@@ -232,7 +231,6 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .turn-header {
     display: flex;
     flex-direction: column;
-    /* Center Header Items Vertical Stack */
     align-items: center;
     gap: 1rem;
     text-align: center;
@@ -244,7 +242,6 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     background: rgba(0, 153, 230, 0.1);
     padding: 16px;
     border-radius: 50%;
-    /* Circle Icon */
 }
 
 .turn-header h4 {
@@ -265,7 +262,6 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     border-radius: 8px;
-    /* Rounded inner container */
 }
 
 .stat-count {
@@ -288,6 +284,16 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .turn-dates {
     text-align: center;
     color: var(--text-secondary);
+}
+
+/* Action Buttons Container - explicitly defined to ensure horizontal layout */
+.turn-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
 }
 
 /* Actions */
@@ -328,7 +334,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     transition: all 0.2s;
 }
 
-/* Modal styles remain mostly same, just ensuring z-index/overlay works */
+/* Modal styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -394,7 +400,6 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     gap: 1rem;
 }
 
-/* Utility classes for lists in modal */
 .search-box {
     display: flex;
     gap: 0.5rem;

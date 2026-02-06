@@ -38,9 +38,11 @@
                     <button class="icon-btn" (click)="editTurno(turno, $event)" title="Editar Turno">
                         <span class="material-icons">edit</span>
                     </button>
+                    @if (turno.cantidadInscriptos === 0) {
                     <button class="icon-btn delete" (click)="deleteTurno(turno, $event)" title="Eliminar Turno">
                         <span class="material-icons">delete</span>
                     </button>
+                    }
                 </div>
                 <button class="btn-outline w-100 mt-2">
                     Ver Mesas
