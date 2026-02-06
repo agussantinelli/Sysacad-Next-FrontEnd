@@ -6,6 +6,7 @@ import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/load
 import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
 import { AdminComisionDTO, ComisionRequest, CarreraAdminDTO } from '@core/models/admin.models';
+import { SalonResponse } from '@core/models/salon.models';
 
 @Component({
     selector: 'app-admin-commissions',
@@ -20,6 +21,7 @@ export class AdminCommissionsComponent implements OnInit {
 
     comisiones: AdminComisionDTO[] = [];
     carreras: CarreraAdminDTO[] = [];
+    salones: SalonResponse[] = [];
     isLoading = false;
 
     // View State
@@ -60,6 +62,26 @@ export class AdminCommissionsComponent implements OnInit {
         this.adminService.getAllCarreras().subscribe(data => this.carreras = data);
     }
 
+    loadSalones() {
+        // Only load if we have year and shift
+        if (!this.newComision.anio || !this.newComision.turno) return;
+
+        this.adminService.getSalonesDisponibles(this.newComision.turno, this.newComision.anio).subscribe({
+            next: (data) => {
+                this.salones = data;
+            },
+            error: (err) => {
+                console.error(err);
+                // Don't block UI, just log
+            }
+        });
+    }
+
+    onTurnoOrAnioChange() {
+        this.newComision.salon = ''; // Reset selection
+        this.loadSalones();
+    }
+
     // Modal Actions
     openCreateModal() {
         this.showModal = true;
@@ -70,6 +92,7 @@ export class AdminCommissionsComponent implements OnInit {
             salon: '',
             idCarrera: this.carreras.length > 0 ? this.carreras[0].id : ''
         };
+        this.loadSalones(); // Load initial availability
     }
 
     closeCreateModal() {

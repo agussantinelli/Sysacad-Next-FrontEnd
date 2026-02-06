@@ -102,11 +102,12 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Año</label>
-                    <input type="number" [(ngModel)]="newComision.anio" class="form-control">
+                    <input type="number" [(ngModel)]="newComision.anio" (change)="onTurnoOrAnioChange()"
+                        class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Turno</label>
-                    <select [(ngModel)]="newComision.turno" class="form-control">
+                    <select [(ngModel)]="newComision.turno" (change)="onTurnoOrAnioChange()" class="form-control">
                         <option value="Mañana">Mañana</option>
                         <option value="Tarde">Tarde</option>
                         <option value="Noche">Noche</option>
@@ -115,7 +116,13 @@
             </div>
             <div class="form-group">
                 <label>Salón</label>
-                <input type="text" [(ngModel)]="newComision.salon" class="form-control" placeholder="Ej: Aula 5">
+                <select [(ngModel)]="newComision.salon" class="form-control"
+                    [disabled]="!newComision.turno || !newComision.anio">
+                    <option value="" disabled>Seleccione Salón</option>
+                    @for (salon of salones; track salon.id) {
+                    <option [value]="salon.nombre">{{ salon.nombre }} (Cap: {{ salon.capacidad }})</option>
+                    }
+                </select>
             </div>
 
             <div class="modal-actions">
