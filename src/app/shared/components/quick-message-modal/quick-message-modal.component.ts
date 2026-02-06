@@ -16,6 +16,7 @@ export class QuickMessageModalComponent implements OnInit, OnDestroy {
     private chatService = inject(ChatService);
 
     @Input() idComision!: string;
+    @Input() idMateria!: string;
     @Input() targetName: string = '';
 
     @Output() close = new EventEmitter<void>();
@@ -46,7 +47,11 @@ export class QuickMessageModalComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         this.error = null;
 
-        this.chatService.enviarMensajeAlGrupo(this.idComision, this.message).subscribe({
+        this.chatService.enviarMensajeComisionMateria({
+            idComision: this.idComision,
+            idMateria: this.idMateria,
+            contenido: this.message
+        }).subscribe({
             next: () => {
                 this.isLoading = false;
                 this.success = true;

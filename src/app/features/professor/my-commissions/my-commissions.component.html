@@ -83,7 +83,7 @@
         }
     </div>
     @if (showQuickMessageModal && selectedCommission) {
-    <app-quick-message-modal [idComision]="selectedCommission.idComision"
+    <app-quick-message-modal [idComision]="selectedCommission.idComision" [idMateria]="selectedCommission.idMateria"
         [targetName]="selectedCommission.nombre + ' - ' + selectedCommission.nombreMateria"
         (close)="closeMessageModal()" (sent)="loadMisComisiones()"></app-quick-message-modal>
     }

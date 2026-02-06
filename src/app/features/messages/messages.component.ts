@@ -24,6 +24,7 @@ export class MessagesComponent implements OnInit {
     newMessage: string = '';
     isLoading = false;
     currentUserId: string | null = null;
+    currentUserRol: string | null = null;
     canSend = false;
 
     constructor(
@@ -41,6 +42,7 @@ export class MessagesComponent implements OnInit {
             if (!user) return;
 
             this.currentUserId = user.id;
+            this.currentUserRol = user.rol;
             let groupsObservable;
 
             if (user.rol === 'ESTUDIANTE') {
@@ -103,13 +105,27 @@ export class MessagesComponent implements OnInit {
     sendMessage() {
         if (!this.newMessage.trim() || !this.selectedConversation || !this.canSend) return;
 
-        this.chatService.enviarMensajeAlGrupo(this.selectedConversation.id, this.newMessage).subscribe({
-            next: (msg) => {
-                this.messages.push(msg);
-                this.newMessage = '';
-            },
-            error: (err) => console.error('Error sending message', err)
-        });
+        if (this.currentUserRol === 'PROFESOR' && this.selectedConversation.idComision && this.selectedConversation.idMateria) {
+            this.chatService.enviarMensajeComisionMateria({
+                idComision: this.selectedConversation.idComision,
+                idMateria: this.selectedConversation.idMateria,
+                contenido: this.newMessage
+            }).subscribe({
+                next: (msg) => {
+                    this.messages.push(msg);
+                    this.newMessage = '';
+                },
+                error: (err) => console.error('Error sending professor message', err)
+            });
+        } else {
+            this.chatService.enviarMensajeAlGrupo(this.selectedConversation.id, this.newMessage).subscribe({
+                next: (msg) => {
+                    this.messages.push(msg);
+                    this.newMessage = '';
+                },
+                error: (err) => console.error('Error sending message', err)
+            });
+        }
     }
 
     isMine(msg: MensajeGrupoResponse): boolean {
