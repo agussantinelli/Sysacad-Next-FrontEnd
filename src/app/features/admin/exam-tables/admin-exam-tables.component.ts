@@ -7,10 +7,12 @@ import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
 import { MesaAdminDTO, MesaExamenRequest, CarreraAdminDTO, SimpleMateriaDTO, ProfesorDisponibleDTO, DetalleMesaRequest } from '@core/models/admin.models';
 
+import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
+
 @Component({
   selector: 'app-admin-exam-tables',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageLayoutComponent, LoadingSpinnerComponent],
+  imports: [CommonModule, FormsModule, PageLayoutComponent, LoadingSpinnerComponent, ConfirmationModalComponent],
   templateUrl: './admin-exam-tables.component.html',
   styleUrl: './styles/admin-exam-tables.component.css'
 })
@@ -27,6 +29,10 @@ export class AdminExamTablesComponent implements OnInit {
   // New features state
   carreras: CarreraAdminDTO[] = [];
   showAddModal = false;
+
+  // Delete Confirmation State
+  showDeleteConfirmation = false;
+  itemToDelete: MesaAdminDTO | null = null;
 
   // Add Exam Wizard State
   addStep: 'SUBJECT' | 'DATETIME' | 'PROFESSOR' = 'SUBJECT';
@@ -119,20 +125,33 @@ export class AdminExamTablesComponent implements OnInit {
       return;
     }
 
-    if (confirm(`¿Eliminar mesa de ${mesa.materia}?`)) {
-      this.isLoading = true;
-      this.adminService.eliminarDetalleMesa(mesa.idMesaExamen, mesa.nroDetalle).subscribe({
-        next: () => {
-          this.alertService.success('Mesa eliminada');
-          this.loadMesas();
-        },
-        error: (err) => {
-          console.error(err);
-          this.alertService.error('Error al eliminar mesa');
-          this.isLoading = false;
-        }
-      });
-    }
+    // Open confirmation modal instead of window.confirm
+    this.itemToDelete = mesa;
+    this.showDeleteConfirmation = true;
+  }
+
+  confirmDelete() {
+    if (!this.itemToDelete) return;
+
+    this.isLoading = true;
+    this.adminService.eliminarDetalleMesa(this.itemToDelete.idMesaExamen, this.itemToDelete.nroDetalle).subscribe({
+      next: () => {
+        this.alertService.success('Mesa eliminada');
+        this.loadMesas();
+        this.cancelDelete(); // Close modal logic
+      },
+      error: (err) => {
+        console.error(err);
+        this.alertService.error('Error al eliminar mesa');
+        this.isLoading = false;
+        this.cancelDelete();
+      }
+    });
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirmation = false;
+    this.itemToDelete = null;
   }
 
   isDatePassed(dateString: string): boolean {

@@ -219,4 +219,11 @@
         </div>
     </div>
     }
+    <!-- Confirmation Modal -->
+    @if (showDeleteConfirmation) {
+    <app-confirmation-modal title="Confirmar Eliminación"
+        message="¿Está seguro de que desea eliminar la mesa de examen de {{ itemToDelete?.materia }}? Esta acción no se puede deshacer."
+        confirmText="Eliminar" cancelText="Cancelar" type="danger" (confirm)="confirmDelete()" (close)="cancelDelete()">
+    </app-confirmation-modal>
+    }
 </app-page-layout>
