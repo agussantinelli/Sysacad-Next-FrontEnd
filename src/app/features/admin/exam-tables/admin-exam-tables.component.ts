@@ -133,18 +133,22 @@ export class AdminExamTablesComponent implements OnInit {
   confirmDelete() {
     if (!this.itemToDelete) return;
 
+    const idMesa = this.itemToDelete.idMesaExamen;
+    const nroDetalle = this.itemToDelete.nroDetalle;
+
+    // Close modal and show loading spinner immediately
+    this.cancelDelete();
     this.isLoading = true;
-    this.adminService.eliminarDetalleMesa(this.itemToDelete.idMesaExamen, this.itemToDelete.nroDetalle).subscribe({
+
+    this.adminService.eliminarDetalleMesa(idMesa, nroDetalle).subscribe({
       next: () => {
         this.alertService.success('Mesa eliminada');
         this.loadMesas();
-        this.cancelDelete(); // Close modal logic
       },
       error: (err) => {
         console.error(err);
         this.alertService.error('Error al eliminar mesa');
         this.isLoading = false;
-        this.cancelDelete();
       }
     });
   }
