@@ -47,7 +47,7 @@ export class AdminCommissionsComponent implements OnInit {
         this.isLoading = true;
         this.adminService.getAllComisiones().subscribe({
             next: (data) => {
-                this.comisiones = data;
+                this.comisiones = data.sort((a, b) => a.nombre.localeCompare(b.nombre));
                 this.isLoading = false;
             },
             error: (err) => {
