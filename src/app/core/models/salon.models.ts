@@ -10,4 +10,5 @@ export interface SalonResponse {
     nombreFacultad: string;
     nombre: string;
     piso: string;
+    capacidad: number;
 }
