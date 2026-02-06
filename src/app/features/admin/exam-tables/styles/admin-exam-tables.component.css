@@ -234,6 +234,9 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     align-items: center;
     gap: 1rem;
     text-align: center;
+    min-height: 110px;
+    /* Ensure consistent height for alignment */
+    justify-content: flex-start;
 }
 
 .turn-icon {

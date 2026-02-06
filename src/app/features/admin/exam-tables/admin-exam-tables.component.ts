@@ -120,10 +120,16 @@ export class AdminExamTablesComponent implements OnInit {
     event.stopPropagation(); // Prevent card selection
     this.isEditingTurn = true;
     this.editingTurnId = turno.id;
+
+    // Ensure dates are YYYY-MM-DD for input[type="date"]
+    // Assuming backend returns "YYYY-MM-DD" or ISO. Slice just in case.
+    const startDate = turno.fechaInicio ? turno.fechaInicio.split('T')[0] : '';
+    const endDate = turno.fechaFin ? turno.fechaFin.split('T')[0] : '';
+
     this.newTurno = {
       nombre: turno.nombre,
-      fechaInicio: turno.fechaInicio,
-      fechaFin: turno.fechaFin
+      fechaInicio: startDate,
+      fechaFin: endDate
     };
     this.showCreateTurnModal = true;
   }

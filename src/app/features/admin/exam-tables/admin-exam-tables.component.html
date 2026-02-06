@@ -28,7 +28,8 @@
                     <span class="stat-label">Mesas de Examen</span>
                 </div>
                 <div class="turn-dates text-muted small mt-2">
-                    {{ turno.fechaInicio | date:'dd/MM' }} - {{ turno.fechaFin | date:'dd/MM/yyyy' }}
+                    Del {{ turno.fechaInicio | date:"d 'de' MMMM" }} <br>
+                    al {{ turno.fechaFin | date:"d 'de' MMMM 'de' yyyy" }}
                 </div>
                 <div class="turn-dates text-muted small mt-1">
                     <strong>Inscriptos:</strong> {{ turno.cantidadInscriptos }}
