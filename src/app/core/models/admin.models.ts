@@ -92,15 +92,30 @@ export interface DetalleMesaRequest {
     horaExamen: string; // LocalTime
 }
 
-export interface MesaAdminDTO {
-    idMesaExamen: string;
-    nroDetalle: number;
-    materia: string;
-    turno: string;
+export interface DetalleMesaExamenResponse {
+    idMesaExamen: string; // The parent ID (Turn ID)
+    nroDetalle: number; // The ID of this specific exam
+    materia: string; // Name of the subject
     fecha: string; // LocalDateTime
     cantidadInscriptos: number;
     abierta: boolean;
 }
+
+export interface MesaExamenResponse {
+    id: string; // UUID
+    nombre: string;
+    fechaInicio: string; // LocalDate
+    fechaFin: string; // LocalDate
+    cantidadInscriptos: number; // Total for the turn?
+    detalles: DetalleMesaExamenResponse[];
+}
+
+// Deprecated or mapped? Keeping for compatibility if needed, but ideally we replace usages.
+// We will alias MesaExamenResponse to "MesaAdminDTO" temporarily or just use the new name.
+// For now, let's export the new ones and update usages.
+export type MesaAdminDTO = DetalleMesaExamenResponse; // Temporary hack or just remove?
+// Actually, let's remove MesaAdminDTO and force compilation errors to fix them.
+
 
 // Commissions
 export interface AdminComisionDTO {
