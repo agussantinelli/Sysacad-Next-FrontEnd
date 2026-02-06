@@ -12,10 +12,16 @@
     /* Emerald 500 */
 
 
+    /* Shared Mappings */
+    --surface-card: var(--bg-card);
+    --bg-input: var(--input-bg);
+    --border-color: var(--border-subtle);
+    --border-input: var(--border-subtle);
 
     /* LIGHT MODE (Default) */
     --bg-page: #f0f4f8;
-    --bg-card: rgba(255, 255, 255, 0.9);
+    --bg-card: #ffffff;
+    /* Changed from rgba for solid background in modals */
     --text-primary: #002060;
     /* Navy for headings */
     --text-secondary: #475569;
@@ -23,7 +29,8 @@
     --text-input: #1e293b;
     /* Dark slate */
     --input-bg: #f8fafc;
-    --border-subtle: rgba(0, 32, 96, 0.1);
+    --border-subtle: #cbd5e1;
+    /* Stronger border for light mode */
     --border-focus: rgba(0, 153, 230, 0.4);
     --shadow-color: rgba(0, 32, 96, 0.08);
     --select-arrow: url('/icons/chevron-down-dark.svg');
@@ -32,13 +39,21 @@
 /* DARK MODE OVERRIDES */
 body.dark-mode {
     --bg-page: #050505;
-    --bg-card: rgba(18, 18, 18, 0.8);
+    --bg-card: #1e1e1e;
+    /* Solid color for dark mode cards */
     --text-primary: #ffffff;
     --text-secondary: #94a3b8;
     --text-input: #e2e8f0;
     --input-bg: rgba(255, 255, 255, 0.05);
-    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-subtle: rgba(255, 255, 255, 0.15);
     --border-focus: rgba(0, 153, 230, 0.5);
     --shadow-color: rgba(0, 0, 0, 0.5);
     --select-arrow: url('/icons/chevron-down-light.svg');
+
+    /* Mappings for Dark Mode */
+    --surface-card: var(--bg-card);
+    --bg-input: var(--input-bg);
+    --border-color: var(--border-subtle);
+    --border-input: var(--border-subtle);
+    --bg-hover: rgba(255, 255, 255, 0.1);
 }
