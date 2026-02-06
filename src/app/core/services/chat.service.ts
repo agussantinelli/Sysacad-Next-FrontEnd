@@ -30,6 +30,18 @@ export class ChatService {
         );
     }
 
+    getGruposAlumno(): Observable<GrupoResponse[]> {
+        return from(axiosClient.get<GrupoResponse[]>('/grupos/alumno')).pipe(
+            map(response => response.data)
+        );
+    }
+
+    getGruposProfesor(): Observable<GrupoResponse[]> {
+        return from(axiosClient.get<GrupoResponse[]>('/grupos/profesor')).pipe(
+            map(response => response.data)
+        );
+    }
+
     getGrupo(id: string): Observable<GrupoResponse> {
         return from(axiosClient.get<GrupoResponse>(`/grupos/${id}`)).pipe(
             map(response => response.data)

@@ -16,6 +16,7 @@ export interface GrupoResponse {
     fechaCreacion: string; // LocalDateTime as ISO string
     idComision: string; // UUID
     idMateria: string; // UUID
+    esVisible: boolean;
 }
 
 export interface MiembroGrupoRequest {
