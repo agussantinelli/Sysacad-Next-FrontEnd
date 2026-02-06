@@ -9,6 +9,8 @@ export interface ComisionRequest {
     nombre: string;
     turno: string;
     anio: number;
+    nivel: number;
+    idCarrera: string; // UUID
     idSalon: string; // UUID
     idsMaterias: string[]; // List of UUIDs
     idsProfesores: string[]; // List of UUIDs
@@ -25,6 +27,9 @@ export interface ComisionResponse {
     nombre: string;
     turno: string;
     anio: number;
+    nivel: number;
+    nombreCarrera: string;
+    idCarrera: string; // UUID
     nombreSalon: string;
     ubicacionSalon: string;
     materiasNombres: string[];
