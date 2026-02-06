@@ -31,18 +31,30 @@ export class MessagesComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.authService.currentUser$.subscribe(user => {
-            this.currentUserId = user?.id || null;
-        });
         this.loadGroups();
     }
 
     loadGroups() {
-        this.chatService.getMisGrupos().subscribe({
-            next: (grupos) => {
-                this.conversations = grupos;
-            },
-            error: (err) => console.error('Error loading groups', err)
+        this.authService.currentUser$.subscribe(user => {
+            if (!user) return;
+
+            this.currentUserId = user.id;
+            let groupsObservable;
+
+            if (user.rol === 'ESTUDIANTE') {
+                groupsObservable = this.chatService.getGruposAlumno();
+            } else if (user.rol === 'PROFESOR') {
+                groupsObservable = this.chatService.getGruposProfesor();
+            } else {
+                groupsObservable = this.chatService.getMisGrupos();
+            }
+
+            groupsObservable.subscribe({
+                next: (grupos) => {
+                    this.conversations = grupos;
+                },
+                error: (err) => console.error('Error loading groups', err)
+            });
         });
     }
 
