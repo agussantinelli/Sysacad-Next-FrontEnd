@@ -168,4 +168,210 @@
         </div>
     </div>
     }
+
+    <!-- Assign Subject Modal -->
+    @if (showAssignModal) {
+    <div class="modal-overlay" (click)="closeAssignModal()">
+        <div class="modal-content assignment-modal" (click)="$event.stopPropagation()">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step" [class.active]="assignStep === 'SUBJECT'"
+                    [class.completed]="assignStep !== 'SUBJECT'">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Materia</span>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step" [class.active]="assignStep === 'SCHEDULE'"
+                    [class.completed]="assignStep === 'PROFESSORS'">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Horarios</span>
+                </div>
+                <div class="step-divider"></div>
+                <div class="step" [class.active]="assignStep === 'PROFESSORS'">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Profesores</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Select Subject -->
+            @if (assignStep === 'SUBJECT') {
+            <div class="modal-header">
+                <h4>Seleccionar Materia</h4>
+            </div>
+            <div class="modal-body">
+                @if (isLoading) {
+                <div class="loading-state">
+                    <span class="material-icons rotating">hourglass_empty</span>
+                    <p>Cargando materias disponibles...</p>
+                </div>
+                } @else {
+                <div class="subject-list">
+                    @for (materia of availableSubjects; track materia.id) {
+                    <div class="subject-card" (click)="selectSubject(materia)">
+                        <div class="subject-info">
+                            <h5>{{ materia.nombre }}</h5>
+                            <div class="subject-meta">
+                                <span class="meta-item">
+                                    <span class="material-icons">layers</span> Nivel {{ materia.nivel }}
+                                </span>
+                                <span class="meta-item">
+                                    <span class="material-icons">schedule</span> {{ materia.horasCursado }} horas/semana
+                                </span>
+                                @if (materia.codigo) {
+                                <span class="meta-item">
+                                    <span class="material-icons">tag</span> {{ materia.codigo }}
+                                </span>
+                                }
+                            </div>
+                        </div>
+                        <span class="material-icons chevron">chevron_right</span>
+                    </div>
+                    } @empty {
+                    <div class="empty-state-small">
+                        <span class="material-icons">search_off</span>
+                        <p>No hay materias disponibles para asignar</p>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="closeAssignModal()">Cancelar</button>
+            </div>
+            }
+
+            <!-- Step 2: Define Schedule -->
+            @if (assignStep === 'SCHEDULE') {
+            <div class="modal-header">
+                <h4>Definir Horarios</h4>
+                @if (selectedSubject) {
+                <p class="subject-selected">{{ selectedSubject.nombre }} - {{ selectedSubject.horasCursado }}
+                    horas/semana</p>
+                }
+            </div>
+            <div class="modal-body">
+                <div class="schedule-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Día</label>
+                            <select [(ngModel)]="newSchedule.dia" class="form-control">
+                                <option value="LUNES">Lunes</option>
+                                <option value="MARTES">Martes</option>
+                                <option value="MIERCOLES">Miércoles</option>
+                                <option value="JUEVES">Jueves</option>
+                                <option value="VIERNES">Viernes</option>
+                                <option value="SABADO">Sábado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <input type="time" [(ngModel)]="newSchedule.horaDesde" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Hasta</label>
+                            <input type="time" [(ngModel)]="newSchedule.horaHasta" class="form-control">
+                        </div>
+                        <div class="form-group align-end">
+                            <button class="btn-primary" (click)="addSchedule()"
+                                [disabled]="!newSchedule.horaDesde || !newSchedule.horaHasta">
+                                <span class="material-icons">add</span> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-list">
+                    @if (scheduleList.length > 0) {
+                    <h5>Horarios Definidos</h5>
+                    @for (schedule of scheduleList; track $index) {
+                    <div class="schedule-item">
+                        <span class="schedule-day">{{ schedule.dia }}</span>
+                        <span class="schedule-time">{{ schedule.horaDesde }} - {{ schedule.horaHasta }}</span>
+                        <button class="icon-btn delete-btn" (click)="removeSchedule($index)">
+                            <span class="material-icons">delete</span>
+                        </button>
+                    </div>
+                    }
+
+                    <div class="hours-indicator" [class.valid]="validateSchedules()"
+                        [class.invalid]="!validateSchedules()">
+                        <span class="material-icons">{{ validateSchedules() ? 'check_circle' : 'error' }}</span>
+                        <span>{{ calculateTotalHours() }} / {{ selectedSubject?.horasCursado || 0 }} horas</span>
+                    </div>
+                    } @else {
+                    <p class="text-muted">No se han agregado horarios aún</p>
+                    }
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="backToStep('SUBJECT')">
+                    <span class="material-icons">arrow_back</span> Atrás
+                </button>
+                <button class="btn-primary" (click)="goToStep3()" [disabled]="!validateSchedules() || isLoading">
+                    Buscar Profesores <span class="material-icons">arrow_forward</span>
+                </button>
+            </div>
+            }
+
+            <!-- Step 3: Select Professors -->
+            @if (assignStep === 'PROFESSORS') {
+            <div class="modal-header">
+                <h4>Seleccionar Profesores</h4>
+                @if (selectedSubject) {
+                <p class="subject-selected">{{ selectedSubject.nombre }}</p>
+                }
+            </div>
+            <div class="modal-body">
+                <div class="schedule-summary">
+                    <h5>Horarios Definidos</h5>
+                    @for (schedule of scheduleList; track $index) {
+                    <span class="schedule-badge">{{ schedule.dia }} {{ schedule.horaDesde }}-{{ schedule.horaHasta
+                        }}</span>
+                    }
+                </div>
+
+                @if (isLoading) {
+                <div class="loading-state">
+                    <span class="material-icons rotating">hourglass_empty</span>
+                    <p>Buscando profesores disponibles...</p>
+                </div>
+                } @else {
+                <div class="professor-list">
+                    @for (profesor of availableProfessors; track profesor.id) {
+                    <div class="professor-item" [class.selected]="selectedProfessorIds.includes(profesor.id)"
+                        (click)="toggleProfessor(profesor.id)">
+                        <div class="professor-info">
+                            <span class="professor-name">{{ profesor.apellido }}, {{ profesor.nombre }}</span>
+                            <span class="professor-legajo">Legajo: {{ profesor.legajo }}</span>
+                        </div>
+                        <span class="material-icons checkbox">
+                            {{ selectedProfessorIds.includes(profesor.id) ? 'check_box' : 'check_box_outline_blank' }}
+                        </span>
+                    </div>
+                    } @empty {
+                    <div class="empty-state-small">
+                        <span class="material-icons">person_off</span>
+                        <p>No hay profesores disponibles en estos horarios</p>
+                    </div>
+                    }
+                </div>
+                }
+
+                @if (selectedProfessorIds.length > 0) {
+                <p class="selected-count">{{ selectedProfessorIds.length }} profesor(es) seleccionado(s)</p>
+                }
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="backToStep('SCHEDULE')">
+                    <span class="material-icons">arrow_back</span> Atrás
+                </button>
+                <button class="btn-primary" (click)="finalizeAssignment()"
+                    [disabled]="selectedProfessorIds.length === 0 || isLoading">
+                    <span class="material-icons">check</span> Confirmar Asignación
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+    }
 </app-page-layout>

@@ -145,6 +145,7 @@ export class AdminCommissionsComponent implements OnInit {
     // Step 1: Subject
     availableSubjects: any[] = [];
     selectedSubjectId: string = '';
+    selectedSubject: any = null;
 
     // Step 2: Schedule
     scheduleList: { dia: string; horaDesde: string; horaHasta: string }[] = [];
@@ -194,11 +195,53 @@ export class AdminCommissionsComponent implements OnInit {
         });
     }
 
+    selectSubject(materia: any) {
+        this.selectedSubjectId = materia.id;
+        this.selectedSubject = materia;
+        this.assignStep = 'SCHEDULE';
+    }
+
     addSchedule() {
         if (this.newSchedule.horaDesde && this.newSchedule.horaHasta) {
+            // Validate time range
+            if (this.newSchedule.horaDesde >= this.newSchedule.horaHasta) {
+                this.alertService.warning('La hora de inicio debe ser anterior a la hora de fin');
+                return;
+            }
             this.scheduleList.push({ ...this.newSchedule });
             this.newSchedule = { dia: 'LUNES', horaDesde: '', horaHasta: '' };
         }
+    }
+
+    calculateTotalHours(): number {
+        return this.scheduleList.reduce((total, schedule) => {
+            const [startH, startM] = schedule.horaDesde.split(':').map(Number);
+            const [endH, endM] = schedule.horaHasta.split(':').map(Number);
+            const startMinutes = startH * 60 + startM;
+            const endMinutes = endH * 60 + endM;
+            const diffMinutes = endMinutes - startMinutes;
+            return total + (diffMinutes / 60);
+        }, 0);
+    }
+
+    validateSchedules(): boolean {
+        if (!this.selectedSubject || this.scheduleList.length === 0) return false;
+        const totalHours = this.calculateTotalHours();
+        return totalHours === this.selectedSubject.horasCursado;
+    }
+
+    goToStep3() {
+        if (!this.validateSchedules()) {
+            const required = this.selectedSubject?.horasCursado || 0;
+            const current = this.calculateTotalHours();
+            this.alertService.warning(`Debe asignar exactamente ${required} horas (actualmente: ${current})`);
+            return;
+        }
+        this.searchProfessors();
+    }
+
+    backToStep(step: 'SUBJECT' | 'SCHEDULE') {
+        this.assignStep = step;
     }
 
     removeSchedule(index: number) {
