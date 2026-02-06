@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
-import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest, AdminInscripcionRequest, FacultadAdminDTO, FacultadRequest, CarreraAdminDTO, PlanDetalleDTO, MesaAdminDTO, MesaExamenRequest, DetalleMesaRequest, AdminComisionDTO, ComisionRequest, AsignarMateriaComisionRequest, ProfesorDisponibleDTO, SimpleMateriaDTO } from '@core/models/admin.models';
+import { AdminInscripcionDTO, AdminEstadisticasDTO, MatriculacionRequest, AdminInscripcionRequest, FacultadAdminDTO, FacultadRequest, CarreraAdminDTO, PlanDetalleDTO, MesaAdminDTO, MesaExamenRequest, DetalleMesaRequest, AdminComisionDTO, ComisionRequest, AsignarMateriaComisionRequest, ProfesorDisponibleDTO, SimpleMateriaDTO, MesaExamenResponse } from '@core/models/admin.models';
 import { FacultadResponse } from '@core/models/facultad.models';
 import { CarreraResponse } from '@core/models/carrera.models';
 import { PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
@@ -181,8 +181,8 @@ export class AdminService {
     }
 
     // --- Module: Exam Tables ---
-    getAllMesasAdmin(): Observable<MesaAdminDTO[]> {
-        return from(axiosClient.get<MesaAdminDTO[]>('/admin/mesas')).pipe(
+    getAllTurnos(): Observable<MesaExamenResponse[]> {
+        return from(axiosClient.get<MesaExamenResponse[]>('/admin/mesas/turnos')).pipe(
             map(response => response.data)
         );
     }
@@ -201,6 +201,18 @@ export class AdminService {
 
     eliminarDetalleMesa(idMesa: string, nroDetalle: number): Observable<void> {
         return from(axiosClient.delete<void>(`/admin/mesas/${idMesa}/detalle/${nroDetalle}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    eliminarTurno(id: string): Observable<void> {
+        return from(axiosClient.delete<void>(`/admin/mesas/turnos/${id}`)).pipe(
+            map(response => response.data)
+        );
+    }
+
+    editarTurno(id: string, request: MesaExamenRequest): Observable<void> {
+        return from(axiosClient.put<void>(`/admin/mesas/turnos/${id}`, request)).pipe(
             map(response => response.data)
         );
     }
