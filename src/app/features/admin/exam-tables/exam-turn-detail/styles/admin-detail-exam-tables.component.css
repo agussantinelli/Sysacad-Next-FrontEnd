@@ -137,6 +137,18 @@ select.form-control {
     background: var(--bg-input, #ffffff);
     color: var(--text-primary);
     transition: all 0.2s;
+    appearance: none;
+    /* Remove default arrow to use custom one if needed, or keep standard */
+    background-image: var(--select-arrow);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+/* Ensure options have correct colors in light/dark mode */
+select.form-control option {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .form-control:focus {
