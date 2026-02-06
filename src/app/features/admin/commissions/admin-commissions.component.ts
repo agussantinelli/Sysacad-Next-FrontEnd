@@ -34,8 +34,11 @@ export class AdminCommissionsComponent implements OnInit {
         nombre: '',
         turno: '',
         anio: new Date().getFullYear(),
-        salon: '',
-        idCarrera: ''
+        nivel: 1,
+        idCarrera: '',
+        idSalon: '',
+        idsMaterias: [],
+        idsProfesores: []
     };
 
     ngOnInit() {
@@ -81,7 +84,7 @@ export class AdminCommissionsComponent implements OnInit {
     }
 
     onTurnoOrAnioChange() {
-        this.newComision.salon = ''; // Reset selection
+        this.newComision.idSalon = ''; // Reset selection
         this.loadSalones();
     }
 
@@ -92,8 +95,11 @@ export class AdminCommissionsComponent implements OnInit {
             nombre: '',
             turno: '',
             anio: new Date().getFullYear(),
-            salon: '',
-            idCarrera: this.carreras.length > 0 ? this.carreras[0].id : ''
+            nivel: 1,
+            idCarrera: this.carreras.length > 0 ? this.carreras[0].id : '',
+            idSalon: '',
+            idsMaterias: [],
+            idsProfesores: []
         };
         this.salones = []; // Reset salones list
     }

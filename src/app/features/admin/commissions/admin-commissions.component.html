@@ -22,7 +22,8 @@
                 </div>
                 <div class="card-body">
                     <p><span class="material-icons">room</span> {{ comision.nombreSalon }}</p>
-                    <p><span class="material-icons">menu_book</span> {{ comision.materias.length }} Materias Asignadas
+                    <p><span class="material-icons">menu_book</span> {{ comision.materias.length }} Materias
+                        Asignadas
                     </p>
                 </div>
             </div>
@@ -128,6 +129,12 @@
             </div>
 
             <div class="form-group">
+                <label>Nivel</label>
+                <input type="number" [(ngModel)]="newComision.nivel" class="form-control" placeholder="1, 2, 3..."
+                    min="1" max="5">
+            </div>
+
+            <div class="form-group">
                 <label>Año Académico</label>
                 <input type="number" [(ngModel)]="newComision.anio" (change)="onTurnoOrAnioChange()"
                     class="form-control" placeholder="Ej: 2025">
@@ -145,11 +152,11 @@
 
             <div class="form-group">
                 <label>Salón Asignado</label>
-                <select [(ngModel)]="newComision.salon" class="form-control"
+                <select [(ngModel)]="newComision.idSalon" class="form-control"
                     [disabled]="!newComision.turno || !newComision.anio">
                     <option value="" disabled selected>Seleccione una opción</option>
                     @for (salon of salones; track salon.id) {
-                    <option [value]="salon.nombre">{{ salon.nombre }}</option>
+                    <option [value]="salon.id">{{ salon.nombre }}</option>
                     }
                 </select>
             </div>

@@ -128,7 +128,7 @@ export interface AdminComisionDTO {
     turno: string;
     anio: number;
     nombreSalon: string;
-    idCarrera: string; // Needed for fetching subjects
+    idCarrera: string;
     materias: AdminMateriaComisionDTO[];
 }
 
@@ -178,8 +178,11 @@ export interface ComisionRequest {
     nombre: string;
     turno: string;
     anio: number;
-    salon: string; // inferred from "nombreSalon" or similar
-    idCarrera: string; // Usually required to link commission to a structure
+    nivel: number;
+    idCarrera: string; // UUID
+    idSalon: string; // UUID
+    idsMaterias: string[]; // List of UUIDs
+    idsProfesores: string[]; // List of UUIDs
 }
 
 export interface SimpleMateriaDTO {
