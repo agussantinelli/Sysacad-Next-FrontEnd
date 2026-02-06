@@ -4,13 +4,14 @@ import { Router, RouterLink } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
+import { QuickMessageModalComponent } from '@shared/components/quick-message-modal/quick-message-modal.component';
 import { ProfessorService } from '@core/services/professor.service';
 import { ComisionDetalladaDTO } from '@core/models/professor.models';
 
 @Component({
     selector: 'app-my-commissions',
     standalone: true,
-    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent, RouterLink],
+    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent, QuickMessageModalComponent],
     templateUrl: './my-commissions.component.html',
     styleUrl: './styles/my-commissions.component.css'
 })
@@ -21,6 +22,9 @@ export class MyCommissionsComponent implements OnInit {
     comisiones: ComisionDetalladaDTO[] = [];
     isLoading = false;
     error: string | null = null;
+
+    showQuickMessageModal = false;
+    selectedCommission: ComisionDetalladaDTO | null = null;
 
     ngOnInit(): void {
         this.loadMisComisiones();
@@ -45,5 +49,15 @@ export class MyCommissionsComponent implements OnInit {
 
     goToGrading(comision: ComisionDetalladaDTO): void {
         this.router.navigate(['/professor/commissions', comision.idComision, 'subjects', comision.idMateria, 'grading']);
+    }
+
+    openMessageModal(comision: ComisionDetalladaDTO) {
+        this.selectedCommission = comision;
+        this.showQuickMessageModal = true;
+    }
+
+    closeMessageModal() {
+        this.showQuickMessageModal = false;
+        this.selectedCommission = null;
     }
 }

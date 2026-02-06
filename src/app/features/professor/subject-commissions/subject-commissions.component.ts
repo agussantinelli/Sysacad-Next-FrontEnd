@@ -4,13 +4,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { AlertMessageComponent } from '@shared/components/alert-message/alert-message.component';
+import { QuickMessageModalComponent } from '@shared/components/quick-message-modal/quick-message-modal.component';
 import { ProfessorService } from '@core/services/professor.service';
 import { ComisionHorarioDTO } from '@core/models/professor.models';
 
 @Component({
     selector: 'app-subject-commissions',
     standalone: true,
-    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent, RouterLink],
+    imports: [CommonModule, PageLayoutComponent, LoadingSpinnerComponent, AlertMessageComponent, QuickMessageModalComponent],
     templateUrl: './subject-commissions.component.html',
     styleUrl: './styles/subject-commissions.component.css'
 })
@@ -24,6 +25,9 @@ export class SubjectCommissionsComponent implements OnInit {
     error: string | null = null;
     subjectName = '';
     idMateria = '';
+
+    showQuickMessageModal = false;
+    selectedCommission: ComisionHorarioDTO | null = null;
 
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
@@ -57,5 +61,15 @@ export class SubjectCommissionsComponent implements OnInit {
 
     goToGrading(idComision: string): void {
         this.router.navigate(['/professor/commissions', idComision, 'subjects', this.idMateria, 'grading']);
+    }
+
+    openMessageModal(comision: ComisionHorarioDTO) {
+        this.selectedCommission = comision;
+        this.showQuickMessageModal = true;
+    }
+
+    closeMessageModal() {
+        this.showQuickMessageModal = false;
+        this.selectedCommission = null;
     }
 }

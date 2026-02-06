@@ -64,15 +64,14 @@
 
                     @if (comision.cantidadAlumnos > 0) {
                     <div class="card-actions">
+                        <button class="btn-message" (click)="openMessageModal(comision)">
+                            <span class="material-icons">chat</span>
+                            Enviar Mensaje
+                        </button>
                         <button class="btn-grade" (click)="goToGrading(comision.idComision)">
                             <span class="material-icons">assignment_turned_in</span>
-                            Calificar
+                            Calificar Alumnos
                         </button>
-                        <a [routerLink]="['/messages']" [queryParams]="{idComision: comision.idComision}"
-                            class="btn-message">
-                            <span class="material-icons">chat</span>
-                            Mensaje
-                        </a>
                     </div>
                     }
                 </div>
@@ -82,4 +81,9 @@
         }
         }
     </div>
+    @if (showQuickMessageModal && selectedCommission) {
+    <app-quick-message-modal [idComision]="selectedCommission.idComision"
+        [targetName]="selectedCommission.nombre + ' - ' + subjectName" (close)="closeMessageModal()"
+        (sent)="loadComisiones()"></app-quick-message-modal>
+    }
 </app-page-layout>
