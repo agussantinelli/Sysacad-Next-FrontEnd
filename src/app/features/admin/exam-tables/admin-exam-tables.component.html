@@ -73,9 +73,13 @@
                                 </span>
                             </td>
                             <td>
-                                <button class="icon-btn delete" (click)="deleteDetalle(mesa)" title="Eliminar Mesa">
+                                @if (mesa.cantidadInscriptos === 0) {
+                                <button class="icon-btn delete" (click)="deleteDetalle(mesa)"
+                                    [disabled]="isDatePassed(mesa.fecha)"
+                                    [title]="isDatePassed(mesa.fecha) ? 'No se puede eliminar una mesa pasada' : 'Eliminar Mesa'">
                                     <span class="material-icons">delete</span>
                                 </button>
+                                }
                             </td>
                         </tr>
                         }

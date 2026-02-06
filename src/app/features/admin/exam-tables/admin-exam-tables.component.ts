@@ -109,6 +109,16 @@ export class AdminExamTablesComponent implements OnInit {
   }
 
   deleteDetalle(mesa: MesaAdminDTO) {
+    if (mesa.cantidadInscriptos > 0) {
+      this.alertService.error('No se puede eliminar una mesa con alumnos inscriptos.');
+      return;
+    }
+
+    if (this.isDatePassed(mesa.fecha)) {
+      this.alertService.error('No se puede eliminar una mesa cuya fecha ya ha pasado.');
+      return;
+    }
+
     if (confirm(`¿Eliminar mesa de ${mesa.materia}?`)) {
       this.isLoading = true;
       this.adminService.eliminarDetalleMesa(mesa.idMesaExamen, mesa.nroDetalle).subscribe({
@@ -123,6 +133,12 @@ export class AdminExamTablesComponent implements OnInit {
         }
       });
     }
+  }
+
+  isDatePassed(dateString: string): boolean {
+    const examDate = new Date(dateString);
+    const now = new Date();
+    return examDate < now;
   }
 
 
