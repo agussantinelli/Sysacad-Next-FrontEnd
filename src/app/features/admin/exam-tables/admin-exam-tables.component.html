@@ -1,29 +1,14 @@
 <app-page-layout title="Gestión de Mesas de Examen" icon="assignment">
     <div class="content-container">
 
-        <!-- Create Turno -->
-        <div class="card create-form">
-            <h3>Nuevo Turno de Examen</h3>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" [(ngModel)]="newTurno.nombre" class="form-control"
-                        placeholder="Ej: Febrero 2026">
-                </div>
-                <div class="form-group">
-                    <label>Inicio</label>
-                    <input type="date" [(ngModel)]="newTurno.fechaInicio" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Fin</label>
-                    <input type="date" [(ngModel)]="newTurno.fechaFin" class="form-control">
-                </div>
-                <button class="btn-primary" (click)="createTurno()"
-                    [disabled]="!newTurno.nombre || !newTurno.fechaInicio || !newTurno.fechaFin || isLoading">
-                    <span class="material-icons">add</span> Crear Turno
-                </button>
-            </div>
+        <!-- Main Toolbar (Only visible when no turn selected) -->
+        @if (!selectedTurno && !isLoading) {
+        <div class="card toolbar-card">
+            <button class="btn-primary" (click)="openCreateTurnModal()">
+                <span class="material-icons">add</span> Nuevo Turno
+            </button>
         </div>
+        }
 
         <!-- Views -->
         @if (isLoading) {
@@ -198,6 +183,35 @@
                 </button>
             </div>
             }
+        </div>
+    </div>
+    }
+    <!-- Create Turn Modal -->
+    @if (showCreateTurnModal) {
+    <div class="modal-overlay" (click)="closeCreateTurnModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h4>Nuevo Turno de Examen</h4>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" [(ngModel)]="newTurno.nombre" class="form-control" placeholder="Ej: Febrero 2026">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Inicio</label>
+                    <input type="date" [(ngModel)]="newTurno.fechaInicio" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Fin</label>
+                    <input type="date" [(ngModel)]="newTurno.fechaFin" class="form-control">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="closeCreateTurnModal()">Cancelar</button>
+                <button class="btn-primary" (click)="createTurno()"
+                    [disabled]="!newTurno.nombre || !newTurno.fechaInicio || !newTurno.fechaFin || isLoading">
+                    Crear Turno
+                </button>
+            </div>
         </div>
     </div>
     }

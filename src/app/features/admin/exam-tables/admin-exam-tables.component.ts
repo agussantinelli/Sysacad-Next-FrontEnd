@@ -97,7 +97,7 @@ export class AdminExamTablesComponent implements OnInit {
     this.adminService.crearTurno(this.newTurno).subscribe({
       next: () => {
         this.alertService.success('Turno creado correctamente');
-        this.newTurno = { nombre: '', fechaInicio: '', fechaFin: '' };
+        this.closeCreateTurnModal();
         this.loadMesas();
       },
       error: (err) => {
@@ -125,6 +125,20 @@ export class AdminExamTablesComponent implements OnInit {
     }
   }
 
+
+  // --- Add Exam Feature ---
+
+  // Create Turn Modal State
+  showCreateTurnModal = false;
+
+  openCreateTurnModal() {
+    this.showCreateTurnModal = true;
+    this.newTurno = { nombre: '', fechaInicio: '', fechaFin: '' };
+  }
+
+  closeCreateTurnModal() {
+    this.showCreateTurnModal = false;
+  }
 
   // --- Add Exam Feature ---
 
