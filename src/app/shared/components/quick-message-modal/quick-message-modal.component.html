@@ -1,0 +1,50 @@
+<div class="modal-overlay" (click)="onClose()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <header class="modal-header">
+            <div class="header-main">
+                <span class="material-icons header-icon">chat</span>
+                <div class="header-text">
+                    <h2>Enviar Mensaje</h2>
+                    <p class="subtitle">{{ targetName }}</p>
+                </div>
+            </div>
+            <button class="close-btn" (click)="onClose()">
+                <span class="material-icons">close</span>
+            </button>
+        </header>
+
+        <main class="modal-body">
+            @if (success) {
+            <div class="success-state">
+                <span class="material-icons success-icon">check_circle</span>
+                <h3>¡Mensaje Enviado!</h3>
+                <p>Redirigiendo...</p>
+            </div>
+            } @else {
+            <div class="input-container">
+                <label for="quick-message">Tu mensaje:</label>
+                <textarea id="quick-message" [(ngModel)]="message" placeholder="Escribe el mensaje para la comisión..."
+                    [disabled]="isLoading" rows="5" #messageInput></textarea>
+            </div>
+
+            @if (error) {
+            <app-alert-message type="error" [message]="error" (close)="error = null"></app-alert-message>
+            }
+            }
+        </main>
+
+        <footer class="modal-footer" *ngIf="!success">
+            <button class="btn-cancel" (click)="onClose()" [disabled]="isLoading">
+                Cancelar
+            </button>
+            <button class="btn-send" (click)="sendMessage()" [disabled]="!message.trim() || isLoading">
+                @if (isLoading) {
+                <app-loading-spinner [inline]="true"></app-loading-spinner>
+                } @else {
+                <span class="material-icons">send</span>
+                <span>Enviar</span>
+                }
+            </button>
+        </footer>
+    </div>
+</div>
