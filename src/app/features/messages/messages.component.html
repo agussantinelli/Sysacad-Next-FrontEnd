@@ -11,29 +11,27 @@
             <div class="conversations-list">
                 @for (conv of conversations; track conv.id) {
                 <div class="conversation-item" [class.active]="selectedConversation?.id === conv.id"
-                    [class.unread]="conv.unreadCount > 0" (click)="selectConversation(conv)">
+                    (click)="selectConversation(conv)">
 
                     <div class="avatar-container">
                         <div class="avatar-placeholder">
-                            {{ conv.name.charAt(0) }}
+                            {{ conv.nombre.charAt(0) }}
                         </div>
-                        @if (conv.online) {
-                        <span class="status-indicator online"></span>
-                        }
                     </div>
 
                     <div class="conv-info">
                         <div class="conv-header">
-                            <span class="conv-name">{{ conv.name }}</span>
-                            <span class="conv-time">{{ conv.lastMessageTime | date:'shortTime' }}</span>
+                            <span class="conv-name text-truncate">{{ conv.nombre }}</span>
+                            <span class="conv-time">{{ conv.fechaCreacion | date:'shortDate' }}</span>
                         </div>
                         <div class="conv-preview">
-                            <span class="last-message">{{ conv.lastMessage }}</span>
-                            @if (conv.unreadCount > 0) {
-                            <span class="badge">{{ conv.unreadCount }}</span>
-                            }
+                            <span class="last-message">{{ conv.descripcion }}</span>
                         </div>
                     </div>
+                </div>
+                } @empty {
+                <div class="p-4 text-center text-secondary italic">
+                    No perteneces a ningún grupo aún.
                 </div>
                 }
             </div>
@@ -49,11 +47,11 @@
 
                 <div class="chat-header-info">
                     <div class="avatar-placeholder sm">
-                        {{ selectedConversation.name.charAt(0) }}
+                        {{ selectedConversation.nombre.charAt(0) }}
                     </div>
                     <div class="header-text">
-                        <h3>{{ selectedConversation.name }}</h3>
-                        <span class="status-text">{{ selectedConversation.online ? 'En línea' : 'Desconectado' }}</span>
+                        <h3>{{ selectedConversation.nombre }}</h3>
+                        <span class="status-text">Grupo</span>
                     </div>
                 </div>
 
@@ -63,16 +61,32 @@
             </div>
 
             <div class="messages-list">
+                @if (isLoading) {
+                <div class="flex flex-col items-center justify-center h-full text-secondary">
+                    <span class="material-icons animate-spin text-4xl mb-2">autorenew</span>
+                    <p>Cargando historial...</p>
+                </div>
+                } @else {
                 @for (msg of messages; track msg.id) {
-                <div class="message-group" [class.mine]="msg.isMine">
+                <div class="message-group" [class.mine]="isMine(msg)">
+                    <div class="message-info-header">
+                        <span class="sender-name">{{ msg.nombreRemitente }}</span>
+                    </div>
                     <div class="message-bubble">
-                        <p>{{ msg.content }}</p>
-                        <span class="msg-time">{{ msg.timestamp | date:'shortTime' }}</span>
+                        <p>{{ msg.contenido }}</p>
+                        <span class="msg-time">{{ msg.fechaEnvio | date:'short' }}</span>
                     </div>
                 </div>
+                } @empty {
+                <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
+                    <span class="material-icons text-4xl mb-2">chat_bubble_outline</span>
+                    <p>No hay mensajes en este grupo.</p>
+                </div>
+                }
                 }
             </div>
 
+            @if (canSend) {
             <div class="chat-input-area">
                 <button class="icon-btn"><span class="material-icons">attach_file</span></button>
                 <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="newMessage"
@@ -81,6 +95,13 @@
                     <span class="material-icons">send</span>
                 </button>
             </div>
+            } @else {
+            <div class="chat-input-area readonly">
+                <p class="text-sm text-center w-full text-secondary">Solo los profesores o jefes de cátedra pueden
+                    enviar
+                    mensajes en este grupo.</p>
+            </div>
+            }
 
             } @else {
             <div class="empty-chat-state">

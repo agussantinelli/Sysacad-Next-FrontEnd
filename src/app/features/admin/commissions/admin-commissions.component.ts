@@ -189,7 +189,7 @@ export class AdminCommissionsComponent implements OnInit {
         this.adminService.getPlanDetalle(this.selectedComision.idCarrera, this.selectedComision.anio).subscribe({
             next: (plan) => {
                 // Filter out subjects already assigned to this commission
-                const assignedIds = this.selectedComision!.materias.map(m => m.idMateria);
+                const assignedIds = this.selectedComision!.materiasDetalle.map((m: any) => m.idMateria);
                 // Also filter by nivel to only show subjects matching the commission's level
                 this.availableSubjects = plan.materias.filter(m =>
                     !assignedIds.includes(m.id) && m.nivel === this.selectedComision!.nivel
