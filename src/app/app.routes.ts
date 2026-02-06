@@ -238,6 +238,10 @@ export const routes: Routes = [
         loadComponent: () => import('@features/admin/exam-tables/admin-exam-tables.component').then(m => m.AdminExamTablesComponent)
     },
     {
+        path: 'admin/exam-tables/:id',
+        loadComponent: () => import('@features/admin/exam-tables/exam-turn-detail/admin-detail-exam-tables.component').then(m => m.AdminDetailExamTablesComponent)
+    },
+    {
         path: 'admin/calendar',
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/student/calendar/calendar.component').then(m => m.CalendarComponent)
