@@ -31,19 +31,13 @@
                         <span>Jefe: {{ materia.jefeCatedra }}</span>
                     </div>
                     }
-                </div>
-                <div class="card-footer">
-                    @if (materia.cargo === 'JEFE_CATEDRA') {
-                    <button class="action-btn">
-                        <span class="material-icons">settings</span>
-                        Ajustes
-                    </button>
-                    }
-                    <a [routerLink]="['/professor/commissions', materia.id]" [queryParams]="{name: materia.nombre}"
-                        class="action-btn primary">
-                        <span class="material-icons">groups</span>
-                        Comisiones
-                    </a>
+                    <div class="card-footer">
+                        <a [routerLink]="['/professor/commissions', materia.id]" [queryParams]="{name: materia.nombre}"
+                            class="action-btn primary">
+                            <span class="material-icons">groups</span>
+                            Comisiones
+                        </a>
+                    </div>
                 </div>
             </div>
             }
