@@ -1,0 +1,168 @@
+<app-page-layout [title]="turn ? turn.nombre : 'Detalle de Turno'" icon="event_note">
+    <div class="content-container">
+        @if (isLoading && !turn) {
+        <app-loading-spinner></app-loading-spinner>
+        } @else if (turn) {
+        <div class="card list-card">
+            <div class="card-header-actions">
+                <button class="btn-outline" (click)="goBack()">
+                    <span class="material-icons">arrow_back</span> Volver
+                </button>
+                <h3>{{ turn.nombre }}</h3>
+                <button class="btn-primary" (click)="openAddModal()">
+                    <span class="material-icons">add_circle</span> Agregar Mesa
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Materia</th>
+                            <th>Fecha Examen</th>
+                            <th>Inscriptos</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (mesa of turn.detalles; track mesa.idMesaExamen + '-' + mesa.nroDetalle) {
+                        <tr>
+                            <td class="fw-bold">{{ mesa.nombreMateria }}</td>
+                            <td>{{ mesa.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+                            <td>{{ mesa.cantidadInscriptos }}</td>
+                            <td>
+                                <span class="badge" [class.open]="mesa.abierta" [class.closed]="!mesa.abierta">
+                                    {{ mesa.abierta ? 'Abierta' : 'Cerrada' }}
+                                </span>
+                            </td>
+                            <td>
+                                @if (mesa.cantidadInscriptos === 0) {
+                                <button class="icon-btn delete" (click)="deleteDetalle(mesa)"
+                                    [disabled]="isDatePassed(mesa.fecha)"
+                                    [title]="isDatePassed(mesa.fecha) ? 'No se puede eliminar una mesa pasada' : 'Eliminar Mesa'">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                                }
+                            </td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">No hay mesas cargadas en este turno.
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+    </div>
+
+    <!-- Add Exam Modal -->
+    @if (showAddModal) {
+    <div class="modal-overlay" (click)="closeAddModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h4>Agregar Mesa de Examen</h4>
+
+            <!-- Step 1: Subject Search -->
+            @if (addStep === 'SUBJECT') {
+            <div class="form-group">
+                <label>Carrera</label>
+                <select [(ngModel)]="selectedCarreraId" class="form-control" (change)="foundSubjects = []">
+                    <option value="" disabled>Seleccione Carrera...</option>
+                    @for (carrera of carreras; track carrera.id) {
+                    <option [value]="carrera.id">{{ carrera.nombre }}</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Buscar Materia</label>
+                <div class="search-box">
+                    <input type="text" [(ngModel)]="subjectQuery" class="form-control"
+                        placeholder="Nombre de materia...">
+                    <button class="btn-primary" (click)="searchSubjects()"
+                        [disabled]="!selectedCarreraId || !subjectQuery">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+
+            <div class="results-list">
+                @for (subj of foundSubjects; track subj.id) {
+                <div class="result-item" (click)="selectSubject(subj)">
+                    <span>{{ subj.nombre }} (Año {{ subj.anio }})</span>
+                    <span class="material-icons">chevron_right</span>
+                </div>
+                } @empty {
+                @if (subjectQuery && !isLoading) { <p class="text-secondary">No se encontraron materias.</p> }
+                }
+            </div>
+            }
+
+            <!-- Step 2: Date & Time -->
+            @if (addStep === 'DATETIME') {
+            <div class="selected-info mb-2">
+                <strong>Materia:</strong> {{ selectedSubject?.nombre }}
+            </div>
+
+            <div class="form-group">
+                <label>Fecha del Examen</label>
+                <input type="date" [(ngModel)]="examDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Hora</label>
+                <input type="time" [(ngModel)]="examTime" class="form-control">
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="addStep = 'SUBJECT'">Atrás</button>
+                <button class="btn-primary" (click)="findPresidents()" [disabled]="!examDate || !examTime || isLoading">
+                    Siguiente (Buscar Presidente)
+                </button>
+            </div>
+            }
+
+            <!-- Step 3: Professor -->
+            @if (addStep === 'PROFESSOR') {
+            <div class="selected-info mb-2">
+                <strong>Fecha:</strong> {{ examDate | date:'dd/MM/yyyy' }} {{ examTime }}
+            </div>
+
+            <h5>Seleccionar Presidente</h5>
+            <div class="professors-list">
+                @for (prof of availablePresidents; track prof.id) {
+                <div class="professor-item" [class.selected]="selectedPresidentId === prof.id"
+                    (click)="selectPresident(prof.id)">
+                    <div>
+                        <span class="prof-name">{{ prof.apellido }}, {{ prof.nombre }}</span>
+                        <span class="prof-legajo">Legajo: {{ prof.legajo }}</span>
+                    </div>
+                    <span class="material-icons checkbox">
+                        {{ selectedPresidentId === prof.id ? 'radio_button_checked' : 'radio_button_unchecked' }}
+                    </span>
+                </div>
+                } @empty {
+                <p>No hay profesores disponibles en este horario.</p>
+                }
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-secondary" (click)="addStep = 'DATETIME'">Atrás</button>
+                <button class="btn-primary" (click)="saveExam()" [disabled]="!selectedPresidentId || isLoading">
+                    Confirmar y Guardar
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+    <!-- Confirmation Modal -->
+    @if (showDeleteConfirmation) {
+    <app-confirmation-modal title="Confirmar Eliminación"
+        message="¿Está seguro de que desea eliminar esta mesa de examen? Esta acción no se puede deshacer."
+        confirmText="Eliminar" cancelText="Cancelar" type="danger" (confirm)="confirmDelete()" (close)="cancelDelete()">
+    </app-confirmation-modal>
+    }
+</app-page-layout>
