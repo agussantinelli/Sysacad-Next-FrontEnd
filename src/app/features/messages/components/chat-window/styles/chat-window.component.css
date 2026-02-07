@@ -1,3 +1,9 @@
+:host {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+}
+
 /* Chat Window */
 .chat-window {
     flex: 1;
@@ -173,13 +179,32 @@
     align-items: center;
     justify-content: center;
     color: var(--text-secondary);
-    background-color: var(--bg-page);
+    background-color: transparent;
+    /* Remove double background */
+    width: 100%;
+    gap: 1rem;
 }
 
 .empty-chat-state .material-icons {
-    font-size: 4rem;
-    opacity: 0.2;
-    margin-bottom: 1rem;
+    font-size: 6rem;
+    opacity: 0.1;
+    margin-bottom: 0.5rem;
+}
+
+.empty-chat-state h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.empty-chat-state p {
+    font-size: 0.95rem;
+    max-width: 250px;
+    text-align: center;
+    line-height: 1.5;
+    opacity: 0.6;
+    margin: 0;
 }
 
 .flex {
