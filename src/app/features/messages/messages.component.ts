@@ -132,7 +132,13 @@ export class MessagesComponent implements OnInit {
                     if (this.selectedConversation) {
                         this.selectedConversation.esVisible = true;
                         this.selectedConversation.horaUltimoMensaje = msg.fechaEnvio;
+                        // Aseguramos que el ID se actualice si era un placeholder
+                        if (msg.idGrupo && this.selectedConversation.id !== msg.idGrupo) {
+                            this.selectedConversation.id = msg.idGrupo;
+                        }
                     }
+                    // Refrescamos la referencia para disparar la reactividad de los getters
+                    this.conversations = [...this.conversations];
                 },
                 error: (err) => console.error('Error sending professor message', err)
             });
@@ -144,6 +150,8 @@ export class MessagesComponent implements OnInit {
                         this.selectedConversation.esVisible = true;
                         this.selectedConversation.horaUltimoMensaje = msg.fechaEnvio;
                     }
+                    // Refrescamos la referencia para disparar la reactividad de los getters
+                    this.conversations = [...this.conversations];
                 },
                 error: (err) => console.error('Error sending message', err)
             });
