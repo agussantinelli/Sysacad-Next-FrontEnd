@@ -17,6 +17,7 @@ export interface GrupoResponse {
     idComision: string; // UUID
     idMateria: string; // UUID
     esVisible: boolean;
+    mensajesSinLeer: number;
 }
 
 export interface MiembroGrupoRequest {
@@ -45,7 +46,10 @@ export interface MensajeGrupoResponse {
     idGrupo: string; // UUID
     idUsuarioRemitente: string; // UUID
     nombreRemitente: string;
+    apellidoRemitente: string;
+    fotoRemitente: string;
     contenido: string;
     editado: boolean;
     fechaEnvio: string; // LocalDateTime
+    leido: boolean;
 }
