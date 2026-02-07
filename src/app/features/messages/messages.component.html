@@ -1,4 +1,7 @@
 <app-page-layout title="Mensajes">
+    @if (loadingGroups) {
+    <app-loading-spinner message="Cargando tus mensajes..." [fullScreen]="false"></app-loading-spinner>
+    } @else {
     <div class="messages-container">
 
         <!-- Sidebar: List of Conversations -->
@@ -167,4 +170,5 @@
             }
         </div>
     </div>
+    }
 </app-page-layout>

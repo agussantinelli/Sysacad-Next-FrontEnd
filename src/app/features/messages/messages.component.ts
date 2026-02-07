@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { filter, switchMap } from 'rxjs/operators';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
+import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
 import { ActivatedRoute } from '@angular/router';
 
 import { ChatService } from '@core/services/chat.service';
@@ -14,7 +15,7 @@ import { RolUsuario } from '@core/enums/usuario.enums';
 @Component({
     selector: 'app-messages',
     standalone: true,
-    imports: [CommonModule, PageLayoutComponent, FormsModule],
+    imports: [CommonModule, PageLayoutComponent, FormsModule, LoadingSpinnerComponent],
     templateUrl: './messages.component.html',
     styleUrl: './styles/messages.component.css'
 })
@@ -28,6 +29,7 @@ export class MessagesComponent implements OnInit {
     currentUserId: string | null = null;
     currentUserRol: string | null = null;
     canSend = false;
+    loadingGroups = false;
 
     constructor(
         private chatService: ChatService,
@@ -40,6 +42,7 @@ export class MessagesComponent implements OnInit {
     }
 
     loadGroups() {
+        this.loadingGroups = true;
         this.authService.currentUser$.pipe(
             filter(user => !!user),
             switchMap(user => {
@@ -47,16 +50,21 @@ export class MessagesComponent implements OnInit {
                 this.currentUserRol = user!.rol;
 
                 if (user!.rol === RolUsuario.ESTUDIANTE) {
+                    console.log('Mensajes: Llamando a /grupos/alumno');
                     return this.chatService.getGruposAlumno();
                 } else if (user!.rol === RolUsuario.PROFESOR) {
+                    console.log('Mensajes: Llamando a /grupos/profesor');
                     return this.chatService.getGruposProfesor();
                 } else {
+                    console.log('Mensajes: Llamando a /grupos/mis-grupos');
                     return this.chatService.getMisGrupos();
                 }
             })
         ).subscribe({
             next: (grupos) => {
+                console.log('Mensajes: Datos recibidos del endpoint:', grupos);
                 this.conversations = grupos || [];
+                this.loadingGroups = false;
 
                 // Handle deep linking
                 const idComision = this.route.snapshot.queryParamMap.get('idComision');
@@ -67,7 +75,10 @@ export class MessagesComponent implements OnInit {
                     }
                 }
             },
-            error: (err) => console.error('Error loading groups', err)
+            error: (err) => {
+                console.error('Error loading groups', err);
+                this.loadingGroups = false;
+            }
         });
     }
 
