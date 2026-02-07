@@ -2,11 +2,12 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GrupoResponse, MensajeGrupoResponse } from '@core/models/messaging.models';
+import { ParticipantsListComponent } from '../participants-list/participants-list.component';
 
 @Component({
     selector: 'app-chat-window',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, ParticipantsListComponent],
     templateUrl: './chat-window.component.html',
     styleUrl: './styles/chat-window.component.css'
 })
@@ -23,6 +24,7 @@ export class ChatWindowComponent implements AfterViewChecked {
     @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
 
     newMessage: string = '';
+    showParticipants = false;
 
     ngAfterViewChecked() {
         this.scrollToBottom();
@@ -32,6 +34,10 @@ export class ChatWindowComponent implements AfterViewChecked {
         try {
             this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
         } catch (err) { }
+    }
+
+    toggleParticipants() {
+        this.showParticipants = !this.showParticipants;
     }
 
     handleSendMessage() {
@@ -47,8 +53,6 @@ export class ChatWindowComponent implements AfterViewChecked {
     getProfileImageUrl(relativePath: string): string {
         if (!relativePath) return '';
         if (relativePath.startsWith('http')) return relativePath;
-        // The backend serves files from /uploads or similar. 
-        // Based on other components, it seems it expects the full path starting from the root of the server
         const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
         return `http://localhost:8080/${cleanPath}`;
     }
@@ -56,12 +60,10 @@ export class ChatWindowComponent implements AfterViewChecked {
     get groupedMessages() {
         if (!this.messages || this.messages.length === 0) return [];
 
-        // 1. First, always sort messages chronologically (oldest first)
         const sorted = [...this.messages].sort((a, b) =>
             new Date(a.fechaEnvio).getTime() - new Date(b.fechaEnvio).getTime()
         );
 
-        // 2. Group by date
         const groups: { dateLabel: string; messages: MensajeGrupoResponse[] }[] = [];
 
         sorted.forEach(msg => {

@@ -20,6 +20,22 @@
     gap: 1rem;
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border-subtle);
+    z-index: 10;
+}
+
+.chat-main-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    transition: all 0.3s ease;
 }
 
 .header-text h3 {
@@ -42,15 +58,22 @@
     border: none;
     color: var(--text-secondary);
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    border-radius: 12px;
+    transition: all 0.2s;
 }
 
-.icon-btn:hover {
-    background-color: var(--input-bg);
+.icon-btn:hover,
+.icon-btn.active {
+    background-color: var(--bg-hover);
+    color: var(--utn-blue);
+}
+
+.icon-btn.active {
+    background-color: rgba(0, 107, 182, 0.1);
 }
 
 /* Avatar Placeholder inside Header */
