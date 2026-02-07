@@ -14,6 +14,14 @@ export class ParticipantsListComponent {
     @Input() totalCount: number = 0;
     @Output() close = new EventEmitter<void>();
 
+    get sortedParticipants(): GrupoIntegranteDTO[] {
+        return [...this.participants].sort((a, b) => {
+            if (a.rol === 'ADMIN' && b.rol !== 'ADMIN') return -1;
+            if (a.rol !== 'ADMIN' && b.rol === 'ADMIN') return 1;
+            return a.apellido.localeCompare(b.apellido);
+        });
+    }
+
     onClose() {
         this.close.emit();
     }

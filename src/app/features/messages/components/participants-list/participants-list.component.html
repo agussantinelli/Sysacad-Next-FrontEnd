@@ -13,7 +13,7 @@
         <div class="section-label">Integrantes</div>
 
         <div class="participants-list">
-            @for (person of participants; track person.idUsuario) {
+            @for (person of sortedParticipants; track person.idUsuario) {
             <div class="participant-item">
                 <div class="participant-avatar">
                     @if (person.foto) {
