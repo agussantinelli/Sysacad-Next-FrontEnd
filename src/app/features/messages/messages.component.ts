@@ -153,7 +153,21 @@ export class MessagesComponent implements OnInit {
 
 
     get activeConversations(): GrupoResponse[] {
-        return (this.conversations || []).filter(c => c && c.esVisible);
+        return [...(this.conversations || [])]
+            .filter(c => c && c.esVisible)
+            .sort((a, b) => {
+                const dateA = new Date(a.horaUltimoMensaje || a.fechaCreacion).getTime();
+                const dateB = new Date(b.horaUltimoMensaje || b.fechaCreacion).getTime();
+                return dateB - dateA;
+            });
+    }
+
+    get sortedConversations(): GrupoResponse[] {
+        return [...(this.conversations || [])].sort((a, b) => {
+            const dateA = new Date(a.horaUltimoMensaje || a.fechaCreacion).getTime();
+            const dateB = new Date(b.horaUltimoMensaje || b.fechaCreacion).getTime();
+            return dateB - dateA;
+        });
     }
 
     get inactiveConversations(): GrupoResponse[] {

@@ -62,7 +62,7 @@
                 }
                 } @else {
                 <!-- Lista plana para Estudiantes (u otros roles) -->
-                @for (conv of conversations; track conv.id) {
+                @for (conv of sortedConversations; track conv.id) {
                 <div class="conversation-item" [class.active]="selectedConversation?.id === conv.id"
                     (click)="selectConversation(conv)">
                     <div class="avatar-container">
