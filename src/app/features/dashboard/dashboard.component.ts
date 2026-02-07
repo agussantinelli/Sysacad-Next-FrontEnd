@@ -173,22 +173,9 @@ export class DashboardComponent implements OnInit {
     }
 
     loadUnreadMessages(): void {
-        if (!this.usuario) return;
-
-        let groupsObservable;
-        if (this.usuario.rol === 'ESTUDIANTE') {
-            groupsObservable = this.chatService.getGruposAlumno();
-        } else if (this.usuario.rol === 'PROFESOR') {
-            groupsObservable = this.chatService.getGruposProfesor();
-        } else {
-            groupsObservable = this.chatService.getMisGrupos();
-        }
-
-        groupsObservable.subscribe({
-            next: (grupos) => {
-                // Placeholder for counting unread messages if supported in the future
-            },
-            error: (err) => console.error('Error loading groups for dashboard', err)
+        this.chatService.getTotalMensajesSinLeer().subscribe({
+            next: (count) => this.updateBadgeCount('Mensajes', count),
+            error: (err) => console.error('Error loading unread messages for dashboard', err)
         });
     }
 

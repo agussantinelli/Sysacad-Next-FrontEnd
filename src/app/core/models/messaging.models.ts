@@ -28,6 +28,7 @@ export interface GrupoResponse {
     mensajesSinLeer: number;
     integrantes: GrupoIntegranteDTO[];
     cantIntegrantes: number;
+    horaUltimoMensaje: string; // LocalDateTime
 }
 
 export interface MiembroGrupoRequest {

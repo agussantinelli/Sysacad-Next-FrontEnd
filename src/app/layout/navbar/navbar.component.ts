@@ -152,23 +152,8 @@ export class NavbarComponent implements OnInit {
     }
 
     loadUnreadMessages(): void {
-        if (!this.usuario) return;
-
-        let groupsObservable;
-        if (this.usuario.rol === 'ESTUDIANTE') {
-            groupsObservable = this.chatService.getGruposAlumno();
-        } else if (this.usuario.rol === 'PROFESOR') {
-            groupsObservable = this.chatService.getGruposProfesor();
-        } else {
-            groupsObservable = this.chatService.getMisGrupos();
-        }
-
-        groupsObservable.subscribe({
-            next: (grupos) => {
-                // For now, we don't have a direct 'unread' count in GrupoResponse, 
-                // but we call the correct endpoint as requested.
-                // this.updateBadgeCount('Mensajes', count);
-            },
+        this.chatService.getTotalMensajesSinLeer().subscribe({
+            next: (count) => this.updateBadgeCount('Mensajes', count),
             error: (err) => console.error(err)
         });
     }
