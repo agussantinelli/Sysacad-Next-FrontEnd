@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   showNavbar = false;
   unreadMessagesCount = 0;
-  private excludedRoutes = ['/login', '/forgot-password', '/profile/change-password'];
+  private excludedRoutes = ['/login', '/forgot-password', '/reset-password', '/profile/change-password'];
 
   ngOnInit() {
     this.authService.currentUser$.subscribe(user => {

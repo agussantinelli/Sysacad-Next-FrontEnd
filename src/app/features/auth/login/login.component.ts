@@ -28,21 +28,6 @@ export class LoginComponent {
             email: ['', [Validators.required]],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
-
-        if (this.authService.isAuthenticated()) {
-            this.handleExistingSession();
-        }
-    }
-
-    handleExistingSession() {
-        // Use a simple confirm for now, or SweetAlert if available. 
-        // User request: "consultar si desea cerrar sesion"
-        if (confirm('Ya has iniciado sesión. ¿Deseas cerrar sesión?')) {
-            this.authService.logout();
-            // Stay on login page (which is where we are)
-        } else {
-            this.router.navigate(['/dashboard']);
-        }
     }
 
     get logoPath(): string {
