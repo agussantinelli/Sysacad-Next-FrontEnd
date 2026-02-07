@@ -22,7 +22,8 @@
                 </div>
                 <div class="card-body">
                     <p><span class="material-icons">room</span> {{ comision.nombreSalon }}</p>
-                    <p><span class="material-icons">menu_book</span> {{ comision.materiasDetalle.length }} Materias
+                    <p><span class="material-icons">menu_book</span> {{ (comision.materias || []).length }}
+                        Materias
                         Asignadas
                     </p>
                 </div>
@@ -60,7 +61,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (materia of selectedComision.materiasDetalle; track materia.idMateria) {
+                        @for (materia of (selectedComision.materias || []); track materia.idMateria) {
                         <tr>
                             <td>
                                 <div class="cell-content">

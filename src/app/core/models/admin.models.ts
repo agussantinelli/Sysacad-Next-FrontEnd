@@ -131,7 +131,7 @@ export interface AdminComisionDTO {
     idCarrera: string;
     nombreCarrera: string;
     nombreSalon: string;
-    materiasDetalle: AdminMateriaComisionDTO[];
+    materias?: AdminMateriaComisionDTO[];
 }
 
 export interface AdminMateriaComisionDTO {
