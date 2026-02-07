@@ -402,47 +402,35 @@ FRONTEND_URL=http://localhost:4200
 - 🚧 **En Construcción**: Ruta existente pero apunta a página de "En Construcción".
 - ❌ **No Implementado**: Enlace visible en menú/dashboard pero sin ruta o lógica asociada.
 
-| Funcionalidad | Módulo | Estudiante | Profesor | Admin |
-| :--- | :--- | :---: | :---: | :---: |
-| **Autenticación** | Acceso | ✅ | ✅ | ✅ |
-| | Login / Logout | ✅ | ✅ | ✅ |
-| | Recuperar Contraseña | ✅ | ✅ | ✅ |
-| **Perfil** | Gestión de Usuario | ✅ | ✅ | ✅ |
-| | Ver Perfil | ✅ | ✅ | ✅ |
-| | Editar Perfil | ✅ | ✅ | ✅ |
-| **Dashboard** | Pantalla Principal | ✅ | ✅ | ✅ |
-| **Académico** | **Inscripciones** | | | |
-| | Inscripción a Cursado | ✅ | ❌ | ✅ |
-| | Inscripción a Examen | ✅ | ❌ | ✅ |
-| | Mis Inscripciones | ✅ | ❌ | ❌ |
-| | **Consultas** | | | |
-| | Estado Académico | ✅ | ❌ | ❌ |
-| | Plan de Estudios | ✅ | ❌ | 🚧 |
-| | Cursado y Notas | ✅ | ❌ | ❌ |
-| | **Trámites** | | | |
-| | Certificado Regular | ✅ | ❌ | ❌ |
-| | Calendario Académico | ✅ | ✅ | ✅ |
-| | **Comunicación** | | | |
-| | Avisos | ✅ | ✅ | ✅ |
-| | Mensajería | 🚧 | 🚧 | 🚧 |
-| **Gestión Docente** | **Clases** | | | |
-| | Mis Materias | ❌ | ✅ | ❌ |
-| | Mis Comisiones | ❌ | ✅ | ❌ |
-| | Calificar Alumnos | ❌ | ✅ | ❌ |
-| | **Trámites** | | | |
-| | Certificado de Servicios | ❌ | ✅ | ❌ |
-| | **Exámenes** | | | |
-| | Mesas de Examen | ❌ | ✅ | ✅ |
-| | Estadísticas | ❌ | ✅ | ✅ |
-| **Administración** | **Académica** | | | |
-| | Carreras / Facultades | ❌ | ❌ | ✅ |
-| | Planes / Materias | ❌ | ❌ | 🚧 |
-| | **Institucional** | | | |
-| | Usuarios / Inscripciones | ❌ | ❌ | ✅ |
-| | **Exámenes** | | | |
-| | Mesas / Actas | ❌ | ❌ | ✅ |
-| | **Trámites** | | | |
-| | Certificados / Avisos | ❌ | ❌ | 🚧 |
+| Área / Funcionalidad | Estudiante | Profesor | Admin |
+| :--- | :---: | :---: | :---: |
+| **Core & Acceso** | | | |
+| Login / Logout / Password Recovery | ✅ | ✅ | ✅ |
+| Dashboard / Perfil de Usuario | ✅ | ✅ | ✅ |
+| **Gestión Académica (Alumno)** | | | |
+| Inscripciones (Cursado y Examen) | ✅ | ❌ | ✅ |
+| Estado Académico (Analítico/Plan) | ✅ | ❌ | ✅ |
+| Mis Inscripciones (Gestión Activa) | ✅ | ❌ | ❌ |
+| Cursado actual y Notas | ✅ | ❌ | ❌ |
+| **Módulo Docente (Profesor)** | | | |
+| Mis Materias y Comisiones | ❌ | ✅ | ❌ |
+| Carga de Notas y Calificaciones | ❌ | ✅ | ❌ |
+| Mesas de Examen Asignadas | ❌ | ✅ | ✅ |
+| Estadísticas de Exámenes | ❌ | ✅ | ✅ |
+| **Administración (Institucional)** | | | |
+| Carreras / Facultades / Universidades | ❌ | ❌ | ✅ |
+| Planes de Estudio y Materias | ❌ | ❌ | ✅ |
+| Gestión de Usuarios (ABM) | ❌ | ❌ | ✅ |
+| Gestión de Inscripciones y Matrículas| ❌ | ❌ | ✅ |
+| Mesas de Examen y Actas Volantes | ❌ | ❌ | ✅ |
+| **Trámites y Certificados** | | | |
+| Certificado de Alumno Regular | ✅ | ❌ | ❌ |
+| Certificado de Servicios (Docente) | ❌ | ✅ | ❌ |
+| Gestión de Solicitudes (Admin)| ❌ | ❌ | ✅ |
+| **Comunicación & Entorno** | | | |
+| Sistema de Avisos y Anuncios | ✅ | ✅ | ✅ |
+| Mensajería Interna (Chat) | ✅ | ✅ | ✅ |
+| Calendario Académico | ✅ | ✅ | ✅ |
 
 
 <hr>
