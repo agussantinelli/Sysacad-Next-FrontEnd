@@ -129,6 +129,10 @@ export class MessagesComponent implements OnInit {
             }).subscribe({
                 next: (msg) => {
                     this.messages.push(msg);
+                    if (this.selectedConversation) {
+                        this.selectedConversation.esVisible = true;
+                        this.selectedConversation.horaUltimoMensaje = msg.fechaEnvio;
+                    }
                 },
                 error: (err) => console.error('Error sending professor message', err)
             });
@@ -136,6 +140,10 @@ export class MessagesComponent implements OnInit {
             this.chatService.enviarMensajeAlGrupo(this.selectedConversation.id, content).subscribe({
                 next: (msg) => {
                     this.messages.push(msg);
+                    if (this.selectedConversation) {
+                        this.selectedConversation.esVisible = true;
+                        this.selectedConversation.horaUltimoMensaje = msg.fechaEnvio;
+                    }
                 },
                 error: (err) => console.error('Error sending message', err)
             });
