@@ -263,10 +263,15 @@
 │   │   ├── features/
 │   │   │   ├── admin/                                # Módulo de Administración
 │   │   │   │   ├── careers/                          # Gestión de Carreras
+│   │   │   │   ├── commissions/                      # Gestión de Comisiones
+│   │   │   │   ├── enroll-student/                   # Matriculación de Alumnos
 │   │   │   │   ├── exam-tables/                      # Gestión de Mesas de Examen
 │   │   │   │   ├── inscriptions/                     # Inscripciones y Matrículas
+│   │   │   │   ├── plan-detail/                      # Detalle de Planes de Estudio
+│   │   │   │   ├── reports/                          # Reportes Administrativos
 │   │   │   │   ├── statistics/                       # Estadísticas Globales
 │   │   │   │   ├── universities/                     # Gestión de Universidades
+│   │   │   │   ├── user-profile/                     # Perfil de Usuario (Admin)
 │   │   │   │   └── users/                            # Gestión de Usuarios
 │   │   │   ├── announcements/                        # Avisos y Anuncios
 │   │   │   ├── auth/                                 # Autenticación (Login)
@@ -276,7 +281,11 @@
 │   │   │   │   ├── exam-details/                     # Detalle de Mesa
 │   │   │   │   ├── exam-statistics/                  # Estadísticas de Examen
 │   │   │   │   ├── exams/                            # Listado de Mesas
-│   │   │   │   ├── grade-exam/                       # Carga de Notas
+│   │   │   │   ├── grade-commission/                 # Calificar Comisión
+│   │   │   │   ├── grade-exam/                       # Carga de Notas de Examen
+│   │   │   │   ├── my-commissions/                   # Mis Comisiones
+│   │   │   │   ├── professor-cert/                   # Certificado de Servicios
+│   │   │   │   ├── subject-commissions/              # Comisiones por Materia
 │   │   │   │   └── subjects/                         # Mis Materias
 │   │   │   ├── profile/                              # Perfil de Usuario
 │   │   │   └── student/                              # Módulo de Estudiantes
@@ -285,18 +294,20 @@
 │   │   │       ├── current-enrollments/              # Cursado Actual
 │   │   │       ├── inscription-course/               # Inscripción Cursado
 │   │   │       ├── inscription-exam/                 # Inscripción Examen
-│   │   │       └── regular-cert/                     # Certificado Regular
+│   │   │       ├── my-inscriptions/                  # Mis Inscripciones
+│   │   │       ├── regular-cert/                     # Certificado Regular
+│   │   │       └── study-plan/                       # Plan de Estudios
 │   │   ├── layout/
 │   │   │   └── navbar/                               # Barra de Navegación
 │   │   ├── shared/
 │   │   │   ├── components/                           # Reutilizables (Table, Spinner, Alert...)
 │   │   │   ├── interfaces/                           # Interfaces UI
 │   │   │   └── pipes/                                # Pipes Custom
-│   ├── assets/                                       # Recursos estáticos
 │   ├── environments/                                 # Configuración de entorno
+│   ├── globals.css                                   # Estilos globales y temas
 │   ├── index.html                                    # Entry Point HTML
 │   ├── main.ts                                       # Entry Point TS
-│   └── styles.css                                    # Estilos globales
+│   └── styles.css                                    # Estilos de Material
 ├── .env                                              # Variables local
 ├── angular.json                                      # Config Angular
 ├── package.json                                      # Dependencias
