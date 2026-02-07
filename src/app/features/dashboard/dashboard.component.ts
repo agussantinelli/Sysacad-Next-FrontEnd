@@ -143,6 +143,10 @@ export class DashboardComponent implements OnInit {
             this.loadUnreadMessages();
         }
 
+        this.chatService.unreadCountChanged$.subscribe(() => {
+            this.loadUnreadMessages();
+        });
+
         if (history.state.loginSuccess && !sessionStorage.getItem('welcomeShown')) {
             this.successMessage = '¡Bienvenido/a al Sistema de Gestión Académica!';
             sessionStorage.setItem('welcomeShown', 'true');

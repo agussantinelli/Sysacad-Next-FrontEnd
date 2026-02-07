@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, from, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import axiosClient from '@core/api/axios.client';
 import {
     GrupoResponse,
@@ -15,6 +15,8 @@ import {
     providedIn: 'root'
 })
 export class ChatService {
+    private unreadCountChangedSource = new Subject<void>();
+    unreadCountChanged$ = this.unreadCountChangedSource.asObservable();
 
     constructor() { }
 
@@ -82,7 +84,8 @@ export class ChatService {
 
     marcarLeido(groupId: string): Observable<void> {
         return from(axiosClient.post<void>(`/grupos/${groupId}/marcar-leido`, {})).pipe(
-            map(response => response.data)
+            map(response => response.data),
+            tap(() => this.unreadCountChangedSource.next())
         );
     }
 

@@ -142,6 +142,10 @@ export class NavbarComponent implements OnInit {
                 this.loadUnreadMessages();
             }
         });
+
+        this.chatService.unreadCountChanged$.subscribe(() => {
+            this.loadUnreadMessages();
+        });
     }
 
     loadUnreadNotices(): void {
