@@ -1,0 +1,67 @@
+@if (selectedConversation) {
+<div class="chat-window">
+    <div class="chat-header">
+        <div class="avatar-container">
+            <div class="avatar-placeholder sm">{{ selectedConversation.nombre.charAt(0) }}</div>
+        </div>
+        <div class="header-text">
+            <h3>{{ selectedConversation.nombre }}</h3>
+            <span class="status-text">{{ selectedConversation.cantIntegrantes }} integrantes</span>
+        </div>
+        <div class="header-actions">
+            <button class="icon-btn">
+                <span class="material-icons">info</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="messages-list">
+        @if (isLoading) {
+        <div class="flex flex-col items-center justify-center h-full text-secondary">
+            <span class="material-icons animate-spin text-4xl mb-2">autorenew</span>
+            <p>Cargando historial...</p>
+        </div>
+        } @else {
+        @if (!selectedConversation.esVisible) {
+        <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
+            <span class="material-icons text-4xl mb-2">info_outline</span>
+            <p>No hay mensajes en la conversación</p>
+            <span class="text-xs mt-1">Este grupo se activará con el primer mensaje.</span>
+        </div>
+        } @else {
+        @for (msg of messages; track msg.id) {
+        <div class="message-group" [class.mine]="isMine(msg)">
+            <div class="message-info-header">
+                <span class="sender-name">{{ msg.nombreRemitente }}</span>
+            </div>
+            <div class="message-bubble">
+                <p>{{ msg.contenido }}</p>
+                <span class="msg-time">{{ msg.fechaEnvio | date:'short' }}</span>
+            </div>
+        </div>
+        } @empty {
+        <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
+            <span class="material-icons text-4xl mb-2">chat_bubble_outline</span>
+            <p>No hay mensajes en este grupo.</p>
+        </div>
+        }
+        }
+        }
+    </div>
+
+    @if (canSend) {
+    <div class="chat-input-area">
+        <input type="text" [(ngModel)]="newMessage" placeholder="Escribe un mensaje..."
+            (keyup.enter)="handleSendMessage()" [disabled]="!canSend">
+        <button class="btn-send" (click)="handleSendMessage()" [disabled]="!newMessage.trim() || !canSend">
+            <span class="material-icons">send</span>
+        </button>
+    </div>
+    }
+</div>
+} @else {
+<div class="empty-chat-state">
+    <span class="material-icons">forum</span>
+    <p>Selecciona una conversación para comenzar</p>
+</div>
+}
