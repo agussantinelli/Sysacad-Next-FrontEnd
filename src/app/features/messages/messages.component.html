@@ -125,6 +125,13 @@
                     <p>Cargando historial...</p>
                 </div>
                 } @else {
+                @if (!selectedConversation.esVisible) {
+                <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
+                    <span class="material-icons text-4xl mb-2">info_outline</span>
+                    <p>No hay mensajes en la conversación</p>
+                    <span class="text-xs mt-1">Este grupo se activará con el primer mensaje.</span>
+                </div>
+                } @else {
                 @for (msg of messages; track msg.id) {
                 <div class="message-group" [class.mine]="isMine(msg)">
                     <div class="message-info-header">
@@ -140,6 +147,7 @@
                     <span class="material-icons text-4xl mb-2">chat_bubble_outline</span>
                     <p>No hay mensajes en este grupo.</p>
                 </div>
+                }
                 }
                 }
             </div>

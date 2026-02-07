@@ -84,9 +84,14 @@ export class MessagesComponent implements OnInit {
 
     selectConversation(conversation: GrupoResponse) {
         this.selectedConversation = conversation;
-        this.loadMessages(conversation.id);
-        this.checkPermissions(conversation.id);
-        this.chatService.marcarLeido(conversation.id).subscribe();
+        if (conversation.esVisible) {
+            this.loadMessages(conversation.id);
+            this.checkPermissions(conversation.id);
+            this.chatService.marcarLeido(conversation.id).subscribe();
+        } else {
+            this.messages = [];
+            this.canSend = false;
+        }
     }
 
     checkPermissions(groupId: string) {
