@@ -1,0 +1,37 @@
+<div class="participants-sidebar">
+    <div class="sidebar-header">
+        <div class="header-title">
+            <h3>Información del grupo</h3>
+            <span class="member-count">{{ totalCount }} integrantes</span>
+        </div>
+        <button class="close-btn" (click)="onClose()">
+            <span class="material-icons">close</span>
+        </button>
+    </div>
+
+    <div class="participants-scroll">
+        <div class="section-label">Integrantes</div>
+
+        <div class="participants-list">
+            @for (person of participants; track person.idUsuario) {
+            <div class="participant-item">
+                <div class="participant-avatar">
+                    @if (person.foto) {
+                    <img [src]="getProfileImageUrl(person.foto)" [alt]="person.nombre" class="avatar-img">
+                    } @else {
+                    <div class="avatar-placeholder">
+                        {{ getInitials(person.nombre, person.apellido) }}
+                    </div>
+                    }
+                </div>
+                <div class="participant-info">
+                    <span class="participant-name">{{ person.nombre }} {{ person.apellido }}</span>
+                    <span class="participant-role" [class]="person.rol.toLowerCase()">
+                        {{ person.rol === 'ADMIN' ? 'Administrador' : 'Miembro' }}
+                    </span>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
