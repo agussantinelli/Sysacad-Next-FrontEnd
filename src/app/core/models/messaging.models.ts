@@ -7,6 +7,14 @@ export interface GrupoRequest {
     idsIntegrantes: string[]; // List of UUIDs
 }
 
+export interface GrupoIntegranteDTO {
+    idUsuario: string; // UUID
+    nombre: string;
+    apellido: string;
+    rol: RolGrupo;
+    foto: string;
+}
+
 export interface GrupoResponse {
     id: string; // UUID
     nombre: string;
@@ -18,6 +26,8 @@ export interface GrupoResponse {
     idMateria: string; // UUID
     esVisible: boolean;
     mensajesSinLeer: number;
+    integrantes: GrupoIntegranteDTO[];
+    cantIntegrantes: number;
 }
 
 export interface MiembroGrupoRequest {
