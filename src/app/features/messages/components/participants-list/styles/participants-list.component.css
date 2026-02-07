@@ -68,12 +68,17 @@
 }
 
 .participants-scroll {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1rem 0 3rem 0;
+    /* Extra bottom padding for last item */
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    max-height: 600px;
-    overflow-y: auto;
-    padding: 1rem 0;
+    /* Dynamic max-height: viewport height minus header/footer space */
+    max-height: calc(100vh - 300px);
+    min-height: 200px;
 }
 
 /* Custom Scrollbar */
