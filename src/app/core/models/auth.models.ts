@@ -13,7 +13,7 @@ export interface AuthResponse {
 }
 
 export interface ForgotPasswordRequest {
-    email: string;
+    identificador: string;
 }
 
 export interface ResetPasswordRequest {

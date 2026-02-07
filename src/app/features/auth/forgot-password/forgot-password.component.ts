@@ -33,8 +33,8 @@ export class ForgotPasswordComponent {
             this.successMessage = null;
             this.errorMessage = null;
 
-            const email = this.emailOrLegajo.value!;
-            this.authService.forgotPassword({ email }).subscribe({
+            const identificador = this.emailOrLegajo.value!;
+            this.authService.forgotPassword({ identificador }).subscribe({
                 next: () => {
                     this.isLoading = false;
                     this.successMessage = 'Se han enviado las instrucciones de recuperación a tu correo.';
