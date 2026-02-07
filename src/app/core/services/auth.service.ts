@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { LoginRequest, AuthResponse } from '@core/models/auth.models';
+import { LoginRequest, AuthResponse, ForgotPasswordRequest, ResetPasswordRequest } from '@core/models/auth.models';
 import { UsuarioResponse } from '@core/models/usuario.models';
 import axiosClient from '@core/api/axios.client';
 
@@ -58,5 +58,17 @@ export class AuthService {
 
     isAuthenticated(): boolean {
         return (!!this.currentUserSubject.value || !!localStorage.getItem('token')) && !!localStorage.getItem('bootId');
+    }
+
+    forgotPassword(request: ForgotPasswordRequest): Observable<void> {
+        return from(axiosClient.post<void>('/auth/forgot-password', request)).pipe(
+            map(() => undefined)
+        );
+    }
+
+    resetPassword(request: ResetPasswordRequest): Observable<void> {
+        return from(axiosClient.post<void>('/auth/reset-password', request)).pipe(
+            map(() => undefined)
+        );
     }
 }
