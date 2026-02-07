@@ -4,13 +4,13 @@
     min-width: 0;
 }
 
-/* Chat Window */
 .chat-window {
     flex: 1;
     display: flex;
     flex-direction: column;
     background-color: var(--bg-page);
     height: 100%;
+    min-height: 0;
 }
 
 .chat-header {
@@ -28,6 +28,8 @@
     display: flex;
     overflow: hidden;
     position: relative;
+    min-height: 0;
+    /* Constraint propagation */
 }
 
 .chat-area {
@@ -35,6 +37,7 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
+    min-height: 0;
     transition: all 0.3s ease;
 }
 
@@ -76,7 +79,6 @@
     background-color: rgba(0, 107, 182, 0.1);
 }
 
-/* Avatar Placeholder inside Header */
 .avatar-placeholder.sm {
     width: 36px;
     height: 36px;
@@ -90,19 +92,16 @@
     font-size: 1rem;
 }
 
-/* Messages List Container */
 .messages-list {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+    position: relative;
+    display: block;
     padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    /* Push messages to bottom */
-    gap: 0.5rem;
 }
 
-/* Date Divider */
 .date-divider {
     display: flex;
     align-items: center;
@@ -134,7 +133,6 @@
     opacity: 0.5;
 }
 
-/* Message Layout */
 .message-wrapper {
     display: flex;
     gap: 0.75rem;

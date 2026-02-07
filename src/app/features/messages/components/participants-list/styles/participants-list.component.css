@@ -1,12 +1,23 @@
-.participants-sidebar {
-    width: 320px;
-    height: 100%;
-    background-color: var(--bg-card);
-    border-left: 1px solid var(--border-subtle);
+:host {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    width: 320px;
+    flex-shrink: 0;
+}
+
+.participants-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    background-color: var(--bg-card);
+    border-left: 1px solid var(--border-subtle);
     animation: slideIn 0.3s ease-out;
     box-shadow: -4px 0 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
 }
 
 @keyframes slideIn {
@@ -20,6 +31,7 @@
 }
 
 .sidebar-header {
+    flex-shrink: 0;
     padding: 1.5rem;
     display: flex;
     justify-content: space-between;
@@ -56,9 +68,34 @@
 }
 
 .participants-scroll {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 600px;
     overflow-y: auto;
     padding: 1rem 0;
+}
+
+/* Custom Scrollbar */
+.participants-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.participants-scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin: 0.5rem 0;
+}
+
+.participants-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--utn-blue), var(--utn-navy));
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.participants-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--utn-navy), var(--utn-blue));
+    box-shadow: 0 0 6px rgba(0, 153, 230, 0.4);
 }
 
 .section-label {
@@ -147,7 +184,7 @@
 }
 
 @media (max-width: 768px) {
-    .participants-sidebar {
+    :host {
         position: absolute;
         top: 0;
         right: 0;
