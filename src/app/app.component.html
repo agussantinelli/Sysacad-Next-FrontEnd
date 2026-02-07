@@ -10,6 +10,9 @@
 @if (user.rol !== 'ADMIN') {
 <a routerLink="/messages" class="floating-chat-btn" title="Mensajes">
     <span class="material-icons">chat</span>
+    @if (unreadMessagesCount > 0) {
+    <span class="notification-badge">{{ unreadMessagesCount > 99 ? '99+' : unreadMessagesCount }}</span>
+    }
 </a>
 }
 }
