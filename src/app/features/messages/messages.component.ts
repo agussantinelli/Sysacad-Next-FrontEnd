@@ -154,12 +154,12 @@ export class MessagesComponent implements OnInit {
             .sort((a, b) => a.nombre.localeCompare(b.nombre));
     }
 
-    isToday = (date: any): boolean => {
+    isToday(date: any): boolean {
         if (!date) return false;
         const d = new Date(date);
         const today = new Date();
         return d.getDate() === today.getDate() &&
             d.getMonth() === today.getMonth() &&
             d.getFullYear() === today.getFullYear();
-    };
+    }
 }

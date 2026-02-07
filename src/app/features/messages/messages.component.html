@@ -25,10 +25,10 @@
                         <div class="conv-header">
                             <span class="conv-name text-truncate">{{ conv.nombre }}</span>
                             <span class="conv-time">
-                                @if (isToday(conv.fechaCreacion)) {
-                                {{ conv.fechaCreacion | date:'HH:mm' }}
+                                @if (isToday(conv.horaUltimoMensaje || conv.fechaCreacion)) {
+                                {{ (conv.horaUltimoMensaje || conv.fechaCreacion) | date:'HH:mm' }}
                                 } @else {
-                                {{ conv.fechaCreacion | date:'dd/MM/yy' }}
+                                {{ (conv.horaUltimoMensaje || conv.fechaCreacion) | date:'dd/MM/yy' }}
                                 }
                             </span>
                         </div>
@@ -72,10 +72,10 @@
                         <div class="conv-header">
                             <span class="conv-name text-truncate">{{ conv.nombre }}</span>
                             <span class="conv-time">
-                                @if (isToday(conv.fechaCreacion)) {
-                                {{ conv.fechaCreacion | date:'HH:mm' }}
+                                @if (isToday(conv.horaUltimoMensaje || conv.fechaCreacion)) {
+                                {{ (conv.horaUltimoMensaje || conv.fechaCreacion) | date:'HH:mm' }}
                                 } @else {
-                                {{ conv.fechaCreacion | date:'dd/MM/yy' }}
+                                {{ (conv.horaUltimoMensaje || conv.fechaCreacion) | date:'dd/MM/yy' }}
                                 }
                             </span>
                         </div>
