@@ -96,86 +96,11 @@
         </div>
 
         <!-- Main: Chat Window -->
-        <div class="chat-window" [class.mobile-visible]="selectedConversation">
-            @if (selectedConversation) {
-            <div class="chat-header">
-                <button class="btn-back mobile-only" (click)="selectedConversation = null">
-                    <span class="material-icons">arrow_back</span>
-                </button>
-
-                <div class="chat-header-info">
-                    <div class="avatar-placeholder sm">
-                        {{ selectedConversation.nombre.charAt(0) }}
-                    </div>
-                    <div class="header-text">
-                        <h3>{{ selectedConversation.nombre }}</h3>
-                        <span class="status-text">Grupo</span>
-                    </div>
-                </div>
-
-                <div class="header-actions">
-                    <button class="icon-btn"><span class="material-icons">more_vert</span></button>
-                </div>
-            </div>
-
-            <div class="messages-list">
-                @if (isLoading) {
-                <div class="flex flex-col items-center justify-center h-full text-secondary">
-                    <span class="material-icons animate-spin text-4xl mb-2">autorenew</span>
-                    <p>Cargando historial...</p>
-                </div>
-                } @else {
-                @if (!selectedConversation.esVisible) {
-                <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
-                    <span class="material-icons text-4xl mb-2">info_outline</span>
-                    <p>No hay mensajes en la conversación</p>
-                    <span class="text-xs mt-1">Este grupo se activará con el primer mensaje.</span>
-                </div>
-                } @else {
-                @for (msg of messages; track msg.id) {
-                <div class="message-group" [class.mine]="isMine(msg)">
-                    <div class="message-info-header">
-                        <span class="sender-name">{{ msg.nombreRemitente }}</span>
-                    </div>
-                    <div class="message-bubble">
-                        <p>{{ msg.contenido }}</p>
-                        <span class="msg-time">{{ msg.fechaEnvio | date:'short' }}</span>
-                    </div>
-                </div>
-                } @empty {
-                <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
-                    <span class="material-icons text-4xl mb-2">chat_bubble_outline</span>
-                    <p>No hay mensajes en este grupo.</p>
-                </div>
-                }
-                }
-                }
-            </div>
-
-            @if (canSend) {
-            <div class="chat-input-area">
-                <!-- Se quitó el botón de adjuntos -->
-                <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="newMessage"
-                    (keyup.enter)="sendMessage()">
-                <button class="btn-send" (click)="sendMessage()" [disabled]="!newMessage.trim()">
-                    <span class="material-icons">send</span>
-                </button>
-            </div>
-            } @else {
-            <div class="chat-input-area readonly">
-                <p class="text-sm text-center w-full text-secondary">Solo los profesores o jefes de cátedra pueden
-                    enviar
-                    mensajes en este grupo.</p>
-            </div>
-            }
-
-            } @else {
-            <div class="empty-chat-state">
-                <span class="material-icons">chat_bubble_outline</span>
-                <h3>Selecciona una conversación</h3>
-                <p>Elige un contacto para comenzar a chatear.</p>
-            </div>
-            }
+        <div class="chat-window-container">
+            <app-chat-window [selectedConversation]="selectedConversation" [messages]="messages"
+                [currentUserId]="currentUserId" [currentUserRol]="currentUserRol" [canSend]="canSend"
+                [isLoading]="isLoading" (sendMessage)="onSendMessage($event)">
+            </app-chat-window>
         </div>
     </div>
     }

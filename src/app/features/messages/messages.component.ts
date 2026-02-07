@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatWindowComponent } from './components/chat-window/chat-window.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { filter, switchMap } from 'rxjs/operators';
@@ -15,7 +16,7 @@ import { RolUsuario } from '@core/enums/usuario.enums';
 @Component({
     selector: 'app-messages',
     standalone: true,
-    imports: [CommonModule, PageLayoutComponent, FormsModule, LoadingSpinnerComponent],
+    imports: [CommonModule, PageLayoutComponent, FormsModule, LoadingSpinnerComponent, ChatWindowComponent],
     templateUrl: './messages.component.html',
     styleUrl: './styles/messages.component.css'
 })
@@ -24,7 +25,6 @@ export class MessagesComponent implements OnInit {
     conversations: GrupoResponse[] = [];
     selectedConversation: GrupoResponse | null = null;
     messages: MensajeGrupoResponse[] = [];
-    newMessage: string = '';
     isLoading = false;
     currentUserId: string | null = null;
     currentUserRol: string | null = null;
@@ -84,14 +84,11 @@ export class MessagesComponent implements OnInit {
 
     selectConversation(conversation: GrupoResponse) {
         this.selectedConversation = conversation;
-        if (conversation.esVisible) {
-            this.loadMessages(conversation.id);
-            this.checkPermissions(conversation.id);
-            this.chatService.marcarLeido(conversation.id).subscribe();
-        } else {
-            this.messages = [];
-            this.canSend = false;
-        }
+        this.loadMessages(conversation.id);
+        this.checkPermissions(conversation.id);
+        this.chatService.marcarLeido(conversation.id).subscribe({
+            next: () => conversation.mensajesSinLeer = 0
+        });
     }
 
     checkPermissions(groupId: string) {
@@ -108,8 +105,10 @@ export class MessagesComponent implements OnInit {
     loadMessages(groupId: string) {
         this.isLoading = true;
         this.chatService.getMensajes(groupId).subscribe({
-            next: (mensajes) => {
-                this.messages = mensajes || [];
+            next: (response: any) => {
+                console.log('Mensajes: Datos recibidos del chat:', response);
+                // The API returns a Page object with a 'content' field
+                this.messages = response.content || response || [];
                 this.isLoading = false;
             },
             error: (err) => {
@@ -119,35 +118,31 @@ export class MessagesComponent implements OnInit {
         });
     }
 
-    sendMessage() {
-        if (!this.newMessage.trim() || !this.selectedConversation || !this.canSend) return;
+    onSendMessage(content: string) {
+        if (!content.trim() || !this.selectedConversation || !this.canSend) return;
 
         if (this.currentUserRol === RolUsuario.PROFESOR && this.selectedConversation.idComision && this.selectedConversation.idMateria) {
             this.chatService.enviarMensajeComisionMateria({
                 idComision: this.selectedConversation.idComision,
                 idMateria: this.selectedConversation.idMateria,
-                contenido: this.newMessage
+                contenido: content
             }).subscribe({
                 next: (msg) => {
                     this.messages.push(msg);
-                    this.newMessage = '';
                 },
                 error: (err) => console.error('Error sending professor message', err)
             });
         } else {
-            this.chatService.enviarMensajeAlGrupo(this.selectedConversation.id, this.newMessage).subscribe({
+            this.chatService.enviarMensajeAlGrupo(this.selectedConversation.id, content).subscribe({
                 next: (msg) => {
                     this.messages.push(msg);
-                    this.newMessage = '';
                 },
                 error: (err) => console.error('Error sending message', err)
             });
         }
     }
 
-    isMine(msg: MensajeGrupoResponse): boolean {
-        return msg.idUsuarioRemitente === this.currentUserId;
-    }
+
 
     get activeConversations(): GrupoResponse[] {
         return (this.conversations || []).filter(c => c && c.esVisible);
