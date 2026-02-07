@@ -91,4 +91,10 @@ export class ChatService {
             map(response => response.data)
         );
     }
+
+    getTotalMensajesSinLeer(): Observable<number> {
+        return from(axiosClient.get<number>('/grupos/mensajes/sin-leer/total')).pipe(
+            map(response => response.data)
+        );
+    }
 }
