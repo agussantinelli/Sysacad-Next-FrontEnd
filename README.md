@@ -31,41 +31,33 @@
 
 <hr>
 
-<h2>🎯 Objetivo</h2>
+<h2>🎯 El Desafío (Legacy vs. Next)</h2>
 
-<p>Reemplazar el sistema de autogestión heredado ("Legacy") con una solución moderna, rápida y centrada en la experiencia del alumno, eliminando la fricción burocrática mediante una interfaz reactiva e intuitiva.</p>
-
-<h2>🧭 Visión General</h2>
-
-<p><strong>Sysacad Next</strong> es la evolución de la plataforma universitaria. Mientras la versión anterior se centraba en formularios estáticos, esta reingeniería propone:</p>
+<p><strong>Sysacad Next</strong> nace para resolver las limitaciones críticas del ecosistema universitario tradicional ("Legacy"). Mientras los sistemas anteriores se ven afectados por:</p>
 <ul>
-    <li>Inscripciones en tiempo real con validación inmediata de correlatividades.</li>
-    <li>Visualización gráfica del avance de carrera (Plan de Estudios Interactivo).</li>
-    <li>Notificaciones instantáneas sobre estados de mesas de examen y trámites.</li>
-    <li>Arquitectura desacoplada (Angular + Java) para mayor escalabilidad.</li>
+    <li><strong>Lentitud crítica</strong> en periodos de alta demanda (inscripciones).</li>
+    <li><strong>UX obsoleta</strong> no optimizada para el uso cotidiano en dispositivos móviles.</li>
+    <li><strong>Fragmentación</strong> de la información académica, dificultando el seguimiento del progreso.</li>
 </ul>
 
-<h2>💼 Problema (Legacy)</h2>
+<p>Esta reingeniería transforma radicalmente esa experiencia, proponiendo una plataforma <strong>reactiva, SPA y centrada en el usuario</strong> que elimina la fricción burocrática y agiliza la vida universitaria.</p>
 
-<p>El sistema actual presenta:</p>
-<ul>
-    <li><strong>Lentitud crítica</strong> durante los periodos de inscripción masiva.</li>
-    <li><strong>UX obsoleta</strong> no adaptada a dispositivos móviles.</li>
-    <li>Dificultad para obtener un estado académico consolidado sin navegar múltiples menús.</li>
-</ul>
 
 <h2>🚀 Propuesta de Valor</h2>
 
 <ul>
-    <li><strong>📱 Mobile First:</strong> Diseño 100% responsivo para gestionar la vida académica desde el celular.</li>
-    <li><strong>⚡ Performance:</strong> Carga de datos optimizada y navegación SPA (Single Page Application) sin recargas.</li>
-    <li><strong>🔒 Seguridad Robusta:</strong> Backend Java con <strong>JWT</strong>. Cliente Frontend con <strong>Axios Interceptors</strong> para inyección automática de tokens y validar la integridad de la sesión del servidor (BootId).</li>
-    <li><strong>🧠 Smart Validation:</strong> Reglas de negocio en el cliente para evitar errores de inscripción antes de enviar la solicitud.</li>
-    <li><strong>🔔 Sistema de Alertas Global:</strong> Feedback unificado (Éxito, Error, Info) gestionado por un servicio centralizado, asegurando consistencia en toda la aplicación.</li>
-    <li><strong>✅ Flujo de Inscripción Confimada:</strong> Sistema de modal doble (Selección -> Confirmación) que previene inscripciones accidentales.</li>
-    <li><strong>📋 Gestión Activa:</strong> Nueva sección "Mis Inscripciones" para visualizar y dar de baja exámenes activos en tiempo real.</li>
-    <li><strong>💬 Comunicación Integrada:</strong> Sistema de Mensajería interna y Avisos (Notificaciones) clasificados por estado y fecha.</li>
-    <li><strong>📄 Trámites Digitales:</strong> Emisión de Certificado de Alumno Regular en PDF directamente desde la plataforma.</li>
+    <li><strong>📱 Mobile First:</strong> Diseño 100% responsivo para gestionar la vida académica desde cualquier dispositivo.</li>
+    <li><strong>⚡ Performance Superior:</strong> SPA (Single Page Application) fluida con carga de componentes bajo demanda (Lazy Loading).</li>
+    <li><strong>🔒 Seguridad Avanzada:</strong>
+        <ul>
+            <li>Autenticación robusta con <strong>JWT</strong>.</li>
+            <li><strong>Boot-Id Validation:</strong> Mecanismo de seguridad en Axios Interceptors que detecta reinicios del servidor o inconsistencias de sesión, forzando un logout seguro para proteger los datos.</li>
+        </ul>
+    </li>
+    <li><strong>🧠 Smart Inscription:</strong> Validaciones preventivas de correlatividades y requisitos en el cliente para reducir errores antes de impactar el backend.</li>
+    <li><strong>🔔 Sistema de Alertas Global:</strong> Servicio centralizado (`AlertService`) que garantiza feedback consistente y visualmente premium en toda la App.</li>
+    <li><strong>📋 Gestión en Tiempo Real:</strong> Seguimiento activo de inscripciones, estado académico y visualización de notas con actualizaciones inmediatas.</li>
+    <li><strong>📄 Trámites 24/7:</strong> Emisión de Certificado de Alumno Regular en PDF con un solo clic.</li>
 </ul>
 
 <hr>
