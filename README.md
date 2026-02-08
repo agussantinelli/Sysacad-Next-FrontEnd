@@ -398,12 +398,11 @@ export const environment = {
 </ul>
 
 ### 👑 Poderes del Jefe de Cátedra
-<p>El sistema distingue automáticamente si un profesor es <strong>Titular / Jefe de Cátedra</strong>, otorgándole visibilidad extendida:</p>
-<ul>
-    <li><strong>Visualización Global:</strong> Puede ver la totalidad de las comisiones de su materia, independiente de si dicta clases en ellas o no.</li>
-    <li><strong>Gestión de Equipo:</strong> Visualización de todos los profesores (JTP, Ayudantes) asignados a cada comisión.</li>
-    <li><strong>Etiquetado Visual:</strong> Identificación clara en el dashboard de las materias donde ejerce como autoridad máxima.</li>
-</ul>
+El **Jefe de Cátedra** tiene permisos extendidos sobre las materias que lidera:
+- Puede ver **todas las comisiones** de la materia, no solo aquellas donde dicta clases.
+- Puede cargar notas y gestionar exámenes para **cualquier comisión** de dicha materia.
+- En los listados, se le muestra la información completa de todos los profesores y alumnos de la cátedra.
+- **Mensajería**: Tiene permiso para enviar mensajes a los grupos de **cualquier comisión** de su materia, sin necesidad de estar asignado como docente frente a curso.
 
 <p><em>Nota: La interfaz (Navbar y Dashboard) renderiza componentes dinámicamente basándose en el rol del usuario logueado.</em></p>
 
