@@ -46,13 +46,13 @@ export class ChangePasswordComponent implements OnInit {
         const errors: ValidationErrors = {};
         let hasError = false;
 
-        // Check if new password is same as current
+        
         if (currentPassword && newPassword && currentPassword === newPassword) {
             errors['sameAsCurrent'] = true;
             hasError = true;
         }
 
-        // Check if confirm matches new
+        
         if (newPassword && confirmPassword && newPassword !== confirmPassword) {
             errors['mismatch'] = true;
             hasError = true;

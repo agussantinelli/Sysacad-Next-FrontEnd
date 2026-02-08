@@ -25,7 +25,7 @@ export class AdminCareersComponent implements OnInit {
   isLoading = false;
   showModal = false;
 
-  // Plans Modal
+  
   showPlansModal = false;
   selectedCarreraPlans: PlanDetalleDTO[] = [];
   selectedCarreraName: string = '';
@@ -106,9 +106,9 @@ export class AdminCareersComponent implements OnInit {
   }
 
   goToPlanDetail(plan: PlanDetalleDTO) {
-    // We can pass the plan via state or reload it via ID in the detail page
-    // Assuming route: /admin/carreras/:carreraId/plan/:anio
-    // But wait, plan ID? PlanDetalleDTO uses composite key (carreraId, anio).
+    
+    
+    
     this.router.navigate(['/admin/carreras', plan.carreraId, 'plan', plan.anio]);
   }
 }

@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
     getProfileImageUrl(relativePath: string): string {
         if (!relativePath) return '';
         if (relativePath.startsWith('http')) return relativePath;
-        // Adjust based on your backend config
+        
         return `http://localhost:8080/${relativePath.startsWith('/') ? relativePath.substring(1) : relativePath}`;
     }
 }

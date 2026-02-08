@@ -61,11 +61,11 @@
 .form-control:disabled,
 .form-select:disabled {
     background-color: var(--bg-secondary, #22303f);
-    /* Fallback to light grey if var doesn't exist */
+    
     color: var(--text-secondary);
     cursor: not-allowed;
     opacity: 1;
-    /* Standardize opacity for some browsers */
+    
     border-color: var(--border-subtle);
 }
 

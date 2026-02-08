@@ -1,7 +1,7 @@
 <app-page-layout title="Gestión de Facultades" icon="school">
     <div class="content-container">
 
-        <!-- Create Form -->
+        
         <div class="card create-form">
             <h3>Nueva Facultad</h3>
             <div class="form-row">
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <!-- List -->
+        
         <div class="card list-card">
             @if (isLoading) {
             <app-loading-spinner></app-loading-spinner>
@@ -75,7 +75,7 @@
 
     </div>
 
-    <!-- Simple Modal for Association -->
+    
     @if (showModal) {
     <div class="modal-overlay" (click)="closeModal()">
         <div class="modal-content" (click)="$event.stopPropagation()">

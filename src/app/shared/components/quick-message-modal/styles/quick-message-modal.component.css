@@ -201,7 +201,7 @@ textarea:focus {
     }
 }
 
-/* Dark Mode Overrides */
+
 :host-context(body.dark-mode) .close-btn:hover {
     background: rgba(255, 255, 255, 0.1);
 }

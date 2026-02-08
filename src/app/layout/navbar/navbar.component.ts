@@ -188,12 +188,12 @@ export class NavbarComponent implements OnInit {
 
     toggleDropdown(): void {
         this.isDropdownOpen = !this.isDropdownOpen;
-        this.activeSection = null; // Close other menus
+        this.activeSection = null; 
     }
 
     setActiveSection(title: string | null): void {
         this.activeSection = this.activeSection === title ? null : title;
-        this.isDropdownOpen = false; // Close user menu
+        this.isDropdownOpen = false; 
     }
 
     closeAll(): void {

@@ -27,18 +27,18 @@ export class InscriptionFormComponent implements OnInit {
 
     isLoading = false;
 
-    // Search
+    
     legajoQuery = '';
     foundStudents: UsuarioResponse[] = [];
     selectedStudent: UsuarioResponse | null = null;
     isSearching = false;
 
-    // Selection Data
+    
     materias: MateriaResponse[] = [];
     comisiones: ComisionDisponibleDTO[] = [];
     mesas: MesaExamenDisponibleDTO[] = [];
 
-    // Form Selection
+    
     tipo: 'CURSADA' | 'EXAMEN' | null = null;
     selectedMateriaId = '';
     selectedComisionId = '';
@@ -46,10 +46,10 @@ export class InscriptionFormComponent implements OnInit {
     selectedMesaNroDetalle: number | null = null;
 
     ngOnInit() {
-        // No initial load needed, starts with search
+        
     }
 
-    // Reuse search logic (could be shared service/component)
+    
     searchStudent() {
         if (!this.legajoQuery || this.legajoQuery.length < 3) {
             this.alertService.warning('Ingrese al menos 3 caracteres del legajo.');
@@ -60,7 +60,7 @@ export class InscriptionFormComponent implements OnInit {
         this.selectedStudent = null;
         this.adminService.buscarUsuarios(this.legajoQuery).subscribe({
             next: (data) => {
-                // Filter only students
+                
                 this.foundStudents = data.filter(user => user.rol === RolUsuario.ESTUDIANTE);
 
                 this.isSearching = false;
@@ -160,7 +160,7 @@ export class InscriptionFormComponent implements OnInit {
         }
     }
 
-    // For exams, when selecting a mesa, we need to capture nroDetalle too
+    
     onMesaChange() {
         const selectedMesa = this.mesas.find(m => m.idDetalleMesa === this.selectedMesaDetalleId);
         if (selectedMesa) {

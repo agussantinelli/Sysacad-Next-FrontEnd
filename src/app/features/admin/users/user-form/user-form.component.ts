@@ -25,7 +25,7 @@ export class UserFormComponent implements OnInit {
     userId: string | null = null;
     isLoading = false;
 
-    // Enums for dropdowns
+    
     roles = Object.values(RolUsuario);
     tiposDocumento = Object.values(TipoDocumento);
 
@@ -37,8 +37,8 @@ export class UserFormComponent implements OnInit {
         tipoDocumento: TipoDocumento.DNI,
         rol: RolUsuario.ESTUDIANTE,
         estado: EstadoUsuario.ACTIVO,
-        // Default values for required fields not in form minimally
-        fechaNacimiento: new Date().toISOString().split('T')[0], // Default today
+        
+        fechaNacimiento: new Date().toISOString().split('T')[0], 
         fechaIngreso: new Date().toISOString().split('T')[0],
         genero: Genero.M,
         telefono: '',
@@ -61,11 +61,11 @@ export class UserFormComponent implements OnInit {
             next: (data) => {
                 this.usuario = {
                     ...data,
-                    // If backend sends nulls, fallback
+                    
                     legajo: data.legajo || '',
                     telefono: data.telefono || '',
                     direccion: data.direccion || '',
-                    // Ensure request compatibility
+                    
                     password: ''
                 };
                 this.isLoading = false;
@@ -95,7 +95,7 @@ export class UserFormComponent implements OnInit {
                 }
             });
         } else {
-            // New user validation/defaults
+            
             this.usuarioService.crearUsuario(this.usuario).subscribe({
                 next: () => {
                     this.alertService.success('Usuario creado correctamente.');

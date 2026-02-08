@@ -50,7 +50,7 @@ export class AdminService {
         );
     }
 
-    // Matriculacion (Enroll Student to Career)
+    
     buscarUsuarios(legajo: string): Observable<UsuarioResponse[]> {
         return from(axiosClient.get<UsuarioResponse[]>('/admin/matriculacion/usuarios/buscar', {
             params: { legajo }
@@ -87,7 +87,7 @@ export class AdminService {
         );
     }
 
-    // Inscripciones (Cursada/Examen)
+    
     inscribir(request: AdminInscripcionRequest): Observable<void> {
         return from(axiosClient.post<void>('/admin/inscripcion', request)).pipe(
             map(response => response.data)
@@ -144,7 +144,7 @@ export class AdminService {
         );
     }
 
-    // --- Module: Careers ---
+    
     getAllCarreras(): Observable<CarreraAdminDTO[]> {
         return from(axiosClient.get<CarreraAdminDTO[]>('/admin/carreras')).pipe(
             map(response => response.data)
@@ -181,7 +181,7 @@ export class AdminService {
         );
     }
 
-    // --- Module: Exam Tables ---
+    
     getAllTurnos(): Observable<MesaExamenResponse[]> {
         console.log('[AdminService] Calling getAllTurnos (/admin/mesas/turnos)');
         return from(axiosClient.get<MesaExamenResponse[]>('/admin/mesas/turnos')).pipe(
@@ -252,7 +252,7 @@ export class AdminService {
         );
     }
 
-    // --- Module: Commissions ---
+    
     getAllComisiones(): Observable<AdminComisionDTO[]> {
         return from(axiosClient.get<AdminComisionDTO[]>('/admin/comisiones')).pipe(
             map(response => response.data)
@@ -285,7 +285,7 @@ export class AdminService {
         );
     }
 
-    // --- Module: General/Search ---
+    
     getCarrerasGeneral(): Observable<CarreraResponse[]> {
         return from(axiosClient.get<CarreraResponse[]>('/admin/general/carreras')).pipe(
             map(response => response.data)
@@ -300,7 +300,7 @@ export class AdminService {
         );
     }
 
-    // --- Module: Exam Tables (Additional) ---
+    
     getProfesoresParaMesa(idMateria: string, fecha: string, hora: string): Observable<ProfesorDisponibleDTO[]> {
         return from(axiosClient.get<ProfesorDisponibleDTO[]>('/admin/mesas/profesores-disponibles', {
             params: { idMateria, fecha, hora }

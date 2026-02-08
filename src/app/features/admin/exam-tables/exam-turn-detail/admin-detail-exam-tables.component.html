@@ -62,13 +62,13 @@
         }
     </div>
 
-    <!-- Add Exam Modal -->
+    
     @if (showAddModal) {
     <div class="modal-overlay" (click)="closeAddModal()">
         <div class="modal-content" (click)="$event.stopPropagation()">
             <h4>Agregar Mesa de Examen</h4>
 
-            <!-- Step 1: Subject Search -->
+            
             @if (addStep === 'SUBJECT') {
             <div class="form-group">
                 <label>Carrera</label>
@@ -103,7 +103,7 @@
             </div>
             }
 
-            <!-- Step 2: Date & Time -->
+            
             @if (addStep === 'DATETIME') {
             <div class="selected-info mb-2">
                 <strong>Materia:</strong> {{ selectedSubject?.nombre }}
@@ -126,7 +126,7 @@
             </div>
             }
 
-            <!-- Step 3: Professor -->
+            
             @if (addStep === 'PROFESSOR') {
             <div class="selected-info mb-2">
                 <strong>Fecha:</strong> {{ examDate | date:'dd/MM/yyyy' }} {{ examTime }}
@@ -161,7 +161,7 @@
     </div>
     }
 
-    <!-- Confirmation Modal -->
+    
     @if (showDeleteConfirmation) {
     <app-confirmation-modal title="Confirmar Eliminación"
         message="¿Está seguro de que desea eliminar esta mesa de examen? Esta acción no se puede deshacer."

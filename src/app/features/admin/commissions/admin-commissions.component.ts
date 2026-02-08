@@ -24,11 +24,11 @@ export class AdminCommissionsComponent implements OnInit {
     salones: SalonResponse[] = [];
     isLoading = false;
 
-    // View State
+    
     viewMode: 'LIST' | 'DETAILS' = 'LIST';
     selectedComision: AdminComisionDTO | null = null;
 
-    // Modal State
+    
     showModal = false;
     newComision: ComisionRequest = {
         nombre: '',
@@ -68,7 +68,7 @@ export class AdminCommissionsComponent implements OnInit {
     }
 
     loadSalones() {
-        // Only load if we have year and shift
+        
         if (!this.newComision.anio || !this.newComision.turno) return;
 
         console.log('[AdminCommissions] Buscando salones disponibles para:', { turno: this.newComision.turno, anio: this.newComision.anio });
@@ -80,17 +80,17 @@ export class AdminCommissionsComponent implements OnInit {
             },
             error: (err) => {
                 console.error(err);
-                // Don't block UI, just log
+                
             }
         });
     }
 
     onTurnoOrAnioChange() {
-        this.newComision.idSalon = ''; // Reset selection
+        this.newComision.idSalon = ''; 
         this.loadSalones();
     }
 
-    // Modal Actions
+    
     openCreateModal() {
         this.showModal = true;
         this.newComision = {
@@ -103,7 +103,7 @@ export class AdminCommissionsComponent implements OnInit {
             idsMaterias: [],
             idsProfesores: []
         };
-        this.salones = []; // Reset salones list
+        this.salones = []; 
     }
 
     closeCreateModal() {
@@ -129,7 +129,7 @@ export class AdminCommissionsComponent implements OnInit {
         });
     }
 
-    // Details logic
+    
     selectComision(comision: AdminComisionDTO) {
         this.selectedComision = comision;
         this.viewMode = 'DETAILS';
@@ -140,20 +140,20 @@ export class AdminCommissionsComponent implements OnInit {
         this.viewMode = 'LIST';
     }
 
-    // --- Assignment Logic ---
+    
     showAssignModal = false;
     assignStep: 'SUBJECT' | 'SCHEDULE' | 'PROFESSORS' = 'SUBJECT';
 
-    // Step 1: Subject
+    
     availableSubjects: any[] = [];
     selectedSubjectId: string = '';
     selectedSubject: any = null;
 
-    // Step 2: Schedule
+    
     scheduleList: { dia: string; horaDesde: string; horaHasta: string }[] = [];
     newSchedule = { dia: 'LUNES', horaDesde: '', horaHasta: '' };
 
-    // Step 3: Professors
+    
     availableProfessors: any[] = [];
     selectedProfessorIds: string[] = [];
 
@@ -187,12 +187,12 @@ export class AdminCommissionsComponent implements OnInit {
         }
 
         this.isLoading = true;
-        // Fetch plan for the commission's year
+        
         this.adminService.getPlanDetalle(this.selectedComision.idCarrera, this.selectedComision.anio).subscribe({
             next: (plan) => {
-                // Filter out subjects already assigned to this commission
+                
                 const assignedIds = (this.selectedComision!.materias || []).map((m: any) => m.idMateria);
-                // Also filter by nivel to only show subjects matching the commission's level
+                
                 this.availableSubjects = plan.materias.filter(m =>
                     !assignedIds.includes(m.id) && m.nivel === this.selectedComision!.nivel
                 );
@@ -214,7 +214,7 @@ export class AdminCommissionsComponent implements OnInit {
 
     addSchedule() {
         if (this.newSchedule.horaDesde && this.newSchedule.horaHasta) {
-            // Validate time range
+            
             if (this.newSchedule.horaDesde >= this.newSchedule.horaHasta) {
                 this.alertService.warning('La hora de inicio debe ser anterior a la hora de fin');
                 return;
@@ -268,7 +268,7 @@ export class AdminCommissionsComponent implements OnInit {
         this.isLoading = true;
         const request = {
             idMateria: this.selectedSubjectId,
-            idsProfesores: [], // Not used for search? The endpoint doc says body: AsignarMateriaComisionRequest uses idMateria, horarios
+            idsProfesores: [], 
             horarios: this.scheduleList
         };
 
@@ -312,10 +312,10 @@ export class AdminCommissionsComponent implements OnInit {
             next: () => {
                 this.alertService.success('Materia asignada correctamente');
                 this.closeAssignModal();
-                // Reload commissions to update the list
+                
                 this.loadComisiones();
-                // Also update selectedComision if needed
-                this.backToList(); // Simple way to refresh
+                
+                this.backToList(); 
                 this.isLoading = false;
             },
             error: (err) => {

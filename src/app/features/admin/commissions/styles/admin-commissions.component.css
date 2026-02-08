@@ -1,4 +1,4 @@
-/* Commission Grid */
+
 .commissions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -56,8 +56,8 @@
     color: var(--text-secondary);
 }
 
-/* Toolbar */
-/* Toolbar & Header Actions */
+
+
 .toolbar-card {
     padding: 1rem;
     display: flex;
@@ -72,7 +72,7 @@
     gap: 1rem;
 }
 
-/* Details */
+
 .details-header {
     display: flex;
     justify-content: space-between;
@@ -94,7 +94,7 @@
     padding: 2rem;
 }
 
-/* Table Enhancements */
+
 .data-table {
     width: 100%;
     border-collapse: collapse;
@@ -145,7 +145,7 @@
     display: inline-flex;
     align-items: center;
     background: rgba(0, 153, 230, 0.1);
-    /* light blue tint */
+    
     color: var(--utn-blue);
     padding: 2px 8px;
     border-radius: 6px;
@@ -190,7 +190,7 @@
     opacity: 0.5;
 }
 
-/* Modal Styling & Loader */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -218,15 +218,15 @@
 
 .modal-content {
     background: #18181b;
-    /* Zinc 900 */
+    
     color: #f4f4f5;
-    /* Zinc 100 */
+    
     padding: 2rem;
     border-radius: 16px;
     width: 100%;
     max-width: 480px;
     border: 1px solid #27272a;
-    /* Zinc 800 */
+    
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
@@ -262,7 +262,7 @@
     display: block;
     margin-bottom: 0.5rem;
     color: #a1a1aa;
-    /* Zinc 400 */
+    
     font-size: 0.875rem;
     font-weight: 500;
 }
@@ -272,9 +272,9 @@
     padding: 0.75rem 1rem;
     border-radius: 8px;
     border: 1px solid #3f3f46;
-    /* Zinc 700 */
+    
     background: #27272a;
-    /* Zinc 800 */
+    
     color: #ffffff;
     transition: all 0.2s ease;
     font-size: 0.95rem;
@@ -282,13 +282,13 @@
 
 .form-control::placeholder {
     color: #71717a;
-    /* Zinc 500 */
+    
     opacity: 1;
 }
 
 .form-control:hover:not(:disabled):not(:focus) {
     border-color: #52525b;
-    /* Zinc 600 */
+    
     background: #2d2d31;
 }
 
@@ -311,7 +311,7 @@ select.form-control option {
 .form-control:focus {
     outline: none;
     border-color: #3b82f6;
-    /* Blue 500 */
+    
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
     background: #27272a;
 }
@@ -354,14 +354,14 @@ select.form-control option {
 
 .btn-primary {
     background: #3b82f6;
-    /* Blue 500 */
+    
     color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary:hover:not(:disabled) {
     background: #2563eb;
-    /* Blue 600 */
+    
     box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
 }
 
@@ -417,14 +417,14 @@ select.form-control option {
     color: #a1a1aa;
 }
 
-/* Assignment Modal Styles */
+
 .assignment-modal {
     max-width: 700px !important;
     max-height: 85vh;
     overflow-y: auto;
 }
 
-/* Step Indicator */
+
 .step-indicator {
     display: flex;
     align-items: center;
@@ -489,7 +489,7 @@ select.form-control option {
     margin-top: -1.5rem;
 }
 
-/* Subject List */
+
 .subject-list {
     display: flex;
     flex-direction: column;
@@ -550,14 +550,14 @@ select.form-control option {
     transform: translateX(4px);
 }
 
-/* Subject Selected Header */
+
 .subject-selected {
     margin: 0.5rem 0 0 0;
     color: #a1a1aa;
     font-size: 0.9rem;
 }
 
-/* Schedule Form */
+
 .schedule-form {
     margin-bottom: 1.5rem;
 }
@@ -574,7 +574,7 @@ select.form-control option {
     align-items: flex-end;
 }
 
-/* Schedule List */
+
 .schedule-list h5 {
     margin: 0 0 0.75rem 0;
     color: #ffffff;
@@ -617,7 +617,7 @@ select.form-control option {
     background: rgba(239, 68, 68, 0.1);
 }
 
-/* Hours Indicator */
+
 .hours-indicator {
     display: flex;
     align-items: center;
@@ -645,7 +645,7 @@ select.form-control option {
     font-size: 1.25rem;
 }
 
-/* Schedule Summary */
+
 .schedule-summary {
     margin-bottom: 1.5rem;
 }
@@ -668,7 +668,7 @@ select.form-control option {
     color: #a1a1aa;
 }
 
-/* Professor List */
+
 .professor-list {
     display: flex;
     flex-direction: column;
@@ -735,7 +735,7 @@ select.form-control option {
     text-align: center;
 }
 
-/* Loading State */
+
 .loading-state {
     display: flex;
     flex-direction: column;

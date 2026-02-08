@@ -5,10 +5,10 @@ export interface AvisoRequest {
 }
 
 export interface AvisoResponse {
-    id: string; // UUID
+    id: string; 
     titulo: string;
     descripcion: string;
-    fechaEmision: string; // LocalDateTime
+    fechaEmision: string; 
     estado: string;
     visto: boolean;
 }

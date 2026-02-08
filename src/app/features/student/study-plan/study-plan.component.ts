@@ -35,7 +35,7 @@ import { CorrelativesModalComponent } from '@shared/components/correlatives-moda
         }
     `,
     styles: [`
-        /* No specific styles needed as we use Tailwind util classes via cellClass */
+        
     `]
 })
 export class StudyPlanComponent implements OnInit {
@@ -44,7 +44,7 @@ export class StudyPlanComponent implements OnInit {
     displayData: any[] = [];
     isLoading: boolean = false;
 
-    // Modal state
+    
     showModal: boolean = false;
     selectedSubjectName: string = '';
     selectedCorrelatives: any[] = [];
@@ -62,9 +62,9 @@ export class StudyPlanComponent implements OnInit {
             key: 'estado',
             label: 'Estado',
             sortable: true,
-            // Logic for cell coloring: 
-            // APROBADA -> Green
-            // REGULAR -> Yellow
+            
+            
+            
             cellClass: (row) => {
                 if (row.estado === 'APROBADA') {
                     return 'bg-green-100 text-green-800 font-bold px-2 py-1 rounded inline-block';
@@ -124,20 +124,20 @@ export class StudyPlanComponent implements OnInit {
         data.forEach(carrera => {
             if (carrera.materias) {
                 carrera.materias.forEach((materia: any) => {
-                    // Include ALL subjects (Pending, Approved, Regular...)
+                    
                     processed.push({
                         ...materia,
-                        // Format cuatrimestre: If not ANUAL, show CUATRIMESTRAL
+                        
                         cuatrimestre: materia.cuatrimestre === 'ANUAL' ? 'ANUAL' : 'CUATRIMESTRAL',
-                        // Clean electiva visual
+                        
                         esElectiva: materia.esElectiva ? 'SÍ' : '',
-                        // Correlativas: format as array of objects with name and condition badge
+                        
                         correlativasList: (materia.correlativas || []).map((corr: any) => ({
                             nombre: corr.nombre,
                             condicion: corr.condicion,
                             badge: corr.condicion === 'PROMOCIONADA' ? 'P' : 'R'
                         })),
-                        // Display field for correlativas column
+                        
                         correlativasDisplay: {
                             hasCorrelatives: materia.correlativas && materia.correlativas.length > 0,
                             count: (materia.correlativas || []).length
@@ -147,7 +147,7 @@ export class StudyPlanComponent implements OnInit {
             }
         });
 
-        // Optional: Sort by year/level if available, or name
+        
         this.displayData = processed;
     }
 }

@@ -51,49 +51,49 @@
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Success Type */
+
 .alert-container.success {
     background-color: #022c22;
-    /* emerald-950 */
+    
     border-color: #064e3b;
-    /* emerald-900 */
+    
     color: #d1fae5;
-    /* emerald-100 */
+    
 }
 
 .alert-container.success .alert-icon {
     color: #059669;
-    /* emerald-600 */
+    
 }
 
-/* Error Type */
+
 .alert-container.error {
     background-color: #450a0a;
-    /* red-950 */
+    
     border-color: #7f1d1d;
-    /* red-900 */
+    
     color: #fecaca;
-    /* red-100 */
+    
 }
 
 .alert-container.error .alert-icon {
     color: #dc2626;
-    /* red-600 */
+    
 }
 
-/* Info Type */
+
 .alert-container.info {
     background-color: #172554;
-    /* blue-950 */
+    
     border-color: #1e3a8a;
-    /* blue-900 */
+    
     color: #dbeafe;
-    /* blue-100 */
+    
 }
 
 .alert-container.info .alert-icon {
     color: #2563eb;
-    /* blue-600 */
+    
 }
 
 .alert-container.warning {

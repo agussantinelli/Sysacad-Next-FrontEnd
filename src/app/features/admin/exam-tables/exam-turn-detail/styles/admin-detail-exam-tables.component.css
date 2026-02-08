@@ -83,7 +83,7 @@
     background: rgba(239, 68, 68, 0.1);
 }
 
-/* Modal Styles */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -138,14 +138,14 @@ select.form-control {
     color: var(--text-primary);
     transition: all 0.2s;
     appearance: none;
-    /* Remove default arrow to use custom one if needed, or keep standard */
+    
     background-image: var(--select-arrow);
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1rem;
 }
 
-/* Ensure options have correct colors in light/dark mode */
+
 select.form-control option {
     background-color: var(--bg-card);
     color: var(--text-primary);
@@ -210,7 +210,7 @@ select.form-control option {
 .professor-item.selected {
     border-color: var(--utn-blue);
     background: rgba(59, 130, 246, 0.1);
-    /* Slight blue tint */
+    
 }
 
 .prof-name {

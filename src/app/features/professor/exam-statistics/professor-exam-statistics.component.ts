@@ -22,22 +22,22 @@ export class ProfessorExamStatisticsComponent implements OnInit {
     years: number[] = [];
     subjects: MateriaProfesorDTO[] = [];
 
-    // Filters
+    
     selectedYear: number | null = null;
     selectedSubject: string = '';
 
     isLoading = true;
     error: string | null = null;
 
-    // Chart Data
+    
     courseStatusData: any[] = [];
 
-    // Chart Colors (Green for Promoted, Orange for Regular, Red for Free)
+    
     colorScheme: Color = {
         name: 'academicStatus',
         selectable: true,
         group: ScaleType.Ordinal,
-        domain: ['#00E676', '#FFC400', '#FF1744'] // Brighter: Green A400, Amber A400, Red A400
+        domain: ['#00E676', '#FFC400', '#FF1744'] 
     };
 
     ngOnInit(): void {
@@ -46,13 +46,13 @@ export class ProfessorExamStatisticsComponent implements OnInit {
     }
 
     loadFilters(): void {
-        // Load available years
+        
         this.professorService.getAniosEstadisticas().subscribe({
             next: (years) => this.years = years,
             error: (err) => console.error('Error loading years', err)
         });
 
-        // Load subjects
+        
         this.professorService.getMisMaterias().subscribe({
             next: (subjects) => this.subjects = subjects,
             error: (err) => console.error('Error loading subjects', err)
@@ -72,7 +72,7 @@ export class ProfessorExamStatisticsComponent implements OnInit {
             next: (data) => {
                 this.stats = data;
 
-                // Populate Chart Data
+                
                 this.courseStatusData = [
                     { name: 'Promocionados', value: data.cantidadPromocionados },
                     { name: 'Regulares', value: data.cantidadRegulares },

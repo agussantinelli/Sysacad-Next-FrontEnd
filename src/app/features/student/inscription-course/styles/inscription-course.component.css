@@ -1,7 +1,7 @@
 .inscription-container {
     padding: 2rem;
     max-width: 1600px;
-    /* Increased from 1200px */
+    
     margin: 0 auto;
     width: 100%;
     animation: fadeIn 0.3s ease-out;
@@ -46,7 +46,7 @@
 
 .btn-back:hover {
     background-color: var(--bg-hover, rgba(0, 0, 0, 0.05));
-    /* Fallback if variable missing */
+    
     color: var(--text-primary);
 }
 
@@ -58,11 +58,11 @@
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
-    /* Removed background-color and padding */
+    
     padding: 0;
     flex-wrap: wrap;
     align-items: flex-end;
-    /* Align inputs and button at the bottom */
+    
 }
 
 .filter-group {
@@ -101,12 +101,8 @@
     margin-top: 1rem;
 }
 
-/* Custom button style for inscription action passed to table */
-/* Global or deep selector might be needed if ViewEncapsulation is Emulated (default).
-   For standard passed class, ::ng-deep or putting in globals is common. 
-   However, since we pass the class string to the component, the styles need to be available there. 
-   The TableComponent uses ngClass. The simplistic way is using a global utility or ::ng-deep here.
-*/
+
+
 :host ::ng-deep .btn-inscription {
     background-color: var(--utn-blue);
     color: white;
@@ -164,7 +160,7 @@
 .filter-actions {
     display: flex;
     align-items: flex-end;
-    /* Removed padding-bottom */
+    
 }
 
 .btn-clear {
@@ -181,7 +177,7 @@
     font-weight: 500;
     transition: all 0.2s;
     height: 42px;
-    /* Match typical select height */
+    
 }
 
 .btn-clear:hover {

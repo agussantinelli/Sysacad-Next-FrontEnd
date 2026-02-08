@@ -1,16 +1,16 @@
 export interface SancionRequest {
-    idUsuario: string; // UUID
+    idUsuario: string; 
     motivo: string;
-    fechaInicio: string; // LocalDate
-    fechaFin: string; // LocalDate
+    fechaInicio: string; 
+    fechaFin: string; 
 }
 
 export interface SancionResponse {
-    id: string; // UUID
-    idUsuario: string; // UUID
+    id: string; 
+    idUsuario: string; 
     nombreUsuario: string;
     legajoUsuario: string;
     motivo: string;
-    fechaInicio: string; // LocalDate
-    fechaFin: string; // LocalDate
+    fechaInicio: string; 
+    fechaFin: string; 
 }

@@ -77,7 +77,7 @@
 
 .data-table {
     table-layout: fixed;
-    /* Enforces the colgroup widths */
+    
     width: 100%;
 }
 

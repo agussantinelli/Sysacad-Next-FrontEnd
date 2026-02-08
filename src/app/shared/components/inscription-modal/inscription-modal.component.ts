@@ -13,23 +13,23 @@ import { DateFormatPipe } from '@shared/pipes/date-format.pipe';
     styleUrls: ['./styles/inscription-modal.component.css']
 })
 export class InscriptionModalComponent implements OnInit, OnDestroy {
-    // Mode 1: Commission Selection (Course Inscription)
+    
     @Input() commissions: ComisionDisponibleDTO[] = [];
 
-    // Mode 2: Exam Confirmation (Exam Inscription)
+    
     @Input() examDetail: DetalleMesaExamenResponse | null = null;
 
-    // Common
+    
     @Input() title: string = '';
     @Output() close = new EventEmitter<void>();
 
-    // Output for Course
+    
     @Output() selectCommission = new EventEmitter<ComisionDisponibleDTO>();
 
-    // Output for Exam List
+    
     @Output() selectExamTable = new EventEmitter<MesaExamenDisponibleDTO>();
 
-    // Output for Exam Confirmation
+    
     @Output() confirmExam = new EventEmitter<void>();
 
     selectedCommission: ComisionDisponibleDTO | null = null;

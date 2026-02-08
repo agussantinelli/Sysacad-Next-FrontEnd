@@ -36,19 +36,19 @@ export class AppComponent implements OnInit {
       }
     });
 
-    // Update navbar visibility on route changes
+    
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.updateNavbarVisibility();
     });
 
-    // Listen for unread count changes
+    
     this.chatService.unreadCountChanged$.subscribe(() => {
       this.loadUnreadCount();
     });
 
-    // Initial check
+    
     this.updateNavbarVisibility();
   }
 

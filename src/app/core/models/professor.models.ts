@@ -1,28 +1,28 @@
 import { RolCargo } from '@core/enums/professor.enums';
 
 export interface MateriaProfesorDTO {
-    id: string; // UUID
+    id: string; 
     nombre: string;
     nivel: number;
     plan: string;
     cargo: RolCargo;
-    jefeCatedra: string | null; // Name of head professor, null if user IS the head
+    jefeCatedra: string | null; 
 }
 
 export interface ComisionHorarioDTO {
-    idComision: string; // UUID
+    idComision: string; 
     nombre: string;
     anio: number;
     turno: string;
     salon: string;
-    horarios: string[]; // Formatted schedules (e.g., "LUNES 08:00 - 12:00")
-    profesores: string[]; // All professors if requester is head, empty otherwise
-    cantidadAlumnos: number; // Number of students in this commission
+    horarios: string[]; 
+    profesores: string[]; 
+    cantidadAlumnos: number; 
 }
 
 export interface ComisionDetalladaDTO extends ComisionHorarioDTO {
     nombreMateria: string;
-    idMateria: string; // UUID
+    idMateria: string; 
 }
 
 export interface MiembroTribunalDTO {
@@ -31,33 +31,33 @@ export interface MiembroTribunalDTO {
 }
 
 export interface ProfesorMesaExamenDTO {
-    id: string; // UUID (idMesaExamen)
-    nombre: string; // Nombre de la mesa/turno (e.g. "Febrero 2026")
-    fechaInicio: string; // LocalDate
-    fechaFin: string; // LocalDate
+    id: string; 
+    nombre: string; 
+    fechaInicio: string; 
+    fechaFin: string; 
     cantidadMateriasInvolucradas: number;
 }
 
 export interface ProfesorDetalleExamenDTO {
-    idMesaExamen: string; // UUID
+    idMesaExamen: string; 
     nroDetalle: number;
-    idMateria: string; // UUID
+    idMateria: string; 
     nombreMateria: string;
     anioMateria: string;
-    fecha: string; // LocalDate
-    hora: string; // LocalTime
+    fecha: string; 
+    hora: string; 
     cantidadInscriptos: number;
     todosCorregidos: boolean;
     tribunal: MiembroTribunalDTO[];
 }
 
 export interface AlumnoExamenDTO {
-    idInscripcion: string; // UUID
+    idInscripcion: string; 
     nombre: string;
     apellido: string;
     legajo: number;
     estado: 'PENDIENTE' | 'APROBADO' | 'DESAPROBADO' | 'AUSENTE';
-    nota: number | null; // BigDecimal in backend, number in TS
+    nota: number | null; 
     tomo?: string;
     folio?: string;
 }
@@ -73,16 +73,16 @@ export interface CargaNotaItemDTO {
 export interface CalificacionDTO {
     concepto: string;
     nota: number;
-    fecha: string; // LocalDate
+    fecha: string; 
 }
 
 export interface AlumnoCursadaDTO {
-    idInscripcion: string; // UUID
+    idInscripcion: string; 
     nombre: string;
     apellido: string;
     legajo: number;
-    estado: string; // EstadoCursada
-    notaFinal?: number; // Optional since not all responses might have it, but consistent with user feedback
+    estado: string; 
+    notaFinal?: number; 
     calificaciones: CalificacionDTO[];
 }
 

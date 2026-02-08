@@ -70,7 +70,7 @@
     opacity: 0.7;
 }
 
-/* Date Picker Specific Styles */
+
 input[type="date"] {
     position: relative;
     padding-right: 1rem;
@@ -169,7 +169,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     color: #ef4444;
 }
 
-/* Updated Icon Buttons */
+
 .icon-btn {
     background: transparent;
     border: none;
@@ -199,7 +199,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     color: var(--text-secondary);
 }
 
-/* Turns Grid */
+
 .turns-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -237,7 +237,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 
 .turn-card.active {
     border-color: #10b981;
-    /* Green */
+    
     box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
 }
 
@@ -267,7 +267,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     gap: 1rem;
     text-align: center;
     min-height: 110px;
-    /* Ensure consistent height for alignment */
+    
     justify-content: flex-start;
 }
 
@@ -315,13 +315,13 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     letter-spacing: 0.5px;
 }
 
-/* Date Styles */
+
 .turn-dates {
     text-align: center;
     color: var(--text-secondary);
 }
 
-/* Action Buttons Container - explicitly defined to ensure horizontal layout */
+
 .turn-actions {
     display: flex;
     flex-direction: row;
@@ -331,7 +331,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     margin-top: 1rem;
 }
 
-/* Actions */
+
 .card-header-actions {
     display: flex;
     align-items: center;
@@ -369,7 +369,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     transition: all 0.2s;
 }
 
-/* Modal styles */
+
 .modal-overlay {
     position: fixed;
     top: 0;

@@ -1,19 +1,19 @@
 import { DiaSemana } from '../enums/horario.enums';
 
 export interface HorarioRequest {
-    idComision: string; // UUID
-    idMateria: string; // UUID
+    idComision: string; 
+    idMateria: string; 
     dia: DiaSemana;
-    horaDesde: string; // LocalTime
-    horaHasta: string; // LocalTime
+    horaDesde: string; 
+    horaHasta: string; 
 }
 
 export interface HorarioResponse {
-    idComision: string; // UUID
+    idComision: string; 
     nombreComision: string;
-    idMateria: string; // UUID
+    idMateria: string; 
     nombreMateria: string;
     dia: DiaSemana;
-    horaDesde: string; // LocalTime
-    horaHasta: string; // LocalTime
+    horaDesde: string; 
+    horaHasta: string; 
 }

@@ -63,7 +63,7 @@ export class AdminUniversitiesComponent implements OnInit {
     this.adminService.asociarCarreraFacultad(this.selectedCarreraId, this.selectedFacultadId).subscribe({
       next: () => {
         this.alertService.success('Carrera asociada exitosamente');
-        this.loadFacultades(); // Reload to see the new career in the list
+        this.loadFacultades(); 
         this.closeModal();
         this.isLoading = false;
       },

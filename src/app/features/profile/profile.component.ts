@@ -28,21 +28,21 @@ export class ProfileComponent implements OnInit {
     }
 
     loadUser() {
-        // Subscribe to auth service state
+        
         this.authService.currentUser$.subscribe(user => {
             this.usuario = user;
         });
 
-        // Optionally still fetch fresh data if needed, but update via AuthService
+        
         const userStr = localStorage.getItem('user');
         if (userStr) {
             try {
                 const localUser = JSON.parse(userStr);
-                // If we have an ID, fetch fresh data to ensure we aren't stale
+                
                 if (localUser && localUser.id) {
                     this.usuarioService.obtenerPorId(localUser.id).subscribe({
                         next: (data) => {
-                            // Update global auth state with fresh data
+                            
                             this.authService.updateUser(data);
                         },
                         error: (err) => console.error('Error fetching fresh user data', err)
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
         this.usuarioService.subirFotoPerfil(this.usuario.id, file).subscribe({
             next: () => {
                 this.usuarioService.obtenerPorId(this.usuario!.id).subscribe(updatedUser => {
-                    this.authService.updateUser(updatedUser); // Update global state
+                    this.authService.updateUser(updatedUser); 
                     this.isUploadingPhoto = false;
                     this.closeUploadModal();
                 });

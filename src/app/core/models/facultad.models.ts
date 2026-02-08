@@ -4,7 +4,7 @@ export interface FacultadRequest {
 }
 
 export interface FacultadResponse {
-    id: string; // UUID
+    id: string; 
     ciudad: string;
     provincia: string;
     nombreCompleto: string;

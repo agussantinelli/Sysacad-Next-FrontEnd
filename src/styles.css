@@ -17,7 +17,7 @@ body {
     background-color: var(--bg-page);
 }
 
-/* Snackbar Styles */
+
 .error-snackbar {
     --mdc-snackbar-container-color: var(--error);
     --mdc-snackbar-supporting-text-color: white;
@@ -26,7 +26,7 @@ body {
 
 .success-snackbar {
     --mdc-snackbar-container-color: #10b981;
-    /* Emerald 500 */
+    
     --mdc-snackbar-supporting-text-color: white;
     --mat-mdc-snack-bar-button-color: white;
 }
@@ -37,7 +37,7 @@ body {
     --mat-mdc-snack-bar-button-color: white;
 }
 
-/* Global Floating Action Button */
+
 .floating-chat-btn {
     position: fixed;
     bottom: 2rem;
@@ -67,7 +67,7 @@ body {
     font-size: 28px;
 }
 
-/* Notification Badge */
+
 .notification-badge {
     position: absolute;
     top: -4px;

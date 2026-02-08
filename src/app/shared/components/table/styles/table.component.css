@@ -1,4 +1,4 @@
-/* Container */
+
 .table-container {
     width: 100%;
     overflow-x: auto;
@@ -8,24 +8,24 @@
     background-color: var(--bg-card);
 }
 
-/* Table */
+
 .data-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.875rem;
-    /* 14px */
+    
     text-align: left;
     color: var(--text-secondary);
 }
 
-/* Header */
+
 .data-table thead {
     font-size: 0.75rem;
-    /* 12px */
+    
     text-transform: uppercase;
     color: var(--text-primary);
     background-color: var(--input-bg);
-    /* Use input-bg for slight contrast in header */
+    
     border-bottom: 2px solid var(--border-subtle);
 }
 
@@ -40,7 +40,7 @@
 
 .header-cell.sortable:hover {
     background-color: var(--border-subtle);
-    /* Slight highlight */
+    
 }
 
 .header-content {
@@ -49,7 +49,7 @@
     gap: 0.5rem;
 }
 
-/* Body */
+
 .table-row {
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border-subtle);
@@ -71,7 +71,7 @@
     color: var(--text-secondary);
 }
 
-/* Actions */
+
 .actions-cell {
     display: flex;
     gap: 0.5rem;
@@ -115,7 +115,7 @@
     color: var(--text-primary) !important;
 }
 
-/* Pagination */
+
 .pagination-container {
     display: flex;
     align-items: center;
@@ -141,7 +141,7 @@
     margin: 0;
     padding: 0;
     gap: -1px;
-    /* Overlap borders */
+    
 }
 
 .page-btn {

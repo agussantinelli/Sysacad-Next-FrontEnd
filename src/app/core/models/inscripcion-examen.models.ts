@@ -5,18 +5,18 @@ export interface InscripcionExamenRequest {
 }
 
 export interface InscripcionExamenResponse {
-    id: string; // UUID
+    id: string; 
     nombreAlumno: string;
     legajoAlumno: string;
     nombreMateria: string;
-    fechaExamen: string; // LocalDate
-    horaExamen: string; // LocalTime
-    fechaInscripcion: string; // LocalDateTime
-    estado: string; // e.g., "PENDIENTE"
-    nota: number; // BigDecimal
+    fechaExamen: string; 
+    horaExamen: string; 
+    fechaInscripcion: string; 
+    estado: string; 
+    nota: number; 
 }
 
 export interface CargaNotaExamenRequest {
     nota: number;
-    estado: string; // Enum actually
+    estado: string; 
 }

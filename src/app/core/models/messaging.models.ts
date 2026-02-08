@@ -4,11 +4,11 @@ export interface GrupoRequest {
     nombre: string;
     descripcion: string;
     tipo: string;
-    idsIntegrantes: string[]; // List of UUIDs
+    idsIntegrantes: string[]; 
 }
 
 export interface GrupoIntegranteDTO {
-    idUsuario: string; // UUID
+    idUsuario: string; 
     nombre: string;
     apellido: string;
     rol: RolGrupo;
@@ -16,51 +16,51 @@ export interface GrupoIntegranteDTO {
 }
 
 export interface GrupoResponse {
-    id: string; // UUID
+    id: string; 
     nombre: string;
     descripcion: string;
     tipo: string;
     estado: EstadoGrupo;
-    fechaCreacion: string; // LocalDateTime as ISO string
-    idComision: string; // UUID
-    idMateria: string; // UUID
+    fechaCreacion: string; 
+    idComision: string; 
+    idMateria: string; 
     esVisible: boolean;
     mensajesSinLeer: number;
     integrantes: GrupoIntegranteDTO[];
     cantIntegrantes: number;
-    horaUltimoMensaje: string; // LocalDateTime
+    horaUltimoMensaje: string; 
 }
 
 export interface MiembroGrupoRequest {
-    idUsuario: string; // UUID
+    idUsuario: string; 
     rol: RolGrupo;
 }
 
 export interface MiembroGrupoResponse {
-    idUsuario: string; // UUID
+    idUsuario: string; 
     nombre: string;
     apellido: string;
     rol: RolGrupo;
-    fechaUnion: string; // LocalDateTime
-    ultimoAcceso: string; // LocalDateTime
+    fechaUnion: string; 
+    ultimoAcceso: string; 
 }
 
 export interface MensajeGrupoRequest {
     contenido: string;
-    idUsuarioRemitente?: string; // UUID: Optional/Ignored (inferred from token).
-    idComision: string; // UUID: Used for automatic group creation.
-    idMateria: string; // UUID: Used for automatic group creation.
+    idUsuarioRemitente?: string; 
+    idComision: string; 
+    idMateria: string; 
 }
 
 export interface MensajeGrupoResponse {
-    id: string; // UUID
-    idGrupo: string; // UUID
-    idUsuarioRemitente: string; // UUID
+    id: string; 
+    idGrupo: string; 
+    idUsuarioRemitente: string; 
     nombreRemitente: string;
     apellidoRemitente: string;
     fotoRemitente: string;
     contenido: string;
     editado: boolean;
-    fechaEnvio: string; // LocalDateTime
+    fechaEnvio: string; 
     leido: boolean;
 }

@@ -19,15 +19,15 @@ export class TableComponent implements OnChanges {
     @Input() isLoading: boolean = false;
     @Output() onAction = new EventEmitter<ActionEvent>();
 
-    // Pagination state
+    
     currentPage: number = 1;
     totalPages: number = 1;
 
-    // Sorting state
+    
     sortColumn: string | null = null;
     sortDirection: 'asc' | 'desc' = 'asc';
 
-    // Internal data to display
+    
     displayData: any[] = [];
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -47,14 +47,14 @@ export class TableComponent implements OnChanges {
 
     updateDisplayData() {
         this.totalPages = Math.ceil(this.data.length / this.pageSize);
-        // Ensure current page is valid
+        
         if (this.currentPage > this.totalPages) {
             this.currentPage = Math.max(1, this.totalPages);
         }
 
         let processedData = [...this.data];
 
-        // Apply sorting
+        
         if (this.sortColumn) {
             processedData.sort((a, b) => {
                 const valueA = this.getCellValue(a, { key: this.sortColumn!, label: '' });
@@ -66,7 +66,7 @@ export class TableComponent implements OnChanges {
             });
         }
 
-        // Apply pagination
+        
         const startIndex = (this.currentPage - 1) * this.pageSize;
         this.displayData = processedData.slice(startIndex, startIndex + this.pageSize);
     }

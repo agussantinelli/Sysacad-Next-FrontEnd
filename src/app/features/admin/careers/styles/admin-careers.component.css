@@ -278,7 +278,7 @@
     cursor: pointer;
 }
 
-/* Plans Modal specific styles */
+
 .large-modal {
     max-width: 600px;
     width: 90%;
@@ -313,10 +313,10 @@
     align-items: center;
     padding: 1rem;
     background-color: var(--bg-hover);
-    /* Use variable that adapts */
+    
     border-radius: 8px;
     border: 1px solid var(--border-color);
-    /* Use variable */
+    
     transition: border-color 0.2s;
 }
 

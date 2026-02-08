@@ -7,7 +7,7 @@
     animation: fadeIn 0.3s ease-out;
 }
 
-/* Card */
+
 .edit-card {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -127,7 +127,7 @@
     box-shadow: none;
 }
 
-/* Select Options */
+
 option {
     background-color: var(--bg-card);
     color: var(--text-primary);
@@ -136,7 +136,7 @@ option {
 
 select.form-input {
     appearance: none;
-    /* Neutral gray arrow */
+    
     background-image: var(--select-arrow);
     background-position: right 1rem center;
     background-repeat: no-repeat;

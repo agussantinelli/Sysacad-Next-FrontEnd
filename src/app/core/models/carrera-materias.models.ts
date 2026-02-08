@@ -1,9 +1,9 @@
 import { EstudianteMateriaDTO } from './estudiante-materia.models';
 
 export interface CarreraMateriasDTO {
-    idCarrera: string; // UUID
+    idCarrera: string; 
     nombreCarrera: string;
-    idFacultad: string; // UUID
+    idFacultad: string; 
     nombreFacultad: string;
     nombrePlan: string;
     materias: EstudianteMateriaDTO[];

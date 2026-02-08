@@ -19,12 +19,12 @@ export class AcademicStatusComponent implements OnInit {
     private matriculacionService = inject(MatriculacionService);
     private authService = inject(AuthService);
 
-    // Raw Data
+    
     matriculacionData: any[] = [];
     displayData: any[] = [];
     isLoading: boolean = false;
 
-    // Modal State
+    
     selectedMateria: any = null;
     isModalOpen = false;
     historyData: any = null;

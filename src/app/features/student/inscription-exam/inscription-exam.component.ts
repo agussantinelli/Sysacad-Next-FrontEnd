@@ -44,20 +44,20 @@ export class InscriptionExamComponent implements OnInit {
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
 
-    // Remove mesasDisponibles (bulk list)
-    // mesasDisponibles: DetalleMesaExamenResponse[] = [];
+    
+    
 
     isLoading: boolean = false;
 
-    // State for Modal
+    
     availableExamTables: MesaExamenDisponibleDTO[] = [];
     selectedExamTable: MesaExamenDisponibleDTO | null = null;
 
     selectedMateriaForEnrollment: any = null;
 
-    // Filters
+    
 
-    // Filters
+    
     filterNombre: string = '';
     filterEstado: string = '';
     filterTipo: string = '';
@@ -96,7 +96,7 @@ export class InscriptionExamComponent implements OnInit {
         {
             name: 'pendiente',
             label: 'Inscripto',
-            class: 'btn-pending-action', // Need to define this style or reuse disabled
+            class: 'btn-pending-action', 
             isVisible: (row: any) => row.tieneInscripcionExamenPendiente === true
         }
     ];
@@ -118,10 +118,10 @@ export class InscriptionExamComponent implements OnInit {
                         const esIngles = ['Inglés I', 'Inglés II'].includes(materia.nombre);
                         const esRegular = materia.estado === 'REGULAR';
                         const estaAprobada = materia.estado === 'APROBADA';
-                        // Add check for pending inscription
+                        
                         const tieneInscripcionPendiente = materia.tieneInscripcionExamenPendiente;
 
-                        // Condition: Not Approved AND (Regular OR Ingles) AND NOT Pending Inscription
+                        
                         const condicionAcademica = !estaAprobada && (esRegular || esIngles);
 
                         materia.condicionAcademica = condicionAcademica;
@@ -144,7 +144,7 @@ export class InscriptionExamComponent implements OnInit {
         });
     }
 
-    // Removed loadMesas() and updateInscriptionStatus() as we fetch on demand now.
+    
 
     extractUniqueNombres() {
         const nombres = new Set<string>();
@@ -228,19 +228,19 @@ export class InscriptionExamComponent implements OnInit {
         }
     }
 
-    // State for Modals
+    
     showTableSelectionModal: boolean = false;
     showConfirmationModal: boolean = false;
 
-    // Step 1: Selection
+    
     onSelectTable(table: MesaExamenDisponibleDTO) {
-        // User clicked "Inscribirse" on a table in the list
+        
         this.selectedExamTable = table;
         this.showTableSelectionModal = false;
         this.showConfirmationModal = true;
     }
 
-    // Step 2: Confirmation
+    
     onConfirmEnrollment() {
         if (!this.selectedMateriaForEnrollment || !this.selectedExamTable) return;
 
@@ -286,8 +286,8 @@ export class InscriptionExamComponent implements OnInit {
 
     closeConfirmationModal() {
         this.showConfirmationModal = false;
-        // Don't clear selectedMateria here if we want to go back?
-        // Usually cancel means cancel everything.
+        
+        
         this.selectedExamTable = null;
     }
 

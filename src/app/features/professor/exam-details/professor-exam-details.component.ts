@@ -33,7 +33,7 @@ export class ProfessorExamDetailsComponent implements OnInit {
         if (navigation?.extras.state) {
             this.mesaNombre = navigation.extras.state['mesaNombre'] || this.mesaNombre;
         } else {
-            // Fallback attempt to read from history state if page was not refreshed but navigated back/forth
+            
             const state = history.state;
             if (state && state.mesaNombre) {
                 this.mesaNombre = state.mesaNombre;
@@ -50,7 +50,7 @@ export class ProfessorExamDetailsComponent implements OnInit {
     loadDetalles(): void {
         this.isLoading = true;
 
-        // If title is missing (e.g. refresh), try to fetch it from the list of mesas
+        
         if (this.mesaNombre === 'Detalle de Mesa de Examen') {
             this.professorService.getMesasExamen().subscribe({
                 next: (mesas) => {

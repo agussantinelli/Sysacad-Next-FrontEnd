@@ -5,7 +5,6 @@
         <app-loading-spinner></app-loading-spinner>
         } @else {
 
-        <!-- LIST VIEW -->
         @if (viewMode === 'LIST') {
         <div class="card toolbar-card">
             <button class="btn-primary" (click)="openCreateModal()">
@@ -37,7 +36,7 @@
         </div>
         }
 
-        <!-- DETAILS VIEW -->
+        
         @if (viewMode === 'DETAILS' && selectedComision) {
         <div class="card details-card">
             <div class="details-header">
@@ -109,7 +108,7 @@
 
     </div>
 
-    <!-- Create Modal -->
+    
     @if (showModal) {
     <div class="modal-overlay" (click)="closeCreateModal()">
         <div class="modal-content" (click)="$event.stopPropagation()">
@@ -170,11 +169,11 @@
     </div>
     }
 
-    <!-- Assign Subject Modal -->
+    
     @if (showAssignModal) {
     <div class="modal-overlay" (click)="closeAssignModal()">
         <div class="modal-content assignment-modal" (click)="$event.stopPropagation()">
-            <!-- Step Indicator -->
+            
             <div class="step-indicator">
                 <div class="step" [class.active]="assignStep === 'SUBJECT'"
                     [class.completed]="assignStep !== 'SUBJECT'">
@@ -194,7 +193,7 @@
                 </div>
             </div>
 
-            <!-- Step 1: Select Subject -->
+            
             @if (assignStep === 'SUBJECT') {
             <div class="modal-header">
                 <h4>Seleccionar Materia</h4>
@@ -241,7 +240,7 @@
             </div>
             }
 
-            <!-- Step 2: Define Schedule -->
+            
             @if (assignStep === 'SCHEDULE') {
             <div class="modal-header">
                 <h4>Definir Horarios</h4>
@@ -314,7 +313,7 @@
             </div>
             }
 
-            <!-- Step 3: Select Professors -->
+            
             @if (assignStep === 'PROFESSORS') {
             <div class="modal-header">
                 <h4>Seleccionar Profesores</h4>

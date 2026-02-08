@@ -1,12 +1,12 @@
 export interface SalonRequest {
-    idFacultad: string; // UUID
+    idFacultad: string; 
     nombre: string;
     piso: string;
 }
 
 export interface SalonResponse {
-    id: string; // UUID
-    idFacultad: string; // UUID
+    id: string; 
+    idFacultad: string; 
     nombreFacultad: string;
     nombre: string;
     piso: string;

@@ -25,7 +25,7 @@ export class AdminUserProfileComponent implements OnInit {
     usuario: UsuarioResponse | null = null;
     isLoading = false;
 
-    // Modal State
+    
     showModal = false;
     modalTitle = '';
     modalMessage = '';

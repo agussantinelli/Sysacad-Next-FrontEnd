@@ -1,4 +1,4 @@
-/* General Layout */
+
 .form-container {
     max-width: 800px;
     margin: 0 auto;
@@ -26,7 +26,7 @@
     font-weight: 600;
 }
 
-/* Form Controls */
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -49,7 +49,7 @@ label {
     font-size: 0.95rem;
     transition: all 0.2s ease;
     box-sizing: border-box;
-    /* Important for width: 100% */
+    
 }
 
 .form-control:focus {
@@ -65,7 +65,7 @@ label {
     border-style: dashed;
 }
 
-/* Select specific styles */
+
 select.form-control {
     appearance: none;
     -webkit-appearance: none;
@@ -77,22 +77,22 @@ select.form-control {
     padding-right: 2.5rem;
     cursor: pointer;
     background-color: var(--bg-input);
-    /* Explicit background for the select itself */
+    
     color: var(--text-primary);
 }
 
-/* Force dark options explicitly */
+
 select.form-control option {
     background-color: #121212;
-    /* Hardcoded dark background fallback */
+    
     background-color: var(--bg-page);
-    /* Use theme variable if available */
+    
     color: white;
-    /* Force white text */
+    
     padding: 12px;
 }
 
-/* Specific fix for Windows High Contrast / Forced Colors if needed, but primary fix is above */
+
 @media (prefers-color-scheme: dark) {
     select.form-control {
         background-color: var(--bg-input);
@@ -130,7 +130,7 @@ select.form-control option {
     color: white;
     border: none;
     border-radius: 0 10px 10px 0;
-    /* Rounded only on right */
+    
     padding: 0 1.5rem;
     display: inline-flex;
     align-items: center;
@@ -150,7 +150,7 @@ select.form-control option {
     background-color: var(--border-input);
 }
 
-/* Results List */
+
 .results-list {
     list-style: none;
     padding: 0;
@@ -181,11 +181,11 @@ select.form-control option {
     color: var(--utn-blue);
 }
 
-/* Selected Student Card */
+
 .selected-student {
     margin-bottom: 1.5rem;
     background: rgba(16, 185, 129, 0.08);
-    /* Very subtle green */
+    
     border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 12px;
     padding: 1.25rem;
@@ -219,7 +219,7 @@ select.form-control option {
     margin: 0;
 }
 
-/* Buttons actions */
+
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -278,7 +278,7 @@ select.form-control option {
 
 .text-warning {
     color: #f59e0b;
-    /* Amber/Orange */
+    
     font-size: 0.9rem;
     display: flex;
     align-items: center;

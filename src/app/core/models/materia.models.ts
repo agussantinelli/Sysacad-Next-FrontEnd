@@ -1,7 +1,7 @@
 import { TipoMateria, DuracionMateria, ModalidadMateria, CuatrimestreDictado } from '../enums/materia.enums';
 
 export interface SimpleMateriaDTO {
-    id: string; // UUID
+    id: string; 
     nombre: string;
 }
 
@@ -11,20 +11,20 @@ export interface MateriaRequest {
     tipoMateria: TipoMateria;
     duracion: DuracionMateria;
     cuatrimestreDictado: CuatrimestreDictado;
-    horasCursado: number; // Short
+    horasCursado: number; 
     rendirLibre: boolean;
     optativa: boolean;
-    idsCorrelativas: string[]; // List of UUIDs
+    idsCorrelativas: string[]; 
 }
 
 export interface MateriaResponse {
-    id: string; // UUID
+    id: string; 
     nombre: string;
     descripcion: string;
     tipoMateria: TipoMateria;
     duracion: DuracionMateria;
     cuatrimestreDictado: CuatrimestreDictado;
-    horasCursado: number; // Short
+    horasCursado: number; 
     rendirLibre: boolean;
     optativa: boolean;
     correlativas: SimpleMateriaDTO[];

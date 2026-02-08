@@ -19,33 +19,33 @@ export interface UsuarioRequest {
     nombre: string;
     apellido: string;
     mail: string;
-    fechaNacimiento: string; // LocalDate 
+    fechaNacimiento: string; 
     genero: Genero;
     telefono: string;
     direccion: string;
     ciudad: string;
     fotoPerfil?: string;
-    fechaIngreso: string; // LocalDate
+    fechaIngreso: string; 
     tituloAcademico?: string;
     rol: RolUsuario;
     estado?: EstadoUsuario;
 }
 
 export interface UsuarioResponse {
-    id: string; // UUID
+    id: string; 
     legajo: string;
     tipoDocumento: TipoDocumento;
     dni: string;
     nombre: string;
     apellido: string;
     mail: string;
-    fechaNacimiento: string; // LocalDate
+    fechaNacimiento: string; 
     genero: Genero;
     telefono: string;
     direccion: string;
     ciudad: string;
     fotoPerfil?: string;
-    fechaIngreso: string; // LocalDate
+    fechaIngreso: string; 
     tituloAcademico?: string;
     rol: RolUsuario;
     estado: EstadoUsuario;

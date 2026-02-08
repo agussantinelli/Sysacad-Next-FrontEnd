@@ -1,7 +1,7 @@
 <app-page-layout title="Nueva Inscripción">
     <div class="form-container">
 
-        <!-- Search Section -->
+        
         <div class="form-card search-card">
             <h3>1. Buscar Alumno</h3>
             <div class="search-box">
@@ -37,12 +37,12 @@
             }
         </div>
 
-        <!-- Inscription Details -->
+        
         <div class="form-card">
             <h3>2. Datos de Inscripción</h3>
             <form (ngSubmit)="onSubmit()" #form="ngForm">
 
-                <!-- Tipo Selection -->
+                
                 <div class="form-group">
                     <label for="tipo">Tipo de Inscripción</label>
                     <select id="tipo" name="tipo" [(ngModel)]="tipo" (change)="onTipoChange()" required
@@ -53,7 +53,7 @@
                     </select>
                 </div>
 
-                <!-- Materia Selection -->
+                
                 <div class="form-group">
                     <label for="materia">Materia</label>
                     <select id="materia" name="materia" [(ngModel)]="selectedMateriaId" (change)="onMateriaChange()"
@@ -65,7 +65,7 @@
                     </select>
                 </div>
 
-                <!-- Cursada: Comision Selection -->
+                
                 @if (tipo === 'CURSADA') {
                 <div class="form-group">
                     <label for="comision">Comisión</label>
@@ -89,7 +89,7 @@
                 </div>
                 }
 
-                <!-- Examen: Mesa Selection -->
+                
                 @if (tipo === 'EXAMEN') {
                 <div class="form-group">
                     <label for="mesa">Mesa de Examen</label>

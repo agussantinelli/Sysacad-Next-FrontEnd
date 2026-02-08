@@ -184,7 +184,7 @@ export class DashboardComponent implements OnInit {
     }
 
     updateBadgeCount(optionTitle: string, count: number): void {
-        // Helper to update count in all sections
+        
         const updateInSections = (sections: DashboardSection[]) => {
             for (const section of sections) {
                 const option = section.options.find(o => o.title === optionTitle);

@@ -101,7 +101,7 @@
     cursor: not-allowed;
 }
 
-/* Row states */
+
 tr.aprobado {
     background-color: rgba(16, 185, 129, 0.05);
 }
@@ -141,29 +141,28 @@ tr.desaprobado {
     width: 10%;
 }
 
-/* Legajo */
+
 .utn-table th:nth-child(2) {
     width: 35%;
 }
 
-/* Alumno */
+
 .utn-table th:nth-child(3) {
     width: 20%;
 }
 
-/* Estado */
+
 .utn-table th:nth-child(4) {
     width: 10%;
 }
 
-/* Nota */
+
 .utn-table th:nth-child(5) {
     width: 12.5%;
 }
 
-/* Tomo */
+
 .utn-table th:nth-child(6) {
     width: 12.5%;
 }
 
-/* Folio */

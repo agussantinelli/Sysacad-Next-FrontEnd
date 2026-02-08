@@ -1,10 +1,10 @@
 <app-page-layout title="Gestión de Usuarios">
     <div class="users-container">
 
-        <!-- Header Actions -->
+        
         <div class="users-header">
             <div class="filters">
-                <!-- Placeholder for future search/filter -->
+                
             </div>
             <button class="btn-create" (click)="goToCreate()">
                 <span class="material-icons">person_add</span>
@@ -37,7 +37,7 @@
                         } @else {
                         @for (user of usuarios; track user.id) {
                         <tr>
-                            <!-- Profile Column -->
+                            
                             <td>
                                 <div class="profile-cell" style="cursor: pointer;" (click)="goToProfile(user)">
                                     @if (user.fotoPerfil) {
@@ -54,7 +54,7 @@
                                 </div>
                             </td>
 
-                            <!-- ID Column -->
+                            
                             <td>
                                 <div class="user-info">
                                     <span class="user-name">{{ user.dni }}</span>
@@ -64,12 +64,12 @@
                                 </div>
                             </td>
 
-                            <!-- Role Column -->
+                            
                             <td>
                                 {{ user.rol }}
                             </td>
 
-                            <!-- Status Column -->
+                            
                             <td>
                                 <span class="status-badge" [class.activo]="user.estado === 'ACTIVO'"
                                     [class.inactivo]="user.estado === 'INACTIVO'">
@@ -80,7 +80,7 @@
                                 </span>
                             </td>
 
-                            <!-- Actions Column -->
+                            
                             <td>
                                 <div class="actions-cell">
                                     <button class="btn-icon-action" title="Ver Perfil" (click)="goToProfile(user)">

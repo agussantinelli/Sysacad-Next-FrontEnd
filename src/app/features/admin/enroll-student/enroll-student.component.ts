@@ -27,18 +27,18 @@ export class EnrollStudentComponent implements OnInit {
 
     isLoading = false;
 
-    // Search
+    
     legajoQuery = '';
     foundStudents: UsuarioResponse[] = [];
     selectedStudent: UsuarioResponse | null = null;
     isSearching = false;
 
-    // Selection Data
+    
     facultades: FacultadResponse[] = [];
     carreras: CarreraResponse[] = [];
     planes: PlanDeEstudioResponse[] = [];
 
-    // Form Selection
+    
     selectedFacultadId = '';
     selectedCarreraId = '';
     selectedPlanNro: number | null = null;
@@ -69,10 +69,10 @@ export class EnrollStudentComponent implements OnInit {
         }
 
         this.isSearching = true;
-        this.selectedStudent = null; // Reset selection on new search
+        this.selectedStudent = null; 
         this.adminService.buscarUsuarios(this.legajoQuery).subscribe({
             next: (data) => {
-                // Filter only students
+                
                 this.foundStudents = data.filter(user => user.rol === RolUsuario.ESTUDIANTE);
                 this.isSearching = false;
                 if (this.foundStudents.length === 0) {
@@ -89,8 +89,8 @@ export class EnrollStudentComponent implements OnInit {
 
     selectStudent(student: UsuarioResponse) {
         this.selectedStudent = student;
-        this.foundStudents = []; // Clear list after selection
-        this.legajoQuery = ''; // Clear search input
+        this.foundStudents = []; 
+        this.legajoQuery = ''; 
     }
 
     onFacultadChange() {
@@ -122,7 +122,7 @@ export class EnrollStudentComponent implements OnInit {
             this.isLoading = true;
             this.adminService.obtenerPlanes(this.selectedCarreraId).subscribe({
                 next: (data) => {
-                    this.planes = data.filter(p => p.esVigente); // Only active plans usually
+                    this.planes = data.filter(p => p.esVigente); 
                     this.isLoading = false;
                 },
                 error: (err) => {
@@ -152,11 +152,11 @@ export class EnrollStudentComponent implements OnInit {
                 this.alertService.success(`Alumno matriculado exitosamente en el plan ${this.selectedPlanNro}.`);
                 this.resetForm();
                 this.isLoading = false;
-                // Optional: navigate somewhere or just start over
+                
             },
             error: (err) => {
                 console.error('Error matriculating', err);
-                // Handle specific backend errors if needed (e.g., student already enrolled)
+                
                 this.alertService.error('Error al matricular el alumno. Verifique si ya está inscripto.');
                 this.isLoading = false;
             }

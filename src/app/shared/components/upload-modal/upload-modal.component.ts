@@ -21,12 +21,12 @@ export class UploadModalComponent {
     isDragging = false;
     isProcessing = false;
 
-    // Cropping logic
+    
     private img = new Image();
     private ctx!: CanvasRenderingContext2D;
-    private canvasSize = 300; // Match CSS size
+    private canvasSize = 300; 
 
-    // Transform state (calculated automatically)
+    
     zoom = 1;
     panX = 0;
     panY = 0;
@@ -75,19 +75,19 @@ export class UploadModalComponent {
             this.imageSource = e.target?.result as string;
             this.img.src = this.imageSource;
             this.img.onload = () => {
-                // Logic: "Cover" behavior (always fill 300x300)
-                // 1. Determine which dimension needs to be scaled more to fill the container
+                
+                
                 const scaleX = this.canvasSize / this.img.width;
                 const scaleY = this.canvasSize / this.img.height;
 
-                // Use the larger scale factor to ensure the image covers the canvas
+                
                 this.zoom = Math.max(scaleX, scaleY);
 
-                // 2. Center the image
+                
                 this.panX = (this.canvasSize - this.img.width * this.zoom) / 2;
                 this.panY = (this.canvasSize - this.img.height * this.zoom) / 2;
 
-                // Initialize canvas after view update
+                
                 setTimeout(() => this.initCanvas(), 0);
             };
         };
@@ -106,10 +106,10 @@ export class UploadModalComponent {
     renderImage() {
         if (!this.ctx) return;
 
-        // Clear
+        
         this.ctx.clearRect(0, 0, this.canvasSize, this.canvasSize);
 
-        // Draw image centered and covering
+        
         this.ctx.drawImage(
             this.img,
             this.panX,
@@ -121,7 +121,7 @@ export class UploadModalComponent {
 
     cropAndSave() {
         try {
-            this.isProcessing = true; // Trigger UI update
+            this.isProcessing = true; 
 
             if (!this.canvasRef || !this.canvasRef.nativeElement) {
                 console.error('Canvas not found');
@@ -129,9 +129,9 @@ export class UploadModalComponent {
                 return;
             }
 
-            // Create output canvas
+            
             const outputCanvas = document.createElement('canvas');
-            outputCanvas.width = 300; // Final upload size
+            outputCanvas.width = 300; 
             outputCanvas.height = 300;
             const ctx = outputCanvas.getContext('2d');
 
@@ -141,16 +141,16 @@ export class UploadModalComponent {
                 return;
             }
 
-            // Draw current view to output
+            
             ctx.drawImage(this.canvasRef.nativeElement, 0, 0, 300, 300);
 
             outputCanvas.toBlob((blob) => {
                 this.ngZone.run(() => {
                     try {
                         if (blob) {
-                            // Convert blob to file
+                            
                             const file = new File([blob], "profile-pic.jpg", { type: "image/jpeg" });
-                            // Emit event
+                            
                             this.imageCropped.emit(file);
                         } else {
                             console.error('Blob generation failed');
@@ -158,7 +158,7 @@ export class UploadModalComponent {
                     } catch (e) {
                         console.error('Error in emission', e);
                     } finally {
-                        // Ensure this runs inside the zone so UI updates
+                        
                         this.isProcessing = false;
                     }
                 });

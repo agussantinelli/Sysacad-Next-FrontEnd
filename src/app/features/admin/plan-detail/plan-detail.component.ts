@@ -25,10 +25,10 @@ export class AdminPlanDetailComponent implements OnInit {
     plan: PlanDetalleDTO | null = null;
     isLoading = true;
 
-    // UI Properties
+    
     pageTitle: string = 'Cargando...';
 
-    // New properties
+    
     careerName: string = '';
     groupedMaterias: { [key: number]: MateriaDetalleDTO[] } = {};
     years: number[] = [];
@@ -50,14 +50,14 @@ export class AdminPlanDetailComponent implements OnInit {
 
     loadData() {
         this.isLoading = true;
-        // Parallel requests could be better, but sequential is safer for now
+        
         this.loadCareerInfo();
         this.loadPlan();
     }
 
     loadCareerInfo() {
-        // Fetch all careers to find the name. 
-        // Optimization: In a real app, we should have a getById endpoint.
+        
+        
         this.adminService.getAllCarreras().subscribe({
             next: (carreras) => {
                 const carrera = carreras.find(c => c.id === this.carreraId);

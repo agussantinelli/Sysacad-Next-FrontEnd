@@ -2,7 +2,7 @@
     background-color: var(--bg-primary);
     min-height: 100vh;
     padding-top: 80px;
-    /* Navbar height */
+    
     transition: background-color 0.3s;
 }
 
@@ -61,7 +61,7 @@
     opacity: 0.5;
 }
 
-/* Sections */
+
 .sections-container {
     display: flex;
     flex-direction: column;
@@ -79,14 +79,14 @@
     border-left: 4px solid var(--utn-blue);
 }
 
-/* Grid */
+
 .options-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.5rem;
 }
 
-/* Option Card */
+
 .option-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -119,7 +119,7 @@
     justify-content: center;
     transition: all 0.3s ease;
     position: relative;
-    /* Added for badge positioning */
+    
 }
 
 .badge {
@@ -158,7 +158,7 @@
     z-index: 1;
 }
 
-/* Dark Mode Overrides for specific elements if needed */
+
 :host-context(.dark-mode) .icon-wrapper {
     background-color: rgba(255, 255, 255, 0.05);
 }
@@ -194,7 +194,7 @@
     }
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .dashboard-content {
         padding: 1.5rem;

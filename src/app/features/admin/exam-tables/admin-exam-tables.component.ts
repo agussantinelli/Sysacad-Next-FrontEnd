@@ -22,11 +22,11 @@ export class AdminExamTablesComponent implements OnInit {
   private alertService = inject(AlertService);
   private router = inject(Router);
 
-  // Data Source: List of Turns
+  
   turns: MesaExamenResponse[] = [];
   isLoading = false;
 
-  // Turn Form State
+  
   showCreateTurnModal = false;
   isEditingTurn = false;
   editingTurnId: string | null = null;
@@ -37,7 +37,7 @@ export class AdminExamTablesComponent implements OnInit {
     fechaFin: ''
   };
 
-  // Delete Confirmation State
+  
   showDeleteConfirmation = false;
   turnToDelete: MesaExamenResponse | null = null;
 
@@ -51,7 +51,7 @@ export class AdminExamTablesComponent implements OnInit {
     this.adminService.getAllTurnos().subscribe({
       next: (data) => {
         console.log('[AdminMain] Turns loaded:', data);
-        // Sort by start date ascending (oldest first)
+        
         this.turns = data.map(t => ({
           ...t,
           detalles: t.detalles || []
@@ -89,7 +89,7 @@ export class AdminExamTablesComponent implements OnInit {
     return now > end;
   }
 
-  // --- Turn Management (Create/Edit/Delete) ---
+  
 
   openCreateTurnModal() {
     this.isEditingTurn = false;
@@ -154,7 +154,7 @@ export class AdminExamTablesComponent implements OnInit {
 
   deleteTurno(turno: MesaExamenResponse, event: Event) {
     event.stopPropagation();
-    // Safety check for optional properties
+    
     const hasActiveInscriptions = (turno.cantidadInscriptos || 0) > 0 ||
       (turno.detalles && turno.detalles.some(d => (d.cantidadInscriptos || 0) > 0));
 

@@ -8,7 +8,7 @@
     justify-content: flex-end;
     margin-bottom: 1rem;
     padding-right: 2.5%;
-    /* Match 95% width override */
+    
 }
 
 .btn-create {
@@ -29,7 +29,7 @@
     background-color: #004a7c;
 }
 
-/* Reusing similar table styles from Reports/Users for consistency */
+
 .table-card {
     background: var(--surface-card);
     border-radius: 16px;
@@ -114,12 +114,12 @@ tr:hover td {
     color: var(--text-secondary);
 }
 
-/* Page Layout Override to widen the table */
+
 :host ::ng-deep .inscription-card {
     max-width: 95% !important;
 }
 
-/* Student Profile Cell */
+
 .student-profile {
     display: flex;
     align-items: center;
@@ -170,7 +170,7 @@ tr:hover td {
     color: var(--text-secondary);
 }
 
-/* Actions */
+
 .btn-icon-action {
     width: 32px;
     height: 32px;

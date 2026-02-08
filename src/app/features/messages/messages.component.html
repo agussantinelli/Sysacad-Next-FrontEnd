@@ -4,7 +4,7 @@
     } @else {
     <div class="messages-container">
 
-        <!-- Sidebar: List of Conversations -->
+        
         <div class="conversations-sidebar" [class.mobile-hidden]="selectedConversation">
             <div class="search-bar">
                 <span class="material-icons search-icon">search</span>
@@ -51,7 +51,7 @@
                     <div class="conv-info">
                         <div class="conv-header">
                             <span class="conv-name text-truncate opacity-50">{{ conv.nombre }}</span>
-                            <!-- Ocultamos la fecha para grupos inactivos -->
+                            
                         </div>
                         <div class="conv-preview">
                             <span class="last-message italic opacity-50">{{ conv.descripcion }}</span>
@@ -61,7 +61,7 @@
                 }
                 }
                 } @else {
-                <!-- Lista plana para Estudiantes (u otros roles) -->
+                
                 @for (conv of sortedConversations; track conv.id) {
                 <div class="conversation-item" [class.active]="selectedConversation?.id === conv.id"
                     (click)="selectConversation(conv)">
@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <!-- Main: Chat Window -->
+        
         <div class="chat-window-container">
             <app-chat-window [selectedConversation]="selectedConversation" [messages]="messages"
                 [currentUserId]="currentUserId" [currentUserRol]="currentUserRol" [canSend]="canSend"

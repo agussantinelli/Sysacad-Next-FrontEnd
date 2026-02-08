@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
 import { StudentService } from '@core/services/student.service';
-import { AlertService } from '@core/services/alert.service'; // Assuming alert service is available
+import { AlertService } from '@core/services/alert.service'; 
 
 @Component({
     selector: 'app-regular-cert',

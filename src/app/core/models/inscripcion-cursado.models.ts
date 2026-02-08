@@ -1,19 +1,19 @@
 import { CalificacionCursadaResponse } from './calificacion-cursada.models';
 
 export interface InscripcionCursadoRequest {
-    idUsuario?: string; // UUID, Optional
-    idMateria: string; // UUID
-    idComision: string; // UUID
+    idUsuario?: string; 
+    idMateria: string; 
+    idComision: string; 
 }
 
 export interface InscripcionCursadoResponse {
-    id: string; // UUID
+    id: string; 
     nombreMateria: string;
     nombreComision: string;
     anioCursado: number;
-    estado: string; // e.g., "CURSANDO"
-    notaFinal: number; // BigDecimal
-    fechaPromocion: string; // LocalDate
-    fechaInscripcion: string; // LocalDateTime
+    estado: string; 
+    notaFinal: number; 
+    fechaPromocion: string; 
+    fechaInscripcion: string; 
     calificaciones: CalificacionCursadaResponse[];
 }

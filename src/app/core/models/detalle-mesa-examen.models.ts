@@ -1,19 +1,19 @@
 export interface DetalleMesaExamenRequest {
-    idMesaExamen: string; // UUID
+    idMesaExamen: string; 
     nroDetalle: number;
-    idMateria: string; // UUID
-    idPresidente: string; // UUID
-    diaExamen: string; // LocalDate
-    horaExamen: string; // LocalTime
+    idMateria: string; 
+    idPresidente: string; 
+    diaExamen: string; 
+    horaExamen: string; 
 }
 
 export interface DetalleMesaExamenResponse {
     idMesaExamen: string;
     nroDetalle: number;
     nombreMateria: string;
-    idMateria: string; // UUID
+    idMateria: string; 
     nombrePresidente: string;
-    idPresidente: string; // UUID
-    diaExamen: string; // LocalDate
-    horaExamen: string; // LocalTime
+    idPresidente: string; 
+    diaExamen: string; 
+    horaExamen: string; 
 }

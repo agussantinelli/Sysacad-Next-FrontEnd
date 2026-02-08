@@ -1,18 +1,18 @@
 export interface PlanDeEstudioRequest {
-    idCarrera: string; // UUID
+    idCarrera: string; 
     nroPlan: number;
     nombrePlan: string;
-    fechaInicio: string; // LocalDate
-    fechaFin?: string; // LocalDate
+    fechaInicio: string; 
+    fechaFin?: string; 
     esVigente: boolean;
 }
 
 export interface PlanDeEstudioResponse {
     nroPlan: number;
     nombrePlan: string;
-    fechaInicio: string; // LocalDate
-    fechaFin?: string; // LocalDate
+    fechaInicio: string; 
+    fechaFin?: string; 
     esVigente: boolean;
     nombreCarrera: string;
-    idCarrera: string; // UUID
+    idCarrera: string; 
 }

@@ -29,7 +29,7 @@
     overflow: hidden;
     position: relative;
     min-height: 0;
-    /* Constraint propagation */
+    
 }
 
 .chat-area {
@@ -253,7 +253,7 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Input Area */
+
 .chat-input-area {
     padding: 1rem;
     background-color: var(--bg-card);
@@ -300,7 +300,7 @@
     opacity: 0.5;
 }
 
-/* Empty State */
+
 .empty-chat-state {
     flex: 1;
     display: flex;

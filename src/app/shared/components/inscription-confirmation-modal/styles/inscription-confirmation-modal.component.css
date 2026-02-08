@@ -1,4 +1,4 @@
-/* Reusing variables and base styles for consistency */
+
 :host {
     --modal-bg: var(--bg-card);
     --modal-border: var(--border-subtle);
@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    /* Higher than list modal if needed */
+    
     animation: fadeIn 0.2s ease-out;
 }
 

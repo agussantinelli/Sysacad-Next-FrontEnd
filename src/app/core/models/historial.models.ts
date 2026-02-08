@@ -9,9 +9,9 @@ export interface DetalleCursadaDTO {
 }
 
 export interface DetalleFinalDTO {
-    fechaExamen: string; // LocalDate
+    fechaExamen: string; 
     turno: string;
-    estado: string; // "APROBADO", etc.
+    estado: string; 
     nota: string;
     tomo: string;
     folio: string;

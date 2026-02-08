@@ -27,7 +27,7 @@
     font-weight: 600;
 }
 
-/* Grid Layout */
+
 .inscriptions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -35,11 +35,11 @@
 }
 
 .inscriptions-grid.widget-grid {
-    /* Widget mode specific grid adjustments if needed */
+    
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-/* Card Styling */
+
 .inscription-card {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -139,7 +139,7 @@
     color: var(--text-tertiary);
 }
 
-/* Empty State */
+
 .empty-state {
     display: flex;
     flex-direction: column;

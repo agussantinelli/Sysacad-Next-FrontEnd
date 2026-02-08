@@ -43,7 +43,7 @@
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* Header Avatar */
+
 .profile-avatar {
     width: 100px;
     height: 100px;
@@ -146,7 +146,7 @@
     color: var(--text-secondary);
 }
 
-/* Profile Actions */
+
 .profile-actions {
     display: flex;
     justify-content: center;

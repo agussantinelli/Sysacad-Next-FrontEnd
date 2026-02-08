@@ -1,12 +1,12 @@
 export interface CarreraRequest {
-    idFacultad: string; // UUID
+    idFacultad: string; 
     alias: string;
     nombre: string;
     horasElectivasRequeridas: number;
 }
 
 export interface CarreraResponse {
-    id: string; // UUID
+    id: string; 
     alias: string;
     nombre: string;
     facultades: string[];

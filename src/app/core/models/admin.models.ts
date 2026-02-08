@@ -1,7 +1,7 @@
 import { ProfesorEstadisticasDTO } from './professor.models';
 
 export interface AdminInscripcionDTO {
-    id: string; // UUID
+    id: string; 
     tipo: 'CURSADA' | 'EXAMEN';
     idAlumno: string;
     nombre: string;
@@ -9,14 +9,14 @@ export interface AdminInscripcionDTO {
     fotoPerfil?: string;
     legajoAlumno: string;
     nombreMateria: string;
-    comision: string; // "N/A" for EXAMEN
-    fechaInscripcion: string; // LocalDateTime
+    comision: string; 
+    fechaInscripcion: string; 
     estado: string;
 }
 
 export interface AdminEstadisticasDTO extends ProfesorEstadisticasDTO {
-    // Additional aggregated fields can be added here if defined in backend
-    // For now, it inherits from ProfesorEstadisticasDTO as specified
+    
+    
 }
 
 export interface MatriculacionRequest {
@@ -29,12 +29,12 @@ export interface MatriculacionRequest {
 export interface AdminInscripcionRequest {
     idAlumno: string;
     tipo: 'CURSADA' | 'EXAMEN';
-    idReferencia: string; // ID Comision or ID MesaExamen
-    idMateria?: string; // Required for CURSADA
-    nroDetalle?: number; // Required for EXAMEN (Usually extracted from available exams)
+    idReferencia: string; 
+    idMateria?: string; 
+    nroDetalle?: number; 
 }
 
-// Faculties
+
 export interface FacultadRequest {
     ciudad: string;
     provincia: string;
@@ -49,13 +49,13 @@ export interface FacultadAdminDTO {
     carreras: string[];
 }
 
-// Careers
+
 export interface CarreraAdminDTO {
     id: string;
     nombre: string;
     alias: string;
     cantidadMatriculados: number;
-    planes: any[]; // Simulating PlanDeEstudioResponse for now to avoid circular deps if needed, otherwise import
+    planes: any[]; 
 }
 
 export interface MateriaDetalleDTO {
@@ -63,7 +63,7 @@ export interface MateriaDetalleDTO {
     nombre: string;
     codigo: string;
     nivel: number;
-    horasCursado: number; // Short
+    horasCursado: number; 
     tipoMateria: string;
     esElectiva: boolean;
     correlativas: string[];
@@ -77,19 +77,19 @@ export interface PlanDetalleDTO {
     materias: MateriaDetalleDTO[];
 }
 
-// Exam Tables
+
 export interface MesaExamenRequest {
     nombre: string;
-    fechaInicio: string; // LocalDate
-    fechaFin: string; // LocalDate
+    fechaInicio: string; 
+    fechaFin: string; 
 }
 
 export interface DetalleMesaRequest {
     idMesaExamen: string;
     idMateria: string;
     idPresidente: string;
-    diaExamen: string; // LocalDate
-    horaExamen: string; // LocalTime
+    diaExamen: string; 
+    horaExamen: string; 
 }
 
 export interface DetalleMesaExamenResponse {
@@ -99,29 +99,29 @@ export interface DetalleMesaExamenResponse {
     idMateria: string;
     nombrePresidente?: string;
     idPresidente?: string;
-    diaExamen: string; // LocalDate yyyy-MM-dd
-    horaExamen: string; // LocalTime HH:mm:ss
-    cantidadInscriptos?: number; // Optional as it might be missing
-    abierta?: boolean; // Optional
+    diaExamen: string; 
+    horaExamen: string; 
+    cantidadInscriptos?: number; 
+    abierta?: boolean; 
 }
 
 export interface MesaExamenResponse {
-    id: string; // UUID
+    id: string; 
     nombre: string;
-    fechaInicio: string; // LocalDate
-    fechaFin: string; // LocalDate
-    cantidadInscriptos: number; // Total for the turn?
+    fechaInicio: string; 
+    fechaFin: string; 
+    cantidadInscriptos: number; 
     detalles: DetalleMesaExamenResponse[];
 }
 
-// Deprecated or mapped? Keeping for compatibility if needed, but ideally we replace usages.
-// We will alias MesaExamenResponse to "MesaAdminDTO" temporarily or just use the new name.
-// For now, let's export the new ones and update usages.
-export type MesaAdminDTO = DetalleMesaExamenResponse; // Temporary hack or just remove?
-// Actually, let's remove MesaAdminDTO and force compilation errors to fix them.
 
 
-// Commissions
+
+export type MesaAdminDTO = DetalleMesaExamenResponse; 
+
+
+
+
 export interface AdminComisionDTO {
     id: string;
     nombre: string;
@@ -137,8 +137,8 @@ export interface AdminComisionDTO {
 export interface AdminMateriaComisionDTO {
     idMateria: string;
     nombreMateria: string;
-    nivel: number; // Short in backend -> number
-    cantidadInscriptos: number; // long -> number
+    nivel: number; 
+    cantidadInscriptos: number; 
     alumnos: AlumnoResumenDTO[];
     profesores: ProfesorResumenDTO[];
 }
@@ -159,14 +159,14 @@ export interface ProfesorResumenDTO {
 
 export interface AsignarMateriaComisionRequest {
     idMateria: string;
-    idsProfesores: string[]; // List<UUID>
+    idsProfesores: string[]; 
     horarios: HorarioRequestDTO[];
 }
 
 export interface HorarioRequestDTO {
-    dia: string; // DiaSemana enum as string
-    horaDesde: string; // LocalTime -> string "HH:mm"
-    horaHasta: string; // LocalTime -> string "HH:mm"
+    dia: string; 
+    horaDesde: string; 
+    horaHasta: string; 
 }
 
 export interface ProfesorDisponibleDTO {
@@ -181,14 +181,14 @@ export interface ComisionRequest {
     turno: string;
     anio: number;
     nivel: number;
-    idCarrera: string; // UUID
-    idSalon: string; // UUID
-    idsMaterias: string[]; // List of UUIDs
-    idsProfesores: string[]; // List of UUIDs
+    idCarrera: string; 
+    idSalon: string; 
+    idsMaterias: string[]; 
+    idsProfesores: string[]; 
 }
 
 export interface SimpleMateriaDTO {
-    id: string; // UUID
+    id: string; 
     nombre: string;
-    anio: number; // or nivel?
+    anio: number; 
 }

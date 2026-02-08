@@ -32,7 +32,7 @@ export class AdminInscriptionsComponent implements OnInit {
             next: (data) => {
                 this.inscripciones = data;
                 this.isLoading = false;
-                // Apply initial sort if set, or default
+                
                 if (this.sortColumn) {
                     this.sortData();
                 }
@@ -45,7 +45,7 @@ export class AdminInscriptionsComponent implements OnInit {
         });
     }
 
-    // Sorting
+    
     sortColumn: string = '';
     sortDirection: 'asc' | 'desc' = 'asc';
 
@@ -105,7 +105,7 @@ export class AdminInscriptionsComponent implements OnInit {
         this.adminService.eliminarInscripcion(item.id, item.tipo).subscribe({
             next: () => {
                 this.alertService.success('Inscripción eliminada correctamente.');
-                this.loadInscriptions(); // Reload list
+                this.loadInscriptions(); 
             },
             error: (err) => {
                 console.error('Error deleting inscription', err);
@@ -117,7 +117,7 @@ export class AdminInscriptionsComponent implements OnInit {
     getProfileImageUrl(relativePath: string): string {
         if (!relativePath) return '';
         if (relativePath.startsWith('http')) return relativePath;
-        // Adjust based on your backend config
+        
         return `http://localhost:8080/${relativePath.startsWith('/') ? relativePath.substring(1) : relativePath}`;
     }
 }

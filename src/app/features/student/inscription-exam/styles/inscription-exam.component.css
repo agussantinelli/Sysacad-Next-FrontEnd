@@ -45,7 +45,7 @@
 
 .btn-back:hover {
     background-color: var(--bg-hover, rgba(0, 0, 0, 0.05));
-    /* Fallback if variable missing */
+    
     color: var(--text-primary);
 }
 
@@ -104,7 +104,7 @@
     margin-top: 1rem;
 }
 
-/* Custom button style for inscription action passed to table */
+
 :host ::ng-deep .btn-inscription {
     background-color: var(--utn-blue);
     color: white;
@@ -191,7 +191,7 @@
     font-weight: 500;
     transition: all 0.2s;
     height: 42px;
-    /* Match typical select height */
+    
 }
 
 .btn-clear:hover {

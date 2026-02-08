@@ -1,7 +1,7 @@
 <app-page-layout title="Gestión de Mesas de Examen" icon="assignment">
     <div class="content-container">
 
-        <!-- Main Toolbar -->
+        
         @if (!isLoading) {
         <div class="card toolbar-card">
             <button class="btn-primary" (click)="openCreateTurnModal()">
@@ -10,11 +10,11 @@
         </div>
         }
 
-        <!-- Views -->
+        
         @if (isLoading) {
         <app-loading-spinner></app-loading-spinner>
         } @else {
-        <!-- Turns Grid View -->
+        
         <div class="turns-grid">
             @for (turno of turns; track turno.id) {
             <div class="card turn-card" [class.active]="isTurnActive(turno)" [class.past]="isTurnPast(turno)"
@@ -34,7 +34,7 @@
                 <div class="turn-dates text-muted small mt-1">
                     <strong>Inscriptos:</strong> {{ turno.cantidadInscriptos }}
                 </div>
-                <!-- Action Buttons -->
+                
                 @if (!isTurnPast(turno)) {
                 <div class="turn-actions mt-3 d-flex justify-content-center gap-3">
                     <button class="icon-btn" (click)="editTurno(turno, $event)" title="Editar Turno">
@@ -61,7 +61,7 @@
 
     </div>
 
-    <!-- Create/Edit Turn Modal -->
+    
     @if (showCreateTurnModal) {
     <div class="modal-overlay" (click)="closeCreateTurnModal()">
         <div class="modal-content" (click)="$event.stopPropagation()">
@@ -91,7 +91,7 @@
         </div>
     </div>
     }
-    <!-- Confirmation Modal -->
+    
     @if (showDeleteConfirmation) {
     <app-confirmation-modal title="Confirmar Eliminación"
         message="¿Está seguro de que desea eliminar el turno {{ turnToDelete?.nombre }}? Esta acción no se puede deshacer."

@@ -1,46 +1,46 @@
 :root {
-    /* Common Colors */
+    
     --utn-blue: #0099e6;
-    /* Vibrant Blue */
+    
     --utn-blue-dark: #0077c8;
-    /* Darker Blue for hover */
+    
     --utn-navy: #002060;
-    /* Academic Navy */
+    
     --error: #dc2626;
     --utn-red: #dc2626;
     --success: #1cffb3;
-    /* Emerald 500 */
+    
 
 
-    /* Shared Mappings */
+    
     --surface-card: var(--bg-card);
     --bg-input: var(--input-bg);
     --border-color: var(--border-subtle);
     --border-input: var(--border-subtle);
 
-    /* LIGHT MODE (Default) */
+    
     --bg-page: #f0f4f8;
     --bg-card: #ffffff;
-    /* Changed from rgba for solid background in modals */
+    
     --text-primary: #002060;
-    /* Navy for headings */
+    
     --text-secondary: #475569;
-    /* Slate gray */
+    
     --text-input: #1e293b;
-    /* Dark slate */
+    
     --input-bg: #f8fafc;
     --border-subtle: #cbd5e1;
-    /* Stronger border for light mode */
+    
     --border-focus: rgba(0, 153, 230, 0.4);
     --shadow-color: rgba(0, 32, 96, 0.08);
     --select-arrow: url('/icons/chevron-down-dark.svg');
 }
 
-/* DARK MODE OVERRIDES */
+
 body.dark-mode {
     --bg-page: #050505;
     --bg-card: #1e1e1e;
-    /* Solid color for dark mode cards */
+    
     --text-primary: #ffffff;
     --text-secondary: #94a3b8;
     --text-input: #e2e8f0;
@@ -50,7 +50,7 @@ body.dark-mode {
     --shadow-color: rgba(0, 0, 0, 0.5);
     --select-arrow: url('/icons/chevron-down-light.svg');
 
-    /* Mappings for Dark Mode */
+    
     --surface-card: var(--bg-card);
     --bg-input: var(--input-bg);
     --border-color: var(--border-subtle);

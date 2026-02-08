@@ -35,10 +35,10 @@
     border-radius: 12px;
     padding: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    /* Base shadow */
+    
     border: 1px solid var(--border-subtle);
     border-left: 5px solid var(--utn-blue);
-    /* Stronger accent */
+    
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -63,7 +63,7 @@
 .notification-card:hover {
     transform: translateY(-4px) scale(1.01);
     box-shadow: 0 12px 20px -5px rgba(0, 32, 96, 0.15);
-    /* Premium shadow */
+    
     border-color: rgba(0, 153, 230, 0.3);
 }
 
@@ -106,7 +106,7 @@
     font-size: 0.85rem;
     color: var(--text-secondary);
     background-color: var(--bg-page);
-    /* Input BG feel */
+    
     padding: 0.4rem 0.8rem;
     border-radius: 8px;
     white-space: nowrap;
@@ -127,10 +127,10 @@
     font-size: 1rem;
     line-height: 1.6;
     padding-left: 4.5rem;
-    /* Align with title */
+    
 }
 
-/* Response for smaller screens */
+
 @media (max-width: 600px) {
     .card-header {
         flex-direction: column;
@@ -148,7 +148,7 @@
     }
 }
 
-/* Unread State */
+
 .notification-card.unread {
     border: 1px solid var(--utn-blue);
     background: linear-gradient(145deg, var(--bg-card) 0%, rgba(0, 153, 230, 0.02) 100%);
@@ -162,7 +162,7 @@
 
 .notification-card:not(.unread) {
     border-left-color: var(--text-secondary);
-    /* Gray accent for read */
+    
     opacity: 0.85;
 }
 
@@ -170,7 +170,7 @@
     opacity: 1;
 }
 
-/* Actions */
+
 .header-actions {
     display: flex;
     align-items: center;
@@ -182,7 +182,7 @@
     border: 1px solid var(--success);
     color: var(--success);
     border-radius: 8px;
-    /* Square-ish matches date-badge */
+    
     width: 32px;
     height: 32px;
     padding: 0;
@@ -203,7 +203,7 @@
     font-size: 1.25rem;
 }
 
-/* Filters */
+
 .filters-container {
     display: flex;
     gap: 1rem;
@@ -258,14 +258,14 @@
     }
 }
 
-/* Fix for dark mode dropdown options */
+
 .filter-select option {
     background-color: var(--bg-page);
-    /* Use solid page background */
+    
     color: var(--text-primary);
 }
 
-/* Creation Form Styles */
+
 .actions-header {
     display: flex;
     justify-content: flex-end;
@@ -360,7 +360,7 @@
     box-shadow: 0 4px 12px rgba(0, 117, 190, 0.2);
 }
 
-/* Title Section */
+
 .title-section {
     display: flex;
     align-items: center;
@@ -385,7 +385,7 @@
     border-color: var(--success-border, #6ee7b7);
 }
 
-/* Improved Toggle Button */
+
 .btn-toggle-visibility {
     background: transparent;
     border: 1px solid var(--border-subtle);
@@ -400,7 +400,7 @@
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     background-color: var(--bg-page);
-    /* Slight contrast from card */
+    
 }
 
 .btn-toggle-visibility:hover {
@@ -411,10 +411,10 @@
     box-shadow: 0 4px 6px -1px var(--shadow-color);
 }
 
-/* Specific state for active (visible) vs hidden action */
+
 .btn-toggle-visibility.is-active:hover {
     background-color: var(--error, #ef4444);
-    /* Red to indicate hiding */
+    
     border-color: var(--error, #ef4444);
 }
 

@@ -24,7 +24,7 @@ export class MyInscriptionsComponent implements OnInit {
     myInscriptions: InscripcionExamenResponse[] = [];
     isLoading: boolean = false;
 
-    // Confirmation Modal State
+    
     showConfirmModal: boolean = false;
     inscriptionIdToUnenroll: string | null = null;
 

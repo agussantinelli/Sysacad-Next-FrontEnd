@@ -13,9 +13,9 @@ import { CalendarioService } from '@core/services/calendario.service';
 })
 export class CalendarComponent {
     private calendarioService = inject(CalendarioService);
-    // private alertService = inject(AlertService); // Commented out to be safe if content unknown, but will try simple console log first if it fails. 
-    // Actually, looking at previous step 7, alert.service.ts exists. I'll use it if I can verify it. 
-    // Let's stick to basic functionality first.
+    
+    
+    
 
     isLoading = false;
 
@@ -34,7 +34,7 @@ export class CalendarComponent {
             error: (err) => {
                 console.error('Error downloading calendar', err);
                 this.isLoading = false;
-                // this.alertService.error('Error al descargar el calendario'); 
+                
             }
         });
     }

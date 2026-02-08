@@ -2,7 +2,7 @@
     padding: 1rem 0;
 }
 
-/* Filters */
+
 .filter-card {
     background: var(--surface-card);
     border: 1px solid var(--border-color);
@@ -58,7 +58,7 @@
 .form-control {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 2.8rem;
-    /* Space for icon */
+    
     border-radius: 8px;
     background: var(--bg-input);
     border: 1px solid var(--border-input);
@@ -96,7 +96,7 @@ select.form-control {
     gap: 0.5rem;
     transition: background 0.2s;
     height: 45px;
-    /* Match input height */
+    
     justify-content: center;
 }
 
@@ -183,7 +183,7 @@ select.form-control {
     display: flex;
     flex-direction: column;
     height: 480px;
-    /* Increased height to accommodate legend */
+    
 }
 
 .chart-card h4 {
@@ -209,7 +209,7 @@ select.form-control {
     color: var(--text-primary) !important;
 }
 
-/* Custom Legend Styles */
+
 .custom-legend {
     display: flex;
     justify-content: center;

@@ -11,10 +11,10 @@
     align-items: center;
     z-index: 50;
     border-radius: 16px;
-    /* Default for inside cards */
+    
 }
 
-/* Fullscreen override */
+
 .spinner-overlay.fullscreen {
     position: fixed;
     border-radius: 0;
@@ -43,10 +43,7 @@
     display: none;
 }
 
-/* Dark mode adjustment if parent is dark, but here we use rgba white for light mode glass.
-   For dark mode support, we might need variables if the context changes.
-   For now, assuming it sits on top of our glass cards.
-*/
+
 :host-context(.dark-mode) .spinner-overlay {
     background: rgba(15, 23, 42, 0.8);
 }

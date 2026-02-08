@@ -10,10 +10,10 @@ export interface ComisionRequest {
     turno: string;
     anio: number;
     nivel: number;
-    idCarrera: string; // UUID
-    idSalon: string; // UUID
-    idsMaterias: string[]; // List of UUIDs
-    idsProfesores: string[]; // List of UUIDs
+    idCarrera: string; 
+    idSalon: string; 
+    idsMaterias: string[]; 
+    idsProfesores: string[]; 
 }
 
 export interface MateriaDetalleDTO {
@@ -23,13 +23,13 @@ export interface MateriaDetalleDTO {
 }
 
 export interface ComisionResponse {
-    id: string; // UUID
+    id: string; 
     nombre: string;
     turno: string;
     anio: number;
     nivel: number;
     nombreCarrera: string;
-    idCarrera: string; // UUID
+    idCarrera: string; 
     nombreSalon: string;
     ubicacionSalon: string;
     materiasNombres: string[];

@@ -20,7 +20,7 @@ export class PageLayoutComponent {
     public alertService = inject(AlertService);
 
     goBack(): void {
-        this.alertService.clear(); // Clear alerts on navigation
+        this.alertService.clear(); 
         if (this.backRoute) {
             const commands = Array.isArray(this.backRoute) ? this.backRoute : [this.backRoute];
             this.router.navigate(commands);

@@ -1,11 +1,11 @@
 @if (isWidget) {
-<!-- Widget Mode -->
+
 <div class="my-inscriptions-container widget-mode">
     <h3 class="widget-title">Inscripciones Activas</h3>
     <ng-container *ngTemplateOutlet="inscriptionsList"></ng-container>
 </div>
 } @else {
-<!-- Full Page Mode -->
+
 <app-page-layout title="Mis Inscripciones a Exámenes">
     <div class="my-inscriptions-container">
         <ng-container *ngTemplateOutlet="inscriptionsList"></ng-container>

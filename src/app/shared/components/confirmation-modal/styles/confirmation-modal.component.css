@@ -99,7 +99,7 @@
 
 .btn-confirm.primary:hover {
     background: var(--utn-hover);
-    /* Needs to be defined or roughly hex */
+    
     filter: brightness(1.1);
 }
 

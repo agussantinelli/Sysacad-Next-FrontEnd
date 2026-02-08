@@ -1,11 +1,11 @@
 :host {
   display: block;
   min-height: 100vh;
-  /* Palette: Light background, Vibrant UTN Blue accents */
+  
   background-color: var(--bg-page);
   background-image:
     radial-gradient(circle at 10% 20%, rgba(0, 153, 230, 0.08) 0%, transparent 40%),
-    /* Subtle Blue Glow */
+    
     radial-gradient(circle at 90% 80%, rgba(0, 32, 96, 0.05) 0%, transparent 40%);
   display: flex;
   align-items: center;
@@ -18,25 +18,25 @@
   max-width: 440px;
   perspective: 1000px;
   position: relative;
-  /* Context for toggle button */
+  
 }
 
-/* Glassmorphism Card - Light Theme polished */
-/* Glassmorphism Card - Light Theme polished */
+
+
 .glass-card {
   background: var(--bg-card);
-  /* Variable for theme switching */
-  /* Cleaner white background */
+  
+  
   border: 1px solid var(--border-subtle);
   border-top: 4px solid var(--utn-blue);
-  /* Top accent instead of left */
+  
   border-radius: 16px;
-  /* Slightly tighter radius */
+  
   padding: 3rem 2.5rem;
   box-shadow:
     0 4px 6px -1px var(--shadow-color),
     0 10px 15px -3px var(--shadow-color);
-  /* Softer, more professional shadow */
+  
   color: var(--text-primary);
   animation: floatIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -96,8 +96,8 @@
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
-  /* Variable */
-  /* Slate 700 */
+  
+  
   margin-bottom: 0.5rem;
 }
 
@@ -108,39 +108,39 @@
 .input-field {
   width: 100%;
   padding: 1rem 1.25rem;
-  /* Increased padding */
+  
   background: var(--input-bg);
-  /* Variable */
+  
   border: 1px solid var(--border-subtle);
-  /* Variable */
+  
   border-radius: 10px;
   color: var(--text-input);
-  /* Variable */
+  
   font-size: 1.1rem;
   line-height: 1.5;
-  /* Explicit line-height */
+  
   transition: all 0.2s ease;
   outline: none;
 }
 
 .input-field::placeholder {
   color: var(--text-secondary);
-  /* Variable */
+  
   opacity: 0.7;
 }
 
 .input-field:focus {
   border-color: var(--utn-blue);
   background: var(--bg-card);
-  /* Variable */
+  
   box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.15);
-  /* Softer focus ring */
+  
 }
 
 .input-field.error {
   border-color: var(--error);
   background: rgba(220, 38, 38, 0.05);
-  /* Soft red bg */
+  
 }
 
 .error-message {
@@ -179,14 +179,14 @@
   width: 100%;
   padding: 1rem;
   background: var(--utn-blue);
-  /* Solid vibrant blue */
+  
   color: white;
   border: 1px solid transparent;
-  /* Match input border width */
+  
   border-radius: 10px;
   font-size: 1.1rem;
   line-height: 1.5;
-  /* Explicit line-height match */
+  
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -230,13 +230,13 @@
   margin-top: 1.5rem;
   display: flex;
   justify-content: center;
-  /* Centered */
+  
   font-size: 0.95rem;
 }
 
 .link {
   color: var(--text-secondary);
-  /* Variable */
+  
   text-decoration: none;
   transition: color 0.2s;
   font-weight: 500;

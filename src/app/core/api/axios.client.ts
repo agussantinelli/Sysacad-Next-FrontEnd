@@ -23,9 +23,9 @@ axiosClient.interceptors.request.use(
 
 axiosClient.interceptors.response.use(
     (response) => {
-        // BootId Validation
+        
         const storedBootId = localStorage.getItem('bootId');
-        const serverBootId = response.headers['boot-id']; // Check header
+        const serverBootId = response.headers['boot-id']; 
 
         if (storedBootId && serverBootId && storedBootId !== serverBootId) {
             console.warn('BootId Mismatch: Server restarted. Logging out.');
@@ -47,7 +47,7 @@ axiosClient.interceptors.response.use(
             sessionStorage.removeItem('welcomeShown');
             window.location.href = '/login';
         }
-        // Also check header on error response if available
+        
         if (error.response?.headers?.['boot-id']) {
             const storedBootId = localStorage.getItem('bootId');
             const serverBootId = error.response.headers['boot-id'];

@@ -1,4 +1,4 @@
-/* Global Vars for this component scope */
+
 :host {
     --modal-bg: var(--bg-card);
     --modal-border: var(--border-subtle);
@@ -35,7 +35,7 @@
     flex-direction: column;
     overflow: hidden;
 
-    /* Requested Dimensions */
+    
     width: 800px;
     max-width: 95vw;
     height: 600px;
@@ -98,7 +98,7 @@
     font-size: 0.9rem;
 }
 
-/* Commission List */
+
 .commission-list {
     display: flex;
     flex-direction: column;
@@ -179,7 +179,7 @@
     color: var(--text-secondary);
 }
 
-/* Radio Indicator */
+
 .selection-indicator {
     display: flex;
     align-items: center;
@@ -209,7 +209,7 @@
     font-weight: bold;
 }
 
-/* Disabled State */
+
 .commission-card.disabled-card {
     opacity: 0.7;
     background: #252526;
@@ -228,7 +228,7 @@
     opacity: 0.7;
 }
 
-/* Error Badge */
+
 .badge-error {
     font-size: 0.75rem;
     background: rgba(239, 68, 68, 0.15);
@@ -241,7 +241,7 @@
     vertical-align: middle;
 }
 
-/* Overlap Warning */
+
 .overlap-warning {
     display: flex;
     align-items: center;
@@ -250,11 +250,11 @@
     margin-bottom: 8px;
     padding: 8px 12px;
     background: rgba(234, 179, 8, 0.1);
-    /* Amber 500/10 */
+    
     border: 1px solid rgba(234, 179, 8, 0.2);
     border-radius: 4px;
     color: #fca5a5;
-    /* Red-ish text for high contrast on dark bg */
+    
     font-size: 0.9rem;
 }
 
@@ -263,7 +263,7 @@
     color: #f87171;
 }
 
-/* Radio Disabled */
+
 .radio-disabled {
     width: 20px;
     height: 20px;
@@ -273,7 +273,7 @@
     cursor: not-allowed;
 }
 
-/* Empty State */
+
 .empty-state {
     text-align: center;
     padding: 32px;
@@ -283,7 +283,7 @@
     border: 1px dashed var(--card-border);
 }
 
-/* Exam Detail Card */
+
 .exam-detail-card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -315,7 +315,7 @@
     font-weight: 500;
 }
 
-/* Footer */
+
 .modal-footer {
     padding: 16px 24px;
     border-top: 1px solid var(--modal-border);
@@ -363,7 +363,7 @@
     background: #444;
 }
 
-/* Alert Info */
+
 .alert-info {
     margin-top: 24px;
     background: rgba(59, 130, 246, 0.1);
@@ -381,7 +381,7 @@
     font-size: 20px;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
     from {
         opacity: 0;

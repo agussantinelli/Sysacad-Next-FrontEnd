@@ -22,7 +22,7 @@ export class AdminStatisticsComponent implements OnInit {
     stats: AdminEstadisticasDTO | null = null;
     isLoading = false;
 
-    // Filters
+    
     selectedAnio: number | null = new Date().getFullYear();
     selectedFacultad: string = '';
     selectedCarrera: string = '';
@@ -30,23 +30,23 @@ export class AdminStatisticsComponent implements OnInit {
     facultades: FacultadAdminDTO[] = [];
     carreras: CarreraAdminDTO[] = [];
 
-    // Charts Data
+    
     examChartData: any[] = [];
     studentChartData: any[] = [];
 
-    // Color Schemes
+    
     examColorScheme: Color = {
         name: 'examScheme',
         selectable: true,
         group: ScaleType.Ordinal,
-        domain: ['#10b981', '#ef4444', '#f59e0b'] // Green (Approved), Red (Failed), Amber (Absent)
+        domain: ['#10b981', '#ef4444', '#f59e0b'] 
     };
 
     studentColorScheme: Color = {
         name: 'studentScheme',
         selectable: true,
         group: ScaleType.Ordinal,
-        domain: ['#3b82f6', '#8b5cf6', '#6b7280'] // Blue (Regular), Purple (Promoted), Gray (Free)
+        domain: ['#3b82f6', '#8b5cf6', '#6b7280'] 
     };
 
     ngOnInit() {
@@ -55,7 +55,7 @@ export class AdminStatisticsComponent implements OnInit {
     }
 
     loadFiltersData() {
-        // Load Faculties and Careers for filters
+        
         this.adminService.getAllFacultades().subscribe(data => this.facultades = data);
         this.adminService.getAllCarreras().subscribe(data => this.carreras = data);
     }
@@ -85,14 +85,14 @@ export class AdminStatisticsComponent implements OnInit {
     }
 
     processChartData(data: AdminEstadisticasDTO) {
-        // 1. Exam Performance Pie Chart
+        
         this.examChartData = [
             { name: 'Aprobados', value: data.cantidadAprobadosExamen },
             { name: 'Desaprobados', value: data.cantidadDesaprobadosExamen },
             { name: 'Ausentes', value: data.cantidadAusentesExamen }
         ];
 
-        // 2. Student Status Bar Chart
+        
         this.studentChartData = [
             { name: 'Regulares', value: data.cantidadRegulares },
             { name: 'Promocionados', value: data.cantidadPromocionados },

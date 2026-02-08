@@ -188,7 +188,7 @@
     text-decoration: none;
 }
 
-/* Dark Mode Adjustments */
+
 :host-context(body.dark-mode) .subject-card {
     background: rgba(30, 30, 35, 0.9);
     border-color: #4A90E2;

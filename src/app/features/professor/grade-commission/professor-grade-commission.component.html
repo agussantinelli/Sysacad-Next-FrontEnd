@@ -31,7 +31,7 @@
                     <tr>
                         <th>Legajo</th>
                         <th>Alumno</th>
-                        <!-- Dynamic Grade Headers -->
+                        
                         @for (col of concepts; track col) {
                         <th class="grade-col">{{ col }}</th>
                         }
@@ -50,7 +50,7 @@
                         <td>{{ student.legajo }}</td>
                         <td>{{ student.studentName }}</td>
 
-                        <!-- Dynamic Grade Cells -->
+                        
                         @for (col of concepts; track col) {
                         <td class="grade-col">
                             <span [className]="getGradeClass(student.grades[col])">

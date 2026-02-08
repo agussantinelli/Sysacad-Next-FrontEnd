@@ -9,7 +9,7 @@
         </div>
 
         <div class="modal-body">
-            <!-- Mode 1: Exam Inscription (Detail View) -->
+            
             @if (examDetail) {
             <div class="exam-detail-card">
                 <p class="section-subtitle">Detalles de la mesa de examen:</p>
@@ -47,7 +47,7 @@
                                 {{ table.nombreMesa }}
                             </h4>
 
-                            <!-- Line 1: Date & Time -->
+                            
                             <div class="commission-detail-row">
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">event</span>
@@ -59,7 +59,7 @@
                                 </span>
                             </div>
 
-                            <!-- Line 2: President -->
+                            
                             <div class="commission-detail-row">
                                 <span class="material-icons icon-sm">person</span>
                                 <span class="detail-text" title="{{ table.presidente }}">
@@ -82,7 +82,7 @@
                 }
             </div>
             }
-            <!-- Mode 2: Commission Selection (List View) -->
+            
             @else {
             <p class="section-subtitle">Selecciona una comisión:</p>
 
@@ -121,7 +121,7 @@
                                 <span class="detail-text">{{ comision.turno }}</span>
                             </div>
 
-                            <!-- Line 3: Schedule and Location -->
+                            
                             <div class="commission-detail-row">
                                 <span class="detail-group">
                                     <span class="material-icons icon-sm">schedule</span>

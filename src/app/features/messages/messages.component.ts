@@ -66,7 +66,7 @@ export class MessagesComponent implements OnInit {
                 this.conversations = grupos || [];
                 this.loadingGroups = false;
 
-                // Handle deep linking
+                
                 const idComision = this.route.snapshot.queryParamMap.get('idComision');
                 if (idComision) {
                     const targetGroup = this.conversations.find(g => g.idComision === idComision);
@@ -107,7 +107,7 @@ export class MessagesComponent implements OnInit {
         this.chatService.getMensajes(groupId).subscribe({
             next: (response: any) => {
                 console.log('Mensajes: Datos recibidos del chat:', response);
-                // The API returns a Page object with a 'content' field
+                
                 this.messages = response.content || response || [];
                 this.isLoading = false;
             },
@@ -132,12 +132,12 @@ export class MessagesComponent implements OnInit {
                     if (this.selectedConversation) {
                         this.selectedConversation.esVisible = true;
                         this.selectedConversation.horaUltimoMensaje = msg.fechaEnvio;
-                        // Aseguramos que el ID se actualice si era un placeholder
+                        
                         if (msg.idGrupo && this.selectedConversation.id !== msg.idGrupo) {
                             this.selectedConversation.id = msg.idGrupo;
                         }
                     }
-                    // Refrescamos la referencia para disparar la reactividad de los getters
+                    
                     this.conversations = [...this.conversations];
                 },
                 error: (err) => console.error('Error sending professor message', err)
@@ -150,7 +150,7 @@ export class MessagesComponent implements OnInit {
                         this.selectedConversation.esVisible = true;
                         this.selectedConversation.horaUltimoMensaje = msg.fechaEnvio;
                     }
-                    // Refrescamos la referencia para disparar la reactividad de los getters
+                    
                     this.conversations = [...this.conversations];
                 },
                 error: (err) => console.error('Error sending message', err)

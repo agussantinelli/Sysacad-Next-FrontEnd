@@ -14,12 +14,12 @@ interface StudentRow {
     studentId: string;
     studentName: string;
     legajo: number;
-    grades: { [concepto: string]: number }; // Map concept -> grade
-    finalGrade: number | null; // Display read-only final grade
-    originalState: string | null; // Track backend state for read-only check
+    grades: { [concepto: string]: number }; 
+    finalGrade: number | null; 
+    originalState: string | null; 
     newGrade: number | null;
     newState: string | null;
-    prevNewGrade: number | null; // Track changes
+    prevNewGrade: number | null; 
     prevNewState: string | null;
 }
 
@@ -40,12 +40,12 @@ export class ProfessorGradeCommissionComponent implements OnInit {
     idMateria = '';
 
     students: StudentRow[] = [];
-    concepts: string[] = []; // Dynamic columns
+    concepts: string[] = []; 
     availableStates = Object.values(EstadoCursada);
     public readonly EstadoCursada = EstadoCursada;
     showFinalGradeColumn = false;
 
-    // Form controls
+    
     concepto = '';
     esNotaFinal = false;
 
@@ -72,22 +72,22 @@ export class ProfessorGradeCommissionComponent implements OnInit {
 
         this.professorService.getInscriptosComision(this.idComision, this.idMateria).subscribe({
             next: (data: AlumnoCursadaDTO[]) => {
-                // Extract all unique concepts
+                
                 const allConcepts = new Set<string>();
                 data.forEach(student => {
                     student.calificaciones?.forEach(c => allConcepts.add(c.concepto));
                 });
                 this.concepts = Array.from(allConcepts).sort();
 
-                // Build student rows
+                
                 this.students = data.map(a => {
                     const gradeMap: { [key: string]: number } = {};
                     a.calificaciones?.forEach(c => {
                         gradeMap[c.concepto] = c.nota;
                     });
 
-                    // If current state is CURSANDO (or null), default 'New State' selector to CURSANDO
-                    // Otherwise keep their existing finalized state
+                    
+                    
                     const defaultState = (a.estado === EstadoCursada.CURSANDO || !a.estado)
                         ? EstadoCursada.CURSANDO
                         : a.estado;
@@ -106,7 +106,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                     };
                 });
 
-                // Check if any student has a final grade to show the column
+                
                 this.showFinalGradeColumn = this.students.some(s => s.finalGrade !== null && s.finalGrade !== undefined);
 
                 this.isLoading = false;
@@ -120,7 +120,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
     }
 
     hasChanges(): boolean {
-        // Change if grade changed OR (final grade active AND state changed)
+        
         return this.students.some(s =>
             (s.newGrade !== s.prevNewGrade) ||
             (this.esNotaFinal && s.newState !== s.prevNewState)
@@ -133,13 +133,13 @@ export class ProfessorGradeCommissionComponent implements OnInit {
             return;
         }
 
-        // Validate Concept if NOT final grade
+        
         if (!this.esNotaFinal && !this.concepto.trim()) {
             this.alertService.error('Debe ingresar un concepto para la nota (ej: 1er Parcial)');
             return;
         }
 
-        // If it's a final grade, concept can be empty (defaults to 'Nota Final' or similar backend side if needed, or just sent as empty string)
+        
         const conceptoToSend = this.esNotaFinal ? (this.concepto.trim() || 'Nota Final') : this.concepto;
 
         const updates: CargaNotasCursadaDTO = {
@@ -147,23 +147,23 @@ export class ProfessorGradeCommissionComponent implements OnInit {
             esNotaFinal: this.esNotaFinal,
             notas: this.students
                 .filter(s => {
-                    // Logic: 
-                    // 1. Grade changed AND is not null (regular grading)
-                    // 2. State changed AND is Final Grade active (state update, maybe grade is null)
+                    
+                    
+                    
                     const gradeChanged = s.newGrade !== s.prevNewGrade && s.newGrade !== null;
                     const stateChanged = this.esNotaFinal && s.newState !== s.prevNewState;
-                    // Note: If state changed to CURSANDO, newGrade might be null, which is now allowed by DTO.
+                    
                     return gradeChanged || stateChanged;
                 })
                 .map(s => {
-                    // Force null grade if state is CURSANDO or LIBRE and it's a final grade note
+                    
                     if (this.esNotaFinal && (s.newState === EstadoCursada.CURSANDO || s.newState === EstadoCursada.LIBRE)) {
                         s.newGrade = null;
                     }
 
                     const item: NotaCursadaItemDTO = {
                         idInscripcion: s.studentId,
-                        nota: s.newGrade // Can be null
+                        nota: s.newGrade 
                     };
                     if (this.esNotaFinal) {
                         item.estado = s.newState || undefined;
@@ -183,7 +183,7 @@ export class ProfessorGradeCommissionComponent implements OnInit {
                 this.alertService.success('Notas guardadas correctamente');
                 this.isSaving = false;
 
-                // Clear input and reload to show new column
+                
                 this.concepto = '';
                 this.esNotaFinal = false;
                 this.loadStudents();

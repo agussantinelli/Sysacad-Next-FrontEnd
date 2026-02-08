@@ -14,7 +14,7 @@ import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/load
 import { InscriptionModalComponent } from '@shared/components/inscription-modal/inscription-modal.component';
 import { InscriptionConfirmationModalComponent } from '@shared/components/inscription-confirmation-modal/inscription-confirmation-modal.component';
 import { AuthService } from '@core/services/auth.service';
-import { AlertService } from '@core/services/alert.service'; // Import service
+import { AlertService } from '@core/services/alert.service'; 
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -38,25 +38,25 @@ export class InscriptionCourseComponent implements OnInit {
     private inscripcionCursadoService = inject(InscripcionCursadoService);
     private authService = inject(AuthService);
     private location = inject(Location);
-    private alertService = inject(AlertService); // Inject service
+    private alertService = inject(AlertService); 
 
     originalCarreras: CarreraMateriasDTO[] = [];
     carreras: CarreraMateriasDTO[] = [];
     isLoading: boolean = false;
     isCommissionsLoading: boolean = false;
 
-    // Messages
-    // Messages removed, using AlertService
+    
+    
 
 
-    // Modal State
+    
     showCommissionModal: boolean = false;
     showConfirmationModal: boolean = false;
     availableCommissions: ComisionDisponibleDTO[] = [];
     selectedMateriaForEnrollment: any = null;
     selectedCommissionForConfirmation: ComisionDisponibleDTO | null = null;
 
-    // Filters
+    
     filterNombre: string = '';
     filterEstado: string = '';
     filterTipo: string = '';
@@ -224,22 +224,22 @@ export class InscriptionCourseComponent implements OnInit {
         });
     }
 
-    // Step 1: User clicks "Confirmar" in the list modal (Inscribirse)
+    
     onEnroll(commission: ComisionDisponibleDTO) {
         if (!this.selectedMateriaForEnrollment) return;
 
-        // Save selection and switch modals
+        
         this.selectedCommissionForConfirmation = commission;
-        this.showCommissionModal = false; // Close list
-        this.showConfirmationModal = true; // Open confirmation
+        this.showCommissionModal = false; 
+        this.showConfirmationModal = true; 
     }
 
-    // Confirm enrollment calls backend
+    
     confirmEnrollment() {
         if (!this.selectedMateriaForEnrollment || !this.selectedCommissionForConfirmation) return;
 
         this.isLoading = true;
-        this.showConfirmationModal = false; // Close confirm modal
+        this.showConfirmationModal = false; 
         this.alertService.clear();
 
         this.inscripcionCursadoService.inscribirCursado({

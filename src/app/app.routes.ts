@@ -43,7 +43,7 @@ export const routes: Routes = [
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/profile/change-password/change-password.component').then(m => m.ChangePasswordComponent)
     },
-    // Academic Modules
+    
     {
         path: 'academic/inscription-course',
         canActivate: [requireAuthGuard],
@@ -74,7 +74,7 @@ export const routes: Routes = [
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/student/current-enrollments/current-enrollments.component').then(m => m.CurrentEnrollmentsComponent)
     },
-    // Placeholders temporales
+    
     {
         path: 'academic/history',
         canActivate: [requireAuthGuard],
@@ -110,7 +110,7 @@ export const routes: Routes = [
         canActivate: [requireAuthGuard],
         loadComponent: () => import('@features/messages/messages.component').then(m => m.MessagesComponent)
     },
-    // Professor Modules
+    
     {
         path: 'professor/subjects',
         canActivate: [requireAuthGuard],
@@ -155,7 +155,7 @@ export const routes: Routes = [
         path: 'professor/professor-cert',
         loadComponent: () => import('@features/professor/professor-cert/professor-cert.component').then(m => m.ProfessorCertComponent)
     },
-    // Admin Modules
+    
     {
         path: 'admin/certificate-requests',
         canActivate: [requireAuthGuard],

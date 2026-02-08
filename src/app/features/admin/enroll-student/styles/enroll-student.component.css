@@ -1,4 +1,4 @@
-/* General Layout */
+
 .enroll-container {
     max-width: 800px;
     margin: 0 auto;
@@ -26,7 +26,7 @@ h3 {
     font-weight: 600;
 }
 
-/* Form Controls */
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -64,7 +64,7 @@ label {
     border-style: dashed;
 }
 
-/* Select specific styles */
+
 select.form-control {
     appearance: none;
     -webkit-appearance: none;
@@ -79,7 +79,7 @@ select.form-control {
     color: var(--text-primary);
 }
 
-/* Force dark options explicitly */
+
 select.form-control option {
     background-color: #121212;
     background-color: var(--bg-page);
@@ -99,7 +99,7 @@ select.form-control option {
     }
 }
 
-/* Search Box specific */
+
 .search-box {
     display: flex;
     gap: 0;
@@ -114,7 +114,7 @@ select.form-control option {
     border-right: none;
     z-index: 1;
     border-color: rgba(255, 255, 255, 0.5);
-    /* Matching the requested style */
+    
 }
 
 .search-box input:focus {
@@ -134,7 +134,7 @@ select.form-control option {
     transition: background-color 0.2s;
     flex-shrink: 0;
     width: auto;
-    /* Override previous fixed width */
+    
 }
 
 .btn-search:hover:not(:disabled) {
@@ -147,7 +147,7 @@ select.form-control option {
     background-color: var(--border-input);
 }
 
-/* Results List */
+
 .results-list {
     list-style: none;
     padding: 0;
@@ -178,7 +178,7 @@ select.form-control option {
     color: var(--utn-blue);
 }
 
-/* Selected Student Card */
+
 .selected-student {
     margin-bottom: 1.5rem;
     background: rgba(16, 185, 129, 0.08);
@@ -231,7 +231,7 @@ select.form-control option {
     color: var(--text-primary);
 }
 
-/* Buttons actions */
+
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -252,7 +252,7 @@ select.form-control option {
     transition: all 0.2s;
     font-size: 0.95rem;
     width: auto;
-    /* Auto width instead of 100% */
+    
 }
 
 .btn-primary:hover:not(:disabled) {

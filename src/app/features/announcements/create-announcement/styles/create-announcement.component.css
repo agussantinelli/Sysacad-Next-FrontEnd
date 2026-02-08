@@ -45,7 +45,7 @@
     box-shadow: 0 0 0 3px rgba(0, 153, 230, 0.1);
 }
 
-/* Fix for dark mode option visibility */
+
 .form-select option {
     background-color: var(--bg-card);
     color: var(--text-primary);
@@ -109,7 +109,7 @@
     transform: none;
 }
 
-/* Spinner for button */
+
 .spinner-sm {
     width: 16px;
     height: 16px;

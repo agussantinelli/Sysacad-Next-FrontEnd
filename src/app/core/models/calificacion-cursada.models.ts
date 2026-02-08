@@ -1,11 +1,11 @@
 export interface CalificacionCursadaResponse {
-    id: string; // UUID
+    id: string; 
     descripcion: string;
-    nota: number; // BigDecimal
-    fecha: string; // LocalDate
+    nota: number; 
+    fecha: string; 
 }
 
 export interface CalificacionCursadaRequest {
     descripcion: string;
-    nota: number; // BigDecimal
+    nota: number; 
 }

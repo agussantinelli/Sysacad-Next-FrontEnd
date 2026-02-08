@@ -27,7 +27,7 @@ export class AnnouncementsComponent implements OnInit {
     isLoading: boolean = false;
     usuario: UsuarioResponse | null = null;
 
-    // Filters
+    
     statusFilter: 'all' | 'read' | 'unread' = 'all';
     timeFilter: 'all' | 'today' | 'week' | 'month' | 'year' = 'all';
 
@@ -43,7 +43,7 @@ export class AnnouncementsComponent implements OnInit {
         this.isLoading = true;
         this.avisoService.listarAvisos().subscribe({
             next: (data) => {
-                // Sort by date descending (newest first)
+                
                 this.avisos = data.sort((a: AvisoResponse, b: AvisoResponse) =>
                     new Date(b.fechaEmision).getTime() - new Date(a.fechaEmision).getTime()
                 );
@@ -59,11 +59,11 @@ export class AnnouncementsComponent implements OnInit {
 
     get filteredAvisos(): AvisoResponse[] {
         return this.avisos.filter(aviso => {
-            // Status Filter
+            
             if (this.statusFilter === 'read' && !aviso.visto) return false;
             if (this.statusFilter === 'unread' && aviso.visto) return false;
 
-            // Time Filter
+            
             if (this.timeFilter !== 'all') {
                 const avisoDate = new Date(aviso.fechaEmision);
                 const now = new Date();
@@ -71,7 +71,7 @@ export class AnnouncementsComponent implements OnInit {
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
                 if (this.timeFilter === 'today') {
-                    // Check if strictly same day
+                    
                     return avisoDate.getDate() === now.getDate() &&
                         avisoDate.getMonth() === now.getMonth() &&
                         avisoDate.getFullYear() === now.getFullYear();
@@ -86,11 +86,11 @@ export class AnnouncementsComponent implements OnInit {
     }
 
     markAsRead(aviso: AvisoResponse) {
-        if (aviso.visto) return; // Already read
+        if (aviso.visto) return; 
 
         this.avisoService.marcarLeido(aviso.id).subscribe({
             next: () => {
-                aviso.visto = true; // Update local state
+                aviso.visto = true; 
             },
             error: (err: any) => {
                 console.error('Error marking as read:', err);

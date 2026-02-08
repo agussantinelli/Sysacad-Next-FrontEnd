@@ -1,4 +1,4 @@
-/* Overlay with backdrop blur */
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -12,7 +12,7 @@
     animation: fadeIn 0.2s ease-out;
 }
 
-/* Modal Content Card */
+
 .modal-content {
     background-color: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -24,7 +24,7 @@
     animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Header */
+
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -43,7 +43,7 @@
 
 .modal-title span {
     color: #60a5fa;
-    /* Blue-400 */
+    
 }
 
 .btn-close-icon {
@@ -64,7 +64,7 @@
     background-color: var(--border-subtle);
 }
 
-/* Body */
+
 .modal-body {
     padding: 0;
     max-height: 70vh;
@@ -86,15 +86,15 @@
 
 .section-title.exams {
     border-left-color: #a855f7;
-    /* Purple-500 */
+    
 }
 
 .section-title.coursework {
     border-left-color: #3b82f6;
-    /* Blue-500 */
+    
 }
 
-/* Tables */
+
 .history-table {
     width: 100%;
     border-collapse: collapse;
@@ -126,7 +126,7 @@
     background-color: var(--input-bg);
 }
 
-/* Badges */
+
 .status-badge {
     padding: 0.25rem 0.5rem;
     border-radius: 9999px;
@@ -137,23 +137,23 @@
 
 .status-approved {
     color: #4ade80;
-    /* Green-400 */
+    
     background-color: rgba(74, 222, 128, 0.1);
 }
 
 .status-failed {
     color: #f87171;
-    /* Red-400 */
+    
     background-color: rgba(248, 113, 113, 0.1);
 }
 
 .status-pending {
     color: #facc15;
-    /* Yellow-400 */
+    
     background-color: rgba(250, 204, 21, 0.1);
 }
 
-/* Footer */
+
 .modal-footer {
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--border-subtle);
@@ -178,7 +178,7 @@
     background-color: var(--border-subtle);
 }
 
-/* Utilities */
+
 .text-empty {
     color: #6b7280;
     font-style: italic;
@@ -192,7 +192,7 @@
     font-weight: 700;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
     from {
         opacity: 0;

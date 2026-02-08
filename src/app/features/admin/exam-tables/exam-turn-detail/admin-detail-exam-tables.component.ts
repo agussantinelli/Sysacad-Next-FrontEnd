@@ -35,16 +35,16 @@ export class AdminDetailExamTablesComponent implements OnInit {
     turn: MesaExamenResponse | null = null;
     isLoading = false;
 
-    // Delete State
+    
     showDeleteConfirmation = false;
     itemToDelete: DetalleMesaExamenResponse | null = null;
 
-    // Add Exam Wizard State
+    
     showAddModal = false;
     addStep: 'SUBJECT' | 'DATETIME' | 'PROFESSOR' = 'SUBJECT';
     carreras: CarreraAdminDTO[] = [];
 
-    // Wizard Helper Data
+    
     selectedCarreraId: string = '';
     subjectQuery: string = '';
     foundSubjects: SimpleMateriaDTO[] = [];
@@ -97,7 +97,7 @@ export class AdminDetailExamTablesComponent implements OnInit {
         this.router.navigate(['/admin/exam-tables']);
     }
 
-    // --- Deletion Logic ---
+    
 
     deleteDetalle(mesa: DetalleMesaExamenResponse) {
         if ((mesa.cantidadInscriptos || 0) > 0) {
@@ -141,17 +141,17 @@ export class AdminDetailExamTablesComponent implements OnInit {
     }
 
     isDatePassed(dateString: string): boolean {
-        // diaExamen is 'yyyy-MM-dd'
+        
         const examDate = new Date(dateString);
-        // Normalize to midnight just in case, though comparison with now is usually enough
-        // But if now is today 10am and exam is today, strictly "passed" might need nuance.
-        // Usually passed means < today.
+        
+        
+        
         const now = new Date();
         now.setHours(0, 0, 0, 0);
 
-        // Fix timezone offset issue if parsed as UTC
-        // '2026-02-10' parsed as Date might look like Feb 09 21:00 in -0300
-        // Better to treat as string comparison or append time
+        
+        
+        
         const dateParts = dateString.split('-');
         const year = +dateParts[0];
         const month = +dateParts[1] - 1;
@@ -161,7 +161,7 @@ export class AdminDetailExamTablesComponent implements OnInit {
         return localExamDate < now;
     }
 
-    // --- Add Exam Logic (Wizard) ---
+    
 
     openAddModal() {
         this.showAddModal = true;

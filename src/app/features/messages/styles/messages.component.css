@@ -1,8 +1,8 @@
-/* Layout */
+
 .messages-container {
     display: flex;
     height: calc(100vh - 180px);
-    /* Adjust based on navbar/footer */
+    
     min-height: 500px;
     background-color: var(--bg-card);
     border-radius: 12px;
@@ -11,7 +11,7 @@
     box-shadow: 0 4px 6px -1px var(--shadow-color);
 }
 
-/* Sidebar */
+
 .conversations-sidebar {
     width: 320px;
     border-right: 1px solid var(--border-subtle);
@@ -19,7 +19,7 @@
     flex-direction: column;
     background-color: var(--bg-card);
     min-height: 0;
-    /* Essential for child scrolling */
+    
 }
 
 .search-bar {
@@ -89,11 +89,11 @@
 
 .conversation-item.active {
     background-color: rgba(0, 153, 230, 0.08);
-    /* faint blue */
+    
     border-left: 4px solid var(--utn-blue);
 }
 
-/* Avatar */
+
 .avatar-container {
     position: relative;
 }
@@ -129,14 +129,14 @@
 
 .status-indicator.online {
     background-color: #10b981;
-    /* Success Green */
+    
 }
 
-/* Conversation Info */
+
 .conv-info {
     flex: 1;
     min-width: 0;
-    /* allows text truncation */
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -187,7 +187,7 @@
     text-align: center;
 }
 
-/* Chat Window */
+
 .chat-window-container {
     flex: 1;
     display: flex;
@@ -196,7 +196,7 @@
 
 
 
-/* Responsive */
+
 .mobile-only {
     display: none;
 }
