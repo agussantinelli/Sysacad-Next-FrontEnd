@@ -33,11 +33,13 @@
 
 <h2>🎯 El Desafío (Legacy vs. Next)</h2>
 
-<p><strong>Sysacad Next</strong> nace para resolver las limitaciones críticas del ecosistema universitario tradicional ("Legacy"). Mientras los sistemas anteriores se ven afectados por:</p>
 <ul>
-    <li><strong>Lentitud crítica</strong> en periodos de alta demanda (inscripciones).</li>
-    <li><strong>UX obsoleta</strong> no optimizada para el uso cotidiano en dispositivos móviles.</li>
-    <li><strong>Fragmentación</strong> de la información académica, dificultando el seguimiento del progreso.</li>
+    <li><strong>Lentitud crítica:</strong> Colapsos sistémicos en periodos de alta demanda, especialmente durante las fechas de inscripción.</li>
+    <li><strong>UX obsoleta:</strong> Interfaces rígidas no optimizadas para el uso cotidiano en dispositivos móviles.</li>
+    <li><strong>Fragmentación:</strong> Dispersión de la información académica que dificulta el seguimiento real del progreso del alumno.</li>
+    <li><strong>Inestabilidad del Servidor:</strong> Caídas constantes que interrumpen procesos vitales, generando un clima de frustración constante.</li>
+    <li><strong>Malestar Estudiantil:</strong> Las fallas recurrentes provocan quejas legítimas de los alumnos y del Centro de Estudiantes, derivando en un descontento generalizado hacia la institución.</li>
+    <li><strong>Burocracia Estatal:</strong> El sistema actual se ha convertido en el símbolo de una burocracia absurda y lenta que prioriza el trámite sobre el aprendizaje.</li>
 </ul>
 
 <p>Esta reingeniería transforma radicalmente esa experiencia, proponiendo una plataforma <strong>reactiva, SPA y centrada en el usuario</strong> que elimina la fricción burocrática y agiliza la vida universitaria.</p>
