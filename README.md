@@ -362,7 +362,7 @@ export const environment = {
 
 <h2>👥 Roles y Accesos</h2>
 
-<p>La plataforma implementa un estricto control de acceso basado en roles para asegurar la integridad académica.</p>
+<p>La plataforma implementa un estricto control de acceso basado en roles para asegurar la integridad académica y la segregación de funciones.</p>
 
 <ul>
     <li>
@@ -370,8 +370,8 @@ export const environment = {
         <p>Acceso total al sistema para la gestión académica e institucional.</p>
         <ul>
             <li><strong>Administración Académica:</strong> Gestión ABM de Carreras, Facultades, Planes de Estudio, Materias, Horarios y Salones.</li>
-            <li><strong>Gestión Institucional:</strong> Administración de Usuarios (Alumnos, Profesores), Inscripciones y Sanciones.</li>
-            <li><strong>Gestión de Exámenes:</strong> Configuración de Mesas de Examen y generación de Actas Volantes.</li>
+            <li><strong>Gestión Institucional:</strong> Administración de Usuarios (Alumnos, Profesores), Inscripciones y Matriculación.</li>
+            <li><strong>Gestión de Exámenes:</strong> Configuración de Mesas de Examen, turnos y generación de Actas Volantes.</li>
             <li><strong>Trámites y Comunicación:</strong> Gestión de Solicitudes de Certificados, publicación de Avisos y Calendario Académico.</li>
         </ul>
     </li>
@@ -380,22 +380,24 @@ export const environment = {
         <p>Herramientas optimizadas para la docencia y evaluación.</p>
         <ul>
             <li><strong>Gestión Académica:</strong> Visualización de "Mis Materias" y "Mis Comisiones" (Globales y por Materia).</li>
-            <li><strong>Exámenes:</strong> Acceso a Mesas de Examen asignadas y gestión de Actas Volantes.</li>
+            <li><strong>Exámenes:</strong> Acceso a Mesas de Examen asignadas, carga de notas y firma de Actas Volantes.</li>
+            <li><strong>Estadísticas:</strong> Visualización de reportes de rendimiento por examen.</li>
+            <li><strong>Certificaciones:</strong> Descarga de Certificado de Servicios Docentes.</li>
         </ul>
     </li>
     <li>
         <strong>🎓 Estudiante (Rol: ESTUDIANTE)</strong>
-        <p>Portal de autogestión centralizado.</p>
+        <p>Portal de autogestión centralizado para la vida universitaria.</p>
         <ul>
-            <li><strong>Inscripciones:</strong> Inscripción a Cursado y Exámenes finales.</li>
-            <li><strong>Consultas Académicas:</strong> Estado Académico (Analítico provisorio), Plan de Estudios interactivo, Cursada/Notas e Historia Académica.</li>
-            <li><strong>Correlatividades:</strong> Verificación visual de materias habilitadas "Para Cursar" y "Para Rendir".</li>
-            <li><strong>Trámites:</strong> Solicitud de Certificados (Regularidad), visualización de Sanciones, Calendario y Avisos institucionales.</li>
+            <li><strong>Inscripciones:</strong> Inscripción ágil a Cursado de materias y Mesas de Examen final.</li>
+            <li><strong>Consultas Académicas:</strong> Estado Académico (Analítico), Plan de Estudios interactivo y Cursada actual.</li>
+            <li><strong>Correlatividades:</strong> Verificación visual de materias habilitadas para cursar o rendir.</li>
+            <li><strong>Trámites:</strong> Solicitud y descarga inmediata de Certificado de Alumno Regular en PDF.</li>
         </ul>
     </li>
 </ul>
 
-<h3>👑 Poderes del Jefe de Cátedra</h3>
+### 👑 Poderes del Jefe de Cátedra
 <p>El sistema distingue automáticamente si un profesor es <strong>Titular / Jefe de Cátedra</strong>, otorgándole visibilidad extendida:</p>
 <ul>
     <li><strong>Visualización Global:</strong> Puede ver la totalidad de las comisiones de su materia, independiente de si dicta clases en ellas o no.</li>
@@ -406,11 +408,6 @@ export const environment = {
 <p><em>Nota: La interfaz (Navbar y Dashboard) renderiza componentes dinámicamente basándose en el rol del usuario logueado.</em></p>
 
 ### 📊 Estado de Implementación por Rol
-
-**Referencias:**
-- ✅ **Implementado**: Funcionalidad activa y enrutada.
-- 🚧 **En Construcción**: Ruta existente pero apunta a página de "En Construcción".
-- ❌ **No Implementado**: Enlace visible en menú/dashboard pero sin ruta o lógica asociada.
 
 | Área / Funcionalidad | Estudiante | Profesor | Admin |
 | :--- | :---: | :---: | :---: |
@@ -431,17 +428,16 @@ export const environment = {
 | Carreras / Facultades / Universidades | ❌ | ❌ | ✅ |
 | Planes de Estudio y Materias | ❌ | ❌ | ✅ |
 | Gestión de Usuarios (ABM) | ❌ | ❌ | ✅ |
-| Gestión de Inscripciones y Matrículas| ❌ | ❌ | ✅ |
+| Gestión de Inscripciones y Matrículas | ❌ | ❌ | ✅ |
 | Mesas de Examen y Actas Volantes | ❌ | ❌ | ✅ |
 | **Trámites y Certificados** | | | |
 | Certificado de Alumno Regular | ✅ | ❌ | ❌ |
 | Certificado de Servicios (Docente) | ❌ | ✅ | ❌ |
-| Gestión de Solicitudes (Admin)| ❌ | ❌ | ✅ |
+| Gestión de Solicitudes (Admin) | ❌ | ❌ | ✅ |
 | **Comunicación & Entorno** | | | |
 | Sistema de Avisos y Anuncios | ✅ | ✅ | ✅ |
 | Mensajería Interna (Chat) | ✅ | ✅ | ✅ |
 | Calendario Académico | ✅ | ✅ | ✅ |
-
 
 <hr>
 
