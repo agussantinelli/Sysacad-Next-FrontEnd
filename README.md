@@ -140,6 +140,13 @@
 <h3>4. Estrategia de Lazy Loading</h3>
 <p>Todas las rutas de características (features) utilizan `loadComponent` para optimizar la carga inicial, descargando el código solo cuando el usuario navega a la ruta concerniente.</p>
 
+<h3>5. Clean Code & Standalone Philosophy</h3>
+<p>El proyecto ha sido refactorizado para seguir una arquitectura limpia y moderna:</p>
+<ul>
+    <li><strong>Sin Comentarios:</strong> El código está diseñado para ser auto-explicativo mediante nombres claros de variables y funciones, eliminando comentarios innecesarios para un mantenimiento más ágil.</li>
+    <li><strong>Standalone Components:</strong> Uso nativo de componentes sin módulos para reducir el acoplamiento y mejorar el tree-shaking.</li>
+</ul>
+
 <hr>
 
 <h2>🎨 Sistema de Temas (Theming)</h2>
@@ -240,7 +247,7 @@
         </tr>
         <tr>
             <td><strong>Gráficos</strong></td>
-            <td>Ngx-Charts 20.5.0</td>
+            <td>Ngx-Charts ^23.1.0</td>
             <td>Visualización de datos (SVGs). Gráficos de torta y barras.</td>
         </tr>
     </tbody>
@@ -342,11 +349,14 @@ BACKEND_URL=http://localhost:8080
 FRONTEND_URL=http://localhost:4200
 </code></pre>
 
-<p><strong>Nota:</strong> Angular utiliza <code>src/environments/environment.development.ts</code> para conectar con la API en desarrollo. Asegúrate de que coincida con el puerto del backend:</p>
+> [!NOTE]
+> **Gestión de Entornos:** Aunque se incluye un `.env` para referencia, Angular utiliza `src/environments/environment.development.ts` para conectar con la API en tiempo de desarrollo.
 
-<pre><code>export const environment = {
+```typescript
+export const environment = {
   apiUrl: 'http://localhost:8080/api'
-};</code></pre>
+};
+```
 
 <hr>
 
@@ -410,10 +420,10 @@ FRONTEND_URL=http://localhost:4200
 | **Gestión Académica (Alumno)** | | | |
 | Inscripciones (Cursado y Examen) | ✅ | ❌ | ✅ |
 | Estado Académico (Analítico/Plan) | ✅ | ❌ | ✅ |
-| Mis Inscripciones (Gestión Activa) | ✅ | ❌ | ❌ |
+| Mis Inscripciones (Gestión Activa) | ✅ | ❌ | ✅ |
 | Cursado actual y Notas | ✅ | ❌ | ❌ |
 | **Módulo Docente (Profesor)** | | | |
-| Mis Materias y Comisiones | ❌ | ✅ | ❌ |
+| Mis Materias y Comisiones | ❌ | ✅ | ✅ |
 | Carga de Notas y Calificaciones | ❌ | ✅ | ❌ |
 | Mesas de Examen Asignadas | ❌ | ✅ | ✅ |
 | Estadísticas de Exámenes | ❌ | ✅ | ✅ |
