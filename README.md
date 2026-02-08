@@ -445,25 +445,6 @@ export const environment = {
 
 <hr>
 
-<h2>🚀 Roadmap & Futuras Implementaciones</h2>
-
-<ul>
-    <li><strong>📧 Notificaciones por Email:</strong>
-        <ul>
-            <li>Alertas inmediatas al alumno cuando se carga una nueva nota.</li>
-            <li>Avisos importantes enviados directamente a la casilla del estudiante.</li>
-        </ul>
-    </li>
-    <li><strong>🤖 Carga Inteligente de Notas (AI + Spring):</strong>
-        <ul>
-            <li>Permitir a los profesores subir un Excel con notas finales.</li>
-            <li><strong>Extractor Excel XML:</strong> Backend en Java Spring procesará el archivo.</li>
-            <li><strong>Validación con IA:</strong> Corroboración automática de datos para asegurar consistencia antes de impactar en la base de datos.</li>
-        </ul>
-    </li>
-</ul>
-
-<hr>
 
 <h2>🤝 Contribuciones</h2>
 
