@@ -57,10 +57,11 @@ export class LoginComponent {
                     console.error('Login failed', error);
                     this.isLoading = false;
                     this.successMessage = null;
-                    if (error.status === 401) {
+                    if (error.response?.status === 401) {
                         this.errorMessage = 'Usuario o contraseña incorrectos';
                     } else {
-                        this.errorMessage = 'Error de conexión con el servidor: ' + error.message;
+                        const serverMsg = error.response?.data?.message || error.message;
+                        this.errorMessage = 'Error: ' + serverMsg;
                     }
                 }
             });
