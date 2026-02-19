@@ -434,16 +434,6 @@ El **Jefe de Cátedra** tiene permisos extendidos sobre las materias que lidera:
 | Mensajería Interna (Chat) | ✅ | ✅ | ✅ |
 | Calendario Académico | ✅ | ✅ | ✅ |
 
-<hr>
-
-
-<h2>🤝 Contribuciones</h2>
-
-<p>Este proyecto es parte de la iniciativa de modernización universitaria. Si encuentras un bug o tienes una idea:</p>
-<ol>
-    <li>Abre un <strong>Issue</strong> describiendo el caso.</li>
-    <li>Haz un Fork y envía tu <strong>Pull Request</strong> a la rama `develop`.</li>
-</ol>
 <hr />
 
 <h2 align="left">⚖️ Licencia</h2>
@@ -458,5 +448,27 @@ El **Jefe de Cátedra** tiene permisos extendidos sobre las materias que lidera:
     🤝 <b>Compromiso Copyleft:</b> La GPLv3 permite el uso, estudio, modificación y distribución de este software. Sin embargo, cualquier obra derivada o modificación distribuida debe ser publicada bajo esta misma licencia, garantizando que el software permanezca libre y accesible para todos.
   </i>
 </p>
+<hr />
+
+<h2 align="left">🤝 Contribución</h2>
+
+<p align="left">
+  ¡Agradecemos enormemente tu interés en contribuir a este proyecto! Dado que este software se distribuye bajo la <b>Licencia GNU General Public License v3.0 (GPLv3)</b>, cualquier contribución que realices debe ser compatible con esta misma licencia.
+</p>
+
+<p align="left">
+  Para contribuir:
+  <ul>
+    <li>Haz un <a href="https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/proposing-changes-with-pull-requests/creating-a-pull-request-from-a-fork" target="_blank">fork de este repositorio</a>.</li>
+    <li>Crea una nueva rama para tu funcionalidad (<code>git checkout -b feature/nueva-funcionalidad</code>).</li>
+    <li>Realiza tus cambios.</li>
+    <li>Envía un <a href="https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/proposing-changes-with-pull-requests/creating-a-pull-request" target="_blank">Pull Request</a> detallando tus modificaciones.</li>
+  </ul>
+</p>
+
+<p align="left">
+  ¡Gracias por ser parte! 🙌✨
+</p>
+
 <hr>
 <p align="center">Desarrollado con ❤️ y mucho 🧉 para la comunidad académica.</p>
