@@ -444,19 +444,18 @@ El **Jefe de Cátedra** tiene permisos extendidos sobre las materias que lidera:
     <li>Abre un <strong>Issue</strong> describiendo el caso.</li>
     <li>Haz un Fork y envía tu <strong>Pull Request</strong> a la rama `develop`.</li>
 </ol>
-<hr>
+<hr />
 
 <h2 align="left">⚖️ Licencia</h2>
 
 <p align="left">
-  Este proyecto está bajo la <b>Licencia MIT</b>. Para más detalles, puedes consultar el archivo 
+  Este proyecto está bajo la <b>Licencia GNU General Public License v3.0 (GPLv3)</b>. Puedes consultar los términos legales completos en el archivo 
   <a href="LICENSE"><code>LICENSE</code></a> incluido en la raíz de este repositorio.
 </p>
 
 <p align="left">
   <i>
-    La licencia MIT permite el uso, copia, modificación y distribución del software de forma gratuita, 
-    siempre que se incluya el aviso de copyright original.
+    🤝 <b>Compromiso Copyleft:</b> La GPLv3 permite el uso, estudio, modificación y distribución de este software. Sin embargo, cualquier obra derivada o modificación distribuida debe ser publicada bajo esta misma licencia, garantizando que el software permanezca libre y accesible para todos.
   </i>
 </p>
 <hr>
