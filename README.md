@@ -357,11 +357,12 @@ npm run lint
 <pre><code>npm run test</code></pre>
 
 <h3>📊 Cobertura Actual</h3>
+<ul>
     <li><strong>Capa de Servicios (Core Services):</strong> <strong>100% de cobertura</strong>. Cada uno de los 24 servicios cuenta con su respectiva suite de pruebas.</li>
     <li><strong>Specs Ejecutados:</strong> Un total de <strong>126 pruebas unitarias</strong> exitosas (100% SUCCESS) que validan flujos de negocio, transformaciones de datos y manejo de errores.</li>
     <li><strong>Componentes y Core:</strong> Cobertura extendida a <strong>Guards</strong>, <strong>Interceptors</strong> y <strong>DashboardComponent</strong>.</li>
     <li><strong>Aislamiento de Pruebas:</strong> Suite 100% aislada empleando mocks estratégicos para <code>Axios</code>, <code>LocalStorage</code> y <code>MatSnackBar</code>.</li>
-
+</ul>
 <hr>
 
 <h3>⚙️ Variables de Entorno</h3>
