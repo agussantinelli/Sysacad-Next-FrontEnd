@@ -80,4 +80,18 @@ describe('errorInterceptor', () => {
         const req = httpTestingController.expectOne('/test');
         req.flush({ message: customMessage }, { status: 400, statusText: 'Bad Request' });
     });
+
+    it('should show client-side error message if error is ErrorEvent', () => {
+        const errorEvent = new ErrorEvent('Client Error', { message: 'Conexión fallida' });
+        
+        httpClient.get('/test').subscribe({
+            next: () => fail('should have failed'),
+            error: () => {
+                expect(notificationService.showError).toHaveBeenCalledWith('Error: Conexión fallida');
+            }
+        });
+
+        const req = httpTestingController.expectOne('/test');
+        req.error(errorEvent);
+    });
 });

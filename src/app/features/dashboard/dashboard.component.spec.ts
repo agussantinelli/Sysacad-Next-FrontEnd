@@ -179,4 +179,21 @@ describe('DashboardComponent', () => {
         
         expect(console.error).toHaveBeenCalledWith('Error loading unread messages for dashboard', jasmine.any(Error));
     });
+    it('should handle error when loading unread notices', () => {
+        spyOn(console, 'error');
+        avisoService.obtenerCantidadSinLeer.and.returnValue(throwError(() => new Error('API Error')));
+        
+        component.loadUnreadNotices();
+        
+        expect(console.error).toHaveBeenCalledWith('Error loading unread notices', jasmine.any(Error));
+    });
+
+    it('should not load data if user is not in localStorage', () => {
+        localStorage.getItem = jasmine.createSpy('getItem').and.returnValue(null);
+        
+        fixture.detectChanges(); // Trigger ngOnInit
+        
+        expect(component.usuario).toBeNull();
+        expect(avisoService.obtenerCantidadSinLeer).not.toHaveBeenCalled();
+    });
 });
