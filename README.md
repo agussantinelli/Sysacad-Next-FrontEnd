@@ -331,6 +331,27 @@ npm run lint
 </code></pre>
 
 <p>Abrí <a href="http://localhost:4200">http://localhost:4200</a> en tu navegador para ver el resultado.</p>
+<hr>
+<h2>🧪 Testing</h2>
+
+<p>El proyecto cuenta con una suite de pruebas unitarias automatizadas para garantizar la integridad de la lógica de negocio en los servicios y componentes principales.</p>
+
+<h3>🛠️ Tecnologías y Convenciones</h3>
+<ul>
+    <li><strong>Framework:</strong> Jasmine & Karma (Configuración estándar de Angular).</li>
+    <li><strong>Naming:</strong> Los archivos de test siguen el patrón <code>*.spec.ts</code>.</li>
+    <li><strong>Mocking:</strong> Se utiliza un sistema de mocks manuales para el cliente de API (<code>axiosClient</code>) y dependencias como <code>localStorage</code>, asegurando tests rápidos y aislados.</li>
+</ul>
+
+<h3>🚀 Ejecutar Tests</h3>
+<p>Para correr la suite completa de pruebas:</p>
+<pre><code>npm run test</code></pre>
+
+<h3>📊 Cobertura Actual</h3>
+<ul>
+    <li><strong>Core Services:</strong> 100% de los servicios críticos (<code>AuthService</code>, <code>AdminService</code>, <code>ChatService</code>, <code>UsuarioService</code>, <code>InscripcionCursadoService</code>, etc.).</li>
+    <li><strong>Root Component:</strong> Validación de bootstrapping y dependencias base en <code>AppComponent</code>.</li>
+</ul>
 
 <hr>
 
