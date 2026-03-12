@@ -358,8 +358,10 @@ npm run lint
 
 <h3>📊 Cobertura Actual</h3>
 <ul>
-    <li><strong>Core Services:</strong> 100% de los servicios críticos (<code>AuthService</code>, <code>AdminService</code>, <code>ChatService</code>, <code>UsuarioService</code>, <code>InscripcionCursadoService</code>, etc.).</li>
-    <li><strong>Root Component:</strong> Validación de bootstrapping y dependencias base en <code>AppComponent</code>.</li>
+    <li><strong>Capa de Servicios (Core Services):</strong> <strong>100% de cobertura</strong>. Cada uno de los 24 servicios cuenta con su respectiva suite de pruebas.</li>
+    <li><strong>Specs Ejecutados:</strong> Más de <strong>100 pruebas unitarias</strong> exitosas que validan flujos de negocio, transformaciones de datos y manejo de errores.</li>
+    <li><strong>Root Component:</strong> Validación completa de bootstrapping, inyección de dependencias y rendering base en <code>AppComponent</code>.</li>
+    <li><strong>Aislamiento de Pruebas:</strong> Suite 100% aislada empleando mocks estratégicos para <code>Axios</code>, <code>LocalStorage</code> y <code>MatSnackBar</code>.</li>
 </ul>
 
 <hr>
