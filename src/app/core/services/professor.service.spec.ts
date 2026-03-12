@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ProfessorService } from './professor.service';
 import axiosClient from '@core/api/axios.client';
-import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO } from '@core/models/professor.models';
+import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, CargaNotasCursadaDTO } from '@core/models/professor.models';
 
 describe('ProfessorService', () => {
     let service: ProfessorService;
@@ -85,6 +85,40 @@ describe('ProfessorService', () => {
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: {} }));
         service.getEstadisticasGeneral(2024).subscribe(data => {
             expect(axiosClient.get).toHaveBeenCalledWith('/profesores/estadisticas/general', jasmine.objectContaining({ params: { anio: 2024 } }));
+            done();
+        });
+    });
+
+    it('should getInscriptosComision', (done) => {
+        (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: [] }));
+        service.getInscriptosComision('c1', 'm1').subscribe(data => {
+            expect(axiosClient.get).toHaveBeenCalledWith('/profesores/comisiones/c1/materias/m1/inscriptos');
+            done();
+        });
+    });
+
+    it('should cargarNotasComision', (done) => {
+        const mockRequest: CargaNotasCursadaDTO = { concepto: '1er Parcial', esNotaFinal: false, notas: [] };
+        (axiosClient.post as jasmine.Spy).and.returnValue(Promise.resolve({ data: undefined }));
+        service.cargarNotasComision('c1', 'm1', mockRequest).subscribe(() => {
+            expect(axiosClient.post).toHaveBeenCalledWith('/profesores/comisiones/c1/materias/m1/calificar', mockRequest);
+            done();
+        });
+    });
+
+    it('should getEstadisticasMateria', (done) => {
+        (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: {} }));
+        service.getEstadisticasMateria('m1', 2024).subscribe(data => {
+            expect(axiosClient.get).toHaveBeenCalledWith('/profesores/estadisticas/materias/m1', jasmine.objectContaining({ params: { anio: 2024 } }));
+            done();
+        });
+    });
+
+    it('should getAniosEstadisticas', (done) => {
+        (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: [2023, 2024] }));
+        service.getAniosEstadisticas().subscribe(data => {
+            expect(data).toEqual([2023, 2024]);
+            expect(axiosClient.get).toHaveBeenCalledWith('/profesores/estadisticas/anios');
             done();
         });
     });
