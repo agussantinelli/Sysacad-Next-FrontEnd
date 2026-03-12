@@ -147,7 +147,8 @@ export class DashboardComponent implements OnInit {
             this.loadUnreadMessages();
         });
 
-        if (history.state.loginSuccess && !sessionStorage.getItem('welcomeShown')) {
+        const state = history.state || {};
+        if (state.loginSuccess && !sessionStorage.getItem('welcomeShown')) {
             this.successMessage = '¡Bienvenido/a al Sistema de Gestión Académica!';
             sessionStorage.setItem('welcomeShown', 'true');
             setTimeout(() => {
