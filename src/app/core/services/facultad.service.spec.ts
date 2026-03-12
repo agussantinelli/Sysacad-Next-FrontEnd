@@ -22,8 +22,8 @@ describe('FacultadService', () => {
     });
 
     it('should crearFacultad', (done) => {
-        const mockRequest: FacultadRequest = { nombre: 'Facultad 1', ubicacion: 'Calle 1' };
-        const mockResponse: FacultadResponse = { id: '1', ...mockRequest };
+        const mockRequest: FacultadRequest = { ciudad: 'Ciudad 1', provincia: 'Provincia 1' };
+        const mockResponse: FacultadResponse = { id: '1', ...mockRequest, nombreCompleto: 'Facultad Ciudad 1' };
         (axiosClient.post as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockResponse }));
 
         service.crearFacultad(mockRequest).subscribe(data => {
@@ -34,7 +34,7 @@ describe('FacultadService', () => {
     });
 
     it('should listarTodas', (done) => {
-        const mockFacultades: FacultadResponse[] = [{ id: '1', nombre: 'Facultad 1', ubicacion: 'Calle 1' }];
+        const mockFacultades: FacultadResponse[] = [{ id: '1', ciudad: 'Ciudad 1', provincia: 'Provincia 1', nombreCompleto: 'Facultad Ciudad 1' }];
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockFacultades }));
 
         service.listarTodas().subscribe(data => {
@@ -45,7 +45,7 @@ describe('FacultadService', () => {
     });
 
     it('should buscarPorId', (done) => {
-        const mockFacultad: FacultadResponse = { id: '1', nombre: 'Facultad 1', ubicacion: 'Calle 1' };
+        const mockFacultad: FacultadResponse = { id: '1', ciudad: 'Ciudad 1', provincia: 'Provincia 1', nombreCompleto: 'Facultad Ciudad 1' };
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockFacultad }));
 
         service.buscarPorId('1').subscribe(data => {

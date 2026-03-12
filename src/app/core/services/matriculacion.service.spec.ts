@@ -21,7 +21,7 @@ describe('MatriculacionService', () => {
     });
 
     it('should getMisCarrerasMaterias', (done) => {
-        const mockData: CarreraMateriasDTO[] = [{ idCarrera: '1', nombreCarrera: 'C1', materias: [] }];
+        const mockData: CarreraMateriasDTO[] = [{ idCarrera: '1', nombreCarrera: 'C1', idFacultad: 'f1', nombreFacultad: 'Facultad 1', nombrePlan: 'Plan 2024', materias: [] }];
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockData }));
 
         service.getMisCarrerasMaterias().subscribe(data => {

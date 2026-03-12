@@ -22,8 +22,8 @@ describe('SalonService', () => {
     });
 
     it('should crearSalon', (done) => {
-        const mockRequest: SalonRequest = { nombre: 'S1', capacidad: 30, idFacultad: 'f1' };
-        const mockResponse: SalonResponse = { id: '1', ...mockRequest };
+        const mockRequest: SalonRequest = { idFacultad: 'f1', nombre: 'Salon 1', piso: '1' };
+        const mockResponse: SalonResponse = { id: '1', idFacultad: 'f1', nombreFacultad: 'Facultad 1', nombre: 'Salon 1', piso: '1', capacidad: 30 };
         (axiosClient.post as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockResponse }));
 
         service.crearSalon(mockRequest).subscribe(data => {
@@ -34,7 +34,7 @@ describe('SalonService', () => {
     });
 
     it('should listarSalonesFacultad', (done) => {
-        const mockSalones: SalonResponse[] = [{ id: '1', nombre: 'S1', capacidad: 30, idFacultad: 'f1' }];
+        const mockSalones: SalonResponse[] = [{ id: '1', idFacultad: 'f1', nombreFacultad: 'Facultad 1', nombre: 'Salon 1', piso: '1', capacidad: 30 }];
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockSalones }));
 
         service.listarSalonesFacultad('f1').subscribe(data => {

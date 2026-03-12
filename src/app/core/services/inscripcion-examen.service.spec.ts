@@ -23,8 +23,8 @@ describe('InscripcionExamenService', () => {
     });
 
     it('should inscribirExamen', (done) => {
-        const mockRequest: InscripcionExamenRequest = { idMesaExamen: 'm1' };
-        const mockResponse: InscripcionExamenResponse = { id: '1', idMesaExamen: 'm1' } as any;
+        const mockRequest: InscripcionExamenRequest = { idUsuario: 'u1', idDetalleMesa: 'dm1', nroDetalle: 1 };
+        const mockResponse: InscripcionExamenResponse = { id: '1', nombreAlumno: 'A1', legajoAlumno: '123', nombreMateria: 'M1', fechaExamen: '2024-01-01', horaExamen: '08:00', fechaInscripcion: '2024-01-01', estado: 'ACTIVO', nota: 0 };
         (axiosClient.post as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockResponse }));
 
         service.inscribirExamen(mockRequest).subscribe(data => {
@@ -35,7 +35,7 @@ describe('InscripcionExamenService', () => {
     });
 
     it('should misInscripciones', (done) => {
-        const mockInscripciones: InscripcionExamenResponse[] = [{ id: '1' } as any];
+        const mockInscripciones: InscripcionExamenResponse[] = [{ id: '1', nombreAlumno: 'A1', legajoAlumno: '123', nombreMateria: 'M1', fechaExamen: '2024-01-01', horaExamen: '08:00', fechaInscripcion: '2024-01-01', estado: 'ACTIVO', nota: 0 }];
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockInscripciones }));
 
         service.misInscripciones().subscribe(data => {
@@ -57,8 +57,8 @@ describe('InscripcionExamenService', () => {
     it('should calificarExamen', (done) => {
         (axiosClient.post as jasmine.Spy).and.returnValue(Promise.resolve({ data: undefined }));
 
-        service.calificarExamen('1', { nota: 8 }).subscribe(() => {
-            expect(axiosClient.post).toHaveBeenCalledWith('/inscripciones-examen/1/calificar', { nota: 8 });
+        service.calificarExamen('1', { nota: 8, estado: 'APROBADO' }).subscribe(() => {
+            expect(axiosClient.post).toHaveBeenCalledWith('/inscripciones-examen/1/calificar', { nota: 8, estado: 'APROBADO' });
             done();
         });
     });

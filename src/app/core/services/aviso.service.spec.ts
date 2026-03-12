@@ -23,8 +23,8 @@ describe('AvisoService', () => {
     });
 
     it('should crearAviso', (done) => {
-        const mockRequest: AvisoRequest = { titulo: 'Test', contenido: 'Test Content', tipo: 'GENERAL' };
-        const mockResponse: AvisoResponse = { id: '1', ...mockRequest, fecha: '2024-01-01', leido: false };
+        const mockRequest: AvisoRequest = { titulo: 'Test', descripcion: 'Test Content', estado: 'ACTIVO' };
+        const mockResponse: AvisoResponse = { id: '1', ...mockRequest, fechaEmision: '2024-01-01', visto: false };
         (axiosClient.post as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockResponse }));
 
         service.crearAviso(mockRequest).subscribe(data => {
@@ -35,7 +35,7 @@ describe('AvisoService', () => {
     });
 
     it('should listarAvisos', (done) => {
-        const mockAvisos: AvisoResponse[] = [{ id: '1', titulo: 'Test', contenido: 'Test Content', tipo: 'GENERAL', fecha: '2024-01-01', leido: false }];
+        const mockAvisos: AvisoResponse[] = [{ id: '1', titulo: 'Test', descripcion: 'Test Content', estado: 'ACTIVO', fechaEmision: '2024-01-01', visto: false }];
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockAvisos }));
 
         service.listarAvisos().subscribe(data => {
@@ -65,7 +65,7 @@ describe('AvisoService', () => {
     });
 
     it('should cambiarEstado', (done) => {
-        const mockResponse: AvisoResponse = { id: '1', titulo: 'Test', contenido: 'Test Content', tipo: 'GENERAL', fecha: '2024-01-01', leido: false };
+        const mockResponse: AvisoResponse = { id: '1', titulo: 'Test', descripcion: 'Test Content', estado: 'ACTIVO', fechaEmision: '2024-01-01', visto: false };
         (axiosClient.put as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockResponse }));
 
         service.cambiarEstado('1', 'ACTIVO').subscribe(data => {

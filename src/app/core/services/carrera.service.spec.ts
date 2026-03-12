@@ -22,7 +22,7 @@ describe('CarreraService', () => {
     });
 
     it('should listarPorFacultad', (done) => {
-        const mockCarreras: CarreraResponse[] = [{ id: '1', nombre: 'Carrera 1', duracionAnios: 5, idFacultad: 'f1' }];
+        const mockCarreras: CarreraResponse[] = [{ id: '1', alias: 'C1', nombre: 'Carrera 1', facultades: ['f1'] }];
         (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: mockCarreras }));
 
         service.listarPorFacultad('f1').subscribe(data => {
