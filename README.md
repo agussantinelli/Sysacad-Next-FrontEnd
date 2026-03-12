@@ -68,6 +68,77 @@
 
 <hr>
 
+<h2>⚙️ Stack Tecnológico</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Componente</th>
+            <th>Tecnología</th>
+            <th>Notas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Framework</strong></td>
+            <td>Angular 19.2.18</td>
+            <td>Uso de Standalone Components, Signals y Control Flow Syntax.</td>
+        </tr>
+        <tr>
+            <td><strong>Lenguaje</strong></td>
+            <td>TypeScript 5.5.2</td>
+            <td>Tipado estricto, Interfaces y DTOs alineados con Backend Java.</td>
+        </tr>
+        <tr>
+            <td><strong>UI Kit</strong></td>
+            <td>Angular Material 19.0.0</td>
+            <td>Librería oficial. Componentes accesibles (Tablas, Cards, Datepickers).</td>
+        </tr>
+        <tr>
+            <td><strong>Gestión de Estado</strong></td>
+            <td>RxJS 7.8.0</td>
+            <td>Manejo de asincronía y flujos de datos (Observables).</td>
+        </tr>
+        <tr>
+            <td><strong>Cliente HTTP</strong></td>
+            <td>Axios 1.13.2</td>
+            <td>Cliente ligero con <strong>Interceptores</strong> para inyección de JWT.</td>
+        </tr>
+        <tr>
+            <td><strong>Runtime</strong></td>
+            <td>Node.js 18+</td>
+            <td>Entorno de ejecución para desarrollo y construcción del proyecto.</td>
+        </tr>     
+        <tr>
+            <td><strong>Iconos</strong></td>
+            <td>Material Icons 1.13.14</td>
+            <td>Paquete npm <code>material-icons</code>. Iconografía estándar de Google.</td>
+        </tr>
+        <tr>
+            <td><strong>Tipografía</strong></td>
+            <td>Questrial 5.2.8</td>
+            <td>Google Fonts (vía <code>@fontsource/questrial</code>). Estética moderna y limpia.</td>
+        </tr>
+        <tr>
+            <td><strong>Gráficos</strong></td>
+            <td>Ngx-Charts ^23.1.0</td>
+            <td>Visualización de datos (SVGs). Gráficos de torta y barras.</td>
+        </tr>
+        <tr>
+            <td><strong>Unit Testing</strong></td>
+            <td>Jasmine 5.2.0</td>
+            <td>Framework de pruebas unitarias centrado en BDD.</td>
+        </tr>
+        <tr>
+            <td><strong>Test Runner</strong></td>
+            <td>Karma 6.4.0</td>
+            <td>Ejecutor de pruebas en entorno de navegador real.</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
 <h2>🏗️ Arquitectura de Alto Nivel</h2>
 
 <p>La aplicación sigue una arquitectura en capas separando presentación, lógica de negocio y acceso a datos:</p>
@@ -188,76 +259,6 @@
 
 <hr>
 
-<h2>⚙️ Stack Tecnológico</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Componente</th>
-            <th>Tecnología</th>
-            <th>Notas</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Framework</strong></td>
-            <td>Angular 19.2.18</td>
-            <td>Uso de Standalone Components, Signals y Control Flow Syntax.</td>
-        </tr>
-        <tr>
-            <td><strong>Lenguaje</strong></td>
-            <td>TypeScript 5.5.2</td>
-            <td>Tipado estricto, Interfaces y DTOs alineados con Backend Java.</td>
-        </tr>
-        <tr>
-            <td><strong>UI Kit</strong></td>
-            <td>Angular Material 19.0.0</td>
-            <td>Librería oficial. Componentes accesibles (Tablas, Cards, Datepickers).</td>
-        </tr>
-        <tr>
-            <td><strong>Gestión de Estado</strong></td>
-            <td>RxJS 7.8.0</td>
-            <td>Manejo de asincronía y flujos de datos (Observables).</td>
-        </tr>
-        <tr>
-            <td><strong>Cliente HTTP</strong></td>
-            <td>Axios 1.13.2</td>
-            <td>Cliente ligero con <strong>Interceptores</strong> para inyección de JWT.</td>
-        </tr>
-        <tr>
-            <td><strong>Runtime</strong></td>
-            <td>Node.js 18+</td>
-            <td>Entorno de ejecución para desarrollo y construcción del proyecto.</td>
-        </tr>     
-        <tr>
-            <td><strong>Iconos</strong></td>
-            <td>Material Icons 1.13.14</td>
-            <td>Paquete npm <code>material-icons</code>. Iconografía estándar de Google.</td>
-        </tr>
-        <tr>
-            <td><strong>Tipografía</strong></td>
-            <td>Questrial 5.2.8</td>
-            <td>Google Fonts (vía <code>@fontsource/questrial</code>). Estética moderna y limpia.</td>
-        </tr>
-        <tr>
-            <td><strong>Gráficos</strong></td>
-            <td>Ngx-Charts ^23.1.0</td>
-            <td>Visualización de datos (SVGs). Gráficos de torta y barras.</td>
-        </tr>
-        <tr>
-            <td><strong>Unit Testing</strong></td>
-            <td>Jasmine 5.2.0</td>
-            <td>Framework de pruebas unitarias centrado en BDD.</td>
-        </tr>
-        <tr>
-            <td><strong>Test Runner</strong></td>
-            <td>Karma 6.4.0</td>
-            <td>Ejecutor de pruebas en entorno de navegador real.</td>
-        </tr>
-    </tbody>
-</table>
-
-<hr>
 <h3>📦 Estructura del Proyecto</h3>
 
 <pre><code>Sysacad-Next-FrontEnd/
