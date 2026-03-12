@@ -188,11 +188,7 @@
 
 <hr>
 
-<h2>🌐 Frontend (este repositorio)</h2>
-
-<p>Este repositorio aloja la <strong>Single Page Application (SPA)</strong> desarrollada en Angular, encargada de toda la interacción con el usuario final.</p>
-
-<h3>⚙️ Stack Tecnológico</h3>
+<h2>⚙️ Stack Tecnológico</h2>
 
 <table>
     <thead>
