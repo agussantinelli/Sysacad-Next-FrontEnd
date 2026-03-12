@@ -20,6 +20,8 @@
     <img src="https://img.shields.io/badge/Axios-HttpClient-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt="Axios Badge"/>
     <img src="https://img.shields.io/badge/Ngx%20Charts-Visualization-AA2B68?style=for-the-badge&logo=googleanalytics&logoColor=white" alt="NgxCharts Badge"/>
     <img src="https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT Badge"/>
+    <img src="https://img.shields.io/badge/Jasmine-Testing-8A4182?style=for-the-badge&logo=jasmine&logoColor=white" alt="Jasmine Badge"/>
+    <img src="https://img.shields.io/badge/Karma-Test%20Runner-339999?style=for-the-badge&logo=karma&logoColor=white" alt="Karma Badge"/>
     <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
 </div>
 
@@ -245,6 +247,16 @@
             <td><strong>Gráficos</strong></td>
             <td>Ngx-Charts ^23.1.0</td>
             <td>Visualización de datos (SVGs). Gráficos de torta y barras.</td>
+        </tr>
+        <tr>
+            <td><strong>Unit Testing</strong></td>
+            <td>Jasmine 5.2.0</td>
+            <td>Framework de pruebas unitarias centrado en BDD.</td>
+        </tr>
+        <tr>
+            <td><strong>Test Runner</strong></td>
+            <td>Karma 6.4.0</td>
+            <td>Ejecutor de pruebas en entorno de navegador real.</td>
         </tr>
     </tbody>
 </table>
