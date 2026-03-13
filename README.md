@@ -161,32 +161,32 @@
         <tr>
             <td><strong>Application Shell</strong></td>
             <td>Bootstrapping y configuración raíz</td>
-            <td><code>index.html</code>, <code>main.ts</code>, <code>app.routes.ts</code></td>
+            <td><code>index.html</code>, <code>main.ts</code>, <code>app.config.ts</code>, <code>app.routes.ts</code></td>
         </tr>
         <tr>
             <td><strong>Feature Modules</strong></td>
-            <td>Funcionalidad de usuario por dominio</td>
-            <td><code>auth/</code>, <code>dashboard/</code>, <code>profile/</code>, <code>student/</code></td>
-        </tr>
-        <tr>
-            <td><strong>Layout</strong></td>
-            <td>Estructura y navegación persistente</td>
-            <td><code>navbar.component.ts</code></td>
+            <td>Funcionalidad por dominio (Standalone)</td>
+            <td><code>admin/</code>, <code>professor/</code>, <code>student/</code>, <code>auth/</code>, <code>dashboard/</code>, <code>messages/</code>, <code>announcements/</code></td>
         </tr>
         <tr>
             <td><strong>Core Layer</strong></td>
             <td>Lógica de negocio, API y Modelos</td>
-            <td><code>axiosClient.ts</code>, servicios, DTOs</td>
+            <td><code>axiosClient.ts</code>, servicios, DTOs, <strong>Guards</strong>, <strong>Interceptors</strong></td>
         </tr>
         <tr>
-            <td><strong>Shared Components</strong></td>
-            <td>UI Reutilizable</td>
-            <td>Tablas, Alertas, Modales, Spinner</td>
+            <td><strong>Shared & Layout</strong></td>
+            <td>UI Reutilizable y navegación</td>
+            <td><code>navbar/</code>, componentes comunes (Table, Spinner), Pipes, Interfaces</td>
         </tr>
         <tr>
             <td><strong>Theming System</strong></td>
             <td>Consistencia visual y Dark Mode</td>
-            <td><code>theme.service.ts</code>, <code>globals.css</code></td>
+            <td><code>theme.service.ts</code>, <code>globals.css</code> (CSS Variables / Tokens)</td>
+        </tr>
+        <tr>
+            <td><strong>CI/CD & DevOps</strong></td>
+            <td>Automatización y Despliegue</td>
+            <td>GitHub Actions (<code>ci.yml</code>), Environments config</td>
         </tr>
     </tbody>
 </table>
