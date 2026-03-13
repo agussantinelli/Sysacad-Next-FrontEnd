@@ -23,6 +23,7 @@
     <img src="https://img.shields.io/badge/Jasmine-Testing-8A4182?style=for-the-badge&logo=jasmine&logoColor=white" alt="Jasmine Badge"/>
     <img src="https://img.shields.io/badge/Karma-Test%20Runner-339999?style=for-the-badge&logo=karma&logoColor=white" alt="Karma Badge"/>
     <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
+    <img src="https://github.com/agussantinelli/Sysacad-Next-FrontEnd/actions/workflows/ci.yml/badge.svg" alt="Angular CI Status Badge"/>
 </div>
 
 <div align="center">
