@@ -23,6 +23,7 @@
     <img src="https://img.shields.io/badge/Jasmine-Testing-8A4182?style=for-the-badge&logo=jasmine&logoColor=white" alt="Jasmine Badge"/>
     <img src="https://img.shields.io/badge/Karma-Test%20Runner-339999?style=for-the-badge&logo=karma&logoColor=white" alt="Karma Badge"/>
     <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
+    <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Actions Badge"/>
     <img src="https://github.com/agussantinelli/Sysacad-Next-FrontEnd/actions/workflows/ci.yml/badge.svg" alt="Angular CI Status Badge"/>
 </div>
 
@@ -134,6 +135,11 @@
             <td><strong>Test Runner</strong></td>
             <td>Karma 6.4.0</td>
             <td>Ejecutor de pruebas en entorno de navegador real.</td>
+        </tr>
+        <tr>
+            <td><strong>CI/CD</strong></td>
+            <td>GitHub Actions</td>
+            <td>Automatización de procesos (Build, Test, Lint) en cada Push/PR.</td>
         </tr>
     </tbody>
 </table>
