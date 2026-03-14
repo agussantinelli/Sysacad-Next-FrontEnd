@@ -14,7 +14,7 @@ describe('AdminCareersComponent', () => {
   let router: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    const adminSpy = jasmine.createSpyObj('AdminService', ['getAllCarreras', 'crearCarrera', 'getPlanesDetallados']);
+    const adminSpy = jasmine.createSpyObj('AdminService', ['getAllCarreras', 'crearCarrera', 'getPlanesDetallados', 'obtenerFacultades']);
     const alertSpy = jasmine.createSpyObj('AlertService', ['success', 'error', 'warning', 'info']);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 

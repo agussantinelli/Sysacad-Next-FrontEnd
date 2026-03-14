@@ -57,8 +57,8 @@ describe('EnrollStudentComponent', () => {
 
   it('should search student by legajo', () => {
     const mockStudents = [
-        { id: '1', nroAlumno: 123, rol: 'estudiante', nombre: 'Juan' },
-        { id: '2', nroAlumno: 456, rol: 'admin', nombre: 'Pedro' }
+        { id: '1', nroAlumno: 123, rol: 'ESTUDIANTE', nombre: 'Juan' },
+        { id: '2', nroAlumno: 456, rol: 'ADMIN', nombre: 'Pedro' }
     ] as any;
     adminService.buscarUsuarios.and.returnValue(of(mockStudents));
     

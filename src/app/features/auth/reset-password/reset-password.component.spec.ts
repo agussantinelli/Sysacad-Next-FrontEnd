@@ -102,7 +102,7 @@ describe('ResetPasswordComponent', () => {
 
     it('should handle reset password error', () => {
         const errorResponse = { response: { data: { message: 'Expired token' } } };
-        authService.resetPassword.and.returnValue(throwError(() => ({ response: { data: { message: 'Expired' } } })));
+        authService.resetPassword.and.returnValue(throwError(() => ({ response: { data: { message: 'Expired token' } } })));
         component.token = 'expired-token';
         component.resetForm.patchValue({
             password: 'newpassword123',

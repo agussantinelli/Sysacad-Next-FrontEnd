@@ -3,7 +3,7 @@ import { CreateAnnouncementComponent } from './create-announcement.component';
 import { AvisoService } from '@core/services/aviso.service';
 import { AlertService } from '@core/services/alert.service';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CreateAnnouncementComponent', () => {
@@ -58,7 +58,6 @@ describe('CreateAnnouncementComponent', () => {
     });
 
     it('should handle error from api', () => {
-        const { throwError } = require('rxjs');
         avisoService.crearAviso.and.returnValue(throwError(() => new Error('Error')));
         
         component.aviso = { titulo: 'T', descripcion: 'D', estado: 'ACTIVO' };

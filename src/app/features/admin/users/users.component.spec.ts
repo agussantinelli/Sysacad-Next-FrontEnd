@@ -12,6 +12,7 @@ describe('UsersComponent', () => {
   let fixture: ComponentFixture<UsersComponent>;
   let usuarioService: jasmine.SpyObj<UsuarioService>;
   let alertService: jasmine.SpyObj<AlertService>;
+  let router: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
     const usuarioSpy = jasmine.createSpyObj('UsuarioService', ['obtenerTodos', 'cambiarEstado']);
@@ -31,6 +32,7 @@ describe('UsersComponent', () => {
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService) as jasmine.SpyObj<UsuarioService>;
     alertService = TestBed.inject(AlertService) as jasmine.SpyObj<AlertService>;
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
 
     usuarioService.obtenerTodos.and.returnValue(of([]));
   });
@@ -52,22 +54,16 @@ describe('UsersComponent', () => {
     });
 
     it('should navigate to create', () => {
-        const router = TestBed.inject(Router);
-        spyOn(router, 'navigate');
         component.goToCreate();
         expect(router.navigate).toHaveBeenCalledWith(['/admin/users/create']);
     });
 
     it('should navigate to edit user', () => {
-        const router = TestBed.inject(Router);
-        spyOn(router, 'navigate');
         component.editUser({ id: '123' } as any);
         expect(router.navigate).toHaveBeenCalledWith(['/admin/users/edit', '123']);
     });
 
     it('should navigate to profile', () => {
-        const router = TestBed.inject(Router);
-        spyOn(router, 'navigate');
         component.goToProfile({ id: '456' } as any);
         expect(router.navigate).toHaveBeenCalledWith(['/admin/profile', '456']);
     });

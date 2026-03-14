@@ -37,9 +37,8 @@ describe('AxiosClient', () => {
         localStorage.setItem('token', 'some-token');
         
         // Mock window.location
-        const originalLocation = window.location;
-        delete (window as any).location;
-        (window as any).location = { href: '' };
+        const mockLocation = { href: '' };
+        spyOnProperty(window, 'location', 'get').and.returnValue(mockLocation as any);
 
         const response: any = {
             headers: { 'boot-id': 'new-id' }
@@ -53,16 +52,12 @@ describe('AxiosClient', () => {
         }
 
         expect(localStorage.getItem('token')).toBeNull();
-        expect(window.location.href).toBe('/login');
-
-        // Restore
-        (window as any).location = originalLocation;
+        expect(mockLocation.href).toBe('/login');
     });
 
     it('should handle network errors by clearing storage and redirecting', async () => {
-        const originalLocation = window.location;
-        delete (window as any).location;
-        (window as any).location = { href: '' };
+        const mockLocation = { href: '' };
+        spyOnProperty(window, 'location', 'get').and.returnValue(mockLocation as any);
 
         const error = {
             code: 'ERR_NETWORK',
@@ -76,7 +71,6 @@ describe('AxiosClient', () => {
             // expected
         }
 
-        expect(window.location.href).toBe('/login');
-        (window as any).location = originalLocation;
+        expect(mockLocation.href).toBe('/login');
     });
 });
