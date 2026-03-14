@@ -370,6 +370,14 @@ npm run lint
     <li><strong>Specs Ejecutados:</strong> Un total de <strong>368 pruebas unitarias</strong> exitosas que garantizan la integridad de la plataforma.</li>
     <li><strong>Aislamiento:</strong> Suite 100% aislada empleando mocks estratégicos para servicios, Axios y dependencias del navegador.</li>
 </ul>
+
+### ⚖️ Filosofía de Testeo 1:1
+
+El proyecto sigue una política estricta de **aparejamiento 1:1** entre archivos de código y archivos de prueba:
+- **Regla de Oro:** Todo archivo `.ts` que contenga lógica de negocio, servicios o componentes **DEBE** tener su correspondiente archivo `.spec.ts`.
+- **Ubicación:** El test debe residir en el mismo directorio que el archivo testeado.
+- **Integridad:** Esta convención asegura que ninguna funcionalidad sea desplegada sin su validación automatizada correspondiente, manteniendo la estabilidad del sistema a largo plazo.
+
 <hr>
 
 <h3>⚙️ Variables de Entorno</h3>
