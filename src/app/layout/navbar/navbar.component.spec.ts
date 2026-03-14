@@ -4,7 +4,7 @@ import { ThemeService } from '@core/services/theme.service';
 import { AuthService } from '@core/services/auth.service';
 import { AvisoService } from '@core/services/aviso.service';
 import { ChatService } from '@core/services/chat.service';
-import { of, Subject } from 'rxjs';
+import { of, Subject, BehaviorSubject } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -140,9 +140,11 @@ describe('NavbarComponent', () => {
     });
 
     it('should not load counts if user is null', () => {
-        // Redefine authSpy for this specific test
+        // Use a BehaviorSubject to control emissions
+        const userSubject = new BehaviorSubject<any>(null);
         const authService = TestBed.inject(AuthService) as any;
-        authService.currentUser$ = of(null);
+        // In the setup, currentUser$ was a getter or a property. Let's force it to our subject.
+        Object.defineProperty(authService, 'currentUser$', { value: userSubject.asObservable(), writable: true });
         
         spyOn(component, 'loadUnreadNotices');
         spyOn(component, 'loadUnreadMessages');

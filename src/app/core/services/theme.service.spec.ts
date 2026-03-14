@@ -45,6 +45,7 @@ describe('ThemeService', () => {
     });
 
     it('should initialize with light theme if saved in localStorage', () => {
+        document.body.classList.remove('dark-mode');
         (localStorage.getItem as jasmine.Spy).and.returnValue('light');
         const lightService = new ThemeService();
         expect(lightService.isDarkMode()).toBeFalse();

@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { HealthService } from './health.service';
 import { AuthService } from './auth.service';
 import axiosClient from '@core/api/axios.client';
@@ -80,10 +80,14 @@ describe('HealthService', () => {
 
     it('should handle unauthorized error as failure', fakeAsync(() => {
         const errorResponse = { response: { status: 401 } };
-        (axiosClient.get as jasmine.Spy).and.returnValue(Promise.reject(errorResponse));
+        const rejectedPromise = Promise.reject(errorResponse);
+        rejectedPromise.catch(() => {}); // Prevent "Uncaught in promise" error
+        (axiosClient.get as jasmine.Spy).and.returnValue(rejectedPromise);
 
         service.startMonitoring();
         tick(30001);
+        
+        flush();
 
         expect(authServiceSpy.logout).toHaveBeenCalled();
     }));

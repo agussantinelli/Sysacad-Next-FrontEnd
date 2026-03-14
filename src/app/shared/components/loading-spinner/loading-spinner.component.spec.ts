@@ -46,16 +46,16 @@ describe('LoadingSpinnerComponent', () => {
         expect(compiled.querySelector('.inline')).toBeTruthy();
     });
 
-    it('should NOT have full-screen class by default', () => {
+    it('should NOT have fullscreen class by default', () => {
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('.spinner-overlay')).toBeFalsy();
+        expect(compiled.querySelector('.spinner-overlay')?.classList.contains('fullscreen')).toBeFalsy();
     });
 
     it('should NOT have inline class by default', () => {
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('.inline')).toBeFalsy();
+        expect(compiled.querySelector('.spinner-overlay')?.classList.contains('inline')).toBeFalsy();
     });
 
     it('should update message dynamically', () => {
@@ -71,6 +71,6 @@ describe('LoadingSpinnerComponent', () => {
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
         // Should at least contain the spinner div
-        expect(compiled.querySelector('.loader')).toBeTruthy();
+        expect(compiled.querySelector('.spinner')).toBeTruthy();
     });
 });

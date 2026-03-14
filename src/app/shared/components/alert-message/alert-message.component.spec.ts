@@ -50,28 +50,28 @@ describe('AlertMessageComponent', () => {
         component.type = 'success';
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('.alert-success')).toBeTruthy();
+        expect(compiled.querySelector('.alert-container')?.classList.contains('success')).toBeTrue();
     });
 
     it('should have error class when type is error', () => {
         component.type = 'error';
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('.alert-error')).toBeTruthy();
+        expect(compiled.querySelector('.alert-container')?.classList.contains('error')).toBeTrue();
     });
 
     it('should have warning class when type is warning', () => {
         component.type = 'warning';
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('.alert-warning')).toBeTruthy();
+        expect(compiled.querySelector('.alert-container')?.classList.contains('warning')).toBeTrue();
     });
 
     it('should have info class when type is info', () => {
         component.type = 'info';
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('.alert-info')).toBeTruthy();
+        expect(compiled.querySelector('.alert-container')?.classList.contains('info')).toBeTrue();
     });
 
     it('should render icon in the DOM', () => {
