@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AdminStatisticsComponent } from './admin-statistics.component';
 import { AdminService } from '@core/services/admin.service';
 import { AlertService } from '@core/services/alert.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AdminStatisticsComponent', () => {
@@ -47,5 +47,45 @@ describe('AdminStatisticsComponent', () => {
   it('should create', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
+  });
+
+  it('should load filters and statistics on init', () => {
+    const mockStats = {
+        cantidadAprobadosExamen: 10,
+        cantidadDesaprobadosExamen: 5,
+        cantidadAusentesExamen: 2,
+        cantidadRegulares: 20,
+        cantidadPromocionados: 15,
+        cantidadLibres: 5
+    } as any;
+    adminService.obtenerEstadisticas.and.returnValue(of(mockStats));
+    
+    component.ngOnInit();
+    
+    expect(adminService.getAllFacultades).toHaveBeenCalled();
+    expect(adminService.getAllCarreras).toHaveBeenCalled();
+    expect(adminService.obtenerEstadisticas).toHaveBeenCalled();
+    
+    expect(component.examChartData[0].value).toBe(10); // Aprobados
+    expect(component.studentChartData[2].value).toBe(5); // Libres
+  });
+
+  it('should apply filters and reload stats', () => {
+    component.selectedAnio = 2024;
+    component.selectedFacultad = 'F1';
+    component.selectedCarrera = 'C1';
+    
+    component.applyFilters();
+    
+    expect(adminService.obtenerEstadisticas).toHaveBeenCalledWith(2024, 'F1', 'C1');
+  });
+
+  it('should handle error when loading statistics', () => {
+        adminService.obtenerEstadisticas.and.returnValue(throwError(() => new Error('Error')));
+    
+    component.loadStatistics();
+    
+    expect(alertService.error).toHaveBeenCalledWith('Error al cargar las estadísticas.');
+    expect(component.isLoading).toBeFalse();
   });
 });
