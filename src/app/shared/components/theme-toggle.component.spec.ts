@@ -24,4 +24,29 @@ describe('ThemeToggleComponent', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
+
+    it('should call toggleTheme on click', () => {
+        const themeService = TestBed.inject(ThemeService);
+        const button = fixture.nativeElement.querySelector('button');
+        button.click();
+        expect(themeService.toggleTheme).toHaveBeenCalled();
+    });
+
+    it('should apply dark class when in dark mode', () => {
+        const themeService = TestBed.inject(ThemeService);
+        (themeService.isDarkMode as any).and.returnValue(true);
+        fixture.detectChanges();
+        
+        const button = fixture.nativeElement.querySelector('button');
+        expect(button.classList.contains('dark')).toBeTrue();
+    });
+
+    it('should not apply dark class when in light mode', () => {
+        const themeService = TestBed.inject(ThemeService);
+        (themeService.isDarkMode as any).and.returnValue(false);
+        fixture.detectChanges();
+        
+        const button = fixture.nativeElement.querySelector('button');
+        expect(button.classList.contains('dark')).toBeFalse();
+    });
 });

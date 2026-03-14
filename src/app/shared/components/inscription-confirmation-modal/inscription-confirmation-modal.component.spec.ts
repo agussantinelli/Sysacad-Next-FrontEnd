@@ -18,4 +18,22 @@ describe('InscriptionConfirmationModalComponent', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
+
+    it('should handle body overflow on lifecycle', () => {
+        component.ngOnInit();
+        expect(document.body.style.overflow).toBe('hidden');
+        component.ngOnDestroy();
+        expect(document.body.style.overflow).toBe('auto');
+    });
+
+    it('should emit confirm and close events', () => {
+        spyOn(component.confirm, 'emit');
+        spyOn(component.close, 'emit');
+        
+        component.onConfirm();
+        expect(component.confirm.emit).toHaveBeenCalled();
+        
+        component.onClose();
+        expect(component.close.emit).toHaveBeenCalled();
+    });
 });
