@@ -25,7 +25,7 @@ describe('EditProfileComponent', () => {
 
         // Mock localStorage
         const mockUser = { id: '1', nombre: 'Test', apellido: 'User', dni: '123', mail: 'test@example.com' };
-        spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockUser));
+        localStorage.setItem('user', JSON.stringify(mockUser));
 
         fixture = TestBed.createComponent(EditProfileComponent);
         component = fixture.componentInstance;
@@ -45,8 +45,8 @@ describe('EditProfileComponent', () => {
 
     it('should update profile successfully', () => {
         fixture.detectChanges(); // Initialize form
-        const mockUser = { id: '1', nombre: 'Test' } as any;
-        usuarioService.actualizarUsuario.and.returnValue(of(mockUser));
+        const updatedUser = { id: '1', nombre: 'Test', apellido: 'User', dni: '123', mail: 'test@example.com' } as any;
+        usuarioService.actualizarUsuario.and.returnValue(of(updatedUser));
         const router = TestBed.inject(Router);
         spyOn(router, 'navigate');
 
@@ -55,7 +55,7 @@ describe('EditProfileComponent', () => {
 
         expect(usuarioService.actualizarUsuario).toHaveBeenCalled();
         expect(router.navigate).toHaveBeenCalledWith(['/profile']);
-        expect(JSON.parse(localStorage.getItem('user')!)).toEqual(mockUser);
+        expect(JSON.parse(localStorage.getItem('user')!)).toEqual(updatedUser);
     });
 
     it('should cancel and navigate back', () => {

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { HealthService } from '@core/services/health.service';
 import { AuthService } from '@core/services/auth.service';
 import { ChatService } from '@core/services/chat.service';
+import { AvisoService } from '@core/services/aviso.service';
 import { of, Subject, BehaviorSubject } from 'rxjs';
 import { ThemeService } from '@core/services/theme.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
     let authServiceSpy: jasmine.SpyObj<AuthService>;
     let healthServiceSpy: jasmine.SpyObj<HealthService>;
     let chatServiceSpy: jasmine.SpyObj<ChatService>;
+    let avisoServiceSpy: jasmine.SpyObj<AvisoService>;
     let routerSpy: any;
     let routerEventsSubject: Subject<any>;
     let currentUserSubject: BehaviorSubject<any>;
@@ -29,6 +31,7 @@ describe('AppComponent', () => {
         const chatSpy = jasmine.createSpyObj('ChatService', ['getTotalMensajesSinLeer'], {
             unreadCountChanged$: of(void 0)
         });
+        const avisoSpy = jasmine.createSpyObj('AvisoService', ['obtenerCantidadSinLeer']);
         const themeSpy = jasmine.createSpyObj('ThemeService', ['isDarkMode']);
         routerSpy = {
             navigate: jasmine.createSpy('navigate'),
@@ -44,6 +47,7 @@ describe('AppComponent', () => {
                 { provide: AuthService, useValue: authSpy },
                 { provide: HealthService, useValue: healthSpy },
                 { provide: ChatService, useValue: chatSpy },
+                { provide: AvisoService, useValue: avisoSpy },
                 { provide: ThemeService, useValue: themeSpy },
                 { provide: Router, useValue: routerSpy },
                 { 
@@ -60,6 +64,9 @@ describe('AppComponent', () => {
         authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
         healthServiceSpy = TestBed.inject(HealthService) as jasmine.SpyObj<HealthService>;
         chatServiceSpy = TestBed.inject(ChatService) as jasmine.SpyObj<ChatService>;
+        avisoServiceSpy = TestBed.inject(AvisoService) as jasmine.SpyObj<AvisoService>;
+        
+        avisoServiceSpy.obtenerCantidadSinLeer.and.returnValue(of(0));
 
         fixture = TestBed.createComponent(AppComponent);
         component = fixture.componentInstance;

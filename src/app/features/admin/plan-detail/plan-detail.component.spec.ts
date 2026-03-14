@@ -56,8 +56,9 @@ describe('AdminPlanDetailComponent', () => {
     } as any;
 
     adminService.getAllCarreras.and.returnValue(of(mockCareers));
+    adminService.getPlanDetalle.and.returnValue(of(mockPlan));
 
-    component.ngOnInit();
+    fixture.detectChanges();
 
     expect(adminService.getPlanDetalle).toHaveBeenCalledWith('1', 2023);
     expect(component.careerName).toBe('Sistemas');
