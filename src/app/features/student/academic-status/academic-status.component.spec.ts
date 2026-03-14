@@ -37,4 +37,39 @@ describe('AcademicStatusComponent', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
+
+    it('should load and process data on init', () => {
+        const mockData = [{
+            materias: [
+                { idMateria: '1', nombre: 'M1', estado: 'PENDIENTE', nivel: 1 },
+                { idMateria: '2', nombre: 'M2', estado: 'REGULAR', nivel: 1 }
+            ]
+        }] as any;
+        matriculacionService.getMisCarrerasMaterias.and.returnValue(of(mockData));
+        
+        component.ngOnInit();
+        
+        expect(component.displayData.length).toBe(1);
+        expect(component.displayData[0].nombre).toBe('M2');
+    });
+
+    it('should handle ver-historial action', () => {
+        const mockRow = { idMateria: 'M2', nombre: 'M2' };
+        
+        matriculacionService.getHistorialMateria.and.returnValue(of({ finales: [], cursadas: [] } as any));
+        matriculacionService.getNotasCursada.and.returnValue(of([]));
+        
+        component.handleAction({ action: 'ver-historial', row: mockRow });
+        
+        expect(component.isModalOpen).toBeTrue();
+        expect(component.selectedMateria).toBe(mockRow);
+        expect(matriculacionService.getHistorialMateria).toHaveBeenCalledWith('M2');
+    });
+
+    it('should close modal', () => {
+        component.isModalOpen = true;
+        component.closeModal();
+        expect(component.isModalOpen).toBeFalse();
+        expect(component.selectedMateria).toBeNull();
+    });
 });

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MyInscriptionsComponent } from './my-inscriptions.component';
 import { InscripcionExamenService } from '@core/services/inscripcion-examen.service';
 import { AlertService } from '@core/services/alert.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('MyInscriptionsComponent', () => {
@@ -32,5 +32,43 @@ describe('MyInscriptionsComponent', () => {
     it('should create', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
+    });
+
+    it('should load inscriptions on init', () => {
+        const mockInscriptions = [{ idInscripcion: '1', nombreMateria: 'Math' }] as any;
+        inscripcionService.misInscripciones.and.returnValue(of(mockInscriptions));
+        
+        component.ngOnInit();
+        
+        expect(inscripcionService.misInscripciones).toHaveBeenCalled();
+        expect(component.myInscriptions).toEqual(mockInscriptions);
+        expect(component.isLoading).toBeFalse();
+    });
+
+    it('should show confirmation modal on unenroll click', () => {
+        component.onUnenrollClick('1');
+        expect(component.showConfirmModal).toBeTrue();
+        expect(component.inscriptionIdToUnenroll).toBe('1');
+    });
+
+    it('should confirm unenroll and reload data', () => {
+        const alertService = TestBed.get(AlertService);
+        inscripcionService.bajaInscripcion.and.returnValue(of(undefined));
+        spyOn(component, 'loadMyInscriptions');
+        
+        component.inscriptionIdToUnenroll = '1';
+        component.onConfirmUnenroll();
+        
+        expect(inscripcionService.bajaInscripcion).toHaveBeenCalledWith('1');
+        expect(alertService.success).toHaveBeenCalledWith('Baja de inscripción exitosa.');
+        expect(component.loadMyInscriptions).toHaveBeenCalled();
+    });
+
+    it('should cancel unenroll', () => {
+        component.showConfirmModal = true;
+        component.inscriptionIdToUnenroll = '1';
+        component.onCancelUnenroll();
+        expect(component.showConfirmModal).toBeFalse();
+        expect(component.inscriptionIdToUnenroll).toBeNull();
     });
 });

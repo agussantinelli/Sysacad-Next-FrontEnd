@@ -37,4 +37,41 @@ describe('CurrentEnrollmentsComponent', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
+
+    it('should load and process enrollment data on init', () => {
+        const mockData = [{
+            nombreMateria: 'M1',
+            nombreComision: 'C1',
+            calificaciones: [{ descripcion: 'P1', nota: 8 }]
+        }] as any;
+        inscripcionService.obtenerCursadasActuales.and.returnValue(of(mockData));
+        
+        component.ngOnInit();
+        
+        expect(inscripcionService.obtenerCursadasActuales).toHaveBeenCalledWith('1');
+        expect(component.displayData.length).toBe(1);
+        expect(component.displayData[0].calificacionesList[0]).toBe('P1: 8');
+    });
+
+    it('should handle missing user identified', () => {
+        (Object.getOwnPropertyDescriptor(authService, 'currentUser$')?.get as jasmine.Spy).and.returnValue(of(null));
+        spyOn(console, 'error');
+        
+        component.loadData();
+        
+        expect(console.error).toHaveBeenCalledWith('User not identified');
+        expect(component.isLoading).toBeFalse();
+    });
+
+    it('should handle empty grades list', () => {
+        const mockData = [{
+            nombreMateria: 'M2',
+            calificaciones: []
+        }] as any;
+        inscripcionService.obtenerCursadasActuales.and.returnValue(of(mockData));
+        
+        component.loadData();
+        
+        expect(component.displayData[0].calificacionesList).toEqual([]);
+    });
 });
