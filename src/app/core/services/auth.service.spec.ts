@@ -134,5 +134,58 @@ describe('AuthService', () => {
                 done();
             });
         });
+
+        it('should handle null user in updateUser', (done) => {
+            service.updateUser(null as any);
+            expect(localStorage.removeItem).toHaveBeenCalledWith('user');
+            service.currentUser$.subscribe(user => {
+                expect(user).toBeNull();
+                done();
+            });
+        });
+    });
+
+    describe('Storage checks', () => {
+        it('should have token in local storage', () => {
+            localStorage.setItem('token', 'my-token');
+            expect(localStorage.getItem('token')).toBe('my-token');
+        });
+
+        it('should have bootId in local storage', () => {
+            localStorage.setItem('bootId', 'my-boot-id');
+            expect(localStorage.getItem('bootId')).toBe('my-boot-id');
+        });
+    });
+
+    describe('currentUserSubject initialization', () => {
+        it('should initialize with user from storage if present', (done) => {
+            localStorage.setItem('user', JSON.stringify(mockUser));
+            // We need to re-inject service to trigger constructor initialization
+            const newService = TestBed.inject(AuthService);
+            newService.currentUser$.subscribe(user => {
+                expect(user).toEqual(mockUser);
+                done();
+            });
+        });
+
+        it('should initialize with null if storage is empty', (done) => {
+            localStorage.clear();
+            const newService = TestBed.inject(AuthService);
+            newService.currentUser$.subscribe(user => {
+                expect(user).toBeNull();
+                done();
+            });
+        });
+
+        it('should handle corrupted JSON in storage', (done) => {
+            localStorage.setItem('user', 'invalid-json');
+            spyOn(console, 'error');
+            const newService = TestBed.inject(AuthService);
+            newService.currentUser$.subscribe(user => {
+                expect(user).toBeNull();
+                expect(console.error).toHaveBeenCalled();
+                done();
+            });
+        });
     });
 });

@@ -45,4 +45,40 @@ describe('AlertMessageComponent', () => {
         const compiled = fixture.nativeElement as HTMLElement;
         expect(compiled.textContent).toContain('Test Alert Message');
     });
+
+    it('should have success class when type is success', () => {
+        component.type = 'success';
+        fixture.detectChanges();
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('.alert-success')).toBeTruthy();
+    });
+
+    it('should have error class when type is error', () => {
+        component.type = 'error';
+        fixture.detectChanges();
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('.alert-error')).toBeTruthy();
+    });
+
+    it('should have warning class when type is warning', () => {
+        component.type = 'warning';
+        fixture.detectChanges();
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('.alert-warning')).toBeTruthy();
+    });
+
+    it('should have info class when type is info', () => {
+        component.type = 'info';
+        fixture.detectChanges();
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('.alert-info')).toBeTruthy();
+    });
+
+    it('should render icon in the DOM', () => {
+        component.type = 'success';
+        fixture.detectChanges();
+        const compiled = fixture.nativeElement as HTMLElement;
+        const iconElement = compiled.querySelector('.material-icons');
+        expect(iconElement?.textContent?.trim()).toBe('check_circle');
+    });
 });

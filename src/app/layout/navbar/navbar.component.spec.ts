@@ -111,4 +111,58 @@ describe('NavbarComponent', () => {
         expect(component.loadUnreadNotices).toHaveBeenCalled();
         expect(component.loadUnreadMessages).toHaveBeenCalled();
     });
+
+    it('should return dark mode logo when theme is dark', () => {
+        const themeService = TestBed.inject(ThemeService) as jasmine.SpyObj<ThemeService>;
+        themeService.isDarkMode.and.returnValue(true);
+        expect(component.logoPath).toBe('/logo-utn-dark-mode.png');
+    });
+
+    it('should return light mode logo when theme is light', () => {
+        const themeService = TestBed.inject(ThemeService) as jasmine.SpyObj<ThemeService>;
+        themeService.isDarkMode.and.returnValue(false);
+        expect(component.logoPath).toBe('/logo-utn-light-mode.png');
+    });
+
+    it('should update badge count for ADMIN', () => {
+        component.usuario = { rol: 'ADMIN' } as any;
+        component.updateBadgeCount('Avisos', 3);
+        const avisosOpt = component.adminSections.find(s => s.title === 'Trámites')
+            ?.options.find(o => o.title === 'Avisos');
+        expect(avisosOpt?.badgeCount).toBe(3);
+    });
+
+    it('should handle missing option in updateBadgeCount', () => {
+        component.usuario = { rol: 'ESTUDIANTE' } as any;
+        // Should not throw
+        component.updateBadgeCount('NonExistentOption', 10);
+        expect(true).toBeTrue();
+    });
+
+    it('should not load counts if user is null', () => {
+        // Redefine authSpy for this specific test
+        const authService = TestBed.inject(AuthService) as any;
+        authService.currentUser$ = of(null);
+        
+        spyOn(component, 'loadUnreadNotices');
+        spyOn(component, 'loadUnreadMessages');
+        
+        component.ngOnInit();
+        
+        expect(component.loadUnreadNotices).not.toHaveBeenCalled();
+        expect(component.loadUnreadMessages).not.toHaveBeenCalled();
+    });
+
+    it('should react to unreadCountChanged$ changes', () => {
+        // chatSpy unreadCountChanged$ is a Subject in the setup
+        const chatService = TestBed.inject(ChatService) as any;
+        const unreadSubject = new Subject<void>();
+        chatService.unreadCountChanged$ = unreadSubject.asObservable();
+        
+        spyOn(component, 'loadUnreadMessages');
+        component.ngOnInit();
+        
+        unreadSubject.next();
+        expect(component.loadUnreadMessages).toHaveBeenCalled();
+    });
 });

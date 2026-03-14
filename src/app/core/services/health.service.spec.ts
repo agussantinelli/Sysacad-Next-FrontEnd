@@ -59,4 +59,32 @@ describe('HealthService', () => {
         tick(30001);
         expect(axiosClient.get).toHaveBeenCalledTimes(1);
     }));
+
+    it('should not start monitoring multiple times', fakeAsync(() => {
+        (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: 'ok' }));
+        service.startMonitoring();
+        service.startMonitoring();
+        tick(30001);
+        expect(axiosClient.get).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should be able to restart monitoring after stopping', fakeAsync(() => {
+        (axiosClient.get as jasmine.Spy).and.returnValue(Promise.resolve({ data: 'ok' }));
+        service.startMonitoring();
+        service.stopMonitoring();
+        
+        service.startMonitoring();
+        tick(30001);
+        expect(axiosClient.get).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should handle unauthorized error as failure', fakeAsync(() => {
+        const errorResponse = { response: { status: 401 } };
+        (axiosClient.get as jasmine.Spy).and.returnValue(Promise.reject(errorResponse));
+
+        service.startMonitoring();
+        tick(30001);
+
+        expect(authServiceSpy.logout).toHaveBeenCalled();
+    }));
 });

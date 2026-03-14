@@ -100,4 +100,51 @@ describe('TableComponent', () => {
         component.sort(mockColumns[2]); // category.name DESC
         expect(component.displayData[0].category.name).toBe('Fruit');
     });
+
+    it('should show all data if pageSize is greater than total data', () => {
+        component.data = mockData;
+        component.pageSize = 100;
+        component.updateDisplayData();
+        expect(component.displayData.length).toBe(mockData.length);
+        expect(component.totalPages).toBe(1);
+    });
+
+    it('should handle empty data gracefully', () => {
+        component.data = [];
+        component.updateDisplayData();
+        expect(component.displayData.length).toBe(0);
+        expect(component.totalPages).toBe(0);
+    });
+
+    it('should return null for non-existent nested property', () => {
+        const row = { category: {} };
+        const col = { key: 'category.name', label: 'Cat' };
+        expect(component.getCellValue(row, col)).toBeUndefined();
+    });
+
+    it('should return undefined for missing property', () => {
+        const row = { };
+        const col = { key: 'name', label: 'Name' };
+        expect(component.getCellValue(row, col)).toBeUndefined();
+    });
+
+    it('should navigate to next page', () => {
+        component.data = mockData;
+        component.pageSize = 1;
+        component.currentPage = 1;
+        component.updateDisplayData();
+        
+        component.changePage(2);
+        expect(component.currentPage).toBe(2);
+    });
+
+    it('should not navigate past total pages', () => {
+        component.data = mockData;
+        component.pageSize = 1;
+        component.currentPage = 3;
+        component.updateDisplayData();
+        
+        component.changePage(4);
+        expect(component.currentPage).toBe(3);
+    });
 });
