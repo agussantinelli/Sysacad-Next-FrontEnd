@@ -362,12 +362,13 @@ npm run lint
 <p>Para correr la suite completa de pruebas:</p>
 <pre><code>npm run test</code></pre>
 
-<h3>📊 Cobertura Actual</h3>
+### 📊 Cobertura Actual
 <ul>
-    <li><strong>Capa de Servicios (Core Services):</strong> <strong>100% de cobertura</strong>. Cada uno de los 24 servicios cuenta con su respectiva suite de pruebas.</li>
-    <li><strong>Specs Ejecutados:</strong> Un total de <strong>126 pruebas unitarias</strong> exitosas (100% SUCCESS) que validan flujos de negocio, transformaciones de datos y manejo de errores.</li>
-    <li><strong>Componentes y Core:</strong> Cobertura extendida a <strong>Guards</strong>, <strong>Interceptors</strong> y <strong>DashboardComponent</strong>.</li>
-    <li><strong>Aislamiento de Pruebas:</strong> Suite 100% aislada empleando mocks estratégicos para <code>Axios</code>, <code>LocalStorage</code> y <code>MatSnackBar</code>.</li>
+    <li><strong>Capa de Servicios (Core Services):</strong> <code>src/app/core/services</code> (100% de cobertura).</li>
+    <li><strong>Componentes (Features):</strong> <code>src/app/features</code> (Admin, Professor, Student, Auth, Messages, Announcements).</li>
+    <li><strong>Layout & Shared:</strong> <code>src/app/layout</code>, <code>src/app/shared</code> (Components, Pipes).</li>
+    <li><strong>Specs Ejecutados:</strong> Un total de <strong>185 pruebas unitarias</strong> exitosas que garantizan la integridad de la plataforma.</li>
+    <li><strong>Aislamiento:</strong> Suite 100% aislada empleando mocks estratégicos para servicios, Axios y dependencias del navegador.</li>
 </ul>
 <hr>
 
