@@ -65,14 +65,14 @@ describe('AdminUserProfileComponent', () => {
     
     component.toggleState();
     expect(component.showModal).toBeTrue();
-    expect(component.pendingNewState).toBe(EstadoUsuario.INACTIVO);
+    expect(component.pendingNewState).toEqual(EstadoUsuario.INACTIVO);
 
     usuarioService.cambiarEstado.and.returnValue(of({ id: '1', estado: EstadoUsuario.INACTIVO } as any));
     component.onModalConfirm();
     
     expect(usuarioService.cambiarEstado).toHaveBeenCalledWith('1', EstadoUsuario.INACTIVO);
     expect(alertService.success).toHaveBeenCalled();
-    expect(component.usuario?.estado).toBe(EstadoUsuario.INACTIVO);
+    expect(component.usuario?.estado).toEqual(EstadoUsuario.INACTIVO);
     expect(component.showModal).toBeFalse();
   });
 
