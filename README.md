@@ -367,7 +367,7 @@ npm run lint
     <li><strong>Capa de Servicios (Core Services):</strong> <code>src/app/core/services</code> (100% de cobertura).</li>
     <li><strong>Componentes (Features):</strong> <code>src/app/features</code> (Admin, Professor, Student, Auth, Messages, Announcements).</li>
     <li><strong>Layout & Shared:</strong> <code>src/app/layout</code>, <code>src/app/shared</code> (Components, Pipes).</li>
-    <li><strong>Specs Ejecutados:</strong> Un total de <strong>187 pruebas unitarias</strong> exitosas que garantizan la integridad de la plataforma.</li>
+    <li><strong>Specs Ejecutados:</strong> Un total de <strong>368 pruebas unitarias</strong> exitosas que garantizan la integridad de la plataforma.</li>
     <li><strong>Aislamiento:</strong> Suite 100% aislada empleando mocks estratégicos para servicios, Axios y dependencias del navegador.</li>
 </ul>
 <hr>
