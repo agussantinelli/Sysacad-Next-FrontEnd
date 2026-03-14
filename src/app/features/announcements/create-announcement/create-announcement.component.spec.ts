@@ -36,4 +36,41 @@ describe('CreateAnnouncementComponent', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
+
+    it('should create announcement successfully', () => {
+        const router = TestBed.inject(Router);
+        avisoService.crearAviso.and.returnValue(of({} as any));
+        
+        component.aviso = { titulo: 'T', descripcion: 'D', estado: 'ACTIVO' };
+        component.onSubmit();
+        
+        expect(avisoService.crearAviso).toHaveBeenCalledWith({ titulo: 'T', descripcion: 'D', estado: 'ACTIVO' });
+        expect(alertService.success).toHaveBeenCalledWith('Aviso creado exitosamente.');
+        expect(router.navigate).toHaveBeenCalledWith(['/admin/announcements']);
+    });
+
+    it('should handle validation error on submit', () => {
+        component.aviso = { titulo: '', descripcion: '', estado: 'ACTIVO' };
+        component.onSubmit();
+        
+        expect(alertService.error).toHaveBeenCalledWith('Por favor completa los campos obligatorios.');
+        expect(avisoService.crearAviso).not.toHaveBeenCalled();
+    });
+
+    it('should handle error from api', () => {
+        const { throwError } = require('rxjs');
+        avisoService.crearAviso.and.returnValue(throwError(() => new Error('Error')));
+        
+        component.aviso = { titulo: 'T', descripcion: 'D', estado: 'ACTIVO' };
+        component.onSubmit();
+        
+        expect(alertService.error).toHaveBeenCalledWith('Ocurrió un error al crear el aviso.');
+        expect(component.isLoading).toBeFalse();
+    });
+
+    it('should cancel and navigate back', () => {
+        const router = TestBed.inject(Router);
+        component.cancel();
+        expect(router.navigate).toHaveBeenCalledWith(['/admin/announcements']);
+    });
 });
