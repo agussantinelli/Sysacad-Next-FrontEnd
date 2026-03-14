@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { HealthService } from '@core/services/health.service';
 import { AuthService } from '@core/services/auth.service';
 import { ChatService } from '@core/services/chat.service';
-import { of, Subject } from 'rxjs';
+import { of, Subject, BehaviorSubject } from 'rxjs';
 import { ThemeService } from '@core/services/theme.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,23 +14,29 @@ describe('AppComponent', () => {
     let authServiceSpy: jasmine.SpyObj<AuthService>;
     let healthServiceSpy: jasmine.SpyObj<HealthService>;
     let chatServiceSpy: jasmine.SpyObj<ChatService>;
-    let routerSpy: jasmine.SpyObj<Router>;
+    let routerSpy: any;
     let routerEventsSubject: Subject<any>;
+    let currentUserSubject: BehaviorSubject<any>;
 
     beforeEach(async () => {
         routerEventsSubject = new Subject<any>();
+        currentUserSubject = new BehaviorSubject<any>(null);
+
         const authSpy = jasmine.createSpyObj('AuthService', [], {
-            currentUser$: of(null)
+            currentUser$: currentUserSubject.asObservable()
         });
         const healthSpy = jasmine.createSpyObj('HealthService', ['startMonitoring', 'stopMonitoring']);
         const chatSpy = jasmine.createSpyObj('ChatService', ['getTotalMensajesSinLeer'], {
             unreadCountChanged$: of(void 0)
         });
         const themeSpy = jasmine.createSpyObj('ThemeService', ['isDarkMode']);
-        const rSpy = jasmine.createSpyObj('Router', ['navigate'], {
+        routerSpy = {
+            navigate: jasmine.createSpy('navigate'),
+            createUrlTree: jasmine.createSpy('createUrlTree').and.returnValue({}),
+            serializeUrl: jasmine.createSpy('serializeUrl').and.returnValue('/'),
             events: routerEventsSubject.asObservable(),
             url: '/'
-        });
+        };
 
         await TestBed.configureTestingModule({
             imports: [AppComponent, NoopAnimationsModule],
@@ -39,14 +45,21 @@ describe('AppComponent', () => {
                 { provide: HealthService, useValue: healthSpy },
                 { provide: ChatService, useValue: chatSpy },
                 { provide: ThemeService, useValue: themeSpy },
-                { provide: Router, useValue: rSpy }
+                { provide: Router, useValue: routerSpy },
+                { 
+                    provide: ActivatedRoute, 
+                    useValue: { 
+                        snapshot: { params: {} }, 
+                        params: of({}), 
+                        queryParams: of({}) 
+                    } 
+                }
             ]
         }).compileComponents();
 
         authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
         healthServiceSpy = TestBed.inject(HealthService) as jasmine.SpyObj<HealthService>;
         chatServiceSpy = TestBed.inject(ChatService) as jasmine.SpyObj<ChatService>;
-        routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
 
         fixture = TestBed.createComponent(AppComponent);
         component = fixture.componentInstance;
@@ -62,14 +75,14 @@ describe('AppComponent', () => {
     });
 
     it('should show navbar on non-excluded routes', () => {
-        (routerSpy as any).url = '/dashboard';
+        routerSpy.url = '/dashboard';
         routerEventsSubject.next(new NavigationEnd(1, '/dashboard', '/dashboard'));
         fixture.detectChanges();
         expect(component.showNavbar).toBeTrue();
     });
 
     it('should hide navbar on excluded routes', () => {
-        (routerSpy as any).url = '/login';
+        routerSpy.url = '/login';
         routerEventsSubject.next(new NavigationEnd(1, '/login', '/login'));
         fixture.detectChanges();
         expect(component.showNavbar).toBeFalse();
@@ -77,12 +90,11 @@ describe('AppComponent', () => {
 
     it('should start monitoring and load unread count when user logs in', () => {
         const mockUser = { id: '1', nombre: 'Test' };
-        authServiceSpy.currentUser$ = of(mockUser as any);
         chatServiceSpy.getTotalMensajesSinLeer.and.returnValue(of(5));
         
-        component.ngOnInit();
-        fixture.detectChanges();
-
+        fixture.detectChanges(); // Triggers ngOnInit
+        currentUserSubject.next(mockUser);
+        
         expect(healthServiceSpy.startMonitoring).toHaveBeenCalled();
         expect(chatServiceSpy.getTotalMensajesSinLeer).toHaveBeenCalled();
         expect(component.unreadMessagesCount).toBe(5);
