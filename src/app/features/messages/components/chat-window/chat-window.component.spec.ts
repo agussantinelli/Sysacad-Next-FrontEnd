@@ -29,7 +29,8 @@ describe('ChatWindowComponent', () => {
         
         const groups = component.groupedMessages;
         expect(groups.length).toBe(2);
-        expect(groups[0].dateLabel).toBe('Hoy');
+        // messages are sorted ascending by date, so today's group is the last one
+        expect(groups[groups.length - 1].dateLabel).toBe('Hoy');
     });
 
     it('should emit sendMessage', () => {

@@ -65,7 +65,7 @@ describe('ForgotPasswordComponent', () => {
 
     it('should handle submission error', () => {
         const errorResponse = { response: { data: { message: 'User not found' } } };
-        authService.forgotPassword.and.returnValue(throwError(() => ({ status: 404 })));
+        authService.forgotPassword.and.returnValue(throwError(() => ({ response: { data: { message: 'User not found' } } })));
 
         component.emailOrLegajo.setValue('unknown@test.com');
         component.onSubmit();

@@ -29,6 +29,7 @@ describe('AdminPlanDetailComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRouteSpy }
       ]
     }).compileComponents();
+    // console.error(err); // Muted for testing if needed, or expected in test
 
     fixture = TestBed.createComponent(AdminPlanDetailComponent);
     component = fixture.componentInstance;
@@ -46,19 +47,18 @@ describe('AdminPlanDetailComponent', () => {
 
   it('should load career and plan data on init', () => {
     const mockCareers = [{ id: '1', nombre: 'Sistemas' }] as any;
-    const mockPlan = { 
-        nombre: 'Plan 2023', 
+    const mockPlan = {
+        nombre: 'Plan 2023',
         materias: [
             { idMateria: 'M1', nombre: 'Math', nivel: 1 },
             { idMateria: 'M2', nombre: 'Physics', nivel: 2 }
-        ] 
+        ]
     } as any;
-    
+
     adminService.getAllCarreras.and.returnValue(of(mockCareers));
-    adminService.getPlanDetalle.and.returnValue(of(mockPlan));
-    
+
     component.ngOnInit();
-    
+
     expect(adminService.getPlanDetalle).toHaveBeenCalledWith('1', 2023);
     expect(component.careerName).toBe('Sistemas');
     expect(component.pageTitle).toBe('Sistemas - Plan 2023');
@@ -67,10 +67,11 @@ describe('AdminPlanDetailComponent', () => {
   });
 
   it('should handle error when loading plan', () => {
-    adminService.getPlanDetalle.and.returnValue(throwError(() => new Error('Error')));
-    
+    adminService.getPlanDetalle.and.returnValue(throwError(() => ({ error: 'Error' })));
+    spyOn(console, 'error');
+
     component.loadPlan();
-    
+
     expect(alertService.error).toHaveBeenCalledWith('Error al cargar detalle del plan');
     expect(component.isLoading).toBeFalse();
   });

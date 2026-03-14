@@ -19,7 +19,8 @@ describe('MessagesComponent', () => {
             'getMisGrupos', 
             'marcarLeido',
             'getMiembros',
-            'getMensajes'
+            'getMensajes',
+            'enviarMensajeAlGrupo'
         ]);
         const authSpy = jasmine.createSpyObj('AuthService', [], {
             currentUser$: of({ id: '1', rol: 'ESTUDIANTE' } as any)

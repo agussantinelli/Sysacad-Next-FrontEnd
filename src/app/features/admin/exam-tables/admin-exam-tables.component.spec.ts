@@ -59,7 +59,6 @@ describe('AdminExamTablesComponent', () => {
 
     it('should navigate to turn detail', () => {
         const router = TestBed.inject(Router);
-        spyOn(router, 'navigate');
         component.selectTurno({ id: '123' } as any);
         expect(router.navigate).toHaveBeenCalledWith(['/admin/exam-tables', '123']);
     });

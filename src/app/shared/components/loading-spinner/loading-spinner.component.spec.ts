@@ -43,6 +43,6 @@ describe('LoadingSpinnerComponent', () => {
         component.inline = true;
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('.spinner-inline')).toBeTruthy();
+        expect(compiled.querySelector('.inline')).toBeTruthy();
     });
 });

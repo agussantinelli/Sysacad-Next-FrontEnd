@@ -53,7 +53,8 @@ describe('AdminCareersComponent', () => {
     });
 
     it('should handle error when loading careers', () => {
-        adminService.obtenerFacultades.and.returnValue(throwError(() => new Error('Error')));
+        adminService.getAllCarreras.and.returnValue(throwError(() => ({ error: 'Error' })));
+        spyOn(console, 'error');
         
         component.loadCarreras();
         

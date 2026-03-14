@@ -44,7 +44,7 @@ describe('ProfessorGradeExamComponent', () => {
         
         component.ngOnInit();
         
-        expect(professorService.getInscriptosExamen).toHaveBeenCalledWith('1', 0);
+        expect(professorService.getInscriptosExamen).toHaveBeenCalledWith('1', 1);
         expect(component.inscriptos[0].apellido).toBe('Perez');
         expect(component.inscriptos[0].estado).toBe('PENDIENTE');
     });

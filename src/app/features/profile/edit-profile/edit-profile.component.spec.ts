@@ -44,6 +44,7 @@ describe('EditProfileComponent', () => {
     });
 
     it('should update profile successfully', () => {
+        fixture.detectChanges(); // Initialize form
         const mockUser = { id: '1', nombre: 'Test' } as any;
         usuarioService.actualizarUsuario.and.returnValue(of(mockUser));
         const router = TestBed.inject(Router);
