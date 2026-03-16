@@ -57,11 +57,13 @@ export class LoginComponent {
                     console.error('Login failed', error);
                     this.isLoading = false;
                     this.successMessage = null;
-                    if (error.response?.status === 401) {
-                        this.errorMessage = 'Usuario o contraseña incorrectos';
+
+                    const status = error.response?.status;
+                    if (status === 400 || status === 401 || status === 404) {
+                        this.errorMessage = 'Credenciales inválidas. Por favor, verifique su usuario y contraseña.';
                     } else {
                         const serverMsg = error.response?.data?.message || error.message;
-                        this.errorMessage = 'Error: ' + serverMsg;
+                        this.errorMessage = 'Ha ocurrido un error inesperado: ' + serverMsg;
                     }
                 }
             });
