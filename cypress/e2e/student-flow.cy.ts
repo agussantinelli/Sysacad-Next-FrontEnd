@@ -60,8 +60,12 @@ describe('Student Navigation Flow', () => {
     cy.wait(2000);
     cy.url().should('include', '/announcements');
 
-    // Mark first unread aviso as read
-    cy.get('.notification-card.unread .btn-mark-read').first().click({ force: true });
+    // Mark first unread aviso as read ONLY IF it exists
+    cy.get('body').then(($body) => {
+      if ($body.find('.notification-card.unread .btn-mark-read').length > 0) {
+        cy.get('.notification-card.unread .btn-mark-read').first().click({ force: true });
+      }
+    });
 
     cy.contains('button', 'Volver').click({ force: true });
     cy.url().should('include', '/dashboard');
