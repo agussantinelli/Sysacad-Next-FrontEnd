@@ -23,6 +23,12 @@
       "ES2022",
       "dom"
     ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ],
     "baseUrl": "./",
     "paths": {
       "@core/*": [
@@ -48,6 +54,19 @@
       ]
     }
   },
+  "exclude": [
+    "cypress",
+    "cypress/**/*",
+    "node_modules",
+    "node_modules/cypress",
+    "dist"
+  ],
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.spec.json" },
+    { "path": "./cypress/tsconfig.json" }
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
