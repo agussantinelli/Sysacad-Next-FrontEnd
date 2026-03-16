@@ -3,47 +3,40 @@ name: css-modules
 description: Guidelines for implementing CSS Modules in Angular components for better maintainability and scoped styling.
 ---
 
-# CSS Modules Skill
+# Scoped CSS Skill (Angular)
 
 ## Context
-Next.js provides built-in support for CSS Modules. To maintain a clean directory structure and standard modularity, complex CSS should be extracted to CSS Module files (`.module.css`).
+Angular provides built-in support for scoped styling. Each component should have its own CSS file to ensure styles don't leak.
 
 ## Guidelines
 
-1. **Extraction Rule**: Any significant CSS block (typically >20 lines or reused logic) SHOULD be moved to a CSS Module file.
+1. **Extraction Rule**: Every component must have its own CSS file. If styles exceed 50 lines, consider breaking down the component.
 2. **Directory Structure**: 
-    - Create a `styles/` subdirectory within the component's folder.
-    - Path: `src/components/[category]/styles/[ComponentName].module.css`.
-    - For pages: `src/app/[page]/styles/[PageName].module.css`.
+    - Styles should be placed in a `styles/` subdirectory adjacent to the component or in the same folder if simple.
+    - Standard path: `src/app/features/[feature]/[component]/styles/[component].component.css`.
 3. **Naming Convention**: 
-    - Use `PascalCase` or `kebab-case` matching the component name.
-    - Always use the `.module.css` extension.
+    - Use `kebab-case` matching the component name.
+    - Extension: `.component.css`.
 4. **Integration**:
-    - Import the styles in the `.tsx` file:
-      `import styles from './styles/MyComponent.module.css';`
-    - Apply classes using the `className={styles.className}` syntax.
-    - For multiple classes, use template literals or a utility like `clsx`: `className={`${styles.base} ${styles.active}`}`.
+    - Reference the style file in the `@Component` decorator:
+      ```typescript
+      @Component({
+        selector: 'app-my-component',
+        standalone: true,
+        styleUrl: './styles/my-component.component.css',
+        templateUrl: './my-component.component.html'
+      })
+      ```
+5. **Class Naming**: Use BEM (Block Element Modifier) or a similar convention to maintain readability within the file.
 
 ## Example
 
 ### Component Structure
 ```
-src/components/products/
-├── ProductCard.tsx
+src/app/features/admin/plan-detail/
+├── plan-detail.component.ts
+├── plan-detail.component.html
 └── styles/
-    └── ProductCard.module.css
-```
-
-### `ProductCard.tsx`
-```tsx
-import styles from './styles/ProductCard.module.css';
-
-export default function ProductCard() {
-  return (
-    <article className={styles.card}>
-      <h3 className={styles.title}>Product Title</h3>
-    </article>
-  );
-}
+    └── plan-detail.component.css
 ```
 ```
