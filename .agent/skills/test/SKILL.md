@@ -17,6 +17,6 @@ Quality assurance in the frontend involves checking both individual component lo
 6. **E2E Testing**: Use Cypress for end-to-end flow testing.
 7. **E2E Naming**: Cypress test files should be named `*.cy.ts` and located in the `cypress/e2e` directory.
 8. **Commands**:
-   - `pnpm run test`: Run unit tests (Jasmine/Karma).
+   - `pnpm test`: Run unit tests (Jasmine/Karma).
    - `pnpm e2e:open`: Open Cypress GUI.
    - `pnpm test:e2e`: Run Cypress tests in headless mode.
