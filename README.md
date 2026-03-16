@@ -13,8 +13,8 @@
 </div>
 
 <div align="center">
-    <img src="https://img.shields.io/badge/Angular-18+-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Badge"/>
-    <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"/>
+    <img src="https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Badge"/>
+    <img src="https://img.shields.io/badge/TypeScript-5.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"/>
     <img src="https://img.shields.io/badge/pnpm-10+-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm Badge">
     <img src="https://img.shields.io/badge/Angular%20Material-19-3f51b5?style=for-the-badge&logo=angular&logoColor=white" alt="Material Badge"/>
     <img src="https://img.shields.io/badge/RxJS-7.8-B7178C?style=for-the-badge&logo=rxjs&logoColor=white" alt="RxJS Badge"/>
@@ -25,6 +25,7 @@
     <img src="https://img.shields.io/badge/Karma-Test%20Runner-339999?style=for-the-badge&logo=karma&logoColor=white" alt="Karma Badge"/>
     <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
     <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Actions Badge"/>
+    <img src="https://img.shields.io/badge/Cypress-E2E-17202C?style=for-the-badge&logo=cypress&logoColor=white" alt="Cypress Badge"/>
 </div>
 
 <div align="center">
@@ -87,6 +88,11 @@
             <td>Uso de Standalone Components, Signals y Control Flow Syntax.</td>
         </tr>
         <tr>
+            <td><strong>Package Manager</strong></td>
+            <td>PNPM 10+</td>
+            <td>Gestión de dependencias rápida y eficiente.</td>
+        </tr>
+        <tr>
             <td><strong>Lenguaje</strong></td>
             <td>TypeScript 5.5.2</td>
             <td>Tipado estricto, Interfaces y DTOs alineados con Backend Java.</td>
@@ -128,13 +134,13 @@
         </tr>
         <tr>
             <td><strong>Unit Testing</strong></td>
-            <td>Jasmine 5.2.0</td>
-            <td>Framework de pruebas unitarias centrado en BDD.</td>
+            <td>Jasmine 5.2.0 & Karma</td>
+            <td>Framework de pruebas unitarias y runner en navegador real.</td>
         </tr>
         <tr>
-            <td><strong>Test Runner</strong></td>
-            <td>Karma 6.4.0</td>
-            <td>Ejecutor de pruebas en entorno de navegador real.</td>
+            <td><strong>E2E Testing</strong></td>
+            <td>Cypress 15.12.0</td>
+            <td>Framework moderno para pruebas de extremo a extremo.</td>
         </tr>
         <tr>
             <td><strong>CI/CD</strong></td>
@@ -378,11 +384,11 @@
 
 <p>Instalá dependencias y levantá el servidor de desarrollo:</p>
 
-<pre><code>npm install
-npm run dev
+<pre><code>pnpm install
+pnpm run dev
 
 # Para verificar estilo de código
-npm run lint
+pnpm run lint
 </code></pre>
 
 <p>Abrí <a href="http://localhost:4200">http://localhost:4200</a> en tu navegador para ver el resultado.</p>
@@ -399,8 +405,16 @@ npm run lint
 </ul>
 
 <h3>🚀 Ejecutar Tests</h3>
-<p>Para correr la suite completa de pruebas:</p>
-<pre><code>npm run test</code></pre>
+<p>Para correr la suite de pruebas unitarias:</p>
+<pre><code>pnpm run test</code></pre>
+
+<p>Para correr la suite de pruebas E2E (Cypress):</p>
+<pre><code># Abrir interfaz de Cypress
+pnpm exec cypress open
+
+# Ejecutar tests en modo headless
+pnpm exec cypress run
+</code></pre>
 
 ### 📊 Cobertura Actual
 <ul>
