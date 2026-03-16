@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { environment } from '@env/environment';
 
 const axiosClient = axios.create({
@@ -9,23 +9,23 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(
-    (config) => {
+    (config: InternalAxiosRequestConfig) => {
         const token = localStorage.getItem('token');
-        if (token) {
+        if (token && config.headers) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
         return config;
     },
-    (error) => {
+    (error: AxiosError) => {
         return Promise.reject(error);
     }
 );
 
 axiosClient.interceptors.response.use(
-    (response) => {
+    (response: AxiosResponse) => {
         
         const storedBootId = localStorage.getItem('bootId');
-        const serverBootId = response.headers['boot-id']; 
+        const serverBootId = response.headers?.['boot-id']; 
 
         if (storedBootId && serverBootId && storedBootId !== serverBootId) {
             console.warn('BootId Mismatch: Server restarted. Logging out.');
@@ -38,8 +38,9 @@ axiosClient.interceptors.response.use(
         }
         return response;
     },
-    (error) => {
-        if (error.code === 'ERR_NETWORK') {
+    (error: AxiosError) => {
+        const anyError = error as any;
+        if (anyError.code === 'ERR_NETWORK') {
             console.error('Network Error: Connection to backend lost.');
             localStorage.removeItem('token');
             localStorage.removeItem('user');
@@ -48,21 +49,20 @@ axiosClient.interceptors.response.use(
             window.location.href = '/login';
         }
         
-        if (error.response?.headers?.['boot-id']) {
+        if (anyError.response?.headers?.['boot-id']) {
             const storedBootId = localStorage.getItem('bootId');
-            const serverBootId = error.response.headers['boot-id'];
+            const serverBootId = anyError.response.headers['boot-id'];
             if (storedBootId && storedBootId !== serverBootId) {
                 console.warn('BootId Mismatch (Error): Server restarted. Logging out.');
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
                 localStorage.removeItem('bootId');
                 window.location.href = '/login';
-                window.location.href = '/login';
             }
         }
 
-        if (error.response && error.response.status === 500) {
-            const message = error.response.data?.message || 'Error interno del servidor';
+        if (anyError.response && anyError.response.status === 500) {
+            const message = anyError.response.data?.message || 'Error interno del servidor';
             window.dispatchEvent(new CustomEvent('sysacad-error', { detail: message }));
         }
 
