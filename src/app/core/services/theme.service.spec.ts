@@ -10,6 +10,7 @@ describe('ThemeService', () => {
             return null;
         });
         spyOn(localStorage, 'setItem');
+        document.body.classList.remove('dark-mode');
         
         TestBed.configureTestingModule({
             providers: [ThemeService]

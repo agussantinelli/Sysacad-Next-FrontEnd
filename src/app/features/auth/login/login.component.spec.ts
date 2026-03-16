@@ -105,8 +105,8 @@ describe('LoginComponent', () => {
         });
 
         component.onSubmit();
-
-        expect(component.errorMessage).toBe('Usuario o contraseña incorrectos');
+ 
+        expect(component.errorMessage).toBe('Credenciales inválidas. Por favor, verifique su usuario y contraseña.');
         expect(component.isLoading).toBeFalse();
     });
 
@@ -120,8 +120,8 @@ describe('LoginComponent', () => {
         });
 
         component.onSubmit();
-
-        expect(component.errorMessage).toBe('Error: Server error');
+ 
+        expect(component.errorMessage).toBe('Ha ocurrido un error inesperado: Server error');
     });
 
     it('should mark form as touched if invalid submit', () => {
