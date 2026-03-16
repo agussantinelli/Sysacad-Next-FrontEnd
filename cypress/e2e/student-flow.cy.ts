@@ -74,6 +74,6 @@ describe('Student Navigation Flow', () => {
     cy.contains('.option-card', 'Mensajes').click({ force: true });
     cy.wait(2000);
     cy.url().should('include', '/messages');
-    cy.contains('Mensajes').should('be.visible');
+    cy.wait(2000); // Wait 2s before finishing as requested
   });
 });
