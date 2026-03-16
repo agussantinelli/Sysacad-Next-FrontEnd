@@ -410,10 +410,10 @@ pnpm run lint
 
 <p>Para correr la suite de pruebas E2E (Cypress):</p>
 <pre><code># Abrir interfaz de Cypress
-pnpm exec cypress open
+pnpm e2e:open
 
 # Ejecutar tests en modo headless
-pnpm exec cypress run
+pnpm test:e2e
 </code></pre>
 
 ### 📊 Cobertura Actual
