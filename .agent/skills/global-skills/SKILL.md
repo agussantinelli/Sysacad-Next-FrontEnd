@@ -17,6 +17,7 @@ This skill serves as a central index for all architectural and development guide
 - **[readme-auto-sync](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/readme-auto-sync/SKILL.md)**: Mandatory automated README syncing.
 - **[responsive-design](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/responsive-design/SKILL.md)**: Mobile-first and fluid layout best practices.
 - **[skill-generator](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/skill-generator/SKILL.md)**: A tool for creating new skills following the Sysacad-Next standard.
+- **[angular-components](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/angular-components/SKILL.md)**: Standard for creating Angular Standalone components.
 - **[test](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/test/SKILL.md)**: Guidelines for Jasmine/Karma testing.
 - **[test-enforcement](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/test-enforcement/SKILL.md)**: Mandatory rule requiring one spec per file.
 
