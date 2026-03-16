@@ -222,6 +222,24 @@
     <li><strong>Beneficios:</strong> Menor tamaño de bundle (tree-shaking), gestión de dependencias simple y mejor organización.</li>
 </ul>
 
+<h4>🧩 Anatomía de un Componente Standard</h4>
+<p>Cada componente se organiza en su propia carpeta con una estructura de archivos predecible:</p>
+
+<pre><code>mi-componente/
+├── mi-componente.component.ts      # Lógica y definición Standalone
+├── mi-componente.component.html    # Template (HTML5 Semántico)
+├── mi-componente.component.spec.ts # Tests Unitarios (Jasmine)
+└── styles/
+    └── mi-componente.component.css # Estilos Scoped (CSS)
+</code></pre>
+
+<p><strong>Reglas de oro:</strong></p>
+<ul>
+    <li>Uso obligatorio de <strong>Signals</strong> para el estado reactivo.</li>
+    <li>Encapsulamiento estricto de estilos en la subcarpeta <code>styles/</code>.</li>
+    <li>Arquitectura 100% <strong>Standalone</strong> (sin NgModules).</li>
+</ul>
+
 <h3>2. Role-Based Access Control (RBAC)</h3>
 <p>El sistema implementa tres roles de usuario distintos con capacidades diferenciadas:</p>
 <ul>
