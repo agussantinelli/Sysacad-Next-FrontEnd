@@ -1,6 +1,6 @@
 ---
 name: test
-description: Guidelines for frontend component and E2E testing in FinanzApp.
+description: Guidelines for frontend component and E2E testing in Sysacad-Next.
 ---
 
 # Testing (Sysacad-Next)

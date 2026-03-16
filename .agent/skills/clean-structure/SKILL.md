@@ -1,6 +1,6 @@
 ---
 name: clean-structure
-description: Component organization and modern React principles for the FrontEnd.
+description: Component organization and Angular principles for the FrontEnd.
 ---
 
 # Clean Structure (Sysacad-Next)
