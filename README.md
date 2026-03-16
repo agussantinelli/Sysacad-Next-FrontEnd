@@ -193,6 +193,26 @@
 
 <hr>
 
+<h2>🧠 Skills Especializadas</h2>
+
+<p>Este proyecto utiliza un sistema de <strong>Skills</strong> (guías avanzadas) para asegurar que cualquier desarrollo (humano o por IA) siga estrictamente los estándares arquitectónicos del proyecto:</p>
+
+<ul>
+    <li><strong>🏗️ modular-architecture:</strong> Reglas estrictas sobre la separación de capas (Models, Services, Features, Shared).</li>
+    <li><strong>🧪 test-enforcement:</strong> Regla "One-to-One" que exige un archivo <code>.spec.ts</code> por cada archivo de lógica o componente.</li>
+    <li><strong>📡 api-communication:</strong> Prohibición de fetch nativo; uso obligatorio del cliente API centralizado con interceptores.</li>
+    <li><strong>🧹 clean-structure:</strong> Organización basada en Angular 19 y principios de diseño limpio.</li>
+    <li><strong>🎨 css-modules (Scoped CSS):</strong> Estándar para el encapsulamiento de estilos en componentes Angular.</li>
+    <li><strong>🧪 test:</strong> Guías avanzadas para testing unitario con Jasmine y Karma.</li>
+    <li><strong>✨ code-quality:</strong> Guías para código limpio, legibilidad y política de "No Comentarios".</li>
+    <li><strong>📱 responsive-design:</strong> Mejores prácticas de diseño Mobile-first y layouts fluidos.</li>
+    <li><strong>🔄 readme-auto-sync:</strong> Sincronización automática de estructura y tests en el README.</li>
+    <li><strong>🛠️ skill-generator:</strong> Herramienta para crear nuevas skills siguiendo el estándar del proyecto.</li>
+    <li><strong>📚 global-skills:</strong> Catálogo central que indexa todas las guías del proyecto.</li>
+</ul>
+
+<hr>
+
 <h2>🧩 Patrones de Arquitectura Core</h2>
 
 <h3>1. Arquitectura de Componentes Standalone</h3>
