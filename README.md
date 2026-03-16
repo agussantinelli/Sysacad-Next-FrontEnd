@@ -395,13 +395,14 @@ pnpm run lint
 <hr>
 <h2>🧪 Testing</h2>
 
-<p>El proyecto cuenta con una suite de pruebas unitarias automatizadas para garantizar la integridad de la lógica de negocio en los servicios y componentes principales.</p>
+El proyecto cuenta con una suite integral de pruebas que cubren tanto la lógica de negocio (Unit Testing) como los flujos de usuario (E2E Testing).
 
 <h3>🛠️ Tecnologías y Convenciones</h3>
 <ul>
-    <li><strong>Framework:</strong> Jasmine & Karma (Configuración estándar de Angular).</li>
-    <li><strong>Naming:</strong> Los archivos de test siguen el patrón <code>*.spec.ts</code>.</li>
-    <li><strong>Mocking:</strong> Se utiliza un sistema de mocks manuales para el cliente de API (<code>axiosClient</code>) y dependencias como <code>localStorage</code>, asegurando tests rápidos y aislados.</li>
+    <li><strong>Unit Testing:</strong> Jasmine & Karma (Configuración estándar de Angular).</li>
+    <li><strong>E2E Testing:</strong> Cypress 15.12.0 para validación de flujos de extremo a extremo.</li>
+    <li><strong>Naming:</strong> Patrón <code>*.spec.ts</code> para unitarios y <code>*.cy.ts</code> para E2E.</li>
+    <li><strong>Mocking:</strong> Mocks para <code>axiosClient</code> y dependencias del navegador.</li>
 </ul>
 
 <h3>🚀 Ejecutar Tests</h3>
@@ -412,17 +413,16 @@ pnpm run lint
 <pre><code># Abrir interfaz de Cypress
 pnpm e2e:open
 
-# Ejecutar tests en modo headless
+# Ejecutar tests en modo headless (CI)
 pnpm test:e2e
 </code></pre>
 
-### 📊 Cobertura Actual
+### 📊 Cobertura y Status
 <ul>
-    <li><strong>Capa de Servicios (Core Services):</strong> <code>src/app/core/services</code> (100% de cobertura).</li>
-    <li><strong>Componentes (Features):</strong> <code>src/app/features</code> (Admin, Professor, Student, Auth, Messages, Announcements).</li>
-    <li><strong>Layout & Shared:</strong> <code>src/app/layout</code>, <code>src/app/shared</code> (Components, Pipes).</li>
-    <li><strong>Specs Ejecutados:</strong> Un total de <strong>410 pruebas unitarias</strong> exitosas que garantizan la integridad de la plataforma.</li>
-    <li><strong>Aislamiento:</strong> Suite 100% aislada empleando mocks estratégicos para servicios, Axios y dependencias del navegador.</li>
+    <li><strong>Core Services:</strong> 100% de cobertura en <code>src/app/core/services</code>.</li>
+    <li><strong>Features & UI:</strong> Cobertura 1:1 en componentes de Admin, Professor y Student.</li>
+    <li><strong>E2E Navigation:</strong> Implementación exitosa del <strong>Student Navigation Flow</strong>.</li>
+    <li><strong>Specs Ejecutados:</strong> +410 pruebas unitarias exitosas.</li>
 </ul>
 
 ### ⚖️ Filosofía de Testeo 1:1
@@ -430,7 +430,7 @@ pnpm test:e2e
 El proyecto sigue una política estricta de **aparejamiento 1:1** entre archivos de código y archivos de prueba:
 - **Regla de Oro:** Todo archivo `.ts` que contenga lógica de negocio, servicios o componentes **DEBE** tener su correspondiente archivo `.spec.ts`.
 - **Ubicación:** El test debe residir en el mismo directorio que el archivo testeado.
-- **Integridad:** Esta convención asegura que ninguna funcionalidad sea desplegada sin su validación automatizada correspondiente, manteniendo la estabilidad del sistema a largo plazo.
+- **Integridad:** Esta convención asegura la estabilidad del sistema a largo plazo y la validación continua en CI.
 
 <hr>
 
