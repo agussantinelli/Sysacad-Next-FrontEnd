@@ -199,6 +199,7 @@
 
 <ul>
     <li><strong>🏗️ modular-architecture:</strong> Reglas estrictas sobre la separación de capas (Models, Services, Features, Shared).</li>
+    <li><strong>🧩 angular-components:</strong> Estándar para la creación de componentes Standalone con Signals.</li>
     <li><strong>🧪 test-enforcement:</strong> Regla "One-to-One" que exige un archivo <code>.spec.ts</code> por cada archivo de lógica o componente.</li>
     <li><strong>📡 api-communication:</strong> Prohibición de fetch nativo; uso obligatorio del cliente API centralizado con interceptores.</li>
     <li><strong>🧹 clean-structure:</strong> Organización basada en Angular 19 y principios de diseño limpio.</li>
