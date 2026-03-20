@@ -2,7 +2,8 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import { InscriptionCourseComponent } from '@features/student/inscription-course/inscription-course.component';
 import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 
 describe('Inscription Course Integration', () => {
     const mockInscripcionService = {

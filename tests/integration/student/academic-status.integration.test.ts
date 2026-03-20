@@ -2,7 +2,8 @@ import { render, screen, waitFor } from '@testing-library/angular';
 import { AcademicStatusComponent } from '@features/student/academic-status/academic-status.component';
 import { StudentService } from '@core/services/student.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 
 describe('Academic Status Integration', () => {
     const mockStudentService = {

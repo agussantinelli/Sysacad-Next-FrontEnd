@@ -2,7 +2,8 @@ import { render, screen, waitFor } from '@testing-library/angular';
 import { StudyPlanComponent } from '@features/student/study-plan/study-plan.component';
 import { MatriculacionService } from '@core/services/matriculacion.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 
 describe('Study Plan Integration', () => {
     const mockMatriculacionService = {

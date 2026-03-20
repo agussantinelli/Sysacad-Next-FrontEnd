@@ -3,7 +3,8 @@ import { CurrentEnrollmentsComponent } from '@features/student/current-enrollmen
 import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
 import { AuthService } from '@core/services/auth.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 
 describe('Current Enrollments Integration', () => {
     const mockInscripcionService = {
