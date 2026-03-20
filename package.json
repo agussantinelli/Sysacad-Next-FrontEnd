@@ -35,18 +35,22 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@analogjs/vitest-angular": "^2.3.1",
     "@angular-devkit/build-angular": "^19.2.19",
     "@angular/cli": "^19.2.19",
     "@angular/compiler-cli": "^19.2.18",
+    "@testing-library/angular": "^19.2.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^25.5.0",
     "cypress": "^15.12.0",
+    "happy-dom": "^20.8.4",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "vitest": "^4.1.0"
   }
 }
