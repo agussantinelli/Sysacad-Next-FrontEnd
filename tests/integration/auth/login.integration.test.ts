@@ -3,7 +3,8 @@ import { LoginComponent } from '@features/auth/login/login.component';
 import { AuthService } from '@core/services/auth.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { vi } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 
 describe('Login Integration', () => {
     const mockAuthService = {
