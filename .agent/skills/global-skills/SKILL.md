@@ -20,6 +20,8 @@ This skill serves as a central index for all architectural and development guide
 - **[angular-components](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/angular-components/SKILL.md)**: Standard for creating Angular Standalone components.
 - **[test](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/test/SKILL.md)**: Guidelines for Jasmine/Karma testing.
 - **[test-enforcement](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/test-enforcement/SKILL.md)**: Mandatory rule requiring one spec per file.
+- **[testing-architecture](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/testing-architecture/SKILL.md)**: Tiered test organization (Unit, Integration, E2E).
+- **[integration-testing](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/integration-testing/SKILL.md)**: Guidelines for module interaction testing using Vitest.
 
 ## 🛠️ Usage guidelines
 
