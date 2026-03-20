@@ -411,10 +411,13 @@ El proyecto cuenta con una suite integral de pruebas que cubren tanto la lógica
 </ul>
 
 <h3>🚀 Ejecutar Tests</h3>
-<p>Para correr la suite de pruebas unitarias:</p>
+<p>Para correr <strong>todos</strong> los tests (Unitarios + Integración):</p>
 <pre><code>pnpm run test</code></pre>
 
-<p>Para correr la suite de pruebas de integración:</p>
+<p>Para correr solo pruebas unitarias (Jasmine/Karma):</p>
+<pre><code>pnpm run test:unit</code></pre>
+
+<p>Para correr solo pruebas de integración (Vitest):</p>
 <pre><code>pnpm run test:integration</code></pre>
 
 <p>Para correr la suite de pruebas E2E (Cypress):</p>
