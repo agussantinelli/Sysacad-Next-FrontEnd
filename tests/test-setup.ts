@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom/vitest';
 import '@analogjs/vitest-angular/setup-vitest';
 
 import {
