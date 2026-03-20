@@ -41,6 +41,7 @@
     "@angular/cli": "^19.2.19",
     "@angular/compiler-cli": "^19.2.18",
     "@testing-library/angular": "^19.2.1",
+    "@testing-library/jest-dom": "^6.9.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^25.5.0",
     "cypress": "^15.12.0",
