@@ -211,6 +211,8 @@
     <li><strong>📡 api-communication:</strong> Prohibición de fetch nativo; uso obligatorio del cliente API centralizado con interceptores.</li>
     <li><strong>🧹 clean-structure:</strong> Organización basada en Angular 19 y principios de diseño limpio.</li>
     <li><strong>🎨 css-modules (Scoped CSS):</strong> Estándar para el encapsulamiento de estilos en componentes Angular.</li>
+    <li><strong>🏗️ testing-architecture:</strong> Organización jerárquica de tests (Unit, Integration, E2E).</li>
+    <li><strong>🔗 integration-testing:</strong> Guías para pruebas de interacción de módulos con Vitest.</li>
     <li><strong>🧪 test:</strong> Guías avanzadas para testing unitario con Jasmine y Karma.</li>
     <li><strong>✨ code-quality:</strong> Guías para código limpio, legibilidad y política de "No Comentarios".</li>
     <li><strong>📱 responsive-design:</strong> Mejores prácticas de diseño Mobile-first y layouts fluidos.</li>
@@ -316,6 +318,9 @@
 <pre><code>Sysacad-Next-FrontEnd/
 ├── public/                                           # Assets estáticos servidos directamente
 ├── src/                                              # Código fuente de la aplicación
+├── tests/                                            # Suite de Pruebas de Alto Nivel
+│   ├── e2e/                                          # Tests de Extremo a Extremo (Cypress)
+│   └── integration/                                  # Tests de Interacción (Vitest)
 │   ├── app/
 │   │   ├── core/
 │   │   │   ├── api/                                  # Cliente Axios Configurado
@@ -399,15 +404,18 @@ El proyecto cuenta con una suite integral de pruebas que cubren tanto la lógica
 
 <h3>🛠️ Tecnologías y Convenciones</h3>
 <ul>
-    <li><strong>Unit Testing:</strong> Jasmine & Karma (Configuración estándar de Angular).</li>
-    <li><strong>E2E Testing:</strong> Cypress 15.12.0 para validación de flujos de extremo a extremo.</li>
-    <li><strong>Naming:</strong> Patrón <code>*.spec.ts</code> para unitarios y <code>*.cy.ts</code> para E2E.</li>
-    <li><strong>Mocking:</strong> Mocks para <code>axiosClient</code> y dependencias del navegador.</li>
+    <li><strong>Unit Testing:</strong> Jasmine & Karma (Componentes y Servicios individuales).</li>
+    <li><strong>Integration Testing:</strong> Vitest & Angular Testing Library (Interacción entre módulos).</li>
+    <li><strong>E2E Testing:</strong> Cypress 15.12.0 para validación de flujos de extremo a extremo (Real Browser).</li>
+    <li><strong>Naming:</strong> <code>*.spec.ts</code> (Unit), <code>*.integration.test.ts</code> (Integration), <code>*.cy.ts</code> (E2E).</li>
 </ul>
 
 <h3>🚀 Ejecutar Tests</h3>
 <p>Para correr la suite de pruebas unitarias:</p>
 <pre><code>pnpm run test</code></pre>
+
+<p>Para correr la suite de pruebas de integración:</p>
+<pre><code>pnpm run test:integration</code></pre>
 
 <p>Para correr la suite de pruebas E2E (Cypress):</p>
 <pre><code># Abrir interfaz de Cypress
