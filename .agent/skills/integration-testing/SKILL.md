@@ -58,3 +58,8 @@ Run only integration tests:
 ```bash
 pnpm test:integration
 ```
+
+To run all tests (Unit + Integration):
+```bash
+pnpm test
+```

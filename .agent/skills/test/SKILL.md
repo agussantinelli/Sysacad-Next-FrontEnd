@@ -18,7 +18,8 @@ Quality assurance in the frontend involves checking both individual component lo
    - E2E: `*.cy.ts` (inside `tests/e2e/`).
 5. **Mocking**: Use Jasmine Spies/Mocks for unit tests and `vi.mock()` for integration tests.
 6. **Commands**:
-   - `pnpm test`: Run unit tests (Jasmine/Karma).
-   - `pnpm test:integration`: Run integration tests (Vitest).
+   - `pnpm test`: Run ALL tests (Unit + Integration).
+   - `pnpm test:unit`: Run only unit tests (Jasmine/Karma).
+   - `pnpm test:integration`: Run only integration tests (Vitest).
    - `pnpm test:e2e`: Run Cypress tests in headless mode.
    - `pnpm e2e:open`: Open Cypress GUI.
