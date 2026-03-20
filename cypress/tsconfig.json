@@ -8,8 +8,7 @@
     "allowJs": true,
     "strict": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "typeRoots": ["../node_modules/@types"]
+    "baseUrl": "."
   },
   "include": ["**/*.ts", "**/*.js"]
 }
