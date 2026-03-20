@@ -7,9 +7,10 @@
     "dev": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "test:e2e": "cypress run",
+    "test": "pnpm run test:unit && pnpm run test:integration",
+    "test:unit": "ng test",
     "test:integration": "vitest run tests/integration",
+    "test:e2e": "cypress run",
     "e2e:open": "cypress open"
   },
   "private": true,
