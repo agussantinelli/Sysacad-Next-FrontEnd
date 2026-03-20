@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:e2e": "cypress run",
+    "test:integration": "vitest run tests/integration",
     "e2e:open": "cypress open"
   },
   "private": true,
