@@ -59,13 +59,16 @@
     "cypress/**/*",
     "node_modules",
     "node_modules/cypress",
+    "tests",
+    "tests/**/*",
     "dist"
   ],
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.spec.json" },
-    { "path": "./cypress/tsconfig.json" }
+    { "path": "./cypress/tsconfig.json" },
+    { "path": "./tests/tsconfig.json" }
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
