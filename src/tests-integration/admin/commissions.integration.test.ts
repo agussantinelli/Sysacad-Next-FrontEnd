@@ -49,7 +49,7 @@ describe('Admin Commissions Integration', () => {
         fixture.detectChanges();
 
         // 1. Seleccionar comisión
-        const card = await screen.findByText(/Comision A/i);
+        const card = await screen.findByText(/Comision A/i, { selector: 'h4' });
         fireEvent.click(card);
         
         // 2. Abrir modal de asignación
@@ -64,7 +64,7 @@ describe('Admin Commissions Integration', () => {
         const daySelect = await screen.findByLabelText(/Día/i);
         const fromInput = screen.getByLabelText(/Desde/i);
         const toInput = screen.getByLabelText(/Hasta/i);
-        const saveHourBtn = screen.getByRole('button', { name: /Agregar/i });
+        const saveHourBtn = screen.getByRole('button', { name: 'Guardar Horario' });
 
         fireEvent.change(daySelect, { target: { value: 'LUNES' } });
         fireEvent.input(fromInput, { target: { value: '08:00' } });
@@ -72,7 +72,7 @@ describe('Admin Commissions Integration', () => {
         fireEvent.click(saveHourBtn);
 
         // 5. Intentar pasar al siguiente paso
-        const nextBtn = await screen.findByRole('button', { name: /Siguiente/i });
+        const nextBtn = await screen.findByRole('button', { name: 'Siguiente' });
         fireEvent.click(nextBtn);
 
         await waitFor(() => {
