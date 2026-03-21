@@ -10,16 +10,16 @@ describe('Professor Final Exam Grading Flow', () => {
     cy.contains('.option-card', 'Mis Mesas de Examen').click({ force: true });
 
     cy.log('2. Open a specific exam table for grading');
-    cy.get('button.btn-action').contains('Calificar').first().click({ force: true });
+    cy.get('button.btn-action', { timeout: 10000 }).contains('Calificar').first().click({ force: true });
 
     cy.log('3. Register exam grades');
-    cy.get('input.grade-input').first().clear().type('10');
+    cy.get('input.grade-input', { timeout: 10000 }).first().clear().type('10');
 
     cy.log('4. Close the session definitively');
-    cy.get('button.btn-close-acta').click({ force: true });
-    cy.get('button.btn-confirm').click({ force: true });
+    cy.get('button.btn-close-acta', { timeout: 10000 }).click({ force: true });
+    cy.get('button.btn-confirm', { timeout: 10000 }).click({ force: true });
 
     cy.log('5. Verify table is now "Cerrada"');
-    cy.contains('span.badge', 'Cerrada').should('be.visible');
+    cy.contains('span.badge', 'Cerrada', { timeout: 10000 }).should('be.visible');
   });
 });

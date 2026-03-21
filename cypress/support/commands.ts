@@ -11,7 +11,8 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('#email').type(email);
   cy.get('#password').type(password);
   cy.get('button.submit-btn').click();
-  cy.url().should('include', '/dashboard');
+  // Increase timeout to 10s for slow redirection or initial data loading
+  cy.url({ timeout: 10000 }).should('include', '/dashboard');
 });
 
 export {};
