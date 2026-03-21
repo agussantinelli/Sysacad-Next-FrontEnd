@@ -95,8 +95,8 @@
         "test-integration": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "watch": false,
-            "browsers": "ChromeHeadless",
+            "watch": true,
+            "browsers": "Chrome",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
