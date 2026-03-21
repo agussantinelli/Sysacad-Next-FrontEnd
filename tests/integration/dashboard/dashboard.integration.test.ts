@@ -1,30 +1,29 @@
 import { render, screen, waitFor } from '@testing-library/angular';
-import { DashboardComponent } from '@features/dashboard/dashboard.component';
-import { AuthService } from '@core/services/auth.service';
-import { AvisoService } from '@core/services/aviso.service';
-import { ChatService } from '@core/services/chat.service';
+import { DashboardComponent } from '../../../src/app/features/dashboard/dashboard.component';
+import { AuthService } from '../../../src/app/core/services/auth.service';
+import { AvisoService } from '../../../src/app/core/services/aviso.service';
+import { ChatService } from '../../../src/app/core/services/chat.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
 
 describe('Dashboard Integration', () => {
-    const mockAuthService = {
-        currentUser$: of({ id: 's1', nombre: 'Agustin', rol: 'ESTUDIANTE' })
-    };
-    const mockAvisoService = {
-        obtenerCantidadSinLeer: vi.fn(),
-        listarAvisos: vi.fn()
-    };
-    const mockChatService = {
-        getTotalMensajesSinLeer: vi.fn(),
-        unreadCountChanged$: of(void 0)
-    };
+    let mockAuthService: any;
+    let mockAvisoService: jasmine.SpyObj<AvisoService>;
+    let mockChatService: jasmine.SpyObj<ChatService>;
+
+    beforeEach(() => {
+        mockAuthService = {
+            currentUser$: of({ id: 's1', nombre: 'Agustin', rol: 'ESTUDIANTE' })
+        };
+        mockAvisoService = jasmine.createSpyObj('AvisoService', ['obtenerCantidadSinLeer', 'listarAvisos']);
+        mockChatService = jasmine.createSpyObj('ChatService', ['getTotalMensajesSinLeer']);
+        (mockChatService as any).unreadCountChanged$ = of(void 0);
+    });
 
     it('should show personalized welcome and badges from services', async () => {
-        // Setup local storage for the component's ngOnInit logic
         localStorage.setItem('user', JSON.stringify({ id: 's1', nombre: 'Agustin', rol: 'ESTUDIANTE' }));
         
-        mockAvisoService.obtenerCantidadSinLeer.mockReturnValue(of(5));
-        mockChatService.getTotalMensajesSinLeer.mockReturnValue(of(3));
+        mockAvisoService.obtenerCantidadSinLeer.and.returnValue(of(5));
+        mockChatService.getTotalMensajesSinLeer.and.returnValue(of(3));
 
         await render(DashboardComponent, {
             providers: [
@@ -35,8 +34,8 @@ describe('Dashboard Integration', () => {
         });
 
         await waitFor(() => {
-            expect(screen.getByText(/Buenos/i)).toBeInTheDocument();
-            expect(screen.getByText(/Agustin/i)).toBeInTheDocument();
+            expect(screen.getByText(/Buenos/i)).toBeTruthy();
+            expect(screen.getByText(/Agustin/i)).toBeTruthy();
         });
     });
 });
