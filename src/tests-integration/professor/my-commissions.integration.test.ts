@@ -35,8 +35,8 @@ describe('Professor MyCommissions Integration', () => {
         });
 
         await waitFor(() => {
-            expect(screen.getByRole('heading', { name: /Lab III - C1/i })).toBeTruthy();
-            expect(screen.getByText(/Lab III/i)).toBeTruthy();
+            expect(screen.getByText(/Lab III - C1/i)).toBeTruthy();
+            expect(screen.getByText(/Lab III/i, { selector: '.subject-tag' })).toBeTruthy();
             expect(screen.getByText('20')).toBeTruthy();
         });
     });
