@@ -29,8 +29,8 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['ChromeHeadless'],
-    restartOnFileChange: false,
-    singleRun: true
+    browsers: ['Chrome'],
+    restartOnFileChange: true,
+    singleRun: false
   });
 };
