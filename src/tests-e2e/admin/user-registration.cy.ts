@@ -20,13 +20,15 @@ describe('Admin User Management Flow', () => {
     cy.contains('label', 'Apellido').next('input').type(`User_${randomSuffix}`);
     cy.contains('label', 'Email').next('input').type(`student_${randomSuffix}@sysacad.com`);
     cy.contains('label', 'DNI').next('input').type(`4000${randomSuffix}`);
+    cy.contains('label', 'Tipo Documento').next('select').select('DNI');
     cy.contains('label', 'Rol').next('select').select('ESTUDIANTE');
+    cy.contains('label', 'Legajo').next('input').type(`L-${randomSuffix}`);
 
     cy.log('4. Submit registration');
-    cy.get('button.btn-primary').contains('Crear').click({ force: true });
+    cy.get('button.btn-submit').contains('Guardar').click({ force: true });
 
     cy.log('5. Validate creation success');
-    cy.get('app-alert-message', { timeout: 10000 }).should('be.visible').and('contain.text', 'éxito');
+    cy.get('app-alert-message', { timeout: 10000 }).should('be.visible').and('contain.text', 'correctamente');
     cy.contains(`User_${randomSuffix}`, { timeout: 10000 }).should('be.visible');
 
     cy.log('6. Logout from session');
