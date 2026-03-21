@@ -27,6 +27,7 @@
       "./node_modules/@types"
     ],
     "types": [
+      "jasmine",
       "node"
     ],
     "baseUrl": "./",
@@ -54,22 +55,18 @@
       ]
     }
   },
+  "include": [
+    "src",
+    "src/**/*.ts",
+    "tests",
+    "tests/**/*.ts"
+  ],
   "exclude": [
     "cypress",
     "cypress/**/*",
     "node_modules",
     "node_modules/cypress",
-    "tests",
-    "tests/**/*",
     "dist"
-  ],
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.spec.json" },
-    { "path": "./cypress/tsconfig.json" },
-    { "path": "./tests/integration/tsconfig.json" },
-    { "path": "./tests/e2e/tsconfig.json" }
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
