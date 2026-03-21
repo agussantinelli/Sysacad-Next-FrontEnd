@@ -1,9 +1,9 @@
 /// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
-import { DashboardComponent } from '../../../src/app/features/dashboard/dashboard.component';
-import { AuthService } from '../../../src/app/core/services/auth.service';
-import { AvisoService } from '../../../src/app/core/services/aviso.service';
-import { ChatService } from '../../../src/app/core/services/chat.service';
+import { DashboardComponent } from '@features/dashboard/dashboard.component';
+import { AuthService } from '@core/services/auth.service';
+import { AvisoService } from '@core/services/aviso.service';
+import { ChatService } from '@core/services/chat.service';
 import { of } from 'rxjs';
 
 describe('Dashboard Integration', () => {

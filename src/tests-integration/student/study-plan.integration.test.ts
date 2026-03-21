@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
-import { StudyPlanComponent } from '../../../src/app/features/student/study-plan/study-plan.component';
-import { MatriculacionService } from '../../../src/app/core/services/matriculacion.service';
+import { StudyPlanComponent } from '@features/student/study-plan/study-plan.component';
+import { MatriculacionService } from '@core/services/matriculacion.service';
 import { of } from 'rxjs';
 
 describe('Study Plan Integration', () => {

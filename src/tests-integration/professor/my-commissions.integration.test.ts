@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
-import { MyCommissionsComponent } from '../../../src/app/features/professor/my-commissions/my-commissions.component';
-import { ProfessorService } from '../../../src/app/core/services/professor.service';
+import { MyCommissionsComponent } from '@features/professor/my-commissions/my-commissions.component';
+import { ProfessorService } from '@core/services/professor.service';
 import { of } from 'rxjs';
 
 describe('Professor MyCommissions Integration', () => {

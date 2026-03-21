@@ -1,10 +1,10 @@
 /// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { InscriptionCourseComponent } from '../../../src/app/features/student/inscription-course/inscription-course.component';
-import { MatriculacionService } from '../../../src/app/core/services/matriculacion.service';
-import { InscripcionCursadoService } from '../../../src/app/core/services/inscripcion-cursado.service';
-import { AuthService } from '../../../src/app/core/services/auth.service';
-import { AlertService } from '../../../src/app/core/services/alert.service';
+import { InscriptionCourseComponent } from '@features/student/inscription-course/inscription-course.component';
+import { MatriculacionService } from '@core/services/matriculacion.service';
+import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
+import { AuthService } from '@core/services/auth.service';
+import { AlertService } from '@core/services/alert.service';
 import { of, BehaviorSubject } from 'rxjs';
 
 describe('Inscription Course Integration', () => {

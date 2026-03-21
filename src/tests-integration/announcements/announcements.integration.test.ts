@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
-import { AnnouncementsComponent } from '../../../src/app/features/announcements/announcements.component';
-import { AvisoService } from '../../../src/app/core/services/aviso.service';
+import { AnnouncementsComponent } from '@features/announcements/announcements.component';
+import { AvisoService } from '@core/services/aviso.service';
 import { of } from 'rxjs';
 
 describe('Announcements Integration', () => {

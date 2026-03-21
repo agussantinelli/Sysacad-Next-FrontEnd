@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { TestBed } from '@angular/core/testing';
-import { requireAuthGuard } from '../../../src/app/core/guards/require-auth.guard';
-import { AuthService } from '../../../src/app/core/services/auth.service';
+import { requireAuthGuard } from '@core/guards/require-auth.guard';
+import { AuthService } from '@core/services/auth.service';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 describe('Auth Guard Integration', () => {

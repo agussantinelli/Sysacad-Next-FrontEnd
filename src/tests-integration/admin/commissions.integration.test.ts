@@ -1,8 +1,8 @@
 /// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { AdminCommissionsComponent } from '../../../src/app/features/admin/commissions/admin-commissions.component';
-import { AdminService } from '../../../src/app/core/services/admin.service';
-import { AlertService } from '../../../src/app/core/services/alert.service';
+import { AdminCommissionsComponent } from '@features/admin/commissions/admin-commissions.component';
+import { AdminService } from '@core/services/admin.service';
+import { AlertService } from '@core/services/alert.service';
 import { of } from 'rxjs';
 
 describe('Admin Commissions Integration', () => {
@@ -70,6 +70,7 @@ describe('Admin Commissions Integration', () => {
         const nextBtn = screen.getByRole('button', { name: /Siguiente/i });
         fireEvent.click(nextBtn);
 
+        screen.debug();
         expect(mockAlertService.warning).toHaveBeenCalledWith(jasmine.stringMatching(/Debe asignar exactamente 4 horas/));
     });
 });

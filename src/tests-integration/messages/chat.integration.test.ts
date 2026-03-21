@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { MessagesComponent } from '../../../src/app/features/messages/messages.component';
-import { ChatService } from '../../../src/app/core/services/chat.service';
+import { MessagesComponent } from '@features/messages/messages.component';
+import { ChatService } from '@core/services/chat.service';
 import { of } from 'rxjs';
 
 describe('Messages Chat Integration', () => {

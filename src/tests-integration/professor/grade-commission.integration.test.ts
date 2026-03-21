@@ -1,8 +1,8 @@
 /// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { ProfessorGradeCommissionComponent } from '../../../src/app/features/professor/grade-commission/professor-grade-commission.component';
-import { ProfessorService } from '../../../src/app/core/services/professor.service';
-import { AlertService } from '../../../src/app/core/services/alert.service';
+import { ProfessorGradeCommissionComponent } from '@features/professor/grade-commission/professor-grade-commission.component';
+import { ProfessorService } from '@core/services/professor.service';
+import { AlertService } from '@core/services/alert.service';
 import { of } from 'rxjs';
 
 describe('Professor Grade Commission Integration', () => {

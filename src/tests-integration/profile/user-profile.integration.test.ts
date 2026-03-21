@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
-import { ProfileComponent } from '../../../src/app/features/profile/profile.component';
-import { AuthService } from '../../../src/app/core/services/auth.service';
+import { ProfileComponent } from '@features/profile/profile.component';
+import { AuthService } from '@core/services/auth.service';
 import { of } from 'rxjs';
 
 describe('User Profile Integration', () => {

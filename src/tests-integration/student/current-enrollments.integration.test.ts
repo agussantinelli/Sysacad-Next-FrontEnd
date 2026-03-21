@@ -1,8 +1,8 @@
 /// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
-import { CurrentEnrollmentsComponent } from '../../../src/app/features/student/current-enrollments/current-enrollments.component';
-import { InscripcionCursadoService } from '../../../src/app/core/services/inscripcion-cursado.service';
-import { AuthService } from '../../../src/app/core/services/auth.service';
+import { CurrentEnrollmentsComponent } from '@features/student/current-enrollments/current-enrollments.component';
+import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
+import { AuthService } from '@core/services/auth.service';
 import { of } from 'rxjs';
 
 describe('Current Enrollments Integration', () => {

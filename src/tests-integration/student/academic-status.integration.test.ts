@@ -1,8 +1,8 @@
 /// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
-import { AcademicStatusComponent } from '../../../src/app/features/student/academic-status/academic-status.component';
-import { MatriculacionService } from '../../../src/app/core/services/matriculacion.service';
-import { AuthService } from '../../../src/app/core/services/auth.service';
+import { AcademicStatusComponent } from '@features/student/academic-status/academic-status.component';
+import { MatriculacionService } from '@core/services/matriculacion.service';
+import { AuthService } from '@core/services/auth.service';
 import { of } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 

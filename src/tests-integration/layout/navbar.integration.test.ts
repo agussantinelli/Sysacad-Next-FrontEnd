@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { NavbarComponent } from '../../../src/app/layout/navbar/navbar.component';
-import { AuthService } from '../../../src/app/core/services/auth.service';
+import { NavbarComponent } from '@layout/navbar/navbar.component';
+import { AuthService } from '@core/services/auth.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 

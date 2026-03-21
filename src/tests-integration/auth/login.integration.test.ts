@@ -1,7 +1,7 @@
 /// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { LoginComponent } from '../../../src/app/features/auth/login/login.component';
-import { AuthService } from '../../../src/app/core/services/auth.service';
+import { LoginComponent } from '@features/auth/login/login.component';
+import { AuthService } from '@core/services/auth.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
