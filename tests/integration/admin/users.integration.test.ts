@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import { UsersComponent } from '../../../src/app/features/admin/users/users.component';
 import { UsuarioService } from '../../../src/app/core/services/usuario.service';

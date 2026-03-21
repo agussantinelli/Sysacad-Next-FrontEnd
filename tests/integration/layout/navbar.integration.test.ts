@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import { NavbarComponent } from '../../../src/app/layout/navbar/navbar.component';
 import { AuthService } from '../../../src/app/core/services/auth.service';

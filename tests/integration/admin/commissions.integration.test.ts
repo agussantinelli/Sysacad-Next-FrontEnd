@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import { AdminCommissionsComponent } from '../../../src/app/features/admin/commissions/admin-commissions.component';
 import { AdminService } from '../../../src/app/core/services/admin.service';

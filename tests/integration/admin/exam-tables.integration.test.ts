@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, waitFor, fireEvent } from '@testing-library/angular';
 import { AdminExamTablesComponent } from '../../../src/app/features/admin/exam-tables/admin-exam-tables.component';
 import { AdminService } from '../../../src/app/core/services/admin.service';

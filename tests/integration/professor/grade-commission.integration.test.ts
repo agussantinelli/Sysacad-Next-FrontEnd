@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import { ProfessorGradeCommissionComponent } from '../../../src/app/features/professor/grade-commission/professor-grade-commission.component';
 import { ProfessorService } from '../../../src/app/core/services/professor.service';

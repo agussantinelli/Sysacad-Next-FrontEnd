@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
 import { ProfileComponent } from '../../../src/app/features/profile/profile.component';
 import { AuthService } from '../../../src/app/core/services/auth.service';

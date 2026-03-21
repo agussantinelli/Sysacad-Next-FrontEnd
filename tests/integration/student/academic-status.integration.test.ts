@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
 import { AcademicStatusComponent } from '../../../src/app/features/student/academic-status/academic-status.component';
 import { MatriculacionService } from '../../../src/app/core/services/matriculacion.service';

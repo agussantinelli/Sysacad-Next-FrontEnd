@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { render, screen, waitFor } from '@testing-library/angular';
 import { AnnouncementsComponent } from '../../../src/app/features/announcements/announcements.component';
 import { AvisoService } from '../../../src/app/core/services/aviso.service';
