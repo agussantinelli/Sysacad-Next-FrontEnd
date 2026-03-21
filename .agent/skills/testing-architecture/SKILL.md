@@ -17,16 +17,16 @@ Sysacad-Next follows a three-tiered testing strategy to ensure reliability, perf
     - **Enforcement**: Defined in the [test-enforcement](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/test-enforcement/SKILL.md) skill.
 
 2.  **Integration & E2E (Multi-module & Flows)**:
-    - **Integration**: `src/tests-integration/`. Interaction tests between multiple components or logic modules (using Karma + Jasmine).
-    - **E2E**: `tests/e2e/`. Real browser end-to-end flows covering complete user journeys.
+    - **Integration**: `src/tests-integration/[role]/`. Interaction tests between multiple components or logic modules.
+    - **E2E**: `src/tests-e2e/[role]/`. Real browser end-to-end flows covering complete user journeys.
 
 ## 🧱 Test Tiers
 
 | Tier | Scope | Framework | Execution Context | Location |
 | :--- | :--- | :--- | :--- | :--- |
 | **Unit** | Atomic logic | Jasmine + Karma | Browser (ChromeHeadless) | Adjacent |
-| **Integration** | Component/Service interactions | Jasmine + Karma | Browser (ChromeHeadless) | `src/tests-integration/` |
-| **E2E** | User-facing flows | Cypress | Browser (Real) | `src/tests-e2e/` |
+| **Integration** | Component/Service interactions | Jasmine + Karma | Browser (ChromeHeadless) | `src/tests-integration/[role]/` |
+| **E2E** | User-facing flows | Cypress | Browser (Real) | `src/tests-e2e/[role]/` |
 
 ## 📏 Core Principles
 - **Speed first**: Unit and Integration tests must be extremely fast. Use `ChromeHeadless` for browser environment.
