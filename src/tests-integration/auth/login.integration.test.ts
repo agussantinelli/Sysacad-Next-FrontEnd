@@ -2,33 +2,45 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
 import { LoginComponent } from '@features/auth/login/login.component';
 import { AuthService } from '@core/services/auth.service';
+import { ThemeService } from '@core/services/theme.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('Login Integration', () => {
     let mockAuthService: jasmine.SpyObj<AuthService>;
-    let mockRouter: jasmine.SpyObj<Router>;
+    let mockThemeService: jasmine.SpyObj<ThemeService>;
+    let router: Router;
 
     beforeEach(() => {
         mockAuthService = jasmine.createSpyObj('AuthService', ['login']);
         (mockAuthService as any).currentUser$ = of(null);
-        mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+        mockThemeService = jasmine.createSpyObj('ThemeService', ['isDarkMode']);
+
+        mockThemeService.isDarkMode.and.returnValue(false);
     });
+
+    const setup = async () => {
+        const result = await render(LoginComponent, {
+            imports: [ReactiveFormsModule, RouterTestingModule],
+            providers: [
+                { provide: AuthService, useValue: mockAuthService },
+                { provide: ThemeService, useValue: mockThemeService }
+            ]
+        });
+        router = result.fixture.debugElement.injector.get(Router);
+        spyOn(router, 'navigate');
+        return result;
+    };
 
     it('should login successfully and redirect to dashboard', async () => {
         const userMock = { id: 1, role: 'STUDENT', nombre: 'Test User' };
         mockAuthService.login.and.returnValue(of(userMock as any));
 
-        const { fixture } = await render(LoginComponent, {
-            providers: [
-                { provide: AuthService, useValue: mockAuthService },
-                { provide: Router, useValue: mockRouter }
-            ]
-        });
+        await setup();
 
-        fixture.detectChanges();
-
-        const emailInput = screen.getByLabelText(/Gmail/i);
+        const emailInput = screen.getByLabelText(/Gmail o Legajo/i);
         const passwordInput = screen.getByLabelText(/Contraseña/i);
         const submitBtn = screen.getByRole('button', { name: /Ingresar/i });
 
@@ -38,23 +50,22 @@ describe('Login Integration', () => {
 
         await waitFor(() => {
             expect(mockAuthService.login).toHaveBeenCalled();
-            expect(mockRouter.navigate).toHaveBeenCalledWith(['/dashboard']);
+            expect(router.navigate).toHaveBeenCalledWith(['/dashboard'], jasmine.any(Object));
         });
     });
 
     it('should show error message on failed login', async () => {
-        mockAuthService.login.and.returnValue(throwError(() => new Error('Invalid credentials')));
+        mockAuthService.login.and.returnValue(throwError(() => ({ response: { status: 401 } })));
 
-        const { fixture } = await render(LoginComponent, {
-            providers: [
-                { provide: AuthService, useValue: mockAuthService },
-                { provide: Router, useValue: mockRouter }
-            ]
-        });
+        await setup();
 
-        fixture.detectChanges();
+        const emailInput = screen.getByLabelText(/Gmail o Legajo/i);
+        const passwordInput = screen.getByLabelText(/Contraseña/i);
+        const submitBtn = screen.getByRole('button', { name: /Ingresar/i });
 
-        fireEvent.click(screen.getByRole('button', { name: /Ingresar/i }));
+        fireEvent.input(emailInput, { target: { value: 'wrong@test.com' } });
+        fireEvent.input(passwordInput, { target: { value: 'wrongpass' } });
+        fireEvent.click(submitBtn);
 
         await waitFor(() => {
             expect(screen.getByText(/Credenciales inválidas/i)).toBeTruthy();

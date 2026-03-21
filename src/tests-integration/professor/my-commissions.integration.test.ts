@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/angular';
 import { MyCommissionsComponent } from '@features/professor/my-commissions/my-commissions.component';
 import { ProfessorService } from '@core/services/professor.service';
 import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('Professor MyCommissions Integration', () => {
     let mockProfessorService: jasmine.SpyObj<ProfessorService>;
@@ -13,20 +14,29 @@ describe('Professor MyCommissions Integration', () => {
 
     it('should list assigned commissions for the professor', async () => {
         const commissionsMock = [
-            { idComision: 'c1', nombreComision: 'Lab III - C1', materiaNombre: 'Lab III', alumnosInscriptos: 20 }
+            { 
+                idComision: 'c1', 
+                nombre: 'Lab III - C1', // Match 'nombre' in template
+                nombreMateria: 'Lab III', 
+                cantidadAlumnos: 20, // Match 'cantidadAlumnos' in template
+                anio: 2024,
+                turno: 'NOCHE',
+                salon: 'Aula 1',
+                horarios: ['Lun 18-22']
+            }
         ] as any;
         mockProfessorService.getMisComisiones.and.returnValue(of(commissionsMock));
 
-        const { fixture } = await render(MyCommissionsComponent, {
+        await render(MyCommissionsComponent, {
+            imports: [RouterTestingModule],
             providers: [
                 { provide: ProfessorService, useValue: mockProfessorService }
             ]
         });
 
-        fixture.detectChanges();
-
         await waitFor(() => {
-            expect(screen.getByText('Lab III - C1')).toBeTruthy();
+            expect(screen.getByRole('heading', { name: /Lab III - C1/i })).toBeTruthy();
+            expect(screen.getByText(/Lab III/i)).toBeTruthy();
             expect(screen.getByText('20')).toBeTruthy();
         });
     });

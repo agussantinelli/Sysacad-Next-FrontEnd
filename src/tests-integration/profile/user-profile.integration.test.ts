@@ -2,29 +2,57 @@
 import { render, screen, waitFor } from '@testing-library/angular';
 import { ProfileComponent } from '@features/profile/profile.component';
 import { AuthService } from '@core/services/auth.service';
+import { UsuarioService } from '@core/services/usuario.service';
 import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('User Profile Integration', () => {
     let mockAuthService: any;
+    let mockUsuarioService: jasmine.SpyObj<UsuarioService>;
 
     beforeEach(() => {
-        mockAuthService = {
-            currentUser$: of({ id: 's1', nombre: 'Agustin', email: 'agustin@test.com', rol: 'STUDENT' })
+        const userMock = { 
+            id: 's1', 
+            nombre: 'Agustin', 
+            apellido: 'Santinelli', 
+            mail: 'agustin@test.com', 
+            rol: 'STUDENT',
+            dni: '12345',
+            telefono: '111',
+            direccion: 'Calle 1',
+            ciudad: 'CABA',
+            legajo: 123
         };
+
+        mockAuthService = {
+            currentUser$: of(userMock),
+            updateUser: jasmine.createSpy('updateUser')
+        };
+        mockUsuarioService = jasmine.createSpyObj('UsuarioService', ['obtenerPorId', 'subirFotoPerfil']);
+        mockUsuarioService.obtenerPorId.and.returnValue(of(userMock as any));
+
+        // Mock localStorage
+        spyOn(localStorage, 'getItem').and.callFake((key) => {
+            if (key === 'user') return JSON.stringify({ id: 's1' });
+            return null;
+        });
     });
 
     it('should display user data correctly', async () => {
-        const { fixture } = await render(ProfileComponent, {
+        await render(ProfileComponent, {
+            imports: [RouterTestingModule],
             providers: [
-                { provide: AuthService, useValue: mockAuthService }
+                { provide: AuthService, useValue: mockAuthService },
+                { provide: UsuarioService, useValue: mockUsuarioService }
             ]
         });
 
-        fixture.detectChanges();
-
         await waitFor(() => {
-            expect(screen.getByText('Agustin')).toBeTruthy();
-            expect(screen.getByText('agustin@test.com')).toBeTruthy();
+            expect(screen.getByRole('heading', { name: /Agustin/i })).toBeTruthy();
+            expect(screen.getByText(/Santinelli/i)).toBeTruthy();
+            expect(screen.getByText(/agustin@test.com/i)).toBeTruthy();
         });
+
+        expect(mockUsuarioService.obtenerPorId).toHaveBeenCalled();
     });
 });
