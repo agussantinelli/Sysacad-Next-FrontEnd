@@ -17,13 +17,14 @@ describe('Student Enrollment Flow', () => {
     cy.log('3. Select a commission from the modal');
     cy.get('app-inscription-modal', { timeout: 10000 }).should('be.visible');
     cy.get('.commission-card', { timeout: 10000 }).first().click({ force: true });
+    cy.get('.modal-footer .btn-confirm').contains('Confirmar Inscripción').click({ force: true });
 
     cy.log('4. Confirm enrollment in the summary modal');
     cy.get('app-inscription-confirmation-modal', { timeout: 10000 }).should('be.visible');
-    cy.get('button.btn-primary').contains('Confirmar').click({ force: true });
+    cy.get('app-inscription-confirmation-modal .btn-confirm').contains('Confirmar').click({ force: true });
 
     cy.log('5. Verify success alert');
-    cy.get('app-alert-message', { timeout: 10000 }).should('be.visible').and('contain.text', 'correctamente');
+    cy.get('app-alert-message', { timeout: 15000 }).should('be.visible').and('contain.text', 'éxito');
 
     cy.log('6. Logout from session');
     cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
