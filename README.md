@@ -529,72 +529,72 @@ pnpm run lint
         <tr>
             <td>🎓 <strong>Student</strong></td>
             <td>Inscripción a Cursado</td>
-            <td>Ver Materias → Elegir Comisión → Confirmar → Verificar Mis Inscripciones.</td>
-            <td>Validar el proceso principal de inscripción.</td>
+            <td>Elegir Materia → Seleccionar Comisión → <strong>Confirmar Transacción</strong> (2 pasos).</td>
+            <td>Validar el proceso de inscripción con doble validación.</td>
             <td><code>student/course-enrollment.cy.ts</code></td>
         </tr>
         <tr>
             <td>🎓 <strong>Student</strong></td>
             <td>Inscripción a Finales</td>
-            <td>Buscar Mesa → Seleccionar Turno → Confirmar Registro.</td>
-            <td>Garantizar registro correcto a exámenes.</td>
+            <td>Buscar Mesa → Seleccionar Turno → <strong>Confirmar Registro</strong> (2 pasos).</td>
+            <td>Garantizar registro correcto a exámenes con confirmación.</td>
             <td><code>student/exam-inscription.cy.ts</code></td>
         </tr>
         <tr>
             <td>🎓 <strong>Student</strong></td>
             <td>Gestión Documental</td>
-            <td>Estado Académico → Ver Detalles → Descargar Certificado de Alumno Regular.</td>
-            <td>Verificar emisión de documentación y reportes.</td>
+            <td>Estado Académico (<strong>Ver Historial</strong>) → Certificado Regularidad (<strong>Descargar PDF</strong>).</td>
+            <td>Verificar visualización de notas y descarga de trámites.</td>
             <td><code>student/academic-docs.cy.ts</code></td>
         </tr>
         <tr>
             <td>👑 <strong>Admin</strong></td>
             <td>Gestión de Comisiones</td>
-            <td>Crear Materia/Plan → Crear Comisión → Asignar Docente/Horario.</td>
+            <td>Crear Comisión → Asignar Docente/Horario.</td>
             <td>Validar configuración del ciclo lectivo.</td>
             <td><code>admin/commission-creation.cy.ts</code></td>
         </tr>
         <tr>
             <td>👑 <strong>Admin</strong></td>
             <td>Control de Usuarios</td>
-            <td>Crear Alumno → Asignar Carrera → Editar Perfil.</td>
+            <td>Crear Alumno → Asignar Carrera → Editar Perfil (Guardar).</td>
             <td>Verificar gestión de accesos y perfiles.</td>
             <td><code>admin/user-registration.cy.ts</code></td>
         </tr>
         <tr>
             <td>👑 <strong>Admin</strong></td>
             <td>Mantenimiento de Mesas</td>
-            <td>Abrir Mesa Final → Definir Tribunal → Publicar Fechas.</td>
-            <td>Asegurar disponibilidad de fechas de examen.</td>
+            <td>Abrir Mesa Final (Mayo 2026) → Definir Tribunal → Publicar Fechas.</td>
+            <td>Asegurar disponibilidad de fechas de examen deterministas.</td>
             <td><code>admin/exam-table-config.cy.ts</code></td>
         </tr>
         <tr>
             <td>👑 <strong>Admin</strong></td>
             <td>Reportes y Estadísticas</td>
-            <td>Dashboard → Grficos de Inscriptos → Exportar CSV de Vacantes.</td>
+            <td>Dashboard → Gráficos de Inscriptos.</td>
             <td>Validar visibilidad y consistencia de datos globales.</td>
             <td><code>admin/analytics-reports.cy.ts</code></td>
         </tr>
         <tr>
             <td>👨‍🏫 <strong>Professor</strong></td>
             <td>Carga de Calificaciones</td>
-            <td>Seleccionar Comisión → Cargar Parciales → Confirmar Actas.</td>
-            <td>Garantizar persistencia de notas de cursado.</td>
+            <td>Seleccionar Comisión → Cargar Notas..</td>
+            <td>Garantizar persistencia de notas con sincronización de API.</td>
             <td><code>professor/grading-commissions.cy.ts</code></td>
         </tr>
         <tr>
             <td>👨‍🏫 <strong>Professor</strong></td>
             <td>Cierre de Mesa Final</td>
-            <td>Seleccionar Mesa → Cargar Notas de Alumnos → Cerrar Acta.</td>
-            <td>Asegurar registro oficial de exámenes.</td>
+            <td><strong>Búsqueda Multi-turno</strong> → Cargar Notas de Alumnos → Cerrar Acta.</td>
+            <td>Asegurar registro de exámenes con búsqueda recursiva.</td>
             <td><code>professor/grading-exams.cy.ts</code></td>
         </tr>
         <tr>
             <td>👨‍🏫 <strong>Professor</strong></td>
-            <td>Gestión de Cátedra</td>
-            <td>Ver Alumnos de Comisión → Descargar Lista → Enviar Aviso a Comisión.</td>
-            <td>Validar comunicación e información docente.</td>
-            <td><code>professor/pedagogical-tools.cy.ts</code></td>
+            <td>Comunicación (Avisos)</td>
+            <td>Ver Comisiones → Enviar Aviso Rápido → Verificar Estado Enviado.</td>
+            <td>Validar herramientas de comunicación docente.</td>
+            <td><code>professor/send-message.cy.ts</code></td>
         </tr>
     </tbody>
 </table>
