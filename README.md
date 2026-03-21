@@ -523,7 +523,7 @@ pnpm run lint
             <td><strong>Navegación Estudiante</strong></td>
             <td>Login → Inscripción → Estado Académico.</td>
             <td>Validar la integración de los flujos críticos del alumno.</td>
-            <td><code>student-flow.cy.ts</code></td>
+            <td><code>student/navigation.cy.ts</code></td>
         </tr>
     </tbody>
 </table>
