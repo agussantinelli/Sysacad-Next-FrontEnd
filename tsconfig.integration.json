@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/integration",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "include": [
+    "src/test.ts",
+    "tests/integration/**/*.test.ts",
+    "src/**/*.d.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}
