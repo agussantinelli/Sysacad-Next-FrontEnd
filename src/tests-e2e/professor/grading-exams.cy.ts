@@ -6,8 +6,8 @@ describe('Professor Final Exam Grading Flow', () => {
   });
 
   it('should record exam results and close the Acta', () => {
-    cy.log('1. Access "Mis Mesas de Examen"');
-    cy.contains('.option-card', 'Mis Mesas de Examen').click({ force: true });
+    cy.log('1. Access "Mesas de Examen"');
+    cy.contains('.option-card', 'Mesas de Examen').click({ force: true });
 
     cy.log('2. Open a specific exam table for grading');
     cy.get('button.btn-action', { timeout: 10000 }).contains('Calificar').first().click({ force: true });

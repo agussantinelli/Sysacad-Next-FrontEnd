@@ -6,8 +6,8 @@ describe('Admin User Management Flow', () => {
   });
 
   it('should register a new student and verify their creation', () => {
-    cy.log('1. Go to "Gestión de Usuarios"');
-    cy.contains('.option-card', 'Gestión de Usuarios').click({ force: true });
+    cy.log('1. Go to "Usuarios"');
+    cy.contains('.option-card', 'Usuarios').click({ force: true });
     cy.url().should('include', '/admin/users');
 
     cy.log('2. Open creation form');
@@ -16,11 +16,11 @@ describe('Admin User Management Flow', () => {
 
     cy.log('3. Fill student registration form');
     const randomSuffix = Math.floor(Math.random() * 10000);
-    cy.get('input[placeholder*="Nombre"]', { timeout: 10000 }).type('TestStudent');
-    cy.get('input[placeholder*="Apellido"]').type(`User_${randomSuffix}`);
-    cy.get('input[placeholder*="Email"]').type(`student_${randomSuffix}@sysacad.com`);
-    cy.get('input[placeholder*="DNI"]').type(`4000${randomSuffix}`);
-    cy.get('select').select('ESTUDIANTE');
+    cy.contains('label', 'Nombre').next('input').type('TestStudent');
+    cy.contains('label', 'Apellido').next('input').type(`User_${randomSuffix}`);
+    cy.contains('label', 'Email').next('input').type(`student_${randomSuffix}@sysacad.com`);
+    cy.contains('label', 'DNI').next('input').type(`4000${randomSuffix}`);
+    cy.contains('label', 'Rol').next('select').select('ESTUDIANTE');
 
     cy.log('4. Submit registration');
     cy.get('button.btn-primary').contains('Crear').click({ force: true });
