@@ -407,7 +407,7 @@ El proyecto cuenta con una suite integral de pruebas que cubren tanto la lógica
 El proyecto utiliza una estrategia de tres niveles para garantizar la calidad:
 
 1. **Tests Unitarios**: Jasmine + Karma. Ubicados junto al código fuente (`.spec.ts`).
-2. **Tests de Integración**: Jasmine + Karma + Angular Testing Library. Ubicados en `tests/integration/`.
+2. **Tests de Integración**: Jasmine + Karma + Angular Testing Library. Ubicados en `src/tests-integration/`.
 3. **Tests End-to-End (E2E)**: Cypress. Ubicados en `cypress/`.
 
 #### Ejecución de Tests
