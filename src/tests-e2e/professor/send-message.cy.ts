@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
-describe('Professor Management and Communication Flow', () => {
+describe('Professor Course Communication Flow', () => {
   beforeEach(() => {
     cy.login('laura@sysacad.com', '123456');
   });
 
-  it('should send an announcement to students and export checklist', () => {
+  it('should send an announcement to students in a commission', () => {
     cy.log('1. Go to "Mis Comisiones"');
     cy.contains('.option-card', 'Mis Comisiones').click({ force: true });
 
