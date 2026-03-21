@@ -65,7 +65,8 @@
     "node_modules",
     "node_modules/cypress",
     "dist",
-    "tests"
+    "src/tests-integration/**/*",
+    "src/tests-e2e/**/*"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
