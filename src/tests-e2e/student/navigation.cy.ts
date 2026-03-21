@@ -1,16 +1,8 @@
 /// <reference types="cypress" />
-describe('Student Navigation Flow', () => {
+/// <reference types="cypress" />
+describe('Student Enrollment Flow', () => {
   beforeEach(() => {
-    // Basic setup: Visit login page
-    cy.visit('/login');
-
-    // Perform login
-    cy.get('#email').type('agustinsantinelli@gmail.com');
-    cy.get('#password').type('123456');
-    cy.get('button.submit-btn').click();
-
-    // Verify login successful (dashboard loaded)
-    cy.url().should('include', '/dashboard');
+    cy.login('maria@sysacad.com', '123456');
   });
 
   it('should navigate through the student enrollment process', () => {
