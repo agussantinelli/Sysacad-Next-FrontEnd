@@ -23,7 +23,7 @@ describe('Student Enrollment Flow', () => {
     cy.get('button.btn-primary').contains('Confirmar').click({ force: true });
 
     cy.log('5. Verify success alert');
-    cy.get('app-alert-message', { timeout: 10000 }).should('be.visible').and('contain.text', 'éxito');
+    cy.get('app-alert-message', { timeout: 10000 }).should('be.visible').and('contain.text', 'correctamente');
 
     cy.log('6. Logout from session');
     cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
