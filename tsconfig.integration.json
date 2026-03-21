@@ -9,11 +9,12 @@
   },
   "include": [
     "src/tests-integration/test.ts",
-    "src/**/*.ts",
+    "src/app/**/*.ts",
     "src/tests-integration/**/*.integration.test.ts",
     "src/**/*.d.ts"
   ],
   "exclude": [
-    "src/**/*.spec.ts"
+    "src/**/*.spec.ts",
+    "src/tests-e2e/**/*"
   ]
 }
