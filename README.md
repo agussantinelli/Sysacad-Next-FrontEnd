@@ -382,6 +382,15 @@
 │   │   ├── professor/                                # Flujos de Docente
 │   │   └── student/                                  # Flujos de Alumno (Inscripción, Estado Académico...)
 │   ├── tests-integration/                            # Pruebas de Integración (Karma/Jasmine/ATL)
+│   │   ├── admin/                                    # Pruebas de Módulo Administración
+│   │   ├── announcements/                            # Pruebas de Avisos e Institucional
+│   │   ├── auth/                                     # Pruebas de Autenticación
+│   │   ├── dashboard/                                # Pruebas de Dashboard (Roles)
+│   │   ├── layout/                                   # Pruebas de Componentes Core (Navbar/Sidebar)
+│   │   ├── messages/                                 # Pruebas de Mensajería Interna
+│   │   ├── professor/                                # Pruebas de Módulo Docente
+│   │   ├── profile/                                  # Pruebas de Perfil de Usuario
+│   │   └── student/                                  # Pruebas de Módulo Alumno
 │   ├── globals.css                                   # Estilos globales y temas
 │   ├── index.html                                    # Entry Point HTML
 │   ├── main.ts                                       # Entry Point TS
