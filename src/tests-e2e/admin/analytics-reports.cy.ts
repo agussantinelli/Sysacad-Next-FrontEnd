@@ -25,5 +25,10 @@ describe('Admin Analytics and Reports Flow', () => {
     cy.log('4. Verify statistics cards are updated');
     cy.get('.stat-card').should('have.length.at.least', 4);
     cy.get('app-alert-message[type="error"]').should('not.exist');
+
+    cy.log('5. Logout from session');
+    cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
+    cy.get('.dropdown-item.logout', { timeout: 10000 }).click({ force: true });
+    cy.url({ timeout: 10000 }).should('include', '/login');
   });
 });

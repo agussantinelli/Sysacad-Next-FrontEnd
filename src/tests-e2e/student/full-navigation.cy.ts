@@ -58,5 +58,10 @@ describe('Student Enrollment Flow', () => {
     // 10. Finish by going to Mensajes
     cy.contains('.option-card', 'Mensajes').click({ force: true });
     cy.url({ timeout: 10000 }).should('include', '/messages');
+
+    cy.log('11. Logout from session');
+    cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
+    cy.get('.dropdown-item.logout', { timeout: 10000 }).click({ force: true });
+    cy.url({ timeout: 10000 }).should('include', '/login');
   });
 });

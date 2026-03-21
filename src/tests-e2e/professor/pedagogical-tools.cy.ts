@@ -22,5 +22,10 @@ describe('Professor Management and Communication Flow', () => {
     cy.log('5. Trigger attendance list download');
     cy.get('button.btn-download', { timeout: 10000 }).first().click({ force: true });
     cy.get('app-loading-spinner', { timeout: 15000 }).should('exist');
+
+    cy.log('6. Logout from session');
+    cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
+    cy.get('.dropdown-item.logout', { timeout: 10000 }).click({ force: true });
+    cy.url({ timeout: 10000 }).should('include', '/login');
   });
 });

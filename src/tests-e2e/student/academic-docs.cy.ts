@@ -21,5 +21,10 @@ describe('Student Documents and Academic Status Flow', () => {
     // Usually triggers a download or alert, wait for processing
     cy.get('app-loading-spinner', { timeout: 15000 }).should('exist');
     cy.get('app-loading-spinner', { timeout: 15000 }).should('not.exist');
+
+    cy.log('5. Logout from session');
+    cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
+    cy.get('.dropdown-item.logout', { timeout: 10000 }).click({ force: true });
+    cy.url({ timeout: 10000 }).should('include', '/login');
   });
 });

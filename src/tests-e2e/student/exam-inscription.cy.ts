@@ -29,5 +29,10 @@ describe('Student Exam Registration Flow', () => {
         cy.contains('No hay datos disponibles').should('be.visible');
       }
     });
+
+    cy.log('6. Logout from session');
+    cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
+    cy.get('.dropdown-item.logout', { timeout: 10000 }).click({ force: true });
+    cy.url({ timeout: 10000 }).should('include', '/login');
   });
 });
