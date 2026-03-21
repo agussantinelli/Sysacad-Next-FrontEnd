@@ -19,7 +19,7 @@ Sysacad-Next follows a three-tiered testing strategy to ensure reliability, perf
 2.  **Integration & E2E (Multi-module & Flows)**:
     - **Location**: All high-level and interaction tests are centralized in the `tests/` directory at the project root.
     - **Structure**:
-      - `tests/integration/`: Interaction tests between multiple components or logic modules (using Vitest + happy-dom).
+      - `tests/integration/`: Interaction tests between multiple components or logic modules (using Karma + Jasmine).
       - `tests/e2e/`: Real browser end-to-end flows covering complete user journeys.
 
 ## 🧱 Test Tiers
@@ -27,11 +27,11 @@ Sysacad-Next follows a three-tiered testing strategy to ensure reliability, perf
 | Tier | Scope | Framework | Execution Context | Location |
 | :--- | :--- | :--- | :--- | :--- |
 | **Unit** | Atomic logic | Jasmine + Karma | Browser (ChromeHeadless) | Adjacent |
-| **Integration** | Component/Service interactions | Vitest + ATL | Node (happy-dom) | `tests/integration/` |
+| **Integration** | Component/Service interactions | Jasmine + Karma | Browser (ChromeHeadless) | `tests/integration/` |
 | **E2E** | User-facing flows | Cypress | Browser (Real) | `tests/e2e/` |
 
 ## 📏 Core Principles
-- **Speed first**: Unit and Integration tests must be extremely fast. Use `happy-dom` for integration.
+- **Speed first**: Unit and Integration tests must be extremely fast. Use `ChromeHeadless` for browser environment.
 - **No Overlap**: If a logic branch is covered by a Unit test, do not duplicate it in Integration. Use Integration to test the "glue" between units.
 - **Real-world E2E**: E2E tests should be reserved for the most critical paths and happy paths (e.g., successful registration, exam enrollment).
 - **Proximity**: Keep unit tests close to the code to encourage TDD and maintainability.

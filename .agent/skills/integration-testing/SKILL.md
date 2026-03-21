@@ -8,10 +8,10 @@ description: Guidelines for frontend integration testing using Vitest and Angula
 Integration tests in the Sysacad-Next FrontEnd focus on the interaction between multiple components, services, and state (Signals). They verify that different "islands" of logic work together correctly without the overhead of a full browser environment.
 
 ## 🛠️ Stack
-- **Framework**: [Vitest](https://vitest.dev/)
+- **Framework**: [Jasmine/Karma](https://jasmine.github.io/) (via Angular CLI)
 - **Library**: [Angular Testing Library (ATL)](https://testing-library.com/docs/angular-testing-library/intro/)
-- **Environment**: `happy-dom`
-- **Mocking**: `vi.mock()` for external APIs/Services (e.g., Axios client).
+- **Environment**: Browser (ChromeHeadless)
+- **Mocking**: `jasmine.createSpyObj()` or `jasmine.createSpy()`
 
 ## 📂 Location
 All integration tests **MUST** be located in:
@@ -19,7 +19,7 @@ All integration tests **MUST** be located in:
 
 ## 📏 Core Principles
 1. **State Integration**: Test components together with their real Services or Signals. Avoid mocking the business logic layer unless necessary for boundary isolation.
-2. **Service Interaction**: Verify that components correctly trigger service calls (e.g., `PlanService` or `AuthService`). Mock the service layer only to simulate API responses (e.g., using `vi.mock` or MSW headers).
+2. **Service Interaction**: Verify that components correctly trigger service calls (e.g., `PlanService` or `AuthService`). Mock the service layer only to simulate API responses (e.g., using `jasmine.createSpyObj`).
 3. **DOM Manipulation**: Verify that components correctly bind events and manipulate elements based on state changes (e.g., showing a modal after a button click).
 4. **No Real Backend**: Use mocks or mock services to simulate API responses. Integration tests should be fast and deterministic.
 5. **Foundational Flows**: Focus on critical paths:
@@ -36,9 +36,8 @@ import { of } from 'rxjs';
 
 it('should load details from the service and reflect them in the view', async () => {
     // 1. Mock service
-    const mockPlanService = {
-        getPlan: vi.fn().mockReturnValue(of({ name: 'Plan 2024', status: 'Active' }))
-    };
+    const mockPlanService = jasmine.createSpyObj('PlanService', ['getPlan']);
+    mockPlanService.getPlan.and.returnValue(of({ name: 'Plan 2024', status: 'Active' }));
 
     // 2. Render component with necessary providers
     await render(PlanDetailComponent, {
