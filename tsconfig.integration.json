@@ -8,8 +8,9 @@
     ]
   },
   "include": [
-    "src/test.ts",
-    "tests/integration/**/*.test.ts",
+    "src/tests-integration/test.ts",
+    "src/**/*.ts",
+    "src/tests-integration/**/*.integration.test.ts",
     "src/**/*.d.ts"
   ],
   "exclude": [
