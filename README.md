@@ -439,7 +439,7 @@ pnpm test:e2e
     <li><strong>Core Services:</strong> 100% de cobertura en <code>src/app/core/services</code>.</li>
     <li><strong>Features & UI:</strong> Cobertura 1:1 en componentes de Admin, Professor y Student.</li>
     <li><strong>E2E Navigation:</strong> Implementación exitosa del <strong>Student Navigation Flow</strong>.</li>
-    <li><strong>Specs Ejecutados:</strong> +410 pruebas unitarias y 16 pruebas de integración (Karma/Jasmine) exitosas.</li>
+    <li><strong>Specs Ejecutados:</strong> +410 pruebas unitarias y 18 pruebas de integración en 16 archivos (Karma/Jasmine) exitosas.</li>
 </ul>
 
 ### ⚖️ Filosofía de Testeo 1:1
