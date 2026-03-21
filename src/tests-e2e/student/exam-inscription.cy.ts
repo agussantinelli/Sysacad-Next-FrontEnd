@@ -2,7 +2,7 @@
 
 describe('Student Exam Registration Flow', () => {
   beforeEach(() => {
-    cy.login('maria@sysacad.com', '123456');
+    cy.login('martin@sysacad.com', '123456');
   });
 
   it('should register for an exam final table', () => {
@@ -15,16 +15,18 @@ describe('Student Exam Registration Flow', () => {
     cy.get('body').then(($body) => {
       if ($body.find('button.action-btn').length > 0) {
         cy.get('button.action-btn').contains('Inscribirse').first().click({ force: true });
-        
+
         cy.log('3. Select a date/shift in the modal');
-        cy.get('app-exam-inscription-modal', { timeout: 10000 }).should('be.visible');
-        cy.get('.shift-card', { timeout: 10000 }).first().click({ force: true });
+        cy.get('app-inscription-modal', { timeout: 10000 }).should('be.visible');
+        cy.get('.commission-card', { timeout: 10000 }).first().click({ force: true });
+        cy.get('.modal-footer .btn-confirm').contains('Confirmar Inscripción').click({ force: true });
 
         cy.log('4. Confirm registration');
-        cy.get('button.btn-primary').contains('Confirmar').click({ force: true });
-        
+        cy.get('app-inscription-confirmation-modal', { timeout: 10000 }).should('be.visible');
+        cy.get('app-inscription-confirmation-modal .btn-confirm').contains('Confirmar').click({ force: true });
+
         cy.log('5. Verify success alert');
-        cy.get('app-alert-message', { timeout: 10000 }).should('be.visible');
+        cy.get('app-alert-message', { timeout: 15000 }).should('be.visible').and('contain.text', 'Inscripción');
       } else {
         cy.contains('No hay datos disponibles').should('be.visible');
       }

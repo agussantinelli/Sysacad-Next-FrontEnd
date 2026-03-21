@@ -2,7 +2,7 @@
 
 describe('Student Enrollment Flow', () => {
   beforeEach(() => {
-    cy.login('maria@sysacad.com', '123456');
+    cy.login('martin@sysacad.com', '123456');
   });
 
   it('should complete a course enrollment through the multi-step modal', () => {
@@ -24,7 +24,7 @@ describe('Student Enrollment Flow', () => {
     cy.get('app-inscription-confirmation-modal .btn-confirm').contains('Confirmar').click({ force: true });
 
     cy.log('5. Verify success alert');
-    cy.get('app-alert-message', { timeout: 15000 }).should('be.visible').and('contain.text', 'éxito');
+    cy.get('app-alert-message', { timeout: 15000 }).should('be.visible').and('contain.text', 'Inscripción');
 
     cy.log('6. Logout from session');
     cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
