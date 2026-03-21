@@ -14,7 +14,7 @@ Quality assurance in the frontend involves checking both individual component lo
 314. **Integration Testing**: Use Karma + ATL for testing interactions between modules. See **[integration-testing](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/integration-testing/SKILL.md)**.
 15. **Naming**: 
    - Unit: `.spec.ts` (adjacent).
-   - Integration: `.integration.test.ts` (inside `tests/integration/`).
+   - Integration: `.integration.test.ts` (inside `src/tests-integration/`).
    - E2E: `*.cy.ts` (inside `tests/e2e/`).
 16. **Mocking**: Use Jasmine Spies/Mocks.
 17. **Commands**:
