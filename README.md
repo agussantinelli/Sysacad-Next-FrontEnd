@@ -320,7 +320,7 @@
 ├── src/                                              # Código fuente de la aplicación
 ├── tests/                                            # Suite de Pruebas de Alto Nivel
 │   ├── e2e/                                          # Tests de Extremo a Extremo (Cypress)
-│   └── integration/                                  # Tests de Interacción (Vitest)
+│   └── integration/                                  # Tests de Interacción (Karma/Jasmine)
 │   ├── app/
 │   │   ├── core/
 │   │   │   ├── api/                                  # Cliente Axios Configurado
@@ -402,23 +402,29 @@ pnpm run lint
 
 El proyecto cuenta con una suite integral de pruebas que cubren tanto la lógica de negocio (Unit Testing) como los flujos de usuario (E2E Testing).
 
-<h3>🛠️ Tecnologías y Convenciones</h3>
-<ul>
-    <li><strong>Unit Testing:</strong> Jasmine & Karma (Componentes y Servicios individuales).</li>
-    <li><strong>Integration Testing:</strong> Vitest & Angular Testing Library (Interacción entre módulos).</li>
-    <li><strong>E2E Testing:</strong> Cypress 15.12.0 para validación de flujos de extremo a extremo (Real Browser).</li>
-    <li><strong>Naming:</strong> <code>*.spec.ts</code> (Unit), <code>*.integration.test.ts</code> (Integration), <code>*.cy.ts</code> (E2E).</li>
-</ul>
+### 🧪 Estrategia de Testing
 
-<h3>🚀 Ejecutar Tests</h3>
-<p>Para correr <strong>todos</strong> los tests (Unitarios + Integración):</p>
-<pre><code>pnpm run test</code></pre>
+El proyecto utiliza una estrategia de tres niveles para garantizar la calidad:
+
+1. **Tests Unitarios**: Jasmine + Karma. Ubicados junto al código fuente (`.spec.ts`).
+2. **Tests de Integración**: Jasmine + Karma + Angular Testing Library. Ubicados en `tests/integration/`.
+3. **Tests End-to-End (E2E)**: Cypress. Ubicados en `cypress/`.
+
+#### Ejecución de Tests
+
+```bash
+# Ejecutar todos los tests (Unitarios + Integración)
+pnpm test
+
+# Ejecutar solo integración
+pnpm test:integration
+
+# Ejecutar E2E
+pnpm test:e2e
+```
 
 <p>Para correr solo pruebas unitarias (Jasmine/Karma):</p>
 <pre><code>pnpm run test:unit</code></pre>
-
-<p>Para correr solo pruebas de integración (Vitest):</p>
-<pre><code>pnpm run test:integration</code></pre>
 
 <p>Para correr la suite de pruebas E2E (Cypress):</p>
 <pre><code># Abrir interfaz de Cypress
@@ -433,7 +439,7 @@ pnpm test:e2e
     <li><strong>Core Services:</strong> 100% de cobertura en <code>src/app/core/services</code>.</li>
     <li><strong>Features & UI:</strong> Cobertura 1:1 en componentes de Admin, Professor y Student.</li>
     <li><strong>E2E Navigation:</strong> Implementación exitosa del <strong>Student Navigation Flow</strong>.</li>
-    <li><strong>Specs Ejecutados:</strong> +410 pruebas unitarias y 16 pruebas de integración (Vitest) exitosas.</li>
+    <li><strong>Specs Ejecutados:</strong> +410 pruebas unitarias y 16 pruebas de integración (Karma/Jasmine) exitosas.</li>
 </ul>
 
 ### ⚖️ Filosofía de Testeo 1:1
