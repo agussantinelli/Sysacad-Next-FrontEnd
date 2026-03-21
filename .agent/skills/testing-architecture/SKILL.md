@@ -26,12 +26,12 @@ Sysacad-Next follows a three-tiered testing strategy to ensure reliability, perf
 | :--- | :--- | :--- | :--- | :--- |
 | **Unit** | Atomic logic | Jasmine + Karma | Browser (ChromeHeadless) | Adjacent |
 | **Integration** | Component/Service interactions | Jasmine + Karma | Browser (ChromeHeadless) | `src/tests-integration/` |
-| **E2E** | User-facing flows | Cypress | Browser (Real) | `tests/e2e/` |
+| **E2E** | User-facing flows | Cypress | Browser (Real) | `src/tests-e2e/` |
 
 ## 📏 Core Principles
 - **Speed first**: Unit and Integration tests must be extremely fast. Use `ChromeHeadless` for browser environment.
 - **No Overlap**: If a logic branch is covered by a Unit test, do not duplicate it in Integration. Use Integration to test the "glue" between units.
-- **Real-world E2E**: E2E tests should be reserved for the most critical paths and happy paths (e.g., successful registration, exam enrollment).
+- **Real-world E2E**: E2E tests are organized by role and reserved for critical user journeys.
 - **Proximity**: Keep unit tests close to the code to encourage TDD.
-- **Internal Integration**: Integration tests live in `src/tests-integration/` to leverage Angular's native discovery and project aliases.
+- **Centralized Testing**: All test suites (Integration and E2E) live in `src/` to maintain a unified code + quality structure.
 - **Type Forcing**: Integration tests must include `/// <reference types="jasmine" />` to resolve Vitest conflicts in the IDE.

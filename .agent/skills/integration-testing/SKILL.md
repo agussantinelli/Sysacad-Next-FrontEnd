@@ -15,7 +15,7 @@ Integration tests in the Sysacad-Next FrontEnd focus on the interaction between 
 
 ## 📂 Location
 All integration tests **MUST** be located in:
-`src/tests-integration/[feature].integration.test.ts`
+`src/tests-integration/[role]/[feature].integration.test.ts`
 
 ## 📏 Core Principles
 1. **State Integration**: Test components together with their real Services or Signals. Avoid mocking the business logic layer unless necessary for boundary isolation.
