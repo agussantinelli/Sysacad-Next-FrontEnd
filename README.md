@@ -376,6 +376,7 @@
 │   │   │   ├── interfaces/                           # Interfaces UI
 │   │   │   └── pipes/                                # Pipes Custom
 │   ├── environments/                                 # Configuración de entorno
+│   ├── tests-integration/                            # Suite de Pruebas de Integración (Karma/Jasmine/ATL)
 │   ├── globals.css                                   # Estilos globales y temas
 │   ├── index.html                                    # Entry Point HTML
 │   ├── main.ts                                       # Entry Point TS
