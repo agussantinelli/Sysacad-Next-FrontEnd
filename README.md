@@ -324,9 +324,6 @@
 <pre><code>Sysacad-Next-FrontEnd/
 ├── public/                                           # Assets estáticos servidos directamente
 ├── src/                                              # Código fuente de la aplicación
-├── tests/                                            # Suite de Pruebas de Alto Nivel
-│   ├── e2e/                                          # Tests de Extremo a Extremo (Cypress)
-│   └── integration/                                  # Tests de Interacción (Karma/Jasmine)
 │   ├── app/
 │   │   ├── core/
 │   │   │   ├── api/                                  # Cliente Axios Configurado
