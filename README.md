@@ -533,6 +533,9 @@ pnpm run lint
     <li><strong>Modo Interactivo:</strong> <code>pnpm e2e:open</code></li>
 </ul>
 
+> [!IMPORTANT]
+> **Servidor Requerido:** Para ejecutar las pruebas E2E (Cypress), la aplicación debe estar corriendo localmente. Asegúrate de iniciar el servidor con `pnpm dev` en una terminal separada antes de lanzar los tests.
+
 <h3>⚖️ Filosofía de Testeo 1:1</h3>
 
 <p>El proyecto sigue una política estricta de <strong>aparejamiento 1:1</strong> entre archivos de código y archivos de prueba:</p>
