@@ -1,24 +1,24 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { AdminCommissionsComponent } from '@/app/features/admin/commissions/admin-commissions.component';
-import { AdminService } from '@core/services/admin.service';
-import { AlertService } from '@core/services/alert.service';
+import { AdminCommissionsComponent } from '../../../src/app/features/admin/commissions/admin-commissions.component';
+import { AdminService } from '../../../src/app/core/services/admin.service';
+import { AlertService } from '../../../src/app/core/services/alert.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
 
 describe('Admin Commissions Integration', () => {
-    const mockAdminService = {
-        getAllComisiones: vi.fn(),
-        getAllCarreras: vi.fn(),
-        getSalonesDisponibles: vi.fn(),
-        getPlanDetalle: vi.fn(),
-        getProfesoresDisponibles: vi.fn(),
-        asignarMateriaComision: vi.fn()
-    };
-    const mockAlertService = {
-        success: vi.fn(),
-        error: vi.fn(),
-        warning: vi.fn()
-    };
+    let mockAdminService: jasmine.SpyObj<AdminService>;
+    let mockAlertService: jasmine.SpyObj<AlertService>;
+
+    beforeEach(() => {
+        mockAdminService = jasmine.createSpyObj('AdminService', [
+            'getAllComisiones',
+            'getAllCarreras',
+            'getSalonesDisponibles',
+            'getPlanDetalle',
+            'getProfesoresDisponibles',
+            'asignarMateriaComision'
+        ]);
+        mockAlertService = jasmine.createSpyObj('AlertService', ['success', 'error', 'warning']);
+    });
 
     it('should validate hours during assignment wizard', async () => {
         const commissionMock = [{ 
@@ -27,14 +27,14 @@ describe('Admin Commissions Integration', () => {
             idCarrera: 'car1', 
             anio: 2024, 
             nivel: 1 
-        }];
+        }] as any;
         const planMock = {
             materias: [{ id: 'm1', nombre: 'Matematica', horasCursado: 4, nivel: 1 }]
-        };
+        } as any;
 
-        mockAdminService.getAllComisiones.mockReturnValue(of(commissionMock));
-        mockAdminService.getAllCarreras.mockReturnValue(of([{ id: 'car1', nombre: 'Carrera 1' }]));
-        mockAdminService.getPlanDetalle.mockReturnValue(of(planMock));
+        mockAdminService.getAllComisiones.and.returnValue(of(commissionMock));
+        mockAdminService.getAllCarreras.and.returnValue(of([{ id: 'car1', nombre: 'Carrera 1' } as any]));
+        mockAdminService.getPlanDetalle.and.returnValue(of(planMock));
 
         await render(AdminCommissionsComponent, {
             providers: [
@@ -51,7 +51,7 @@ describe('Admin Commissions Integration', () => {
         fireEvent.click(assignBtn);
 
         // Seleccionar materia
-        await waitFor(() => expect(screen.getByText('Matematica')).toBeInTheDocument());
+        await waitFor(() => expect(screen.getByText('Matematica')).toBeTruthy());
         fireEvent.click(screen.getByText('Matematica'));
 
         // Agregar horario insuficiente (2 horas)
@@ -69,6 +69,6 @@ describe('Admin Commissions Integration', () => {
         const nextBtn = screen.getByRole('button', { name: /Siguiente/i });
         fireEvent.click(nextBtn);
 
-        expect(mockAlertService.warning).toHaveBeenCalledWith(expect.stringContaining('Debe asignar exactamente 4 horas'));
+        expect(mockAlertService.warning).toHaveBeenCalledWith(jasmine.stringMatching(/Debe asignar exactamente 4 horas/));
     });
 });
