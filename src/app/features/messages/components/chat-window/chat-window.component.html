@@ -75,7 +75,7 @@
             <div class="chat-input-area">
                 <input type="text" [(ngModel)]="newMessage" placeholder="Escribe un mensaje..."
                     (keyup.enter)="handleSendMessage()" [disabled]="!canSend">
-                <button class="btn-send" (click)="handleSendMessage()" [disabled]="!newMessage.trim() || !canSend">
+                <button class="btn-send" (click)="handleSendMessage()" [disabled]="!newMessage.trim() || !canSend" aria-label="Enviar">
                     <span class="material-icons">send</span>
                 </button>
             </div>
