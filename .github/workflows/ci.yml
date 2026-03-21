@@ -31,7 +31,7 @@ jobs:
       run: pnpm test:unit --watch=false --browsers=ChromeHeadless
 
     - name: Run Integration Tests
-      run: pnpm test:integration
+      run: pnpm test:integration --watch=false --browsers=ChromeHeadless
 
     - name: Build
       run: pnpm run build
