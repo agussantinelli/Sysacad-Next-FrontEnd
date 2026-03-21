@@ -162,7 +162,7 @@
 
         <div class="modal-footer">
             <button class="btn-cancel" (click)="onClose()">Cancelar</button>
-            <button class="btn-confirm" [disabled]="!examDetail && !selectedCommission && !selectedExamTable"
+            <button class="btn-confirm" aria-label="Confirmar Selección" [disabled]="!examDetail && !selectedCommission && !selectedExamTable"
                 (click)="confirm()">
                 Confirmar Inscripción
             </button>
