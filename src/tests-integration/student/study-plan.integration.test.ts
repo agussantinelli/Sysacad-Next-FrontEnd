@@ -25,11 +25,13 @@ describe('Study Plan Integration', () => {
         }] as any;
         mockMatriculacionService.getMisCarrerasMaterias.and.returnValue(of(planMock));
 
-        await render(StudyPlanComponent, {
+        const { fixture } = await render(StudyPlanComponent, {
             providers: [
                 { provide: MatriculacionService, useValue: mockMatriculacionService }
             ]
         });
+
+        fixture.detectChanges();
 
         await waitFor(() => {
             expect(screen.getByText('Programación I')).toBeTruthy();

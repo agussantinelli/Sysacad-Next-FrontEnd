@@ -64,13 +64,20 @@ describe('Admin Commissions Integration', () => {
         fireEvent.change(daySelect, { target: { value: 'LUNES' } });
         fireEvent.input(fromInput, { target: { value: '08:00' } });
         fireEvent.input(toInput, { target: { value: '10:00' } });
+        fireEvent.blur(toInput); // Triggers valdiation/binding
+        
+        await waitFor(() => expect(addBtn.getAttribute('disabled')).toBeFalsy());
         fireEvent.click(addBtn);
+
+        // Validar que se agregó
+        await screen.findByText(/LUNES: 08:00 - 10:00/i);
 
         // Intentar pasar al siguiente paso
         const nextBtn = screen.getByRole('button', { name: /Siguiente/i });
         fireEvent.click(nextBtn);
 
-        screen.debug();
-        expect(mockAlertService.warning).toHaveBeenCalledWith(jasmine.stringMatching(/Debe asignar exactamente 4 horas/));
+        await waitFor(() => {
+            expect(mockAlertService.warning).toHaveBeenCalledWith(jasmine.stringMatching(/Debe asignar exactamente 4 horas/));
+        });
     });
 });

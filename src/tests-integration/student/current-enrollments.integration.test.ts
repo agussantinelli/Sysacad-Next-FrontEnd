@@ -28,12 +28,14 @@ describe('Current Enrollments Integration', () => {
         ] as any;
         mockInscripcionService.obtenerCursadasActuales.and.returnValue(of(enrollmentsMock));
 
-        await render(CurrentEnrollmentsComponent, {
+        const { fixture } = await render(CurrentEnrollmentsComponent, {
             providers: [
                 { provide: InscripcionCursadoService, useValue: mockInscripcionService },
                 { provide: AuthService, useValue: mockAuthService }
             ]
         });
+
+        fixture.detectChanges();
 
         await waitFor(() => {
             expect(screen.getByText('Laboratorio III')).toBeTruthy();

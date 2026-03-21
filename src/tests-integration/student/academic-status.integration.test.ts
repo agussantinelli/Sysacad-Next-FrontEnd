@@ -30,16 +30,18 @@ describe('Academic Status Integration', () => {
         mockMatriculacionService.getHistorialMateria.and.returnValue(of({ nombreMateria: 'Test', finales: [], cursadas: [] }));
         mockMatriculacionService.getNotasCursada.and.returnValue(of([]));
 
-        await render(AcademicStatusComponent, {
+        const { fixture } = await render(AcademicStatusComponent, {
             providers: [
                 { provide: MatriculacionService, useValue: mockMatriculacionService },
                 { provide: AuthService, useValue: mockAuthService }
             ]
         });
 
+        fixture.detectChanges();
+
         await waitFor(() => {
             expect(screen.getByText('Matematica')).toBeTruthy();
             expect(screen.getByText('Fisica I')).toBeTruthy();
-        });
+        }, { timeout: 2000 });
     });
 });
