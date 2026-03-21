@@ -40,7 +40,7 @@ describe('Inscription Course Integration', () => {
 
         mockMatriculacionService.getMisCarrerasMaterias.and.returnValue(of(materiasMock));
         mockInscripcionService.getComisionesDisponibles.and.returnValue(of([
-            { idComision: 'c1', nombre: 'C1', modalidad: 'Presencial', horarios: ['Lun 08-12'], profesores: [], habilitada: true }
+            { idComision: 'c1', nombreComision: 'C1', modalidad: 'Presencial', horarios: ['Lun 08-12'], profesores: [], habilitada: true }
         ] as any));
         mockInscripcionService.inscribirCursado.and.returnValue(of({ success: true } as any));
 
@@ -54,19 +54,23 @@ describe('Inscription Course Integration', () => {
             ]
         });
 
-        await waitFor(() => expect(screen.getByText(/Bases de Datos/i, { selector: 'span' })).toBeTruthy());
+        // Esperar a que la tabla se renderice buscando una columna de la tabla
+        await waitFor(() => expect(screen.getByRole('columnheader', { name: /Estado/i })).toBeTruthy());
         
         // El botón 'Inscribirse' está en TableComponent
-        const inscribirBtn = screen.getByRole('button', { name: /Inscribirse/i });
+        const inscribirBtn = (await screen.findAllByRole('button', { name: /Inscribirse/i }))[0];
         fireEvent.click(inscribirBtn);
 
         // En el modal, se elige la comisión
-        await waitFor(() => expect(screen.getByText(/C1/i)).toBeTruthy());
-        const commissionCard = screen.getByText(/C1/i).closest('.commission-card');
-        if (commissionCard) fireEvent.click(commissionCard);
+        const commissionCard = await screen.findByLabelText('C1');
+        fireEvent.click(commissionCard);
+
+        // Click en el botón intermedio para ir al modal de confirmación
+        const nextModalBtn = await screen.findByRole('button', { name: 'Confirmar Selección' });
+        fireEvent.click(nextModalBtn);
         
         // Confirmar en el modal de confirmación
-        const confirmBtn = await screen.findByRole('button', { name: /Confirmar Definitivamente/i });
+        const confirmBtn = await screen.findByRole('button', { name: 'Confirmar Definitivamente' });
         fireEvent.click(confirmBtn);
 
         await waitFor(() => {
