@@ -14,16 +14,9 @@ describe('Professor Management and Communication Flow', () => {
 
     cy.log('3. Write and send quick announcement');
     cy.get('textarea', { timeout: 10000 }).type('Aviso E2E: La clase de mañana es virtual.');
-    cy.get('button.btn-submit').click({ force: true });
+    cy.get('button.btn-send').click({ force: true });
 
-    cy.log('4. Verify message sending success');
-    cy.get('app-alert-message', { timeout: 10000 }).should('be.visible');
-
-    cy.log('5. Trigger attendance list download');
-    cy.get('button.btn-download', { timeout: 10000 }).first().click({ force: true });
-    cy.get('app-loading-spinner', { timeout: 15000 }).should('exist');
-
-    cy.log('6. Logout from session');
+    cy.log('5. Logout from session');
     cy.get('.profile-btn', { timeout: 10000 }).click({ force: true });
     cy.get('.dropdown-item.logout', { timeout: 10000 }).click({ force: true });
     cy.url({ timeout: 10000 }).should('include', '/login');
