@@ -89,7 +89,7 @@
             <div class="commission-list">
                 @for (comision of commissions; track comision.idComision) {
                 <div class="commission-card" [class.selected]="selectedCommission?.idComision === comision.idComision"
-                    [class.disabled-card]="!comision.habilitada"
+                    [class.disabled-card]="!comision.habilitada" [attr.aria-label]="comision.nombreComision"
                     (click)="comision.habilitada ? onSelectCommission(comision) : null">
 
                     <div class="commission-content">

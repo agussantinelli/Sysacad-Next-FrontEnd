@@ -271,7 +271,7 @@
                             <input id="horaHasta" type="time" [(ngModel)]="newSchedule.horaHasta" class="form-control">
                         </div>
                         <div class="form-group align-end">
-                            <button class="btn-primary" (click)="addSchedule()"
+                            <button class="btn-primary" (click)="addSchedule()" aria-label="Guardar Horario"
                                 [disabled]="!newSchedule.horaDesde || !newSchedule.horaHasta">
                                 <span class="material-icons">add</span> Agregar
                             </button>
@@ -306,7 +306,7 @@
                 <button class="btn-secondary" (click)="backToStep('SUBJECT')">
                     <span class="material-icons">arrow_back</span> Atrás
                 </button>
-                <button class="btn-primary" (click)="goToStep3()" [disabled]="!validateSchedules() || isLoading">
+                <button class="btn-primary" (click)="goToStep3()" aria-label="Siguiente" [disabled]="!validateSchedules() || isLoading">
                     Buscar Profesores <span class="material-icons">arrow_forward</span>
                 </button>
             </div>
