@@ -376,7 +376,12 @@
 │   │   │   ├── interfaces/                           # Interfaces UI
 │   │   │   └── pipes/                                # Pipes Custom
 │   ├── environments/                                 # Configuración de entorno
-│   ├── tests-integration/                            # Suite de Pruebas de Integración (Karma/Jasmine/ATL)
+│   ├── tests-e2e/                                    # Tests de Extremo a Extremo por Rol (Cypress)
+│   │   ├── admin/                                    # Flujos de Administrador
+│   │   ├── auth/                                     # Flujos de Autenticación y Seguridad
+│   │   ├── professor/                                # Flujos de Docente
+│   │   └── student/                                  # Flujos de Alumno (Inscripción, Estado Académico...)
+│   ├── tests-integration/                            # Pruebas de Integración (Karma/Jasmine/ATL)
 │   ├── globals.css                                   # Estilos globales y temas
 │   ├── index.html                                    # Entry Point HTML
 │   ├── main.ts                                       # Entry Point TS
