@@ -102,6 +102,14 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.integration.json",
+            "main": "src/tests-integration/test.ts",
+            "karmaConfig": "karma.integration.conf.js",
+            "include": [
+              "src/tests-integration/**/*.integration.test.ts"
+            ],
+            "exclude": [
+              "src/**/*.spec.ts"
+            ],
             "assets": [
               {
                 "glob": "**/*",
