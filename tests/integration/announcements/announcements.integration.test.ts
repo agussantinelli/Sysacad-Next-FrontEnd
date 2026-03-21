@@ -1,20 +1,20 @@
 import { render, screen, waitFor } from '@testing-library/angular';
-import { AnnouncementsComponent } from '@features/announcements/announcements.component';
-import { AvisoService } from '@core/services/aviso.service';
+import { AnnouncementsComponent } from '../../../src/app/features/announcements/announcements.component';
+import { AvisoService } from '../../../src/app/core/services/aviso.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
 
 describe('Announcements Integration', () => {
-    const mockAvisoService = {
-        listarAvisos: vi.fn(),
-        marcarLeido: vi.fn()
-    };
+    let mockAvisoService: jasmine.SpyObj<AvisoService>;
+
+    beforeEach(() => {
+        mockAvisoService = jasmine.createSpyObj('AvisoService', ['listarAvisos', 'marcarLeido']);
+    });
 
     it('should show list of announcements from AvisoService', async () => {
         const announcementsMock = [
             { id: 1, titulo: 'Nueva Mesa de Final', contenido: 'Se abren inscripciones.' }
-        ];
-        mockAvisoService.listarAvisos.mockReturnValue(of(announcementsMock));
+        ] as any;
+        mockAvisoService.listarAvisos.and.returnValue(of(announcementsMock));
 
         await render(AnnouncementsComponent, {
             providers: [
@@ -23,7 +23,7 @@ describe('Announcements Integration', () => {
         });
 
         await waitFor(() => {
-            expect(screen.getByText('Nueva Mesa de Final')).toBeInTheDocument();
+            expect(screen.getByText('Nueva Mesa de Final')).toBeTruthy();
         });
     });
 });
