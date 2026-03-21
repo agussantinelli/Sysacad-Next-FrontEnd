@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "ng test --watch=false",
-    "test:integration": "ng test Sysacad-Next-FrontEnd:test-integration --watch=false",
+    "test:integration": "ng run Sysacad-Next-FrontEnd:test-integration",
     "test:e2e": "cypress run",
     "e2e:open": "cypress open"
   },
