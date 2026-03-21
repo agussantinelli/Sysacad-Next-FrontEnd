@@ -139,6 +139,11 @@
             <td>Framework de pruebas unitarias y runner en navegador real.</td>
         </tr>
         <tr>
+            <td><strong>Integration Testing</strong></td>
+            <td>Angular Testing Library 19.x</td>
+            <td>Validación de interacción UI dirigida a accesibilidad (ARIA).</td>
+        </tr>
+        <tr>
             <td><strong>E2E Testing</strong></td>
             <td>Cypress 15.12.0</td>
             <td>Framework moderno para pruebas de extremo a extremo.</td>
