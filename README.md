@@ -398,56 +398,131 @@ pnpm run lint
 
 <p>Abrí <a href="http://localhost:4200">http://localhost:4200</a> en tu navegador para ver el resultado.</p>
 <hr>
-<h2>🧪 Testing</h2>
+<hr>
 
-El proyecto cuenta con una suite integral de pruebas que cubren tanto la lógica de negocio (Unit Testing) como los flujos de usuario (E2E Testing).
+<h2>🧪 Testing Strategy</h2>
 
-### 🧪 Estrategia de Testing
+<p>La estrategia de calidad se basa en un enfoque de pirámide de testing moderna, dividiendo las validaciones en tres capas:</p>
 
-El proyecto utiliza una estrategia de tres niveles para garantizar la calidad:
-
-1. **Tests Unitarios**: Jasmine + Karma. Ubicados junto al código fuente (`.spec.ts`).
-2. **Tests de Integración**: Jasmine + Karma + Angular Testing Library. Ubicados en `src/tests-integration/`.
-3. **Tests End-to-End (E2E)**: Cypress. Ubicados en `cypress/`.
-
-#### Ejecución de Tests
-
-```bash
-# Ejecutar todos los tests (Unitarios + Integración)
-pnpm test
-
-# Ejecutar solo integración
-pnpm test:integration
-
-# Ejecutar E2E
-pnpm test:e2e
-```
-
-<p>Para correr solo pruebas unitarias (Jasmine/Karma):</p>
-<pre><code>pnpm run test:unit</code></pre>
-
-<p>Para correr la suite de pruebas E2E (Cypress):</p>
-<pre><code># Abrir interfaz de Cypress
-pnpm e2e:open
-
-# Ejecutar tests en modo headless (CI)
-pnpm test:e2e
-</code></pre>
-
-### 📊 Cobertura y Status
+<h3>⚡ Unit Tests (Karma + Jasmine)</h3>
+<p>Validación de lógica de negocio aislada, utilidades y componentes base. Se ejecutan automáticamente junto a los de integración con <code>pnpm test</code>.</p>
 <ul>
-    <li><strong>Core Services:</strong> 100% de cobertura en <code>src/app/core/services</code>.</li>
-    <li><strong>Features & UI:</strong> Cobertura 1:1 en componentes de Admin, Professor y Student.</li>
-    <li><strong>E2E Navigation:</strong> Implementación exitosa del <strong>Student Navigation Flow</strong>.</li>
-    <li><strong>Specs Ejecutados:</strong> +410 pruebas unitarias y 18 pruebas de integración en 16 archivos (Karma/Jasmine) exitosas.</li>
+    <li><strong>Comando específico:</strong> <code>pnpm test:unit</code></li>
+    <li><strong>Estado Actual:</strong> +410 tests unitarios pasando exitosamente.</li>
+    <li><strong>Cobertura:</strong> Servicios Core, guards, interceptores y lógica de componentes.</li>
 </ul>
 
-### ⚖️ Filosofía de Testeo 1:1
+<h3>🧪 Integration Tests (Karma + Angular Testing Library)</h3>
+<p>Validación del "Contrato Interno" entre Componentes, UI y Servicios con inyección de mocks. Se ejecutan automáticamente junto a los unitarios con <code>pnpm test</code>.</p>
+<ul>
+    <li><strong>Comando específico:</strong> <code>pnpm test:integration</code></li>
+    <li><strong>Estado Actual:</strong> 16 archivos de test (18 specs individuales) pasando exitosamente.</li>
+    <li><strong>Misión:</strong> Garantizar que la interacción entre la interfaz de usuario, los servicios y el estado de la aplicación sea consistente y libre de errores de integración.</li>
+    <li><strong>Enfoque:</strong> Flujos completos de Admin, Professor y Student sin depender del backend real.</li>
+</ul>
 
-El proyecto sigue una política estricta de **aparejamiento 1:1** entre archivos de código y archivos de prueba:
-- **Regla de Oro:** Todo archivo `.ts` que contenga lógica de negocio, servicios o componentes **DEBE** tener su correspondiente archivo `.spec.ts`.
-- **Ubicación:** El test debe residir en el mismo directorio que el archivo testeado.
-- **Integridad:** Esta convención asegura la estabilidad del sistema a largo plazo y la validación continua en CI.
+<table>
+    <thead>
+        <tr>
+            <th>Módulo</th>
+            <th>Archivo de Test</th>
+            <th>Descripción del Flujo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Autenticación</strong></td>
+            <td><code>login.integration.test.ts</code></td>
+            <td>Inicio de sesión, manejo de roles y redirección.</td>
+        </tr>
+        <tr>
+            <td><strong>Administración</strong></td>
+            <td><code>commissions.integration.test.ts</code></td>
+            <td>Gestión de horarios, materias y profesores en comisiones.</td>
+        </tr>
+        <tr>
+            <td><strong>Administración</strong></td>
+            <td><code>users.integration.test.ts</code></td>
+            <td>CRUD de usuarios y gestión de permisos.</td>
+        </tr>
+        <tr>
+            <td><strong>Administración</strong></td>
+            <td><code>exam-tables.integration.test.ts</code></td>
+            <td>Gestión de mesas de examen y turnos.</td>
+        </tr>
+        <tr>
+            <td><strong>Estudiante</strong></td>
+            <td><code>inscription-course.integration.test.ts</code></td>
+            <td>Flujo completo de inscripción a cursado.</td>
+        </tr>
+        <tr>
+            <td><strong>Estudiante</strong></td>
+            <td><code>status-academico.integration.test.ts</code></td>
+            <td>Visualización de progreso y materias aprobadas.</td>
+        </tr>
+        <tr>
+            <td><strong>Estudiante</strong></td>
+            <td><code>study-plan.integration.test.ts</code></td>
+            <td>Consulta del plan de estudios detallado.</td>
+        </tr>
+        <tr>
+            <td><strong>Docente</strong></td>
+            <td><code>my-commissions.integration.test.ts</code></td>
+            <td>Comisiones asignadas y listado de alumnos.</td>
+        </tr>
+        <tr>
+            <td><strong>Docente</strong></td>
+            <td><code>grade-commission.integration.test.ts</code></td>
+            <td>Carga de notas y gestión de actas.</td>
+        </tr>
+        <tr>
+            <td><strong>Perfil</strong></td>
+            <td><code>user-profile.integration.test.ts</code></td>
+            <td>Gestión de datos personales y preferencias.</td>
+        </tr>
+        <tr>
+            <td><strong>Comunicación</strong></td>
+            <td><code>announcements.integration.test.ts</code></td>
+            <td>Visualización de avisos y notificaciones.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>🎭 End-to-End Tests (Cypress)</h3>
+<p>Simulación de usuario real en navegadores para validar la integridad de los flujos críticos de la plataforma.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre del Flujo</th>
+            <th>Características / Acciones</th>
+            <th>Motivo de la Prueba</th>
+            <th>Archivo de Test</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Navegación Estudiante</strong></td>
+            <td>Login → Inscripción → Estado Académico.</td>
+            <td>Validar la integración de los flujos críticos del alumno.</td>
+            <td><code>student-flow.cy.ts</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<ul>
+    <li><strong>Comando:</strong> <code>pnpm test:e2e</code> (Ejecuta Cypress en modo headless)</li>
+    <li><strong>Modo Interactivo:</strong> <code>pnpm e2e:open</code></li>
+</ul>
+
+<h3>⚖️ Filosofía de Testeo 1:1</h3>
+
+<p>El proyecto sigue una política estricta de <strong>aparejamiento 1:1</strong> entre archivos de código y archivos de prueba:</p>
+<ul>
+    <li><strong>Regla de Oro:</strong> Todo archivo <code>.ts</code> que contenga lógica de negocio, servicios o componentes <strong>DEBE</strong> tener su correspondiente archivo <code>.spec.ts</code>.</li>
+    <li><strong>Ubicación:</strong> El test debe residir en el mismo directorio que el archivo testeado.</li>
+    <li><strong>Integridad:</strong> Esta convención asegura la estabilidad del sistema a largo plazo y la validación continua en CI.</li>
+</ul>
 
 <hr>
 
