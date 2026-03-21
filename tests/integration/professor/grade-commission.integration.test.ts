@@ -1,38 +1,45 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { ProfessorGradeCommissionComponent } from '@/app/features/professor/grade-commission/professor-grade-commission.component';
-import { ProfessorService } from '@core/services/professor.service';
+import { ProfessorGradeCommissionComponent } from '../../../src/app/features/professor/grade-commission/professor-grade-commission.component';
+import { ProfessorService } from '../../../src/app/core/services/professor.service';
+import { AlertService } from '../../../src/app/core/services/alert.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
 
 describe('Professor Grade Commission Integration', () => {
-    const mockProfessorService = {
-        getAlumnosInscriptos: vi.fn(),
-        cargarNotaCursada: vi.fn()
-    };
+    let mockProfessorService: jasmine.SpyObj<ProfessorService>;
+    let mockAlertService: jasmine.SpyObj<AlertService>;
+
+    beforeEach(() => {
+        mockProfessorService = jasmine.createSpyObj('ProfessorService', ['getInscriptosComision', 'cargarNotasComision']);
+        mockAlertService = jasmine.createSpyObj('AlertService', ['success', 'error', 'info', 'clear']);
+    });
 
     it('should enter grades and success notification should appear', async () => {
-        mockProfessorService.getAlumnosInscriptos.mockReturnValue(of([
-            { id: 'a1', nombre: 'Student A', legajo: 'L1', nota: null }
-        ]));
-        mockProfessorService.cargarNotaCursada.mockReturnValue(of({ success: true }));
+        const studentsMock = [
+            { idInscripcion: '1', nombre: 'Student', apellido: 'A', legajo: 123, estado: 'CURSANDO', calificaciones: [] }
+        ] as any;
+        mockProfessorService.getInscriptosComision.and.returnValue(of(studentsMock));
+        mockProfessorService.cargarNotasComision.and.returnValue(of(void 0));
 
         await render(ProfessorGradeCommissionComponent, {
             providers: [
-                { provide: ProfessorService, useValue: mockProfessorService }
+                { provide: ProfessorService, useValue: mockProfessorService },
+                { provide: AlertService, useValue: mockAlertService }
             ]
         });
 
-        await waitFor(() => expect(screen.getByText('Student A')).toBeInTheDocument());
+        await waitFor(() => expect(screen.getByText('Student A')).toBeTruthy());
 
-        const notaInput = screen.getByPlaceholderText(/Nota/i);
-        fireEvent.input(notaInput, { target: { value: '8' } });
+        // In this component, we don't have a placeholder "Nota", it's an input inside a table.
+        // We can find it by its type or role if applicable, or just use getAllByRole('textbox').
+        const inputs = screen.getAllByRole('spinbutton');
+        fireEvent.input(inputs[0], { target: { value: '8' } });
 
-        const saveBtn = screen.getByRole('button', { name: /Guardar Nota/i });
+        const saveBtn = screen.getByRole('button', { name: /Guardar Notas/i });
         fireEvent.click(saveBtn);
 
         await waitFor(() => {
-            expect(mockProfessorService.cargarNotaCursada).toHaveBeenCalled();
-            expect(screen.getByText(/Nota guardada con éxito/i)).toBeInTheDocument();
+            expect(mockProfessorService.cargarNotasComision).toHaveBeenCalled();
+            expect(mockAlertService.success).toHaveBeenCalledWith('Notas guardadas correctamente');
         });
     });
 });

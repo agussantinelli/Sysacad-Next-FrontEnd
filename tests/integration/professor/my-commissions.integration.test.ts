@@ -1,34 +1,30 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/angular';
-import { MyCommissionsComponent } from '@/app/features/professor/my-commissions/my-commissions.component';
-import { ProfessorService } from '@core/services/professor.service';
-import { AuthService } from '@core/services/auth.service';
+import { render, screen, waitFor } from '@testing-library/angular';
+import { MyCommissionsComponent } from '../../../src/app/features/professor/my-commissions/my-commissions.component';
+import { ProfessorService } from '../../../src/app/core/services/professor.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest';
 
 describe('Professor MyCommissions Integration', () => {
-    const mockProfessorService = {
-        getMisComisiones: vi.fn()
-    };
-    const mockAuthService = {
-        currentUser$: of({ id: 'p1', nombre: 'Prof. Test' })
-    };
+    let mockProfessorService: jasmine.SpyObj<ProfessorService>;
+
+    beforeEach(() => {
+        mockProfessorService = jasmine.createSpyObj('ProfessorService', ['getMisComisiones']);
+    });
 
     it('should list assigned commissions for the professor', async () => {
         const commissionsMock = [
-            { id: 'c1', nombreComision: 'Lab III - C1', materiaNombre: 'Lab III', alumnosInscriptos: 20 }
-        ];
-        mockProfessorService.getMisComisiones.mockReturnValue(of(commissionsMock));
+            { idComision: 'c1', nombreComision: 'Lab III - C1', materiaNombre: 'Lab III', alumnosInscriptos: 20 }
+        ] as any;
+        mockProfessorService.getMisComisiones.and.returnValue(of(commissionsMock));
 
         await render(MyCommissionsComponent, {
             providers: [
-                { provide: ProfessorService, useValue: mockProfessorService },
-                { provide: AuthService, useValue: mockAuthService }
+                { provide: ProfessorService, useValue: mockProfessorService }
             ]
         });
 
         await waitFor(() => {
-            expect(screen.getByText('Lab III - C1')).toBeInTheDocument();
-            expect(screen.getByText('20')).toBeInTheDocument();
+            expect(screen.getByText('Lab III - C1')).toBeTruthy();
+            expect(screen.getByText('20')).toBeTruthy();
         });
     });
 });
