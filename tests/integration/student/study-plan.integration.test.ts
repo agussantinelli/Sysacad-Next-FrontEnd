@@ -1,14 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/angular';
-import { StudyPlanComponent } from '@features/student/study-plan/study-plan.component';
-import { MatriculacionService } from '@core/services/matriculacion.service';
+import { StudyPlanComponent } from '../../../src/app/features/student/study-plan/study-plan.component';
+import { MatriculacionService } from '../../../src/app/core/services/matriculacion.service';
 import { of } from 'rxjs';
-import { vi, describe, it, expect } from 'vitest';
-import '@testing-library/jest-dom/vitest';
 
 describe('Study Plan Integration', () => {
-    const mockMatriculacionService = {
-        getMisCarrerasMaterias: vi.fn()
-    };
+    let mockMatriculacionService: jasmine.SpyObj<MatriculacionService>;
+
+    beforeEach(() => {
+        mockMatriculacionService = jasmine.createSpyObj('MatriculacionService', ['getMisCarrerasMaterias']);
+    });
 
     it('should load study plan and display subjects', async () => {
         const planMock = [{
@@ -21,8 +21,8 @@ describe('Study Plan Integration', () => {
                     correlativas: []
                 }
             ]
-        }];
-        mockMatriculacionService.getMisCarrerasMaterias.mockReturnValue(of(planMock));
+        }] as any;
+        mockMatriculacionService.getMisCarrerasMaterias.and.returnValue(of(planMock));
 
         await render(StudyPlanComponent, {
             providers: [
@@ -31,7 +31,7 @@ describe('Study Plan Integration', () => {
         });
 
         await waitFor(() => {
-            expect(screen.getByText('Programación I')).toBeInTheDocument();
+            expect(screen.getByText('Programación I')).toBeTruthy();
         });
     });
 });

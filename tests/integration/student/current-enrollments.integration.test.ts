@@ -1,18 +1,19 @@
 import { render, screen, waitFor } from '@testing-library/angular';
-import { CurrentEnrollmentsComponent } from '@features/student/current-enrollments/current-enrollments.component';
-import { InscripcionCursadoService } from '@core/services/inscripcion-cursado.service';
-import { AuthService } from '@core/services/auth.service';
+import { CurrentEnrollmentsComponent } from '../../../src/app/features/student/current-enrollments/current-enrollments.component';
+import { InscripcionCursadoService } from '../../../src/app/core/services/inscripcion-cursado.service';
+import { AuthService } from '../../../src/app/core/services/auth.service';
 import { of } from 'rxjs';
-import { vi, describe, it, expect } from 'vitest';
-import '@testing-library/jest-dom/vitest';
 
 describe('Current Enrollments Integration', () => {
-    const mockInscripcionService = {
-        obtenerCursadasActuales: vi.fn()
-    };
-    const mockAuthService = {
-        currentUser$: of({ id: 1, nombre: 'Test Student' })
-    };
+    let mockInscripcionService: jasmine.SpyObj<InscripcionCursadoService>;
+    let mockAuthService: any;
+
+    beforeEach(() => {
+        mockInscripcionService = jasmine.createSpyObj('InscripcionCursadoService', ['obtenerCursadasActuales']);
+        mockAuthService = {
+            currentUser$: of({ id: 1, nombre: 'Test Student' })
+        };
+    });
 
     it('should load current enrollments including grades', async () => {
         const enrollmentsMock = [
@@ -23,8 +24,8 @@ describe('Current Enrollments Integration', () => {
                 anioCursado: 2024,
                 calificaciones: [{ descripcion: 'Parcial 1', nota: 8 }] 
             }
-        ];
-        mockInscripcionService.obtenerCursadasActuales.mockReturnValue(of(enrollmentsMock));
+        ] as any;
+        mockInscripcionService.obtenerCursadasActuales.and.returnValue(of(enrollmentsMock));
 
         await render(CurrentEnrollmentsComponent, {
             providers: [
@@ -34,8 +35,8 @@ describe('Current Enrollments Integration', () => {
         });
 
         await waitFor(() => {
-            expect(screen.getByText('Laboratorio III')).toBeInTheDocument();
-            expect(screen.getByText(/Parcial 1: 8/i)).toBeInTheDocument();
+            expect(screen.getByText('Laboratorio III')).toBeTruthy();
+            expect(screen.getByText(/Parcial 1: 8/i)).toBeTruthy();
         });
     });
 });

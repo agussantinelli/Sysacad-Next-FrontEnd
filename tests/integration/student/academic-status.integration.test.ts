@@ -1,37 +1,44 @@
 import { render, screen, waitFor } from '@testing-library/angular';
-import { AcademicStatusComponent } from '@features/student/academic-status/academic-status.component';
-import { StudentService } from '@core/services/student.service';
+import { AcademicStatusComponent } from '../../../src/app/features/student/academic-status/academic-status.component';
+import { MatriculacionService } from '../../../src/app/core/services/matriculacion.service';
+import { AuthService } from '../../../src/app/core/services/auth.service';
 import { of } from 'rxjs';
-import { vi, describe, it, expect } from 'vitest';
-import '@testing-library/jest-dom/vitest';
+import { BehaviorSubject } from 'rxjs';
 
 describe('Academic Status Integration', () => {
-    const mockStudentService = {
-        getHistory: vi.fn()
-    };
+    let mockMatriculacionService: jasmine.SpyObj<MatriculacionService>;
+    let mockAuthService: any;
+    const currentUserSubject = new BehaviorSubject({ id: 'u1', nombre: 'Test User' });
+
+    beforeEach(() => {
+        mockMatriculacionService = jasmine.createSpyObj('MatriculacionService', ['getMisCarrerasMaterias', 'getHistorialMateria', 'getNotasCursada']);
+        mockAuthService = {
+            currentUser$: currentUserSubject.asObservable()
+        };
+    });
 
     it('should display career progress and enrollment list', async () => {
-        const historyMock = {
-            carrera: 'Ingeniería en Sistemas',
-            promedio: 8.5,
-            materiasAprobadas: 45,
-            totalMaterias: 50,
-            inscripciones: [
-                { id: 1, materia: 'Análisis Matemático I', nota: 9, estado: 'Aprobada' },
-                { id: 2, materia: 'Física I', nota: 8, estado: 'Aprobada' }
+        const historyMock = [{ 
+            materias: [
+                { idMateria: 'm1', nombre: 'Matematica', estado: 'APROBADA', nota: 8, nivel: 1 },
+                { idMateria: 'm2', nombre: 'Fisica I', estado: 'APROBADA', nota: 7, nivel: 1 }
             ]
-        };
-        mockStudentService.getHistory.mockReturnValue(of(historyMock));
+        }] as any;
+
+        mockMatriculacionService.getMisCarrerasMaterias.and.returnValue(of(historyMock));
+        mockMatriculacionService.getHistorialMateria.and.returnValue(of({ nombreMateria: 'Test', finales: [], cursadas: [] }));
+        mockMatriculacionService.getNotasCursada.and.returnValue(of([]));
 
         await render(AcademicStatusComponent, {
             providers: [
-                { provide: StudentService, useValue: mockStudentService }
+                { provide: MatriculacionService, useValue: mockMatriculacionService },
+                { provide: AuthService, useValue: mockAuthService }
             ]
         });
 
         await waitFor(() => {
-            expect(screen.getByText(/Ingeniería en Sistemas/i)).toBeInTheDocument();
-            expect(screen.getByText('Análisis Matemático I')).toBeInTheDocument();
+            expect(screen.getByText('Matematica')).toBeTruthy();
+            expect(screen.getByText('Fisica I')).toBeTruthy();
         });
     });
 });
