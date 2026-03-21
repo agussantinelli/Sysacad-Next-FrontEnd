@@ -252,8 +252,8 @@
                 <div class="schedule-form">
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Día</label>
-                            <select [(ngModel)]="newSchedule.dia" class="form-control">
+                            <label for="diaSelect">Día</label>
+                            <select id="diaSelect" [(ngModel)]="newSchedule.dia" class="form-control">
                                 <option value="LUNES">Lunes</option>
                                 <option value="MARTES">Martes</option>
                                 <option value="MIERCOLES">Miércoles</option>
@@ -263,12 +263,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Desde</label>
-                            <input type="time" [(ngModel)]="newSchedule.horaDesde" class="form-control">
+                            <label for="horaDesde">Desde</label>
+                            <input id="horaDesde" type="time" [(ngModel)]="newSchedule.horaDesde" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Hasta</label>
-                            <input type="time" [(ngModel)]="newSchedule.horaHasta" class="form-control">
+                            <label for="horaHasta">Hasta</label>
+                            <input id="horaHasta" type="time" [(ngModel)]="newSchedule.horaHasta" class="form-control">
                         </div>
                         <div class="form-group align-end">
                             <button class="btn-primary" (click)="addSchedule()"
