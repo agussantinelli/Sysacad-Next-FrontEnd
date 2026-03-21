@@ -26,7 +26,7 @@ describe('Dashboard Integration', () => {
         mockAvisoService.obtenerCantidadSinLeer.and.returnValue(of(5));
         mockChatService.getTotalMensajesSinLeer.and.returnValue(of(3));
 
-        await render(DashboardComponent, {
+        const { fixture } = await render(DashboardComponent, {
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
                 { provide: AvisoService, useValue: mockAvisoService },
@@ -34,8 +34,10 @@ describe('Dashboard Integration', () => {
             ]
         });
 
+        fixture.detectChanges();
+
         await waitFor(() => {
-            expect(screen.getByText(/Buenos/i)).toBeTruthy();
+            expect(screen.getByText(/Buen/i)).toBeTruthy();
             expect(screen.getByText(/Agustin/i)).toBeTruthy();
         });
     });

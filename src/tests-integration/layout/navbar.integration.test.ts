@@ -18,15 +18,17 @@ describe('Navbar Integration', () => {
     });
 
     it('should show admin menu and logout correctly', async () => {
-        await render(NavbarComponent, {
+        const { fixture } = await render(NavbarComponent, {
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
                 { provide: Router, useValue: mockRouter }
             ]
         });
 
-        const menuBtn = screen.getByRole('button', { name: /Menu/i });
-        fireEvent.click(menuBtn);
+        fixture.detectChanges();
+
+        const adminBtn = screen.getByRole('button', { name: /Administración/i });
+        fireEvent.click(adminBtn);
 
         await waitFor(() => {
             expect(screen.getByText(/Administración/i)).toBeTruthy();

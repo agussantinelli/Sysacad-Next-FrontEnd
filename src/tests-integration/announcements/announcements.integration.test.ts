@@ -17,11 +17,13 @@ describe('Announcements Integration', () => {
         ] as any;
         mockAvisoService.listarAvisos.and.returnValue(of(announcementsMock));
 
-        await render(AnnouncementsComponent, {
+        const { fixture } = await render(AnnouncementsComponent, {
             providers: [
                 { provide: AvisoService, useValue: mockAvisoService }
             ]
         });
+
+        fixture.detectChanges();
 
         await waitFor(() => {
             expect(screen.getByText('Nueva Mesa de Final')).toBeTruthy();

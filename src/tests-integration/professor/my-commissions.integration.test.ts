@@ -17,11 +17,13 @@ describe('Professor MyCommissions Integration', () => {
         ] as any;
         mockProfessorService.getMisComisiones.and.returnValue(of(commissionsMock));
 
-        await render(MyCommissionsComponent, {
+        const { fixture } = await render(MyCommissionsComponent, {
             providers: [
                 { provide: ProfessorService, useValue: mockProfessorService }
             ]
         });
+
+        fixture.detectChanges();
 
         await waitFor(() => {
             expect(screen.getByText('Lab III - C1')).toBeTruthy();

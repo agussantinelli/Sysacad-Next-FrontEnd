@@ -8,26 +8,27 @@ describe('Admin Users Integration', () => {
     let mockUsuarioService: jasmine.SpyObj<UsuarioService>;
 
     beforeEach(() => {
-        mockUsuarioService = jasmine.createSpyObj('UsuarioService', ['obtenerTodos', 'crearUsuario', 'eliminarUsuario']);
+        mockUsuarioService = jasmine.createSpyObj('UsuarioService', ['obtenerTodos', 'crearUsuario', 'eliminarUsuario', 'cambiarEstado']);
     });
 
     it('should list users and handle deletion', async () => {
         const usersMock = [
-            { id: 1, usuario_name: 'admin', rol: 'ADMIN', email: 'admin@test.com' },
-            { id: 2, usuario_name: 'student1', rol: 'ESTUDIANTE', email: 's1@test.com' }
+            { id: 1, nombre: 'Admin', apellido: 'User', rol: 'ADMIN', mail: 'admin@test.com', estado: 'ACTIVO', dni: '1', legajo: '1' },
+            { id: 2, nombre: 'Student', apellido: 'One', rol: 'ESTUDIANTE', mail: 's1@test.com', estado: 'ACTIVO', dni: '2', legajo: '2' }
         ] as any;
         mockUsuarioService.obtenerTodos.and.returnValue(of(usersMock));
-        mockUsuarioService.eliminarUsuario.and.returnValue(of(void 0));
 
-        await render(UsersComponent, {
+        const { fixture } = await render(UsersComponent, {
             providers: [
                 { provide: UsuarioService, useValue: mockUsuarioService }
             ]
         });
 
+        fixture.detectChanges();
+
         await waitFor(() => {
-            expect(screen.getByText('admin')).toBeTruthy();
-            expect(screen.getByText('student1')).toBeTruthy();
+            expect(screen.getByText(/Admin User/i)).toBeTruthy();
+            expect(screen.getByText(/Student One/i)).toBeTruthy();
         });
     });
 });

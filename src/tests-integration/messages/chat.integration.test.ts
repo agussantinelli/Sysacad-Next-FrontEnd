@@ -20,18 +20,22 @@ describe('Messages Chat Integration', () => {
         mockChatService.getMensajes.and.returnValue(of([{ id: 101, contenido: 'Hi', remitenteNombre: 'Alice' }] as any));
         mockChatService.enviarMensajeAlGrupo.and.returnValue(of({ success: true } as any));
 
-        await render(MessagesComponent, {
+        const { fixture } = await render(MessagesComponent, {
             providers: [
                 { provide: ChatService, useValue: mockChatService }
             ]
         });
+
+        fixture.detectChanges();
 
         await waitFor(() => expect(screen.getByText('Alice')).toBeTruthy());
         fireEvent.click(screen.getByText('Alice'));
 
         const input = screen.getByPlaceholderText(/Escribe un mensaje/i);
         fireEvent.input(input, { target: { value: 'Hello' } });
-        fireEvent.click(screen.getByLabelText(/Enviar/i));
+        // 'Enviar' might be the title of the button or an alt on the icon
+        const sendBtn = screen.getByRole('button', { name: /Enviar/i });
+        fireEvent.click(sendBtn);
 
         expect(mockChatService.enviarMensajeAlGrupo).toHaveBeenCalled();
     });

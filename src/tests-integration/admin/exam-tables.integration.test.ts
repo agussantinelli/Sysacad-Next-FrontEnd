@@ -8,26 +8,36 @@ describe('Admin Exam Tables Integration', () => {
     let mockAdminService: jasmine.SpyObj<AdminService>;
 
     beforeEach(() => {
-        mockAdminService = jasmine.createSpyObj('AdminService', ['getAllTurnos', 'crearTurno']);
+        mockAdminService = jasmine.createSpyObj('AdminService', ['getAllTurnos', 'crearTurno', 'getMesasByTurno']);
     });
 
     it('should list exam turns and open detail', async () => {
         const turnsMock = [
-            { id: 1, nombre: 'Turno Febrero 2024', fechaInicio: '2024-02-01', fechaFin: '2024-02-28' }
+            { 
+                id: 1, 
+                nombre: 'Turno Febrero 2024', 
+                fechaInicio: '2024-02-01', 
+                fechaFin: '2024-02-28',
+                cantidadInscriptos: 0 
+            }
         ] as any;
         mockAdminService.getAllTurnos.and.returnValue(of(turnsMock));
 
-        await render(AdminExamTablesComponent, {
+        const { fixture } = await render(AdminExamTablesComponent, {
             providers: [
                 { provide: AdminService, useValue: mockAdminService }
             ]
         });
 
+        fixture.detectChanges();
+
         await waitFor(() => {
             expect(screen.getByText('Turno Febrero 2024')).toBeTruthy();
         });
 
-        const detailBtn = screen.getByRole('button', { name: /Ver Detalle/i });
+        const detailBtn = screen.getByRole('button', { name: /Ver Mesas/i });
         fireEvent.click(detailBtn);
+        
+        // No expect here yet, but just checking if click didn't crash
     });
 });

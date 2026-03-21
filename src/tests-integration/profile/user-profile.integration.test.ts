@@ -14,11 +14,13 @@ describe('User Profile Integration', () => {
     });
 
     it('should display user data correctly', async () => {
-        await render(ProfileComponent, {
+        const { fixture } = await render(ProfileComponent, {
             providers: [
                 { provide: AuthService, useValue: mockAuthService }
             ]
         });
+
+        fixture.detectChanges();
 
         await waitFor(() => {
             expect(screen.getByText('Agustin')).toBeTruthy();

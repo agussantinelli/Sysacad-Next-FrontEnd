@@ -19,15 +19,17 @@ describe('Login Integration', () => {
         const userMock = { id: 1, role: 'STUDENT', nombre: 'Test User' };
         mockAuthService.login.and.returnValue(of(userMock as any));
 
-        await render(LoginComponent, {
+        const { fixture } = await render(LoginComponent, {
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
                 { provide: Router, useValue: mockRouter }
             ]
         });
 
-        const emailInput = screen.getByLabelText(/Email/i);
-        const passwordInput = screen.getByLabelText(/Password/i);
+        fixture.detectChanges();
+
+        const emailInput = screen.getByLabelText(/Gmail/i);
+        const passwordInput = screen.getByLabelText(/Contraseña/i);
         const submitBtn = screen.getByRole('button', { name: /Ingresar/i });
 
         fireEvent.input(emailInput, { target: { value: 'test@example.com' } });
@@ -43,12 +45,14 @@ describe('Login Integration', () => {
     it('should show error message on failed login', async () => {
         mockAuthService.login.and.returnValue(throwError(() => new Error('Invalid credentials')));
 
-        await render(LoginComponent, {
+        const { fixture } = await render(LoginComponent, {
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
                 { provide: Router, useValue: mockRouter }
             ]
         });
+
+        fixture.detectChanges();
 
         fireEvent.click(screen.getByRole('button', { name: /Ingresar/i }));
 

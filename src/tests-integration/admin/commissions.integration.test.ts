@@ -37,18 +37,20 @@ describe('Admin Commissions Integration', () => {
         mockAdminService.getAllCarreras.and.returnValue(of([{ id: 'car1', nombre: 'Carrera 1' } as any]));
         mockAdminService.getPlanDetalle.and.returnValue(of(planMock));
 
-        await render(AdminCommissionsComponent, {
+        const { fixture } = await render(AdminCommissionsComponent, {
             providers: [
                 { provide: AdminService, useValue: mockAdminService },
                 { provide: AlertService, useValue: mockAlertService }
             ]
         });
 
+        fixture.detectChanges();
+
         // Seleccionar comision
         fireEvent.click(await screen.findByText('Comision A'));
         
         // Abrir modal de asignacion
-        const assignBtn = screen.getByRole('button', { name: /Asignar Materia/i });
+        const assignBtn = screen.getByRole('button', { name: /Agregar Materia/i });
         fireEvent.click(assignBtn);
 
         // Seleccionar materia
@@ -59,7 +61,7 @@ describe('Admin Commissions Integration', () => {
         const daySelect = screen.getByLabelText(/Día/i);
         const fromInput = screen.getByLabelText(/Desde/i);
         const toInput = screen.getByLabelText(/Hasta/i);
-        const addBtn = screen.getByRole('button', { name: /Agregar Horario/i });
+        const addBtn = screen.getByRole('button', { name: /Agregar/i });
 
         fireEvent.change(daySelect, { target: { value: 'LUNES' } });
         fireEvent.input(fromInput, { target: { value: '08:00' } });
@@ -70,10 +72,12 @@ describe('Admin Commissions Integration', () => {
         fireEvent.click(addBtn);
 
         // Validar que se agregó
-        await screen.findByText(/LUNES: 08:00 - 10:00/i);
+        await screen.findByText(/LUNES/i);
+        await screen.findByText(/08:00 - 10:00/i);
 
         // Intentar pasar al siguiente paso
-        const nextBtn = screen.getByRole('button', { name: /Siguiente/i });
+        const nextBtn = await screen.findByRole('button', { name: /Siguiente/i });
+        await waitFor(() => expect(nextBtn.getAttribute('disabled')).toBeFalsy());
         fireEvent.click(nextBtn);
 
         await waitFor(() => {
