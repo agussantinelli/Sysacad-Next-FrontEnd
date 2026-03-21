@@ -1,23 +1,22 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { LoginComponent } from '@features/auth/login/login.component';
-import { AuthService } from '@core/services/auth.service';
+import { LoginComponent } from '../../../src/app/features/auth/login/login.component';
+import { AuthService } from '../../../src/app/core/services/auth.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { vi, describe, it, expect } from 'vitest';
-import '@testing-library/jest-dom/vitest';
 
 describe('Login Integration', () => {
-    const mockAuthService = {
-        login: vi.fn(),
-        currentUser$: of(null)
-    };
-    const mockRouter = {
-        navigate: vi.fn()
-    };
+    let mockAuthService: jasmine.SpyObj<AuthService>;
+    let mockRouter: jasmine.SpyObj<Router>;
+
+    beforeEach(() => {
+        mockAuthService = jasmine.createSpyObj('AuthService', ['login']);
+        (mockAuthService as any).currentUser$ = of(null);
+        mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+    });
 
     it('should login successfully and redirect to dashboard', async () => {
         const userMock = { id: 1, role: 'STUDENT', nombre: 'Test User' };
-        mockAuthService.login.mockReturnValue(of(userMock));
+        mockAuthService.login.and.returnValue(of(userMock as any));
 
         await render(LoginComponent, {
             providers: [
@@ -41,7 +40,7 @@ describe('Login Integration', () => {
     });
 
     it('should show error message on failed login', async () => {
-        mockAuthService.login.mockReturnValue(throwError(() => new Error('Invalid credentials')));
+        mockAuthService.login.and.returnValue(throwError(() => new Error('Invalid credentials')));
 
         await render(LoginComponent, {
             providers: [
@@ -53,7 +52,7 @@ describe('Login Integration', () => {
         fireEvent.click(screen.getByRole('button', { name: /Ingresar/i }));
 
         await waitFor(() => {
-            expect(screen.getByText(/Credenciales inválidas/i)).toBeInTheDocument();
+            expect(screen.getByText(/Credenciales inválidas/i)).toBeTruthy();
         });
     });
 });

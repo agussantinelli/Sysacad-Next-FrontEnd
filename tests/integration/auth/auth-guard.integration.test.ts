@@ -1,18 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-import { requireAuthGuard } from '@core/guards/require-auth.guard';
-import { AuthService } from '@core/services/auth.service';
+import { requireAuthGuard } from '../../../src/app/core/guards/require-auth.guard';
+import { AuthService } from '../../../src/app/core/services/auth.service';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { vi } from 'vitest';
 
 describe('Auth Guard Integration', () => {
-    const mockAuthService = {
-        isAuthenticated: vi.fn()
-    };
-    const mockRouter = {
-        createUrlTree: vi.fn()
-    };
+    let mockAuthService: jasmine.SpyObj<AuthService>;
+    let mockRouter: jasmine.SpyObj<Router>;
 
     beforeEach(() => {
+        mockAuthService = jasmine.createSpyObj('AuthService', ['isAuthenticated']);
+        mockRouter = jasmine.createSpyObj('Router', ['createUrlTree']);
+
         TestBed.configureTestingModule({
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
@@ -22,15 +20,15 @@ describe('Auth Guard Integration', () => {
     });
 
     it('should allow navigation if authenticated', () => {
-        mockAuthService.isAuthenticated.mockReturnValue(true);
+        mockAuthService.isAuthenticated.and.returnValue(true);
         const result = TestBed.runInInjectionContext(() => requireAuthGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot));
         expect(result).toBe(true);
     });
 
     it('should redirect if not authenticated', () => {
-        mockAuthService.isAuthenticated.mockReturnValue(false);
-        const urlTreeMock = {};
-        mockRouter.createUrlTree.mockReturnValue(urlTreeMock);
+        mockAuthService.isAuthenticated.and.returnValue(false);
+        const urlTreeMock = {} as any;
+        mockRouter.createUrlTree.and.returnValue(urlTreeMock);
         
         const result = TestBed.runInInjectionContext(() => requireAuthGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot));
         expect(result).toBe(urlTreeMock);
