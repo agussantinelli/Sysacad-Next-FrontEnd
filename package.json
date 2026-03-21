@@ -7,9 +7,9 @@
     "dev": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "pnpm run test:unit && pnpm run test:integration",
-    "test:unit": "ng test",
-    "test:integration": "vitest run tests/integration",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "ng test --watch=false",
+    "test:integration": "ng test Sysacad-Next-FrontEnd:test-integration --watch=false",
     "test:e2e": "cypress run",
     "e2e:open": "cypress open"
   },
@@ -35,8 +35,6 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@analogjs/vite-plugin-angular": "^2.3.1",
-    "@analogjs/vitest-angular": "^2.3.1",
     "@angular-devkit/build-angular": "^19.2.19",
     "@angular/cli": "^19.2.19",
     "@angular/compiler-cli": "^19.2.18",
@@ -45,14 +43,12 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^25.5.0",
     "cypress": "^15.12.0",
-    "happy-dom": "^20.8.4",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.2",
-    "vitest": "^4.1.0"
+    "typescript": "~5.5.2"
   }
 }
