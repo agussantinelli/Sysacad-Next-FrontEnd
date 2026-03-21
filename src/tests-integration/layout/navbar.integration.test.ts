@@ -1,40 +1,57 @@
 /// <reference types="jasmine" />
 import { render, screen, fireEvent, waitFor } from '@testing-library/angular';
-import { NavbarComponent } from '@layout/navbar/navbar.component';
+import { NavbarComponent } from 'src/app/layout/navbar/navbar.component';
 import { AuthService } from '@core/services/auth.service';
-import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { ThemeService } from '@core/services/theme.service';
+import { AvisoService } from '@core/services/aviso.service';
+import { ChatService } from '@core/services/chat.service';
+import { of, BehaviorSubject } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('Navbar Integration', () => {
     let mockAuthService: any;
-    let mockRouter: jasmine.SpyObj<Router>;
+    let mockThemeService: any;
+    let mockAvisoService: any;
+    let mockChatService: any;
 
     beforeEach(() => {
         mockAuthService = {
-            currentUser$: of({ id: 's1', nombre: 'Agustin', rol: 'ADMIN' }),
+            currentUser$: of({ id: 's1', nombre: 'Agustin', apellido: 'Santinelli', rol: 'ADMIN' }),
             logout: jasmine.createSpy('logout')
         };
-        mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+        mockThemeService = {
+            isDarkMode: () => false
+        };
+        mockAvisoService = {
+            obtenerCantidadSinLeer: () => of(0)
+        };
+        mockChatService = {
+            unreadCountChanged$: new BehaviorSubject(0),
+            getTotalMensajesSinLeer: () => of(0)
+        };
     });
 
     it('should show admin menu and logout correctly', async () => {
         const { fixture } = await render(NavbarComponent, {
+            imports: [RouterTestingModule],
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
-                { provide: Router, useValue: mockRouter }
+                { provide: ThemeService, useValue: mockThemeService },
+                { provide: AvisoService, useValue: mockAvisoService },
+                { provide: ChatService, useValue: mockChatService }
             ]
         });
 
         fixture.detectChanges();
 
-        const adminBtn = screen.getByRole('button', { name: /Administración/i });
+        const adminBtn = await screen.findByRole('button', { name: /Académica/i });
         fireEvent.click(adminBtn);
 
-        await waitFor(() => {
-            expect(screen.getByText(/Administración/i)).toBeTruthy();
-        });
+        // Abrir menú de usuario
+        const profileBtn = screen.getByRole('button', { name: /Agustin Santinelli/i });
+        fireEvent.click(profileBtn);
 
-        const logoutBtn = screen.getByText(/Cerrar Sesión/i);
+        const logoutBtn = await screen.findByRole('button', { name: /Cerrar Sesión/i });
         fireEvent.click(logoutBtn);
 
         expect(mockAuthService.logout).toHaveBeenCalled();

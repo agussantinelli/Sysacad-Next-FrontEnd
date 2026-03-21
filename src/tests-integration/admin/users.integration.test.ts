@@ -27,8 +27,12 @@ describe('Admin Users Integration', () => {
         fixture.detectChanges();
 
         await waitFor(() => {
-            expect(screen.getByText(/Admin User/i)).toBeTruthy();
-            expect(screen.getByText(/Student One/i)).toBeTruthy();
+            expect(screen.getByText(/admin@test.com/i)).toBeTruthy();
+            expect(screen.getByText(/s1@test.com/i)).toBeTruthy();
         });
+        
+        // El nombre y apellido se renderizan juntos en el template
+        expect(screen.getByText(/Admin User/i)).toBeTruthy();
+        expect(screen.getByText(/Student One/i)).toBeTruthy();
     });
 });
