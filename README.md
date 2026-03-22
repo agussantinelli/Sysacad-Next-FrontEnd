@@ -24,9 +24,10 @@
     <img src="https://img.shields.io/badge/Jasmine-Testing-8A4182?style=for-the-badge&logo=jasmine&logoColor=white" alt="Jasmine Badge"/>
     <img src="https://img.shields.io/badge/Karma-Test%20Runner-339999?style=for-the-badge&logo=karma&logoColor=white" alt="Karma Badge"/>
     <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
-    <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Actions Badge"/>
     <img src="https://img.shields.io/badge/Testing%20Library-Angular-E33332?style=for-the-badge&logo=testing-library&logoColor=white" alt="Testing Library Badge"/>
     <img src="https://img.shields.io/badge/Cypress-E2E-17202C?style=for-the-badge&logo=cypress&logoColor=white" alt="Cypress Badge"/>
+    <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Actions Badge"/>
+
 </div>
 
 <div align="center">
