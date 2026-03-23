@@ -426,7 +426,7 @@ pnpm run lint
 <p>Validación de lógica de negocio aislada, utilidades y componentes base. Se ejecutan automáticamente junto a los de integración con <code>pnpm test</code>.</p>
 <ul>
     <li><strong>Comando específico:</strong> <code>pnpm test:unit</code></li>
-    <li><strong>Estado Actual:</strong> +410 tests unitarios pasando exitosamente.</li>
+    <li><strong>Estado Actual:</strong> 410 tests unitarios pasando exitosamente.</li>
     <li><strong>Cobertura:</strong> Servicios Core, guards, interceptores y lógica de componentes.</li>
 </ul>
 
