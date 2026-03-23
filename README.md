@@ -415,7 +415,7 @@ pnpm run lint
 </code></pre>
 
 <p>Abrí <a href="http://localhost:4200">http://localhost:4200</a> en tu navegador para ver el resultado.</p>
-<hr>
+
 <hr>
 
 <h2>🧪 Testing Strategy</h2>
