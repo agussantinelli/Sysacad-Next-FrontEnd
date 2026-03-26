@@ -24,9 +24,10 @@
     <img src="https://img.shields.io/badge/Jasmine-Testing-8A4182?style=for-the-badge&logo=jasmine&logoColor=white" alt="Jasmine Badge"/>
     <img src="https://img.shields.io/badge/Karma-Test%20Runner-339999?style=for-the-badge&logo=karma&logoColor=white" alt="Karma Badge"/>
     <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node Badge"/>
-    <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Actions Badge"/>
     <img src="https://img.shields.io/badge/Testing%20Library-Angular-E33332?style=for-the-badge&logo=testing-library&logoColor=white" alt="Testing Library Badge"/>
     <img src="https://img.shields.io/badge/Cypress-E2E-17202C?style=for-the-badge&logo=cypress&logoColor=white" alt="Cypress Badge"/>
+    <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Actions Badge"/>
+
 </div>
 
 <div align="center">
@@ -414,7 +415,7 @@ pnpm run lint
 </code></pre>
 
 <p>Abrí <a href="http://localhost:4200">http://localhost:4200</a> en tu navegador para ver el resultado.</p>
-<hr>
+
 <hr>
 
 <h2>🧪 Testing Strategy</h2>
@@ -425,7 +426,7 @@ pnpm run lint
 <p>Validación de lógica de negocio aislada, utilidades y componentes base. Se ejecutan automáticamente junto a los de integración con <code>pnpm test</code>.</p>
 <ul>
     <li><strong>Comando específico:</strong> <code>pnpm test:unit</code></li>
-    <li><strong>Estado Actual:</strong> +410 tests unitarios pasando exitosamente.</li>
+    <li><strong>Estado Actual:</strong> 410 tests unitarios pasando exitosamente.</li>
     <li><strong>Cobertura:</strong> Servicios Core, guards, interceptores y lógica de componentes.</li>
 </ul>
 
