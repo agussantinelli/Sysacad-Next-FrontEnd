@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { Router, UrlTree } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
-import { authGuard } from './auth.guard';
+import { guestGuard } from '../guest.guard';
 
-describe('authGuard', () => {
+describe('guestGuard', () => {
     let authService: jasmine.SpyObj<AuthService>;
     let router: jasmine.SpyObj<Router>;
 
@@ -22,25 +22,23 @@ describe('authGuard', () => {
         router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     });
 
-    it('should redirect to dashboard if authenticated', () => {
+    it('should redirect to dashboard if already authenticated', () => {
         authService.isAuthenticated.and.returnValue(true);
         const urlTree = {} as UrlTree;
         router.createUrlTree.and.returnValue(urlTree);
 
-        const result = TestBed.runInInjectionContext(() => authGuard({} as any, {} as any));
+        const result = TestBed.runInInjectionContext(() => guestGuard({} as any, {} as any));
 
         expect(result).toBe(urlTree);
         expect(router.createUrlTree).toHaveBeenCalledWith(['/dashboard']);
     });
 
-    it('should redirect to login if not authenticated', () => {
+    it('should allow navigation if not authenticated', () => {
         authService.isAuthenticated.and.returnValue(false);
-        const urlTree = {} as UrlTree;
-        router.createUrlTree.and.returnValue(urlTree);
 
-        const result = TestBed.runInInjectionContext(() => authGuard({} as any, {} as any));
+        const result = TestBed.runInInjectionContext(() => guestGuard({} as any, {} as any));
 
-        expect(result).toBe(urlTree);
-        expect(router.createUrlTree).toHaveBeenCalledWith(['/login']);
+        expect(result).toBeTrue();
+        expect(router.createUrlTree).not.toHaveBeenCalled();
     });
 });
