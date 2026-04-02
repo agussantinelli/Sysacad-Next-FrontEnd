@@ -30,17 +30,17 @@
 
             <div class="card-body">
                 <div class="detail-row">
-                    <span class="material-icons icon-sm">event</span>
+                    <span class="material-icons icon-sm" aria-hidden="true">event</span>
                     <span>{{ inscripcion.fechaExamen | dateFormat }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="material-icons icon-sm">schedule</span>
+                    <span class="material-icons icon-sm" aria-hidden="true">schedule</span>
                     <span>{{ inscripcion.horaExamen }}</span>
                 </div>
 
                 @if (inscripcion.nota) {
                 <div class="detail-row">
-                    <span class="material-icons icon-sm">grade</span>
+                    <span class="material-icons icon-sm" aria-hidden="true">grade</span>
                     <span>Nota: {{ inscripcion.nota }}</span>
                 </div>
                 }
@@ -59,7 +59,7 @@
     </div>
     } @else {
     <div class="empty-state">
-        <span class="material-icons empty-icon">assignment_turned_in</span>
+        <span class="material-icons empty-icon" aria-hidden="true">assignment_turned_in</span>
         <p>No tienes inscripciones a exámenes activas.</p>
     </div>
     }

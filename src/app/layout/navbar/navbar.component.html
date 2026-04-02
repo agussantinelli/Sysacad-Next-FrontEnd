@@ -12,13 +12,13 @@
             <button class="nav-link" [class.active]="activeSection === section.title"
                 (click)="setActiveSection(section.title)">
                 {{ section.title }}
-                <span class="material-icons chevron">expand_more</span>
+                <span class="material-icons chevron" aria-hidden="true">expand_more</span>
             </button>
 
             <div class="nav-dropdown" [class.show]="activeSection === section.title">
                 @for (option of section.options; track option.title) {
                 <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
-                    <span class="material-icons icon-sm">{{ option.icon }}</span>
+                    <span class="material-icons icon-sm" aria-hidden="true">{{ option.icon }}</span>
                     {{ option.title }}
                     @if (option.badgeCount && option.badgeCount > 0) {
                     <span class="nav-badge">{{ option.badgeCount }}</span>
@@ -34,13 +34,13 @@
             <button class="nav-link" [class.active]="activeSection === section.title"
                 (click)="setActiveSection(section.title)">
                 {{ section.title }}
-                <span class="material-icons chevron">expand_more</span>
+                <span class="material-icons chevron" aria-hidden="true">expand_more</span>
             </button>
 
             <div class="nav-dropdown" [class.show]="activeSection === section.title">
                 @for (option of section.options; track option.title) {
                 <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
-                    <span class="material-icons icon-sm">{{ option.icon }}</span>
+                    <span class="material-icons icon-sm" aria-hidden="true">{{ option.icon }}</span>
                     {{ option.title }}
                     @if (option.badgeCount && option.badgeCount > 0) {
                     <span class="nav-badge">{{ option.badgeCount }}</span>
@@ -56,13 +56,13 @@
             <button class="nav-link" [class.active]="activeSection === section.title"
                 (click)="setActiveSection(section.title)">
                 {{ section.title }}
-                <span class="material-icons chevron">expand_more</span>
+                <span class="material-icons chevron" aria-hidden="true">expand_more</span>
             </button>
 
             <div class="nav-dropdown" [class.show]="activeSection === section.title">
                 @for (option of section.options; track option.title) {
                 <a [routerLink]="option.route" class="nav-dropdown-item" (click)="closeAll()">
-                    <span class="material-icons icon-sm">{{ option.icon }}</span>
+                    <span class="material-icons icon-sm" aria-hidden="true">{{ option.icon }}</span>
                     {{ option.title }}
                     @if (option.badgeCount && option.badgeCount > 0) {
                     <span class="nav-badge">{{ option.badgeCount }}</span>
@@ -84,17 +84,17 @@
                 </div>
             </ng-container>
             <ng-template #defaultIcon>
-                <span class="material-icons">account_circle</span>
+                <span class="material-icons" aria-hidden="true">account_circle</span>
             </ng-template>
         </button>
 
         <div class="dropdown-menu" [class.show]="isDropdownOpen">
             <a class="dropdown-item" routerLink="/profile" (click)="toggleDropdown()">
-                <span class="material-icons icon-sm">person</span> Ver Perfil
+                <span class="material-icons icon-sm" aria-hidden="true">person</span> Ver Perfil
             </a>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item logout" (click)="logout()">
-                <span class="material-icons icon-sm">logout</span> Cerrar Sesión
+                <span class="material-icons icon-sm" aria-hidden="true">logout</span> Cerrar Sesión
             </button>
         </div>
     </div>

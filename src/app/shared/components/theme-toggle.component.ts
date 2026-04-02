@@ -12,9 +12,9 @@ import { ThemeService } from '@core/services/theme.service';
         <button class="theme-toggle-switch" 
                 (click)="themeService.toggleTheme()" 
                 [class.dark]="themeService.isDarkMode()" 
-                aria-label="Toggle Dark Mode">
-            <span class="material-icons sun-icon">light_mode</span>
-            <span class="material-icons moon-icon">dark_mode</span>
+                aria-label="Alternar tema oscuro">
+            <span class="material-icons sun-icon" aria-hidden="true">light_mode</span>
+            <span class="material-icons moon-icon" aria-hidden="true">dark_mode</span>
             <div class="toggle-circle"></div>
         </button>
     </div>

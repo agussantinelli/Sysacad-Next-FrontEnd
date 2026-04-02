@@ -8,7 +8,7 @@
 
         @if (mesas.length === 0) {
         <div class="empty-state">
-            <span class="material-icons">event_busy</span>
+            <span class="material-icons" aria-hidden="true">event_busy</span>
             <h3>No tienes mesas de examen asignadas actualmente.</h3>
             <p>Las mesas aparecerán aquí cuando seas designado como autoridad.</p>
         </div>
@@ -20,7 +20,7 @@
                         <th>Nombre / Turno</th>
                         <th (click)="sortData('fechaInicio')" class="sortable">
                             Fecha Inicio
-                            <span class="material-icons sort-icon" [class.active]="sortColumn === 'fechaInicio'">
+                            <span class="material-icons sort-icon" [class.active]="sortColumn === 'fechaInicio'" aria-hidden="true">
                                 {{ sortColumn === 'fechaInicio' && sortDirection === 'desc' ? 'arrow_drop_down' :
                                 'arrow_drop_up' }}
                             </span>
@@ -29,7 +29,7 @@
                         <th (click)="sortData('cantidadMateriasInvolucradas')" class="sortable">
                             Materias Involucradas
                             <span class="material-icons sort-icon"
-                                [class.active]="sortColumn === 'cantidadMateriasInvolucradas'">
+                                [class.active]="sortColumn === 'cantidadMateriasInvolucradas'" aria-hidden="true">
                                 {{ sortColumn === 'cantidadMateriasInvolucradas' && sortDirection === 'desc' ?
                                 'arrow_drop_down' : 'arrow_drop_up' }}
                             </span>
@@ -48,7 +48,7 @@
                         </td>
                         <td>
                             <button class="btn-action primary" (click)="viewDetails(mesa)" title="Ver Detalle">
-                                <span class="material-icons">visibility</span> Ver Materias
+                                <span class="material-icons" aria-hidden="true">visibility</span> Ver Materias
                             </button>
                         </td>
                     </tr>

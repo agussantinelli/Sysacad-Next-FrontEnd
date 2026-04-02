@@ -7,7 +7,7 @@
         } @else {
         @if (materias.length === 0) {
         <div class="empty-state">
-            <span class="material-icons">class_off</span>
+            <span class="material-icons" aria-hidden="true">class_off</span>
             <h3>No tienes materias asignadas</h3>
             <p>Si consideras que es un error, contacta a bedelía.</p>
         </div>
@@ -22,19 +22,19 @@
                 <div class="card-body">
                     <h3>{{ materia.nombre }}</h3>
                     <div class="role-info">
-                        <span class="material-icons">person_outline</span>
+                        <span class="material-icons" aria-hidden="true">person_outline</span>
                         <span>{{ getCargoLabel(materia.cargo) }}</span>
                     </div>
                     @if (materia.jefeCatedra) {
                     <div class="head-info">
-                        <span class="material-icons">school</span>
+                        <span class="material-icons" aria-hidden="true">school</span>
                         <span>Jefe: {{ materia.jefeCatedra }}</span>
                     </div>
                     }
                     <div class="card-footer">
                         <a [routerLink]="['/professor/commissions', materia.id]" [queryParams]="{name: materia.nombre}"
                             class="action-btn primary">
-                            <span class="material-icons">groups</span>
+                            <span class="material-icons" aria-hidden="true">groups</span>
                             Comisiones
                         </a>
                     </div>

@@ -5,7 +5,7 @@
         @if (!isLoading) {
         <div class="card toolbar-card">
             <button class="btn-primary" (click)="openCreateTurnModal()">
-                <span class="material-icons">add</span> Nuevo Turno
+                <span class="material-icons" aria-hidden="true">add</span> Nuevo Turno
             </button>
         </div>
         }
@@ -20,7 +20,7 @@
             <div class="card turn-card" [class.active]="isTurnActive(turno)" [class.past]="isTurnPast(turno)"
                 (click)="selectTurno(turno)">
                 <div class="turn-header">
-                    <span class="material-icons turn-icon">event_note</span>
+                    <span class="material-icons turn-icon" aria-hidden="true">event_note</span>
                     <h4>{{ turno.nombre }}</h4>
                 </div>
                 <div class="turn-stats">
@@ -38,11 +38,11 @@
                 @if (!isTurnPast(turno)) {
                 <div class="turn-actions mt-3 d-flex justify-content-center gap-3">
                     <button class="icon-btn" (click)="editTurno(turno, $event)" title="Editar Turno">
-                        <span class="material-icons">edit</span>
+                        <span class="material-icons" aria-hidden="true">edit</span>
                     </button>
                     @if (turno.cantidadInscriptos === 0) {
                     <button class="icon-btn delete" (click)="deleteTurno(turno, $event)" title="Eliminar Turno">
-                        <span class="material-icons">delete</span>
+                        <span class="material-icons" aria-hidden="true">delete</span>
                     </button>
                     }
                 </div>

@@ -16,7 +16,7 @@
                 </div>
                 <button class="btn-primary" (click)="create()"
                     [disabled]="!newFacultad.ciudad || !newFacultad.provincia || isLoading">
-                    <span class="material-icons">add</span> Agregar
+                    <span class="material-icons" aria-hidden="true">add</span> Agregar
                 </button>
             </div>
         </div>
@@ -54,10 +54,10 @@
                                 <div class="action-buttons">
                                     <button class="icon-btn add-link" (click)="openAssociationModal(facultad)"
                                         title="Asociar Carrera">
-                                        <span class="material-icons">link</span>
+                                        <span class="material-icons" aria-hidden="true">link</span>
                                     </button>
                                     <button class="icon-btn delete" (click)="delete(facultad)" title="Eliminar">
-                                        <span class="material-icons">delete</span>
+                                        <span class="material-icons" aria-hidden="true">delete</span>
                                     </button>
                                 </div>
                             </td>

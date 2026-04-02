@@ -2,7 +2,7 @@
     <div class="inscriptions-container">
         <div class="header-actions">
             <button class="btn-create" (click)="goToCreate()">
-                <span class="material-icons">add_circle</span>
+                <span class="material-icons" aria-hidden="true">add_circle</span>
                 Nueva Inscripción
             </button>
         </div>
@@ -21,7 +21,7 @@
                         <th (click)="onSort('fecha')" class="sortable-header">
                             Fecha
                             @if (sortColumn === 'fecha') {
-                            <span class="material-icons sort-icon">{{ sortDirection === 'asc' ? 'arrow_upward' :
+                            <span class="material-icons sort-icon" aria-hidden="true">{{ sortDirection === 'asc' ? 'arrow_upward' :
                                 'arrow_downward' }}</span>
                             }
                         </th>
@@ -29,14 +29,14 @@
                         <th (click)="onSort('alumno')" class="sortable-header">
                             Alumno
                             @if (sortColumn === 'alumno') {
-                            <span class="material-icons sort-icon">{{ sortDirection === 'asc' ? 'arrow_upward' :
+                            <span class="material-icons sort-icon" aria-hidden="true">{{ sortDirection === 'asc' ? 'arrow_upward' :
                                 'arrow_downward' }}</span>
                             }
                         </th>
                         <th (click)="onSort('materia')" class="sortable-header">
                             Materia
                             @if (sortColumn === 'materia') {
-                            <span class="material-icons sort-icon">{{ sortDirection === 'asc' ? 'arrow_upward' :
+                            <span class="material-icons sort-icon" aria-hidden="true">{{ sortDirection === 'asc' ? 'arrow_upward' :
                                 'arrow_downward' }}</span>
                             }
                         </th>
@@ -79,7 +79,7 @@
 
                             <button class="btn-icon-action delete" title="Eliminar Inscripción"
                                 (click)="deleteInscription(item)">
-                                <span class="material-icons">delete</span>
+                                <span class="material-icons" aria-hidden="true">delete</span>
                             </button>
                         </td>
                     </tr>

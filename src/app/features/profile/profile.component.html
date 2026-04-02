@@ -3,16 +3,16 @@
     <div class="profile-card">
         <div class="profile-header">
             <button class="back-btn" (click)="goBack()">
-                <span class="material-icons">arrow_back</span>
+                <span class="material-icons" aria-hidden="true">arrow_back</span>
             </button>
             <div class="profile-avatar editable" (click)="openUploadModal()" title="Cambiar foto">
                 @if (usuario.fotoPerfil) {
                 <img [src]="usuario.fotoPerfil" [alt]="usuario.nombre" class="avatar-img">
                 } @else {
-                <span class="material-icons">person</span>
+                <span class="material-icons" aria-hidden="true">person</span>
                 }
                 <div class="edit-overlay">
-                    <span class="material-icons">camera_alt</span>
+                    <span class="material-icons" aria-hidden="true">camera_alt</span>
                 </div>
             </div>
 
@@ -77,11 +77,11 @@
 
             <div class="profile-actions">
                 <button class="btn-edit" (click)="navigateToEdit()">
-                    <span class="material-icons">edit</span>
+                    <span class="material-icons" aria-hidden="true">edit</span>
                     {{ isProfileComplete ? 'Editar Perfil' : 'Completar Perfil' }}
                 </button>
                 <button class="btn-security" (click)="navigateToChangePassword()">
-                    <span class="material-icons">lock</span>
+                    <span class="material-icons" aria-hidden="true">lock</span>
                     Cambiar Contraseña
                 </button>
             </div>

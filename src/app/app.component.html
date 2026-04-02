@@ -8,8 +8,8 @@
 
 @if (authService.currentUser$ | async; as user) {
 @if (user.rol !== 'ADMIN') {
-<a routerLink="/messages" class="floating-chat-btn" title="Mensajes">
-    <span class="material-icons">chat</span>
+<a routerLink="/messages" class="floating-chat-btn" title="Mensajes" aria-label="Mensajes">
+    <span class="material-icons" aria-hidden="true">chat</span>
     @if (unreadMessagesCount > 0) {
     <span class="notification-badge">{{ unreadMessagesCount > 99 ? '99+' : unreadMessagesCount }}</span>
     }

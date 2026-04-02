@@ -4,12 +4,12 @@
         
         
         <div class="card filter-card">
-            <h4><span class="material-icons">filter_alt</span> Filtros de Búsqueda</h4>
+            <h4><span class="material-icons" aria-hidden="true">filter_alt</span> Filtros de Búsqueda</h4>
             <div class="filter-row">
                 <div class="form-group">
                     <label>Año Académico</label>
                     <div class="input-wrapper">
-                        <span class="material-icons input-icon">calendar_today</span>
+                        <span class="material-icons input-icon" aria-hidden="true">calendar_today</span>
                         <select [(ngModel)]="selectedAnio" class="form-control">
                             <option [ngValue]="null">Todos</option>
                             <option [ngValue]="2025">2025</option>
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label>Facultad</label>
                     <div class="input-wrapper">
-                        <span class="material-icons input-icon">apartment</span>
+                        <span class="material-icons input-icon" aria-hidden="true">apartment</span>
                         <select [(ngModel)]="selectedFacultad" class="form-control">
                             <option value="">Todas</option>
                             @for (fac of facultades; track fac.id) {
@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label>Carrera</label>
                     <div class="input-wrapper">
-                        <span class="material-icons input-icon">school</span>
+                        <span class="material-icons input-icon" aria-hidden="true">school</span>
                         <select [(ngModel)]="selectedCarrera" class="form-control">
                             <option value="">Todas</option>
                             @for (car of carreras; track car.id) {
@@ -43,7 +43,7 @@
                 </div>
                 <div class="filter-actions">
                     <button class="btn-primary" (click)="applyFilters()" [disabled]="isLoading">
-                        <span class="material-icons">refresh</span> Actualizar
+                        <span class="material-icons" aria-hidden="true">refresh</span> Actualizar
                     </button>
                 </div>
             </div>
@@ -57,7 +57,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">groups</span>
+                    <span class="material-icons" aria-hidden="true">groups</span>
                     <span>Total Alumnos</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadTotalAlumnos }}</div>
@@ -66,7 +66,7 @@
 
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">school</span>
+                    <span class="material-icons" aria-hidden="true">school</span>
                     <span>Regulares</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadRegulares }}</div>
@@ -75,7 +75,7 @@
 
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">sentiment_very_dissatisfied</span>
+                    <span class="material-icons" aria-hidden="true">sentiment_very_dissatisfied</span>
                     <span>Libres</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadLibres }}</div>
@@ -84,7 +84,7 @@
 
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">emoji_events</span>
+                    <span class="material-icons" aria-hidden="true">emoji_events</span>
                     <span>Promocionados</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadPromocionados }}</div>
@@ -96,7 +96,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">assignment_turned_in</span>
+                    <span class="material-icons" aria-hidden="true">assignment_turned_in</span>
                     <span>Inscriptos a Examen</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadTotalInscriptosExamen }}</div>
@@ -105,7 +105,7 @@
 
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">check_circle</span>
+                    <span class="material-icons" aria-hidden="true">check_circle</span>
                     <span>Aprobados</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadAprobadosExamen }}</div>
@@ -114,7 +114,7 @@
 
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">cancel</span>
+                    <span class="material-icons" aria-hidden="true">cancel</span>
                     <span>Desaprobados</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadDesaprobadosExamen }}</div>
@@ -123,7 +123,7 @@
 
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">event_busy</span>
+                    <span class="material-icons" aria-hidden="true">event_busy</span>
                     <span>Ausentes</span>
                 </div>
                 <div class="stat-value">{{ stats.cantidadAusentesExamen }}</div>
@@ -132,7 +132,7 @@
 
             <div class="stat-card">
                 <div class="card-header">
-                    <span class="material-icons">trending_up</span>
+                    <span class="material-icons" aria-hidden="true">trending_up</span>
                     <span>Promedio General</span>
                 </div>
                 <div class="stat-value">{{ stats.notaPromedio | number:'1.2-2' }}</div>

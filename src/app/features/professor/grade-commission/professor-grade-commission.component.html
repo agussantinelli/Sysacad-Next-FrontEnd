@@ -21,7 +21,7 @@
 
         @if (students.length === 0) {
         <div class="empty-state">
-            <span class="material-icons">people_outline</span>
+            <span class="material-icons" aria-hidden="true">people_outline</span>
             <h3>No hay alumnos inscriptos</h3>
         </div>
         } @else {
@@ -96,10 +96,10 @@
             <button class="btn btn-primary" (click)="saveGrades()"
                 [disabled]="isSaving || !hasChanges() || (!esNotaFinal && !concepto)">
                 @if (isSaving) {
-                <span class="material-icons spin">refresh</span>
+                <span class="material-icons spin" aria-hidden="true">refresh</span>
                 <span>Guardando...</span>
                 } @else {
-                <span class="material-icons">save</span>
+                <span class="material-icons" aria-hidden="true">save</span>
                 <span>Descargar y Recargar</span>
                 }
             </button>

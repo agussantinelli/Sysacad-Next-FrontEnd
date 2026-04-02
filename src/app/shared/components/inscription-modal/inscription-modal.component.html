@@ -4,7 +4,7 @@
         <div class="modal-header">
             <h2 class="modal-title">Inscribirse a: <span class="highlight-text">{{ title }}</span></h2>
             <button (click)="onClose()" class="btn-close-icon">
-                <span class="material-icons">close</span>
+                <span class="material-icons" aria-hidden="true">close</span>
             </button>
         </div>
 
@@ -15,20 +15,20 @@
                 <p class="section-subtitle">Detalles de la mesa de examen:</p>
 
                 <div class="detail-row">
-                    <span class="label"><span class="material-icons icon-sm">event</span> Fecha:</span>
+                    <span class="label"><span class="material-icons icon-sm" aria-hidden="true">event</span> Fecha:</span>
                     <span class="value">{{ examDetail.diaExamen | dateFormat }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="label"><span class="material-icons icon-sm">schedule</span> Hora:</span>
+                    <span class="label"><span class="material-icons icon-sm" aria-hidden="true">schedule</span> Hora:</span>
                     <span class="value">{{ examDetail.horaExamen }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="label"><span class="material-icons icon-sm">person</span> Presidente:</span>
+                    <span class="label"><span class="material-icons icon-sm" aria-hidden="true">person</span> Presidente:</span>
                     <span class="value">{{ examDetail.nombrePresidente }}</span>
                 </div>
 
                 <div class="alert-info mt-4">
-                    <span class="material-icons info-icon">info</span>
+                    <span class="material-icons info-icon" aria-hidden="true">info</span>
                     <span>Se validaron tus condiciones académicas.</span>
                 </div>
             </div>
@@ -50,18 +50,18 @@
                             
                             <div class="commission-detail-row">
                                 <span class="detail-group">
-                                    <span class="material-icons icon-sm">event</span>
+                                    <span class="material-icons icon-sm" aria-hidden="true">event</span>
                                     <span class="detail-text">{{ table.fecha | dateFormat }}</span>
                                 </span>
                                 <span class="detail-group">
-                                    <span class="material-icons icon-sm">schedule</span>
+                                    <span class="material-icons icon-sm" aria-hidden="true">schedule</span>
                                     <span class="detail-text">{{ table.hora }}</span>
                                 </span>
                             </div>
 
                             
                             <div class="commission-detail-row">
-                                <span class="material-icons icon-sm">person</span>
+                                <span class="material-icons icon-sm" aria-hidden="true">person</span>
                                 <span class="detail-text" title="{{ table.presidente }}">
                                     {{ table.presidente || 'A designar' }}
                                 </span>
@@ -71,7 +71,7 @@
                         <div class="selection-indicator">
                             @if (selectedExamTable?.idDetalleMesa === table.idDetalleMesa) {
                             <div class="radio-checked">
-                                <span class="material-icons check-icon">check</span>
+                                <span class="material-icons check-icon" aria-hidden="true">check</span>
                             </div>
                             } @else {
                             <div class="radio-unchecked"></div>
@@ -103,13 +103,13 @@
 
                             @if (!comision.habilitada) {
                             <div class="overlap-warning">
-                                <span class="material-icons warning-icon">warning_amber</span>
+                                <span class="material-icons warning-icon" aria-hidden="true">warning_amber</span>
                                 <span>{{ comision.mensaje }}</span>
                             </div>
                             }
 
                             <div class="commission-detail-row">
-                                <span class="material-icons icon-sm">person</span>
+                                <span class="material-icons icon-sm" aria-hidden="true">person</span>
                                 <span class="detail-text" title="{{ comision.profesores.join(', ') }}">
                                     {{ comision.profesores.length > 0 ? comision.profesores.join(', ') : 'Sin profesor
                                     asignado' }}
@@ -117,14 +117,14 @@
                             </div>
 
                             <div class="commission-detail-row">
-                                <span class="material-icons icon-sm">brightness_6</span>
+                                <span class="material-icons icon-sm" aria-hidden="true">brightness_6</span>
                                 <span class="detail-text">{{ comision.turno }}</span>
                             </div>
 
                             
                             <div class="commission-detail-row">
                                 <span class="detail-group">
-                                    <span class="material-icons icon-sm">schedule</span>
+                                    <span class="material-icons icon-sm" aria-hidden="true">schedule</span>
                                     <div class="schedule-column">
                                         @for (horario of comision.horarios; track horario) {
                                         <span class="schedule-text">{{ horario }}</span>
@@ -132,7 +132,7 @@
                                     </div>
                                 </span>
                                 <span class="detail-group">
-                                    <span class="material-icons icon-sm">place</span>
+                                    <span class="material-icons icon-sm" aria-hidden="true">place</span>
                                     <span class="detail-text">{{ comision.ubicacion || '---' }}</span>
                                 </span>
                             </div>
@@ -141,7 +141,7 @@
                         <div class="selection-indicator">
                             @if (selectedCommission?.idComision === comision.idComision) {
                             <div class="radio-checked">
-                                <span class="material-icons check-icon">check</span>
+                                <span class="material-icons check-icon" aria-hidden="true">check</span>
                             </div>
                             } @else if (comision.habilitada) {
                             <div class="radio-unchecked"></div>

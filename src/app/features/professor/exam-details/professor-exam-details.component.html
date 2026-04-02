@@ -8,7 +8,7 @@
 
         @if (detalles.length === 0) {
         <div class="empty-state">
-            <span class="material-icons">info</span>
+            <span class="material-icons" aria-hidden="true">info</span>
             <h3>No hay detalles disponibles para esta mesa.</h3>
         </div>
         } @else {
@@ -21,7 +21,7 @@
                         <span class="year-badge">{{ detalle.anioMateria }} Año</span>
                     </div>
                     <div class="date-badge">
-                        <span class="material-icons">event</span>
+                        <span class="material-icons" aria-hidden="true">event</span>
                         <div>
                             <span class="date">{{ detalle.fecha | date:'dd/MM/yyyy' }}</span>
                             <span class="time">{{ detalle.hora }} hs</span>
@@ -31,7 +31,7 @@
 
                 <div class="card-body">
                     <div class="info-row">
-                        <span class="material-icons">groups</span>
+                        <span class="material-icons" aria-hidden="true">groups</span>
                         <span class="label">Inscriptos:</span>
                         <span class="value">{{ detalle.cantidadInscriptos }}</span>
                     </div>
@@ -41,7 +41,7 @@
                         <div class="tribunal-list">
                             @for (miembro of detalle.tribunal; track miembro.nombreCompleto) {
                             <div class="tribunal-member" [class.president]="miembro.rol === 'PRESIDENTE'">
-                                <span class="material-icons person-icon">
+                                <span class="material-icons person-icon" aria-hidden="true">
                                     {{ miembro.rol === 'PRESIDENTE' ? 'school' : 'person' }}
                                 </span>
                                 <div class="member-info">
@@ -58,14 +58,14 @@
                         <button class="btn-grade" (click)="gradeExam(detalle)"
                             [class.btn-view]="detalle.todosCorregidos">
                             @if (detalle.todosCorregidos) {
-                            <span class="material-icons">visibility</span> Ver Calificaciones
+                            <span class="material-icons" aria-hidden="true">visibility</span> Ver Calificaciones
                             } @else {
-                            <span class="material-icons">rate_review</span> Corregir Examen
+                            <span class="material-icons" aria-hidden="true">rate_review</span> Corregir Examen
                             }
                         </button>
                         } @else {
                         <div class="grading-status-message warning">
-                            <span class="material-icons">info</span>
+                            <span class="material-icons" aria-hidden="true">info</span>
                             <span>
                                 @if (!hasEnrolledStudents(detalle.cantidadInscriptos)) {
                                 Sin alumnos inscriptos.

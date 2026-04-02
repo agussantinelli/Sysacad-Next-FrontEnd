@@ -8,7 +8,7 @@
                 <input type="text" [(ngModel)]="legajoQuery" placeholder="Ingresar Legajo"
                     (keyup.enter)="searchStudent()" class="form-control">
                 <button class="btn-search" (click)="searchStudent()" [disabled]="isSearching">
-                    <span class="material-icons">search</span>
+                    <span class="material-icons" aria-hidden="true">search</span>
                 </button>
             </div>
 
@@ -28,7 +28,7 @@
 
             @if (selectedStudent) {
             <div class="selected-student">
-                <div class="check-icon"><span class="material-icons">check_circle</span></div>
+                <div class="check-icon"><span class="material-icons" aria-hidden="true">check_circle</span></div>
                 <div>
                     <p class="student-name">{{ selectedStudent.apellido }}, {{ selectedStudent.nombre }}</p>
                     <p class="student-detail">Legajo: {{ selectedStudent.legajo }} | DNI: {{ selectedStudent.dni }}</p>
@@ -82,7 +82,7 @@
                     @if (selectedMateriaId && comisiones.length === 0 && !isLoading) {
                     <div class="hint-text text-warning mt-2">
                         <span class="material-icons"
-                            style="font-size: 1rem; vertical-align: text-bottom;">warning</span>
+                            style="font-size: 1rem; vertical-align: text-bottom;" aria-hidden="true">warning</span>
                         No hay comisiones disponibles para esta materia.
                     </div>
                     }

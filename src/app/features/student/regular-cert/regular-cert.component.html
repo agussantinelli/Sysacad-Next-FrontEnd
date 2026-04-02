@@ -13,10 +13,10 @@
         <div class="action-section">
             <button class="btn btn-primary download-btn" (click)="downloadCertificate()" [disabled]="isLoading">
                 @if (isLoading) {
-                <span class="material-icons spin">refresh</span>
+                <span class="material-icons spin" aria-hidden="true">refresh</span>
                 <span>Generando...</span>
                 } @else {
-                <span class="material-icons">file_download</span>
+                <span class="material-icons" aria-hidden="true">file_download</span>
                 <span>Descargar PDF</span>
                 }
             </button>

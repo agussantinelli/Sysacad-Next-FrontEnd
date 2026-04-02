@@ -7,7 +7,7 @@
         } @else {
         @if (comisiones.length === 0) {
         <div class="empty-state">
-            <span class="material-icons">groups_off</span>
+            <span class="material-icons" aria-hidden="true">groups_off</span>
             <h3>No tienes comisiones asignadas</h3>
             <p>Si consideras que es un error, contacta a bedelía.</p>
         </div>
@@ -26,20 +26,20 @@
 
                 <div class="card-body">
                     <div class="info-row">
-                        <span class="material-icons">meeting_room</span>
+                        <span class="material-icons" aria-hidden="true">meeting_room</span>
                         <span class="info-label">Salón:</span>
                         <span class="info-value">{{ comision.salon }}</span>
                     </div>
 
                     <div class="info-row">
-                        <span class="material-icons">group</span>
+                        <span class="material-icons" aria-hidden="true">group</span>
                         <span class="info-label">Alumnos:</span>
                         <span class="info-value">{{ comision.cantidadAlumnos }}</span>
                     </div>
 
                     <div class="schedules-section">
                         <div class="section-title">
-                            <span class="material-icons">schedule</span>
+                            <span class="material-icons" aria-hidden="true">schedule</span>
                             <span>Horarios</span>
                         </div>
                         <div class="schedules-list">
@@ -52,7 +52,7 @@
                     @if (comision.profesores && comision.profesores.length > 0) {
                     <div class="professors-section">
                         <div class="section-title">
-                            <span class="material-icons">school</span>
+                            <span class="material-icons" aria-hidden="true">school</span>
                             <span>Profesores</span>
                         </div>
                         <div class="professors-list">
@@ -66,11 +66,11 @@
                     @if (comision.cantidadAlumnos > 0) {
                     <div class="card-actions">
                         <button class="btn-message" (click)="openMessageModal(comision)">
-                            <span class="material-icons">chat</span>
+                            <span class="material-icons" aria-hidden="true">chat</span>
                             Enviar Mensaje
                         </button>
                         <button class="btn-grade" (click)="goToGrading(comision)">
-                            <span class="material-icons">assignment_turned_in</span>
+                            <span class="material-icons" aria-hidden="true">assignment_turned_in</span>
                             Calificar Alumnos
                         </button>
                     </div>

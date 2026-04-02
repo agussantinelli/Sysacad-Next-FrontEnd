@@ -6,11 +6,11 @@
         <div class="card list-card">
             <div class="card-header-actions">
                 <button class="btn-outline" (click)="goBack()">
-                    <span class="material-icons">arrow_back</span> Volver
+                    <span class="material-icons" aria-hidden="true">arrow_back</span> Volver
                 </button>
                 <h3>{{ turn.nombre }}</h3>
                 <button class="btn-primary" (click)="openAddModal()">
-                    <span class="material-icons">add_circle</span> Agregar Mesa
+                    <span class="material-icons" aria-hidden="true">add_circle</span> Agregar Mesa
                 </button>
             </div>
 
@@ -44,7 +44,7 @@
                                 <button class="icon-btn delete" (click)="deleteDetalle(mesa)"
                                     [disabled]="isDatePassed(mesa.diaExamen)"
                                     [title]="isDatePassed(mesa.diaExamen) ? 'No se puede eliminar una mesa pasada' : 'Eliminar Mesa'">
-                                    <span class="material-icons">delete</span>
+                                    <span class="material-icons" aria-hidden="true">delete</span>
                                 </button>
                                 }
                             </td>
@@ -95,7 +95,7 @@
                 @for (subj of foundSubjects; track subj.id) {
                 <div class="result-item" (click)="selectSubject(subj)">
                     <span>{{ subj.nombre }} (Año {{ subj.anio }})</span>
-                    <span class="material-icons">chevron_right</span>
+                    <span class="material-icons" aria-hidden="true">chevron_right</span>
                 </div>
                 } @empty {
                 @if (subjectQuery && !isLoading) { <p class="text-secondary">No se encontraron materias.</p> }
@@ -141,7 +141,7 @@
                         <span class="prof-name">{{ prof.apellido }}, {{ prof.nombre }}</span>
                         <span class="prof-legajo">Legajo: {{ prof.legajo }}</span>
                     </div>
-                    <span class="material-icons checkbox">
+                    <span class="material-icons checkbox" aria-hidden="true">
                         {{ selectedPresidentId === prof.id ? 'radio_button_checked' : 'radio_button_unchecked' }}
                     </span>
                 </div>

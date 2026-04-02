@@ -10,7 +10,7 @@ import { PageLayoutComponent } from '../page-layout/page-layout.component';
     <app-page-layout title="Función No Disponible">
       <div class="construction-container">
         <div class="icon-wrapper">
-          <span class="material-icons">engineering</span>
+          <span class="material-icons" aria-hidden="true">engineering</span>
         </div>
         <h2>En Construcción</h2>
         <p>Esta funcionalidad aún no está disponible.</p>

@@ -3,7 +3,7 @@
         <div class="modal-header">
             <h2 class="modal-title">Correlativas de <span class="subject-highlight">{{ subjectName }}</span></h2>
             <button (click)="onClose()" class="btn-close">
-                <span class="material-icons">close</span>
+                <span class="material-icons" aria-hidden="true">close</span>
             </button>
         </div>
 
@@ -32,7 +32,7 @@
             </table>
             } @else {
             <div class="empty-state">
-                <span class="material-icons">info</span>
+                <span class="material-icons" aria-hidden="true">info</span>
                 <p>Esta materia no tiene correlativas.</p>
             </div>
             }

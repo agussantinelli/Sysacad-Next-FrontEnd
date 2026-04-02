@@ -3,13 +3,13 @@
     <div class="profile-card">
         <div class="profile-header">
             <button class="back-btn" (click)="goBack()">
-                <span class="material-icons">arrow_back</span>
+                <span class="material-icons" aria-hidden="true">arrow_back</span>
             </button>
             <div class="profile-avatar">
                 @if (usuario.fotoPerfil) {
                 <img [src]="getProfileImageUrl(usuario.fotoPerfil)" [alt]="usuario.nombre" class="avatar-img">
                 } @else {
-                <span class="material-icons">person</span>
+                <span class="material-icons" aria-hidden="true">person</span>
                 }
             </div>
 
@@ -73,13 +73,13 @@
 
             <div class="profile-actions">
                 <button class="btn-edit" (click)="editUser()">
-                    <span class="material-icons">edit</span>
+                    <span class="material-icons" aria-hidden="true">edit</span>
                     Editar Usuario
                 </button>
                 <button class="btn-delete" (click)="toggleState()"
                     [style.background-color]="usuario.estado === 'ACTIVO' ? '#ef4444' : '#10b981'"
                     [style.box-shadow]="'none'">
-                    <span class="material-icons">{{ usuario.estado === 'ACTIVO' ? 'block' : 'check_circle' }}</span>
+                    <span class="material-icons" aria-hidden="true">{{ usuario.estado === 'ACTIVO' ? 'block' : 'check_circle' }}</span>
                     {{ usuario.estado === 'ACTIVO' ? 'Deshabilitar Usuario' : 'Habilitar Usuario' }}
                 </button>
             </div>

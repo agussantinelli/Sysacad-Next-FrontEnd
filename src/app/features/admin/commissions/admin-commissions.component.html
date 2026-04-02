@@ -8,7 +8,7 @@
         @if (viewMode === 'LIST') {
         <div class="card toolbar-card">
             <button class="btn-primary" (click)="openCreateModal()">
-                <span class="material-icons">add</span> Nueva Comisión
+                <span class="material-icons" aria-hidden="true">add</span> Nueva Comisión
             </button>
         </div>
 
@@ -20,8 +20,8 @@
                     <span class="badge">{{ comision.turno }}</span>
                 </div>
                 <div class="card-body">
-                    <p><span class="material-icons">room</span> {{ comision.nombreSalon }}</p>
-                    <p><span class="material-icons">menu_book</span> {{ (comision.materias || []).length }}
+                    <p><span class="material-icons" aria-hidden="true">room</span> {{ comision.nombreSalon }}</p>
+                    <p><span class="material-icons" aria-hidden="true">menu_book</span> {{ (comision.materias || []).length }}
                         Materias
                         Asignadas
                     </p>
@@ -29,7 +29,7 @@
             </div>
             } @empty {
             <div class="empty-state">
-                <span class="material-icons">class</span>
+                <span class="material-icons" aria-hidden="true">class</span>
                 <p>No hay comisiones registradas.</p>
             </div>
             }
@@ -43,7 +43,7 @@
                 <h3>{{ selectedComision.nombre }} ({{ selectedComision.anio }})</h3>
                 <div class="header-actions">
                     <button class="btn-primary" (click)="openAssignModal()">
-                        <span class="material-icons">add_circle</span> Agregar Materia
+                        <span class="material-icons" aria-hidden="true">add_circle</span> Agregar Materia
                     </button>
                     <button class="btn-outline" (click)="backToList()">Volver</button>
                 </div>
@@ -64,7 +64,7 @@
                         <tr>
                             <td>
                                 <div class="cell-content">
-                                    <span class="material-icons text-muted">menu_book</span>
+                                    <span class="material-icons text-muted" aria-hidden="true">menu_book</span>
                                     <span>{{ materia.nombreMateria }}</span>
                                 </div>
                             </td>
@@ -83,7 +83,7 @@
                             <td>
                                 @if (materia.cantidadInscriptos === 0) {
                                 <button class="icon-btn danger" title="Desasignar">
-                                    <span class="material-icons">delete</span>
+                                    <span class="material-icons" aria-hidden="true">delete</span>
                                 </button>
                                 }
                             </td>
@@ -92,7 +92,7 @@
                         <tr>
                             <td colspan="5" class="text-center py-4">
                                 <div class="empty-state-small">
-                                    <span class="material-icons">playlist_remove</span>
+                                    <span class="material-icons" aria-hidden="true">playlist_remove</span>
                                     <p>No hay materias asignadas a esta comisión.</p>
                                 </div>
                             </td>
@@ -200,7 +200,7 @@
             <div class="modal-body">
                 @if (isLoading) {
                 <div class="loading-state">
-                    <span class="material-icons rotating">hourglass_empty</span>
+                    <span class="material-icons rotating" aria-hidden="true">hourglass_empty</span>
                     <p>Cargando materias disponibles...</p>
                 </div>
                 } @else {
@@ -211,23 +211,23 @@
                             <h5>{{ materia.nombre }}</h5>
                             <div class="subject-meta">
                                 <span class="meta-item">
-                                    <span class="material-icons">layers</span> Nivel {{ materia.nivel }}
+                                    <span class="material-icons" aria-hidden="true">layers</span> Nivel {{ materia.nivel }}
                                 </span>
                                 <span class="meta-item">
-                                    <span class="material-icons">schedule</span> {{ materia.horasCursado }} horas/semana
+                                    <span class="material-icons" aria-hidden="true">schedule</span> {{ materia.horasCursado }} horas/semana
                                 </span>
                                 @if (materia.codigo) {
                                 <span class="meta-item">
-                                    <span class="material-icons">tag</span> {{ materia.codigo }}
+                                    <span class="material-icons" aria-hidden="true">tag</span> {{ materia.codigo }}
                                 </span>
                                 }
                             </div>
                         </div>
-                        <span class="material-icons chevron">chevron_right</span>
+                        <span class="material-icons chevron" aria-hidden="true">chevron_right</span>
                     </div>
                     } @empty {
                     <div class="empty-state-small">
-                        <span class="material-icons">search_off</span>
+                        <span class="material-icons" aria-hidden="true">search_off</span>
                         <p>No hay materias disponibles para asignar</p>
                     </div>
                     }
@@ -273,7 +273,7 @@
                         <div class="form-group align-end">
                             <button class="btn-primary" (click)="addSchedule()" aria-label="Guardar Horario"
                                 [disabled]="!newSchedule.horaDesde || !newSchedule.horaHasta">
-                                <span class="material-icons">add</span> Agregar
+                                <span class="material-icons" aria-hidden="true">add</span> Agregar
                             </button>
                         </div>
                     </div>
@@ -287,14 +287,14 @@
                         <span class="schedule-day">{{ schedule.dia }}</span>
                         <span class="schedule-time">{{ schedule.horaDesde }} - {{ schedule.horaHasta }}</span>
                         <button class="icon-btn delete-btn" (click)="removeSchedule($index)">
-                            <span class="material-icons">delete</span>
+                            <span class="material-icons" aria-hidden="true">delete</span>
                         </button>
                     </div>
                     }
 
                     <div class="hours-indicator" [class.valid]="validateSchedules()"
                         [class.invalid]="!validateSchedules()">
-                        <span class="material-icons">{{ validateSchedules() ? 'check_circle' : 'error' }}</span>
+                        <span class="material-icons" aria-hidden="true">{{ validateSchedules() ? 'check_circle' : 'error' }}</span>
                         <span>{{ calculateTotalHours() }} / {{ selectedSubject?.horasCursado || 0 }} horas</span>
                     </div>
                     } @else {
@@ -304,10 +304,10 @@
             </div>
             <div class="modal-actions">
                 <button class="btn-secondary" (click)="backToStep('SUBJECT')">
-                    <span class="material-icons">arrow_back</span> Atrás
+                    <span class="material-icons" aria-hidden="true">arrow_back</span> Atrás
                 </button>
                 <button class="btn-primary" (click)="goToStep3()" aria-label="Siguiente" [disabled]="!validateSchedules() || isLoading">
-                    Buscar Profesores <span class="material-icons">arrow_forward</span>
+                    Buscar Profesores <span class="material-icons" aria-hidden="true">arrow_forward</span>
                 </button>
             </div>
             }
@@ -331,7 +331,7 @@
 
                 @if (isLoading) {
                 <div class="loading-state">
-                    <span class="material-icons rotating">hourglass_empty</span>
+                    <span class="material-icons rotating" aria-hidden="true">hourglass_empty</span>
                     <p>Buscando profesores disponibles...</p>
                 </div>
                 } @else {
@@ -343,13 +343,13 @@
                             <span class="professor-name">{{ profesor.apellido }}, {{ profesor.nombre }}</span>
                             <span class="professor-legajo">Legajo: {{ profesor.legajo }}</span>
                         </div>
-                        <span class="material-icons checkbox">
+                        <span class="material-icons checkbox" aria-hidden="true">
                             {{ selectedProfessorIds.includes(profesor.id) ? 'check_box' : 'check_box_outline_blank' }}
                         </span>
                     </div>
                     } @empty {
                     <div class="empty-state-small">
-                        <span class="material-icons">person_off</span>
+                        <span class="material-icons" aria-hidden="true">person_off</span>
                         <p>No hay profesores disponibles en estos horarios</p>
                     </div>
                     }
@@ -362,11 +362,11 @@
             </div>
             <div class="modal-actions">
                 <button class="btn-secondary" (click)="backToStep('SCHEDULE')">
-                    <span class="material-icons">arrow_back</span> Atrás
+                    <span class="material-icons" aria-hidden="true">arrow_back</span> Atrás
                 </button>
                 <button class="btn-primary" (click)="finalizeAssignment()"
                     [disabled]="selectedProfessorIds.length === 0 || isLoading">
-                    <span class="material-icons">check</span> Confirmar Asignación
+                    <span class="material-icons" aria-hidden="true">check</span> Confirmar Asignación
                 </button>
             </div>
             }

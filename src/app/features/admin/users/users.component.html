@@ -7,7 +7,7 @@
                 
             </div>
             <button class="btn-create" (click)="goToCreate()">
-                <span class="material-icons">person_add</span>
+                <span class="material-icons" aria-hidden="true">person_add</span>
                 Crear Usuario
             </button>
         </div>
@@ -73,7 +73,7 @@
                             <td>
                                 <span class="status-badge" [class.activo]="user.estado === 'ACTIVO'"
                                     [class.inactivo]="user.estado === 'INACTIVO'">
-                                    <span class="material-icons" style="font-size: 14px;">
+                                    <span class="material-icons" style="font-size: 14px;" aria-hidden="true">
                                         {{ user.estado === 'ACTIVO' ? 'check_circle' : 'cancel' }}
                                     </span>
                                     {{ user.estado }}
@@ -84,20 +84,20 @@
                             <td>
                                 <div class="actions-cell">
                                     <button class="btn-icon-action" title="Ver Perfil" (click)="goToProfile(user)">
-                                        <span class="material-icons">visibility</span>
+                                        <span class="material-icons" aria-hidden="true">visibility</span>
                                     </button>
                                     <button class="btn-icon-action" title="Editar" (click)="editUser(user)">
-                                        <span class="material-icons">edit</span>
+                                        <span class="material-icons" aria-hidden="true">edit</span>
                                     </button>
 
                                     @if (user.estado === 'ACTIVO') {
                                     <button class="btn-icon-action delete" title="Deshabilitar"
                                         (click)="toggleState(user)">
-                                        <span class="material-icons">block</span>
+                                        <span class="material-icons" aria-hidden="true">block</span>
                                     </button>
                                     } @else {
                                     <button class="btn-icon-action" title="Habilitar" (click)="toggleState(user)">
-                                        <span class="material-icons">check_circle</span>
+                                        <span class="material-icons" aria-hidden="true">check_circle</span>
                                     </button>
                                     }
                                 </div>

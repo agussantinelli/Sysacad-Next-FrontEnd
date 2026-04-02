@@ -55,7 +55,7 @@
 
         <div class="form-actions" *ngIf="!isReadOnly">
             <button class="btn-save" (click)="saveGrades()" [disabled]="isSaving || isReadOnly">
-                <span class="material-icons" *ngIf="!isSaving">save</span>
+                <span class="material-icons" *ngIf="!isSaving" aria-hidden="true">save</span>
                 <span *ngIf="isSaving">Guardando...</span>
                 <span *ngIf="!isSaving">Guardar Notas</span>
             </button>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="empty-state" *ngIf="!isLoading && inscriptos.length === 0 && !error">
-        <span class="material-icons">people_outline</span>
+        <span class="material-icons" aria-hidden="true">people_outline</span>
         <h3>No hay alumnos inscriptos en esta mesa.</h3>
     </div>
 

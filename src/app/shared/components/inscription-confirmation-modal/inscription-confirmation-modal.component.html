@@ -4,7 +4,7 @@
         <div class="modal-header">
             <h2 class="modal-title">Confirmar Inscripción</h2>
             <button class="btn-cancel" style="border:none; padding:4px;" (click)="onClose()">
-                <span class="material-icons" style="font-size:20px;">close</span>
+                <span class="material-icons" style="font-size:20px;" aria-hidden="true">close</span>
             </button>
         </div>
 
@@ -49,7 +49,7 @@
             </div>
 
             <div class="alert-info">
-                <span class="material-icons">info</span>
+                <span class="material-icons" aria-hidden="true">info</span>
                 <span>Verifica los datos antes de confirmar.</span>
             </div>
             } @else if (examTable) {
@@ -78,7 +78,7 @@
             </div>
 
             <div class="alert-info">
-                <span class="material-icons">info</span>
+                <span class="material-icons" aria-hidden="true">info</span>
                 <span>Verifica los datos de la mesa antes de confirmar.</span>
             </div>
             }

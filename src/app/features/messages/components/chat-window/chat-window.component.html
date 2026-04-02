@@ -9,24 +9,24 @@
             <span class="status-text">{{ selectedConversation.cantIntegrantes }} integrantes</span>
         </div>
         <div class="header-actions">
-            <button class="icon-btn" (click)="toggleParticipants()" [class.active]="showParticipants">
-                <span class="material-icons">info</span>
+            <button class="icon-btn" (click)="toggleParticipants()" [class.active]="showParticipants" aria-label="Ver participantes">
+                <span class="material-icons" aria-hidden="true">info</span>
             </button>
         </div>
     </div>
 
     <div class="chat-main-container">
         <div class="chat-area">
-            <div class="messages-list" #scrollContainer>
+            <div class="messages-list" #scrollContainer aria-live="polite">
                 @if (isLoading) {
                 <div class="flex flex-col items-center justify-center h-full text-secondary">
-                    <span class="material-icons animate-spin text-4xl mb-2">autorenew</span>
+                    <span class="material-icons animate-spin text-4xl mb-2" aria-hidden="true">autorenew</span>
                     <p>Cargando historial...</p>
                 </div>
                 } @else {
                 @if (!selectedConversation.esVisible && (!messages || messages.length === 0)) {
                 <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
-                    <span class="material-icons text-4xl mb-2">info_outline</span>
+                    <span class="material-icons text-4xl mb-2" aria-hidden="true">info_outline</span>
                     <p>No hay mensajes en la conversación</p>
                     <span class="text-xs mt-1">Este grupo se activará con el primer mensaje.</span>
                 </div>
@@ -63,7 +63,7 @@
                 }
                 } @empty {
                 <div class="flex flex-col items-center justify-center h-full text-secondary opacity-50">
-                    <span class="material-icons text-4xl mb-2">chat_bubble_outline</span>
+                    <span class="material-icons text-4xl mb-2" aria-hidden="true">chat_bubble_outline</span>
                     <p>No hay mensajes en este grupo.</p>
                 </div>
                 }
@@ -76,7 +76,7 @@
                 <input type="text" [(ngModel)]="newMessage" placeholder="Escribe un mensaje..."
                     (keyup.enter)="handleSendMessage()" [disabled]="!canSend">
                 <button class="btn-send" (click)="handleSendMessage()" [disabled]="!newMessage.trim() || !canSend" aria-label="Enviar">
-                    <span class="material-icons">send</span>
+                    <span class="material-icons" aria-hidden="true">send</span>
                 </button>
             </div>
             }
@@ -91,7 +91,7 @@
 </div>
 } @else {
 <div class="empty-chat-state">
-    <span class="material-icons">forum</span>
+    <span class="material-icons" aria-hidden="true">forum</span>
     <h3>Tus Mensajes</h3>
     <p>Selecciona una conversación de la lista para comenzar a chatear.</p>
 </div>

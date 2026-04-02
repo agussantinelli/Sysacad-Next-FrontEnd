@@ -2,21 +2,21 @@
     <div class="modal-content" (click)="$event.stopPropagation()">
         <header class="modal-header">
             <div class="header-main">
-                <span class="material-icons header-icon">chat</span>
+                <span class="material-icons header-icon" aria-hidden="true">chat</span>
                 <div class="header-text">
                     <h2>Enviar Mensaje</h2>
                     <p class="subtitle">{{ targetName }}</p>
                 </div>
             </div>
             <button class="close-btn" (click)="onClose()">
-                <span class="material-icons">close</span>
+                <span class="material-icons" aria-hidden="true">close</span>
             </button>
         </header>
 
         <main class="modal-body">
             @if (success) {
             <div class="success-state">
-                <span class="material-icons success-icon">check_circle</span>
+                <span class="material-icons success-icon" aria-hidden="true">check_circle</span>
                 <h3>¡Mensaje Enviado!</h3>
                 <p>Redirigiendo...</p>
             </div>
@@ -41,7 +41,7 @@
                 @if (isLoading) {
                 <app-loading-spinner [inline]="true"></app-loading-spinner>
                 } @else {
-                <span class="material-icons">send</span>
+                <span class="material-icons" aria-hidden="true">send</span>
                 <span>Enviar</span>
                 }
             </button>
