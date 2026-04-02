@@ -1,4 +1,4 @@
-import axiosClient from './axios.client';
+import axiosClient from '../axios.client';
 
 describe('AxiosClient', () => {
     beforeEach(() => {
