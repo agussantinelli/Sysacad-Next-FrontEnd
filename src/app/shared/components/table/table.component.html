@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th *ngFor="let col of columns" scope="col" class="header-cell" (click)="sort(col)"
-                    [class.sortable]="col.sortable" [style.width]="col.width" [style.text-align]="col.align || 'left'">
+                    [class.sortable]="col.sortable" [style.width]="col.width" [style.text-align]="col.align || 'left'" [attr.aria-label]="col.sortable ? 'Ordenar por ' + col.label : null" tabindex="0" (keydown.enter)="sort(col)">
                     <div class="header-content w-full" [class.justify-center]="col.align === 'center'"
                         [class.justify-end]="col.align === 'right'">
                         {{ col.label }}
@@ -33,7 +33,7 @@
                             <ng-container *ngIf="col.key === 'correlativasDisplay'">
                                 <button *ngIf="getCellValue(row, col)?.hasCorrelatives"
                                     (click)="emitAction('viewCorrelatives', row)"
-                                    class="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity visibility-btn">
+                                    class="inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity visibility-btn" aria-label="Ver correlativas">
                                     <span class="material-icons text-sm" aria-hidden="true">visibility</span>
                                     <span class="text-sm font-medium">{{ getCellValue(row,
                                         col)?.count }}</span>
@@ -51,7 +51,7 @@
                                 <ng-container *ngIf="col.collapsible !== false">
                                     <button *ngIf="items.length > 0"
                                         (click)="row['isExpanded_' + col.key] = !row['isExpanded_' + col.key]"
-                                        class="flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer p-1 rounded hover:bg-black/5 expand-btn">
+                                        class="flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer p-1 rounded hover:bg-black/5 expand-btn" [attr.aria-label]="row['isExpanded_' + col.key] ? 'Colapsar detalles' : 'Expandir detalles'" [attr.aria-expanded]="!!row['isExpanded_' + col.key]">
                                         <span>{{ items.length }}</span>
                                         <img src="icons/chevron-down-light.svg" alt="Expand" width="12" height="12"
                                             class="transform transition-transform duration-200"
@@ -127,13 +127,13 @@
             de <strong>{{ data.length }}</strong>
         </span>
         <div class="pagination-controls">
-            <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="page-btn prev">
+            <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="page-btn prev" aria-label="Página anterior">
                 Anterior
             </button>
             <span class="page-indicator">
                 {{ currentPage }} / {{ totalPages }}
             </span>
-            <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="page-btn next">
+            <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="page-btn next" aria-label="Página siguiente">
                 Siguiente
             </button>
         </div>

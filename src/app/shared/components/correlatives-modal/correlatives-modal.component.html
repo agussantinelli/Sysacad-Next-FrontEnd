@@ -2,7 +2,7 @@
     <div class="modal-container" (click)="$event.stopPropagation()">
         <div class="modal-header">
             <h2 class="modal-title">Correlativas de <span class="subject-highlight">{{ subjectName }}</span></h2>
-            <button (click)="onClose()" class="btn-close">
+            <button (click)="onClose()" class="btn-close" aria-label="Cerrar ventana">
                 <span class="material-icons" aria-hidden="true">close</span>
             </button>
         </div>
