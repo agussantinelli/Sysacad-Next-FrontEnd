@@ -10,7 +10,9 @@ To maintain 100% reliability and prevent regressions in the Sysacad-Next Fronten
 
 ## Guidelines
 1. **Rule of One**: Every `.ts` file in `src/app/core/services`, `src/app/core/utils`, or `src/app/features` MUST have a matching `.spec.ts` file.
-2. **Location**: Test files must be located in the same directory as the file they are testing.
+2. **Location**: 
+    - **In `src/app/core`**: Test files MUST be located in a `tests/` subdirectory within the source directory (e.g., `src/app/core/services/tests/`).
+    - **Other areas**: Test files must be located in the same directory as the source file.
 3. **Naming**: If the file is `auth.service.ts`, the test file MUST be `auth.service.spec.ts`.
 4. **Content**:
     - **Logic/Services**: Tests must cover main success paths and edge cases.
@@ -19,16 +21,24 @@ To maintain 100% reliability and prevent regressions in the Sysacad-Next Fronten
 
 ## Examples
 
-### Correct Structure
+### Correct Structure (Core)
 ```
 src/app/core/services/
 ├── auth.service.ts
-└── auth.service.spec.ts
+└── tests/
+    └── auth.service.spec.ts
+```
+
+### Correct Structure (Features/Shared)
+```
+src/app/features/dashboard/
+├── dashboard.component.ts
+└── dashboard.component.spec.ts
 ```
 
 ### Incorrect Structure (Missing Test)
 ```
 src/app/core/services/
 └── auth.service.ts
-(Error: Missing auth.service.spec.ts)
+(Error: Missing tests/auth.service.spec.ts)
 ```

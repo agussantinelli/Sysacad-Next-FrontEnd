@@ -10,10 +10,10 @@ Quality assurance in the frontend involves checking both individual component lo
 
 ## Guidelines
 1. **Architecture**: Refer to the **[testing-architecture](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/testing-architecture/SKILL.md)** for a full overview of test tiers and locations.
-2. **Component Testing**: Use Jasmine + Karma for unit testing UI components, services, and pipes. Files must be adjacent to the source.
+2. **Component Testing**: Use Jasmine + Karma for unit testing UI components, services, and pipes. Files must be adjacent to the source OR in a `tests/` subdirectory (for `src/app/core`).
 314. **Integration Testing**: Use Karma + ATL for testing interactions between modules. See **[integration-testing](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/integration-testing/SKILL.md)**.
 15. **Naming**: 
-   - Unit: `.spec.ts` (adjacent).
+   - Unit: `.spec.ts` (adjacent or in `tests/`).
    - Integration: `.integration.test.ts` (inside `src/tests-integration/[role]/`).
    - E2E: `*.cy.ts` (inside `src/tests-e2e/[role]/`).
 16. **Mocking**: Use Jasmine Spies/Mocks.
