@@ -290,6 +290,17 @@
 
 <hr>
 
+<h2>♿ Accesibilidad y UX Inclusiva (A11y)</h2>
+<p>Sysacad Next está diseñado con un fuerte compromiso hacia la accesibilidad web, cumpliendo activamente con los estándares <strong>WCAG 2.1</strong> para asegurar que la plataforma sea inclusiva y navegable mediante teclado y lectores de pantalla (Screen Readers).</p>
+<ul>
+    <li><strong>Iconografía Declarativa Transparente:</strong> Uso estricto de <code>aria-hidden="true"</code> en toda la iconografía visual (Material Icons) que es puramente estética, previniendo el ruido en lectores de voz y sintetizadores.</li>
+    <li><strong>Etiquetas de Interacción Claras:</strong> Inyección contextual de <code>aria-label</code> en componentes sin texto visible (ej. botones tipo ícono, paginación, componentes tabulares, modales) para describir unívocamente sus acciones.</li>
+    <li><strong>Regiones Dinámicas Activas (`aria-live`):</strong> Anuncio automatizado de cambios en vivo a través de interfaces SPA usando <code>aria-live="polite"</code> y <code>role="alert"</code> (Chat en tiempo real, Notificaciones Toast, Alertas del servidor).</li>
+    <li><strong>Navegación por Teclado:</strong> Las vistas respetan la jerarquía visual del DOM y los elementos nativos como <code>&lt;button&gt;</code> soportan combinaciones nativas (Teclas Enter / Espacio).</li>
+</ul>
+
+<hr>
+
 <h2>🔌 Integración Backend</h2>
 <p>El frontend se comunica con el backend Java Spring Boot a través de una API RESTful.</p>
 
