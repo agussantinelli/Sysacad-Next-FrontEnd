@@ -9,6 +9,7 @@ This skill serves as a central index for all architectural and development guide
 
 ## Frontend Skills (`Sysacad-Next-FrontEnd`)
 
+- **[accessibility](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/accessibility/SKILL.md)**: Reglas obligatorias para garantizar la accesibilidad web (A11y) en Sysacad-Next.
 - **[api-communication](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/api-communication/SKILL.md)**: Mandatory rules for API communication using the central `api` client.
 - **[clean-structure](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/clean-structure/SKILL.md)**: Component organization and Angular principles.
 - **[code-quality](file:///c:/Users/Agus/Documents/Sysacad-Next/Sysacad-Next-FrontEnd/.agent/skills/code-quality/SKILL.md)**: Guidelines for clean code and the "No Comments" policy.
