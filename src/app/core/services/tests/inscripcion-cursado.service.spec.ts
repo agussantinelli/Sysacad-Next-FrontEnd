@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { InscripcionCursadoService } from './inscripcion-cursado.service';
+import { InscripcionCursadoService } from '../inscripcion-cursado.service';
 import axiosClient from '@core/api/axios.client';
 
 describe('InscripcionCursadoService', () => {
@@ -43,3 +43,4 @@ describe('InscripcionCursadoService', () => {
         });
     });
 });
+

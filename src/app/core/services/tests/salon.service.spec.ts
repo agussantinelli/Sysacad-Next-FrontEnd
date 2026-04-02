@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { SalonService } from './salon.service';
+import { SalonService } from '../salon.service';
 import axiosClient from '@core/api/axios.client';
 import { SalonRequest, SalonResponse } from '@core/models/salon.models';
 
@@ -44,3 +44,4 @@ describe('SalonService', () => {
         });
     });
 });
+

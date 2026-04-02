@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { MateriaService } from './materia.service';
+import { MateriaService } from '../materia.service';
 import axiosClient from '@core/api/axios.client';
 
 describe('MateriaService', () => {
@@ -25,3 +25,4 @@ describe('MateriaService', () => {
         });
     });
 });
+

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ComisionService } from './comision.service';
+import { ComisionService } from '../comision.service';
 import axiosClient from '@core/api/axios.client';
 import { ComisionRequest, ComisionResponse } from '@core/models/comision.models';
 
@@ -66,3 +66,4 @@ describe('ComisionService', () => {
         });
     });
 });
+

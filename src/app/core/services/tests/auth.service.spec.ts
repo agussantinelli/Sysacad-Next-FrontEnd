@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth.service';
 import axiosClient from '@core/api/axios.client';
 import { of, throwError } from 'rxjs';
 import { UsuarioResponse } from '@core/models/usuario.models';
@@ -195,3 +195,4 @@ describe('AuthService', () => {
         });
     });
 });
+

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HorarioService } from './horario.service';
+import { HorarioService } from '../horario.service';
 import axiosClient from '@core/api/axios.client';
 import { HorarioRequest, HorarioResponse } from '@core/models/horario.models';
 
@@ -56,3 +56,4 @@ describe('HorarioService', () => {
         });
     });
 });
+

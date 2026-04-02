@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ReporteService } from './reporte.service';
+import { ReporteService } from '../reporte.service';
 import axiosClient from '@core/api/axios.client';
 
 describe('ReporteService', () => {
@@ -29,3 +29,4 @@ describe('ReporteService', () => {
         });
     });
 });
+

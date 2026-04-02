@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { InscripcionExamenService } from './inscripcion-examen.service';
+import { InscripcionExamenService } from '../inscripcion-examen.service';
 import axiosClient from '@core/api/axios.client';
 import { InscripcionExamenRequest, InscripcionExamenResponse } from '@core/models/inscripcion-examen.models';
 
@@ -63,3 +63,4 @@ describe('InscripcionExamenService', () => {
         });
     });
 });
+

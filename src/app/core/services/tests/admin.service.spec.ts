@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { AdminService } from './admin.service';
+import { AdminService } from '../admin.service';
 import axiosClient from '@core/api/axios.client';
 import { of } from 'rxjs';
 import { AdminInscripcionDTO, AdminEstadisticasDTO } from '@core/models/admin.models';
@@ -90,3 +90,4 @@ describe('AdminService', () => {
         });
     });
 });
+

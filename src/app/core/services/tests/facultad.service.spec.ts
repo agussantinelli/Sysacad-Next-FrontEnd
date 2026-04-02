@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { FacultadService } from './facultad.service';
+import { FacultadService } from '../facultad.service';
 import axiosClient from '@core/api/axios.client';
 import { FacultadRequest, FacultadResponse } from '@core/models/facultad.models';
 
@@ -55,3 +55,4 @@ describe('FacultadService', () => {
         });
     });
 });
+

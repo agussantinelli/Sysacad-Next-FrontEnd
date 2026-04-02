@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ProfessorService } from './professor.service';
+import { ProfessorService } from '../professor.service';
 import axiosClient from '@core/api/axios.client';
 import { MateriaProfesorDTO, ComisionHorarioDTO, ComisionDetalladaDTO, CargaNotasCursadaDTO } from '@core/models/professor.models';
 
@@ -123,3 +123,4 @@ describe('ProfessorService', () => {
         });
     });
 });
+

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { MesaExamenService } from './mesa-examen.service';
+import { MesaExamenService } from '../mesa-examen.service';
 import axiosClient from '@core/api/axios.client';
 
 describe('MesaExamenService', () => {
@@ -26,3 +26,4 @@ describe('MesaExamenService', () => {
         });
     });
 });
+

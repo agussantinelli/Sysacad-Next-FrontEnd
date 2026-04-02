@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { CarreraService } from './carrera.service';
+import { CarreraService } from '../carrera.service';
 import axiosClient from '@core/api/axios.client';
 import { CarreraResponse } from '@core/models/carrera.models';
 import { PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
@@ -43,3 +43,4 @@ describe('CarreraService', () => {
         });
     });
 });
+

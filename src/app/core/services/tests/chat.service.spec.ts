@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ChatService } from './chat.service';
+import { ChatService } from '../chat.service';
 import axiosClient from '@core/api/axios.client';
 import { GrupoResponse, MensajeGrupoResponse } from '@core/models/messaging.models';
 import { EstadoGrupo } from '@core/enums/grupo.enums';
@@ -77,3 +77,4 @@ describe('ChatService', () => {
         });
     });
 });
+

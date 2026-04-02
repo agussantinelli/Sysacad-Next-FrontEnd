@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { PlanDeEstudioService, PlanMateriaRequest } from './plan-de-estudio.service';
+import { PlanDeEstudioService, PlanMateriaRequest } from '../plan-de-estudio.service';
 import axiosClient from '@core/api/axios.client';
 import { PlanDeEstudioRequest, PlanDeEstudioResponse } from '@core/models/plan-de-estudio.models';
 
@@ -65,3 +65,4 @@ describe('PlanDeEstudioService', () => {
         });
     });
 });
+

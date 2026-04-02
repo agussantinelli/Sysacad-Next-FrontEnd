@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { AvisoService } from './aviso.service';
+import { AvisoService } from '../aviso.service';
 import axiosClient from '@core/api/axios.client';
 import { AvisoRequest, AvisoResponse } from '@core/models/aviso.models';
 
@@ -75,3 +75,4 @@ describe('AvisoService', () => {
         });
     });
 });
+

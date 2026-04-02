@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { MatriculacionService } from './matriculacion.service';
+import { MatriculacionService } from '../matriculacion.service';
 import axiosClient from '@core/api/axios.client';
 import { CarreraMateriasDTO } from '@core/models/carrera-materias.models';
 
@@ -53,3 +53,4 @@ describe('MatriculacionService', () => {
         });
     });
 });
+

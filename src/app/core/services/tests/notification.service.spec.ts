@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { NotificationService } from './notification.service';
+import { NotificationService } from '../notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('NotificationService', () => {
@@ -44,3 +44,4 @@ describe('NotificationService', () => {
         }));
     });
 });
+

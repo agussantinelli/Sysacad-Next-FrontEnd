@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { UsuarioService } from './usuario.service';
+import { UsuarioService } from '../usuario.service';
 import axiosClient from '@core/api/axios.client';
 import { RolUsuario, EstadoUsuario, TipoDocumento, Genero } from '@core/enums/usuario.enums';
 import { UsuarioResponse } from '@core/models/usuario.models';
@@ -48,3 +48,4 @@ describe('UsuarioService', () => {
         });
     });
 });
+

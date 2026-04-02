@@ -1,6 +1,6 @@
 import { TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
-import { HealthService } from './health.service';
-import { AuthService } from './auth.service';
+import { HealthService } from '../health.service';
+import { AuthService } from '../auth.service';
 import axiosClient from '@core/api/axios.client';
 import { of, throwError } from 'rxjs';
 
@@ -92,3 +92,4 @@ describe('HealthService', () => {
         expect(authServiceSpy.logout).toHaveBeenCalled();
     }));
 });
+

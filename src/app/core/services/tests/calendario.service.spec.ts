@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { CalendarioService } from './calendario.service';
+import { CalendarioService } from '../calendario.service';
 import axiosClient from '@core/api/axios.client';
 
 describe('CalendarioService', () => {
@@ -30,3 +30,4 @@ describe('CalendarioService', () => {
         });
     });
 });
+
