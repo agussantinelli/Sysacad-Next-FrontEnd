@@ -212,6 +212,7 @@
 <p>Este proyecto utiliza un sistema de <strong>Skills</strong> (guías avanzadas) para asegurar que cualquier desarrollo (humano o por IA) siga estrictamente los estándares arquitectónicos del proyecto:</p>
 
 <ul>
+    <li><strong>♿ accessibility:</strong> Reglas obligatorias para garantizar la accesibilidad web (A11y) siguiendo estándares WCAG 2.1.</li>
     <li><strong>🏗️ modular-architecture:</strong> Reglas estrictas sobre la separación de capas (Models, Services, Features, Shared).</li>
     <li><strong>🧩 angular-components:</strong> Estándar para la creación de componentes Standalone con Signals.</li>
     <li><strong>🧪 test-enforcement:</strong> Regla "One-to-One" que exige un archivo <code>.spec.ts</code> por cada archivo de lógica o componente.</li>
